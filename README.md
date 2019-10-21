@@ -36,7 +36,8 @@ Display a calendar in the middle of the screen. The HTML of the calendar needs t
 - The gap between the cells must be 1 pixel.
 - The date should be written in the middle of the corresponding cell with Arial 30px font.
 - Upon hovering over a cell, the cursor should become pointer.
-- The hovered cell has to become pink and move up by `20px`.
+- The hovered cell has to become pink
+  - (**Optional**) Move it up by `20px`.
   - (**Optional**) both of these properties are to be animated with the duration of half a second.
 
 ## Here is a preview: 
