@@ -1,6 +1,6 @@
 # Calendar
 1. Replace `<your_account>` with your Github username in the link
-    - [DEMO LINK](https://<your_account>.github.io/layout_miami/)
+    - [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
 2. This project requires you to work with `git` manually:
     - Fork and clone the project
     - `npm i` and `npm start` to start the development
