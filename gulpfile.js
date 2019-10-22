@@ -96,6 +96,7 @@ gulp.task('build', series(
 
 gulp.task('serve', function() {
   browserSync.init({
+    notify: false,
     server: {
       baseDir: distDirectory,
     },

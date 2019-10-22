@@ -14,18 +14,17 @@
 
 ## Task
 Display a calendar in the middle of the screen. The HTML of the calendar needs to have the following structure:
-
 ```html
-    <div class="calendar calendar-30 calendar-tue">
-        <div></div>
-        <div></div>
-        <!--
-        ...
-        31 child divs in total
-        ...
-        -->
-        <div></div>
-    </div>
+<div class="calendar calendar-30 calendar-tue">
+  <div></div>
+  <div></div>
+  <!--
+  ...
+  31 child divs in total
+  ...
+  -->
+  <div></div>
+</div>
 ```
 - Use SASS (.scss) for this task. Please do not use JavaScript.
 - Use the given HTML (don't change anything or add numbers 1 through 31).
