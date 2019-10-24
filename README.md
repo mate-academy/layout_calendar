@@ -32,6 +32,9 @@ Display a calendar in the middle of the screen. The HTML of the calendar needs t
 </div>
 ```
 - Use SASS (.scss) for this task. Please do not use JavaScript.
+  - [@each](https://sass-lang.com/documentation/at-rules/control/each)
+  - [@for](https://sass-lang.com/documentation/at-rules/control/for)
+- You can use `flex` and `margin-left` of required size for the `:first-child`
 - Use the given HTML (don't change anything or add numbers 1 through 31).
 - The first day of the week is Monday. (the first column)
 - The `calendar-30` classname here means that the month has 30 days, and `calendar-tue` means that the first day of the month is Tuesday.
