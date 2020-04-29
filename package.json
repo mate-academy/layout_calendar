@@ -10,11 +10,13 @@
     "build": "gulp build",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "lint": "stylelint src/**/*.scss && eslint src/**/*.js && htmllint --rc ./node_modules/@mate-academy/htmllint-config/.htmllintrc src/*.html",
+    "lint": "stylelint src/**/*.scss && eslint src/**/*.js && linthtml src/*.html",
     "publish": "npm run deploy",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "postinstall": "cp node_modules/@mate-academy/htmllint-config/.htmllintrc ./.linthtmlrc"
   },
   "devDependencies": {
+    "@linthtml/linthtml": "^0.3.2",
     "@mate-academy/eslint-config": "*",
     "@mate-academy/htmllint-config": "*",
     "@mate-academy/stylelint-config": "*",
@@ -32,8 +34,6 @@
     "gulp-sass": "^4.0.2",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-stylelint": "^9.0.0",
-    "htmllint": "^0.7.3",
-    "htmllint-cli": "0.0.7",
     "husky": "^2.2.0",
     "lint-staged": "^8.1.6",
     "stylelint": "^10.0.1",
@@ -51,7 +51,7 @@
         "git add"
       ],
       "*.html": [
-        "htmllint --rc  ./node_modules/@mate-academy/htmllint-config/.htmllintrc",
+        "linthtml src/*.html",
         "git add"
       ]
     },
