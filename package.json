@@ -6,67 +6,39 @@
   "license": "GPL-3.0",
   "main": "index.js",
   "scripts": {
-    "start": "gulp",
-    "build": "gulp build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "lint": "stylelint src/**/*.scss && eslint src/**/*.js && linthtml src/*.html",
-    "publish": "npm run deploy",
-    "test": "npm run lint",
-    "postinstall": "cp node_modules/@mate-academy/htmllint-config/.htmllintrc ./.linthtmlrc"
+    "init": "mate-scripts init",
+    "start": "mate-scripts start",
+    "lint": "mate-scripts lint",
+    "test:only": "mate-scripts test",
+    "build": "mate-scripts build",
+    "deploy": "mate-scripts deploy",
+    "update": "mate-scripts update",
+    "postinstall": "npm run update",
+    "test": "npm run lint && npm run test:only"
   },
   "devDependencies": {
     "@linthtml/linthtml": "^0.3.2",
     "@mate-academy/eslint-config": "*",
-    "@mate-academy/htmllint-config": "*",
+    "@mate-academy/linthtml-config": "0.0.1",
+    "@mate-academy/scripts": "^0.2.0",
     "@mate-academy/stylelint-config": "*",
     "browser-sync": "^2.26.3",
     "colors": "^1.3.3",
     "eslint": "^5.9.0",
     "eslint-plugin-node": "^9.0.1",
     "gh-pages": "2.0.0",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "^6.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-eslint": "^5.0.0",
     "gulp-htmllint": "0.0.16",
-    "gulp-replace-path": "^0.4.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-stylelint": "^9.0.0",
-    "husky": "^2.2.0",
-    "lint-staged": "^8.1.6",
+    "node-sass": "^4.14.1",
+    "parcel": "^1.12.4",
     "stylelint": "^10.0.1",
     "stylelint-config-recommended-scss": "^3.3.0",
-    "stylelint-scss": "^3.6.1"
-  },
-  "lint-staged": {
-    "linters": {
-      "*.scss": [
-        "stylelint",
-        "git add"
-      ],
-      "*.js": [
-        "eslint",
-        "git add"
-      ],
-      "*.html": [
-        "linthtml",
-        "git add"
-      ]
-    },
-    "ignore": [
-      "**/dist/**",
-      "**/lib/**"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "post-commit": "git update-index --again",
-      "pre-commit": "lint-staged"
-    }
+    "stylelint-scss": "^3.17.2"
   },
   "browserslist": [
     "last 2 versions"
-  ]
+  ],
+  "mateAcademy": {
+    "projectType": "layout"
+  },
+  "dependencies": {}
 }
