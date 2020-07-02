@@ -38,6 +38,8 @@ Display a calendar in the middle of the screen. The HTML of the calendar needs t
 - The hovered cell has to become pink
   - (**Optional**) Move it up by `20px`.
   - (**Optional**) both of these properties are to be animated with the duration of half a second.
+  
+--> [CHECKLIST](https://github.com/mate-academy/layout_snake/blob/master/checklist.md)
 
 ## Here is a preview:
 ![reference image](reference.png).
