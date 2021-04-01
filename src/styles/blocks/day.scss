@@ -1,0 +1,35 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $sizeDay;
+  height: $sizeDay;
+  margin: $between;
+  background-color: #eee;
+  border: 1px solid #000;
+  transition: transform 0.5s;
+
+  @for $index from 1 through $mean-min-mounth-day {
+    &--#{$index + $sunday - 1}::before {
+      content: "#{$index}";
+    }
+  }
+  
+  @for $index from 1 through $sunday {
+    &--#{$index - 1} {
+      visibility: hidden;
+    }
+  }
+  
+  @for $index from $mean-min-mounth-day + 1 through 42 {
+    &--#{$index + $sunday - 1} {
+      visibility: hidden;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+}
