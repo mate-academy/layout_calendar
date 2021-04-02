@@ -1,0 +1,24 @@
+@import "variables";
+@import "mixins";
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+.calendar__day:nth-child(n+29) {
+  display: none;
+}
+
+@for $i from 28 through 31 {
+  .calendar--#{$i} .calendar__day:nth-child(-n+#{$i}) {
+    display: block;
+  }
+}
+
+@each $name, $num in $days {
+  .calendar--#{$name} {
+    @include start($num);
+  }
+}
