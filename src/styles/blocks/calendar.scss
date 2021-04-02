@@ -2,25 +2,45 @@
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  width: getCalendarWidth($cell-size, $gap-size);
+  width: getCalendarWidth($cell-size, $gap-size, $calendar-padding);
   gap: $gap-size;
   padding: $calendar-padding;
 
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  @each $name, $shift in $days {
+    &--start-day_#{$name} :first-child {
+      margin-left: $shift;
+    }
+  }
+
   &__item {
     position: relative;
-    min-width: $cell-size;
-    height: $cell-size;
+    @include square($cell-size);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     background-color: #eee;
     border: 1px solid #000;
-    margin-bottom: 1px;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
   
     &:hover {
-      cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: transform 0.5s, background-color 0.5s;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        position: absolute;
+        @include square($cell-size);
+        line-height: $cell-size;
+        text-align: center;
+      }
     }
   }
 }
