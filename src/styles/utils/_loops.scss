@@ -1,0 +1,22 @@
+@each $name, $shift in $days {
+  .calendar__item--#{$name} {
+    margin-left: $shift;
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__item--#{$index}::before {
+    content: "#{$index}";
+    position: absolute;
+    width: $cell-size;
+    height: $cell-size;
+    line-height: $cell-size;
+    text-align: center;
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar__item--month-length_#{$index}:nth-child(n + #{$index + 1}) {
+    visibility: hidden;
+  }
+}
