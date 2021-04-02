@@ -5,4 +5,24 @@
   height: getHeight($sizeDay, $between, $distance);
   flex-wrap: wrap;
   font-size: 30px;
+
+  &__days {
+    margin: $between;
+  }
+
+  $countDays:
+    "mounth28"      28,
+    "mounth29"      29,
+    "mounth30"      30,
+    "mounth31"      31;
+
+  @each $name, $number in $countDays {
+    &--mounth--#{$name} {
+      @for $index from 1 through $number {
+        .day--#{$index} {
+          display: flex;
+        }
+      }
+    }
+  }
 }
