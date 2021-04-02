@@ -5,6 +5,12 @@
   flex-wrap: wrap;
   gap: 1px;
 
+  @each $day, $margin in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+
   @for $index from 28 through $month-length {
     &--month-length--#{$index} :nth-child(n + #{$index+1}) {
       display: none;
@@ -31,12 +37,6 @@
     @for $index from 1 through $month-length {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-      }
-    }
-
-    @each $day, $margin in $days {
-      &--start-day--#{$day} {
-        margin-left: $margin;
       }
     }
 
