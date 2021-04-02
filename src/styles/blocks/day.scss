@@ -1,0 +1,19 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include cell;
+
+  @for $number from 1 through 31 {
+    &--#{$number}::before {
+      content: "#{$number}";
+      @include font;
+    }
+  }
+
+  &:hover {
+    background-color: $cellColorHover;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+}
