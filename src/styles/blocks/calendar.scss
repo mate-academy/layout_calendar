@@ -1,0 +1,34 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendarSize;
+  gap: $gap;
+  padding: $calendarPadding;
+  
+  @for $index from 1 through $month {
+    & :nth-child(#{$index}) {
+      @include square(100px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      background-color: #eee;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+
+    & :nth-child(#{$index}):hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    & :nth-child(#{$index})::after {
+      content: "#{$index}";
+    }
+  }
+  @each $name, $margin in $startDay {
+    &--start-day--#{$name} :first-child {
+      margin-left: $margin;
+    }
+  }
+}
