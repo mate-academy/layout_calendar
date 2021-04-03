@@ -4,24 +4,17 @@
   align-items: center;
   width: $sizeDay;
   height: $sizeDay;
+  margin: $between;
   background-color: #eee;
   border: 1px solid #000;
-  transition: transform 0.5s;
+  transition-duration: 0.5s;
+  transition-property: transform background-color;
 
   @for $index from 1 through 31 {
-    &--#{$index}::before {
+    &:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
-
-  $days:
-    "monday"    $fullDay * 0,
-    "tuesday"   $fullDay * 1,
-    "wednesday" $fullDay * 2,
-    "thursday"  $fullDay * 3,
-    "friday"    $fullDay * 4,
-    "saturday"  $fullDay * 5,
-    "sunday"    $fullDay * 6;
 
   @each $name, $day in $days {
     &--day--#{$name} {
