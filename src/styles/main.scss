@@ -1,3 +1,73 @@
+$calendar-size: 707px;
+$block-size: ($calendar-size - 7) / 7;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  margin: 10px 10px 9px;
+  width: $calendar-size;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  @for $index from 1 to 31 {
+    &__month-length--#{$index} :nth-child(n + #{$index+1}) {
+      display: none;
+    }
+  }
+
+  @for $number from 1 to 32 {
+    &__day--#{$number}::before {
+      content: "#{$number}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      position: relative;
+      top: 33%;
+    }
+  }
+
+  &__day {
+    margin: 0 0 1px 1px;
+    box-sizing: border-box;
+    text-align: center;
+    position: relative;
+    width: $block-size;
+    height: $block-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition-duration: 0.5s;
+  }
+
+  $days:
+    "mon" 1,
+    "tue" 2 + $block-size,
+    "wed" 3 + $block-size * 2,
+    "thu" 4 + $block-size * 3,
+    "fri" 5 + $block-size * 4,
+    "sat" 6 + $block-size * 5,
+    "sun" 7 + $block-size * 6;
+
+  @each $day, $position in $days {
+    &__day-start--#{$day} {
+      margin-left: $position;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    animation: 0.5s forwards slidein;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(0, -20px);
+  }
 }
