@@ -1,0 +1,22 @@
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: calculateCalendarWidth($calendarDayBoxSize, $calendarPadding, $gap);
+  padding: $calendarPadding;
+
+  &__day {
+    @extend %flexCenter;
+    @include square($calendarDayBoxSize);
+    background-color: $calendarDayColor;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+    background-color: #ffbfcb;
+  }
+}
