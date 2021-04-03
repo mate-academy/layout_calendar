@@ -5,15 +5,6 @@
   padding: $calendarPadding;
   gap: $cellShift;
 
-  $week:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
   @each $day, $shift in $week {
     &--start-day_#{$day} :first-child {
       margin-left: $cellSize * $shift + $cellShift * $shift;
@@ -21,7 +12,7 @@
   }
 
   @for $days from 28 through 31 {
-    &--month-length_#{$days} :nth-child(n+#{$days+1}) {
+    &--month-length_#{$days} :nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
