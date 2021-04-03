@@ -1,0 +1,40 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $square-gap;
+  width: $container-width;
+
+  @each $day, $indentation in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $indentation;
+    }
+  }
+
+  @for $last-day from $min-month-length to $max-month-length {
+    &--month-lenght--#{$last-day} :nth-child(#{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $square-width;
+    height: $square-height;
+    line-height: 98px;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      margin-top: -20px;
+      background-color: pink;
+    }
+  }
+}
+
+@for $date from 1 through 31 {
+  .month__day:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
