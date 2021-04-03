@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+.content {
+  @extend %align-ver-hor;
+  @extend %text-number;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $padding-sides;
+  gap: $gap-between-cell;
+  width: $widthCalendar;
+  @for $index from 1 through $all-days {
+    & :nth-child(#{$index}) {
+      @extend %align-ver-hor;
+      @include cell-square($size-cell);
+      background-color: $color-cell;
+      border: $border-cell;
+      cursor: pointer;
+      transition-duration: 0.5s;
+      &::before {
+        content: "#{$index}";
+      }
+    }
+  }
+  & :hover {
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+  }
+  
+  @for $index from 28 through $all-days {
+    &--month-length_#{$index} :nth-last-child(
+    -n + #{$all-days - $index}) {
+      display: none;
+    }
+  }
+
+  @each $day-of-week, $intend-multiplier in $week {
+    &--start-day_#{$day-of-week} :first-child {
+      margin-left: ($size-cell + $gap-between-cell) * $intend-multiplier;
+    }
+  }
+}
