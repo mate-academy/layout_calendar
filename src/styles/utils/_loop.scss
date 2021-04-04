@@ -1,0 +1,29 @@
+@for $i from 1 through 31 {
+  .calendar div:nth-child(#{$i})::after {
+    display: none;
+    content: "#{$i}";
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar--month-length--#{$i} div:nth-child(-n + #{$i}) {
+    @include boxItem();
+    @include flexCenter();
+    transition-duration: 0.5s;
+    &::after {
+      display: inline;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
+
+@each $day, $margin in $days {
+  .calendar--start-day--#{$day} div:first-child {
+    margin-left: $margin;
+  }
+}
