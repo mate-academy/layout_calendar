@@ -1,0 +1,51 @@
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calGap;
+  margin: 0 auto;
+  padding: $calPadding;
+  width: calWidth($dayWidth, $calPadding, $calGap);
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($dayWidth);
+    background-color: #aaa;
+    transition: translatey, 100ms;
+    &:hover {
+      background-color: lightblue;
+      cursor: pointer;
+      transition: translatey, 100ms;
+      transform: translateY(-20px);
+    }
+
+    // add numbers to cells
+    @for $dayNum from 1 through 31 {
+      &:nth-child(#{$dayNum})::before {
+        content: "#{$dayNum}";
+        left: 50%;
+        top: 50%;
+      }
+    }
+  }
+
+  // calculate position of the first day
+  @each $day, $num in $startDay {
+    &--start-day--#{$day}::before {
+      content: "";
+      margin-left: -1px;
+      width: firstDay($dayWidth, $num, $calGap);
+    }
+  }
+
+  // calculate the numbers of days in month
+  @for $lastDay from 28 through 31 {
+    &--month-length--#{$lastDay} {
+      .calendar__day:nth-child(n + #{$lastDay + 1}) {
+        display: none;
+      }
+    }
+  }
+}
