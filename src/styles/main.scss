@@ -1,12 +1,13 @@
-$calendar-size: 700px;
-$block-size: $calendar-size / 7;
+$calendar-size: 707px;
+$block-size: ($calendar-size - 7) / 7;
 
 body {
   margin: 0;
 }
 
 .calendar {
-  margin: 10px 10px 9px;
+  margin: 25px 10px;
+  gap: 1px;
   width: $calendar-size;
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +21,6 @@ body {
 
   &__day {
     display: flex;
-    gap: 1px;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
@@ -41,12 +41,12 @@ body {
 
   $days:
     "mon" 0,
-    "tue" $block-size,
-    "wed" $block-size * 2,
-    "thu" $block-size * 3,
-    "fri" $block-size * 4,
-    "sat" $block-size * 5,
-    "sun" $block-size * 6;
+    "tue" 1 + $block-size,
+    "wed" 2 + $block-size * 2,
+    "thu" 3 + $block-size * 3,
+    "fri" 4 + $block-size * 4,
+    "sat" 5 + $block-size * 5,
+    "sun" 6 + $block-size * 6;
 
   @each $day, $position in $days {
     &__day-start--#{$day} {
