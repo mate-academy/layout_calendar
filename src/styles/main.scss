@@ -1,5 +1,5 @@
-$calendar-size: 707px;
-$block-size: ($calendar-size - 7) / 7;
+$calendar-size: 700px;
+$block-size: $calendar-size / 7;
 
 body {
   margin: 0;
@@ -18,21 +18,12 @@ body {
     }
   }
 
-  @for $number from 1 to 32 {
-    &__day--#{$number}::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      position: relative;
-      top: 33%;
-    }
-  }
-
   &__day {
-    margin: 0 0 1px 1px;
+    display: flex;
+    gap: 1px;
     box-sizing: border-box;
-    text-align: center;
-    position: relative;
+    justify-content: center;
+    align-items: center;
     width: $block-size;
     height: $block-size;
     border: 1px solid #000;
@@ -40,14 +31,22 @@ body {
     transition-duration: 0.5s;
   }
 
+  @for $number from 1 to 32 {
+    &__day--#{$number}::before {
+      content: "#{$number}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
   $days:
-    "mon" 1,
-    "tue" 2 + $block-size,
-    "wed" 3 + $block-size * 2,
-    "thu" 4 + $block-size * 3,
-    "fri" 5 + $block-size * 4,
-    "sat" 6 + $block-size * 5,
-    "sun" 7 + $block-size * 6;
+    "mon" 0,
+    "tue" $block-size,
+    "wed" $block-size * 2,
+    "thu" $block-size * 3,
+    "fri" $block-size * 4,
+    "sat" $block-size * 5,
+    "sun" $block-size * 6;
 
   @each $day, $position in $days {
     &__day-start--#{$day} {
@@ -58,16 +57,6 @@ body {
   &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
-    animation: 0.5s forwards slidein;
-  }
-}
-
-@keyframes slidein {
-  from {
-    transform: translate(0, 0);
-  }
-
-  to {
     transform: translate(0, -20px);
   }
 }
