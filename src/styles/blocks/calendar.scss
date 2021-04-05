@@ -1,0 +1,50 @@
+.calendar {
+  width: calendarWidth(
+    $cell-size, $field-gap, $field-padding
+  );
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $field-gap;
+    padding: $field-padding;
+  }
+
+  &__cell {
+    text-align: center;
+    line-height: $cell-size;
+    width: $cell-size;
+    height: $cell-size;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    visibility: hidden;
+    transition-duration: 500ms;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
+  }
+
+  @for $date from 1 through 31 {
+    &__field &__cell:nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
+  }
+
+  @each $day, $shift in $days-shifts {
+    &--start-day--#{$day} &__cell:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $daysInMonth from 28 through 31 {
+    &--month-length--#{$daysInMonth}
+    &__cell:nth-child(-n + #{$daysInMonth}) {
+      visibility: visible;
+    }
+  }
+}
