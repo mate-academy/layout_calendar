@@ -1,0 +1,44 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: getCalendarWidth($fieldsSize, $fieldsGap, $fieldPaddings);
+  gap: $fieldsGap;
+  padding: $fieldPaddings;
+  & :nth-child(7n+1) {
+    background-color: red;
+  }
+
+  @each $day, $margin in $startDay {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 through $monthLength {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+  
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: $borderThin solid black;
+    @include square ($fieldsSize);
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      transform: translateY(-$hoveredDay);
+      background-color: #ffbfcb;
+    }
+
+    @for $index from 1 through $monthLength {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
