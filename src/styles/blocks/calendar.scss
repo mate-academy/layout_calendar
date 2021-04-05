@@ -1,0 +1,55 @@
+@use "../utils/variables";
+@use "../utils/mixins";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  width: 100%;
+  max-width: variables.$calendar-width;
+  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  &--month-length {
+    @for $var from 1 to variables.$month-length {
+      &--#{$var} :nth-child(n + #{$var + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    @each $day, $margination in variables.$start-day {
+      &--#{$day} :first-child {
+        margin-left: $margination;
+      }
+    }
+  }
+
+  &__day {
+    @include mixins.square(variables.$square-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $var from 1 through variables.$month-length {
+      &:nth-child(#{$var})::before {
+        content: "#{$var}";
+        color: #000;
+        
+      }
+    }
+  }
+}
