@@ -1,0 +1,25 @@
+.day-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  border: 1px solid black;
+  width: $dayBlockSize;
+  height: $dayBlockSize;
+  text-align: center;
+  font-family: inherit;
+  transition-duration: 0.5s;
+  
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+      font-size: 30px;
+    }
+  }
+  
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}

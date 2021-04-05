@@ -1,0 +1,31 @@
+.calendar {
+  $dayBlockPadding: 10px;
+  $calendarGap: 1px;
+  
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendarGap;
+  max-width: 7 * $dayBlockSize + $dayBlockPadding * 2;
+  
+  $startDays: 
+    "mon" 0,
+    "tue" 1, 
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+  
+  @each $startDayName, $startDayNumber in $startDays {
+    &--#{$startDayName} .day-block:first-child {
+      margin-left: $startDayNumber * ($dayBlockSize+$calendarGap);
+    }
+  }
+  
+  @for $redundantDays from 28 through 31 {
+    &--month-length_#{$redundantDays} 
+    .day-block:nth-child(n + #{$redundantDays}) + * {
+      display: none;
+    }
+  }
+}
