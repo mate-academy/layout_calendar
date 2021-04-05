@@ -1,33 +1,28 @@
-@mixin square {
-  height: $heightOfDay;
-  width: $heightOfDay;
-}
-
-@function calendarWidth($widthOfDay, $calendarPadding, $day) {
-  @return ($widthOfDay * $day) + ($calendarPadding * 2) + ($gap * 6);
+@function calendarWidth($widthOfDay, $calendarPadding) {
+  @return ($widthOfDay * 7) + ($calendarPadding * 2) + ($gap * 6);
 }
 
 $startDay:
   "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5,
-  "sun" 6;
+  "tue" #{$sizeOfDay + $gap},
+  "wed" #{($sizeOfDay + $gap) * 2},
+  "thu" #{($sizeOfDay + $gap) * 3},
+  "fri" #{($sizeOfDay + $gap) * 4},
+  "sat" #{($sizeOfDay + $gap) * 5},
+  "sun" #{($sizeOfDay + $gap) * 6};
 
 .calendar {
 
-  width: calendarWidth($widthOfDay, $calendarPadding, 7);
+  width: calendarWidth($sizeOfDay, $calendarPadding);
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: #{$gap}px;
   padding: $calendarPadding;
 
   @each $day, $number in $startDay {
     &--start-day-#{$day} {
       & :first-child {
-        margin-left: #{$number * 100 + $number}px;
+        margin-left: #{$number}px;
       }
     }
   }
@@ -39,7 +34,8 @@ $startDay:
   }
 
   &__day {
-    @include square();
+    width: #{$sizeOfDay}px;
+    height: #{$sizeOfDay}px;
     background-color: #eee;
     border: 1px solid black;
     display: flex;
@@ -47,7 +43,7 @@ $startDay:
     align-items: center;
     font-family: "Arial", sans-serif;
     font-size: 30px;
-    transition: transform 500ms;
+    transition-duration: 500ms;
 
     &:hover {
       background-color: pink;
