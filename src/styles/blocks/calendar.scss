@@ -5,32 +5,35 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  padding-top: 20px;
   gap: $cell-shift;
   width: ((7 * ($cell-size + $cell-shift)) - $cell-shift);
-  padding-top: 20px;
 
   @for $day from 1 through $dayQuantity {
-    &__day:nth-child(#{$day}) {
-      width: #{$cell-size};
-      height: #{$cell-size};
-      background-color: #eee;
-      border: 1px solid #000;
-      line-height: $cell-size;
-      text-align: center;
-      font-size: 30px;
-      cursor: pointer;
-      transition: 0.5s;
+    &--month-length--#{$day - 1}:nth-child(n + #{$day}) {
+      display: none;
     }
+  }
 
-    &__day:nth-child(#{$day})::before {
-      content: "#{$day}";
-    }
+  &__day {
+    width: #{$cell-size};
+    height: #{$cell-size};
+    background-color: #eee;
+    border: 1px solid #000;
+    line-height: $cell-size;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s;
+  }
 
-    &__day:nth-child(#{$day}):hover {
-      background-color: pink;
-      transform: translateY(-20px);
-    }
+  &__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+
+  &__day:nth-child(#{$day}):hover {
+    background-color: pink;
+    transform: translateY(-20px);
   }
 
   @each $day, $margin in $first-day {
