@@ -1,13 +1,17 @@
 .calendar {
-  width: calendarWidth(
-    $cell-size, $field-gap, $field-padding
-  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
   &__field {
     display: flex;
     flex-wrap: wrap;
     gap: $field-gap;
     padding: $field-padding;
+    width: calendarWidth(
+      $cell-size, $field-gap, $field-padding
+    );
   }
 
   &__cell {
@@ -18,9 +22,7 @@
 
     background-color: #eee;
     border: 1px solid #000;
-
-    visibility: hidden;
-    transition-duration: 500ms;
+    transition-duration: 0.5s;
 
     &:hover {
       transform: translateY(-20px);
@@ -43,8 +45,8 @@
 
   @for $daysInMonth from 28 through 31 {
     &--month-length--#{$daysInMonth}
-    &__cell:nth-child(-n + #{$daysInMonth}) {
-      visibility: visible;
+    &__cell:nth-child(n + #{$daysInMonth + 1}) {
+      visibility: hidden;
     }
   }
 }
