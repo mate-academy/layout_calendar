@@ -1,0 +1,21 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s, background-color 0.5s;
+  @include cell;
+
+  @for $number from 1 through 31 {
+    &:nth-child(#{$number}) {
+      &::before {
+        content: "#{$number}";
+        @include font;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: $cellColorHover;
+    transform: translateY(-20px);
+  }
+}
