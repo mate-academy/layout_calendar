@@ -33,13 +33,16 @@
       transform: translateY(-20px);
     }
 
+    &::before {
+      position: absolute;
+      @include square($cell-size);
+      line-height: $cell-size;
+      text-align: center;
+    }
+
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
-        position: absolute;
-        @include square($cell-size);
-        line-height: $cell-size;
-        text-align: center;
       }
     }
   }
