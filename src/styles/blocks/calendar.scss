@@ -9,9 +9,15 @@
   gap: $cell-shift;
   width: ((7 * ($cell-size + $cell-shift)) - $cell-shift);
 
-  @for $day from 1 through $dayQuantity {
-    &--month-length--#{$day - 1}:nth-child(n + #{$day}) {
+  @for $item from 1 through $dayQuantity {
+    &--month-length--#{$item - 1} :nth-child(n + #{$item}) {
       display: none;
+    }
+  }
+
+  @for $item from 1 through $dayQuantity {
+    &__day:nth-child(#{$item})::before {
+      content: "#{$item}";
     }
   }
 
@@ -25,15 +31,11 @@
     font-size: 30px;
     cursor: pointer;
     transition: 0.5s;
-  }
 
-  &__day:nth-child(#{$day})::before {
-    content: "#{$day}";
-  }
-
-  &__day:nth-child(#{$day}):hover {
-    background-color: pink;
-    transform: translateY(-20px);
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
   }
 
   @each $day, $margin in $first-day {
