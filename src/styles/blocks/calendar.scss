@@ -1,0 +1,46 @@
+.content__item {
+  margin: 0 auto;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  gap: $cell-shift;
+  width: ((7 * ($cell-size + $cell-shift)) - $cell-shift);
+
+  @for $item from 1 through $dayQuantity {
+    &--month-length--#{$item - 1} :nth-child(n + #{$item}) {
+      display: none;
+    }
+  }
+
+  @for $item from 1 through $dayQuantity {
+    &__day:nth-child(#{$item})::before {
+      content: "#{$item}";
+    }
+  }
+
+  &__day {
+    width: #{$cell-size};
+    height: #{$cell-size};
+    background-color: #eee;
+    border: 1px solid #000;
+    line-height: $cell-size;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $margin in $first-day {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+}
