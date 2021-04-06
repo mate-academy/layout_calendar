@@ -4,9 +4,6 @@
   width: getCalendarWidth($fieldsSize, $fieldsGap, $fieldPaddings);
   gap: $fieldsGap;
   padding: $fieldPaddings;
-  & :nth-child(7n+1) {
-    background-color: red;
-  }
 
   @each $day, $margin in $startDay {
     &--start-day--#{$day} :first-child {
@@ -28,7 +25,7 @@
     border: $borderThin solid black;
     @include square ($fieldsSize);
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.5s, background-color 0.5s;
 
     &:hover {
       transform: translateY(-$hoveredDay);
