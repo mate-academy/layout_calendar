@@ -17,6 +17,14 @@
     }
   }
 
+  @each $day, $value in $startDay {
+    &--start-day--#{$day} {
+      .calendar__square:first-child {
+        margin-left: startMonth($value, $squareSize, $calendarGap);
+      }
+    }
+  }
+
   &__container {
     display: flex;
     flex-wrap: wrap;
@@ -46,12 +54,6 @@
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-      }
-    }
-
-    @each $day, $value in $startDay {
-      &--start-day--#{$day} {
-        margin-left: startMonth($value, $squareSize, $calendarGap);
       }
     }
   }
