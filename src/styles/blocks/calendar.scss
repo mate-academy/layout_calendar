@@ -1,49 +1,54 @@
 .calendar {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  gap: $blockGap;
 
-  padding: 100px;
+  padding: $blockPadding;
+  max-width: getWidth($blockSize, $blockGap, $blockPadding);
 
-  &__container {
+  @each $day, $position in $week {
+    &--start-day_#{$day} :first-child {
+      margin-left: ($blockSize + $blockGap) * $position;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include daySize($blockSize);
+
     display: flex;
-    flex-wrap: wrap;
-    width: $width-blocks-calendar;
-    gap: $shift;
-    padding: $isnside-shift;
+    background-color: #eee;
+    border: 1px solid #000;
+  
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    cursor: pointer;
 
-    @for $index from 1 through $max-days-of-month {
-      & div:nth-child(#{$index}) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: $width-blocks-day;
-        height: $width-blocks-day;
-        background-color: #eee;
-        border: 1px solid black;
-        transition-duration: 0.5s;
-        cursor: pointer;
-
-        &::before {
-          content: "#{$index}";
-        }
-
-        &:hover {
-          transform: translateY(-20px);
-          background-color: pink;
-        }
+    transition-duration: 0.5s;
+ 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
       }
     }
 
-    @each $name, $shift in $first-day-shift {
-      &--start-day--#{$name} div:first-child {
-        margin-left: $shift;
-      }
+    &::before {
+      width: 100%;
+    
+      display: flex;
+      align-self: center;
+      justify-content: center;
     }
 
-    @for $index from 28 through $max-days-of-month {
-      &--month-length--#{$index} div:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
     }
+    
   }
 }
