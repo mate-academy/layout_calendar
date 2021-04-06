@@ -1,0 +1,25 @@
+.calendar__block {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  width: $square-block;
+  height: $square-block;
+  border: 1px solid black;
+  background-color: #eee;
+  transition-duration: 0.5s;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    cursor: pointer ;
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(n + #{$i})::before {
+      content: "#{$i}";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
