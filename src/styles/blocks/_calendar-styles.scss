@@ -15,16 +15,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    @include day-square($day-square-size);
+    border: 1px solid #000;
+    background-color: $day-color;
     font: $font-cell-day;
     cursor: pointer;
 
-    @for $index from 1 through $month-length {
-      &:nth-child(#{$index}) {
-        @include day-square($day-square-size);
-        border: 1px solid #000;
-        background-color: $day-color;
-      }
-    
+    @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
@@ -40,6 +37,12 @@
       &_start-day--#{$day} {
         margin-left: $ident;
       }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &_month-length--#{$index} > :nth-child(n + #{$index+1}) {
+      display: none;
     }
   }
 }
