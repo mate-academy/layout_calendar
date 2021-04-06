@@ -1,0 +1,41 @@
+@for $index from 1 through $calendarMonthDays {
+  .calendar__item:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $day, $margin in $days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $value from 28 through $calendarMonthDays {
+  .calendar--month-length--#{$value} :nth-child(n + #{$value + 1}) {
+    display: none;
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calcCalendarWidth($paddings, $calendarDaysSize, $gap);
+  gap: 1px;
+  padding: 10px;
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @include square($calendarDaysSize);
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s, background-color 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+  }
+}
