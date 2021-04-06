@@ -2,7 +2,7 @@
 .calendar {
   $calendar-gap: 1px;
   $calendar-padding: 10px;
-  $calendar-width: $days-in-line * $day-suqare-side +
+  $calendar-width: $days-in-line * $day-square-side +
     $calendar-padding * 2 + $calendar-gap * ($days-in-line - 1);
   display: flex;
   flex-wrap: wrap;
@@ -10,48 +10,39 @@
   gap: $calendar-gap;
   padding: $calendar-padding;
   
-  @for $i from 1 through $max-month-length {
-    & :nth-child(#{$i})::before {
-      position: absolute;
-      content: "#{$i}";
-    }
-
-    @for $i from $min-month-length through $max-month-length {
-      @for $j from $i through  $max-month-length {
-        &--days-in-month--#{$i} :nth-child(#{$j + 1}) {
-          display: none;
-        }
-      }
-    }
-
-    &-container {
-      padding: 150px;
-      display: flex;
-      justify-content: center;
+  @for $j from $min-month-length through  $max-month-length {
+    &--days-in-month--#{$j} :nth-child(n + #{$j + 1}) {
+      display: none;
     }
   }
 
   @each $day, $day-number in $days {
     &--first-day--#{$day} :first-child {
-      margin-left: $day-number * $day-suqare-side + $calendar-gap * $day-number;
+      margin-left: $day-number * $day-square-side + $calendar-gap * $day-number;
       background-color: sandybrown;
     }
   }
 
   &__day {
-    @include setDaySquaqre($day-suqare-side);
+    @include setDaySquaqre($day-square-side);
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #eee;
     border: 1px solid black;
     transition-duration: 0.5s;
-    transition-property: background-color translatey;
+    transition-property: background-color, transform;
 
     &:hover {
       transform: translateY(-20px);
       cursor: pointer;
       background-color: #ffbfcb;
+    }
+
+    @for $date from 1 through $max-month-length {
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
+      }
     }
   }
 }
