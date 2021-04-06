@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.5s;
+  transition: transform 0.5s, background-color 0.5s;
   @include cell;
 
   @for $number from 1 through 31 {
-    &--#{$number}::before {
-      content: "#{$number}";
-      @include font;
+    &:nth-child(#{$number}) {
+      &::before {
+        content: "#{$number}";
+        @include font;
+      }
     }
   }
 
