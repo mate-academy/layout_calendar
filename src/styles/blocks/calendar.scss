@@ -1,0 +1,55 @@
+.conteiner {
+  display: flex;
+  justify-self: center;
+
+  padding: 50px;
+
+  &_numbers {
+    display: flex;
+    flex-wrap: wrap;
+    width: conteinerWidth($widthAndHeightBlock, $gap, $insidePadding, $border);
+    gap: $gap;
+
+    padding: $insidePadding;
+    border: $border solid #000;
+
+    & div:nth-child(n) {
+      background-color: #eee;
+
+      cursor: pointer;
+    }
+
+    @for $index from 1 through 31 {
+      & div:nth-child(#{$index})::after {
+        content: "#{$index}";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: $widthAndHeightBlock;
+        height: $widthAndHeightBlock;
+
+        border: $border solid #000;
+      }
+
+      & div:nth-child(#{$index}):hover {
+        background-color: #ffbfcb;
+
+        transform: translateY(-20px);
+        transition-duration: 0.5s;
+      }
+
+      @each $day, $number in $dayNumber {
+        &--start-day--#{$day} :first-child {
+          margin-left: ($widthAndHeightBlock + $gap + $border * 2) * $number;
+        }
+      }
+
+      @for $dayInMonth from 28 through 31 {
+        &--month_length--#{$dayInMonth} :nth-child(n + #{$dayInMonth + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
