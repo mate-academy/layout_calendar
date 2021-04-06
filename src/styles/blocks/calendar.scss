@@ -1,3 +1,21 @@
+@for $index from 1 through $calendarMonthDays {
+  .calendar__item:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $day, $margin in $days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $value from 28 through $calendarMonthDays {
+  .calendar--month-length--#{$value} :nth-child(n + #{$value + 1}) {
+    display: none;
+  }
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -13,12 +31,11 @@
     @include square($calendarDaysSize);
     background-color: #eee;
     border: 1px solid #000;
-    transition-duration: 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
       transform: translateY(-20px);
       background-color: #ffbfcb;
-      transition-duration: 0.5s;
     }
   }
 }
