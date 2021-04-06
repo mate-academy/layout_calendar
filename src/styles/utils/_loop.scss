@@ -4,17 +4,9 @@
   }
 }
 
-@for $i from 1 through 31 {
-  .calendar--month-length_#{$i} div:nth-child(-n + #{$i}) {
-    @include boxItem();
-    @include flexCenter();
-    transition-duration: 0.5s;
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-      cursor: pointer;
-    }
+@for $i from 28 through 31 {
+  .calendar--month-length_#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
 
