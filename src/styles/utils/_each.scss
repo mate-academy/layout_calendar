@@ -1,0 +1,14 @@
+$start-day:
+  "mon" 0,
+  "tue" $ceil-shift,
+  "wed" 2 * $ceil-shift,
+  "thu" 3 * $ceil-shift,
+  "fri" 4 * $ceil-shift,
+  "sat" 5 * $ceil-shift,
+  "sun" 6 * $ceil-shift;
+
+@each $name, $index in $start-day {
+  .calendar--start-day--#{$name} :first-child {
+    margin-left: $index;
+  }
+}

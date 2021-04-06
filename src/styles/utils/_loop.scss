@@ -1,0 +1,11 @@
+@for $month-length from 1 through 31 {
+  .calendar__ceil:nth-child(#{$month-length})::before {
+  content: '#{$month-length}';
+  }
+}
+
+@for $empty-ceil from 28 through 31 {
+  .calendar--month-length--#{$empty-ceil} :nth-child(n + #{$empty-ceil + 1}) {
+  display: none;
+  }
+}
