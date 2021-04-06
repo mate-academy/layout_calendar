@@ -1,3 +1,60 @@
-body {
-  margin: 0;
+$ceil-size: 100px;
+$calendar-padding: 10px;
+$calendar-gap: 1px;
+$ceil-shift: $ceil-size + $calendar-gap;
+
+@mixin ceil ($size) {
+  width: $size;
+  height: $size;
+}
+
+//$month-length:
+//31,
+//30,
+//29,
+//28;
+
+
+@for $month-length from 1 through 31 {
+.calendar__ceil:nth-child(#{$month-length})::before {
+  content: '#{$month-length}';
+}
+}
+
+$start-day:
+  "mon" 0,
+  "tue" $ceil-shift,
+  "wed" 2 * $ceil-shift,
+  "thu" 3 * $ceil-shift,
+  "fri" 4 * $ceil-shift,
+  "sat" 5 * $ceil-shift,
+  "sun" 6 * $ceil-shift;
+
+  @each $name, $index in start-day {
+    .calendar--start-day-#{$name}:first-child {
+      margin-left: $index;
+    }
+  }
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 7 * $ceil-size + ($calendar-gap * 6) + ($calendar-padding * 2);
+  padding: $calendar-padding;
+  margin: 0 auto;
+  gap: $calendar-gap;
+
+  &__ceil {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    @include ceil($ceil-size);
+    }
 }
