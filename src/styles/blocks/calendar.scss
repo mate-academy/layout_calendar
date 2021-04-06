@@ -1,9 +1,4 @@
-
 .calendar {
-  $calendar-gap: 1px;
-  $calendar-padding: 10px;
-  $calendar-width: $days-in-line * $day-square-side +
-    $calendar-padding * 2 + $calendar-gap * ($days-in-line - 1);
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
@@ -11,13 +6,13 @@
   padding: $calendar-padding;
   
   @for $j from $min-month-length through  $max-month-length {
-    &--days-in-month--#{$j} :nth-child(n + #{$j + 1}) {
+    &--days-in-month_#{$j} :nth-child(n + #{$j + 1}) {
       display: none;
     }
   }
 
   @each $day, $day-number in $days {
-    &--first-day--#{$day} :first-child {
+    &--first-day_#{$day} :first-child {
       margin-left: $day-number * $day-square-side + $calendar-gap * $day-number;
       background-color: sandybrown;
     }
