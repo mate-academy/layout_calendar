@@ -2,7 +2,7 @@
   @extend %flex;
   flex-wrap: wrap;
   gap: $gap;
-  max-width: getCellWidth($cellSize, $gap, $pading);
+  max-width: getCalendarWidth($cellSize, $gap, $pading);
 
   @each $nameOfDay, $daysBefore in $startDay {
     &--start-day--#{$nameOfDay} :first-child {
@@ -29,13 +29,10 @@
     justify-content: center;
     content: "";
     @include square();
-  
     background-color: #eee;
-  
     border: 1px solid black;
-  
     transition: transform 0.5s, background-color 0.5s;
-  
+
     &:hover {
       cursor: pointer;
       background-color: pink;
