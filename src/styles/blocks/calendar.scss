@@ -1,0 +1,61 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+@import "../utils/functions";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  padding: 5px;
+  gap: $gap-size;
+  height: min-content;
+  width: $cell-size * 7 + $gap-size * 6 + 10;
+  background-color: lightblue;
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include square($cell-size);
+    border: 1px solid black;
+    transition: 0.5s;
+    background-color: #eee;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  $week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $value in $week {
+    &--start-day_#{$day} {
+      .calendar__cell:first-child {
+        margin-left: getShift($cell-size, $gap-size, $value) - 1 + 1px;
+      }
+    }
+  }
+
+  @for $month-end from 28 through 31 {
+    &--month-length_#{$month-end} {
+      .calendar__cell:nth-child(n + #{$month-end + 1}) {
+        display: none;
+      }
+    }
+  }
+}
