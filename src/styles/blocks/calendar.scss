@@ -1,0 +1,19 @@
+.calendar {
+  display: flex;
+  padding: $distance;
+  width: getWidth($sizeDay, $between, $distance);
+  flex-wrap: wrap;
+  font-size: 30px;
+
+  @each $weekDay, $margin in $days {
+    &__start-day--#{$weekDay} .day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} .day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
