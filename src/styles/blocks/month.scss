@@ -5,13 +5,13 @@
   width: $container-width;
 
   @each $day, $indentation in $week {
-    &--start-day--#{$day} :first-child {
+    &--start-day-#{$day} :first-child {
       margin-left: $indentation;
     }
   }
 
   @for $last-day from $min-month-length to $max-month-length {
-    &--month-lenght--#{$last-day} :nth-child(#{$last-day + 1}) {
+    &--month-lenght-#{$last-day} :nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
