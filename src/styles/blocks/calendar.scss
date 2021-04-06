@@ -7,15 +7,15 @@
 
   padding: 0 10px;
 
-  @each $length, $value in $monthLength {
-    @for $index from $value through 32 {
-      &--month-length--#{$length} {
-        .calendar__square:nth-child(#{$index}) {
-          display: none;
-        }
+
+  @for $days from 28 through 32 {
+    &--month-length--#{$days} {
+      .calendar__square:nth-child(n + #{$days + 1}) {
+        display: none;
       }
     }
   }
+
 
   @each $day, $value in $startDay {
     &--start-day--#{$day} {
@@ -44,7 +44,7 @@
     text-align: center;
 
     cursor: pointer;
-    transition-duration: 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       background-color: #FFBFCB;
