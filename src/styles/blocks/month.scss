@@ -1,0 +1,48 @@
+.month {
+  display: flex;
+  margin: auto;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: $border-gap;
+  max-width: $one-week;
+
+  
+
+  &__day {
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    display: flex;
+   
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #ffbfbf;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through $max-days-mounth {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+          margin: auto;
+        }
+      }
+    }
+  }
+
+  @each $name,$scope in $day-week {
+    &--start-day--#{$name} > :first-child {
+      margin-left: $scope;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index}>:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
