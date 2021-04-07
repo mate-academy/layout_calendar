@@ -4,6 +4,7 @@
   padding: $calendar-paddings;
   flex-wrap: wrap;
   gap: 1px;
+  
 
   @each $day, $margin in $days {
     &--start-day--#{$day} :first-child {
@@ -22,8 +23,11 @@
     @include box-size($box_with);
     background-color: #eee;
     border: 1px solid black;
-    transition-duration: 0.5s;
-
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+    
     @for $k from 1 through $month-length {
       &:nth-child(#{$k})::before {
         content: "#{$k}";
@@ -31,13 +35,10 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
     &:hover {
-      cursor: pointer;
       background-color: #f5c2cb;
       transform: translateY(-20px);
     }
