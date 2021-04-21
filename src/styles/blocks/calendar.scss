@@ -1,0 +1,46 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins" as *;
+@use "../utils/extends";
+
+.calendar {
+  display: flex;
+  @include calendar-size($square-size, $gap-size);
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  &__day {
+    transform: translateY(0);
+    transition-duration: 500ms;
+    display: flex;
+    justify-content: center;
+    @include cell($square-size, $cell-color);
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+        @extend %cell-inner-text;
+      }
+    }
+  }
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+    cursor: pointer;
+  }
+
+  @each $day, $number in $weekdays {
+    &--start-day_#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($square-size + $gap-size) * $number;
+      }
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--length_#{$day} {
+      .calendar__day:nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+}

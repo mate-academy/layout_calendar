@@ -1,0 +1,18 @@
+@use "./variables";
+
+@mixin calendar-size($square-size, $gap-size) {
+  width: ($square-size + $gap-size) * 7 - $gap-size;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin cell($size, $bg-color) {
+  box-sizing: border-box;
+  list-style: none;
+  @include square($size);
+  border: 1px solid black;
+  background-color: $bg-color;
+}
