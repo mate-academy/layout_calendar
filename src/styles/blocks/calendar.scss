@@ -2,6 +2,13 @@
 @use "../utils/extends";
 @use "../utils/variables" as *;
 
+body {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
 
 .calendar {
   margin: 0 auto;
@@ -15,11 +22,11 @@
     @include mixins.cell-style;
     display: flex;
     justify-content: center;
-    transform:translateY(0);
+    transform: translateY(0);
     transition-duration: 0.5s;
 
     @for $day from 1 through 31 {
-      &:nth-child(n + #{$day})::before{
+      &:nth-child(n + #{$day})::before {
         @extend %text-style;
         content: "#{$day}";
       }
@@ -31,7 +38,7 @@
   }
 
   @each $day, $num-day in $week-days {
-    &--start-day_#{$day} {
+    &--#{$day} {
       .calendar__cell:first-child {
         margin-left: $num-day * ($cell-width + $gap-size);
       }
@@ -39,7 +46,7 @@
   }
 
   @for $day from 28 through 31 {
-    &--month-length_#{$day} {
+    &--#{$day} {
       .calendar__cell:nth-child(n + #{$day + 1}) {
         display: none;
       }
