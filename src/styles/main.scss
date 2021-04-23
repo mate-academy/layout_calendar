@@ -1,3 +1,59 @@
+$cell-size: 100px;
+$gap: 1px;
+$cal-width: $cell-size * 7 + $gap * 6;
+
+$days: "mon" 7, "tue" 6, "wed" 5, "thu" 4, "fri" 3, "sat" 2, "sun" 6;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $cal-width;
+  margin: 100px auto;
+  padding: 10px;
+  border: 1px solid black;
+
+  @each $day, $num in $days {
+    &--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $cal-width - (($cell-size * $num) + ($gap * ($num - 1)));
+      }
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $number from 1 through 31 {
+      &-#{$number}::before {
+        content: "#{$number}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
 }
