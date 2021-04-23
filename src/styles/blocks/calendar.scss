@@ -1,0 +1,55 @@
+@use "../utils/mixins";
+@use "../utils/extends";
+@use "../utils/variables" as *;
+
+body {
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+}
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  gap: $gap-size;
+  flex-wrap: wrap;
+  width: ($cell-width + $gap-size) * 7;
+
+  &__cell {
+    @include mixins.box($cell-width, $cell-height);
+    @include mixins.cell-style;
+    display: flex;
+    justify-content: center;
+    transform: translateY(0);
+    transition-duration: 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(n + #{$day})::before {
+        @extend %text-style;
+        content: "#{$day}";
+      }
+    }
+  }
+
+  &__cell:hover {
+    @include mixins.cell-hover;
+  }
+
+  @each $day, $num-day in $week-days {
+    &--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: $num-day * ($cell-width + $gap-size);
+      }
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--#{$day} {
+      .calendar__cell:nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+}
