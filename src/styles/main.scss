@@ -1,3 +1,72 @@
+$calendar-padding: 10px;
+$border-black: #000;
+$cell-size: 100px;
+$gap: 1px;
+$width: 7 * $cell-size + $gap * 6;
+$start-days: 
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@mixin date-cell($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  width: $width;
+  margin: 50px auto;
+  border: $border-black;
+  
+  @each $start-day, $number in $start-days {
+    &--#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: $cell-size * ($number - 1) + $gap * ($number - 1);
+      }
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    @include date-cell($cell-size);
+    border: $border-black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 500ms;
+    
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
+      }
+    }
+  }
 }
