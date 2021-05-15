@@ -1,3 +1,58 @@
+$cell-size: 100px;
+$month-length: 31;
+
 body {
   margin: 0;
+  padding-top: 25px;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: 7 * $cell-size + 10px;
+  margin: 0 auto;
+
+  $days:
+    "mon" 0,
+    "tue" 1px + $cell-size,
+    "wed" 2px + $cell-size * 2,
+    "thu" 3px + $cell-size * 3,
+    "fri" 4px + $cell-size * 4,
+    "sat" 5px + $cell-size * 5,
+    "sun" 6px + $cell-size * 6;
+
+  @each $day-name, $shift in $days {
+    &--start-day--#{$day-name} {
+      .cell:first-child {
+        margin-left: $shift;
+      }
+    }
+  }
+  
+  .cell {
+    display: flex;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    padding: 1px;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
+
+    @for $day from 1 through $month-length {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        text-align: center;
+        margin: auto;
+      }
+    }
+  }
 }
