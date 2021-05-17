@@ -1,9 +1,18 @@
 $cell-size: 100px;
-$month-length: 31;
 
 body {
   margin: 0;
   padding-top: 25px;
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index} {
+    @for $day-index from $index + 1 through 32 {
+      .cell:nth-child(#{$day-index}) {
+        display: none;
+      }
+    }
+  }
 }
 
 .calendar {
@@ -29,7 +38,7 @@ body {
       }
     }
   }
-  
+
   .cell {
     display: flex;
     height: $cell-size;
@@ -45,7 +54,7 @@ body {
       background-color: pink;
     }
 
-    @for $day from 1 through $month-length {
+    @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
         font-family: Arial, sans-serif;
