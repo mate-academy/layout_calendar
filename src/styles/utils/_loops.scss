@@ -1,0 +1,21 @@
+@for $index from 1 through 31 {
+  .calendar__days:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $first-day, $number in $week-days {
+  .calendar--#{$first-day} {
+    .calendar__days:first-child {
+      margin-left: $day-size * ($number - 1) + $gap-size * ($number - 1);
+    }
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .calendar--#{$last-day} {
+    .calendar__days:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
