@@ -1,0 +1,19 @@
+@each $day, $number in $days {
+  .calendar--#{$day} .calendar__cell:first-child {
+    margin-left: $number*($sell-size+$gap);
+  }
+}
+
+@for $lastdays from 28 through 31 {
+  .calendar--monthlength--#{$lastdays} {
+    .calendar__cell:nth-child(n+#{$lastdays+1}){
+      display: none;
+    }
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar :nth-child(#{$index})::before {
+    content: "#{$index}"
+  }
+}
