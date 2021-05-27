@@ -1,7 +1,7 @@
 # Calendar
-Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+Replace `Johnny-S96` with your Github username and copy the links to Pull Request description:
+- [DEMO LINK](https://Johnny-S96.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Johnny-S96.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
