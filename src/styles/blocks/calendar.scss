@@ -1,18 +1,18 @@
-.title {
-  margin: 5px 0 20px;
-  text-align: center;
-}
-
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  max-width: $week-size;
-  margin: 0 auto;
-  padding: 0 10px;
+  &__title {
+    margin: 5px 0 20px;
+    text-align: center;
+  }
 
-  @for $idx from 1 to 32 {
-    & :nth-child(#{$idx}) {
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    max-width: $week-size;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    & :nth-child(n) {
       display: none;
       align-items: center;
       justify-content: center;
@@ -23,16 +23,17 @@
       cursor: pointer;
       transition: 0.5s;
 
-      &:nth-child(#{$idx}) {
-        &::before {
-          content: "#{$idx}";
-        }
-      }
-
       &:hover {
         background: pink;
         transform: translateY(-20px);
-        transition: 0.5s;
+      }
+
+      @for $idx from 1 to 32 {
+        &:nth-child(#{$idx}) {
+          &::before {
+            content: "#{$idx}";
+          }
+        }
       }
     }
   }
