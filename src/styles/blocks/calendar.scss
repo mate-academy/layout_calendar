@@ -1,0 +1,57 @@
+@import '../utils/variables';
+
+@media screen and (min-width: 1024px) {
+  .calendar {
+  margin: (1024px - $day-unit * 5) / 2;
+}
+}
+
+@media screen and (min-width: 1200) {
+  .calendar {
+  margin: (1200px - $day-unit * 5) / 2;
+}
+}
+
+@for $index from 1 to $daysCount + 1 {
+  .day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.month {
+  padding: 10px;
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  height: $day-unit * $count-rows + $columns-gap;
+  width: $day-unit * $count-columns + $rows-gap;
+
+  $week:
+  'monday' 0,
+  'tuesday' 1,
+  'wednesday' 2,
+  'thursday' 3,
+  'friday' 4,
+  'saturday' 5,
+  'sunday' 6;
+
+  @each $weekday, $daynumber  in $week {
+    &__day--#{$weekday} {
+      .day:first-of-type {
+        margin-left: $daynumber * 101px;
+      }
+      
+    }
+  }
+
+  // does this work ^ ?? 
+}
+
+.calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}

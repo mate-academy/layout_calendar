@@ -1,0 +1,29 @@
+@import '../utils/mixins';
+@import '../utils/variables';
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  @include day-basis($day-unit);
+  border: solid black 1px;
+  box-sizing: border-box;
+
+  &:hover {
+    transform: translate(0, -20px);
+    background-color: pink;
+    transition: .5s;
+    transition-property: all;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    cursor: pointer;
+  }
+}
+
+@for $index from 1 to $daysCount + 1 {
+  .day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
