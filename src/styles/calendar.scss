@@ -1,0 +1,52 @@
+@import "variables.scss";
+@import "fonts.scss";
+
+.calendar {
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    width: $container-width;
+    padding: $container-padding;
+
+    @each $dayname, $shift in $week {
+      &--start-#{$dayname} div:first-child {
+        margin-left: $shift;
+      }
+    }
+    
+    @for $index from 1 through $month-length {
+      &--#{$index} div:nth-child(-n + #{$index}) {
+        display: flex;
+      }
+    }
+  }
+
+  &__month > div {
+    min-height: $cell-size;
+    min-width: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    align-items: center;
+    justify-content: center;
+    display: none;
+
+    @for $index from 1 through $month-length {
+      &:nth-child(#{$index})::before {
+        content: " #{$index} ";
+        text-align: center;
+      }
+  
+
+  
+      &:nth-child(-n + #{$index}):hover {
+        transition-property: transform, background-color;
+        transition-duration: 500ms;
+        transform: translateY(-20px);
+        background-color: pink;
+        cursor: pointer;
+      }
+    }
+  }
+}
