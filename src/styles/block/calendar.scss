@@ -32,13 +32,13 @@
       content: "#{$i}";
     }
   }
-  
+
   @for $i from 28 through 30 {
-    &-#{$i} calendar__day:nth-child(n + #{$i+1}) {
+    &--#{$i} &__day:nth-child(n + #{$i+1}) {
       display: none;
     }
   }
-  
+
   @each $day, $value in $daysOfWeek {
     &-#{$day} div:first-child {
       margin-left: $value * ($cellSize + $cellGap);
