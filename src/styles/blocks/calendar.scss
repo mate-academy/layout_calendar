@@ -27,15 +27,16 @@
         background: pink;
         transform: translateY(-20px);
       }
+    }
 
-      @for $idx from 1 to 32 {
-        &:nth-child(#{$idx}) {
-          &::before {
-            content: "#{$idx}";
-          }
+    @for $idx from 1 to 32 {
+      & > :nth-child(#{$idx}) {
+        &::before {
+          content: "#{$idx}";
         }
       }
     }
+
   }
 
   @each $day, $margin in $first-margin {
