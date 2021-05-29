@@ -1,0 +1,46 @@
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: 750px;
+  padding: 10px;
+}
+ 
+.day {
+  position: relative;
+  @include square($square-size);
+  background-color: #eee;
+  border: 1px solid #000;
+}
+  
+.day::before {
+  display: block;
+  line-height: $square-size;
+  text-align: center;
+}
+  
+.day:hover {
+  cursor: pointer;
+  background-color: pink;
+}
+
+@for $day-of-the-month from 1 through 31 {
+  .day--#{$day-of-the-month}::before {
+    content: "#{$day-of-the-month}";
+  }
+}
+
+@for $month-length from 28 through 31 {
+  .calendar--month-length_#{$month-length} 
+  .day:nth-child(n+#{$month-length+1}) {
+    display: none;
+  }
+}
+
+@each $start-day-name, $start-day-number in $days-of-week {
+  .calendar--start-day_#{$start-day-name} .day:first-child {
+    margin-left: $start-day-number * 101px - 101px;
+  }
+}
