@@ -1,0 +1,65 @@
+$cellSize: 100px;
+$cellGap: 1px;
+$blockPadding: 10px;
+
+.calendar {
+  padding: $blockPadding;
+  
+  &__days {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $cellSize * 7 + $cellGap * 6 + $blockPadding * 2;
+    margin: 0 auto;
+    gap: $cellGap;
+  }
+
+  &__day {
+    position: relative;
+    list-style: none;
+    height: 100px;
+    width: $cellSize;
+    border: 1px solid black;
+    background-color: #eee;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    &::before {
+      position: absolute;
+      font-size: 30px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @for $numberDay from 1 through 31 {
+    &__day:nth-child(#{$numberDay})::before {
+      content: "#{$numberDay}";
+    }
+  }
+
+  $dayWeek:
+    "mon" ($cellSize + $cellGap) * 0,
+    "tue" ($cellSize + $cellGap) * 1,
+    "wed" ($cellSize + $cellGap) * 2,
+    "thu" ($cellSize + $cellGap) * 3,
+    "fri" ($cellSize + $cellGap) * 4,
+    "sat" ($cellSize + $cellGap) * 5,
+    "sun" ($cellSize + $cellGap) * 6;
+
+  @each $nameDay, $positionDay in $dayWeek {
+    &__days-week--#{$nameDay} :first-child {
+      margin-left: $positionDay;
+    }
+  }
+
+  @for $monthLength from 28 through 30 {
+    &__days--#{$monthLength} :nth-child(n + #{$monthLength + 1}) {
+      display: none;
+    }
+  }
+}
