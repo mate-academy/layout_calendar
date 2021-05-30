@@ -6,20 +6,23 @@ body {
   margin: 0;
 }
 
-@import url("./blocks/calendar.scss");
-
 $day-side: 100px;
 $padding: 10px;
 $gap: 1px;
 $calendar-size: ($day-side * 7) + (2 * $padding) + (6 * $gap);
 $month-length: 28;
+
 @mixin square($size) {
   height: $size;
   width: $size;
 }
 
+@function calendarSize($side, $external, $internal) {
+  @return ($side * 7) + (2 * $external) + (6 * $internal);
+}
+
 .calendar {
-  width: $calendar-size;
+  width: calendarSize($day-side, $padding, $gap);
   padding: $padding;
   display: flex;
   flex-wrap: wrap;
@@ -27,6 +30,7 @@ $month-length: 28;
 
   &__day {
     @include square($day-side);
+
     background-color: #eee;
     border: 1px solid black;
     text-align: center;
@@ -63,6 +67,9 @@ $month-length: 28;
     }
     &:hover {
       background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: 0.5s;
     }
   }
 }
