@@ -1,17 +1,13 @@
-@use "../utils/variables" as *;
-@use "../utils/mixins";
-@use "../utils/functions";
-
 .calendar {
-  width: functions.calendarSize($day-side, $padding, $gap);
+  width: calendarSize($day-side, $padding, $gap);
   padding: $padding;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
 
   &__day {
-    @include mixins.square($day-side);
-
+    width: $day-side;
+    height: $day-side;
     background-color: #eee;
     border: 1px solid black;
     text-align: center;
