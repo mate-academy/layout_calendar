@@ -1,0 +1,56 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins";
+@use "../utils/functions";
+
+.calendar {
+  width: functions.calendarSize($day-side, $padding, $gap);
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    @include mixins.square($day-side);
+
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+
+    @for $index from 1 through 31 {
+      &--#{$index} {
+        &::before {
+          content: "#{$index}";
+          font-family: "Arial", sans-serif;
+          font-size: 30px;
+          line-height: 100px;
+        }
+      }
+    }
+    $week-days:
+      "mon" 0,
+      "tue" ($day-side + $gap),
+      "wed" (2 * ($day-side + $gap)),
+      "thu" (3 * ($day-side + $gap)),
+      "fri" (4 * ($day-side + $gap)),
+      "sat" (5 * ($day-side + $gap)),
+      "sun" (6 * ($day-side + $gap));
+
+    @each $name, $week-day in $week-days {
+      &--start-day--#{$name} {
+        margin-left: $week-day;
+      }
+    }
+
+    @for $index from ($month-length + 1) through 32 {
+      &:nth-child(n + #{$index}) {
+        display: none;
+      }
+    }
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+  }
+}
