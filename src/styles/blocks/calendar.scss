@@ -7,25 +7,16 @@
   max-width: $calendar-size;
   font-size: 30px;
 
-  $week:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
   @each $day-of-week, $value in $week {
     &--start-day--#{$day-of-week}
-    .calendar__item:first-child {
+    &__item:first-child {
       margin-left: ($cell-size + $cell-gap) * $value;
     }
   }
 
   @for $last-date from 28 through 31 {
     &--month-length--#{$last-date}
-    .calendar__item:nth-child(n + #{$last-date + 1}) {
+    &__item:nth-child(n + #{$last-date + 1}) {
       @extend %display-none;
     }
   }
