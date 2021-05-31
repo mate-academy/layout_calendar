@@ -6,19 +6,19 @@
   gap: $gap;
 
   &__day {
-    width: $day-side;
-    height: $day-side;
+    @include day($day-side);
+    
     background-color: #eee;
     border: 1px solid black;
     text-align: center;
+    font-family: "Arial", sans-serif;
+    font-size: 30px;
+    line-height: 100px;
 
     @for $index from 1 through 31 {
       &--#{$index} {
         &::before {
           content: "#{$index}";
-          font-family: "Arial", sans-serif;
-          font-size: 30px;
-          line-height: 100px;
         }
       }
     }
