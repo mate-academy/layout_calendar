@@ -1,4 +1,5 @@
 .section-calendar {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +16,8 @@
   &__days {
     display: none;
     @include square($box-width, $box-height);
+    text-align: center;
+    line-height: $box-height;
     background-color: #eee;
     border: 1px solid black;
 
@@ -35,11 +38,7 @@
 
     &__days:nth-child(#{$index}):before {
       content: "#{$index}";
-      position: relative;
-      top: 50%;
-      transform: translate(0, -50%);
       display: block;
-      text-align: center;
     }
   }
 
