@@ -1,0 +1,31 @@
+
+body {
+  width: 8 * $size;
+  margin: 80px auto;
+}
+  
+.calendar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  @for $i from 1 through 31 {
+    &-cell-#{$i} {
+      @include cell-size($size);
+    }
+    &-cell-#{$i}:hover {
+      @include cell-size($size);
+      background-color: rgb(212, 132, 132);
+      transform: translateY(-20px);
+      transition: 0.5s ease-in-out;
+    }
+    &-cell-#{$i}::before {
+      display: flex;
+      justify-content: center;
+      line-height: $size;
+      content: "#{$i}";
+      font-family: Arial, Helvetica, sans-serif;
+      color: black;
+      font-size: 30px;
+    }
+  }
+}
