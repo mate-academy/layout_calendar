@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  gap: 1px;
+  width: max-width(
+    $days-in-row, $day-size ,$calendar-gap
+  );
+
+  @for $var from 1 to $days-count + 1 {
+    &__day--#{$var}::before {
+      @extend %day-count-text;
+      content: "#{$var}";
+    }
+  }
+
+  @each $name, $value in $days {
+    &--start-day_#{$name} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  &__day {
+    @include day-block($day-size);
+    transition-duration: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $var, $value in $month-length {
+    &--month-length_#{$var} {
+      :nth-child(n+ #{$value + 1}) {
+        display: none;
+      }
+    }
+  }
+}
