@@ -7,13 +7,15 @@
 
   &__day {
     @include day($day-side);
-    
+
     background-color: #eee;
     border: 1px solid black;
-    text-align: center;
-    font-family: "Arial", sans-serif;
-    font-size: 30px;
-    line-height: 100px;
+
+    @for $index from 1 through 31 {
+      &--month-length--#{$index} ~ &:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
 
     @for $index from 1 through 31 {
       &--#{$index} {
@@ -37,11 +39,6 @@
       }
     }
 
-    @for $index from ($month-length + 1) through 32 {
-      &:nth-child(n + #{$index}) {
-        display: none;
-      }
-    }
     &:hover {
       background-color: pink;
       cursor: pointer;
