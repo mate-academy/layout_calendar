@@ -14,15 +14,14 @@
     }
   }
 
+  @each $name, $value in $days {
+    &--start-day_#{$name} :first-child {
+      margin-left: $value;
+    }
+  }
+
   &__day {
     @include day-block($day-size);
-
-    @each $name, $value in $days {
-      &--start-day_#{$name} {
-        margin-left: $value;
-      }
-    }
-
     transition-duration: 0.5s;
     cursor: pointer;
 
