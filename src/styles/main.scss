@@ -1,16 +1,5 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-$day-cell-color: #eee;
-$day-cell-size: 100px;
-$col-number: 7;
-$col-padding: 10px;
-$gap: 1px;
+@import "./utils/variables";
+@import "./utils/normalize";
 
 @function getWidth($size, $gap, $quantity, $padding) {
   @return ($size + $gap) * $quantity + $padding;
@@ -54,8 +43,8 @@ $gap: 1px;
 .day-cell {
   position: relative;
   border: 1px solid #000;
-  width: 100px;
-  height: 100px;
+  width: $day-cell-size;
+  height: $day-cell-size;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 30px;
   background-color: $day-cell-color;
