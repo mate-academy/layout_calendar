@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: $calendar-width;
+  padding: $calendar-paddings;
+  gap: $calendar-gap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+    
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $margin-left in $first-day-margin {
+    &--start--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $margin-left;
+      }
+    }
+  }
+
+  @for $index from 1 to 32 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $index from 1 through 32 {
+    &--length--#{$index - 1} {
+      .calendar__day:nth-child(n + #{$index}) {
+        display: none;
+      }
+    }
+  }
+}
