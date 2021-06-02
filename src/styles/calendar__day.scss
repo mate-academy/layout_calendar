@@ -1,8 +1,9 @@
+@import "./variables.scss";
+
 .calendar__day {
   box-sizing: border-box;
-  width: 100px;
-  height: 100px;
   display: flex;
+  @include square($side);
 
   border: 1px solid black;
   background-color: #eee;
@@ -23,21 +24,6 @@
       transform: translateY(-20px);
 
       transition-delay: 0.5s;
-    }
-  }
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
-  @each $d, $n in $days {
-    &--start-day_#{$d} {
-      margin-left: $n * 100px + $n;
     }
   }
 }
