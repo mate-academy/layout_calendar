@@ -14,7 +14,7 @@
   }
 
   &__days {
-    display: none;
+    // display: none;
     @include square($box-width, $box-height);
     text-align: center;
     line-height: $box-height;
@@ -29,12 +29,14 @@
     }
   }
 
-  @for $index from 1 through 31 {
-
-    &__container--month-length--#{$index}
-    .section-calendar__days:nth-child(-n+#{$index}) {
-      display: block;
+  @for $i from 28 through 31 {
+    &__container--month-length--#{$i}
+    &__days:nth-child(n + #{$i+1}) {
+      display: none;
     }
+  }
+
+  @for $index from 1 through 31 {
 
     &__days:nth-child(#{$index}):before {
       content: "#{$index}";
