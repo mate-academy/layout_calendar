@@ -1,5 +1,4 @@
 @import "variables.scss";
-@import "fonts.scss";
 
 .calendar {
   &__month {
@@ -28,17 +27,19 @@
     align-items: center;
     justify-content: center;
     display: none;
+    text-align: center;
+
+    &:hover {
+      transition-property: transform, background-color;
+      transition-duration: 500ms;
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
     @for $index from 1 through $month-length {
       &:nth-child(#{$index})::before {
         content: " #{$index} ";
-        text-align: center;
-      }
-      &:nth-child(-n + #{$index}):hover {
-        transition-property: transform, background-color;
-        transition-duration: 500ms;
-        transform: translateY(-20px);
-        background-color: pink;
-        cursor: pointer;
       }
     }
   }
