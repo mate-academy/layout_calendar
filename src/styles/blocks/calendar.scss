@@ -31,20 +31,20 @@
     &__day:nth-child(#{$index}):after {
       content: "#{$index}";
     }
+  }
 
-    &__day::after {
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%,-50%);
-    }
+  &__day::after {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
 
-    @for $index from 1 through 31 {
-      &--month-length--#{$index - 1} {
-        .calendar__day:nth-child(n + #{$index}) {
-          display: none;
-        }
+  @for $index from 1 through 31 {
+    &--month-length--#{$index - 1} {
+      .calendar__day:nth-child(n + #{$index}) {
+        display: none;
       }
     }
   }
