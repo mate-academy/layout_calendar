@@ -1,0 +1,30 @@
+@import "./variables.scss";
+
+@for $index from 1 through 32 {
+  .calendar__day:nth-child(#{$index}) {
+    &::before {
+      content: "#{$index}";
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .month-length--#{$length} > :nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
+
+$week-days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $name, $day in $week-days {
+  .start-day--#{$name} {
+    margin-left: ($cell-size + $gap-size) * $day;
+  }
+}
