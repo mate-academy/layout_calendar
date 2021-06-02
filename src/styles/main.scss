@@ -1,3 +1,52 @@
+$color: #eee;
+$size: 100px;
+$offset: 18px;
+
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
   margin: 0;
+}
+
+@mixin square($size, $color) {
+  background-color: $color;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: $size;
+  width: $size;
+  transition: all 0.5s ease-in-out;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: $size * 8;
+
+  &__day {
+    @include square($size, $color);
+  }
+
+  @for $number from 1 through 31 {
+    &__day--#{$number}::before {
+      content: "#{$number}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &__day:first-child {
+    margin-left: ($size * 6) + $offset;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
 }
