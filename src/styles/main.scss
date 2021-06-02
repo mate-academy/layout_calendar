@@ -1,3 +1,28 @@
+@import "./calendar__day.scss";
+
 body {
   margin: 0;
+}
+
+.main {
+  display: flex;
+  padding-top: 50px;
+}
+
+.calendar {
+
+  align-self: center;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 1px;
+  width: 710px;
+
+  @for $last-day from 28 through 31 {
+    $day: $last-day + 1;
+    &--month-length_#{$last-day} .calendar__day:nth-child(n+#{$day}) {
+      display: none;
+    }
+  }
 }
