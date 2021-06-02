@@ -1,0 +1,51 @@
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: $width-calendar;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5px;
+    background-color: $color-content;
+    height: $calendar-size;
+    width: $calendar-size;
+    border: 1px solid #000;
+
+    &:hover {
+      transform: scale(1) translate(0, -20px);
+      transition-duration: 1s;
+      background-color: greenyellow;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        font-size: $calendar-size-content;
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-#{$index} &__content:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  $start-day:
+    "tue" #{$start-tue},
+    "wed" #{$start-wed},
+    "thu" #{$start-thu},
+    "fri" #{$start-fri},
+    "sat" #{$start-sat},
+    "sun" #{$start-sun};
+
+  @each $name, $day in $start-day {
+    &--start-#{$name} &__content:first-child {
+      margin-left: #{$day};
+    }
+  }
+}
