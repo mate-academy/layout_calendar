@@ -1,13 +1,12 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $day-gap;
+  gap: 1px;
   padding: $calendar-padding;
   width: $days-in-week * $day-size + 2 * $calendar-padding;
 
   &__day {
-    width: $day-height;
-    height: $day-height;
+   @include square($day-height);
     background-color: $day-color;
     border: 1px solid #000;
     border-radius: 5px;
@@ -36,7 +35,8 @@
 
   @for $month-length from 28 through 31 {
 
-    &--month-length--#{$month-length} &__day:nth-child(n + #{$month-length + 1}) {
+    &--month-length--#{$month-length}
+    &__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
