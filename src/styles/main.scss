@@ -1,5 +1,6 @@
 @import "./calendar__day.scss";
 @import "./variables.scss";
+@import "./calendar.scss";
 
 body {
   margin: 0;
@@ -8,30 +9,4 @@ body {
 .main {
   display: flex;
   padding-top: 50px;
-}
-
-.calendar {
-
-  align-self: center;
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: 1px;
-  width: 710px;
-
-  @for $last-day from 28 through 31 {
-    $day: $last-day + 1;
-    &--month-length_#{$last-day} .calendar__day:nth-child(n+#{$day}) {
-      display: none;
-    }
-  }
-
-  @each $d, $n in $days {
-    &--start-day_#{$d} {
-      .calendar__day:first-child {
-        margin-left: $n * 100px + $n;
-      }
-    }
-  }
 }
