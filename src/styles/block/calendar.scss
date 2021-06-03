@@ -1,0 +1,22 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: $calendar-padding;
+  width: $day-in-month *$day-height + 2 * $calendar-padding;
+
+  &__day {
+    width: $day-height;
+    height: $day-height;
+    background-color: $day-color;
+    border: 1px solid #000;
+    border-radius: 5px;
+  }
+
+  &__day::before {
+    @for $index from 1 through 31 {
+      content: "#{$index}";
+    }
+  }
+
+}
