@@ -1,11 +1,26 @@
 $color: #eee;
 $size: 100px;
-$offset: 18px;
+$gap: 1px;
+$padding: 10px;
+
+$week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   display: flex;
   align-items: center;
   justify-content: center;
+
   height: 100vh;
   margin: 0;
 }
@@ -13,10 +28,12 @@ body {
 @mixin square($size, $color) {
   background-color: $color;
   border: 1px solid #000;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+
   height: $size;
   width: $size;
   transition: all 0.5s ease-in-out;
@@ -25,28 +42,46 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  max-width: $size * 8;
+  gap: $gap;
+  max-width: $size * 7 + $gap * 6 + $padding * 2;
+  padding: $padding;
 
-  &__day {
-    @include square($size, $color);
-  }
-
-  @for $number from 1 through 31 {
-    &__day--#{$number}::before {
-      content: "#{$number}";
-      font-family: Arial, sans-serif;
-      font-size: 30px;
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} {
+      :nth-child(n + #{$days + 1}) {
+        display: none;
+      }
     }
   }
 
-  &__day:first-child {
-    margin-left: ($size * 6) + $offset;
+  @each $day, $day-name in $week {
+    &--start-day--#{$day} {
+      :first-child {
+        margin-left: ($size + $gap) * $day-name;
+      }
+    }
   }
 
-  &__day:hover {
-    background-color: #ffbfcb;
-    cursor: pointer;
-    transform: translateY(-20px);
+  &__day {
+    @include square($size, $color);
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number}) {
+        &::before {
+          content: "#{$number}";
+        }
+      }
+    }
   }
 }
