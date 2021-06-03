@@ -8,7 +8,6 @@
   transform: translateY(20%);
 
   @each $day, $daynum in $days-of-week {
-    //calendar modifier of start-day of month
     &__start-day_#{$day} {
       .calendar__day-1 {
         margin-left: $daynum * $day-size + $daynum;
@@ -30,11 +29,11 @@
     text-align: center;
     background-color: $calendar-grey-color;
     border: 1px solid #000;
+    font-size: 30px;
+    line-height: $day-size;
   
     @for $index from 1 through 31 {
       &-#{$index}::before {
-        font-size: 30px;
-        line-height: $day-size;
         content: "#{$index}";
       }
     }
