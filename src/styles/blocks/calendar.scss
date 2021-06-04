@@ -1,9 +1,32 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 0 10px;
-  width: $calendar-width;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: solid black 1px;
+    @include square($square-size);
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+    transition-duration: $animation-duration;
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $font-size;
+    }
+  }
 
   @each $name, $shift in $week {
     &--start-day--#{$name} {
@@ -17,28 +40,5 @@
     &--month-length--#{$days} &__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
-  }
-
-  &__day {
-    background-color: #eee;
-    border: 1px solid black;
-
-    @for $index from 1 through 31 {
-      &--#{$index}::before {
-        @include square($square-size);
-        content: "#{$index}";
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-size: $font-size;
-      }
-    }
-  }
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translate(0, -20px);
-    transition-duration: $animation-duration;
   }
 }
