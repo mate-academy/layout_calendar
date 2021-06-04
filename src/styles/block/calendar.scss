@@ -1,0 +1,43 @@
+@import "./utils/variables.scss";
+@import "./utils/mixin.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  width: ($calendarSize + $calendarBorder) * 7;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $calendarSize;
+    height: $calendarSize;
+    margin-right: $calendarBorder;
+    margin-bottom: $calendarBorder;
+    @include square($calendarSize);
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $colorCalendarHover;
+    }
+  }
+
+  @each $day, $prop in $week {
+    &__first-day--#{$day} &__day:first-child {
+      margin-left: $prop * ($calendarSize + $calendarBorder);
+    }
+  }
+
+  @for $prop from 1 to $allDay {
+    &__day:nth-child(#{$prop})::before {
+      content: "#{$prop}";
+    }
+  }
+
+  @for $char from 28 through $allDay {
+    &__month--#{$char} &__day:nth-child(n + #{$char - 1}) {
+      display: none;
+    }
+  }
+}
