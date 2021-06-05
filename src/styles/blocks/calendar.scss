@@ -1,0 +1,53 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $var-width;
+  padding: $var-padding;
+  gap: $var-gap;
+
+  &__daily {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: $var-cell-color;
+    border: 1px solid #000;
+    transition: 0.5s;
+  }
+
+  &__daily:hover {
+    cursor: pointer;
+    background-color: $var-cell-focus-color;
+    transform: translateY(-20px);
+    animation-name: color;
+    animation-duration: 500ms;
+  }
+
+  @for $index from 1 through 31 {
+    &__daily--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $quantity from 28 through 31 {
+    &--lenght--#{$quantity} >:nth-child(n + #{$quantity + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  @each $name, $index in $week {
+    &--start-day--#{$name} >:first-child {
+      margin-left: $index * 101px;
+    }
+  }
+
+  @keyframes color {
+    from {
+      background-color: #eee;
+    }
+    to {
+      background-color: $var-cell-focus-color;
+    }
+  }
+}
