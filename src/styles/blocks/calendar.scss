@@ -25,14 +25,14 @@
   }
 
   @for $index from 1 through 31 {
-    .calendar__daily--#{$index}::before {
+    &__daily--#{$index}::before {
       content: "#{$index}";
     }
   }
 
   @for $quantity from 28 through 31 {
-    .calendar--lenght--#{$quantity}>:nth-child(n + #{1 + $quantity}) {
-      display: none;
+    &--lenght--#{$quantity} >:nth-child(n + #{$quantity + 1}) {
+      visibility: hidden;
     }
   }
 
