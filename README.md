@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://nyaremchuk.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://nyaremchuk.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -34,4 +34,4 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 --> [CHECKLIST](https://github.com/mate-academy/layout_snake/blob/master/checklist.md)
 
 ## Here is a preview:
-![reference image](reference.png).
+![reference image](reference.png). 
