@@ -1,0 +1,13 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $calendar-size;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+  @for $index from 28 to 31 {
+    $index-plus-1: $index + 1;
+    &--month-length_#{$index} :nth-child(n + #{$index-plus-1}) {
+      display: none;
+    }
+  }
+}
