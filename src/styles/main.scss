@@ -1,3 +1,67 @@
-body {
+$side: 100px;
+$padding: 10px;
+$gap: 1px;
+
+* {
   margin: 0;
+  box-sizing: border-box;
+}
+
+.month {
+  padding: $padding;
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: 7 * $side + 2 * $padding + 6 * $gap;
+  margin: auto;
+
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      @for $index from $index through 31 {
+        .month__day:nth-child(#{$index + 1}) {
+          border: none;
+          height: 0;
+        }
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      @for $index from 1 through $index {
+        .month__day--#{$index}::before {
+          content: "#{$index}";
+        }
+      }
+    }
+  }
+
+  &__day {
+    height: $side;
+    width: $side;
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    $start-day: "mon" 0, "tue" ($side + $gap), "wed" 2 * ($side + $gap),
+      "thu" 3 * ($side + $gap), "fri" 4 * ($side + $gap),
+      "sat" 5 * ($side + $gap), "sun" 6 * ($side + $gap);
+
+    @each $name, $margin in $start-day {
+      &--start-day_#{$name} {
+        margin-left: $margin;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      animation-duration: 0.5s;
+    }
+  }
 }
