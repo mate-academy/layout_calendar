@@ -1,0 +1,34 @@
+@for $i from 1 through 31 {
+  .day:nth-child(#{$i})::after {
+    content: "#{$i}";
+    display: flex;
+    height: $cell-size;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+$start-day-margins:
+  "mon" 0,
+  "tue" $total-size,
+  "wed" $total-size * 2,
+  "thu" $total-size * 3,
+  "fri" $total-size * 4,
+  "sat" $total-size * 5,
+  "sun" $total-size * 6;
+
+@each $start-day, $start-day-margin in $start-day-margins {
+  .calendar--#{$start-day} {
+    .day:first-child {
+      margin-left: $start-day-margin;
+    }
+  }
+}
+
+@for $month-length from 28 through 31 {
+  .calendar--#{$month-length} {
+    .day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
