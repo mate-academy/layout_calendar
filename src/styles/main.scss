@@ -7,13 +7,19 @@ $gap: 1px;
   box-sizing: border-box;
 }
 
+.container {
+  display: flex;
+  height: 100vh;
+}
+
 .month {
+  margin: auto;
+  min-width: 7 * $side + 2 * $padding + 6 * $gap;
+  max-width: 7 * $side + 2 * $padding + 6 * $gap;
   padding: $padding;
   display: flex;
   gap: $gap;
   flex-wrap: wrap;
-  width: 7 * $side + 2 * $padding + 6 * $gap;
-  margin: auto;
 
   @for $index from 28 through 31 {
     &--month-length_#{$index} {
@@ -61,7 +67,6 @@ $gap: 1px;
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      animation-duration: 0.5s;
     }
   }
 }
