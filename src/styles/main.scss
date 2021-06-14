@@ -13,17 +13,6 @@ $start-days:
   6 "Sat",
   7 "Sun";
 
-@keyframes move {
-  from {
-    transform: translateY(0%);
-  }
-
-  to {
-    transform: translateY(-20px);
-    background-color: pink;
-  }
-}
-
 @mixin square($size) {
   width: $size;
   height: $size;
@@ -64,6 +53,8 @@ body {
     padding: 10px;
 
     background-color: #eee;
+
+    transition-duration: 0.5s;
   }
 
   @each $index, $day in $start-days {
@@ -80,7 +71,8 @@ body {
 
   &__day:hover {
     cursor: pointer;
-    animation: move 0.5s forwards;
+    transform: translateY(-20px);
+    background-color: pink;
   }
 
   @for $index from 28 through 31 {
