@@ -3,15 +3,16 @@
 }
 
 $cell-size: 100px;
+$gap-size: 1px;
 $cell-count: 31;
 $start-days:
-  1 "Mon",
-  2 "Tue",
-  3 "Wed",
-  4 "Thu",
-  5 "Fri",
-  6 "Sat",
-  7 "Sun";
+  1 "Mon" 0,
+  2 "Tue" ($cell-size + $gap-size),
+  3 "Wed" ($cell-size + $gap-size) * 2,
+  4 "Thu" ($cell-size + $gap-size) * 3,
+  5 "Fri" ($cell-size + $gap-size) * 4,
+  6 "Sat" ($cell-size + $gap-size) * 5,
+  7 "Sun" ($cell-size + $gap-size) * 6;
 
 @mixin square($size) {
   width: $size;
@@ -31,7 +32,7 @@ body {
   display: flex;
   width: 7 * $cell-size + 6;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap-size;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
 
@@ -54,18 +55,18 @@ body {
 
     background-color: #eee;
 
-    transition-duration: 0.5s;
+    transition-duration: transform 0.5s;
   }
 
-  @each $index, $day in $start-days {
-    &__start-day:nth-child(#{$index})::before {
+  @each $day-of-week, $day, $shift in $start-days {
+    &__start-day:nth-child(#{$day-of-week})::before {
       content: "#{$day}";
     }
-  }
 
-  @for $index from 1 through $cell-count {
-    &__day:nth-child(#{$index + 7})::before {
-      content: "#{$index}";
+    &--#{$day} {
+      .calendar__day:nth-child(8) {
+        margin-left: $shift;
+      }
     }
   }
 
@@ -75,10 +76,12 @@ body {
     background-color: pink;
   }
 
-  @for $index from 28 through 31 {
-    &--month-length--#{$index} {
-      .calendar__day:nth-last-child(-n + #{31 - $index}) {
-        display: none;
+  @for $days-count from 28 through 31 {
+    &--#{$days-count} {
+      @for $cell from 1 through $days-count {
+        .calendar__day:nth-child(#{$cell + 7})::before {
+          content: "#{$cell}";
+        }
       }
     }
   }
