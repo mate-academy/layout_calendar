@@ -1,0 +1,46 @@
+.month {
+  padding: 0 $month-padding;
+  width: getMonthWidth($month-padding);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    @include square($day-width);
+    background-color: #eee;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+
+    @for $day from 1 through $days-in-month {
+      &--#{$day}::before {
+        position: absolute;
+        content: "#{$day}";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: all 500ms;
+    }
+  }
+
+  @each $index, $day in $weekdays {
+    &--#{$day} &__day--1 {
+      margin-left: $index * $day-width + $index;
+    }
+  }
+
+  @for $count from 28 through $days-in-month {
+    &--#{$count} &__day:nth-child(n+#{$count+1}) {
+      display: none;
+    }
+  }
+}
