@@ -53,10 +53,16 @@ $margin: $side + $gap;
     }
   }
 
-  $start: "mon" 0, "tue" ($margin), "wed" 2 * ($margin), "thu" 3 * ($margin),
-    "fri" 4 * ($margin), "sat" 5 * ($margin), "sun" 6 * ($margin);
+  $start-day:
+    "mon" 0,
+    "tue" ($margin),
+    "wed" 2 * ($margin),
+    "thu" 3 * ($margin),
+    "fri" 4 * ($margin),
+    "sat" 5 * ($margin),
+    "sun" 6 * ($margin);
 
-  @each $name, $margin-left in $start {
+  @each $name, $margin-left in $start-day {
     &--#{$name} {
       .calendar__day:first-child {
         margin-left: $margin-left;
