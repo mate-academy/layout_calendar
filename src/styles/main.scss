@@ -76,14 +76,14 @@ body {
     background-color: pink;
   }
 
+  @for $cell from 1 through 31 {
+    .calendar__day:nth-child(#{$cell + 7})::before {
+      content: "#{$cell}";
+    }
+  }
+
   @for $days-count from 28 through 31 {
     &--#{$days-count} {
-      @for $cell from 1 through $days-count {
-        .calendar__day:nth-child(#{$cell + 7})::before {
-          content: "#{$cell}";
-        }
-      }
-
       .calendar__day:nth-last-child(-n + #{31 - $days-count}) {
         display: none;
       }
