@@ -11,9 +11,10 @@
     border: 1px solid black;
     position: relative;
     cursor: pointer;
+    transition: transform 500ms;
 
     @for $day from 1 through $days-in-month {
-      &--#{$day}::before {
+      &:nth-child(#{$day}):before {
         position: absolute;
         content: "#{$day}";
         top: 50%;
@@ -28,12 +29,11 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: all 500ms;
     }
   }
 
   @each $index, $day in $weekdays {
-    &--#{$day} &__day--1 {
+    &--#{$day} :first-child {
       margin-left: $index * $day-width + $index;
     }
   }
