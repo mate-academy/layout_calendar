@@ -1,3 +1,79 @@
+$days-in-month: 31;
+$cell-size: 100px;
+$col-count: 7;
+$space-between: 1px;
+$padding-calendar: 10px;
+$width-calendar: ($col-count * $cell-size) + $space-between * ($col-count - 1);
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  height: 100%;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-between;
+  width: $width-calendar;
+  padding: $padding-calendar;
+
+  &__day {
+    @include square($cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: #eee;
+    border-color: #000;
+    transition-duration: 0.5s;
+  }
+
+  $first-day-of-month:
+    "mon" 0,
+    "tue" $cell-size + $space-between,
+    "wed" ($cell-size + $space-between) * 2,
+    "thu" ($cell-size + $space-between) * 3,
+    "fri" ($cell-size + $space-between) * 4,
+    "sat" ($cell-size + $space-between) * 5,
+    "sun" ($cell-size + $space-between) * 6;
+
+  @each $name, $margin in $first-day-of-month {
+    &__day-start--#{$name} {
+      margin-left: #{$margin};
+    }
+  }
+
+  @for $index from 31 to $days-in-month {
+    &-length--#{$days-in-month} :nth-child(#{$index}) {
+      visibility: hidden;
+    }
+  }
+
+  @for $index from 1 through $days-in-month {
+    &__day--#{$index}::before {
+      font-family: Arial, Helvetica, sans-serif;
+      content: "#{$index}";
+      font-size: 30px;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 }
