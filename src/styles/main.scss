@@ -43,6 +43,14 @@ body {
     }
   }
 
+  @each $day-name, $use-margin in $days {
+    &--start-day--#{$day-name} {
+      & > :first-child {
+        margin-left: $use-margin;
+      }
+    }
+  }
+
   &__day {
     @include square($cell-size);
 
@@ -56,12 +64,6 @@ body {
     border: 1px solid #000;
     background-color: #eee;
     transition-duration: 0.5s;
-
-    @each $day-name, $use-margin in $days {
-      &--start-day--#{$day-name} {
-        margin-left: $use-margin;
-      }
-    }
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index}) {
