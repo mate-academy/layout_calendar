@@ -1,0 +1,62 @@
+@use "../utils/_variables.scss" as *;
+@use "../utils/_functions.scss" as *;
+@use "../utils/_mixins.scss" as *;
+
+.calendar-position {
+  height: 100vh;
+  display: flex;
+}
+
+.calendar-month {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: 727px;
+  gap: 1px;
+  padding: 10px;
+
+  &__day {
+    @include square($day-size);
+    background-color: #eee;
+    display: flex;
+
+    border: 1px solid black;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+      transition: all 0.5s;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+        font-size: 30px;
+        margin: auto;
+      }
+    }
+  }
+
+  @for $index from 29 through 31 {
+    @for $index1 from $index through 31 {
+      &--length-#{$index - 1} &__day:nth-child(#{$index1}) {
+        display: none;
+      }
+    }
+  }
+
+  $days-shift:
+    "tue" day--shift(1),
+    "wed" day--shift(2),
+    "thu" day--shift(3),
+    "fri" day--shift(4),
+    "sat" day--shift(5),
+    "san" day--shift(6);
+
+  @each $name, $shift in $days-shift {
+    &--#{$name} &__day:nth-child(1) {
+      margin-left: $shift;
+    }
+  }
+}
