@@ -1,0 +1,74 @@
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    margin: 5px 0 20px;
+
+    @media (max-width: 750px) {
+      font-size: 48px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    max-width: $week-size;
+    padding: 0 10px;
+
+    @media (max-width: 750px) {
+      max-width: $week-size--sm;
+    }
+
+    & :nth-child(n) {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      @include squre($sell-size);
+      background: #eee;
+      border: 1px solid;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: 0.5s;
+
+      @media (max-width: 750px) {
+        @include squre($sell-size--sm);
+      }
+
+      &:hover {
+        background: pink;
+        transform: translateY(-20px);
+      }
+    }
+
+    @for $idx from 1 to 32 {
+      & > :nth-child(#{$idx}) {
+        &::before {
+          content: "#{$idx}";
+        }
+      }
+    }
+
+  }
+
+  @each $day, $margin in $first-margin {
+    &--start-day--#{$day} > &__content :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @media (max-width: 750px) {
+    @each $day, $margin in $first-margin--sm {
+      &--start-day--#{$day} > &__content :first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $idx from 28 to 32 {
+    &--month-length--#{$idx} :nth-child(-n + #{$idx}) {
+      display: flex;
+    }
+  }
+}
