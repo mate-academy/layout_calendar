@@ -1,3 +1,81 @@
-body {
+$field-size: 100px;
+$calendar-width: $field-size * 7 + 6px;
+$day-count: 31;
+
+.page {
   margin: 0;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  align-self: center;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  position: relative;
+
+  &__field {
+    width: $field-size;
+    height: $field-size;
+    display: flex;
+    justify-content: center;
+    line-height: $field-size;
+    font-size: 30px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    transition-duration: 0.5s;
+  }
+
+  $days:
+    'mon' 0px,
+    'tue' $field-size + 1,
+    'wed' $field-size * 2 + 2,
+    'thu' $field-size * 3 + 3,
+    'fri' $field-size * 4 + 4,
+    'sat' $field-size * 5 + 5,
+    'sun' $field-size * 6 + 6;
+
+  @each $name, $margin in $days {
+    &--day--#{$name} &__field:nth-child(1) {
+      margin-left: #{$margin};
+    }
+  }
+
+  @for $day from 1 through $day-count {
+    &__field:nth-child(#{$day}):before {
+      content: "#{$day}";
+    }
+  }
+
+  @for $count from 27 through $day-count {
+    &--#{$count} &__field:nth-child(#{$count + 1}) {
+      visibility: hidden;
+    }
+
+    &--#{$count} &__field:nth-child(#{$count + 2}) {
+      visibility: hidden;
+    }
+
+    &--#{$count} &__field:nth-child(#{$count + 3}) {
+      visibility: hidden;
+    }
+
+    &--#{$count} &__field:nth-child(#{$count + 4}) {
+      visibility: hidden;
+    }
+  }
+
+  &__field:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 }
