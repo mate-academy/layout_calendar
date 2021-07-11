@@ -1,3 +1,75 @@
+$block-length: 100px;
+$col-amount: 7;
+$calendar-padding: 10px;
+$gap: 1px;
+$first-day-offset:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@mixin day-block($length) {
+  box-sizing: border-box;
+  position: relative;
+  transition: transform 0.5s, background-color 0.5s;
+  width: $length;
+  height: $length;
+  background-color: #eee;
+  border: 1px solid #000;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  width: $col-amount * $block-length + ($calendar-padding * 2);
+
+  @for $day from 1 through 31 {
+    & :nth-child(-n + #{$day}) {
+      @include day-block($block-length);
+    }
+
+    & :nth-child(#{$day})::after {
+      content: "#{$day}";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length_#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @each $weekday, $offset in $first-day-offset {
+    &--start-day_#{$weekday} {
+      & :first-child {
+        margin-left: ($block-length * $offset) + ($gap * $offset);
+      }
+    }
+  }
+
+  &__block:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 }
