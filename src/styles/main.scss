@@ -1,3 +1,76 @@
+$cell-size: 100px;
+$cell-bgc: #eee;
+$hover-bgc: pink;
+$cell-ff: arial;
+$sell-fsz: 30px;
+$days: mon, tue, wed, thu, fri, sat, sun;
+
+@mixin cell-position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin cell-font {
+  font-family: $cell-ff, sans-serif;
+  font-size: $sell-fsz;
+}
+
+@mixin day-counter {
+  @for $i from 1 through 31 {
+    .calendar div:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+}
+
+@mixin mounth-start {
+  @for $n from 1 through length($days) {
+    .calendar-#{nth($days, $n)} div:first-child {
+      grid-column-start: #{$n};
+    }
+  }
+}
+
+@mixin num-of-days {
+  @for $d from 28 through 31 {
+    .calendar-#{$d} div:nth-child(#{$d}) ~ div {
+      display: none;
+    }
+  }
+}
+
 body {
   margin: 0;
 }
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $cell-size);
+  grid-template-rows: repeat(6, $cell-size);
+  grid-gap: 1px;
+  width: 707px;
+  margin: 50px auto;
+}
+
+.calendar > div {
+  @include cell-position;
+
+  border: 1px solid black;
+  background-color: $cell-bgc;
+  transition: all 0.5s linear;
+
+  @include cell-font;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-bgc;
+    transform: translateY(-20px);
+  }
+}
+
+@include day-counter;
+
+@include mounth-start;
+
+@include num-of-days;
