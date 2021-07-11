@@ -1,7 +1,19 @@
 $cell-size: 100px;
 $calendar-gap: 1px;
 $calendar-padding: 10px;
-$calendar-width: $cell-size * 7 + $calendar-padding * 2 + $calendar-gap * 6;
+$days-in-week: 7;
+$calendar-width:
+  ($cell-size * $days-in-week)
+  + ($calendar-padding * 2)
+  + ($calendar-gap * 6);
+$day-of-week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 @mixin square($size) {
   width: $size;
@@ -33,6 +45,18 @@ body {
   gap: $calendar-gap;
   padding: $calendar-padding;
 
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $first-day, $number in $day-of-week {
+    &--start-day--#{$first-day} :first-child {
+      margin-left: ($cell-size + $calendar-gap) * $number;
+    }
+  }
+
   &__day {
     @include square($cell-size);
 
@@ -45,6 +69,14 @@ body {
     &:hover {
       background-color: pink;
       cursor: pointer;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        align-self: center;
+        margin: auto;
+      }
     }
   }
 }
