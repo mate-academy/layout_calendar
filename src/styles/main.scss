@@ -1,3 +1,71 @@
+$day-size: 100px;
+$col-count: 7;
+$paddings: 10px;
+$gap: 1px;
+
+@mixin daySquare($size) {
+  width: $size;
+  height: $size;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $paddings;
+  width: (($day-size + $gap) * $col-count) - $gap + ($paddings * 2);
+
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $count in $days {
+    &--start-day_#{$day} :first-child {
+      margin-left: ($day-size + $gap) * $count;
+    }
+  }
+
+  &__day {
+    @include daySquare($day-size);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: #eee;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
 }
