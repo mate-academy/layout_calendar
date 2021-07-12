@@ -1,0 +1,108 @@
+html {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+.promo {
+  height: 300px;
+  background-image: url("https://mate-academy.github.io/fe-program/assets/MA_top.jpg");
+  background-size: cover;
+  background-position: top;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+}
+
+.nav {
+  font-size: 20px;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+}
+
+.nav__toggler {
+  display: none;
+}
+
+.nav__toggler-label {
+  display: inline-block;
+  padding: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .nav__toggler-label {
+    display: none;
+  }
+}
+
+.nav__toggler-label::before {
+  content: "=";
+}
+
+.nav__toggler:checked ~ .nav__toggler-label::before {
+  content: "x";
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  max-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  list-style: none;
+  transition: max-height 0.3s;
+}
+
+@media (min-width: 640px) {
+  .nav__list {
+    display: flex;
+    flex-direction: row;
+    max-height: revert;
+  }
+}
+
+.nav__toggler:checked ~ .nav__list {
+  max-height: 100vh;
+}
+
+.nav__link {
+  display: block;
+  margin: 0 20px;
+  padding: 10px 5px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: #ccc;
+}
+
+.main {
+  padding: 10px;
+  background-color: antiquewhite;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: -1;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+  color: #fff;
+  background-image: url("https://mate-academy.github.io/fe-program/assets/MA_bottom.jpg");
+  background-size: cover;
+  background-position: top;
+}
