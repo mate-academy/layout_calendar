@@ -21,13 +21,13 @@ body {
     font-family: arial, sans-serif;
     font-size: 30px;
     background-color: #eee;
+    transition: transform 0.5s;
   }
 
   &__day:hover {
     cursor: pointer;
     background-color: pink;
     transform: translate(0, -20px);
-    transition: transform 0.5s;
   }
 
   @for $day from 1 through 31 {
@@ -36,8 +36,14 @@ body {
     }
   }
 
-  $days: "mon" 0, "tue" 1 * $cell-size-gap, "wed" 2 * $cell-size-gap, "thu" 3 * $cell-size-gap, "fri" 4 * $cell-size-gap,
-    "sat" 5 * $cell-size-gap, "sun" 6 * $cell-size-gap;
+  $days:
+  "mon" 0, 
+  "tue" 1 * $cell-size-gap, 
+  "wed" 2 * $cell-size-gap, 
+  "thu" 3 * $cell-size-gap, 
+  "fri" 4 * $cell-size-gap,
+  "sat" 5 * $cell-size-gap,
+  "sun" 6 * $cell-size-gap;
 
   @each $start-day, $margin-left in $days {
     &--start-day-#{$start-day} .calendar__day:first-child {
