@@ -1,0 +1,68 @@
+.nav {
+  font-size: 20px;
+  text-align: center;
+
+  &__toggler {
+    display: none;
+  }
+
+  &__toggler-label {
+    display: inline-block;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  @include onDesktop {
+    &__toggler-label {
+      display: none;
+    }
+  }
+
+  &__toggler-label::before {
+    content: "=";
+  }
+
+  &__toggler:checked ~ .nav__toggler-label::before {
+    content: "x";
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    list-style: none;
+    transition: max-height 0.3s;
+  }
+
+  @media (min-width: 640px) {
+    @include onDesktop {
+      &__list {
+        display: flex;
+        flex-direction: row;
+        max-height: revert;
+      }
+    }
+  }
+
+  &__toggler:checked ~ &__list {
+    max-height: 100vh;
+  }
+
+  &__link {
+    display: block;
+    padding: 10px 0;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &__link:hover {
+    color: #ccc;
+  }
+}
