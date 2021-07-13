@@ -1,15 +1,15 @@
 $square-size: 100px;
 $padding: 10px;
 $gap: 1px;
-$width-content: calc(#{$square-size} * 7 + 2 * #{$padding});
+$width-content: calc((#{$square-size} + #{$gap}) * 7 + #{$padding} * 2);
 $day-of-week:
-  "mon" 1,
-  "tue" 2,
-  "wed" 3,
-  "thu" 4,
-  "fri" 5,
-  "sat" 6,
-  "sun" 7;
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 @mixin square ($size) {
   width: $size;
@@ -25,12 +25,13 @@ html {
   font-size: 30px;
 }
 
-.month {
+.calendar {
   display: flex;
   gap: $gap;
   width: $width-content;
   flex-wrap: wrap;
   margin: 50px auto;
+  padding: $padding;
 
   @each $day, $num in $day-of-week {
     &--start-day--#{$day} :first-child {
@@ -45,7 +46,7 @@ html {
   }
 }
 
-.month__day {
+.calendar__day {
   display: flex;
   @include square ($square-size);
   background-color: #eee;
