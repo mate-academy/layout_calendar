@@ -1,0 +1,40 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: calendar-width($day-size,$day-gap,$calendar-padding);
+  padding: 10px;
+
+  &__day {
+    @include day-square($day-size);
+    background-color: $day-color;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $margin in $days-in-week {
+    &--start-#{$day} > :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $days from 28 to 31 {
+    &--number-days-#{$days} > :nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
