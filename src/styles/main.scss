@@ -1,3 +1,91 @@
+$cell-size: 100px;
+$calendar-gap: 1px;
+$calendar-padding: 10px;
+$days-in-week: 7;
+$calendar-width:
+  ($cell-size * $days-in-week)
+  + ($calendar-padding * 2)
+  + ($calendar-gap * 6);
+$day-of-week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.page {
+
+  &__element {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $first-day, $number in $day-of-week {
+    &--start-day--#{$first-day} :first-child {
+      margin-left: ($cell-size + $calendar-gap) * $number;
+    }
+  }
+
+  &__day {
+    @include square($cell-size);
+
+    display: flex;
+    flex-shrink: 0;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    transition-duration: 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        align-self: center;
+        margin: auto;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+
+      transform: translateY(-20px);
+    }
+  }
 }
