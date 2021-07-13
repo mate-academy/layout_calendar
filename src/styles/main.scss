@@ -1,3 +1,67 @@
+$square-size: 100px;
+$padding: 10px;
+$gap: 1px;
+$width-content: calc(#{$square-size} * 7 + 2 * #{$padding});
+$day-of-week:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.month {
+  display: flex;
+  gap: $gap;
+  width: $width-content;
+  flex-wrap: wrap;
+  margin: 50px auto;
+
+  @each $day, $num in $day-of-week {
+    &--start-day--#{$day} :first-child {
+      margin-left: calc((#{$square-size} + #{$gap}) * #{$num});
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-lenth--#{$len} :nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+}
+
+.month__day {
+  display: flex;
+  @include square ($square-size);
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: 0.5s ease-in;
+  }
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      margin: auto;
+    }
+  }
 }
