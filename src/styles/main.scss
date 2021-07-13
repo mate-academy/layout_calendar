@@ -1,3 +1,92 @@
-body {
-  margin: 0;
+* {
+  box-sizing: border-box;
 }
+
+.page {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  &__body {
+    margin: 0;
+  }
+}
+
+$day-count: 31;
+$col-count: 7;
+$col-gap: $col-count - 1;
+$cell-size: 100px;
+$padding: 10px;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@function getWidth($count, $size, $padding, $gap) {
+  @return $count * $size + $padding * 2 + $gap;
+}
+
+.calendar {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.month {
+  max-width: getWidth($col-count, $cell-size, $padding, $col-gap);
+  margin: auto;
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    @include square($cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: 0.5s;
+
+    @for $day from 1 through $day-count {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
+
+$week-days:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@each $day, $number in $week-days {
+  .month--start-day--#{$day} {
+    .month__day:first-child {
+      margin-left: ($number - 1) * $cell-size +
+        $col-gap - ($col-count - $number);
+    }
+  }
+}
+
+@for $day from 28 through $day-count {
+  .month--length--#{$day}:nth-last-child(-n + #{$day-count - $day}) {
+    display: none;
+  }
+}
+
+// .month__day:nth-child(n + #{$day-count + 1}) {
+//   display: none;
+// }
