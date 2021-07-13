@@ -1,3 +1,51 @@
-body {
-  margin: 0;
+@import "normalize.scss";
+@import "var.scss";
+
+.calendar {
+  width: 720px;
+  gap: $gap;
+  box-sizing: border-box;
+
+  &__item {
+    display: flex;
+    width: $width;
+    height: 100px;
+    border: $border solid #000;
+    background-color: #eee;
+    transition-duration: 500ms;
+  }
+
+  &__item:hover {
+    transform: scale(1,1) rotate(0)skew(0,0) translate(0,-20px);
+    cursor: pointer;
+    background-color: #ffbfcb;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__item:nth-child(#{$i})::before {
+    content: "#{$i}";
+    margin: auto;
+  }
+}
+
+$start: 
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+ 
+@each $days, $margin in $start {
+  .calendar--start-day--#{$days} > :nth-child(1) {
+    margin-left: ($width+$gap+$border*2)*$margin;
+  }
+}
+
+@for $k from 28 through 31 {
+  .calendar--month-length--#{$k} :not(:nth-child(-n + #{$k} )) {
+    display: none;
+  }
 }
