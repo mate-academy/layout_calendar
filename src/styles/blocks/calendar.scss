@@ -6,8 +6,8 @@
 
   &__day {
     position: relative;
-    width: $cell-size;
-    height: $cell-size;
+    
+    @include square($cell-size);
 
     margin: 0 $gap-size $gap-size 0;
 
@@ -30,28 +30,29 @@
 
     @for $cell-num from 1 through 31 {
       &:nth-child(#{$cell-num}):before {
+        position: absolute;
         content: "#{$cell-num}";
+
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        position: absolute;
       }
     }
   }
+}
 
-  @for $length from 28 through 31 {
-    &__month-length--#{$length} {
-      .calendar__day:nth-child(n + #{$length + 1}) {
-        display: none;
-      }
+@for $length from 28 through 31 {
+  .calendar_month-length--#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
+}
 
-  @each $day, $position in $days {
-    &__start-day--#{$day} {
-      .calendar__day:first-child {
-        margin-left: first-day-margin($cell-size, $position, $gap-size);
-      }
+@each $day, $position in $days {
+  .calendar_start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: first-day-margin($cell-size, $position, $gap-size);
     }
   }
 }
