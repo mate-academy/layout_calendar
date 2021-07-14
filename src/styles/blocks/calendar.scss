@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  @each $start-day, $number in $days{
+  @each $start-day, $number in $days {
     &_start-day--#{$start-day} >:first-child {
       margin-left: ($cell-size + $cell-gap) * $number;
     }
@@ -26,13 +26,13 @@
     }
 
     @for $number from 1 through 31 {
-      &:nth-child(#{$number}){
+      &:nth-child(#{$number}) {
         &::before {
-        content: "#{$number}";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+          content: "#{$number}";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
       }
     }
@@ -43,6 +43,3 @@
     }
   }
 }
-
-
-
