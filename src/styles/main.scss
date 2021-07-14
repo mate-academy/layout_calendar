@@ -1,6 +1,11 @@
 @import "../styles/reset.scss";
 @import "../styles/variables.scss";
 
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 .calendar-container {
   display: flex;
   justify-content: center;
@@ -33,24 +38,22 @@
 
   }
 
-}
-
-@for $index from 1 through 31 {
-  .calendar__days:nth-child(#{$index})::before {
-    content: "#{$index}";
-    font-family: Arial, sans-serif;
-    font-size: 30px;
+  @for $index from 1 through 31 {
+    &__days:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
   }
-}
-
-@each $day, $margin-left in $days {
-  .calendar--day--#{$day} > :first-child {
-    margin-left: ($calendar-day-size + $calendar-day-gap) * $margin-left;
+  
+  @for $month from 28 through 31 {
+    &--month-length--#{$month} :not(:nth-child(-n + #{$month})) {
+      display: none;
+    }
   }
-}
-
-@for $month from 28 through 31 {
-  .calendar--month-length--#{$month} :not(:nth-child(-n + #{$month})) {
-    display: none;
+  
+  @each $day, $margin-left in $days {
+    &--day--#{$day} > :first-child {
+      margin-left: ($calendar-day-size + $calendar-day-gap) * $margin-left;
+    }
   }
+
 }
