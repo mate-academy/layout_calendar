@@ -6,6 +6,7 @@
 
   &__day {
     position: relative;
+    cursor: pointer;
     
     @include square($cell-size);
 
@@ -14,18 +15,11 @@
     background-color: $cell-color;
     border: 1px solid black;
 
+    transition: transform 1s, background-color 1s;
+
     &:hover {
-      cursor: pointer;
-
-      animation: cell-hover 0.5s forwards;
-
-      @keyframes cell-hover {
-
-        100% {
-          background-color: $cell-color--active;
-          transform: translateY(-20px);
-        }
-      }
+      transform: translateY(-20px);
+      background-color: $cell-color--active;
     }
 
     @for $cell-num from 1 through 31 {
