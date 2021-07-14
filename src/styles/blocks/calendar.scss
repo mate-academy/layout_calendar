@@ -1,0 +1,40 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: getCalendarWidth($square-side, $square-gap, $calendar-padding);
+  padding: 0 $calendar-padding;
+  
+  &__day {
+    @include day($square-side, $square-color, $square-border);
+
+    &:hover {
+      position: relative;
+
+      background-color: pink;
+      transform: translate(0, -20px);
+      transition-duration: 0.5s;
+      cursor: pointer;
+    }
+  }
+  
+  @for $day from 1 through $days-number {
+    & :nth-child(#{$day})::before {
+      content: "#{$day}";
+      
+      @extend %calendar__day-before;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length_#{$last-day} :nth-child(n + #{$last-day + 1}) {
+      @extend %display-none;
+    }
+  }
+  
+  @each $day, $index in $week-days {
+    &--start-day_#{$day} :first-child {
+      margin-left: firstDayShift($square-gap, $square-side, $index);
+    }
+  }
+}
