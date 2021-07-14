@@ -1,3 +1,76 @@
+$cell-size: 100px;
+$col-count: 7;
+$paddings: 10px;
+$gap: 1px;
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@mixin daySquare($size) {
+  width: $size;
+  height: $size;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $gap;
+  padding: $paddings;
+  width: (($cell-size + $gap) * $col-count) - $gap + ($paddings * 2);
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
+      align-self: center;
+      margin: auto;
+    }
+  }
+
+  @each $day, $count in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($cell-size + $gap) * $count;
+    }
+  }
+
+  &__day {
+    @include daySquare($cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
 }
