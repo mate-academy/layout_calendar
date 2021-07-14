@@ -34,7 +34,7 @@ body {
   }
 
   @for $index from 1 through 31 {
-    &__cell--#{$index}::before {
+    &__cell:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
@@ -50,7 +50,7 @@ $day:
   "sun" 6 * ($cellWidth + $gap);
 
 @each $dayName, $margin in $day {
-  .calendar--start-day_#{$dayName} .calendar__cell--1 {
+  .calendar--start-day_#{$dayName} .calendar__cell:first-child {
     margin-left: $margin;
   }
 }
