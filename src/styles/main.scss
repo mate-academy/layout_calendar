@@ -11,7 +11,6 @@
   }
 }
 
-$day-count: 31;
 $col-count: 7;
 $col-gap: $col-count - 1;
 $cell-size: 100px;
@@ -49,7 +48,7 @@ $padding: 10px;
     border: 1px solid #000;
     transition: 0.5s;
 
-    @for $day from 1 through $day-count {
+    @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
@@ -81,12 +80,8 @@ $week-days:
   }
 }
 
-@for $day from 28 through $day-count {
-  .month--length--#{$day}:nth-last-child(-n + #{$day-count - $day}) {
+@for $day from 28 through 31 {
+  .month--length--#{$day} :nth-child(n + #{$day + 1}) {
     display: none;
   }
 }
-
-// .month__day:nth-child(n + #{$day-count + 1}) {
-//   display: none;
-// }
