@@ -6,8 +6,12 @@
   margin: 5% auto;
 
   &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: $block-h;
     width: 100px;
+
     background-color: #eee;
     border: 1px solid #000;
     transition-duration: 0.5s;
@@ -22,9 +26,6 @@
       &:nth-child(#{$num}) {
         &::before {
           content: "#{$num}";
-          display: flex;
-          justify-content: center;
-          line-height: $block-h;
         }
       }
     }
@@ -44,11 +45,9 @@
       margin-left: 100px * $num-day + $num-day;
     }
   }
-}
 
-.calendar--month-length {
-  @for $length from $month-length + 1 through 31 {
-    & > :nth-child(#{$length}) {
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} > :nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
