@@ -1,0 +1,40 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 25px 10px 10px;
+
+  @for $mounth-length from 28 through 31 {
+    &--#{$mounth-length} > :nth-child(n + #{$mounth-length + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    @include cell-day-size ($cell-size);
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $data from 1 through 31 {
+      &--#{$data}::before {
+        content: "#{$data}";
+      }
+    }
+
+    @each $name, $first-day-margin in $begining-margin {
+      &--first--#{$name} {
+        margin-left: $first-day-margin;
+      }
+    }
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: #ffc0cb;
+  }
+}
