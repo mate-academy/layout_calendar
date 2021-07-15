@@ -8,6 +8,7 @@
     @include bg-color($square-bg-color);
     border: 1px solid $square-border-color;
     cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
   }
 
   @for $day-num from 1 through 31 {
@@ -19,17 +20,16 @@
   &__day:hover {
     @include bg-color($hover-color);
     transform: translateY(-20px);
-    transition: transform 0.5s, background-color 0.5s;
   }
 
   @each $day-name, $day-number in $days {
-    &_start-day--#{$day-name} > :first-child {
+    &--start-day--#{$day-name} > :first-child {
       margin-left: countMargin($square-size, $day-number);
     }
   }
 
   @for $length from 28 through 31 {
-    &_month-length--#{$length} > :nth-child(n + #{$length + 1}) {
+    &--month-length--#{$length} > :nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
