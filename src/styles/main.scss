@@ -1,3 +1,70 @@
-body {
+$cell-size:100px;
+$calendar-padding: 10px;
+$gap: 1px;
+$calendar-width: $cell-size * 7 + (2 * $calendar-padding) + (6 * $gap);
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.page {
   margin: 0;
+}
+
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+
+  &__day {
+    @include square($cell-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $count in $days {
+    &--begins-day--#{$name} :first-child {
+      margin-left: $count * ($cell-size + $gap);
+    }
+  }
+
 }
