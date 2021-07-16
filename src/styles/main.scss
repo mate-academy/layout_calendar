@@ -5,6 +5,12 @@ $month-length: 31;
 $week: 7;
 $padding: 10px;
 
+@mixin moveBox {
+  cursor: pointer;
+  transform: translateY(-20px);
+  background-color: pink;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -26,6 +32,7 @@ body {
   padding: $padding;
   gap: $gap;
   max-width: $width-box * $week + $week * $gap + $padding;
+  
 }
 
 @for $nth-day from 1 through 31 {
@@ -34,7 +41,7 @@ body {
   }
 }
 
-@for $month-length from 28 to 32 {
+@for $month-length from 28 through 31 {
   .calendar--#{$month-length} > :nth-child(n + #{$month-length + 1}) {
     display: none;
   }
@@ -64,10 +71,6 @@ $start-day:
   font-size: 30px;
   align-items: center;
   justify-content: center;
-}
-
-.day:nth-child(1) {
-  margin-left: 505px;
 }
 
 .day:hover {
