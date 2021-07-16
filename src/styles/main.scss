@@ -1,3 +1,77 @@
+$width-day: 100px;
+$gap: 1px;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+@mixin square ($width-day) {
+  width: $width-day;
+  height: $width-day;
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+    line-height: $width-day;
+  }
+}
+
+$first-day:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 726px;
+  padding: 10px;
+  gap: $gap;
+
+  @each $day, $skipping-days in $first-day {
+    &--first-day_#{$day} :first-child {
+      margin-left: ($width-day * $skipping-days) + ($gap * $skipping-days);
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length_#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    border: 1px solid #000;
+    background-color: #eee;
+    text-align: center;
+    @include square($width-day);
+    transition-duration: 500ms;
+
+    &:nth-child(7n) {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background-color: pink;
+      transition: 20px;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
 }
