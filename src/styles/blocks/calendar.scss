@@ -1,0 +1,54 @@
+.page__calendar {
+  margin: 0 auto;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  width: 7 * $cell-size + 50px;
+}
+
+$days: 28, 29, 30, 31;
+
+@each $day in $days {
+  @for $numb from 1 through $day {
+    .calendar--month-length--#{$day} div:nth-child(#{$numb}) {
+      display: flex;
+      gap: 1px;
+
+      height: $cell-size;
+      width: $cell-size;
+
+      background-color: $gray-color;
+      border: 1px solid #000;
+
+      &:hover {
+        background: #ffc0cb;
+        transform: translateY(-20px);
+        transition: 0.5s;
+        cursor: pointer;
+      }
+
+      &::after {
+        content: "#{$numb}";
+      }
+    }
+  }
+}
+
+$week-days:
+  "mon" 0,
+  "tue" 1 * $cell-size + 1,
+  "wed" 2 * $cell-size + 2,
+  "thu" 3 * $cell-size + 3,
+  "fri" 4 * $cell-size + 4,
+  "sat" 5 * $cell-size + 5,
+  "sun" 6 * $cell-size + 6;
+
+@each $wd, $shift in $week-days {
+  .calendar--start-day--sun#{$wd} div:first-child {
+    margin-left: $shift;
+  }
+}
