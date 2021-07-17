@@ -1,54 +1,63 @@
 .page__calendar {
   margin: 0 auto;
+  margin-top: 50px;
 }
 
 .calendar {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
-  width: 7 * $cell-size + 50px;
-}
+  gap: $gap;
+  padding: $cal-padding;
+  width: $cell-amount * $cell-size + ($cal-padding * 2);
 
-$days: 28, 29, 30, 31;
-
-@each $day in $days {
-  @for $numb from 1 through $day {
-    .calendar--month-length--#{$day} div:nth-child(#{$numb}) {
-      display: flex;
-      gap: 1px;
-
-      height: $cell-size;
+  @for $day from 1 through 31 {
+    & :nth-child(-n + #{$day}) {
+      box-sizing: border-box;
+      position: relative;
       width: $cell-size;
-
-      background-color: $gray-color;
+      height: $cell-size;
+      transition: transform 0.5s, background-color 0.5s;
+      background-color: #eee;
       border: 1px solid #000;
+    }
 
-      &:hover {
-        background: #ffc0cb;
-        transform: translateY(-20px);
-        transition: 0.5s;
-        cursor: pointer;
-      }
+    & :nth-child(#{$day})::before {
+      content: "#{$day}";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 
-      &::after {
-        content: "#{$numb}";
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} :nth-child(n + #{$days} + 1) {
+      display: none;
+    }
+  }
+  
+  $week-days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $numb in $week-days {
+    &--start-day--#{$name} {
+      & :first-child {
+        margin-left: ($cell-size * $numb) + ($gap * $numb);
       }
     }
   }
-}
 
-$week-days:
-  "mon" 0,
-  "tue" 1 * $cell-size + 1,
-  "wed" 2 * $cell-size + 2,
-  "thu" 3 * $cell-size + 3,
-  "fri" 4 * $cell-size + 4,
-  "sat" 5 * $cell-size + 5,
-  "sun" 6 * $cell-size + 6;
-
-@each $wd, $shift in $week-days {
-  .calendar--start-day--sun#{$wd} div:first-child {
-    margin-left: $shift;
+  &__day:hover {
+    background: #ffc0cb;
+    transform: translateY(-20px);
+    transition: 0.5s;
+    cursor: pointer;
   }
 }
