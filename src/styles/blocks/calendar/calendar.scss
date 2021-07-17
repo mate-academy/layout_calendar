@@ -1,0 +1,58 @@
+@use "../../other/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  width: ($column-width * 7) + $padding-size + $padding-size + ($gap-size * 6 );
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $column-width;
+    height: $column-height;
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+
+    }
+    &:active {
+      background-color: dodgerblue;
+    }
+
+  }
+}
+
+@for $index from $minimum-days-in-calendar through $maximum-days-in-calendar {
+  .calendar__day--#{$index}:before {
+    content: "#{$index}";
+  }
+}
+
+@each $days, $margin in $week-days {
+  .calendar--start-day_#{$days} {
+    .calendar__day:first-child {
+      margin-left: $margin + $gap-size + $gap-size;
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length_#{$index} {
+
+    @for $new-index from $index through 31 {
+      .calendar__day--#{$new-index+1} {
+        display: none;
+      };
+    }
+  }
+}
