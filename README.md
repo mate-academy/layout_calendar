@@ -13,7 +13,7 @@ ___
 ## Task
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
-- Create a markup for the calendar ceil with 31 days inside
+- Create a markup for the calendar cell with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
   - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
