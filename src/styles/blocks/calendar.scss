@@ -1,0 +1,57 @@
+.calendar {
+  margin: 20px auto;
+  display: flex;
+  gap: $gap;
+  padding: 10px;
+  flex-wrap: wrap;
+  width: 7 * $cell-size + 7;
+  height: $cell-size * 5;
+
+  @for $number from 1 through 31 {
+    & :nth-child(-n + #{$number}) {
+      display: flex;
+      position: relative;
+      width: $cell-width;
+      height: $cell-height;
+      background-color: #eee;
+      border: 1px solid black;
+      box-sizing: border-box;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s, background-color 0.5s;
+    }
+
+    & :nth-child(#{$number})::before {
+      content: "#{$number}";
+      position: relative;
+    }
+  }
+
+  &__day:hover {
+    background: #ffc0cb;
+    transform: translateY(-20px);
+    transition: 0.5s;
+    cursor: pointer;
+  }
+
+  $week-days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+  @each $day, $date in $week-days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($cell-size + $gap) * $date;
+    }
+  }
+
+  @for $number from 28 through 31 {
+    &--month-length--#{$number} &__day:nth-child(n + #{$number} + 1) {
+      display: none;
+    }
+  }
+}
