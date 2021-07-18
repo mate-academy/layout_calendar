@@ -1,0 +1,38 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  gap: 1px;
+  width: 720px;
+  flex-wrap: wrap;
+
+  &__day {
+    @extend %square;
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__day:first-child {
+    margin-left: 618px;
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    transition: 0.5s;
+    background-color: pink;
+  }
+
+  @for $var from 1 to 32 {
+    &__day:nth-child(#{$var})::before {
+      height: 50px;
+      width: 50px;
+      color: #000;
+      content: "#{$var}";
+      padding: 10px;
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      font-size: 30px;
+    }
+  }
+}
