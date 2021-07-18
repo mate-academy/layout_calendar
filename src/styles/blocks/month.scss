@@ -5,16 +5,25 @@
   padding: 10px;
 
   &__day {
+    @include cell-size;
     border: #000 1px solid;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: #eee;
     cursor: pointer;
-    width: 100px;
-    height: 100px;
   }
 
   &__day:hover {
     background-color: #ffc0cb;
+    transition: tranform, background-color, 0.5s;
     transform: translateY(-20px);
+  }
+
+  &__day:nth-child(n + #{$max-days}) {
+    display: none;
   }
 
   @each $name, $size in $week-day {
@@ -22,4 +31,12 @@
       margin-left: $size;
     }
   }
+
+  
+  @for $index from 1 to $max-days {
+    .month__day--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
 }
