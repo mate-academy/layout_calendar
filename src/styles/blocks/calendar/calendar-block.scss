@@ -19,9 +19,12 @@
   &__day {
     width: $WidthOf-dayBlock;
     height: $heightOf-dayBlock;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: $heightOf-dayBlock;
     border: 1px solid #000;
     background: #eee;
-    box-sizing: border-box;
     transition: linear 0.5s all;
 
     &:hover {
@@ -32,10 +35,6 @@
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: $heightOf-dayBlock;
       }
     }
   }
