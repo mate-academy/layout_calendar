@@ -5,15 +5,16 @@
   flex-wrap: wrap;
   gap: $gap-size;
 
-  width: ($column-width * 7) + $padding-size + $padding-size + ($gap-size * 6 );
+  width: ($block-size * 7) + $padding-size + $padding-size + ($gap-size * 6 );
   padding: 10px;
 
   &__day {
+
+    @include create-square(100px);
+
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $column-width;
-    height: $column-height;
     background-color: #eee;
     border: 1px solid black;
     font-size: 30px;
@@ -25,6 +26,7 @@
       transform: translateY(-20px);
 
     }
+
     &:active {
       background-color: dodgerblue;
     }
@@ -32,27 +34,23 @@
   }
 }
 
-@for $index from $minimum-days-in-calendar through $maximum-days-in-calendar {
-  .calendar__day--#{$index}:before {
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index}):before {
     content: "#{$index}";
   }
 }
 
-@each $days, $margin in $week-days {
-  .calendar--start-day_#{$days} {
-    .calendar__day:first-child {
-      margin-left: $margin + $gap-size + $gap-size;
-    }
+@each $days, $day-number in $week-days {
+  .calendar--start-day_#{$days} > :first-child {
+    margin-left: ($block-size * $day-number ) + $gap-size + $gap-size;
   }
 }
 
-@for $index from 28 through 31 {
-  .calendar--month-length_#{$index} {
-
-    @for $new-index from $index through 31 {
-      .calendar__day--#{$new-index+1} {
-        display: none;
-      };
+@each $max-day in $max-months-days {
+  @for $index from $max-day through 31 {
+    .calendar__day--#{$index + 1} {
+      display: none;
     }
   }
+
 }
