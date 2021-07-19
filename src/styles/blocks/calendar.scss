@@ -16,7 +16,7 @@
     "sun" 6;
 
   @each $name, $index in $weeks {
-    &--start-day_#{$name} {
+    &--#{$name} {
       & > .calendar__cell:first-child {
         margin-left: startDayShift($cell-size, $cell-gap, $index);
       }
@@ -25,7 +25,7 @@
   }
    
   @for $days from 28 through $days-count {
-    &--month-length_#{$days} {
+    &--#{$days} {
       .calendar__cell:nth-child(n + #{$days}):not(:nth-child(#{$days})) {
         display: none;
       }
@@ -49,10 +49,9 @@
     }
 
     @for $index from 1 through $days-count {
-      &--#{$index} {
-        &::before {
-          content: "#{$index}";
-        }
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        
       }
 
     }
