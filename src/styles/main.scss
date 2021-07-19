@@ -1,3 +1,69 @@
+$month-day: 30;
+$dayy: 31 - $month-day;
+
+$days: 
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  margin: 0 auto;
+  width: 710px;
+
+  &__day {
+    border: 1px solid #000;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #eee;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.7s;
+    }
+
+    @for $index from 1 through $month-day {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $indexx from $month-day through 31 {
+    @for $indexxx from 1 through $dayy {
+      &--#{$indexx} :nth-child(#{$indexxx + $month-day}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  @each $day, $margin in $days {
+    &--#{$day} :first-child {
+      margin-left: 101px * $margin;
+    }
+  }
 }
