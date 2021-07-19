@@ -32,24 +32,22 @@
     }
 
   }
-}
 
-@for $index from 1 through 31 {
-  .calendar__day:nth-child(#{$index}):before {
-    content: "#{$index}";
-  }
-}
-
-@each $days, $day-number in $week-days {
-  .calendar--start-day_#{$days} > :first-child {
-    margin-left: ($block-size * $day-number ) + $gap-size + $gap-size;
-  }
-}
-
-@each $max-day in $max-months-days {
-  @for $index from $max-day through 31 {
-    .calendar__day--#{$index + 1} {
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} > :nth-child(n + #{$index + 1}) {
       display: none;
+    }
+
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index}):before {
+      content: "#{$index}";
+    }
+  }
+  @each $days, $day-number in $week-days {
+    &--start-day_#{$days} > :first-child {
+      margin-left: ($block-size  + $gap-size) * $day-number;
     }
   }
 
