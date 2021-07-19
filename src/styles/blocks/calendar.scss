@@ -21,6 +21,12 @@
     font-size: 30px;
     
     transition: 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
   }
 
   &__day:hover {
@@ -28,15 +34,9 @@
     background-color: #ffc0cb;
     transform: translateY(-20px);
   }
-  
-  @for $index from 1 through 31 {
-    &__day--#{$index}::before {
-      content: "#{$index}";
-    }
-  }
 
   @each $day, $day-margin in $days {
-    &--start-day_#{$day} .calendar__day--1 {
+    &--start-day_#{$day} &__day:first-child {
       margin-left: $day-margin;
     }
   }
