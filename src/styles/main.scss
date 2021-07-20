@@ -1,4 +1,4 @@
-$month-day: 30;
+$month-day: 31;
 $dayy: 31 - $month-day;
 
 $days: 
@@ -46,18 +46,16 @@ body {
       transition: 0.7s;
     }
 
-    @for $index from 1 through $month-day {
+    @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
   }
 
-  @for $indexx from $month-day through 31 {
-    @for $indexxx from 1 through $dayy {
-      &--#{$indexx} :nth-child(#{$indexxx + $month-day}) {
-        visibility: hidden;
-      }
+  @for $indexx from 28 through 31 {
+    &--#{$indexx} :nth-child(n + #{$indexx + 1}) {
+      display: none;
     }
   }
 
