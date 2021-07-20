@@ -1,3 +1,5 @@
+@import "../utils/mixins";
+
 .calendar {
   display: flex;
   flex-direction: row;
@@ -7,32 +9,37 @@
   flex-wrap: wrap;
 
   &__day {
-    @extend %square;
-    position: relative;
+    @include square($cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
-  }
-
-  &__day:first-child {
-    margin-left: 618px;
+    transition: 0.5s;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid black;
   }
 
   &__day:hover {
     transform: translateY(-20px);
-    transition: 0.5s;
     background-color: pink;
   }
 
   @for $var from 1 to 32 {
     &__day:nth-child(#{$var})::before {
-      height: 50px;
-      width: 50px;
-      color: #000;
       content: "#{$var}";
-      padding: 10px;
-      position: absolute;
-      left: 30px;
-      top: 30px;
-      font-size: 30px;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $first-day, $index in $dayOf {
+    &--start-day--#{$first-day} :first-child {
+      margin-left: ($cell-size + 3) * $index;
     }
   }
 }
