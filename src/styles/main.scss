@@ -12,7 +12,8 @@
 }
 
 $col-count: 7;
-$col-gap: $col-count - 1;
+$gap: 1px;
+$gap-sum: $col-count - $gap;
 $cell-size: 100px;
 $padding: 10px;
 
@@ -32,7 +33,7 @@ $padding: 10px;
 }
 
 .month {
-  max-width: getWidth($col-count, $cell-size, $padding, $col-gap);
+  max-width: getWidth($col-count, $cell-size, $padding, $gap-sum);
   margin: auto;
   padding: $padding;
   display: flex;
@@ -63,19 +64,18 @@ $padding: 10px;
 }
 
 $week-days:
-  "mon" 1,
-  "tue" 2,
-  "wed" 3,
-  "thu" 4,
-  "fri" 5,
-  "sat" 6,
-  "sun" 7;
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 @each $day, $number in $week-days {
   .month--start-day--#{$day} {
     .month__day:first-child {
-      margin-left: ($number - 1) * $cell-size +
-        $col-gap - ($col-count - $number);
+      margin-left: $cell-size * $number + $number;
     }
   }
 }
