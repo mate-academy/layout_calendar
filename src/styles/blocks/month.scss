@@ -1,0 +1,44 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+
+  &__day {
+    @include cell-size;
+    border: #000 1px solid;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+    cursor: pointer;
+  }
+
+  &__day:hover {
+    background-color: #ffc0cb;
+    transition: tranform, background-color, 0.5s;
+    transform: translateY(-20px);
+  }
+
+  @each $name, $size in $week-day {
+    &-start--#{$name} :first-child {
+      margin-left: $size;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    .month__day:nth-child(#{$index}):before {
+      content: "#{$index}";
+    }
+  }
+
+  @each $name, $size in $month-size {
+    &--length-#{$name} {
+      .month__day:nth-child(n + #{$size + 1}) {
+        display: none;
+      }
+    }
+  }
+}
