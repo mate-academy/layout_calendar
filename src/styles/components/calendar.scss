@@ -1,0 +1,43 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-item-size * 7 + $padding * 2 + $distance-between * 6;
+  gap: $distance-between;
+  padding: $padding;
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $calendar-item-size;
+    height: $calendar-item-size;
+    border: 1px solid #000;
+    background-color: $calendar-item-background;
+    transition: transform 500ms;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day,
+  $index in $day-of-week {
+    &--start-day-#{$day} {
+      &> :first-child {
+        margin-left: $index * ($calendar-item-size + $distance-between);
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index}> :nth-child(n+#{$index+1}) {
+      display: none;
+    }
+  }
+}
