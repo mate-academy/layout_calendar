@@ -1,3 +1,80 @@
+@use "sass:math";
+
+$day-width: 100px;
+$gap: 1px;
+$week-column: 7;
+$gap-amount: 6;
+$calendar-padding: 10px;
+$calendar-width: (($day-width + $gap) * $week-column) - $gap;
+$days: 31;
+$font-size: 30px;
+
+@mixin square ($size) {
+  height: $size;
+  width: $size;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+}
+
 body {
   margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  margin: auto;
+  padding: $calendar-padding;
+  max-width: $calendar-width + (2 * $calendar-padding);
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    display: flex;
+    @include square($day-width);
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: transform 0.5s;
+
+    @for $index from 1 through $days {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  $week-days:
+    "mon" 0,
+    "tue" 1,
+    "wen" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $column in $week-days {
+    &--#{$name} > :first-child {
+      margin-left: ($day-width + $gap) * $column;
+    }
+  }
+
+  @for $index from 28 through $days {
+    &--#{$index} > :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
 }
