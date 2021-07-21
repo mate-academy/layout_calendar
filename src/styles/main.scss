@@ -42,9 +42,10 @@ body {
     align-items: center;
     border: 1px solid #000;
     background-color: #eee;
+    transition: transform 0.5s;
 
     @for $index from 1 through $days {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
@@ -53,8 +54,6 @@ body {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      // animation-duration: 500ms;
-      transition: marging-top 0.5s;
     }
   }
 
@@ -68,13 +67,13 @@ body {
     "sun" 6;
 
   @each $name, $column in $week-days {
-    &--start-day--#{$name} .calendar__day--1 {
+    &--#{$name} > :first-child {
       margin-left: ($day-width + $gap) * $column;
     }
   }
 
   @for $index from 28 through $days {
-    &--month-length--#{$index} > :nth-child(n + #{$index + 1}) {
+    &--#{$index} > :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
