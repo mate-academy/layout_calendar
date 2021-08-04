@@ -3,6 +3,7 @@ $myWidth: 800px;
 $deysColor:rgb(76, 148, 170);
 $deysBackground: #eee;
 $deysPadding: 30px 0 20px;
+$myMarginAuto: auto;
 
 * {
   box-sizing: border-box;
@@ -17,8 +18,8 @@ body {
   width: $myWidth;
   background: #1abc9c;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: $myMarginAuto;
+  margin-right: $myMarginAuto;
   color: white;
   font-size: 20px;
   text-transform: uppercase;
@@ -31,12 +32,12 @@ body {
   margin: $myMargin;
   padding: 10px 20px;
   background-color: #ddd;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: $myMarginAuto;
+  margin-right: $myMarginAuto;
   width: $myWidth;
 
   @each $monthDay in "mon", "tue", "wed", "thu", "fri", "sat", "sun" {
-    &__start-day__days#{$monthDay} {
+    &__days#{$monthDay} {
       display: inline-block;
       width: 13.6%;
       color: #666;
@@ -51,7 +52,7 @@ body {
   padding: $deysPadding;
   background: $deysColor;
   width: $myWidth;
-  margin: 0 auto;
+  margin: $myMarginAuto;
   display: grid;
   grid-template-columns: repeat(7, 100px);
   justify-content: center;
@@ -69,6 +70,7 @@ body {
     border: 1px solid black;
     cursor: pointer;
     transition: 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   &__day:hover {
@@ -80,10 +82,8 @@ body {
   @for $index from 1 through 31 {
 
     &__day:nth-child(#{$index}):before {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
       content: "#{$index}";
-      margin: auto;
+      margin: $myMarginAuto;
     }
   }
 }
