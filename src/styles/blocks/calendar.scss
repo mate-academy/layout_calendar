@@ -1,0 +1,62 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  margin: 50px auto;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+  color: black;
+
+  
+  &__day {
+    height: $cell-height;
+    width: $cell-width;
+    border: 1px solid black;
+    background-color: #eee;
+    flex-shrink: 0;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px) scale(110%);
+      animation-duration: 0.5s;
+    }
+  }
+
+  @for $n-day from 1 through 31 {
+    &__day:nth-of-type(#{$n-day})::before {
+      content: "#{$n-day}";
+      display: flex;
+      justify-content: center;
+      margin-top: ($cell-height / 2) - ($font-size / 2);
+    }
+  }
+
+  $days:
+    "monday" 0,
+    "tuesday" 1,
+    "wednesday" 2,
+    "thursday" 3,
+    "friday" 4,
+    "saturday" 5,
+    "sunday" 6;
+
+  @each $day, $index in $days {
+    &--#{$day} > &__day:first-of-type {
+      margin-left: ($index * $cell-width) + ($index * $gap);
+    }
+  }
+
+  @for $n-days from 28 through 31 {
+    &--#{$n-days} > &__day:nth-of-type(n + #{$n-days + 1}) {
+      visibility: hidden;
+    }
+  }
+}
