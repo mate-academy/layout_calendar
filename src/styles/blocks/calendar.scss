@@ -1,5 +1,4 @@
-body,
-div {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -41,17 +40,17 @@ div {
   }
 
   $days:
-    'monday' 1,
-    'tuesday' 2,
-    'wednesday' 3,
-    'thursday' 4,
-    'friday' 5,
-    'saturday' 6,
-    'sunday' 7;
+    'monday' 0,
+    'tuesday' 1,
+    'wednesday' 2,
+    'thursday' 3,
+    'friday' 4,
+    'saturday' 5,
+    'sunday' 6;
 
   @each $day, $index in $days {
     &--#{$day} > &__day:first-of-type {
-      margin-left: ($index * $cell-width - $cell-width) + ($index * $gap - $gap);
+      margin-left: ($index * $cell-width) + ($index * $gap);
     }
   }
 
