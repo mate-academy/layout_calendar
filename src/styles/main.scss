@@ -36,24 +36,8 @@ body {
     }
   }
 
-  @for $index from ($days-month + 1) to 32 {
-    &--month-length--#{$days-month}>div:nth-child(#{$index}) {
-      display: none;
-    }
-  }
-}
-
-.day {
-  box-sizing: border-box;
-  border: 1px solid #000;
-  @include square($side-square);
-  background-color: #eee;
-  cursor: pointer;
-  position: relative;
-  transition-duration: 0.5s;
-
   @for $index from 1 to ($days-month + 1) {
-    &--number--#{$index}::before {
+    &>div:nth-child(#{$index})::before {
       content: '#{$index}';
       font-size: 30px;
       position: absolute;
@@ -64,8 +48,24 @@ body {
     }
   }
 
-  &:hover {
-    transform: translateY(-20px);
-    background-color: pink;
+  @for $index from ($days-month + 1) to 32 {
+    &>div:nth-child(#{$index}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    @include square($side-square);
+    background-color: #eee;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
   }
 }
