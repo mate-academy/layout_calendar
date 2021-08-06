@@ -1,0 +1,21 @@
+@each $day, $value in $day-margins {
+  .month--day-start--#{$day} {
+    .month__day:first-of-type {
+      margin-left: $value;
+    }
+  }
+}
+
+@for $index from 1 through 31 {
+  .month__day:nth-of-type(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@for $index from 29 through 32 {
+  .month--length--#{$index - 1} {
+    .month__day:nth-child(n + #{$index}) {
+      display: none;
+    }
+  }
+}
