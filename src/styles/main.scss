@@ -16,6 +16,7 @@ $paddings: 10px;
 }
 
 .calendar {
+  
   &__inner {
     display: flex;
     flex-wrap: wrap;
@@ -23,27 +24,47 @@ $paddings: 10px;
     width: (7 * $cell-size) + $paddings;
   }
 
-  @for $cell from 1 through 31 {
-    &__cell {
-      height: $cell-size;
-      width: $cell-size;
-      background: #eee;
-      border: 1px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-    }
-    &__cell:hover {
-      transform: translateY(-20px);
-      background-color: pink;
-    }
+  &__cell {
+    height: $cell-size;
+    width: $cell-size;
+    background: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
 
-    &__cell:nth-child(#{$cell})::before {
-      content: "#{$cell}";
+  &__cell:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+
+  // count of days in month
+  @for $index from 1 through 31 {
+
+    &__cell:nth-child(#{$index})::before {
+      content: "#{$index}";
       font-size: 30px;
       font-family: Arial, Helvetica, sans-serif;
+    }
+
+    &--#{$index} {
+      .calendar__cell:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  $days: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
+
+  @each $day, $num in $days {
+
+    &--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: $cell-size * ($num - 1);
+      }
     }
   }
 }
