@@ -9,23 +9,23 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   gap: $days-gap;
-  width: ($day-width * 7) + ($days-gap * 7);
+  width: ($day-width * 7) + ($days-gap * 6);
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
 
   $week-days-list:
-    mon 1,
-    tue 2,
-    wed 3,
-    thu 4,
-    fri 5,
-    sat 6,
-    sun 7;
+    mon 0,
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
 
   @each $week-day, $counter in $week-days-list {
     &--start-day_#{$week-day} :first-child {
-      margin-left: ($day-width + $days-gap) * ($counter - 1);
+      margin-left: ($day-width + $days-gap) * ($counter);
     }
   }
 
@@ -46,6 +46,7 @@ body {
     width: $day-width;
     height: $day-width;
 
+    transition: transform 0.5s ease;
     cursor: pointer;
     box-sizing: border-box;
     border: 1px solid black;
@@ -60,7 +61,6 @@ body {
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-      transition: 0.5s;
     }
   }
 }
