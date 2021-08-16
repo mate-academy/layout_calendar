@@ -4,6 +4,15 @@ $deysColor:rgb(76, 148, 170);
 $deysBackground: #eee;
 $deysPadding: 30px 0 20px;
 $myMarginAuto: auto;
+$blockWIdht: 110px;
+$daysOfWeek:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 * {
   box-sizing: border-box;
@@ -47,15 +56,22 @@ body {
   }
 }
 
+.calendar_box {
+  margin-left: $myMarginAuto;
+  margin-right: $myMarginAuto;
+  width: $myWidth;
+  background: $deysColor;
+  padding-left: 20px;
+}
+
 .calendar {
-  position: relative;
   padding: $deysPadding;
   background: $deysColor;
-  width: $myWidth;
+  width: 780px;
   margin: $myMarginAuto;
-  display: grid;
-  grid-template-columns: repeat(7, 100px);
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 10px;
   margin-bottom: 10px;
 
@@ -84,6 +100,12 @@ body {
     &__day:nth-child(#{$index}):before {
       content: "#{$index}";
       margin: $myMarginAuto;
+    }
+  }
+
+  @each $day, $indent in $daysOfWeek {
+    &--#{$day} :first-child {
+      margin-left: ($blockWIdht) * $indent;
     }
   }
 }
