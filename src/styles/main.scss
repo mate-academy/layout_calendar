@@ -5,13 +5,13 @@ $width-field: $col-count * ($size-cell + $gap) - 1;
 $padding: 10px;
 
 $days:
-  "mon" 1,
-  "tue" 2,
-  "wed" 3,
-  "thu" 4, 
-  "fri" 5,
-  "sat" 6,
-  "sun" 7;
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3, 
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 @mixin square($size) {
   width: $size;
@@ -35,7 +35,7 @@ body {
 
   @each $day, $col in $days {
     &--#{$day} :first-child {
-      margin-left: ($size-cell + $gap) * ($col - 1);
+      margin-left: ($size-cell + $gap) * $col;
     }
   }
 
@@ -68,7 +68,7 @@ body {
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
