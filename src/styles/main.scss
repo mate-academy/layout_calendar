@@ -1,3 +1,85 @@
+// @use "./blocks/body.scss";
+// @use "./blocks/calendar.scss";
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+$cell-size: 100px;
+$calendar-width: 7;
+$gap-size: 1px;
+
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
+.calendar {
+  padding: 10px;
+  width: ($cell-size * $calendar-width) + ($calendar-width - 1);
+  
+  &__field {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    gap: $gap-size;
+  }
+
+  &__cell {
+    @include square($cell-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+  }
+  
+  &__cell:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+    
+  }
+}
+
+$start-days:
+  "mon" 0,
+  "tue" ($cell-size * 1) + ($gap-size * 1),
+  "wed" ($cell-size * 2) + ($gap-size * 2),
+  "thu" ($cell-size * 3) + ($gap-size * 3),
+  "fri" ($cell-size * 4) + ($gap-size * 4),
+  "sat" ($cell-size * 5) + ($gap-size * 5),
+  "sun" ($cell-size * 6) + ($gap-size * 6);
+
+@each $day, $margin in $start-days {
+  .calendar__start-day--#{$day} {
+    .calendar__cell:first-child {
+      margin-left: #{$margin};
+    }
+  }
+}
+
+$month-length:
+  28,
+  29,
+  30,
+  31;
+
+@each $var in $month-length {
+  .calendar__month-length--#{$var} {
+    @for $i from 1 through $var {
+      .calendar__cell:nth-child(#{$i})::before {
+        content: "#{$i}";
+        color: black;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
 }
