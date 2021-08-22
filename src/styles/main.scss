@@ -1,3 +1,54 @@
-body {
-  margin: 0;
+@import "_vars";
+@import "_setup";
+@import "mixins";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  justify-content: start;
+  flex-flow: row wrap;
+  gap: $gap;
+  width: $sizeCalendar;
+  padding: $padding 0;
+
+  &__day {
+    position: relative;
+    @include daySize($daySize);
+    background-color: $dayBackground;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    @for $item from 1 through 31 {
+      &:nth-child(#{$item})::before {
+        content: "#{$item}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 30px;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $margin in $days {
+    &--first-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $count from $min-days-calendar to $max-days-calendar {
+    &--length-month--#{$count} :nth-child(n + #{$count + 1}) {
+      display: none;
+    }
+  }
 }
