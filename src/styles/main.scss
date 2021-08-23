@@ -1,3 +1,71 @@
+$day-padding: 10px;
+$day-border: 1px;
+$day-gap: 1px;
+$day-size: 100px;
+$start-week:  
+  "mon" 0,
+  "tue" ($day-size + $day_gap),
+  "wed" (2 *($day-size + $day_gap)),
+  "thu" (3 *($day-size + $day_gap)),
+  "fri" (4 *($day-size + $day_gap)),
+  "sat" (5 *($day-size + $day_gap)),
+  "sun" (6 *($day-size + $day_gap));
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 7 * $day-size + 6 * $day-gap;
+
+  @each $day, $shift in $start-week {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  &__day {
+    @include square($day-size - 2 * $day-border - 2 * $day-padding);
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #eee;
+    padding: 10px;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translateY(-10%) translateX(10%);
+    transition: all 0.5s;
+  }
+
+  @for $index from 1 through 31 {
+    &__day--#{$index}::before {
+      content: "#{$index}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &--month-length--#{$index} &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
 }
