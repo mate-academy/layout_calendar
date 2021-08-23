@@ -10,6 +10,42 @@ body {
   gap: 1px;
   width: 720px;
   padding: 10px;
+
+  @for $i from 1 through 31 {
+    .day:nth-child(#{$i}):before {
+      content: "#{$i}";
+      display: flex;
+      flex: auto;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  $start-day:
+    "mon" 0,
+    "tue" 101px,
+    "wed" 202px,
+    "thu" 303px,
+    "fri" 404px,
+    "sat" 505px,
+    "sun" 606px;
+
+  @each $day, $shift in $start-day {
+    &__start-day--#{$day} {
+      .day:first-child {
+        margin-left: #{$shift};
+      }
+    }
+  }
+
+  @for $index from 29 through 31 {
+    &__month-length--#{$index} {
+      .day:nth-child(1n+#{$index+1}) {
+        display: none;
+      }
+    }
+  }
+
 }
 
 .day {
@@ -19,6 +55,10 @@ body {
   background-color: #eee;
   border: 1px black solid;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  position: relative;
+  bottom: 0;
 }
 
 .day:first-child {
