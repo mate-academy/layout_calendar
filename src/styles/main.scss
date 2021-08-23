@@ -1,68 +1,11 @@
-$cell-size: 100px;
-$cell-gap: 1px;
-$calendar-padding: 10px;
-$start-days-shift:  
-  "mon" 0,
-  "tue" ($cell-size + $cell_gap),
-  "wed" (2 *($cell-size + $cell_gap)),
-  "thu" (3 *($cell-size + $cell_gap)),
-  "fri" (4 *($cell-size + $cell_gap)),
-  "sat" (5 *($cell-size + $cell_gap)),
-  "sun" (6 *($cell-size + $cell_gap));
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./blocks/calendar";
 
-@mixin square($size) {
-  height: $size;
-  width: $size;
-}
-
-.body {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   margin: 0;
-}
-
-.calendar {
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $cell-gap;
-  width: 7 * $cell-size + 6 * $cell-gap + 2 * $calendar-padding;
-  padding: 0 $calendar-padding;
-  &__cell {
-    box-sizing: inherit;
-    @include square($cell-size);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
-    border: 1px solid #000;
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20%);
-      transition: all 0.5s;
-    }
-  }
-
-  @each $day, $shift in $start-days-shift {
-    &--start-day--#{$day} &__cell:first-child {
-      margin-left: $shift;
-    }
-  }
-
-  @for $index from 1 through 31 {
-    &__cell--#{$index}::before {
-      content: "#{$index}";
-      font-family: Arial, sans-serif;
-      font-size: 30px;
-    }
-  }
-  
-  @for $index from 28 to 31 {
-    &--month-length--#{$index} &__cell:nth-child(n + #{$index + 1}) {
-      display: none;
-    }
-  }
 }
