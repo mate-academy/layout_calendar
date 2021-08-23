@@ -45,6 +45,7 @@ $gap-size: 1px;
     transform: translateY(-20px);
     transition-duration: 0.5s;
     
+    
   }
 }
 
@@ -57,6 +58,21 @@ $start-days:
   "sat" ($cell-size * 5) + ($gap-size * 5),
   "sun" ($cell-size * 6) + ($gap-size * 6);
 
+$month-length:
+  28,
+  29,
+  30;
+  
+@each $var in $month-length {
+  .calendar__month-length--#{$var} {
+    @for $i from $var + 1 through 31 {
+      .calendar__cell:nth-child(#{$i})::before {
+        content: "";
+      }
+    }
+  }
+}
+
 @each $day, $margin in $start-days {
   .calendar__start-day--#{$day} {
     .calendar__cell:first-child {
@@ -65,21 +81,11 @@ $start-days:
   }
 }
 
-$month-length:
-  28,
-  29,
-  30,
-  31;
-
-@each $var in $month-length {
-  .calendar__month-length--#{$var} {
-    @for $i from 1 through $var {
-      .calendar__cell:nth-child(#{$i})::before {
-        content: "#{$i}";
-        color: black;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-      }
-    }
+@for $i from 1 through 31 {
+  .calendar__cell:nth-child(#{$i})::before {
+    content: "#{$i}";
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
   }
 }
