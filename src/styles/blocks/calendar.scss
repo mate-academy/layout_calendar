@@ -1,0 +1,45 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $calendarWidth;
+
+  @for $index from 1 through 31 {
+    &__calendarDay--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &__month--length-#{$index} &__calendarDay:nth-child(1n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $dayOfTheWeek, $dayOfTheWeekStart in $startDay {
+    &__start--day-#{$dayOfTheWeek} &__calendarDay:nth-child(1) {
+      margin-left: #{$dayOfTheWeekStart};
+    }
+  }
+
+  &__calendarDay {
+    @include square($blockSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #eee;
+  }
+
+  &__calendarDay:hover {
+    transform: translateY(-20px);
+    transition: 0.5s;
+    background: pink;
+    cursor: pointer;
+  }
+}
