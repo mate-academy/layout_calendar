@@ -1,0 +1,46 @@
+/*#region calendar*/ 
+@import '../utils/mixin';
+
+.calendar {
+  padding:10px;
+  width: 706px;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  margin: 40px auto;
+  background-color: rgb(16, 126, 126);
+  border:7px solid rgb(6, 61, 58);
+  border-radius: 10px;
+  box-shadow: 10px 7px 7px rgb(152, 209, 209);
+
+  &__cell {
+    background-color: $cell-bgc;
+
+    &:hover {
+      background-color: $hover-bgc;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
+
+@include cellMonth (1, 27);
+
+@each $var in $month-length {
+  .calendar__month-length--#{$var} {
+
+   @include cellMonth (28, $var)
+      }
+    }
+
+  @each $day, $margin in $start-days {
+    .calendar__start-day--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: #{$margin};
+      }
+    }
+  }  
+
+/* #endregion calendar */ 
