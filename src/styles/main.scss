@@ -1,3 +1,43 @@
+$main-color: #eee;
+$border-color: #000;
+$day-in-month: 31;
+
+@mixin centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 700px;
+  width: 100%;
+  @include centered;
+
+  &__day {
+    margin: 1px;
+    width: 100px;
+    height: 100px;
+    background-color: $main-color;
+    border: 1px solid $border-color;
+    position: relative;
+
+    @for $day from 1  through $day-in-month {
+      &:nth-of-type(#{$day})::before {
+        content: "#{$day}";
+        @include centered;
+        font-size: 30px;
+      }
+    }
+  }
 }
