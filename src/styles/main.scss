@@ -1,85 +1,13 @@
-$blockSize: 100px;
-$calendarWidth: 100px * 7 + 10px;
-$startDay: 
-  "mon" 0,
-  "tue" #{$blockSize + 1px},
-  "wed" #{$blockSize * 2 + 2px},
-  "thu" #{$blockSize * 3 + 3px},
-  "fri" #{$blockSize * 4 + 4px},
-  "sat" #{$blockSize * 5 + 5px},
-  "sun" #{$blockSize * 6 + 6px};
-
-@mixin square($blockSize) {
-  width: $blockSize;
-  height: $blockSize;
-}
-
-body {
-  margin: 0;
+html {
   font-family: Arial, sans-serif;
   font-size: 30px;
 }
 
-.daysOfTheWeek {
-  display: flex;
-  gap: 1px;
-  margin-bottom: 1px;
-  width: 100px * 7 + 10px;
-  
-  @for $index from 1 through 7 {
-    &__days--#{$index} {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      padding: 10px;
-      width: 100px;
-      height: 50px;
-      border: 1px solid #000;
-      background-color: #ffb774;
-    }
-  }
+body {
+  margin: 0;
 }
 
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  width: $calendarWidth;
-
-  @for $index from 1 through 31 {
-    &__calendarDay--#{$index}::before {
-      content: "#{$index}";
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &__month--length-#{$index} &__calendarDay:nth-child(1n + #{$index + 1}) {
-      display: none;
-    }
-  }
-
-  @each $dayOfTheWeek, $dayOfTheWeekStart in $startDay {
-    &__start--day-#{$dayOfTheWeek} &__calendarDay:nth-child(1) {
-      margin-left: #{$dayOfTheWeekStart};
-    }
-  }
-
-  &__calendarDay {
-    @include square($blockSize);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #000;
-    background-color: #eee;
-  }
-
-  &__calendarDay:hover {
-    transform: translateY(-20px);
-    transition: 0.5s;
-    background: pink;
-    cursor: pointer;
-  }
-}
+@import "./blocks/daysOfTheWeek.scss";
+@import "./blocks/calendar.scss";
+@import "./utils/variables.scss";
+@import "./utils/mixins.scss";
