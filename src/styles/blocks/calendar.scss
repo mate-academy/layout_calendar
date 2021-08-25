@@ -1,0 +1,43 @@
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 7 * $cell-size + 6px;
+  gap: #{$cell-gap};
+
+  &__cell {
+    @include square($cell-size);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+    }
+  }
+  @for $index from 1 through $day-in-month {
+    &__cell--#{$index}::before {
+      content: "#{$index}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @each $day, $shift in $cell-shift {
+    &--start-day--#{$day} &__cell:first-child {
+      margin-left: #{$shift};
+    }
+  }
+
+  @for $index from 28 through $day-in-month {
+    &--month-#{$index}
+    &__cell:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
