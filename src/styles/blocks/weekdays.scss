@@ -1,0 +1,29 @@
+.weekdays {
+  display: flex;
+  justify-content: center;
+  gap: $cell-gap;
+
+  &__cell {
+    @include square($cell-size);
+    
+    box-sizing: border-box;
+    background: rgb(199, 169, 3);
+    cursor: pointer;
+    border: 2px solid #000;
+    border-radius: 8px;
+
+    @each $day, $day-number in $start-day {
+      &--day_#{$day-number + 1}::before {
+        content: "#{$day}";
+        @extend %pseudo-class;
+      }
+    }
+  }
+  
+  &__cell:hover {
+    background: rgb(255, 137, 1);
+    transition: 500ms;
+    transform: translateY(-20px);
+  }
+
+}
