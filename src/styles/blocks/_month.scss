@@ -1,0 +1,50 @@
+
+.month {
+  @include display-position(flex, flex-start, center);
+  flex-wrap: wrap;
+  width: $week-width;
+  padding: $padding-space;
+  gap: $gap-space;
+  background-color: #0f0;
+
+  &__day {
+    @include display-position(flex, center, center);
+    width: $square-size;
+    height: $square-size;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid #000;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: transform 0.5s;
+      cursor: pointer;
+    }
+
+  }
+
+  @each $name, $index in $start-days {
+
+    $start-day-position:
+      ($index - 1) * ($square-size + $gap-space);
+
+    &--start--#{$name} > &__day:first-child {
+      margin-left: $start-day-position;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--length--#{$day} > &__day:nth-child(n + #{$day +1}) {
+      visibility: hidden;
+    }
+  }
+
+}
