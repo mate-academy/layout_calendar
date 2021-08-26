@@ -3,28 +3,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  .calendar {
-    width: ($square-size + $margin) * 7;
+}
+
+.calendar {
+  width: ($square-size + $margin) * 7;
+  display: flex;
+  flex-wrap: wrap;
+  &__day::before {
+    box-sizing: border-box;
+    width: $square-size;
+    height: $square-size;
+    margin-left: $margin;
+    margin-top: $margin;
+    background-color: #eee;
     display: flex;
-    flex-wrap: wrap;
-    &__day::before {
-      box-sizing: border-box;
-      width: $square-size;
-      height: $square-size;
-      margin-left: $margin;
-      margin-top: $margin;
-      background-color: #eee;
-      display: flex;
-      padding: 10px;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid black;
-      transition: transform 0.5s 0.1s linear;
-    }
-    &__day:hover::before {
-      cursor: pointer;
-      transform: translateY(-20px);
-      background-color: rgb(243, 167, 192);
-    }
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    transition: transform 0.5s 0.1s linear;
+  }
+  &__day:hover::before {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: rgb(243, 167, 192);
   }
 }
