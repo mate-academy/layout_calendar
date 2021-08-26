@@ -36,13 +36,13 @@
     $start-day-position:
       ($index - 1) * ($square-size + $gap-space);
 
-    &__length--#{$name} &-day:first-child {
+    &--start--#{$name} > &__day:first-child {
       margin-left: $start-day-position;
     }
   }
 
   @for $day from 28 through 31 {
-    &__start--#{$day} &-day:nth-child(n + #{$day +1}) {
+    &--length--#{$day} > &__day:nth-child(n + #{$day +1}) {
       visibility: hidden;
     }
   }
