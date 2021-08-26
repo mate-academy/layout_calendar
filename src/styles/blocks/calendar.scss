@@ -1,0 +1,63 @@
+.calendar {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: $cell-day-space;
+  width: getCalendarWidth($cell-day-size, $cell-day-space, $calendar-padding);
+  padding: $calendar-padding;
+
+  &__day {
+    display: none;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    box-sizing: border-box;
+    @include square($cell-day-size);
+    border: 1px solid #000;
+    background-color: #eee;
+  }
+
+  &__day::before {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__day:hover {
+    background-color: #f6beca;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+
+  @for $day-count from 1 to 32 {
+    &__day:nth-child(#{$day-count})::before {
+      content: "#{$day-count}";
+    }
+  }
+
+  $weekdays:
+    0 "mon",
+    1 "tue",
+    2 "wed",
+    3 "thu",
+    4 "fri",
+    5 "sat",
+    6 "sun";
+
+  @each $weekday-count, $weekday-count-name in $weekdays {
+    &--start-day_#{$weekday-count-name} > &__day:first-child {
+      margin-left: ($cell-day-size + $cell-day-space) * $weekday-count;
+    }
+  }
+
+  @for $count-days from 28 to 32 {
+    &--month-lenght_#{$count-days} > &__day:nth-child(-n + #{$count-days}) {
+      display: block;
+    }
+  }
+}
