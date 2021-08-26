@@ -7,7 +7,7 @@
     width: ($square-size + $margin) * 7;
     display: flex;
     flex-wrap: wrap;
-    .day::before {
+    &__day::before {
       box-sizing: border-box;
       width: $square-size;
       height: $square-size;
@@ -19,7 +19,12 @@
       align-items: center;
       justify-content: center;
       border: 1px solid black;
-      transition: all 0.5s 0.1s linear;
+      transition: transform 0.5s 0.1s linear;
+    }
+    &__day:hover::before {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: rgb(243, 167, 192);
     }
   }
 }
