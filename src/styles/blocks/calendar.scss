@@ -1,44 +1,44 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  width: $square-size * 7 + $gap * 6;
+  gap: 1px;
+  width: $size * 7 + 6px;
 
-  @for $index from 28 through 31 {
-    &--month-length_#{$index} .calendar__day:nth-child(n + #{$index + 1}) {
+  @for $index from 1 through 31 {
+    &__day#{$index} {
+      @include square($size);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background-color: #eee;
+      border: 2px solid black;
+      border-radius: 7px;
+      color: black;
+      padding: 10px;
+    }
+
+    &__day#{$index}:hover {
+      transform: translateY(-20px);
+      background-color: rgb(235, 178, 55);
+      transition-duration: 0.5s;
+    }
+
+    &__day#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @each $day, $margin in $days {
+    &__start--day-#{$day} &__day1 {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &__month--length-#{$index} .length:nth-child(1n + #{$index + 1}) {
       display: none;
     }
-  }
-
-  @each $day, $nr in $week-days {
-    &--start-day_#{$day} .calendar__day:first-child {
-      margin-left: margin($square-size, $gap, $nr);
-    }
-  }
-
-  &__day {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #{$squ-color};
-    width: $square-size;
-    height: $square-size;
-    border: 1px solid #000;
-    transition-duration: 0.5s;
-
-    @for $index from 1 through 31 {
-      &--#{$index}::before {
-        position: absolute;
-        content: "#{$index}";
-      }
-    }
-  }
-  
-  &__day:hover {
-    background-color: #{$hover-squ};
-    transform: translateY(-20px);
-    
-    cursor: pointer;
   }
 }
