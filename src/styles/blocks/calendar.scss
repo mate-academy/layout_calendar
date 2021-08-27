@@ -1,0 +1,64 @@
+// position calendar in the center of the page
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// calendar parameters
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $container-width;
+  $start-day:
+    "mon" 0,
+    "tue" 101px,
+    "wed" 202px,
+    "thu" 303px,
+    "fri" 404px,
+    "sat" 505px,
+    "sun" 606px;
+
+  //Week first day shift
+  @each $name, $week-shift in $start-day {
+    &--start-day--#{$name} {
+      .calendar__date:first-child {
+        margin-left: $week-shift;
+      }
+    }
+  }
+  //Modificators for different month length
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+  //Day cell style
+  &__date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-backgr-color;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+  //Visual effect when hovering on day cell
+  &__date:hover {
+    @extend %hover-effect;
+  }
+  //For loop which generates numbers in date cells
+  @for $day from 1 through 31 {
+    &__date:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+}
