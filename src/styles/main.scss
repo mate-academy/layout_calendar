@@ -1,3 +1,51 @@
+@import "./variables";
+@import "./mixin";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $container-width;
+  @include centered;
+
+  @each $dayName, $week-shift in $dayNames {
+    &--start-day--#{$dayName} :first-child {
+      margin-left: $week-shift;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $main-color;
+    border: 1px solid $border-color;
+    position: relative;
+    transition: all ease 0.3s;
+
+    @for $day from 1  through $day-in-month {
+      &:nth-of-type(#{$day})::before {
+        content: "#{$day}";
+        @include centered;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      @include hovered-cell;
+    }
+  }
 }
