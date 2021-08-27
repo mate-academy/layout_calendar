@@ -1,0 +1,40 @@
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 710px;
+  gap: 1px;
+    
+  &__cell {
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #eee;
+        
+    &:hover {
+      transform: translateY(-20px);
+      transition: 0.5s;
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+    
+  @for $countDays from 1 through 31 {
+    &__cell--#{$countDays}::before {
+      content: "#{$countDays}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @each $day, $margin in $start-day {
+    &__start-days--#{$day} &__cell:first-child {
+      margin-left: $margin;
+    }
+  }
+}
