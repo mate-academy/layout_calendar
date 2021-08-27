@@ -8,8 +8,6 @@
   width: $calendar-width;
   padding: $calendarpadding;
 
-  background-color: aquamarine;
-
   @each $day, $number in $weekday {
     &--start-day--#{$day} > :first-child {
       margin-left: $number * ($daycellsize + $calendargap)
@@ -26,9 +24,7 @@
 
   &__day {
     position: relative;
-    box-sizing: border-box;
-    border: 1px solid #000;
-    background-color: #eee;
+
     width: $daycellsize;
     height: $daycellsize;
 
@@ -36,6 +32,10 @@
     justify-content: center;
     align-items: center;
 
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: #eee;
+    
     transition-duration: 500ms;
 
     @for $day-number from 1 through 31 {
