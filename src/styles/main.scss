@@ -1,5 +1,5 @@
 $square-size: 100px;
-$gap-size: 0.5px;
+$gap-size: 1px;
 
 * {
   box-sizing: border-box;
@@ -24,7 +24,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
-  max-width: calc(#{$square-size} * 7 + (#{$gap-size} * 7) + #{$padding} * 2);
+  max-width: #{$square-size} * 7 + (#{$gap-size} * 6) + #{$padding} * 2;
   padding: $padding;
 
   $days: ("mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6, "sun": 7);
@@ -32,10 +32,10 @@ body {
   @each $day, $num in $days {
     &--start-day-#{$day} {
       .calendar__day:nth-child(1) {
-        margin-left: calc((#{$num} - 1)
-        * #{$square-size}
-        + (#{$gap-size}
-        * (#{$num} - 1)));
+        margin-left: ($num - 1)
+          * $square-size
+          + ($gap-size
+          * ($num - 1));
       }
     }
   }
