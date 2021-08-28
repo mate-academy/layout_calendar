@@ -1,0 +1,57 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: $calendarWidth;
+  gap: $sellGap;
+  margin: 0 auto;
+  padding: 10px;
+
+  $daysList:
+    "mon" 0,
+    "tue" $sellSize + $sellGap,
+    "wed" 2 * ($sellSize + $sellGap),
+    "thu" 3 * ($sellSize + $sellGap),
+    "fri" 4 * ($sellSize + $sellGap),
+    "sat" 5 * ($sellSize + $sellGap),
+    "sun" 6 * ($sellSize + $sellGap);
+
+  @each $startDay, $indent in $daysList {
+    &--start-day--#{$startDay} :first-child {
+      margin-left: #{$indent};
+    }
+  }
+
+  @for $hiddenDays from $minMonthLenth through $maxMonthLenth {
+    &--month-length--#{$hiddenDays} :not(:nth-child(-n + #{$hiddenDays})) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $sellSize;
+    height: $sellSize;
+    
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    border: 1px solid black;
+    background-color: #eee;
+
+    @for $dayNumber from 1 through $maxMonthLenth {
+      &--number--#{$dayNumber}::before {
+        content: "#{$dayNumber}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+      cursor: pointer;
+    }
+  }
+}
