@@ -1,3 +1,80 @@
-body {
+$square-size: 100px;
+$paddings: 10px;
+$square-gap: 1px;
+$square-color: #eee;
+$start-day:
+  "mon" 0,
+  "tue" 1 * ($square-size + $square-gap),
+  "wed" 2 * ($square-size + $square-gap),
+  "thu" 3 * ($square-size + $square-gap),
+  "fri" 4 * ($square-size + $square-gap),
+  "sat" 5 * ($square-size + $square-gap),
+  "sun" 6 * ($square-size + $square-gap);
+$countm:
+  28 3,
+  29 2,
+  30 1,
+  31 0;
+
+.page {
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-size: 30px;
+}
+
+.page__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $paddings;
+  width: $square-size * 7 + ($square-gap * 6);
+  gap: $square-gap;
+
+  &__day {
+    position: relative;
+    width: $square-size;
+    height: $square-size;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: #eee;
+
+    @for $days from 1 through 31 {
+      &:nth-child(#{$days})::before {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 98px;
+        position: absolute;
+        content: "#{$days}";
+      }
+    }
+
+    @each $name, $day in $start-day {
+      &--week_#{$name} {
+        margin-left: #{$day};
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20%);
+      background-color: pink;
+      transition: background-color 0.5s;
+      cursor: pointer;
+    }
+  }
+
+  @each $name, $count in $countm {
+    &--length_#{$name} :nth-last-child(-n + #{$count}) {
+      display: none;
+    }
+  }
+
 }
