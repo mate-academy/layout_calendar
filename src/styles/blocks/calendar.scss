@@ -1,26 +1,26 @@
 .calendar {
   display: flex;
+  width: $calendar-width;
   flex-wrap: wrap;
   gap: $cell-gap;
-  width: $calendar-width;
   margin: auto;
   padding: 10px;
 
   &__cell {
-    @include square($cell-size);
-    border: 1px solid black;
-    box-sizing: border-box;
-    background-color: $cell-color;
     display: flex;
+    @include square($cell-size);
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    background-color: $cell-color;
+    border: 1px solid black;
   }
 
   &__cell:hover {
     background-color: $hover-color;
+    cursor: pointer;
     transform: translateY(-20px);
     transition: 0.5s;
-    cursor: pointer;
   }
 
   @each $name, $day in $days-of-week {
