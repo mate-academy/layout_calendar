@@ -1,0 +1,28 @@
+@each $month-length in 28, 29, 30, 31 {
+  .calendar-month-length--#{$month-length} {
+
+    @for $index from 1 through $month-length {
+      .calendar__day:nth-child(#{$index})::before {
+        content: "#{$index}";
+        position: absolute;
+      }
+      .calendar__day:nth-child(#{$index}) {
+        background-color: #eee;
+        border: 1px solid #000;
+      }
+      .calendar__day:nth-child(#{$index}):hover {
+        cursor: pointer;
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
+  }
+}
+
+@each $first-day, $start-margin in $days {
+  .calendar-start-day--#{$first-day} {
+    .calendar__day:first-child {
+      margin-left: $start-margin;
+    }
+  }
+}
