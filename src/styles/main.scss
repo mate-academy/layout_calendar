@@ -1,3 +1,74 @@
+@import ".//utils/_variables.scss";
+@import ".//utils/_mixins.scss";
+@import ".//utils/_functions.scss";
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.month {
+  // не працює функція - довелося рахувати. не розумію чому.
+  // max-width: getWidth($col-count, $box-size, $padding, $gap);
+  max-width: 726px;
+  margin: auto;
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    @include square($box-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $padding;
+    background-color: #eee;
+    border: 1px solid #000;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::after {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+}
+
+$days-of-week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $nr in $days-of-week {
+  .month--start-day--#{$day} {
+    .month__day:first-child {
+      margin-left: ($box-size + $gap) * $nr;
+    }
+  }
+}
+@for $day from 28 through 31 {
+  .month--length--#{$day} :nth-child(n + #{$day + 1}) {
+    display: none;
+  }
 }
