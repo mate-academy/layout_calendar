@@ -1,0 +1,52 @@
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendarWidth;
+  gap: 1px;
+
+  &__dayNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    @include square($size);
+    padding: 10px;
+
+    @for $index from 1 through $numbersOfDays {
+      &--#{$index}::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &__month--length-#{$index} &__dayNumber:nth-child(1n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $shift in $starsDayShift {
+    &__start--day-#{$day} &__dayNumber:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  &__dayNumber:hover {
+    transform: translateY(-20px);
+    transition: 0.5s;
+    background: pink;
+    cursor: pointer;
+  }
+}
