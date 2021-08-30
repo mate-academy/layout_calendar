@@ -24,12 +24,6 @@
       }
     }
 
-    @each $name, $day in $start-day {
-      &--week_#{$name} {
-        margin-left: #{$day};
-      }
-    }
-
     &:hover {
       transform: translateY(-20%);
       background-color: pink;
@@ -41,6 +35,12 @@
   @each $name, $count in $countm {
     &--length_#{$name} :nth-last-child(-n + #{$count}) {
       display: none;
+    }
+  }
+
+  @each $name, $day in $start-day {
+    &--week_#{$name} :first-child {
+      margin-left: #{$day};
     }
   }
 }
