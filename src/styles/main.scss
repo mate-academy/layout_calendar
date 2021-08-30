@@ -1,20 +1,5 @@
-$day-padding: 10px;
-$day-border: 1px;
-$day-gap: 1px;
-$day-size: 100px;
-$start-week:  
-  "mon" 0,
-  "tue" ($day-size + $day_gap),
-  "wed" (2 *($day-size + $day_gap)),
-  "thu" (3 *($day-size + $day_gap)),
-  "fri" (4 *($day-size + $day_gap)),
-  "sat" (5 *($day-size + $day_gap)),
-  "sun" (6 *($day-size + $day_gap));
-
-@mixin square($size) {
-  width: $size;
-  height: $size;
-}
+@import './mixins.scss';
+@import './vars.scss';
 
 body {
   display: flex;
@@ -29,11 +14,11 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  width: 7 * $day-size + 6 * $day-gap;
+  width: $days-in-week * $day-size + ($days-in-week - 1) * $day-gap;
 
   @each $day, $shift in $start-week {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: $shift;
+      margin-left: $shift * ($day-size + $day_gap);
     }
   }
 
@@ -58,8 +43,6 @@ body {
   @for $index from 1 through 31 {
     &__day--#{$index}::before {
       content: "#{$index}";
-      font-family: Arial, sans-serif;
-      font-size: 30px;
     }
   }
 
