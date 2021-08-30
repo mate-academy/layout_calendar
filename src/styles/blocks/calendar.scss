@@ -1,0 +1,47 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $container-size;
+  gap: 1px;
+  padding: 20px 0;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid;
+    transition: 0.5s;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: #fcc;
+      transform: translate(0, -20px);
+    }
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: "#{$day}";
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month_length_#{$day} .calendar__day:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $column in $start-day {
+  .calendar__day--start_day--#{$day} > :first-child {
+    margin-left: $column * ($cell-size + $cell-padding * 2 + $gap + 2);
+  }
+}
