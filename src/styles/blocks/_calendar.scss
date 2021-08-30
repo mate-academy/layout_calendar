@@ -14,36 +14,38 @@ body {
   width: $calendarWidth;
   gap: 1px;
 
-  &__dayNumber {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
-    box-sizing: border-box;
-    border: 1px solid #000;
-    @include square($size);
-    padding: 10px;
-
-    @for $index from 1 through $numbersOfDays {
-      &--#{$index}::before {
-        content: "#{$index}";
+  &__day {
+    &-number {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #eee;
+      box-sizing: border-box;
+      border: 1px solid #000;
+      @include square($size);
+      padding: 10px;
+  
+      @for $index from 1 through $numbersOfDays {
+        &--#{$index}::before {
+          content: "#{$index}";
+        }
       }
     }
   }
 
   @for $index from 28 through 31 {
-    &__month--length-#{$index} &__dayNumber:nth-child(1n + #{$index + 1}) {
+    &--month-length-#{$index} &__day-number:nth-child(1n + #{$index + 1}) {
       display: none;
     }
   }
 
   @each $day, $shift in $starsDayShift {
-    &__start--day-#{$day} &__dayNumber:first-child {
+    &--start-day-#{$day} &__day-number:first-child {
       margin-left: $shift;
     }
   }
 
-  &__dayNumber:hover {
+  &__day-number:hover {
     transform: translateY(-20px);
     transition: 0.5s;
     background: pink;
