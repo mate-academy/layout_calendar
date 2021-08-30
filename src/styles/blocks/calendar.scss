@@ -1,9 +1,24 @@
 .calendar {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: $contentWidth;
 
   &__title {
     margin: 20px 0;
+  }
+
+  @each $day, $gap in $week-day {
+    &--first-day_#{$day} :nth-child(2) > :first-child {
+      margin-left: $gap;
+    }
+  }
+
+  @for $length from 28 through 31 {
+    $gap: 31 - $length;
+    &--month-length_#{$length} :nth-child(2) > :nth-last-child(-n + #{$gap}) {
+      visibility: hidden;
+    }
   }
 
   &__days {
@@ -12,16 +27,9 @@
     gap: $cellGap;
     padding: $contentPaddings;
 
-    @each $day, $gap in $week-day {
-      &--first-day_#{$day} :first-child {
-        margin-left: $gap;
-      }
-    }
-
-    @for $length from 28 through 31 {
-      $gap: 31 - $length;
-      &--month-length_#{$length} :nth-last-child(-n + #{$gap}) {
-        visibility: hidden;
+    @for $index from 1 through 31 {
+      & :nth-child(#{$index})::before {
+        content: "#{$index}";
       }
     }
   }
@@ -43,12 +51,6 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-    }
-
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-      }
     }
   }
 }
