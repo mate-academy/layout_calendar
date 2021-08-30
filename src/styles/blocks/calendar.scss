@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $paddings;
+  width: $square-size * 7 + ($square-gap * 6);
+  gap: $square-gap;
+
+  &__day {
+    position: relative;
+    width: $square-size;
+    height: $square-size;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: #eee;
+
+    @for $days from 1 through 31 {
+      &:nth-child(#{$days})::before {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        line-height: 98px;
+        position: absolute;
+        content: "#{$days}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20%);
+      background-color: pink;
+      transition: background-color 0.5s;
+      cursor: pointer;
+    }
+  }
+
+  @each $name, $count in $countm {
+    &--length_#{$name} :nth-last-child(-n + #{$count}) {
+      display: none;
+    }
+  }
+
+  @each $name, $day in $start-day {
+    &--week_#{$name} :first-child {
+      margin-left: #{$day};
+    }
+  }
+}
