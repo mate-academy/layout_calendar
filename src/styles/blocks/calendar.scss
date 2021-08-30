@@ -24,19 +24,26 @@ html {
     }
   }
 
-  @each $monthLength in $monthLengthValuesSet {
-    &--month-length--#{$monthLength} > &__day {
-      display: flex;
-  
-      @for $date from 1 through $monthLength {
-        &:nth-child(#{$date})::before {
-          content: "#{$date}";
-          @extend %day-square;
-        }
-      }
+  &__day {
+    @extend %day-square;
+    display: flex;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transition-delay: 0.05s;
+  }
+
+  @for $date from 1 through 31 {
+    &__day:nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
+  }
+
+  @for $dayLength from 28 through 30 {
+    &--month-length--#{$dayLength} 
+    > .calendar__day:nth-child(n + #{$dayLength + 1}) {
+      display: none;
     }
   }
 }
-
-// How and were to use :hover pseudoclass with a pink background color? 
-// It's doesn't work in this code for unestablished reasons...
