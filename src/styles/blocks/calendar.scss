@@ -12,6 +12,12 @@
     gap: $cellGap;
     padding: $contentPaddings;
 
+    @each $day, $gap in $week-day {
+      &--first-day_#{$day} :first-child {
+        margin-left: $gap;
+      }
+    }
+
     @for $length from 28 through 31 {
       $gap: 31 - $length;
       &--month-length_#{$length} :nth-last-child(-n + #{$gap}) {
@@ -31,18 +37,12 @@
 
     background-color: #eee;
     border: 1px solid #000;
+    transition: all 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition: background-color 0.5s, transform 0.5s;
-    }
-
-    @each $day, $gap in $week-day {
-      &--first-day_#{$day} {
-        margin-left: $gap;
-      }
     }
 
     @for $index from 1 through 31 {
