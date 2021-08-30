@@ -5,7 +5,7 @@
   width: $size * 7 + 6px;
 
   @for $index from 1 through 31 {
-    &__day#{$index} {
+    &__day--#{$index} {
       @include square($size);
       box-sizing: border-box;
       display: flex;
@@ -19,19 +19,19 @@
       padding: 10px;
     }
 
-    &__day#{$index}:hover {
+    &__day--#{$index}:hover {
       transform: translateY(-20px);
       background-color: rgb(235, 178, 55);
       transition-duration: 0.5s;
     }
 
-    &__day#{$index}::before {
+    &__day--#{$index}::before {
       content: "#{$index}";
     }
   }
 
   @each $day, $margin in $days {
-    &__start--day-#{$day} &__day1 {
+    &__start--day-#{$day} &__day--1 {
       margin-left: $margin;
     }
   }
