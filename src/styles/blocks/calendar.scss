@@ -1,7 +1,7 @@
 $cell-size: 100px;
 $cell-padding: 10px;
 $gap: 1px;
-$container-size: ($cell-size + 2) * 7 + $cell-padding * 14 + $gap * 7;
+$container-size: ($cell-size) * 9 + $gap * 6;
 $start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 .calendar {
@@ -9,7 +9,7 @@ $start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
   flex-wrap: wrap;
   width: $container-size;
   gap: 1px;
-  padding: 20px;
+  padding: 20px 0;
   margin: 0 auto;
 
   &__day {
@@ -39,8 +39,14 @@ $start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
   }
 }
 
+@for $day from 28 through 31 {
+  .calendar--month_length_#{$day} .calendar__day:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
+
 @each $day, $column in $start-day {
-  .calendar__day--start_day_#{$day} {
+  .calendar__day--start_day--#{$day} > :first-child {
     margin-left: $column * ($cell-size + $cell-padding * 2 + $gap + 2);
   }
 }
