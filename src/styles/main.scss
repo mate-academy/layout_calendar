@@ -46,13 +46,13 @@ body {
     "sun" 6;
 
   @each $name, $value in $start-day {
-    &--start-day_#{$name} {
+    &--start-day_#{$name} :first-child {
       margin-left: ($size + $gap) * $value;
     }
   }
 
   @for $day from 28 through 31 {
-    &--month-length_#{$day}:nth-child(n + #{$day}) {
+    &--month-length_#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
