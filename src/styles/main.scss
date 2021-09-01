@@ -9,7 +9,7 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
   align-items: center;
 }
 
-%square{
+%square {
   width: $day-size;
   height: $day-size;
 }
@@ -48,14 +48,24 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
     border: $day-margin solid black;
     box-sizing: border-box;
 
+    @each $num, $day in $days {
+      &--start-day-#{$day} {
+        .calendar__day:first-of-type {
+          margin-left: ($day-size + $day-margin) * $num - $day-size - $day-margin;
+        }
+      }
+    }
+      
     @for $num from 1 through $length {
       &:nth-child(#{$num})::before {
         content: "#{$num}";
       }
     }
 
-    &:nth-of-type(n + #{$length + 1}) {
-      display: none;
+    @for $num from 28 through 31 {
+      .calendar--month-length--#{$num} &:nth-of-type(n + #{$num + 1}) {
+        display: none;
+      }
     }
 
     &:hover {
@@ -65,4 +75,5 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
       transition: all 0.5s;
     }
   }
+
 }
