@@ -7,31 +7,37 @@ html {
 }
 
 .calendar {
-  $rootAmperdant: &;
-
   margin: 0 auto;
   display: flex;
-  gap: 1px;
-  width: 706px;
-  overflow: hidden;
+  gap: $gap;
+  width: $cell-size * 7 + $gap * 6;
   flex-wrap: wrap;
 
   @each $weekDay, $marginValue in $weekDays {
     &--start-day--#{$weekDay} {
-      #{$rootAmperdant}__day:first-child {
+      .calendar__day:first-child {
         margin-left: $marginValue;
       }
     }
   }
 
   &__day {
-    @extend %day-square;
+    @include square ($cell-size);
     display: flex;
+
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
   }
 
   &__day:hover {
     background-color: pink;
-    transition-delay: 0.05s;
+    transition-duration: 0.5s;
+    transform: translateY(-20px);
   }
 
   @for $date from 1 through 31 {
