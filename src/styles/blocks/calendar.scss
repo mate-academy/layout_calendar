@@ -5,18 +5,9 @@
 
   padding: $calendar-paddings;
 
-  @include calendar-width($cell-width, $calendar-paddings, $calendar-gap);
+  width: calendar-width($cell-width, $calendar-paddings, $calendar-gap);
 
   //modificator for start day
-  $start-days:
-    "mon" 0,
-    "tue" $cell-width + $calendar-gap,
-    "wed" 2*($cell-width + $calendar-gap),
-    "thu" 3*($cell-width + $calendar-gap),
-    "fri" 4*($cell-width + $calendar-gap),
-    "sat" 5*($cell-width + $calendar-gap),
-    "sun" 6*($cell-width + $calendar-gap);
-
   @each $name,$margin in $start-days {
     &--start-day--#{$name} {
       .calendar__cell--day--1 {
@@ -24,6 +15,7 @@
       }
     }
   }
+
   //modificator for month length
   @for $index from 28 to 31 {
     &--month-length--#{$index} {
@@ -49,10 +41,11 @@
       }
     }
 
+    transition: background-color 0.5s, transform 0.5s;
+
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: background-color 0.5s, transform 0.5s;
     }
   }
 }
