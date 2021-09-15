@@ -1,8 +1,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  flex-shrink: 0;
   gap: 1px;
-  width: ($size-day * $numbers-of-columns) + (10px * 2) + (7 * $border-of-day);
+  width: $all-size-of-days + $all-size-of-bd + (10px * 2);
   padding: 10px;
 
   @for $day-of-month from 28 through 31 {
@@ -25,13 +26,12 @@
 
   &__day {
     @extend %flex-center;
-    flex-basis: $size-day;
-    height: $size-day;
+    @include square($size-day);
 
     background-color: #eee;
     border: 1px solid #000;
     cursor: pointer;
-    transition: transform 0.5s;
+    transition: transform $transition-day, background-color $transition-day;
 
     &:hover {
       transform: translateY(-20px);
