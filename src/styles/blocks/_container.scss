@@ -1,12 +1,6 @@
-%flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @mixin square($size, $color) {
-  height: $size-suqare;
-  width: $size-suqare;
+  height: $size-square;
+  width: $size-square;
   
   @extend %flex-center;
 
@@ -17,27 +11,25 @@
 .container {
   @extend %flex-center;
   font-size: 30px;
+  width: 726px;
+  margin: 0 auto;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
-  row-gap: 1px;
-  column-gap: 1px;
-  max-width: 726px;
+  gap: 1px;
   padding: 10px;
 
   &__day {
     transition-duration: 0.5s;
 
-    @include square($size-suqare, $color-day);
+    @include square($size-square, $color-day);
 
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
 
     @for $days from 1 through $length {
@@ -49,7 +41,7 @@
 
   @each $num, $day in $days {
     &--start-day--#{$day} > :first-child {
-      margin-left: #{($num - 1) * 101}px;
+      margin-left: #{($num - 1) * $margin-change}px;
     }
   }
 
