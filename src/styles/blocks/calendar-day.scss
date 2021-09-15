@@ -1,0 +1,33 @@
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1px 1px 0;
+  height: #{$square};
+  width: #{$square};
+  background-color: #eee;
+  border: 1px solid black;
+  cursor: pointer;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+
+  @for $number from 1 through 31 {
+    &--#{$number}::before {
+      content: "#{$number}";
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+    }
+  }
+}
+
+@for $days from 28 through 31 {
+  .calendar__month-length--#{$days} {
+    .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
