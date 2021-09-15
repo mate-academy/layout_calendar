@@ -31,7 +31,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - (**Optional**) Move it up by `20px` (use `transform`)
   - (**Optional**) both of these properties are to be animated with the duration of half a second.
 
---> [CHECKLIST](https://github.com/mate-academy/layout_snake/blob/master/checklist.md)
+--> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
 
 ## Here is a preview:
 ![reference image](reference.png).
