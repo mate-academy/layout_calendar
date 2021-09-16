@@ -1,5 +1,7 @@
 $day-size: 100px;
 $day-margin: 1px;
+$day-full-size: $day-size + $day-margin;
+$calendar-padding: 10px;
 $length: 31;
 $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
 
@@ -18,7 +20,7 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
   @extend %flex-center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-  background-color: palegreen;
+  border-color: palegreen;
 
   &__element {
     margin: auto;
@@ -29,13 +31,13 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
   @extend %flex-center;
   justify-content: start;
   flex-wrap: wrap;
-  width: ($day-size + $day-margin) * 7 + 2 * $day-margin;
-  padding: $day-margin;
+  width: ($day-full-size) * 7 + 2 * $calendar-padding;
+  padding: $calendar-padding;
 
   @each $num, $day in $days {
     &--start-day--#{$day} {
       .calendar__day:first-of-type {
-        margin-left: ($day-size+$day-margin)* $num - ($day-size+ $day-margin);
+        margin-left: ($day-full-size) * $num - ($day-full-size);
       }
     }
   }
@@ -43,10 +45,11 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
   &__day {
     @extend %flex-center;
     @extend %square;
-    margin: 0 $day-margin $day-margin 0;
-    background-color: #eee;
-    border: $day-margin solid black;
     box-sizing: border-box;
+    margin: 0 $day-margin $day-margin 0;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: transform 0.5s, color 0.5s;
 
     @for $num from 1 through $length {
       &:nth-child(#{$num})::before {
@@ -54,7 +57,7 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
       }
     }
 
-    @for $num from 28 through 31 {
+    @for $num from 28 through $length {
       .calendar--month-length--#{$num} &:nth-of-type(n + #{$num + 1}) {
         display: none;
       }
@@ -64,7 +67,6 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
       background-color: pink;
       cursor: pointer;
       transform: translateY(-20px);
-      transition: all 0.5s;
     }
   }
 }
