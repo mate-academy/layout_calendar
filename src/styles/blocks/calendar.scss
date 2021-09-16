@@ -1,20 +1,17 @@
 .calendar {
-  width: 799px;
-  min-height: 410px;
+  width: #{$calendar-width};
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
   padding: 10px;
-  box-sizing: border-box;
   margin: auto;
 
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $one-day-width;
-    height: 100px;
-    background-color: #eee;
+    @include square($one-day-width);
+    background-color: #{$grey-color};
     border: 1px solid black;
     box-sizing: border-box;
     margin: $one-day-margin;
@@ -27,10 +24,8 @@
     }
   
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
     
