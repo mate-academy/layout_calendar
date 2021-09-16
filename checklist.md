@@ -35,8 +35,7 @@ them and give them descriptive names. But don't overuse them, don't create
 variable for the value that's used just once.
 6. [SASS] - Don't use SASS loops for styles that stay the same for all elements
 of the group, e.g. `display` or `position`.
-7. [STYLES] - Make sure to list all styles that you apply transition to. If
-there are more than 3 - use `all`.
+7. [STYLES] - Make sure to list all styles that you apply transition to.
 8. [STYLES] - Make sure to add transition style under general selector, not the
 one with `:hover` - this way transition will work smoothly both ways.
 
@@ -44,10 +43,11 @@ GOOD example:
 ```scss
 .box {
   color: gray;
-  transition: color 0.5s;
+  transition: color 0.5s, transform 0.5s;
 
   &:hover {
     color: aquamarine;
+    transform: scale(1.2);
   }
 }
 ```
@@ -59,6 +59,7 @@ BAD example:
 
   &:hover {
     color: aquamarine;
+    transform: scale(1.2);
     transition: 0.5s;
   }
 }
