@@ -1,0 +1,43 @@
+@import "../utils/_variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: calendarWidth($ceil-size, $ceil-border, $calendar-padding);
+  
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($ceil-size);
+    margin-right: 1px;
+    background-color: $ceil-color;
+    border: 1px solid black;
+    transition: background-color .5s, transform .5s;
+
+    @for $var from 1 through 31 {
+      &:nth-child(n + #{$var}):before {
+        content: "#{$var}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $ceil-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $var from 28 through 31 {
+    &--month-length-#{$var} > :nth-child(n+#{$var+1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $margin in $day-list {
+    &--start-day-#{$day} > :first-child {
+      margin-left: $margin;
+    }
+  }
+}
