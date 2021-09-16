@@ -6,11 +6,12 @@
   gap: 1px;
 
   padding: $calendar-padding;
-  max-width: $mxwd;
+  max-width: mxwd($day-size, $calendar-padding, $day-border);
 
   &__day {
     height: $day-size;
     width: $day-size;
+    cursor: pointer;
 
     @extend %flex-center;
     background-color: $day-bg-color;
@@ -18,13 +19,12 @@
     transition: background-color 0.5s, transform 0.5s;
 
     @for $DayIndex from 1 through 31 {
-      &:nth-child(1n + #{$DayIndex})::before {
+      &:nth-child(n + #{$DayIndex})::before {
         content: "#{$DayIndex}";
       }
     }
 
     &:hover {
-      cursor: pointer;
       background-color: $hover-color;
       transform: translateY(-20px);
     }
