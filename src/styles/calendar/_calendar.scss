@@ -1,0 +1,17 @@
+.calendar {
+  padding: $base-padding;
+  width: total-width($cell-side, $cell-gap, $base-padding);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  &__cell {
+    position: relative;
+    @extend %flex-center;
+    @include cell-size($cell-side);
+    @include content;
+    @include extratask;
+  }
+  @include start-day-mods;
+  @include month-length-mods;
+}

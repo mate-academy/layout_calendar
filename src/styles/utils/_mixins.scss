@@ -1,0 +1,47 @@
+@mixin font($fontFamily, $fontSize) {
+  font-family: $fontFamily, Helvetica, sans-serif;
+  font-size: $fontSize + px;
+}
+
+@mixin cell-size($side) {
+  width: $side;
+  height: $side;
+  background-color: $cell-bg;
+  border: 1px solid #000;
+}
+
+@mixin content {
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      position: absolute;
+    }
+  }
+}
+
+@mixin start-day-mods {
+  @each $day, $value in $start-days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: $value;
+    }
+  }
+}
+
+@mixin month-length-mods {
+  @for $daynumber from 28 to 31 {
+    &--month-length--#{$daynumber} {
+      .calendar__cell:nth-child(n + #{$daynumber + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@mixin extratask {
+  transition: transform, background-color, 0.5s linear;
+  cursor: pointer;
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
