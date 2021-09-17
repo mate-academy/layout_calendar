@@ -4,17 +4,18 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  max-width: calendarWidth($ceil-size, $ceil-border, $calendar-padding);
-  
+  gap: 1px;
+  max-width: calculatingCalendarWidth($ceil-size, $ceil-border, $calendar-padding);
+
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
     @include square($ceil-size);
-    margin-right: 1px;
+    gap: 1px;
     background-color: $ceil-color;
     border: 1px solid black;
-    transition: background-color .5s, transform .5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $var from 1 through 31 {
       &:nth-child(n + #{$var}):before {
