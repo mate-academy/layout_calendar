@@ -1,0 +1,48 @@
+.calendar {
+  @extend %flex-container;
+  max-width: getWidth($cell-size, $numbers-of-cells, $indent, $cell-gap);
+  padding: 10px;
+  gap: 1px;
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} > &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  $list:
+    "mon" 0,
+    "tue" getShift($cell-size,$cell-gap),
+    "wed" 2 * getShift($cell-size,$cell-gap ),
+    "thu" 3 * getShift($cell-size,$cell-gap ),
+    "fri" 4 * getShift($cell-size,$cell-gap ),
+    "sat" 5 * getShift($cell-size,$cell-gap ),
+    "sun" 6 * getShift($cell-size,$cell-gap );
+
+  @each $name, $shift in $list {
+    &--start-day--#{$name} > :first-child {
+      margin-left: #{$shift};
+    }
+  }
+
+  &__day {
+    @include square($cell-size);
+    @extend %flex-center;
+    border: 1px solid $border-color;
+    background-color: $cell-color;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-color-hover;
+      transform: translate(0, -20%);
+      transition: 0.5s;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
