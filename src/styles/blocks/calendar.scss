@@ -1,47 +1,45 @@
-.calendar__start {
-  display: flex;
-  width: $square * 7 + 10px;
-  flex-wrap: wrap;
-  margin: 200px auto;
-}
+.calendar {
+  &__start {
+    display: flex;
+    width: $square * 7 + 10px;
+    flex-wrap: wrap;
+    margin: 200px auto;
+  }
 
-@each $day, $margin in $margin-days {
-  .calendar__start-day--#{$day} {
-    .calendar__day--1 {
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1px 1px 0;
+    height: #{$square};
+    width: #{$square};
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: background-color $transition-time, transform $transition-time;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $number from 1 through 31 {
+      &--#{$number}::before {
+        content: "#{$number}";
+      }
+    }
+  }
+
+  @each $day, $margin in $margin-days {
+    &__start-day--#{$day} &__day:first-child {
       margin-left: #{$margin};
     }
   }
-}
 
-.calendar__day {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 1px 1px 0;
-  height: #{$square};
-  width: #{$square};
-  background-color: #eee;
-  border: 1px solid black;
-  cursor: pointer;
-  transition: background-color $transition-time, transform $transition-time;
-  font-size: 30px;
-  font-family: Arial, sans-serif;
-
-  &:hover {
-    background-color: pink;
-    transform: translateY(-20px);
-  }
-
-  @for $number from 1 through 31 {
-    &--#{$number}::before {
-      content: "#{$number}";
-    }
-  }
-}
-
-@for $days from 28 through 31 {
-  .calendar__month-length--#{$days} {
-    .calendar__day:nth-child(n + #{$days + 1}) {
+  @for $days from 28 through 31 {
+    &__month-length--#{$days} &__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
