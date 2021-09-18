@@ -1,0 +1,40 @@
+.calendar {
+  width: $cal-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    @include square($block-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+    @for $nod from 1 through $month {
+      &:nth-child(#{$nod})::before {
+        content: "#{$nod}";
+      }
+    }
+  }
+
+  @for $nod from 28 through $month {
+    &--month-length--#{$nod} :nth-child(n + #{$nod + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $num in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $num * ($block-size + $gap);
+    }
+  }
+}
