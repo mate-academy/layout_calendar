@@ -1,7 +1,8 @@
 $day-size: 100px;
 $day-margin: 1px;
-$day-full-size: $day-size + $day-margin;
 $calendar-padding: 10px;
+$calendar-width: $day-size * 7 + $calendar-padding * 2 + 6px;
+$day-full-size: $day-size + $day-margin;
 $length: 31;
 $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
 
@@ -31,14 +32,12 @@ $days: 1 "mon", 2 "tue", 3 "wed", 4 "thu" 5 "fri" 6 "sat", 7 "sun";
   @extend %flex-center;
   justify-content: start;
   flex-wrap: wrap;
-  width: ($day-full-size) * 7 + 2 * $calendar-padding;
+  width: $calendar-width;
   padding: $calendar-padding;
 
   @each $num, $day in $days {
-    &--start-day--#{$day} {
-      .calendar__day:first-of-type {
-        margin-left: ($day-full-size) * $num - ($day-full-size);
-      }
+    &--start-day--#{$day} :first-child {
+      margin-left: ($day-full-size) * $num - ($day-full-size);
     }
   }
 
