@@ -1,3 +1,78 @@
-body {
+$squareSize: 100px;
+$squareSizeWithMargin: $squareSize + 1px;
+$calendarWidth: $squareSizeWithMargin * 7;
+$maxDaysOfMonth: 31;
+$daysInMonth: 28, 29, 30, 31;
+$dayOfWeek: 
+  ("mon": 0,
+  "tue": $squareSizeWithMargin,
+  "wed": $squareSizeWithMargin * 2,
+  "thu": $squareSizeWithMargin * 3,
+  "fri": $squareSizeWithMargin * 4,
+  "sat": $squareSizeWithMargin * 5,
+  "sun": $squareSizeWithMargin * 6);
+
+* {
   margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.mounth {
+  text-align: center;
+  margin: 30px;
+}
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  width: $calendarWidth;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  @each $day, $score in $dayOfWeek {
+    &__startDay--#{$day} .calendar__day:first-child {
+      margin-left: $score;
+    }
+  }
+
+  &__day {
+    width: $squareSize;
+    height: $squareSize;
+    margin-right: 1px;
+    margin-bottom: 1px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      position: relative;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $index from 1 through $maxDaysOfMonth {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-size: 30px;
+      line-height: $squareSize;
+      text-align: center;
+    }
+  }
+
+  @each $lastDay in $daysInMonth {
+    &__monthLength--#{$lastDay} .calendar__day:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
+  }
 }
