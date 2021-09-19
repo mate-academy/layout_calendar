@@ -1,3 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calendar__item {
+  background-color: #eee;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+}
+
+@for $index from 1 through 31 {
+  &__item:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
 }
