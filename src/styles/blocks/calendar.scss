@@ -7,7 +7,7 @@
   width: $calendar-width;
 
   @each $start-day, $margin-left in $days-of-week {
-    &--day-of-week_#{$start-day} > &__day--number_1 {
+    &--day-of-week_#{$start-day} > &__day:first-child {
       margin-left: $margin-left;
     }
   }
@@ -27,6 +27,12 @@
       transform $smooth-transition linear;
     background-color: #eee;
 
+    @for $day-number from 1 through 31 {
+      &:nth-child(n+#{$day-number})::before {
+        content: "#{$day-number}";
+      }
+    }
+
     @for $calendar-length from 28 through 31 {
       .calendar--month-length_#{$calendar-length}
       > &:nth-child(n + #{$calendar-length + 1}) {
@@ -37,12 +43,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-    }
-
-    @for $day-number from 1 through 31 {
-      &--number_#{$day-number}::before {
-        content: "#{$day-number}";
-      }
     }
   }
 }
