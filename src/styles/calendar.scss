@@ -1,23 +1,30 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
-  width: 726px;
+  gap: $gap-size;
+  padding: $calendar-padding;
+  width: $calendar-width;
 
-  $days:
-    "mon" 0,
-    "tue" 101,
-    "wed" 202,
-    "thu" 303;
-  // "fri" 404,
-  // "sat" 505,
-  // "sun" 606;
+  &--position {
+    margin: 60px auto;
+  }
+
+  @each $nameDay, $offset in $days {
+    &--start-day_#{$nameDay} > :first-child {
+      margin-left: #{$offset * ($cell-size + $gap-size)};
+    }
+  }
+
+  @for $excludeDay from 28 to 31 {
+     &--month-length_#{$excludeDay} > :nth-child(n + #{$excludeDay + 1}) {
+    display: none;
+     }
+  }
 
   &__day {
+    width: $cell-size;
+    height: $cell-size;
     background-color: #eee;
-    width: 100px;
-    height: 100px;
     border: black solid 1px;
     box-sizing: border-box;
 
@@ -30,22 +37,18 @@
     font-size: 30px;
     flex-basis: 100px;
 
+    cursor: pointer;
+    transition: $transition-time;
+
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
     }
-    @each $nameDay, $value in $days {
-      &:first-child {
-        margin-left: #{$value}px;
-      }
-    }
 
     &:hover {
       transform: translateY(-20px);
-      transition: 0.5s;
       background-color: pink;
-      cursor: pointer;
     }
   }
 }
