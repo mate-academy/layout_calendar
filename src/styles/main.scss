@@ -18,6 +18,9 @@
 
   &__day {
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
     height: $box-size;
     width: $box-size;
@@ -33,13 +36,8 @@
   }
 
   @for $index from 1 to 32 {
-    & :nth-child(#{$index})::after {
-      text-align: center;
-      margin: 0.25*$box-size auto;
+    & :nth-child(#{$index})::before {
       content: "#{$index}";
-      position: absolute;
-      left: 0;
-      right: 0;
     }
   }
 
