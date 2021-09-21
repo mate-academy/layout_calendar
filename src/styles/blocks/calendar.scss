@@ -5,10 +5,6 @@
   padding: $calendar-padding;
   width: $calendar-width;
 
-  &--position {
-    margin: 60px auto;
-  }
-
   @each $nameDay, $offset in $days {
     &--start-day_#{$nameDay} > :first-child {
       margin-left: #{$offset * ($cell-size + $gap-size)};
@@ -16,9 +12,9 @@
   }
 
   @for $excludeDay from 28 to 31 {
-     &--month-length_#{$excludeDay} > :nth-child(n + #{$excludeDay + 1}) {
-    display: none;
-     }
+    &--month-length_#{$excludeDay} > :nth-child(n + #{$excludeDay + 1}) {
+      display: none;
+    }
   }
 
   &__day {
@@ -30,12 +26,10 @@
 
     display: flex;
     justify-content: center;
-    text-align: center;
     align-items: center;
 
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    flex-basis: 100px;
 
     cursor: pointer;
     transition: $transition-time;
