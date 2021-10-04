@@ -1,11 +1,6 @@
+@import "utils/reset";
 @import "utils/variables";
 @import "utils/mixins";
-
-body,
-div {
-  margin: 0;
-  padding: 0;
-}
 
 .calendar {
   padding: 2 * $padding $padding;
@@ -16,16 +11,24 @@ div {
   background-color: aliceblue;
   margin: auto;
 
-  // @each $day in mon, tue, wed, thu, fri, sat, sun {
-  //   &--#{$day} > :first-child {
-  //     margin-left: $wed;
-  //   }  
-  // }
+  & > :first-child {
+    margin-left: $start-day;
+  }
 
-}
+  @for $dayNum from 1 through $days-in-month {
+    & > :nth-child(#{$dayNum}){
+      &::before {
+        content: "#{$dayNum}";
+      }
+    }
+  }
 
-.calendar > :first-child {
-  margin-left: $start-day;
+  @for $lastDay from $days-in-month + 1 to 32 {
+    & > :nth-child(#{$lastDay}) {
+      display: none;
+    }
+
+  }
 }
 
 .day {
@@ -46,19 +49,5 @@ div {
     cursor: pointer;
     transform: translateY(-$day-move-on-hover); 
     transition: all 0.5s;
-  }
-
-  @for $lastDay from $days-in-month + 1 to 32 {
-    &--#{$lastDay} {
-      display: none;
-    }
-  }
-
-  @for $dayNum from 1 through $days-in-month {
-    &--#{$dayNum} {
-      &::before {
-        content: "#{$dayNum}";
-      }
-    }
   }
 }
