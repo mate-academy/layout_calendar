@@ -1,3 +1,64 @@
-body {
+@import "utils/variables";
+@import "utils/mixins";
+
+body,
+div {
   margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  padding: 2 * $padding $padding;
+  width: $calendar-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap $gap;
+  background-color: aliceblue;
+  margin: auto;
+
+  // @each $day in mon, tue, wed, thu, fri, sat, sun {
+  //   &--#{$day} > :first-child {
+  //     margin-left: $wed;
+  //   }  
+  // }
+
+}
+
+.calendar > :first-child {
+  margin-left: $start-day;
+}
+
+.day {
+  @include day($size);
+  border: 1px solid black;
+  box-sizing: border-box;
+  text-align: center;
+  line-height: $size;
+  transition: all 0.5s;
+
+  &::before {
+    font-size: 30px;
+    font-family: Arial, serif;
+  }
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-$day-move-on-hover); 
+    transition: all 0.5s;
+  }
+
+  @for $lastDay from $days-in-month + 1 to 32 {
+    &--#{$lastDay} {
+      display: none;
+    }
+  }
+
+  @for $dayNum from 1 through $days-in-month {
+    &--#{$dayNum} {
+      &::before {
+        content: "#{$dayNum}";
+      }
+    }
+  }
 }
