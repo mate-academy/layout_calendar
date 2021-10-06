@@ -1,54 +1,5 @@
 @import "utils/reset";
 @import "utils/variables";
 @import "utils/mixins";
-
-.calendar {
-  padding: 2 * $padding $padding;
-  width: $calendar-size;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap $gap;
-  background-color: aliceblue;
-  margin: auto;
-
-  & > :first-child {
-    margin-left: $start-day;
-  }
-
-  @for $dayNum from 1 through $days-in-month {
-    & > :nth-child(#{$dayNum}){
-      &::before {
-        content: "#{$dayNum}";
-      }
-    }
-  }
-
-  @for $lastDay from $days-in-month + 1 to 32 {
-    & > :nth-child(#{$lastDay}) {
-      display: none;
-    }
-
-  }
-}
-
-.day {
-  @include day($size);
-  background-color: $day-color;
-  border: 1px solid black;
-  box-sizing: border-box;
-  text-align: center;
-  line-height: $size;
-  transition: all 0.5s;
-
-  &::before {
-    font-size: 30px;
-    font-family: Arial, serif;
-  }
-
-  &:hover {
-    background-color: pink;
-    cursor: pointer;
-    transform: translateY(-$day-move-on-hover); 
-    transition: all 0.5s;
-  }
-}
+@import "blocks/calendar.scss";
+@import "blocks/day.scss";
