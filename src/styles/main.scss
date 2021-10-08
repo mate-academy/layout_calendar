@@ -1,3 +1,72 @@
+$cell-size: 100px;
+$cell-gap: 1px;
+$month-padding: 10px;
+$month-margin-left: $cell-size+$cell-gap;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: 7 * $cell-size + 6 * $cell-gap + 2 * $month-padding;
+  padding: $month-padding;
+
+  @for $num from 1 through 31 {
+    & :nth-child(#{$num})::before {
+      content: "#{$num}";
+    }
+  }
+
+  @for $num from 28 through 30 {
+    &--month-length--#{$num} {
+      &> :nth-child(n + #{$num + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  $indents: "mon"0,
+    "tue"$month-margin-left,
+    "wed"2 * $month-margin-left,
+    "thu"3 * $month-margin-left,
+    "fri"4 * $month-margin-left,
+    "sat"5 * $month-margin-left,
+    "sun"6 * $month-margin-left;
+
+  @each $name,
+    $indent in $indents {
+    &--start-day--#{$name} :first-child {
+      margin-left: $indent;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: background-color ease-out 0.5s, transform ease-out 0.5s;
+
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+  }
 }
