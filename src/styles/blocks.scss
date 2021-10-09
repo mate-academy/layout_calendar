@@ -1,0 +1,46 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 1px;
+  width: $day-size * 7 + 6px;
+
+  @for $date from 1 through 31 {
+    & :nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
+  }
+
+  @for $total from 28 through 31 {
+    &--month-length--#{$total} {
+      :nth-child(n + #{$total + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $week-day, $left in $month-start  {
+    &--start-day--#{$week-day} {
+      :first-child {
+        margin-left: #{$left};
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    @extend %flex-position;
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+    width: $day-size;
+    height: $day-size;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-25px)
+    }
+  }
+}
