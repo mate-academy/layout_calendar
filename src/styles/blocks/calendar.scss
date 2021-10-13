@@ -32,13 +32,16 @@
       transform: translateY(-20px);
     }
 
-    @for $i from 1 through $month-length {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
+    &::before {
         position: absolute;
         width: $day-size;
         line-height: $day-size;
         text-align: center;
+    }
+
+    @for $i from 1 through $month-length {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
       }
     }
   }
