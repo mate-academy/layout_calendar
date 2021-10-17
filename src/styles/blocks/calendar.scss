@@ -10,6 +10,18 @@
   gap: 1px;
   max-width: calendarWidth($ceil-size, $ceil-border, $calendar-padding);
 
+  @for $var from 28 through 31 {
+    &--month-length-#{$var} > :nth-child(n+#{$var+1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $margin in $day-list {
+    &--start-day-#{$day} > :first-child {
+      margin-left: $margin;
+    }
+  }
+
   &__day {
     @include square($ceil-size);
 
@@ -31,18 +43,6 @@
     &:hover {
       background-color: $ceil-color-hover;
       transform: translateY(-20px);
-    }
-
-    @for $var from 28 through 31 {
-      &--month-length-#{$var} > :nth-child(n+#{$var+1}) {
-        display: none;
-      }
-    }
-
-    @each $day, $margin in $day-list {
-      &--start-day-#{$day} > :first-child {
-        margin-left: $margin;
-      }
     }
   }
 }
