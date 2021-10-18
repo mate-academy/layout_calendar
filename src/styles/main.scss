@@ -28,10 +28,6 @@ body {
     border: 1px solid #000;
     transition: transform 0.5s;
 
-    // &:first-of-type {
-    //   margin-left: 101px;
-    // }
-
     &:hover {
       cursor: pointer;
       background-color: pink;
@@ -57,13 +53,13 @@ body {
     "sun" 6 * ($cell-size + $cell-gap);
 
   @each $name, $day in $days {
-    &--start-day--#{$name} > :first-child {
+    &--#{$name} > :first-child {
       margin-left: $day;
     }
   }
 
   @for $length from 28 through 31 {
-    &--month-length--#{$length} {
+    &--#{$length} {
       & :nth-child(n + #{$length + 1}) {
         display: none;
       }
