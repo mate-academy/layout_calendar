@@ -1,0 +1,38 @@
+
+.day {
+  @include square($cell-size);
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid black;
+  text-align: center;
+  line-height: $cell-size;
+  transition: color 0.5s, transforn 0.5s;
+
+  @for $date from 1 through 31 {
+    &--#{$date}::before {
+      content: "#{$date}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+  &--start-day {
+    $week:
+      "mon" 1,
+      "tue" 2,
+      "wed" 3,
+      "thu" 4,
+      "fri" 5,
+      "sat" 6,
+      "sun" 7;
+    @each $start-day, $order in $week {
+      &--#{$start-day} {
+        margin-left: ($order - 1) * ($cell-size + $gap);
+      }
+    }
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}

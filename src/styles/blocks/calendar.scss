@@ -1,0 +1,14 @@
+
+.calendar {
+  width: getWidth($cell-size, 7, $padding, $gap);
+  padding-top: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: $gap;
+
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} .day:nth-child(n + #{$length + 1}) {
+      @extend %short-month;
+    }
+  }
+}
