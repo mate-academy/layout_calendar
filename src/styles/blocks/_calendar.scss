@@ -1,0 +1,64 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin-top: 20px;
+
+  width: $calendar-width;
+
+  &__field {
+    position: relative;
+
+    justify-content: center;
+    align-items: center;
+
+    width: $block-size;
+    height: $block-size;
+    margin: 0 $block-gap $block-gap 0;
+
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+
+    transition: 0.5s;
+
+    &::before {
+      font-size: 30px;
+    }
+
+    @for $i from 1 through 31 {
+      .calendar > .calendar__field:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffb6c1;
+    }
+  }
+}
+
+@each $day, $margin in $days-array {
+  .calendar--#{$day} > .calendar__field:first-child {
+    margin-left: ($block-size + 1) * $margin;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--#{$i} > .calendar__field:nth-child(n + #{$i}) {
+    display: none;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--#{$i} > .calendar__field:nth-child(-n + #{$i}) {
+    display: flex;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar > .calendar__field:nth-child(#{$i}):before {
+    content: "#{$i}";
+  }
+}
