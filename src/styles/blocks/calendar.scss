@@ -1,0 +1,64 @@
+@import "../utils/variable.scss";
+
+.calendar-container {
+
+  &__calendar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 740px;
+    margin: auto;
+    padding: 10px;
+    padding-top: 10%;
+    gap: $cell-gap;
+  
+  }
+  
+  &__date {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $cell-height;
+    width: $cell-width;
+    border: 1px solid #000;
+    background-color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: background-color 0.5s, transform 1s;
+  }
+  
+  &__date:hover {
+    background-color: #ffc0cb;
+    cursor: pointer;
+    transform: translate(-0%, -20%);
+  }
+}
+
+@for $date from 1 through 31 {
+  .calendar-container__calendar > :nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar-container__calendar--month--length_#{$date} 
+  >:nth-child(n + #{$date + 1}) {
+    display: none;
+  }
+}
+
+$week: (
+  "mon": 0,
+  "tue": $cell-width + $cell-gap,
+  "wed": 2 * ($cell-width + $cell-gap),
+  "thu": 3 * ($cell-width + $cell-gap),
+  "fri": 4 * ($cell-width + $cell-gap),
+  "sat": 5 * ($cell-width + $cell-gap),
+  "sun": 6 * ($cell-width + $cell-gap)
+);
+
+@each $day, $marginSize in $week {
+  .calendar-container__calendar--start--day_#{$day} > :first-child {
+    margin-left: $marginSize;
+  }
+}
