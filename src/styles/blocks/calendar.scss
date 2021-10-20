@@ -1,15 +1,20 @@
 @import "../utils/variable.scss";
 
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  width: 740px;
-  margin: auto;
-  padding: 10px;
-  padding-top: 10%;
-  gap: $cell-gap;
+.calendar-container {
 
+  &__calendar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 740px;
+    margin: auto;
+    padding: 10px;
+    padding-top: 10%;
+    gap: $cell-gap;
+  
+  }
+  
   &__date {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +24,7 @@
     background-color: #eee;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    transition: color 1s, transform 1s;
+    transition: background-color 0.5s, transform 1s;
   }
   
   &__date:hover {
@@ -30,13 +35,14 @@
 }
 
 @for $date from 1 through 31 {
-  .calendar > :nth-child(#{$date})::before {
+  .calendar-container__calendar > :nth-child(#{$date})::before {
     content: "#{$date}";
   }
 }
 
 @for $date from 28 through 31 {
-  .calendar--month--length_#{$date} > :nth-child(n + #{$date + 1}) {
+  .calendar-container__calendar--month--length_#{$date} 
+  >:nth-child(n + #{$date + 1}) {
     display: none;
   }
 }
@@ -52,7 +58,7 @@ $week: (
 );
 
 @each $day, $marginSize in $week {
-  .calendar--start--day_#{$day} > :first-child {
+  .calendar-container__calendar--start--day_#{$day} > :first-child {
     margin-left: $marginSize;
   }
 }
