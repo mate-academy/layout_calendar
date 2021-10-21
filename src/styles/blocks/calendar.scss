@@ -18,7 +18,7 @@
     border: 1px solid #000;
     cursor: pointer;
 
-    transition: 0.5s;
+    transition-duration: 0.5s;
 
     &::before {
       font-size: 30px;
@@ -44,11 +44,8 @@
 }
 
 @for $i from 28 through 31 {
-  .calendar--month-length--#{$i} > .calendar__field:nth-child(n + #{$i}) {
+  .calendar--month-length--#{$i} > .calendar__field:nth-child(n + #{$i + 1}) {
     display: none;
-  }
-  .calendar--month-length--#{$i} > .calendar__field:nth-child(#{$i}) {
-    display: flex;
   }
 }
 
