@@ -1,8 +1,10 @@
+@import "./utils/variables";
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  gap: $gap;
+  gap: $calendar-gap;
   padding: $calendar-padding;
 
   &__day {
@@ -32,7 +34,7 @@
     @each $name, $num in $days {
       .calendar--start-day--#{$name} >
       &:first-child {
-        margin-left: ($size + $gap) * ($num - 1);
+        margin-left: ($size + $calendar-gap) * ($num - 1);
       }
     }
 
