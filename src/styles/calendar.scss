@@ -1,0 +1,30 @@
+.calendar {
+  max-width: $calendar-size;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $white-space;
+  margin: 20px;
+
+  &__elem {
+    background-color: #eee;
+    flex-basis: $elem-size;
+    height: $elem-size;
+    border: solid 1px #000;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
