@@ -1,10 +1,12 @@
 @import '../units/variables';
 
-.calendar {
+.main-calendar {
   width: $calendar-width;
+  margin: 0 auto;
+}
+.calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
   gap: $cell-gap;
   padding: $cell-padding;
 
@@ -55,7 +57,7 @@ $days:
   }
 }
 
-@for $index from 29 through 31 {
+@for $index from 28 through 31 {
   .calendar__month-length--#{$index} {
     .calendar__day:nth-last-child(-n + #{31 - $index}) {
       display: none;
