@@ -4,6 +4,7 @@
   position: absolute;
   width: ($size + $padd) * 7;
   top: 50%;
+  gap: 1px;
   left: 50%;
   transform: translate(-50%, -50%);
 
@@ -17,6 +18,8 @@
     text-align: center;
     cursor: pointer;
     transition: background-color 0.5s, transform 0.5s;
+    font-size: 30px;
+    line-height: $size;
   }
 
   &__day:hover {
@@ -25,7 +28,7 @@
   }
 
   &__day::after {
-    font-size: 30px;
+    
     line-height: $size;
   }
 
@@ -33,15 +36,21 @@
     & :nth-child(#{$index}) {
       &::before {
         content: "#{$index}";
-        font-size: 30px;
-        line-height: $size;
       }
     }
   }
 }
 
 @each $daysName, $daysNumber in $weekDays {
-  .calendar-#{$daysName} :first-child {
+  .calendar--start-day_#{$daysName} :first-child {
     margin-left: ($size + $padd) * ($daysNumber - 1);
+  }
+}
+
+@for $index from 28 to 31 {
+  .calendar--month-length_#{$index} {
+    :nth-child(#{$index + 1}) {
+      display: none;
+    }
   }
 }
