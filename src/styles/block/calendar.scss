@@ -25,6 +25,9 @@
     height: $size-box-day;
     font-family: Arial, sans-serif;
     font-size: 30px;
+    background-color: $c-box-day;
+    border: 1px solid black;
+    transition-duration: 0.5s;
   }
 
   @for $i from 1 through 31 {
@@ -33,15 +36,13 @@
       content: '#{$i}';
       text-align: center;
       line-height: $size-box-day;
-      background-color: $c-box-day;
-      border: 1px solid black;
     }
   }
 
   @for $j from 28 through 31 {
     &--month-lengs-#{$j} {
-      :nth-child(n + #{$j+1})::before {
-        content:none;
+      :nth-child(n + #{$j+1}) {
+        display: none;
       }
     }
   }
@@ -50,5 +51,10 @@
     &--start-day-#{$day} :first-child {
       margin-left: $shift;
     }
+  }
+
+  &__day:hover {
+    background-color: $c-box-day-hover;
+    transform: translateY(-20px);
   }
 }
