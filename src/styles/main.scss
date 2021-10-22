@@ -1,3 +1,56 @@
+@import "./reset.scss";
+@import "./variables.scss";
+
 body {
-  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  max-width: 726px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: 0 10px;
+
+  @for $day from 28 through 31 {
+    &--#{$day} &__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $value in $days {
+    &--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  &__day {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    background-color: $color-back;
+    border: 1px solid #000;
+    transition: transform 0.3s ease 0.2s;
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}) {
+        &:before {
+          content: "#{$index}";
+          font-family: Arial, sans-serif;
+          font-size: 30px;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $color-back-hover;
+    }
+  }
 }
