@@ -36,10 +36,6 @@
       background-color: $c-box-day;
       border: 1px solid black;
     }
-
-    &__day:nth-child(#{$i})::before:hover {
-      background-color: #fff;
-    }
   }
 
   @for $j from 28 through 31 {
@@ -51,11 +47,8 @@
   }
 
   @each $day, $shift in $week {
-    &--start-day-#{$day}::before {
-      display: block;
-      content: '';
-      height: $size-box-day;
-      width: #{$shift};
+    &--start-day-#{$day} :first-child {
+      margin-left: $shift;
     }
   }
 }
