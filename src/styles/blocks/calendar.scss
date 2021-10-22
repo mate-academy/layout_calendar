@@ -5,13 +5,13 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  width: cal-width($date-size, $cal-pad, $gap);
-  padding: $cal-pad;
+  gap: $calendar-gap;
+  width: cal-width($date-size, $calendar-pad, $calendar-gap);
+  padding: $calendar-pad;
 
-  @each $day, $index in $margins {
+  @each $day, $index in $first-day-margin {
     &--start-day--#{$day} :first-child {
-      margin-left: ($date-size + $gap) * $index;
+      margin-left: ($date-size + $calendar-gap) * $index;
     }
   }
 
