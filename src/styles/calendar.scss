@@ -3,8 +3,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: $white-space;
-  margin: 20px;
+  padding: 20px;
   font-family: Arial, Helvetica, sans-serif;
+
+  &--month-length:nth-child(n + #{$month-length + 1}) {
+    display: none;
+  }
 
   &__elem {
     background-color: $elem-color;
@@ -17,15 +21,11 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: all 0.5s ease-in-out;
+    transition: transform 0.5s, background-color 0.5s ease-in-out;
 
     &:hover {
       background-color: $hover-color;
       transform: translateY(-20px);
-    }
-
-    &:nth-child(n + #{$month-length + 1}) {
-      display: none;
     }
   }
 }
