@@ -8,8 +8,14 @@
   width: $col-count * $cell-size + $base-shift;
   
   @each $day, $index_day in $weekdays {
-    &__start-day--#{$day} &__day:first-child {
-      margin-left: #{$index_day * ($cell-size + $day-border)};
+    &--start-day_#{$day} &__day:first-child {
+      margin-left: $index_day;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-lenght_#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
   
@@ -22,7 +28,7 @@
     transition-duration: 0.5s;
     
     @for $index from 1 through $month-day {
-      &:nth-child(#{$index})::before {
+      &:nth-child(#{$index})::after {
         content: "#{$index}";
         display: flex;
         justify-content: center;
