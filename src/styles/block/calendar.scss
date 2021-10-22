@@ -1,6 +1,7 @@
 $day-width: 100px;
 $calendar-gap: 1px;
 $calendar-padding: 10px;
+$text-size: 30px;
 $calendar-width: $day-width * 7 + $calendar-gap * 6 + $calendar-padding * 2;
 $week-day:
   "mon" 0,
@@ -20,13 +21,13 @@ $week-day:
   gap: $calendar-gap;
 
   @each $day, $index in $week-day {
-    &--start-day--#{$day} &__day:first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: ($day-width + $calendar-gap) * $index;
     }
   }
 
   @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length} &__day::nth-child(n + #{$month-length + 1}) {
+    &--month-length--#{$month-length} :nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
@@ -39,18 +40,17 @@ $week-day:
     align-items: center;
     border: 1px solid #ccc;
     background-color: #eee;
+    font-size: $text-size;
+    cursor: pointer;
     transition: color 0.5s, transform 0.5s;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: "#{$number}";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
       }
     }
 
     &:hover {
-      cursor: pointer;
       transform: translateY(-20px);
       background-color: #ffb6c1;
     }
