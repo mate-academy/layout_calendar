@@ -9,13 +9,13 @@
   gap: $calendar-gap;
 
   @each $day, $index in $week-days {
-    &--start-day_#{$day} &__day:first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: ($day-sise + $calendar-gap) * $index;
     }
   }
 
   @for $length from 28 to 31 {
-    &--month-length_#{$length} &__day:nth-child(n + #{$length + 1}) {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
@@ -26,7 +26,7 @@
     align-items: center;
     height: $day-sise;
     width: $day-sise;
-    border: 1px solid rgb(131, 114, 114);
+    border: 1px solid #837272;
     background-color: #eee;
     transition: transform 0.5s ease-in-out;
 
@@ -40,7 +40,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: rgb(238, 156, 217);
+      background-color: #ee9cd9;
       transform: translate(0, -20px);
     }
 
