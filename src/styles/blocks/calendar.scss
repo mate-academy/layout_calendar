@@ -1,13 +1,39 @@
-.calendar {
+.container {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.calendar {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $gap-size;
 
+  &__day {
+    box-sizing: border-box;
+    @include square($day-size);
+    border: 1px solid #000;
+    background-color: $day-color;
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+    font-family: $day-font;
+    font-size: $day-font-size;
+    line-height: $day-size;
+    text-align: center;
+    transition: background-color 0.5s, transform 0.5s;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $hover-color;
+    }
+  }
   
   $day-positions:
     "mon" 0,
@@ -25,7 +51,7 @@
   }
 
   @for $index from 28 through 31 {
-    &--month-length_#{$index} {
+    &--month-length-#{$index} {
       :nth-child(n + #{$index + 1}) {
         display: none;
       }
