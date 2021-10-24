@@ -1,3 +1,35 @@
+@import "./utils/variables";
+@import "./utils/for";
+@import "./utils/each";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $calendar-size;
+  padding: 10px;
+  margin-left: 24%;
+  margin-top: 8%;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+
+  &__day-of-month {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-color;
+    text-align: center;
+    line-height: $cell-size;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(235, 168, 212);
+      transform: translateY(-20px);
+    }
+  }
 }
