@@ -1,0 +1,52 @@
+.calendar {
+  @include calendar;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+
+  &-day-of-month {
+    border: 1px solid black;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-color;
+    text-align: center;
+    line-height: $cell-size;
+    transition-duration: $anim-duration;
+
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@each $name, $num in $weekdays {
+  .calendar--start-day--#{$name} {
+    & .calendar-day-of-month:first-child {
+      margin-left: calc(
+        (#{$cell-size} * #{$num - 1}) + (#{$cell-gap} * #{$num - 1})
+      );
+    }
+  }
+}
+
+@for $num from 1 through 31 {
+  .calendar-day-of-month:nth-child(#{$num}):before {
+    content: "#{$num}";
+    font-size: $font-size;
+  }
+}
+
+@for $num from 28 through 31 {
+  .calendar--month-length--#{$num} {
+    .calendar-day-of-month:nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
+}
