@@ -1,47 +1,62 @@
 @import "variables";
 
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  margin: $size auto;
-  width: ($size + 1px) * 7;
+.calendar-container {
 
-  &__day {
+  &__calendar {
+    display: flex;
+    flex-wrap: wrap;
+    width: 740px;
+    margin: auto;
+    padding: 10px;
+    gap: $cell-gap;
+  }
+
+  &__date {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    margin-top: 1px;
-    margin-left: 1px;
-    width: $size;
-    height: $size;
-
+    height: $cell-height;
+    width: $cell-width;
     border: 1px solid #000;
     background-color: #eee;
-    transition: background-color 0.5s, transform 0.5s;
-
-    &:hover {
-      background: $hover-color;
-      transform: translateY(-20px);
-      cursor: pointer;
-    }
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::after {
-        content: "#{$i}";
-      }
-    }
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: background-color 0.5s, transform 1s;
   }
 
-  @each $day, $num in $days {
-    &-#{$day} &__day:first-child {
-      margin-left: $size * $num + $num + 1;
-    }
+  &__date:hover {
+    background-color: $hover-color;
+    cursor: pointer;
+    transform: translate(-0%, -20%);
   }
+}
 
-  @for $i from 28 through 31 {
-    &-#{$i} &__day:nth-child(#{$i}) ~ &__day {
-      display: none;
-    }
+@for $date from 1 through 31 {
+  .calendar-container__calendar > :nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar-container__calendar--month--length_#{$date}
+  >:nth-child(n + #{$date + 1}) {
+    display: none;
+  }
+}
+
+$week: (
+  "mon": 0,
+  "tue": $cell-width + $cell-gap,
+  "wed": 2 * ($cell-width + $cell-gap),
+  "thu": 3 * ($cell-width + $cell-gap),
+  "fri": 4 * ($cell-width + $cell-gap),
+  "sat": 5 * ($cell-width + $cell-gap),
+  "sun": 6 * ($cell-width + $cell-gap)
+);
+
+@each $day, $marginSize in $week {
+  .calendar-container__calendar--start--day_#{$day} > :first-child {
+    margin-left: $marginSize;
   }
 }
