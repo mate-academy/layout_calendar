@@ -1,0 +1,55 @@
+@import "variables";
+
+.calendar-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($cell-width * 7) + ($cell-gap * 7);
+  margin: auto;
+  gap: $cell-gap;
+}
+
+.calendar-container__date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $cell-height;
+  width: $cell-width;
+  border: 1px solid #000;
+  background-color: #eee;
+  transition: background-color 0.5s, transform 1s;
+}
+
+.calendar-container__date:hover {
+  background-color: $hover-color;
+  cursor: pointer;
+  transform: translateY(-20%);
+}
+
+@for $date from 1 through 31 {
+  .calendar-container > :nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar-container--month--length_#{$date}
+  >:nth-child(n + #{$date + 1}) {
+    display: none;
+  }
+}
+
+$week: (
+  "mon": 0,
+  "tue": $cell-width + $cell-gap,
+  "wed": 2 * ($cell-width + $cell-gap),
+  "thu": 3 * ($cell-width + $cell-gap),
+  "fri": 4 * ($cell-width + $cell-gap),
+  "sat": 5 * ($cell-width + $cell-gap),
+  "sun": 6 * ($cell-width + $cell-gap)
+);
+
+@each $day, $marginSize in $week {
+  .calendar-container--start--day_#{$day} > :first-child {
+    margin-left: $marginSize;
+  }
+}
