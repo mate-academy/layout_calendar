@@ -15,8 +15,8 @@
     background-color: $cell-color;
     text-align: center;
     line-height: $cell-size;
-    transition-duration: $anim-duration;
     cursor: pointer;
+    transition: transform $anim-duration linear;
 
     &:hover {
       background-color: $hover-color;
@@ -26,17 +26,7 @@
 
   @each $name, $num in $weekdays {
     &--start-day--#{$name} {
-      &-day-of-month:first-child {
-        margin-left: calc(
-          (#{$cell-size} * #{$num - 1}) + (#{$cell-gap} * #{$num - 1})
-        );
-      }
-    }
-  }
-
-  @each $name, $num in $weekdays {
-    &--start-day--#{$name} {
-      & .calendar-day-of-month:first-child {
+      .calendar-day-of-month:first-child {
         margin-left: calc(
           (#{$cell-size} * #{$num - 1}) + (#{$cell-gap} * #{$num - 1})
         );
