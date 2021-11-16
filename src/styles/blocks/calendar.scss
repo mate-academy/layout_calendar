@@ -1,0 +1,87 @@
+$monday: 0;
+$tuesday: dayfunc($calendar_cell_size, $calendar_cell_gap) ;
+$wednesday: dayfunc($calendar_cell_size, $calendar_cell_gap) * 2;
+$thursday:  dayfunc($calendar_cell_size, $calendar_cell_gap) * 3;
+$friday:  dayfunc($calendar_cell_size, $calendar_cell_gap) * 4;
+$saturday: dayfunc($calendar_cell_size, $calendar_cell_gap) * 5;
+$sunday: dayfunc($calendar_cell_size, $calendar_cell_gap) * 6;
+
+$days:
+  "monday" 0,
+  "tuesday" $tuesday,
+  "wednesday" $wednesday,
+  "thursday" $thursday,
+  "friday" $friday,
+  "saturday" $saturday,
+  "sunday" $sunday;
+
+$months: 
+  "january" 31,
+  "februar28" 28,
+  "februar29" 29,
+  "march" 31,
+  "april" 30,
+  "may" 31,
+  "june" 30,
+  "july" 31,
+  "fugust" 31,
+  "september" 30,
+  "october" 31,
+  "november" 30,
+  "december" 31;
+
+body {
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  padding: 20px;
+}
+
+.calendar {
+  display: flex;
+  max-width: $calendar_width;
+  flex-wrap: wrap;
+  gap: $calendar_cell_gap;
+  padding: 10px;
+  border: $border;
+  margin-top: 20px;
+
+  @each $mon, $val in $months {
+    &--#{$mon} :nth-child(n+#{$val+1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $value in $days {
+    &--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+  
+  &_cell {
+    box-sizing: border-box;
+    display: flex;
+    @include square($calendar_cell_size);
+    background-color: #eee;
+    border: $border;
+    cursor: pointer;
+    transition-duration: 1s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+        justify-content: center;
+        content: "#{$index}";
+        color: black;
+        font-size: $nuber_day_size;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
