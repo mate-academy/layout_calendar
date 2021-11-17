@@ -19,7 +19,9 @@ $calendar:
 }
 
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 50, 40;
   width: auto;
   height: auto;
 }
@@ -31,7 +33,7 @@ body {
   padding: 10px;
   width: 720px;
   
-  &-box {
+  &_day {
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -39,7 +41,7 @@ body {
     counter-increment: section;
   }
 
-  &-box:hover {
+  &_day:hover {
     cursor: pointer;
     animation-duration: 0.5s;
     animation-name: animation-1;
@@ -48,7 +50,7 @@ body {
   }
     
   @for $index from 1 through 31 {
-    .calendar-box--#{$index}::before {
+    .calendar_day::before {
       display: flex;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -61,8 +63,14 @@ body {
     }
 
     @each $day, $margin in $calendar {
-      .start-day#{$day} {
+      .start-day-#{$day} {
         margin-left: $margin;
+      }
+    }
+
+    @for $month-length from 28 through 31 {
+      .div:nth-child(#{month-length}) {
+        visibility: hidden;
       }
     }
   }
