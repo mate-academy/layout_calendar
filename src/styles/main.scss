@@ -1,3 +1,70 @@
+$day-size: 100px;
+$gap-size: 1px;
+$number-size: 0.3 * $day-size;
+$calendar-size: 7 * $day-size + 6 * $gap-size;
+
 body {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-size;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: 10px;
+  
+    
+  @for $number from 1 through 31 {
+    & :nth-child(#{$number})::before {
+      content: "#{$number}";
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day-of-week, $number in $days {
+    &--starts-day--#{$day-of-week} :first-child {
+      margin-left: ($day-size + $gap-size) * $number;
+    }
+  }
+
+  @for $number from 28 through 31 {
+    &--month-length--#{$number} :nth-child(n + #{$number + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $number-size;
+    transition: all 0.5s ease-out;
+
+    &:hover {
+      transform: translateY(-20px);
+      background: pink;
+
+    }
+  }
 }
