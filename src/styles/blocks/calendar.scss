@@ -15,21 +15,6 @@ $days:
   "saturday" $saturday,
   "sunday" $sunday;
 
-$months: 
-  "january" 31,
-  "februar28" 28,
-  "februar29" 29,
-  "march" 31,
-  "april" 30,
-  "may" 31,
-  "june" 30,
-  "july" 31,
-  "fugust" 31,
-  "september" 30,
-  "october" 31,
-  "november" 30,
-  "december" 31;
-
 body {
   display: flex;
   margin: 0;
@@ -46,8 +31,8 @@ body {
   border: $border;
   margin-top: 20px;
 
-  @each $mon, $val in $months {
-    &--#{$mon} :nth-child(n+#{$val+1}) {
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
