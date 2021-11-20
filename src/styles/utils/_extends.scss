@@ -1,0 +1,30 @@
+@for $index from 1 through 31 {
+  .day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+$days-of-week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $num in $days-of-week {
+  .month--start-day_#{$day} {
+    .day:first-child {
+      margin-left: #{$num * ($square-size + $gap)};
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .month--month-length_#{$length} {
+    .day:nth-child(n+#{$length + 1}) {
+      display: none;
+    }
+  }
+}
