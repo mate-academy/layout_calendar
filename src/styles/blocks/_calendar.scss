@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  gap: $gap-days;
+  width: $calendar-width;
+
+  &::before {
+    content: "";
+    height: $cell-side;
+    width: ($gap-days + $cell-side) * $empty-days - $gap-days;
+  }
+}
+
+.calendar__cell:hover {
+  background-color: #f5c2cb;
+  transform: translateY(-20%);
+  cursor: pointer;
+  transition: 500ms;
+}
+
+@for $i from 1 through $number-of-days {
+
+  .cell-#{$i} {
+    height: $cell-side;
+    width: $cell-side;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &:nth-child(#{$i}) {
+      &::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}
