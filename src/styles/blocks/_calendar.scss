@@ -1,3 +1,6 @@
+$number-of-days: 31;
+$empty-days: 5;
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -5,10 +8,47 @@
   gap: $gap-days;
   width: $calendar-width;
 
-  &::before {
-    content: "";
-    height: $cell-side;
-    width: ($gap-days + $cell-side) * $empty-days - $gap-days;
+  @each $day, $i in $days-of-week {
+    &--start-day_#{$day} {
+      &::before {
+        content: "";
+        height: $cell-side;
+        width: ($gap-days + $cell-side) * ($i - 1) - $gap-days;
+      }
+    }
+  }
+
+  @for $i from 28 through $number-of-days {
+    &--month-length_#{$i} {
+      .cell-#{$i + 1},
+      .cell-#{$i + 2},
+      .cell-#{$i + 3},
+      .cell-#{$i + 4} {
+        display: none;
+      }
+    }
+  }
+}
+
+.calendar__cell {
+  height: $cell-side;
+  width: $cell-side;
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@for $i from 1 through $number-of-days {
+  .cell-#{$i} {
+    &:nth-child(#{$i}) {
+      &::before {
+        content: "#{$i}";
+      }
+    }
   }
 }
 
@@ -17,25 +57,4 @@
   transform: translateY(-20%);
   cursor: pointer;
   transition: 500ms;
-}
-
-@for $i from 1 through $number-of-days {
-
-  .cell-#{$i} {
-    height: $cell-side;
-    width: $cell-side;
-    background-color: #eee;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-
-    &:nth-child(#{$i}) {
-      &::before {
-        content: "#{$i}";
-      }
-    }
-  }
 }
