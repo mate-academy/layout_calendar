@@ -40,9 +40,26 @@ body {
   }
 
   @for $length from 28 through 30 {
-    &--length--#{$length} {
+    &--#{$length} {
       & > :nth-child(n + #{$length + 1}) {
         display: none;
+      }
+    }
+  }
+
+  $start-day:
+    "mon" 0,
+    "tue" 1 * $size-day + 1 * $gap,
+    "wed" 2 * $size-day + 2 * $gap,
+    "thu" 3 * $size-day + 3 * $gap,
+    "fri" 4 * $size-day + 4 * $gap,
+    "sat" 5 * $size-day + 5 * $gap,
+    "sun" 6 * $size-day + 6 * $gap;
+
+  @each $day, $day-padding in $start-day {
+    &--#{$day} {
+      :nth-child(1) {
+        margin-left: $day-padding;
       }
     }
   }
@@ -62,23 +79,23 @@ body {
   &:hover {
     background-color: pink;
     transform: translatey(-20px);
-    transition-delay: 0.5s;
+    transition-duration: 0.5s;
   }
 
   @include square($size-day);
 
-  $start-day:
-    "mon" 0,
-    "tue" 1 * $size-day + 1 * $gap,
-    "wed" 2 * $size-day + 2 * $gap,
-    "thu" 3 * $size-day + 3 * $gap,
-    "fri" 4 * $size-day + 4 * $gap,
-    "sat" 5 * $size-day + 5 * $gap,
-    "sun" 6 * $size-day + 6 * $gap;
+  // $start-day:
+  // "mon" 0,
+  // "tue" 1 * $size-day + 1 * $gap,
+  // "wed" 2 * $size-day + 2 * $gap,
+  // "thu" 3 * $size-day + 3 * $gap,
+  // "fri" 4 * $size-day + 4 * $gap,
+  // "sat" 5 * $size-day + 5 * $gap,
+  // "sun" 6 * $size-day + 6 * $gap;
 
-  @each $day, $day-padding in $start-day {
-    &--#{$day} {
-      margin-left: $day-padding;
-    }
-  }
+  // @each $day, $day-padding in $start-day {
+  // &__#{$day} {
+  //   margin-left: $day-padding;
+  //   }
+  // }
 }
