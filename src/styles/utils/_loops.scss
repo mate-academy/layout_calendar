@@ -1,0 +1,21 @@
+@for $index from 1 through 31 {
+  .day:nth-child(#{$index})::before {
+    content: $index + "";
+  }
+}
+
+@each $value, $position in $start {
+  .start-day--#{$value} {
+    .day:first-child {
+      margin-left: $position;
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .month-length--#{$index} {
+    .day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
