@@ -1,0 +1,65 @@
+.month {
+  display: flex;
+  justify-content: center;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 30px;
+  padding-top: 50px;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    width: $month-width;
+    gap: $day-box-gap;
+
+    @for $day from 28 through 31 {
+      &--days-in-month--#{$day} .month__day:nth-last-child(-n+#{31-$day}) {
+        display: none;
+      }
+    }
+
+    $week:
+      "mon" 1,
+      "tue" 2,
+      "wen" 3,
+      "thu" 4,
+      "fri" 5,
+      "sat" 6,
+      "sun" 7;
+
+    @each $day, $num in $week {
+      &--start-day--#{$day} .month__day:first-child {
+        margin-left: calc(
+          (#{$num} - 1) * #{$day-box-width} +
+          (#{$num} - 1) * #{$day-box-gap}
+        );
+      }
+    }
+  }
+
+  &__day {
+    @include day-box-square($day-box-width);
+
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #555;
+    color: plum;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -20px);
+      background-color: plum;
+      color: #555;
+    }
+
+    transition: transform 0.5s, background-color 0.5s, color 0.5s;
+  }
+}
