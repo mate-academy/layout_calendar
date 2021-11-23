@@ -1,5 +1,21 @@
 .calendar {
-  padding-top: 35px;
+  padding-top: 30px;
+
+  @each $day, $var in $day-of-week {
+    &--start-#{$day} &__item {
+      &:first-child {
+        margin-left: $cell-size * ($var - 1) + $gap-size * ($var - 1);
+      }
+    }
+  }
+
+  @each $len in $days-of-month {
+    &--lenght-#{$len} &__item {
+      &:nth-last-child(-n + #{31 - $len}) {
+        display: none;
+      }
+    }
+  }
 
   &__container {
     width: ($cell-size * 7) + ($gap-size * 6);
@@ -20,29 +36,19 @@
     font-size: 30px;
     font-family: Arial, sans-serif;
     transition: 0.5s all;
-    cursor: pointer;
-
-    &:nth-child(1) {
-      margin-left: (2 * $cell-size) + (2 *  $gap-size);
-    }
 
     @for $var from 1 through 31 {
-      &--day-#{$var} {
-        &::before {
+      &:nth-child(#{$var}) {
+        &:before {
           content: "#{$var}";
         }
       }
     }
 
-    @include dayOfWeek(0);
-    @include dayOfWeek(7);
-    @include dayOfWeek(14);
-    @include dayOfWeek(21);
-    @include dayOfWeek(28);
-
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
+      cursor: pointer;
     }
   }
 }
