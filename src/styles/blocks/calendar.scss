@@ -1,0 +1,58 @@
+@use "../utils/variables";
+@use "../utils/function";
+
+.calendar {
+  width: getWidth($cell__size, $gap, $padding);
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+    padding: 10px;
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+
+    width: $cell__size;
+    background-color: #eee;
+    border: 1px solid black;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        line-height: $cell__size;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translatey(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" 101px,
+    "wed" 202px,
+    "thu" 303px,
+    "fri" 404px,
+    "sat" 505px,
+    "sun" 606px;
+
+  @each $day, $shift in $days {
+    &--start-day-#{$day} &__cell:nth-child(1) {
+      margin-left: $shift;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index}
+    &__cell:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
