@@ -1,13 +1,13 @@
-@use "../utils/variables";
-@use "../utils/function";
 
 .calendar {
+  display: flex;
+  justify-content: center;
   margin-top: 30px;
-  width: getWidth($cell__size, $gap, $padding);
 
   &__field {
     display: flex;
     flex-wrap: wrap;
+    width: getWidth($cell__size, $gap, $padding);
     gap: $gap;
     padding: 10px;
   }
@@ -19,7 +19,7 @@
     width: $cell__size;
     background-color: #eee;
     border: 1px solid black;
-    transition: color 0.5s, transform 0.5s;
+    transition: all 0.5s;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
