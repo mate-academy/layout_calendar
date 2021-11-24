@@ -9,19 +9,19 @@
   width: $calendar-width;
 
   $days:
-    "mon" 1,
-    "tue" 2,
-    "wen" 3,
-    "thu" 4,
-    "fri" 5,
-    "sat" 6,
-    "sun" 7;
+    "mon" 0,
+    "tue" 1,
+    "wen" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
   @each $day, $i in $days {
     &--start-day-#{$day} &__block:first-child {
       margin-left: calc(
-        (#{$i} - 1) * #{$calendar__block-width} +
-        (#{$i} - 1) * #{$calendar-gap}
+        #{$i} * (#{$calendar__block-width} +
+        #{$calendar-gap})
       );
     }
   }
