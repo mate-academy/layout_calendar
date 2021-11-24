@@ -25,13 +25,16 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
+      cursor: pointer;
     }
   }
+
   @for $index from 28 through 31 {
     &--month-length-#{$index} > &__cell:nth-child(n + #{$index +1}) {
       display: none;
     }
   }
+
   @each $day, $margin in $days {
     &--start-day-#{$day} > &__cell:first-child {
       margin-left: $margin;
