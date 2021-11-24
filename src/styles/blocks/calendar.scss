@@ -1,10 +1,8 @@
 @import "../variables.scss";
 
 .calendar {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
-  padding: $padding-box;
   width: $cell-size * 7 + $padding-box*2;
   gap: 1px;
 
@@ -18,7 +16,7 @@
   @each $day, $i in $week-days {
     &--start-day_#{$day}
     &__day:first-child {
-      margin-left: $cell-size * $i + ($i * $gap-day);
+      margin-left: ($cell-size + $gap-day) * $i;
     }
   }
 
@@ -26,7 +24,6 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
 
-    box-sizing: border-box;
     display: flex;
     background-color: #eee;
     height: $cell-size;
