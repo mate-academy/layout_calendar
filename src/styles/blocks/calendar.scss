@@ -12,12 +12,12 @@ $days:
   flex-wrap: wrap;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-  gap: 1px;
-  padding: 0 10px;
-  max-width: 725px;
+  gap: $gap;
+  padding: 0 $horizontal-paddings;
+  max-width: cellShift(7) - $gap;
 
   @each $start-day, $shift in $days {
-    &--start-day--#{$start-day} :first-child{
+    &--start-day--#{$start-day} :first-child {
       margin-left: #{$shift};
     }
   }
@@ -40,17 +40,14 @@ $days:
 
     &:hover {
       cursor: pointer;
-      background-color:pink;
+      background-color: pink;
       transform: translateY(-20px);
     }
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
-        content: "#{$index}"
+        content: "#{$index}";
       }
     }
   }
 }
-
-
-
