@@ -1,0 +1,48 @@
+@import "./__variables.scss";
+
+.calendar {
+  width: $calendar-width;
+  height: 100vh;
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: 1px;
+  align-content: center;
+
+  @each $day, $num in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc((#{$gap-size} + #{$cell-size}) * #{$num - 1});
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+    display: flex;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+  }
+
+  @for $day from 1 through $month-length {
+    &__day--#{$day}::before {
+      content: "#{$day}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      margin: auto;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--last-day-#{$last-day} .calendar__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
