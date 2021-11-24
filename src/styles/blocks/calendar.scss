@@ -1,0 +1,72 @@
+.calendar {
+  width: 7 * $size-block + 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: 1px;
+}
+
+.day {
+  box-sizing: border-box;
+  @include square($size-block);
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@each $number in 28, 29, 30, 31 {
+  .calendar--#{$number} .day:nth-child(-n + #{$number}) {
+    box-sizing: border-box;
+    @include square($size-block);
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+    
+  
+
+  @for $index from 1 through 31 {
+    .day:nth-child(#{$index}):before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $index from ($number + 1)  through 32 {
+    .calendar--#{$number}  .day:nth-child(#{$index}):before {
+      content: "";
+    }
+    .calendar--#{$number}  .day:nth-child(#{$index}) {
+      @include square(0);
+      border: none;
+    }
+  }
+}
+
+.calendar .day:hover {
+  background-color: pink;
+  transform: translate(0, -20px);
+  cursor: pointer;
+}
+
+$week:
+  "mon" 0,
+  "tue" 1 * ($size-block + 1),
+  "wed" 2 * ($size-block + 1),
+  "thu" 3 * ($size-block + 1),
+  "fri" 4 * ($size-block + 1),
+  "sat" 5 * ($size-block + 1),
+  "sun" 6 * ($size-block + 1);
+
+@each $day, $margin in $week {
+  .calendar--#{$day} .day:first-child {
+    margin-left: $margin;
+  }
+}
