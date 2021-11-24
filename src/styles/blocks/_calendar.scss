@@ -10,27 +10,18 @@
     background-color: #eee;
     border: 1px solid #000;
     box-sizing: border-box;
-    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: background-color 0.5s, transform 0.5s;
 
-    @for $index from 1 through 9 {
+    @for $index from 1 through 31 {
       &--day-#{$index}::before {
         content: "#{$index}";
-        position: absolute;
-        top: 40px;
-        left: 40px;
         font-size: 30px;
       }
     }
-    @for $index from 10 through 31 {
-      &--day-#{$index}::before {
-        content: "#{$index}";
-        position: absolute;
-        top: 35px;
-        left: 35px;
-        font-size: 30px;
-      }
-    }
+
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
