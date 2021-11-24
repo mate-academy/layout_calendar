@@ -1,20 +1,14 @@
 @import "../utils/variables";
 @import "../utils/mixin";
 
-.container {
-  display: flex;
-  justify-content: center;
-  padding-top: 60px;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  gap: $square-gap;
+  gap: $cell-gap;
 
   &__day {
-    @include square;
+    @include square($cell-size);
 
     display: flex;
     justify-content: center;
@@ -37,14 +31,14 @@
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
-      background-color: pink;
+      background-color: #ffc0cb;
     }
   }
 
   @each $day, $num in $week {
     &--start-day--#{$day}
     &__day:first-child {
-      margin-left: calc(#{$num} * (#{$side-size} + #{$square-gap}));
+      margin-left: calc(#{$num} * (#{$cell-size} + #{$cell-gap}));
     }
   }
 
