@@ -1,0 +1,53 @@
+$days:
+  "mon" cellShift(0),
+  "tue" cellShift(1),
+  "wed" cellShift(2),
+  "thu" cellShift(3),
+  "fri" cellShift(4),
+  "sat" cellShift(5),
+  "sun" cellShift(6);
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  gap: $gap;
+  padding: 0 $horizontal-paddings;
+  max-width: cellShift(7) - $gap;
+
+  @each $start-day, $shift in $days {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: #{$shift};
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-last-child(-n + #{31 - $index}) {
+      display: none;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
