@@ -1,5 +1,8 @@
 .calendar {
-  padding-top: 30px;
+  width: ($cell-size * 7) + ($gap-size * 6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
 
   @each $day, $var in $day-of-week {
     &--start-#{$day} &__item {
@@ -10,19 +13,11 @@
   }
 
   @each $len in $days-of-month {
-    &--lenght-#{$len} &__item {
+    &--length-#{$len} &__item {
       &:nth-last-child(-n + #{31 - $len}) {
         display: none;
       }
     }
-  }
-
-  &__container {
-    width: ($cell-size * 7) + ($gap-size * 6);
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap-size;
-    margin: auto;
   }
 
   &__item {
