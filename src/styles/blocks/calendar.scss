@@ -3,24 +3,17 @@
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $gap-size;
-  @for $index from 28 to 32 {
-    &--month-length--#{$index} &__item:nth-child(n + #{$index + 1}) {
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} &__item:nth-last-child(-n + #{31 - $index}) {
       visibility: hidden;
     }
   }
 
-  $days:
-    "mon" 1,
-    "tue" 2,
-    "wed" 3,
-    "thu" 4,
-    "fri" 5,
-    "sat" 6,
-    "sun" 7;
+  $days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
 
   @each $day, $index in $days {
     &--start-day--#{$day} &__item:first-child {
-      margin-left: ($index - 1) * $ceil-size + $gap-size * ($index - 1);
+      margin-left: $index * ($ceil-size + $gap-size);
     }
   }
 
@@ -41,12 +34,7 @@
       transform: translateY(-20px);
     }
 
-    &:first-child {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    @for $index from 1 to 32 {
+    @for $index from 1 through 31 {
       &:nth-child(#{$index}):before {
         content: "#{$index}";
       }
