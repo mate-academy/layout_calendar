@@ -3,12 +3,12 @@
   flex-wrap: wrap;
   padding: 20px 10px;
   gap: $interblock-gap;
-  width: calc(#{$block-width} * 7 + #{$interblock-gap} * 6 + 20px);
+  width: calc(#{$size} * 7 + #{$interblock-gap} * 6 + 20px);
 
   @each $day, $i in $days {
     &--start-day--#{$day}
     &__block:first-child {
-      margin-left: calc((#{$block-width} + #{$interblock-gap}) * (#{$i} - 1));
+      margin-left: calc((#{$size} + #{$interblock-gap}) * (#{$i} - 1));
     }
   }
 
@@ -30,7 +30,7 @@
 
     transition: background-color 0.5s, transform 0.5s;
 
-    @include square;
+    @include square($size);
     background-color: #eee;
     border: 1px solid black;
 
