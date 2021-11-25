@@ -18,8 +18,8 @@
     justify-content: center;
     align-items: center;
 
-    @for $day from 1 to 31 + 1 {
-      &:nth-child(n + #{$day}) {
+    @for $day from 1 to 31 {
+      &:nth-child(#{$day}) {
         &::before {
           content: "#{$day}";
         }
@@ -34,10 +34,8 @@
   }
 
   @each $week-day, $margin in $week {
-    &--start-day_#{&day} {
-      .calendar__day:first-child {
-        margin-left: #{$margin};
-      }
+    &--start-day_#{$week-day} &__day:first-child {
+      margin-left: $margin;
     }
   }
 
