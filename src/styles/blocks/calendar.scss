@@ -6,6 +6,7 @@
   width: getCalendarWidth($day-size, $gap);
   
   @import "../utils/variables.scss";
+  @import "../utils/mixins.scss";
 
   @each $name, $margin in $start-day {
     &--start-day_#{$name} &__day:nth-child(1) {
@@ -23,24 +24,20 @@
   }
  
   &__day {
-    @include square($day-size);
-    transition: color 0.5s, transform 0.5s;
+    @include square;
+    
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        margin: auto;
+      }
+    }
   
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
       cursor: pointer;
     }
-
-    @for $index from 1 through 31 {
-      &--#{$index}::before {
-        content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        margin: auto;
-      }
-    }
-
   }
-
 }
