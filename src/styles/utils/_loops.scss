@@ -1,8 +1,6 @@
 @for $index from 1 through 31 {
   .calendar__day:nth-child(#{$index})::before {
     content: "#{$index}";
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
   }
 }
 
@@ -15,7 +13,7 @@
 
 @for $last from 28 through 31 {
   .calendar--month-length--#{$last}
-  .calendar__day:nth-child(-n + #{$last})::after {
+  .calendar__day:nth-last-child(-n + #{31 - $last}) {
     display: none;
   }
 }
