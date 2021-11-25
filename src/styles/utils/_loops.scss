@@ -1,0 +1,18 @@
+@for $i from 1 through 31 {
+  .calendar .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-last-child(-n + #{31 - $i}) {
+    display: none;
+  }
+}
+
+@each $name, $day in $days {
+  .calendar--start-day-#{$name}::before {
+    content: "";
+    margin-left: ($cell-size + $size-gap) * ($day - 1) - $size-gap;
+  }
+}

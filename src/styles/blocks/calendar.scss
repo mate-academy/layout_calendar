@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $size-gap;
+  width: ($cell-size + $size-gap) * 7;
+  padding: 10px;
+
+  &__day {
+    @include flex-center;
+    @include square($cell-size);
+
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    background-color: #eee;
+    transition: color 0.5s, transform 0.5s;
+
+    border: 1px solid black;
+    box-sizing: border-box;
+    color: black;
+
+    &:hover {
+      background-color: lightcoral;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
