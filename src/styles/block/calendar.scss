@@ -17,13 +17,12 @@
         display: none;
       }
 
-      $week: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
+      $week: "mon" shift(0), "tue" shift(1), "wed" shift(2), "thu" shift(3),
+        "fri" shift(4), "sat" shift(5), "sun" shift(6);
 
       @each $day, $num in $week {
         &--start-day--#{$day} :first-child {
-          margin-left: calc(
-            (#{$num} - 1) * #{$cell-size} + (#{$num} - 1) * #{$cell-gap}
-          );
+          margin-left: #{$num};
         }
       }
     }
