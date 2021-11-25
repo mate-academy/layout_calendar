@@ -16,9 +16,8 @@
   @each $day, $i in $days-of-week {
     &--start-day_#{$day} &__cell:first-child {
       margin-left: calc(
-        (#{$i} - 1) * #{$cell-size} +
-        (#{$i} - 1) * #{$gap-size}
-      );
+        #{$i} * #{$cell-size} +
+        #{$i} * #{$gap-size});
     }
   }
 
@@ -38,6 +37,7 @@
     align-items: center;
     background-color: #eee;
     border: 1px solid black;
+    transition: transform 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -49,7 +49,6 @@
       background-color: pink;
       cursor: pointer;
       transform: translateY(-20%);
-      transition: 500ms;
     }
   }
 }
