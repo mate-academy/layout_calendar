@@ -5,46 +5,46 @@
   gap: $square-gap;
   padding: $calendar-pading;
 
-  @for $index from 1 to 32 {
-    &__cell-#{$index} {
-      height: $square-size;
-      width: $square-size;
-      background-color: #eee;
-      border: 1px solid black;
+  &__cell {
+    height: $square-size;
+    width: $square-size;
+    background-color: #eee;
+    border: $square-border solid black;
 
-      box-sizing: content-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: translate(0, 0);
-      transition: 0.5s;
-    }
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 
-    &__cell-#{$index}::before {
-      content: "#{$index}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-    }
+    box-sizing: content-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0, 0);
+    transition: 0.5s;
 
-    &__cell-#{$index}:hover {
+    &:hover {
       background-color: pink;
       cursor: pointer;
       transform: translate(0, -20px);
       transition: 0.5s;
     }
 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
   }
 
   @each $day, $num in $day-start {
     &--start-day--#{$day} :first-child {
       margin-left: calc(
-        (#{$num} * (#{$square-size} + 2px))
+        (#{$num} * (#{$square-size} + #{$square-border} + #{$square-border}))
         + (#{$square-gap} * #{$num})
       );
     }
   }
 
-  @for $day from 28 to 32 {
+  @for $day from 28 through 31 {
     &--month-length--#{$day - 1} :nth-child(n + #{$day}) {
       display: none;
     }
