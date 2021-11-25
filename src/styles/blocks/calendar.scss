@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  max-width: 720px;
+  max-width: 722px;
 
   @each $day, $i in $days {
     &--start-day-#{$day} &__day:first-child {
@@ -12,7 +12,7 @@
 
   @each $k in $month-length {
     &--month-length-#{$k} &__day:nth-last-child(-n + #{31 - $k}) {
-      opacity: 0;
+      display: none;
     }
   }
 
@@ -22,6 +22,9 @@
     align-items: center;
     border: 1px solid black;
 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
     width: $day-size;
     height: $day-size;
     background-color: $day-color;
@@ -29,10 +32,8 @@
     transition: transform 500ms;
 
     @for $index from 1 through 31 {
-      &:nth-child(#{$index}):before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
