@@ -18,17 +18,17 @@
       border: 1px solid black;
       transition: 0.5s;
 
-      @for $index from 1 through $days-in-month {
-        &:nth-child(#{$index})::before {
-          content: "#{$index}";
-        }
-      }
-
       &:hover {
         cursor: pointer;
         transform: translateY(-20px);
         background-color: pink;
       }
+    }
+  }
+
+  @for $index from 1 through $days-in-month {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
     }
   }
 
