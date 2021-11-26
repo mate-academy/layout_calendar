@@ -1,0 +1,50 @@
+$days:
+  "mon" 0,
+  "tue" itemMargin(1),
+  "wed" itemMargin(2),
+  "thu" itemMargin(3),
+  "fri" itemMargin(4),
+  "sat" itemMargin(5),
+  "sun" itemMargin(6);
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: itemMargin(7);
+  gap: $gap;
+
+  @each $start-day, $margin in $days {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: #{$margin};
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-last-child(-n + #{31 - $index}) {
+      display: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform 0.5s;
+    @include square($cell-size);
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
