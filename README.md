@@ -1,17 +1,17 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://rom911.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://rom911.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
-- Write styles in `src/styles/main.scss` instead of `src/style.css`.
+Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
 ___
 
 ## Task
-Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
+- Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
 - Create a markup for the calendar block with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
