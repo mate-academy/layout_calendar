@@ -1,0 +1,47 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $size-container;
+  gap: $size-gap;
+  margin: 0 auto;
+
+  &__element {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    width: $size-column;
+    height: $size-column;
+    border: 1px solid black;
+    background-color: #eee;
+
+    @include flex-element;
+    box-sizing: border-box;
+
+    counter-increment: section;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: pink;
+    }
+  }
+
+  @for $nthDay from 1 through 31 {
+    &__element:nth-child(#{$nthDay})::before {
+      content: "#{$nthDay}";
+    }
+  }
+
+  @each $day, $count in $week-days {
+    &__element:first-child {
+      margin-left: ($size-column + $size-gap) * $count;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &__element:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
