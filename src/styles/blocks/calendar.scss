@@ -1,0 +1,45 @@
+@import "./utils/variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $size * 7 + 7px;
+
+  @for $index from 1 through 31 {
+    &__day#{$index} {
+      @include square($size);
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background-color: #eee;
+      border: 2px solid black;
+      color: black;
+      padding: 10px;
+    }
+
+    &__day#{$index}:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      transition-duration: 0.5s;
+    }
+
+    &__day#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @each $day, $margin in $days {
+    &__start--day-#{$day} &__day1 {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &__month--length-#{$index} .day-length:nth-child(1n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
