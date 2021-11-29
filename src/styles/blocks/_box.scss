@@ -1,0 +1,52 @@
+@import "../utils/varibles";
+@import "../utils/mixins";
+
+.calendar {
+  padding: $vertical-padding $horizontal-padding;
+  margin: 0 auto;
+  display: flex;
+  width: ($option-size * 7) + ($gap * 6) + (2 * $horizontal-padding);
+  gap: 1px;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  &__option {
+    @include option($option-size);
+
+    display: flex;
+    background-color: #eee;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transition: all 500ms;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+      content: '#{$i}';
+      color: black;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY($vertical-movement);
+    }
+  }
+
+  $days: 'mon' 0, 'tue' 101px, 'wed' 202px, 'thu' 303px, 'fri' 404px, 'sat' 505px, 'sun' 606px;
+  @each $day, $shift in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
+    }
+  }
+}
+
+
