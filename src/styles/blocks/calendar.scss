@@ -1,12 +1,12 @@
 .calendar {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    width: $width__calendar;
-    padding-top: 50px;
-    gap: $gap__day;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: $width__calendar;
+  padding-top: 50px;
+  gap: $gap__day;
 
-    &__day {
+  &__day {
     box-sizing: border-box;
     width: $border__day;
     height: $border__day;
@@ -25,20 +25,20 @@
       }
     }
   }
-    &__day:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-    @each $day, $shift in $week {
-      &--day--#{$day} &__day:first-child {
-        margin-left: $shift;
-      }
-    }
-    @for $month-length from 28 through 31 {
-      &--month-length--#{$month-length} &__day:nth-last-child( -n + #{$max_days - $month-length}) {
-        display: none;
-      }
-
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+  @each $day, $shift in $week {
+    &--day--#{$day} &__day:first-child {
+      margin-left: $shift;
     }
   }
+  @for $month-length from 28 through 31 {
+     &--month-length--#{$month-length} &__day:nth-last-child( -n + #{$max_days - $month-length}) {
+       display: none;
+     }
+
+  }
+}
