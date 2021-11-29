@@ -1,3 +1,73 @@
+$month-length: 29;
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+h1 {
+  display: none;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 711px;
+  max-width: 711px;
+  gap: 1px;
+  padding: 10px;
+  border: 1px solid blue;
+
+  &_day {
+    height: 98px;
+    width: 98px;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+    transition-property: bottom, background-color;
+
+    &:hover {
+      cursor: pointer;
+      position: relative;
+      background-color: pink;
+      bottom: 20px;
+    }
+  }
+
+  $week:
+    "--mon" 0,
+    "--tue" 101,
+    "--wed" 202,
+    "--thu" 303,
+    "--fri" 404,
+    "--sat" 505,
+    "--sun" 606;
+
+  @each $day-of-week, $gap-to-left in $week {
+    &#{$day-of-week} :nth-child(1) {
+      margin-left: #{$gap-to-left}px;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &_day:nth-child(#{$index})::before {
+      display: block;
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @for $index from $month-length + 1 through 32 {
+    &_day:nth-child(#{$index}) {
+      display: none;
+    }
+  }
 }
