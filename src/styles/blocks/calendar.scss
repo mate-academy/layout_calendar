@@ -8,33 +8,25 @@
   padding: $padding-value;
 
   @each $day, $index in $start-day {
-    &--start-day_#{$day} :nth-child(1) {
+    &--start-day-#{$day} :first-child {
       margin-left: ($field-size + $gap-value) * ($index - 1);
     }
   }
 
-  // @each $day, $index in $start-day {
-  //   &--start-day_#{$day} :nth-child(-n + #{$index - 1}) {
-  //     display: none;
-  //   }
-  // }
-
   @for $month-length from 28 through 31 {
-    &--month-length_#{$month-length} :nth-child(n + #{$month-length + 1}) {
+    &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
 
   &__day {
     @include square($field-size);
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     background-color: $color-grey;
-    transition: 0.5s;
+    transition: transform 0.5s;
 
     &:hover {
       background-color: #ffc0cb;
