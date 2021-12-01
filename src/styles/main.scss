@@ -1,4 +1,14 @@
-$month-length: 29;
+$month-length: 30;
+$size-cell: 100px;
+$gap-cell: 1px;
+$padding-calendar: 10px;
+
+@function max-width-calendar($size-cell, $gap-cell) {
+  @return
+    7 * $size-cell +
+    6 * $gap-cell +
+    2 * ($padding-calendar);
+}
 
 body {
   margin: 0;
@@ -6,25 +16,21 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-
-}
-
-h1 {
-  display: none;
+  background-color: #222;
+  min-width: max-width-calendar($size-cell, $gap-cell);
 }
 
 .month {
   display: flex;
   flex-wrap: wrap;
-  min-width: 711px;
-  max-width: 711px;
-  gap: 1px;
-  padding: 10px;
-  border: 1px solid blue;
+  max-width: max-width-calendar($size-cell, $gap-cell);
+  gap: $gap-cell;
+  padding: $padding-calendar;
+  border-radius: 1px;
 
   &_day {
-    height: 98px;
-    width: 98px;
+    height: $size-cell;
+    width: $size-cell;
     background-color: #eee;
     border: 1px solid black;
     display: flex;
@@ -32,6 +38,7 @@ h1 {
     justify-content: center;
     transition-duration: 0.5s;
     transition-property: bottom, background-color;
+    box-sizing: border-box;
 
     &:hover {
       cursor: pointer;
@@ -43,16 +50,16 @@ h1 {
 
   $week:
     "--mon" 0,
-    "--tue" 101,
-    "--wed" 202,
-    "--thu" 303,
-    "--fri" 404,
-    "--sat" 505,
-    "--sun" 606;
+    "--tue" 1,
+    "--wed" 2,
+    "--thu" 3,
+    "--fri" 4,
+    "--sat" 5,
+    "--sun" 6;
 
-  @each $day-of-week, $gap-to-left in $week {
-    &#{$day-of-week} :nth-child(1) {
-      margin-left: #{$gap-to-left}px;
+  @each $day-of-week, $num-of-week in $week {
+    &_day#{$day-of-week} :first-child {
+      margin-left: ($num-of-week * ($size-cell + 1));
     }
   }
 
@@ -70,4 +77,11 @@ h1 {
       display: none;
     }
   }
+
+  @for $index from $month-length + 1 through 31 {
+    &_day:nth-child(#{$index}) {
+      display: none;
+    }
+  }
+
 }
