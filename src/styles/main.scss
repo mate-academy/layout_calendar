@@ -42,23 +42,23 @@ body {
       }
     }
 
-    @each $name, $day in $days {
-      &--start-day--#{$name} {
-        margin-left: ($calendar-size * $day) + ($gap * $day);
-      }
-    }
-
-    @for $index from 28 through 31 {
-      &:nth-child(n + 32) {
-        display: none;
-      }
-    }
-
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
       transition-duration: 0.5s;
+    }
+  }
+  
+  @each $name, $day in $days {
+    &--start-day--#{$day + 1} .calendar__day:first-child {
+      margin-left: ($calendar-size * $day) + ($gap * $day);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} .calendar__day:nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 }
