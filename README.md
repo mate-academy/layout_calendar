@@ -1,7 +1,6 @@
 # Calendar
 
 - [DEMO LINK](https://lanebx.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://lanebx.github.io/layout_calendar/report/html_report/)
 
 
 ## Task
