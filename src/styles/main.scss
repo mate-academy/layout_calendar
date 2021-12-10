@@ -1,4 +1,3 @@
-$month-length: 29;
 $start-day: 102px;
 
 body {
@@ -15,11 +14,13 @@ body {
   padding: 10px;
   width: 727px;
 
-  &--#{$month-length} {
-    @for $index from $month-length through 31 {
-      .calendar-day:nth-child(#{$index + 1}) {
-        display: none;
-      };
+  @for $index from 28 to 31 {
+    &--#{$index} {
+      @for $index from $index + 1 through 31 {
+        .calendar-day:nth-child(#{$index}) {
+          display: none;
+        };
+      }
     }
   }
 
