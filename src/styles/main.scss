@@ -1,3 +1,40 @@
-body {
-  margin: 0;
+$cell-size: 100px;
+$width-size: 7 * $cell-size + 50px;
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width-size;
+  margin: auto;
+  padding: 10px;
+  counter-reset: section;
+}
+
+.calendar__number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  width: $cell-size;
+  height: $cell-size;
+  border: 1px solid #000;
+  background-color: #eee;
+  margin-top: 1px;
+  margin-left: 1px;
+}
+
+.calendar__number::before {
+  counter-increment: section;
+  content: "" counter(section) "";
+}
+
+.calendar__number:hover {
+  transform: translateY(-20px);
+  background-color: pink;
 }
