@@ -10,6 +10,8 @@ ___
 - This task does not have tests so you need to check if it works as expected manually.
 ___
 
+## ❗️❗️❗️ DON'T FORGET TO PROOFREAD YOUR CODE WITH [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md) BEFORE SENDING YOUR PULL REQUEST❗️❗️❗️
+
 ## Task
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
