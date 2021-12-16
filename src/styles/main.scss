@@ -12,10 +12,9 @@ html {
   width: $width-size;
   margin: auto;
   padding: 10px;
-  counter-reset: section;
 }
 
-.calendar__number {
+.calendar-day {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,12 +28,34 @@ html {
   margin-left: 1px;
 }
 
-.calendar__number::before {
-  counter-increment: section;
-  content: "" counter(section) "";
-}
-
-.calendar__number:hover {
+.calendar-day:hover {
   transform: translateY(-20px);
   background-color: pink;
+}
+
+@for $data from 1 through 31 {
+  .calendar-day:nth-child(#{$data}):before {
+    content: "#{$data}";
+  }
+}
+
+$days:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day, $shift in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: $shift;
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-lenght-31 :nth-child(n + #{$index+1}) {
+    display: none;
+  }
 }
