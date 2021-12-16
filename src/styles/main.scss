@@ -70,7 +70,7 @@ $base-bg-color: #eee;
 
 @for $index from 28 through 30 {
   @for $i from $index through 30 {
-    .day--month-length--#{$index}:nth-child(#{$i + 1}) {
+    .calendar--month-length--#{$index}>.calendar__day:nth-child(#{$i + 1}) {
       display: none;
     }
   }
@@ -86,7 +86,7 @@ $day-of-week:
   "sun" 7;
 
 @each $day, $number in $day-of-week {
-  .day--start-day--#{$day} {
+  .calendar--start-day--#{$day}>.calendar__day:first-child {
     margin-left: ($day-width + $day-gap) * ($number - 1);
   }
 }
