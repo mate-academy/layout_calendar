@@ -32,22 +32,21 @@ body {
     @include square($cell-square);
     background-color: $bcg-color;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    transition: 0.5s;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.5s;
     }
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
         font-size: $main-size-text;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
       }
     }
   }
