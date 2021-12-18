@@ -46,16 +46,18 @@ body {
     background-color: #eee;
     border: $cell-width * 0.01 solid rgb(0, 0, 0);
     transition-duration: 0.5s;
+    &:nth-child(n) {
+      display: flex;
+      color: black;
+      font-size: $cell-width * 0.3;
+      justify-content: center;
+      align-items: center;
+      height: $cell-width;
+    }
 
     @for $index from 1 through 31 {
       &--#{$index}::before {
         content: "#{$index}";
-        display: flex;
-        color: black;
-        font-size: $cell-width * 0.3;
-        justify-content: center;
-        align-items: center;
-        height: $cell-width;
       }
     }
 
