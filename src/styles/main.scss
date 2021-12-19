@@ -1,3 +1,46 @@
+$cell-size: 100px;
+
 body {
   margin: 0;
+}
+
+.wrap {
+  width: 7 * $cell-size;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: $cell-size;
+  width: $cell-size;
+  gap: 1px;
+  background-color: #eee;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(0, -20px);
+    transition: 0.5s;
+    background-color: #ffc0cb ;
+  }
+
+  &:first-child {
+    margin-left: 6 * $cell-size;
+  }
+
+  &:nth-last-child(-n+2) {
+    display: none;
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index}):before {
+      content: "#{$index}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
 }
