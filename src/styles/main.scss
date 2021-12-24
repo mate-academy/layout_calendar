@@ -24,7 +24,7 @@ $month-length-list: 28, 29, 30, 31;
 }
 
 @for $i from 1 through 31 {
-  .day-#{$i} {
+  .day {
     display: flex;
     width: 100px;
     height: 100px;
@@ -34,14 +34,14 @@ $month-length-list: 28, 29, 30, 31;
     font-size: 30px;
     transition: color 0.5s, transform 0.5s;
   }
-  .day-#{$i}:before {
+  .day:nth-child(#{$i}):before {
     content: "#{$i}";
     color: #000;
     font-weight: bold;
     line-height: 100px;
     margin: 0 auto;
   }
-  .day-#{$i}:hover {
+  .day:nth-child(#{$i}):hover {
     cursor: pointer;
     background-color: pink;
     transform: translate(0, -20px);
@@ -50,7 +50,7 @@ $month-length-list: 28, 29, 30, 31;
 
 @each $start-day, $value in $start-days {
   .calendar--#{$start-day} {
-    .day-1 {
+    .day:first-child {
       margin-left: 101px*$value;
     }
   }
@@ -58,7 +58,7 @@ $month-length-list: 28, 29, 30, 31;
 
 @for $i from 28 to 32 {
   .calendar--#{$i} {
-    div:nth-child(n+#{$i+1}) {
+    .day:nth-child(n+#{$i+1}) {
       display: none;
     }
   }
