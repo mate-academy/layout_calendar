@@ -8,15 +8,19 @@ $number-of-columns: 7;
 $gap-between-days: 1px;
 $gap-sum: ($gap-between-days * $number-of-columns) - $gap-between-days;
 
-$days: "mon" 0, "tue" $cell-size * 1 + $gap-sum - 5,
-  "wed" $cell-size * 2 + $gap-sum - 4, "thu" $cell-size * 3 + $gap-sum - 3,
-  "fri" $cell-size * 4 + $gap-sum - 2, "sat" $cell-size * 5 + $gap-sum - 1,
-  "sun" $cell-size * 6 + $gap-sum;
-
+// defining size of my squere
 @mixin square($size) {
   width: $size;
   height: $size;
 }
+
+$days: "mon" 0,
+  "tue" $cell-size * 1 + $gap-sum - 5,
+  "wed" $cell-size * 2 + $gap-sum - 4,
+  "thu" $cell-size * 3 + $gap-sum - 3,
+  "fri" $cell-size * 4 + $gap-sum - 2,
+  "sat" $cell-size * 5 + $gap-sum - 1,
+  "sun" $cell-size * 6 + $gap-sum;
 
 .calendar {
   display: flex;
@@ -27,47 +31,39 @@ $days: "mon" 0, "tue" $cell-size * 1 + $gap-sum - 5,
 
   // defining start position for my calendar
   @each $day-of-week, $day-position-correction in $days {
-    &--start-day-#{$day-of-week} > .calendar__day--1 {
+    &--start-day-#{$day-of-week} :first-child {
       margin-left: $day-position-correction;
     }
   }
 
-  // only showing days that defined by &--month-length-#{$days}
-  @for $days from 1 to 32 {
-    &--month-length-#{$days} > .calendar__day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-      background-color: #eee;
-      border: 1px solid black;
-      @include square($cell-size);
-
-      @for $index from 1 to 31 + 1 {
-        &--#{$index}::after {
-          content: "#{$index}";
-          color: black;
-          font-size: 30px;
-        }
-      }
+  // match haw many days in this month by calendar--month-length-30 class
+  @for $days from 1 through 31 {
+    &--month-length-#{$days} :nth-child(n + #{$days + 1}) {
+      display: none;
     }
   }
 
-  // &__day {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   box-sizing: border-box;
-  //   background-color: #eee;
-  //   border: 1px solid black;
-  //   @include square($cell-size);
+  // put days count on cells
+  @for $day from 1 through 31 {
+    & :nth-child(#{$day})::after {
+      content: "#{$day}";
+      font-size: 30px;
+    }
+  }
 
-  //   @for $index from 1 to 31 + 1 {
-  //     &--#{$index}::after {
-  //       content: "#{$index}";
-  //       color: black;
-  //       font-size: 30px;
-  //     }
-  //   }
-  // }
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transform: translateY(0);
+    border: 1px solid black;
+    @include square($cell-size);
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+      transform: translateY(-20px) scale(1.15);
+      background-color: pink;
+    }
+  }
 }
