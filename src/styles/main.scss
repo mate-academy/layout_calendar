@@ -37,8 +37,10 @@ $days: "mon" 0,
   }
 
   // match haw many days in this month by calendar--month-length-30 class
-  @for $days from 1 through 31 {
+  @for $days from 28 through 31 {
     &--month-length-#{$days} :nth-child(n + #{$days + 1}) {
+
+      // src = http://codeguide.academy/html-css.html#css-order
       position: absolute;
       width: 1px;
       height: 1px;
@@ -73,6 +75,7 @@ $days: "mon" 0,
     &:hover {
       transform: translateY(-20px) scale(1.15);
       background-color: pink;
+      z-index: 1;
     }
   }
 }
