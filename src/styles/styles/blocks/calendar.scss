@@ -1,0 +1,55 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-between-days;
+  width: $cell-size * $number-of-columns + $gap-sum;
+  padding: 10px;
+
+  // defining start position for my calendar
+  @each $day-of-week, $day-position-correction in $days {
+    &--start-day-#{$day-of-week} :first-child {
+      margin-left: $day-position-correction;
+    }
+  }
+
+  // match haw many days in this month by calendar--month-length-30 class
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} :nth-child(n + #{$days + 1}) {
+
+      // src = http://codeguide.academy/html-css.html#css-order
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      border: 0;
+      padding: 0;
+      white-space: nowrap;
+      clip-path: inset(100%);
+      clip: rect(0 0 0 0);
+      overflow: hidden;
+    }
+  }
+
+  // put days count on cells
+  @for $day from 1 through 31 {
+    & :nth-child(#{$day})::after {
+      content: "#{$day}";
+      font-size: 30px;
+    }
+  }
+
+  &__day {
+    @extend %flex-justify-center;
+    box-sizing: border-box;
+    transform: translateY(0);
+    border: 1px solid black;
+    @include square($cell-size);
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+      transform: translateY(-20px) scale(1.15);
+      background-color: pink;
+      z-index: 1;
+    }
+  }
+}
