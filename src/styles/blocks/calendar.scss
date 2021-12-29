@@ -1,0 +1,47 @@
+.calendar {
+  width: $day-size * 7 + 6 * $gapping;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+}
+
+@for $var from 1 through 31 {
+  .day--#{$var} {
+    @extend %days;
+
+    &::before {
+      @include numero();
+
+      content: "#{$var}";
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
+
+$days-of-week:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day-of-week, $marg in $days-of-week {
+  .calendar--start-day--#{$day-of-week}>.day--1 {
+    margin-left: $marg;
+  }
+}
+
+@for $last-day from 29 through 31 {
+  @for $l-day from $last-day to 32 {
+    .calendar--month-length--#{$last-day}>.day--#{$l-day + 1} {
+      display: none;
+    }
+  }
+}
