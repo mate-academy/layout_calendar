@@ -1,0 +1,32 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cells-gap;
+
+  width: getCalendarWidth($cell-size, $calendar-padding);
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} {
+      & > .day:first-child {
+        margin-left: ($cell-size + $cells-gap) * $number;
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      & > :nth-child(-n + #{$index}) {
+        display: flex;
+      }
+    }
+  }
+}
