@@ -1,0 +1,43 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-between-days;
+  width: $square-size * $number-of-columns + $gap-sum;
+  padding: 10px;
+
+  // defining start position for my calendar
+  @each $day-of-week, $day-position-correction in $days {
+    &--start-day-#{$day-of-week} :first-child {
+      margin-left: $day-position-correction;
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} :nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    & :nth-child(#{$day})::after {
+      content: "#{$day}";
+      font-size: 30px;
+    }
+  }
+
+  &__day {
+    @extend %flex-position-center;
+    @include square($square-size);
+    box-sizing: border-box;
+
+    border: 1px solid black;
+    transform: translateY(0);
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+      transform: translateY(-20px) scale(1.15);
+      background-color: pink;
+      z-index: 1;
+    }
+  }
+}
