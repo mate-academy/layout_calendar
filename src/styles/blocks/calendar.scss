@@ -1,0 +1,47 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gapWidth;
+
+  margin: 0 auto;
+  width: $widthElement * $countInRow + ($countInRow - 1) * $gapWidth;
+  padding: $paddingValue;
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} &__day:nth-last-child(-n + #{getCount($index)}) {
+      display: none;
+    }
+  }
+
+  @each $dayName, $countMiss in $days {
+    &--start-day--#{$dayName} &__day:first-child {
+      margin-left: getLeftMargin($countMiss);
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 1px solid $border-color;
+    background-color: $background-color;
+    transition: color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "" + getNumber($index);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $background-color-hover;
+    }
+  }
+}
