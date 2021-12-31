@@ -2,13 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding: 10px;
+  padding: $paddings;
   gap: $gap;
 
   width: $dayWidth * 7 + $gap * 6 + $paddings * 2;
 
-
-  /* #region display none */
   &--month-length {
     @for $lastDay from 28 through 31 {
       &--#{$lastDay} >:nth-child(n+ #{$lastDay + 1}) {
@@ -16,26 +14,14 @@
       }
     }
   }
-  /* #endregion */
 
-/* #region strat day margin */
   &--start-day {
-    $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sut" 5,
-    "sun" 6;
-
     @each $startDayName, $startDayNum in $days {
       &--#{$startDayName}>:first-child {
         margin-left: ($dayWidth + $gap) * $startDayNum;
       }
     }
   }
-/* #endregion */
 
   &__day {
     display: flex;
@@ -54,13 +40,11 @@
 
     transition: 0.5s;
 
-    /* #region numbers in cells */
     @for $index from 1 through $daysAmount {
       &:nth-child(n + #{$index})::before {
         content: "#{$index}";
       }
     }
-    /* #endregion */
 
     &:hover {
       cursor: pointer;
