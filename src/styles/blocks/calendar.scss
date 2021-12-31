@@ -1,38 +1,37 @@
-@import "../utils/variables";
+@import "../utils/_variables";
+@import "../utils/_extends";
 
 .calendar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  justify-content: flex-start;
   align-items: center;
-  width: 713px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap-block-day;
+  width: ($width-height-block-day * 7) + (7 * $gap-block-day);
+
   :first-child {
-    margin-left: 612px;
+    margin-left: (6 * $width-height-block-day) + (6 * $gap-block-day) ;
   }
 }
 
 @for $i from 1 through 31 {
-  .day#{$i}:before {
+  .calendar__day:nth-child(#{$i}):before {
     content: "#{$i}";
   }
 }
 
 .calendar__day {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @extend %flex-param;
   width: $width-height-block-day;
   height: $width-height-block-day;
-  margin-right: 1px;
-  margin-bottom: 1px;
   box-sizing: border-box;
   border: 1px solid $border-color-block-day;
   background-color: $bg-block-day;
+  cursor: pointer;
+
   &:hover {
     background: $bg-block-day--hover;
     transition: 0.5s;
-    cursor: pointer;
     transform: translateY(-20px);
   }
 }
