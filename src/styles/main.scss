@@ -1,3 +1,77 @@
-body {
+body,
+li,
+ul {
   margin: 0;
+  padding: 0;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  min-width: 726px;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 706px;
+  padding: 10px;
+  gap: 1px;
+  list-style: none;
+  align-content: center;
+  &__day {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 100px;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day}):before {
+      content: "#{$day}";
+    }
+  }
+}
+ 
+.calendar__day:hover {
+  transform: translateY(-20px);
+  background-color: pink;
+}
+
+.calendar--month-length-28 > .calendar__day:nth-child(n + 29),
+.calendar--month-length-29 > .calendar__day:nth-child(n + 30),
+.calendar--month-length-30 > .calendar__day:nth-child(n + 31) {
+  display: none;
+}
+
+.calendar--begins-on-tuesday > .calendar__day:first-child {
+  margin-left: 101px;
+}
+
+.calendar--begins-on-wednesday > .calendar__day:first-child {
+  margin-left: 202px;
+}
+
+.calendar--begins-on-thirday > .calendar__day:first-child {
+  margin-left: 303px;
+}
+
+.calendar--begins-on-friday > .calendar__day:first-child {
+  margin-left: 404px;
+}
+
+.calendar--begins-on-saturday > .calendar__day:first-child {
+  margin-left: 505px;
+}
+
+.calendar--begins-on-sunday > .calendar__day:first-child {
+  margin-left: 606px;
 }
