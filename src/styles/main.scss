@@ -1,3 +1,51 @@
+$max-day: 31;
+$start__day: 4;
+
+@mixin square {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  font-weight: normal;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: 800px;
+  gap: 0;
+  margin: 0 auto;
+}
+
+.calendar__number {
+  position: relative;
+  @include square;
+  border: 1px solid transparent;
+
+  @for $index from 1 through $max-day {
+    &:nth-child(#{$start__day - 1 + $index})::before {
+      content: "#{$index}";
+      @include square;
+      border: 1px solid black;
+      box-sizing: border-box;
+      background-color: #eee;
+      transition-duration: 0.5s;
+      transition-property: margin-bottom;
+    }
+  }
+
+  &:hover::before {
+    margin-bottom: 20px;
+    cursor: pointer;
+    background-color: #ffabbf;
+  }
 }
