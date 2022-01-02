@@ -1,3 +1,84 @@
-body {
+$size: 100px;
+$day-border: black;
+$day-color: #eee;
+$day-color-hover: #588cb8;
+$calendar-padding: 10px;
+$calendar-gap: 1px;
+$calendar-width: 7 * $size + $calendar-gap * (7 - 1) + $calendar-padding * 2;
+$font-size: 30px;
+
+@mixin squere ($size) {
+  width: $size;
+  height: $size;
+}
+
+%day-tool {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $font-size;
+  border: 1px solid $day-border;
+  background-color: $day-color;
+}
+
+.body {
   margin: 0;
+}
+
+.container {
+  padding: 200px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  box-sizing: border-box;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  &--month-length {
+    @for $index from 28 through 31 {
+      &--#{$index} > :nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    $days: "mo" 0, "tu" 1, "we" 2, "th" 3, "fr" 4, "sa" 5, "su" 6;
+
+    @each $day-of-week, $offset in $days {
+      &--#{$day-of-week} > :first-child {
+        margin-left: ($size + $calendar-gap) * $offset;
+      }
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &__day-#{$index} {
+      @include squere($size);
+      @extend %day-tool;
+
+      box-sizing: border-box;
+      position: relative;
+
+      background-color: $day-color;
+      transition: background-color 0.5s, transform 0.5s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $day-color-hover;
+        transform: translateY(-20px);
+      }
+    }
+    &__day-#{$index}::before {
+      content: "#{$index}";
+      top: ($size - $font-size) / 2;
+      text-align: center;
+      width: 100%;
+      position: absolute;
+    }
+  }
 }
