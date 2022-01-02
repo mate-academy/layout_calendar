@@ -1,11 +1,12 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: $max_width;
+  align-content: center;
+  width: $CalendarWidth;
   padding: $padding;
   gap: $gap;
   list-style: none;
-  align-content: center;
+
   
   &__day {
     width: $width;
@@ -15,10 +16,8 @@
     border: 1px solid #000;
     text-align: center;
     line-height: $height;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
-    transition: 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
       transform: translateY($shiftEffect);
@@ -39,7 +38,7 @@
   }
 
   @each $day, $margin in $days {
-    &--begins-on-#{$day} > .calendar__day:first-child {
+    &--begins-on-#{$day} > &__day:first-child {
       margin-left: $margin;
     }
   }
