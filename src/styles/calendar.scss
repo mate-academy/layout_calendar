@@ -1,0 +1,57 @@
+.calendar {
+  box-sizing: border-box;
+  padding: ($paddings-x / 2);
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    width: $cell-size * $col-count + $gap-x * ($col-count - 1) + $paddings-x;
+    gap: $gap-x;
+
+    $week-margin:
+      "mon" 0,
+      "tue" $col-margin-left,
+      "wed" $col-margin-left * 2,
+      "thu" $col-margin-left * 3,
+      "fri" $col-margin-left * 4,
+      "sat" $col-margin-left * 5,
+      "sun" $col-margin-left * 6;
+
+    @each $day, $day-margin in $week-margin {
+      &-start-day--#{$day} > :first-child {
+        margin-left: $day-margin;
+      }
+    }
+
+    @for $length from 28 through $days-count {
+      &-month-length--#{$length} > :nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @include squere($cell-size);
+
+    box-sizing: border-box;
+    border: 1px solid #000;
+
+    text-align: center;
+    line-height: $cell-size;
+    background-color: #eee;
+
+    transition: 0.5s, background-color 0.5s;
+
+    @for $index from 1 through $days-count {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+  }
+}
