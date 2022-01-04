@@ -1,4 +1,5 @@
 .pageCalendar__day {
+
   box-sizing: border-box;
   width: $cell-width;
   height: $cell-width;
@@ -33,17 +34,18 @@
       margin-left: #{$margin};
     }
   }
+
+  &:hover {
+    cursor: pointer;
+    transform: translate(0, -20px);
+    background-color: pink;
+    transition-duration: 500ms;
+  }
+
 }
 
 @for $index from 28 through 31 {
   .pageCalendar--#{$index} :nth-child(n+#{$index+1}) {
     display: none;
   }
-}
-
-.pageCalendar__day:hover {
-  cursor: pointer;
-  transform: translate(0, -20px);
-  background-color: pink;
-  transition-duration: 500ms;
 }
