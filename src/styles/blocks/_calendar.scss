@@ -19,28 +19,27 @@
       background-color: #ffc0cb;
     }
   }
-}
-@for $num from 1 through 31 {
-  &__day:nth-child(#{$num})::before {
-    content: "#{$num}";
-  }
-}
 
-@for $length from 28 to 31 {
-  $hidden-day: 31 - $length;
-  &--month-length--#{$length} {
-    .calendar__day:nth-last-child(-n + #{$hidden-day}) {
-      display: none;
+  @for $num from 1 through 31 {
+    &__day:nth-child(#{$num})::before {
+      content: "#{$num}";
     }
   }
-}
 
-@each $day, $num in $days-of-week {
-  &--start-day-#{$day} {
-    .calendar__day:nth-child(1) {
-      margin-left: calc(
-        (#{$num} - 1) * #{$cell-size} + (#{$gap-size} * (#{$num} - 1))
-      );
+  @for $length from 28 to 31 {
+    $hidden-day: 31 - $length;
+    &--month-length--#{$length} {
+      .calendar__day:nth-last-child(-n + #{$hidden-day}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $num in $days-of-week {
+    &--start-day-#{$day} {
+      .calendar__day:nth-child(1) {
+       margin-left: calc((#{$num} - 1) * #{$cell-size} + (#{$gap-size} * (#{$num} - 1)));
+      }
     }
   }
 }
