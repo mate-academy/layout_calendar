@@ -1,0 +1,50 @@
+@import "../utils/_variables";
+@import "../utils/_extends";
+
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap-block-day;
+  width: ($width-height-block-day * 7) + (7 * $gap-block-day);
+
+  @for $length from 28 to 31 {
+    &--month-length--#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $number in $days-of-the-week {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc((#{$number} - 1) * #{$width-height-block-day}
+        + (#{$gap-block-day} * (#{$number} - 1)));
+      }
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}):before {
+    content: "#{$i}";
+  }
+}
+
+.calendar__day {
+  @extend %flex-param;
+  width: $width-height-block-day;
+  height: $width-height-block-day;
+  box-sizing: border-box;
+  border: 1px solid $border-color-block-day;
+  background-color: $bg-block-day;
+  cursor: pointer;
+  transition: color 0.5s;
+
+  &:hover {
+    background: $bg-block-day--hover;
+    transform: translateY(-20px);
+  }
+}
