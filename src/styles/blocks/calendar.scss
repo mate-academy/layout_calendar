@@ -9,14 +9,32 @@
   gap: $gap-block-day;
   width: ($width-height-block-day * 7) + (7 * $gap-block-day);
 
-  :first-child {
-    margin-left: (6 * $width-height-block-day) + (6 * $gap-block-day) ;
-  }
+  //:first-child {
+  //  margin-left: (6 * $width-height-block-day) + (6 * $gap-block-day) ;
+  //}
 }
 
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i}):before {
     content: "#{$i}";
+  }
+}
+
+@for $length from 28 to 31 {
+  $hidden-day: 21 - $length;
+  &--month-length--#{$length} {
+    .calendar__day:nth-last-child(-n + #{$hidden-day}) {
+      display: none;
+    }
+  }
+}
+
+@each $day, $number in $days-of-the-week {
+  &--start-day-#{$day} {
+    .calendar__day:nth-child(1) {
+      margin-left: calc((#{$number} - 1) * #{$width-height-block-day}
+      + (#{$gap-block-day} * (#{$number} - 1)));
+    }
   }
 }
 
