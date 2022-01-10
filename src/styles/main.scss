@@ -9,9 +9,11 @@ $padding: 10px;
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  padding: 0;
 }
 
 .calendar {
+  position: f;
   box-sizing: content-box;
   padding: $padding;
   display: flex;
@@ -36,7 +38,7 @@ body {
   }
 
   @for $length from 28 to 31 {
-    &--month-length-#{$length} :nth-child(n + #{$length} + 1) {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
@@ -49,6 +51,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    transition-duration: 0.5s;
 
     @for $number from 1 to 32 {
       &:nth-child(#{$number})::before {
@@ -60,7 +63,6 @@ body {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
   }
 }
