@@ -11,6 +11,7 @@ body {
   width: 720px;
   margin: 0 auto;
   gap: 1px;
+  counter-reset: items;
 
   $first-day:
     "mon" 0,
@@ -23,7 +24,7 @@ body {
 
   @each $name-day, $number-day in $first-day {
     &--start--day--#{$name-day} {
-      .day:first-child {
+      .calendar__day:first-child {
         margin-left: calc(103px * #{$number-day});
       }
     }
@@ -37,19 +38,13 @@ body {
 
   @each $max-day, $number-day in $month-length {
     &--month-length--#{$max-day} {
-      .day:nth-last-child(-1n + #{$number-day}) {
+      .calendar__day:nth-last-child(-1n + #{$number-day}) {
         display: none;
       }
     }
   }
 
-  @for $index from 1 through 31 {
-    &__day#{$index}::before {
-      content: "#{$index}";
-    }
-  }
-
-  .day {
+  &__day {
     display: flex;
     background-color: #eee;
     width: 100px;
@@ -58,6 +53,11 @@ body {
     justify-content: center;
     align-items: center;
     transition: transform 500ms;
+
+    &::before {
+      content: counter(items);
+      counter-increment: items;
+    }
 
     &:hover {
       background-color: #ffabbf;
