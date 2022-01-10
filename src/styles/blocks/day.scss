@@ -1,0 +1,24 @@
+.day {
+  box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  background-color: $background;
+  border: $border;
+  text-align: center;
+  line-height: $day-size;
+
+  &:hover {
+    background-color: $background-hover;
+    transform: translateY(-20px);
+    transition: 500ms;
+    cursor: pointer;
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index}) {
+      &::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
