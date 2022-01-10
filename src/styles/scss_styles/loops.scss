@@ -1,0 +1,36 @@
+@import "./collection.scss";
+
+@for $day_num from 1 through 31 {
+  .calendar__day:nth-child(#{$day_num})::before {
+    content: "#{$day_num}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $font_size;
+  }
+
+  .calendar__day:nth-child(#{$day_num}) {
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+
+  .calendar__day:nth-child(#{$day_num}):hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}
+
+@each $numDay, $nameDay in $wDays {
+  .calendar--start-day--#{$nameDay} {
+    &__day:nth-child(1) {
+      margin-left: $base-shift * ($numDay - 1);
+    }
+  }
+}
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length--#{$lastDay} {
+    &__day:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
+  }
+}
