@@ -1,0 +1,23 @@
+
+  .calendar__day {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-cell;
+    @include square($size);
+    border: 1px solid $color-border;
+    transition-duration: 0.5s;
+  
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
+        content: "#{$day-number}";
+      }
+  
+      &:nth-child(#{$day-number}):hover {
+        background-color: $color-hover;
+        cursor: pointer;
+        transform: translateY(-20px);
+      }
+    }
+  }
