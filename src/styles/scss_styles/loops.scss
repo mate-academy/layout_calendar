@@ -1,3 +1,5 @@
+@import "./variables.scss";
+@import "./mixins.scss";
 @import "./collection.scss";
 
 @for $day_num from 1 through 31 {
@@ -21,7 +23,7 @@
 
 @each $numDay, $nameDay in $wDays {
   .calendar--start-day--#{$nameDay} {
-    &__day:nth-child(1) {
+    .calendar__day:nth-child(1) {
       margin-left: $base-shift * ($numDay - 1);
     }
   }
@@ -29,7 +31,7 @@
 
 @for $lastDay from 28 through 31 {
   .calendar--month-length--#{$lastDay} {
-    &__day:nth-child(n + #{$lastDay + 1}) {
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
       display: none;
     }
   }
