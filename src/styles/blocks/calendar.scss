@@ -1,0 +1,30 @@
+@import "../scss_styles/variables.scss";
+@import "../scss_styles/mixins.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: $padding;
+  width: ($part_size + $gap) * $week_days + ($padding * 2);
+  box-sizing: border-box;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @include cell_size($part_size);
+    border: 1px solid #000;
+    background-color: #eee;
+    box-sizing: border-box;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+}
