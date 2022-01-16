@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  gap: $gap;
+  padding: $padding;
+  width: $number-of-days * ($cell-size + $gap) + 2 * $padding;
+  flex-wrap: wrap;
+  
+  &__day:first-child {
+    margin-left: 0;
+  }
+
+  @each $day, $numDay in $week-days {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($cell-size + $gap) * ($numDay - 1);
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      .calendar__day:nth-child(n + #{$index+1}) {
+        display: none;
+      }
+    }
+  }
+}
