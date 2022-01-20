@@ -1,3 +1,71 @@
+$cell-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$colum: 7;
+$start-day:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  margin: 0 auto;
+  padding: $padding;
+  width: $padding * 2 + $colum * $gap + $colum * $cell-size;
+  gap: $gap;
+  display: flex;
+  flex-wrap: wrap;
+
+  @each $day, $num in $start-day {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $cell-size * ($colum - 1) + $gap * ($colum - 1);
+      }
+    }
+  }
+
+  @for $index from 1 to 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+  
+  @for $index from 28 to 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  &__day {
+    @include square($cell-size);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    transition-duration: 0.5s;
+  }
+  
+  &__day:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: pink;
+  }
 }
