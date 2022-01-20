@@ -1,0 +1,57 @@
+@import "../utils/variables.scss";
+@import "../utils/mixins.scss";
+@import "../utils/normalize.scss";
+@import "../utils/reset.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: solid #000 1px;
+    background-color: $day-color;
+    transition: 0.5s;
+
+    @include square($day-size);
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        display: flex;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $numDay in $month-start {
+    &--start-day-#{$day} :first-child {
+      margin-left: $margin-left * ($numDay - 1);
+    }
+  }
+
+  @for $index from 28 to 31 {
+    $hidden-day: 31 - $index;
+    &--month-length-#{$index} {
+      .calendar__day:nth-last-child(-n + #{$hidden-day}) {
+        display: none;
+      }
+    }
+  }
+}
