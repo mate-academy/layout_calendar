@@ -29,9 +29,11 @@ body {
   transition: transform 0.5s, background-color 0.5s;
 }
 
+/*
 .calendarDay:nth-child(1) {
   margin-left: 606px;
 }
+*/
 
 .calendarDay:hover {
   background-color: var(--calendarDayHoverBackground);
@@ -45,5 +47,31 @@ body {
     position: relative;
     top: 35px;
     content: "#{$i}";
+  }
+}
+
+@for $q from 28 to 32 {
+  .calendar_monthLength--#{$q} {
+    div:nth-child(n + #{$q + 1}) {
+      display: none;
+    }
+  }
+}
+
+$startDays: (
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6
+);
+
+@each $startDay, $num in $startDays {
+  .calendar_startDay--#{$startDay} {
+    div:first-child {
+      margin-left: 101px*$num;
+    }
   }
 }
