@@ -16,7 +16,7 @@
   width: $calendar-width;
 
   &__day {
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
@@ -26,9 +26,10 @@
 
     @include square($day-size);
 
-    @for $index from 0 through 31 {
-      &:nth-child(#{$index}):before {
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
+        display: flex;
       }
     }
 
@@ -45,9 +46,12 @@
     }
   }
 
-  @for $index from 28 through 31 {
-    &--month-length-#{$index} > :nth-child(-n + #{$index}) {
-      display: flex;
+  @for $index from 28 to 31 {
+    $hidden-day: 31 - $index;
+    &--month-length-#{$index} {
+      .calendar__day:nth-last-child(-n + #{$hidden-day}) {
+        display: none;
+      }
     }
   }
 }
