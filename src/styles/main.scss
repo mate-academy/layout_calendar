@@ -25,6 +25,12 @@ body {
   margin: auto;
   background-color: #fff;
 
+  @for $index from 28 through $month-length {
+    &--month-length--#{$index} > :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   &__cell {
     display: flex;
     justify-content: center;
