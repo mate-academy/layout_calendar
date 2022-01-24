@@ -3,13 +3,13 @@ $gap: 1px;
 $padding: 10px;
 $colum: 7;
 $start-day:
-  "mon" 1,
-  "tue" 2,
-  "wed" 3,
-  "thu" 4,
-  "fri" 5,
-  "sat" 6,
-  "sun" 7;
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 @mixin square($size) {
   width: $size;
@@ -31,7 +31,7 @@ body {
   @each $day, $num in $start-day {
     &--start-day--#{$day} {
       .calendar__day:first-child {
-        margin-left: $cell-size * ($colum - 1) + $gap * ($colum - 1);
+        margin-left: $cell-size * $num + $gap * $num;
       }
     }
   }
@@ -41,10 +41,13 @@ body {
       content: "#{$index}";
     }
   }
-  
-  @for $index from 28 to 31 {
-    &__day:nth-child(#{$index})::before {
-      content: "#{$index}";
+
+  @for $length from 28 to 31 {
+    $hidden-day: 31 - $length;
+    &--month-length--#{$length} {
+      .calendar__day:nth-last-child(-n + #{$hidden-day}) {
+        display: none;
+      }
     }
   }
 
