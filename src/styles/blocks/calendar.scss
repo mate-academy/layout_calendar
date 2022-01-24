@@ -30,23 +30,25 @@
 
     transition: transform 0.5s, background-color 0.5s;
 
+    &::before {
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
     @for $index from 1 to 32 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-
-        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
     @each $day, $column in $first-day {
       #{$parent}--start-day--#{$day} &:first-child {
-        margin-left: getWidth($column, $cell-size, $gap-size) + $gap-size;
+        margin-left: ($cell-size + $gap-size) * $column;
       }
     }
 
     @for $lenght from 28 to 32 {
-      #{$parent}--month-length-#{$lenght}
+      #{$parent}--month-length--#{$lenght}
       &:nth-last-child(-n + #{31 - $lenght}) {
         display: none;
       }
