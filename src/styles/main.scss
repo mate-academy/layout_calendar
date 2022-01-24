@@ -62,15 +62,9 @@ $days:
   }
 }
 
-$numbers: 
-  "28" 29,
-  "29" 30, 
-  "30" 31,
-  "31" 32;
-
-@each $day-number, $number in $numbers {
-  .calendar--month-length--#{$day-number} {
-    .calendar__day:nth-child(n + #{$number}) {
+@for $day from 28 through 31 {
+  .calendar--month-length--#{$day} {
+    .calendar__day:nth-child(n + #{$day+1}) {
       display: none;
     }
   }
