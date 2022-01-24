@@ -1,5 +1,4 @@
 .calendar {
-  $parent: &;
   $first-day:
     "mon" 0,
     "tue" 1,
@@ -16,6 +15,18 @@
   gap: $gap-size;
 
   max-width: getWidth($columns, $cell-size, $gap-size);
+
+  @for $lenght from 28 to 32 {
+    &--month-length--#{$lenght} > :nth-last-child(-n + #{31 - $lenght}) {
+      display: none;
+    }
+  }
+
+  @each $day, $column in $first-day {
+    &--start-day--#{$day} > :first-child {
+      margin-left: ($cell-size + $gap-size) * $column;
+    }
+  }
 
   &__cell {
     @include square($cell-size);
@@ -38,19 +49,6 @@
     @for $index from 1 to 32 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-      }
-    }
-
-    @each $day, $column in $first-day {
-      #{$parent}--start-day--#{$day} &:first-child {
-        margin-left: ($cell-size + $gap-size) * $column;
-      }
-    }
-
-    @for $lenght from 28 to 32 {
-      #{$parent}--month-length--#{$lenght}
-      &:nth-last-child(-n + #{31 - $lenght}) {
-        display: none;
       }
     }
 
