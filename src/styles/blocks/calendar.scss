@@ -2,14 +2,14 @@
   display: flex;
   gap: $gap;
   flex-wrap: wrap;
+  &__day {
+    position: relative;
+    @include square($size);
+    background-color: $cell-color;
+    border: 1px solid black;
+    transition: background-color 0.5s, transform 0.5s;
+  }
   @for $index from 1 through 31 {
-    &__day--#{$index} {
-      position: relative;
-      @include square($size);
-      background-color: $cell-color;
-      border: 1px solid black;
-      transition: background-color 0.5s;
-    }
     &__day--#{$index}::before {
       content: "#{$index}";
       position: absolute;
