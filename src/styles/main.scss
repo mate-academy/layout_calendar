@@ -38,7 +38,7 @@ body {
 }
 
 @for $index from 1 through 31 {
-  .day-#{$index}::before {
+  .calendar__day:nth-child(#{$index}):before {
     content: "#{$index}";
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
@@ -56,7 +56,7 @@ $days:
 
 @each $name, $day in $days {
   .calendar--start-day--#{$name} {
-    .day-1 {
+    .calendar__day:first-child {
       margin-left: (($size_day * $day) + ($shift * $day));
     }
   }
