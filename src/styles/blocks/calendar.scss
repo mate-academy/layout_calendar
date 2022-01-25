@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  padding: $calendar-padding;
+  width: $cell-size * 7 + $cell-gap * 6;
+
+  @each $name, $value in $daysweek {
+    &--start-day-#{$name} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  &--month-length {
+    @for $index from 28 through 31 {
+      &-#{$index} :nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::after {
+      content: "#{$index}";
+    }
+  }
+}
