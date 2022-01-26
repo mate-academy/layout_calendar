@@ -7,7 +7,7 @@ ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
-- This task does not have tests so you need to check if it works as expected manually.
+- This task does not have tests so you need To check if it works as expected manually.
 ___
 
 ## ❗️❗️❗️ DON'T FORGET TO PROOFREAD YOUR CODE WITH [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md) BEFORE SENDING YOUR PULL REQUEST❗️❗️❗️
