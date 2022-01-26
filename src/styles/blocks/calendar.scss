@@ -1,0 +1,39 @@
+.calendar {
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-$move-up-cell);
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &__day {
+      @include square;
+      &:nth-child(#{$day})::after {
+        content: "#{$day}";
+      }
+    }
+
+  }
+
+  @for $da from 28 through 31 {
+    &--month-length--#{$da} > :nth-child(n + #{1 + $da}) {
+      display: none;
+    }
+  }
+
+  @each $name, $value in $days-name {
+    &--start-day--#{$name} > :first-child {
+      margin-left: $value;
+    }
+  }
+}
