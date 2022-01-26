@@ -1,0 +1,38 @@
+.calendar {
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+
+    border: 1px solid #000;
+    background-color: $color-light-gray;
+
+    transition: transform $delay ease-out, background-color $delay;
+
+    &:hover {
+      background-color: $color-pink;
+      cursor: pointer;
+
+      transform: translateY(-$cell-y-offset);
+    }
+  }
+
+  @each $day, $shift in $day-shift-pair {
+    &--start-day_#{$day} > :first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $day from 1 through $days-num {
+    &__day--#{$day}::before {
+      content: "#{$day}";
+    }
+  }
+
+  @for $index from 28 through $days-num {
+    &--month-length_#{$index} > :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
