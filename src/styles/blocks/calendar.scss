@@ -1,27 +1,12 @@
 .calendar {
   display: flex;
-  flex-wrap: wrap;
-  gap: $cell-gap;
-  padding: $calendar-padding;
-  width: $cell-size * 7 + $cell-gap * 6;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-  @each $name, $value in $daysweek {
-    &--start-day-#{$name} :first-child {
-      margin-left: $value;
-    }
-  }
-
-  &--month-length {
-    @for $index from 28 through 31 {
-      &-#{$index} :nth-child(n + #{$index + 1}) {
-        display: none;
-      }
-    }
-  }
-
-  @for $index from 1 through 31 {
-    & :nth-child(#{$index})::after {
-      content: "#{$index}";
-    }
-  }
+  background-image: url(/images/abstract-1817584.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: $background-color;
 }
