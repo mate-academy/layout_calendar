@@ -29,11 +29,11 @@ BAD example:
 }
 ```
 
-4. [SASS] - Check your import syntax. It's differs from plain CSS.
-5. [SASS] - use variables for the main values so that you'll be able to reuse
-them and give them descriptive names. But don't overuse them, don't create
-variable for the value that's used just once.
-6. [SASS] - Don't use SASS loops for styles that stay the same for all elements
+4. [SASS] - Check your import syntax. It"s differs from plain CSS.
+5. [SASS] - use variables for the main values so that you"ll be able to reuse
+them and give them descriptive names. But don"t overuse them, don"t create
+variable for the value that"s used just once.
+6. [SASS] - Don"t use SASS loops for styles that stay the same for all elements
 of the group, e.g. `display` or `position`.
 7. [STYLES] - Make sure to list all styles that you apply transition to.
 8. [STYLES] - Make sure to add transition style under general selector, not the
@@ -67,5 +67,5 @@ BAD example:
 
 9. [FUNCTIONALITY] - Your project should work correctly (have 31 days and start
 on Monday) with invalid modifier values, like `start-day--ghy` or `days--27`.
-10. [STYLES] - Don't be greedy, add some top paddings, so the top row don't go over
+10. [STYLES] - Don"t be greedy, add some top paddings, so the top row don"t go over
 top of the page on hover.
