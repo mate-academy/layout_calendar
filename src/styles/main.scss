@@ -1,6 +1,6 @@
 $day-size: 100px;
 $col-count: 7;
-$month-length: 29;
+$month-length: 30;
 $color-day: #eee;
 $color-border: #000;
 $font-family: arial, helvetica, sans-serif;
@@ -35,20 +35,36 @@ body {
     // @include square($size);
   }
 
-  &__day:nth-child(-n+1) {
-    margin-left: $day-size * 6;
-  }
-
   &__day:hover {
     cursor: pointer;
     background-color: $background-hover;
-    margin-top: -20px;
+    transform: translateY(-20px);
   }
 
-  @for $day-number from 1 through 31 {
+  @for $day-number from 1 through $month-length {
     &__day:nth-child(#{$day-number})::before {
       content: "#{$day-number}";
     }
   }
 
+  $days:
+    "mon" $day-size * 0,
+    "tue" $day-size * 1,
+    "wed" $day-size * 2,
+    "thu" $day-size * 3,
+    "fri" $day-size * 4,
+    "sat" $day-size * 5,
+    "sun" $day-size * 6;
+
+  @each $day, $margin in $days {
+    &__days--#{$day}:nth-child(-n+1) {
+      margin-left: #{$margin};
+    }
+  }
+
+  @each $day in 28, 29, 30, 31 {
+    &__days--#{$day}:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
 }
