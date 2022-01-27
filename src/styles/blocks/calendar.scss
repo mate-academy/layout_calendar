@@ -4,24 +4,25 @@
   gap: $gap;
   width: $calendar-width;
 
-  @each $day, $number in $start-day {
-    &-start-day--#{$day}:first-child {
-      margin-left: $number * ($square-size + $gap);
-    }
-  }
-
   &__day {
     @include flex-center-center;
     @include square($square-size);
     background-color: #eee;
     border: 1px solid #000;
     border-radius: 5px;
-    transition: transform 0.5s ease, background-color 0.5s ease;
+    transition: transform 0.5s ease,
+      background-color 0.5s ease;
 
     &:hover {
       transform: translateY(-20px);
       background-color: #ffc0cb;
       cursor: pointer;
+    }
+
+    @each $day, $number in $start-day {
+      &-start-day--#{$day}:first-child {
+        margin-left: $margin-left;
+      }
     }
 
     @for $i from 1 through 31 {
