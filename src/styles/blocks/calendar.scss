@@ -20,7 +20,7 @@
     }
 
     @each $day, $number in $start-day {
-      &-start-day--#{$day} > :first-child {
+      &-start-day--#{$day} :first-child {
         margin-left: ($square-size + $gap) * $number;
         background-color: blue;
       }
@@ -34,12 +34,10 @@
       }
     }
 
-    @for $lenght from 28 to 32 {
-      &--month-length--#{$lenght} {
-        &:nth-last-child(-n + #{31 - $lenght}) {
-          display: none;
-        }
-      }
+  }
+  @for $index from 28 through 31 {
+    &__month-length--#{$index} > :nth-child(n + #{$index+1}) {
+      display: none;
     }
   }
 }
