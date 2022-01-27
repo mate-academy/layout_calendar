@@ -1,5 +1,5 @@
 .calendar {
-  width: $cell-width * 7 + $day-gapX * 7 + $calendar-gapX * 2;
+  width: $day-width * 7 + $day-gapX * 7 + $calendar-gapX * 2;
   margin: auto;
   padding: $calendar-gapX;
   background-color: rgba(173, 216, 230, 0.1);
@@ -10,9 +10,9 @@
 
   &__day {
     position: relative;
-    width: $cell-width;
-    height: $cell-width;
-    background-color: $cell-background;
+    width: $day-width;
+    height: $day-width;
+    background-color: $day-background;
     border: 1px solid black;
     margin-bottom: 3px;
     margin-right: $day-gapX;
@@ -32,12 +32,13 @@
     }
 
     &:hover {
-      transform: translateY(-20%);
+      cursor: pointer;
+      transform: translateY(-20px);
       box-shadow: 0 0 45px -5px rgba(0, 0, 0, 0.5);
-      background-color: rosybrown;
-      transition: transform 0.3s ease-in-out,
-        box-shadow 0.2s ease,
-        background-color 0.3s ease-out;
+      background-color: pink;
+      transition: transform 0.5s ease-in-out,
+        box-shadow 0.5s ease,
+        background-color 0.5s ease-out;
     }
   }
 
@@ -52,7 +53,7 @@
 
   @each $day, $index in $days {
     &--day-#{$day} > :first-child {
-      margin-left: $index * $cell-width + $day-gapX * $index;
+      margin-left: $index * $day-width + $day-gapX * $index;
     }
   }
 
