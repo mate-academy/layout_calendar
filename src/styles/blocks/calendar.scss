@@ -9,7 +9,7 @@
   width: $box-width * $count-box-row + $gapY * ($count-box-row - 1);
   gap: $gapY;
 
-  @for $index from 28 through 31 {
+  @for $index from $month-days through 31 {
     &--month-length :nth-last-child(-n + #{31 - $index}) {
       display: none;
     }
@@ -41,7 +41,7 @@
     cursor: pointer;
     transition-duration: 0.5s;
   
-    @for $index from 1 through 28 {
+    @for $index from 1 through $month-days {
       &--#{$index}::before {
         content: "#{$index}";
         font-family: Arial, Helvetica, sans-serif;
