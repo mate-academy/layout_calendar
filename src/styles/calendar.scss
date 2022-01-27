@@ -1,0 +1,64 @@
+.calendar {
+  width: $cell-width * 7 + $day-gapX * 7 + $calendar-gapX * 2;
+  margin: auto;
+  padding: $calendar-gapX;
+  background-color: rgba(173, 216, 230, 0.1);
+  box-shadow: 0 0 50px -8px grey;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  &__day {
+    position: relative;
+    width: $cell-width;
+    height: $cell-width;
+    background-color: $cell-background;
+    border: 1px solid black;
+    margin-bottom: 3px;
+    margin-right: $day-gapX;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}) {
+        &::before {
+          position: absolute;
+          content: "#{$index}";
+          font-family: Arial, sans-serif;
+          font-size: 30px;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20%);
+      box-shadow: 0 0 45px -5px rgba(0, 0, 0, 0.5);
+      background-color: rosybrown;
+      transition: transform 0.3s ease-in-out,
+        box-shadow 0.2s ease,
+        background-color 0.3s ease-out;
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $index in $days {
+    &--day-#{$day} > :first-child {
+      margin-left: $index * $cell-width + $day-gapX * $index;
+    }
+  }
+
+  @each $index in $month-length {
+    & > :nth-child(#{$index}) ~ * {
+      display: none;
+    }
+  }
+}
