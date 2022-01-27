@@ -4,7 +4,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include square;
+    box-sizing: border-box;
+
+    background: $c-grey;
+    border-color: $c-grey;
+    border: $square-border solid $c-black;
+    @include square ($square-size);
 
     font-family: Arial, sans-serif;
     font-size: 30px;
@@ -31,7 +36,7 @@
 
   @each $name, $value in $days-name {
     &--start-day--#{$name} > :first-child {
-      margin-left: ($square-width + $gap-between-day) * $value;
+      margin-left: ($square-size + $gap-between-day) * $value;
     }
   }
 }
