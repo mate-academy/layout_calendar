@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    @include square;
 
     font-family: Arial, sans-serif;
     font-size: 30px;
@@ -13,16 +14,13 @@
       background-color: pink;
       transform: translateY(-$move-up-cell);
     }
-  }
 
-  @for $day from 1 through 31 {
-    &__day {
-      @include square;
+    @for $day from 1 through 31 {
       &:nth-child(#{$day})::after {
         content: "#{$day}";
       }
-    }
 
+    }
   }
 
   @for $da from 28 through 31 {
