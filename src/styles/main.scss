@@ -1,3 +1,78 @@
+@import "variables";
+@import "reset";
+
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width;
+  background-color: yellowgreen;
+
+  &__day {
+    position: relative;
+    width: $box-side;
+    height: $box-side;
+    border: 1px solid black;
+    margin-right: $gapX;
+    background-color: #eee;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    @for $index from 1 through $month-length {
+      &:nth-child(#{$index}) {
+        &:before {
+          position: absolute;
+          content: "#{$index}";
+        }
+      }
+    }
+    
+  }
+
+  position: relative;
+
+  &__day:hover {
+    transform: translate(0, -20px);
+    background-color: pink;
+    cursor: pointer;
+  }
+
+  $start-days:
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $index in $start-days {
+    &--day-start--#{$name} > :first-child {
+      margin-left: $width - $box-side * (7 - $index) - ($gapX * (7 - $index));
+    }
+  }
+
+  @for $index from 28 through $month-length {
+    &--day-end--#{$index} > :nth-child(n + #{$index+1}) {
+      display: none;
+    }
+  }
+}
+
+.month__day:last-child {
+  margin-right: 0;
 }
