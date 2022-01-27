@@ -19,13 +19,6 @@
       cursor: pointer;
     }
 
-    @each $day, $number in $start-day {
-      &-start-day--#{$day} :first-child {
-        margin-left: ($square-size + $gap) * $number;
-        background-color: blue;
-      }
-    }
-
     @for $i from 1 through 31 {
       &--#{$i} {
         &::before {
@@ -38,6 +31,12 @@
   @for $index from 28 through 31 {
     &__month-length--#{$index} > :nth-child(n + #{$index+1}) {
       display: none;
+    }
+  }
+
+  @each $day, $number in $start-day {
+    &-start-day--#{$day} :first-child {
+      margin-left: ($square-size + $gap) * $number;
     }
   }
 }
