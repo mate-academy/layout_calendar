@@ -9,8 +9,8 @@
   width: $box-width * $count-box-row + $gapY * ($count-box-row - 1);
   gap: $gapY;
 
-  @for $index from $month-days through 31 {
-    &--month-length :nth-last-child(-n + #{31 - $index}) {
+  @for $index from 28 through $month-days {
+    &--month-length--#{$index} :nth-child(n + #{$index+1}) {
       display: none;
     }
   }
