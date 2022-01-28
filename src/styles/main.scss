@@ -1,6 +1,6 @@
 $day-size: 100px;
 $col-count: 7;
-$month-length: 30;
+$month-length: 31;
 $color-day: #eee;
 $color-border: #000;
 $font-family: arial, helvetica, sans-serif;
@@ -48,23 +48,23 @@ body {
   }
 
   $days:
-    "mon" $day-size * 0,
-    "tue" $day-size * 1,
-    "wed" $day-size * 2,
-    "thu" $day-size * 3,
-    "fri" $day-size * 4,
-    "sat" $day-size * 5,
-    "sun" $day-size * 6;
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
   @each $day, $margin in $days {
-    &__days--#{$day}:nth-child(-n+1) {
-      margin-left: #{$margin};
+    &__days--#{$day} :first-child {
+      margin-left: $margin * $day-size;
     }
   }
 
-  @each $day in 28, 29, 30, 31 {
-    &__days--#{$day}:nth-child(#{$day})::before {
-      content: "#{$day}";
+  @for $cell from 28 through 31 {
+    &__month-length--#{$cell} :nth-child(n+#{$cell + 1}) {
+      display: none;
     }
   }
 }
