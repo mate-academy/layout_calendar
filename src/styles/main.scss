@@ -1,3 +1,70 @@
+$day-size: 100px;
+$col-count: 7;
+$month-length: 31;
+$color-day: #eee;
+$color-border: #000;
+$font-family: arial, helvetica, sans-serif;
+$background-hover: pink;
+
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  width: $col-count * $day-size;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__day {
+    width: #{$day-size};
+    height: #{$day-size};
+    border: 1px solid $color-border;
+    font-family: $font-family;
+    transition-duration: 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: $color-day;
+    font-size: 30px;
+    // @include square($size);
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $background-hover;
+    transform: translateY(-20px);
+  }
+
+  @for $day-number from 1 through $month-length {
+    &__day:nth-child(#{$day-number})::before {
+      content: "#{$day-number}";
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $margin in $days {
+    &__days--#{$day} :first-child {
+      margin-left: $margin * $day-size;
+    }
+  }
+
+  @for $cell from 28 through 31 {
+    &__month-length--#{$cell} :nth-child(n+#{$cell + 1}) {
+      display: none;
+    }
+  }
 }
