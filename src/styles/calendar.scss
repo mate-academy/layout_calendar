@@ -1,6 +1,5 @@
 .calendar {
   width: $day-width * 7 + $day-gapX * 7 + $calendar-gapX * 2;
-  margin: auto;
   padding: $calendar-gapX;
   background-color: rgba(173, 216, 230, 0.1);
   box-shadow: 0 0 50px -8px grey;
@@ -16,17 +15,18 @@
     margin-bottom: 3px;
     margin-right: $day-gapX;
 
+    &::before {
+      position: absolute;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50% -50%);
+    }
+
     @for $index from 1 through 31 {
-      &:nth-child(#{$index}) {
-        &::before {
-          position: absolute;
-          content: "#{$index}";
-          font-family: Arial, sans-serif;
-          font-size: 30px;
-          top: 50%;
-          left: 50%;
-          transform: translateY(-50%) translateX(-50%);
-        }
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
       }
     }
 
