@@ -1,34 +1,4 @@
 .calendar {
-  margin: auto;
-  padding: $padings-size;
-
-  width: $day-size * 7 + $padings-size * 2 + $gap-size * 6;
-
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap-size;
-
-  $start-day:
-  "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5,
-  "sun" 6;
-
-  @each $day, $column in $start-day{
-    &--start-day--#{$day} > :first-child {
-      margin-left: ($day-size + $gap-size) * $column;
-    }
-  }
-
-  @for $number from 28 through 31 {
-    &--month-length--#{$number} > :nth-child(1n + #{$number + 1}) {
-      display: none;
-    }
-  }
-
   &__day {
     @include square ($day-size);
 
@@ -46,10 +16,8 @@
     transition: all 0.5s linear;
 
     @for $index from 1 through 31 {
-      &:nth-child(#{$index}){
-        &::before {
-          content: "#{$index}";
-        }
+      &:nth-child(#{$index}):before{
+        content: "#{$index}";
       }
     }
 
@@ -59,4 +27,25 @@
       background-color: pink;
     }
   }
+
+  $start-day:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+    @each $day, $column in $start-day{
+      &--start-day--#{$day} > :first-child {
+        margin-left: ($day-size + $gap-size) * $column;
+      }
+    }
+
+    @for $number from 28 through 31 {
+      &--month-length--#{$number} > :nth-child(1n + #{$number + 1}) {
+        display: none;
+      }
+    }
 }
