@@ -1,4 +1,71 @@
-@import "./blocks/body";
-@import "./utils/variables";
-@import "./utils/mixins";
-@import "./blocks/calendar.scss";
+$background-color: #eee;
+$cell-size: 100px;
+$cells-width: calc(7 * #{$cell-size});
+$gap: 1px;
+$padding: 10px;
+$month-length: 31;
+$calendar-width: calc(#{$cells-width} + 6 * #{$gap} + 2 * #{$padding});
+$start-days: (
+  "mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6, "sun": 7
+);
+
+@mixin square ($cell-size) {
+  width: $cell-size;
+  height: $cell-size;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  align-items: center;
+  margin: 0 auto;
+  gap: $gap;
+  padding: $padding;
+  margin-top: 20px;
+    
+  &_day {
+    @include square($cell-size);
+    background-color: $background-color;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: $cell-size;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
+    
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px), ;
+    }
+  }
+    
+  @for $index from 1 through $month-length {
+    &_day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+    
+  @for $duration from 28 through 31 {
+    &--month-duration--#{$duration} {
+      .calendar_day:nth-child(n + #{$duration + 1}) {
+        display: none;
+      }
+    }
+  }
+    
+  @each $day, $num in $start-days {
+    &--start-day--#{$day} {
+      .calendar_day:nth-child(1) {
+        margin-left: ($cell-size + $gap) * ($num - 1);
+      }
+    }
+  }
+}
