@@ -47,15 +47,15 @@ body {
     }
   }
     
-  @for $index from 1 through $month-length {
-    &_day:nth-child(#{$index})::before {
-      content: "#{$index}";
+  @for $number from 1 through $month-length {
+    &_day:nth-child(#{$number})::before {
+      content: "#{$number}";
     }
   }
     
-  @for $duration from 28 through 31 {
-    &--month-duration--#{$duration} {
-      .calendar_day:nth-child(n + #{$duration + 1}) {
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} {
+      .calendar_day:nth-child(n + #{$length + 1}) {
         display: none;
       }
     }
