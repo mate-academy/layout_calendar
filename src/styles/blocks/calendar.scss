@@ -1,4 +1,12 @@
 .calendar {
+  $start-day: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
+
+  @each $weekday, $value in $start-day {
+    &--#{$weekday} .calendar__cell:first-child {
+      margin-left: ($value - 1) * ($cell-size + $gap);
+    }
+  }
+
   &__field {
     display: flex;
     flex-wrap: wrap;
@@ -29,14 +37,6 @@
       cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
-    }
-
-    $start-day: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
-
-    @each $weekday, $value in $start-day {
-      &--#{$weekday}:first-child {
-        margin-left: ($value - 1) * ($cell-size + $gap);
-      }
     }
   }
 
