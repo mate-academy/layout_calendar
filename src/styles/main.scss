@@ -7,11 +7,11 @@ $base-shift: 1px;
 $start-days:
   "mon" 0,
   "tue" $cell-size + $base-shift,
-  "wed" $cell-size * 2 + $base-shift * 2,
-  "thu" $cell-size * 3 + $base-shift * 3,
-  "fri" $cell-size * 4 + $base-shift * 4,
-  "sat" $cell-size * 5 + $base-shift * 5,
-  "sun" $cell-size * 6 + $base-shift * 6;
+  "wed" ($cell-size + $base-shift) * 2,
+  "thu" ($cell-size + $base-shift) * 3,
+  "fri" ($cell-size + $base-shift) * 4,
+  "sat" ($cell-size + $base-shift) * 5,
+  "sun" ($cell-size + $base-shift) * 6;
 
 @mixin square($size) {
   width: $size;
@@ -21,12 +21,6 @@ $start-days:
 .calendar {
   padding: 10px;
   width: $cell-size * 7 + $base-shift * 6;
-
-  @each $name, $size in $start-days {
-    &--start-day--#{$name} {
-      margin-left: $size;
-    }
-  }
 
   @for $index from 28 through 31 {
     &--month-lenght--#{$index} .day:nth-child(n+#{$index + 1}) {
@@ -40,6 +34,12 @@ $start-days:
   flex-wrap: wrap;
   gap: $base-shift;
   padding-top: 20px;
+
+  @each $name, $size in $start-days {
+    &--start-day--#{$name} .day:first-child {
+      margin-left: $size;
+    }
+  }
 }
 
 .day {
@@ -59,6 +59,7 @@ $start-days:
     cursor: pointer;
     background-color: rgb(255, 200, 200);
     transform: translate(0, -20px);
+    
   }
 
   @for $index from 1 through 31 {
