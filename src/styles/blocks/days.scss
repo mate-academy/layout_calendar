@@ -1,0 +1,56 @@
+.days {
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  width: 7 * $space - $gap;
+  
+  $margins:
+    "mon" 0,
+    "tue" $space,
+    "wed" #{$space * 2},
+    "thu" #{$space * 3},
+    "fri" #{$space * 4},
+    "sat" #{$space * 5},
+    "sun" #{$space * 6};
+
+  @each $day, $margin in $margins {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+  
+  @for $index from 28 to 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index +1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    cursor: pointer;
+    transition: all 50ms;
+  }
+
+  @for $index from 1 to 32 {
+    &__day:nth-child(#{$index})::before {
+      content: " " + $index;
+      font-size: 30px;
+    }
+  }
+
+  &__day:hover {
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+  }
+}
