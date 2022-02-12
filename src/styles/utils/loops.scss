@@ -1,10 +1,19 @@
+@import "./utils/variables.scss";
+
 /*filling cells with numbers according to month length*/
 @for $index from 1 through 31 {
   .calendar--month-length--#{$index} {
     @for $index2 from 1 through $index {
       .calendar__day:nth-child(#{$index2}) {
+        background: #eee;
+        border: 1px solid black;
         &::before {
           content: "#{$index2}";
+        }
+
+        &:hover {
+          transform: translateY(-20px);
+          background: pink;
         }
       }
     }
