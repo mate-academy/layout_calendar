@@ -1,0 +1,58 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $cell-size * 7 + $cell-gap * 7 + $calendar-padding * 2;
+  gap: $cell-gap;
+  padding: $calendar-padding;
+  margin: auto;
+
+  $margin-left:
+    0 "--start-day--mon",
+    1 "--start-day--tue",
+    2 "--start-day--wed",
+    3 "--start-day--thu",
+    4 "--start-day--fri",
+    5 "--start-day--sat",
+    6 "--start-day--sun";
+
+  @each $margin, $day in $margin-left {
+    &#{$day} div:first-child {
+      margin-left: #{$margin * $day-width};
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--calendar-length--#{$i} div:nth-child(1n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    border: 1px solid black;
+    @include square($cell-size);
+    position: relative;
+    cursor: pointer;
+    transition: background-color, translate, 0.5s linear 0s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &::before {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
