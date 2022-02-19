@@ -1,0 +1,69 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+@import "../utils/functions";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: $calendar-padding;
+  gap: $gap;
+  width: calendarWidth($calendar-width, $gap, $calendar-padding);
+
+  &__day {
+    @include square($size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(238, 238, 238);
+    border: 1px solid rgb(0, 0, 0);
+    transition-duration: $transition;
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+
+    &::before {
+      font-family: Arials, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(255, 192, 203);
+      transform: translateY(-20px);
+      transition-duration: $transition;
+    }
+
+  }
+
+  $start-days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $start-day, $start-value in $start-days {
+    &--start-day--#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: $start-value * $calendar-width;
+      }
+    }
+  }
+
+  @for $day from 28 through 30 {
+    &--month-length--#{$day} {
+      @for $start-number from ($day + 1) through 31 {
+        .calendar__day:nth-child(#{$start-number}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
