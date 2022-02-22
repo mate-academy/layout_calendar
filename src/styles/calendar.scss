@@ -1,5 +1,10 @@
 @import "./var.scss";
 
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
 .calendar {
   display: flex;
   padding: $calendar-padding;
@@ -15,12 +20,11 @@
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 30px;
     position: relative;
-    width: $calendar-sqr-size;
-    height: $calendar-sqr-size;
+    @include square($calendar-sqr-size);
     flex-shrink: 0;
     border: 1px solid #000;
     background-color: #eee;
-    transition: transform 0.5s, color 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
   }
 
   &__sqr::before {
