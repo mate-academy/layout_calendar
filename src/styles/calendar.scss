@@ -1,0 +1,72 @@
+@import "./var.scss";
+
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  display: flex;
+  padding: $calendar-padding;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  max-width: calc(
+    7 * #{$calendar-sqr-size} +
+    6 * #{$calendar-gap} +
+    2 * #{$calendar-padding}
+  );
+
+  &__sqr {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 30px;
+    position: relative;
+    @include square($calendar-sqr-size);
+    flex-shrink: 0;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: background-color 0.5s, transform 0.5s;
+  }
+
+  &__sqr::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__sqr:hover {
+    transform: translateY(-20px);
+    cursor: pointer;
+    background-color: #dbd;
+  }
+
+  $days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  @each $day, $num in $days {
+    &--start-day-#{$day} &__sqr:first-of-type {
+      margin-left: calc(
+        #{$num - 1} *
+        (#{$calendar-sqr-size} +
+        #{$calendar-gap}));
+    }
+  }
+
+  @for $data from 1 through 31 {
+    & :nth-of-type(#{$data})::before {
+      content: "#{$data}";
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length-#{$last-day} &__sqr:nth-of-type(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
