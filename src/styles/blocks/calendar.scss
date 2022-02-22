@@ -13,8 +13,10 @@
   }
 
   @each $day, $i in $days {
-    &--month-day--#{$day} :nth-child(1) {
-      margin-left: ($i - 1) * ($square-gap + $square-size);
+    &--month-day--#{$day} {
+      .calendar__field-day:first-child {
+        margin-left: ($i - 1) * ($square-gap + $square-size);
+      }
     }
   }
 
