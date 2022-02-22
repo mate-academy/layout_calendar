@@ -20,8 +20,8 @@
     }
   }
 
-  @each $name, $num in $month-length {
-    &--month-length_#{$name} :nth-child(n+#{$num}) {
+  @for $num from 28 through 31 {
+    &--month-length_#{$num} :nth-child(n + #{$num + 1}) {
       display: none;
     }
   }
