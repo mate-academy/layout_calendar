@@ -18,20 +18,22 @@ body {
   padding: $calendar-padding;
   max-width: ($day-size * 7) + ($calendar-padding * 2) + 6;
 
-  @each $count, $number in $month-lenght {
-    &--month-lenght--#{$count} :nth-child(n + #{$number}) {
+  @for $index from 28 through 30 {
+    &--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
 
   @each $name, $number in $day-of-week {
     &--start-day--#{$name} :first-child {
-      margin-left: #{$number * 100 + $number}px;
+      margin-left: #{$number * $day-size + $number};
     }
   }
 
   &__day {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     min-width: $day-size;
     height: $day-size;
@@ -52,10 +54,6 @@ body {
     @for $index from 1 through 31 {
       &:nth-child(#{$index}):before {
         content: "#{$index}";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
       }
     }
   }
