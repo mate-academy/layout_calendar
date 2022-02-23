@@ -7,7 +7,7 @@
   color: #000;
 
   @for $index from 1 through 31 {
-    &-day:nth-child(#{$index})::before {
+    &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
@@ -20,18 +20,16 @@
 
   @for $last-day from 28 through 31 {
     &--month-length_#{$last-day}
-    &-day:nth-child(n + #{$last-day + 1}) {
+    &__day:nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
 
-  &-day {
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: $cell-size;
-    height: $cell-size;
+    @include square($cell-size);
     font-size: 30px;
     border: 1px solid #000;
     background-color: #eee;
