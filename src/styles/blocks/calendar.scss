@@ -1,0 +1,22 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $dayGap;
+  
+  max-width: $calenarWidth;
+  margin: auto;
+  padding: $calendarPaddings;
+  padding-top: $dayCellSize;
+
+  @each $day, $index in $dayOfWeek {
+    &--start-day--#{$day} :first-child {
+      margin-left: #{($dayCellSize + $dayGap) * ($dayCellInRow - 1) };
+    }
+  }
+
+  @for $index from 28 through 31 {
+    .calendar--month-length--#{$index} :nth-child(n + #{$index+1}) {
+      display: none;
+    }
+  }
+}
