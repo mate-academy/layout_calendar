@@ -1,4 +1,5 @@
 $cell-size: 100px;
+$gap-size: 1px;
 
 @mixin square ($size) {
   width: $size;
@@ -12,8 +13,8 @@ body {
 .calendar {
   margin: 50px auto;
   display: flex;
-  gap: 1px;
-  max-width: calc(#{$cell-size} * 7 + 10px);
+  gap: #{$gap-size};
+  max-width: $cell-size * 7 + 10px;
   flex-wrap: wrap;
 
   &__day {
@@ -70,7 +71,7 @@ $days: (
 @each $day, $number in $days {
   .calendar--start-day_#{$day} {
     .calendar__day:first-child {
-      margin-left: calc(#{$number} * (#{$cell-size} + 1px));
+      margin-left: $number * ($cell-size + $gap-size);
     }
   }
 }
