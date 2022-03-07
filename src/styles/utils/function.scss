@@ -1,0 +1,19 @@
+@for $day-index from 1 through 31 {
+  .calendar__day:nth-child(#{$day-index})::before {
+    content: "#{$day-index}";
+  }
+}
+
+@for $day-last from 28 through 31 {
+  .calendar--month-length--#{$day-last}
+  :nth-child(n + #{$day-last + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $day-number in $days-of-the-week {
+  .calendar--start-day--#{$day}
+  .calendar__day:nth-child(1) {
+    margin-left: $day-number * $day-block-size + $day-number * $day-block-gap;
+  }
+}
