@@ -1,6 +1,6 @@
 .calendar {
   padding: $el-padding;
-  max-width: ($el-size*7)+99px;
+  max-width: $el-size*7 + 7*$el-gap;
   display: flex;
   flex-wrap: wrap;
   gap: $el-gap;
@@ -15,6 +15,7 @@
     width: $el-size;
     background-color: #eee;
     cursor: pointer;
+    transition: 0.5s;
 
     @for $n-of-date from 1 through 31 {
       &:nth-child(#{$n-of-date}):before {
@@ -25,7 +26,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.5s;
     }
   }
 
