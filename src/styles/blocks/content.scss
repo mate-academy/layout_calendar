@@ -5,8 +5,12 @@
   width: $size;
 }
 
+@function calendar-width() {
+  @return 7 * $day-size + 6 * $day-gap + 2 * $calendar-hr-padding;
+}
+
 .calendar {
-  width: 7 * $day-size + 6 * $day-gap + 2 * $calendar-hr-padding;
+  width: calendar-width();
   display: flex;
   flex-wrap: wrap;
   gap: $day-gap;
@@ -31,6 +35,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s;
 
   @include square($day-size);
 
