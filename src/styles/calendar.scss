@@ -1,4 +1,22 @@
-@import "./variables.scss";
+$calendar-cell-size: 100px;
+$calendar-gap: 1px;
+$calendar-padding: 10px;
+$calendar-width: 7 * $calendar-cell-size +
+  6 * $calendar-gap + 2 * $calendar-padding;
+$week_days: (
+  1:"mon",
+  2:"tue",
+  3:"wed",
+  4:"thu",
+  5:"fri",
+  6:"sat",
+  7:"sun",
+);
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
 
 .calendar {
   padding: $calendar-padding;
@@ -6,10 +24,10 @@
   flex-wrap: wrap;
   gap: 1px;
 
-  max-width: $calendar-widht;
+  max-width: $calendar-width;
 
   @each $num, $day in $week_days {
-    &--start-day_#{$day} &__cell:first-of-type {
+    &--start-day_#{$day} :first-child {
       margin-left: calc(
         #{$num - 1} * #{$calendar-cell-size + $calendar-gap}
       );
@@ -23,11 +41,7 @@
   }
 
   &__cell {
-    position: relative;
-
-    width: $calendar-cell-size;
-    height: $calendar-cell-size;
-    flex-shrink: 0;
+    @include square($calendar-cell-size);
 
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-size: 30px;
