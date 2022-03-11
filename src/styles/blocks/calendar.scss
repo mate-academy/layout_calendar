@@ -11,6 +11,14 @@
   gap: $gap;
   width: $size-calendar;
 
+  @for $number from 28 through 31 {
+    &__month-length--#{$number} {
+      &__day:nth-last-child(-n+#{31 - $number}) {
+        display: none;
+      }
+    }
+  }
+
   & ::before {
     display: block;
     width: $cell-size;
@@ -18,7 +26,6 @@
     text-align: center;
     font-size: 30px;
     font-family: "Arial", sans-serif;
-    // position: absolute;
   }
 
   &__day {
@@ -30,27 +37,23 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    cursor: pointer;
+    transition: transform 0.5s;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
     }
 
-    cursor: pointer;
-    transition: transform 0.5s;
+    &:first-child {
+      margin-left: ($number-of-cells - 1) * $cell-size +
+        ($number-of-cells - 1) * $gap;
+    }
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number}):before {
         content: "#{$number}";
       }
-    }
-  }
-}
-
-@for $number from 28 through 31 {
-  .calendar__month-length--#{$number} {
-    .calendar__day:nth-last-child(-n+#{31 - $number}) {
-      display: none;
     }
   }
 }
