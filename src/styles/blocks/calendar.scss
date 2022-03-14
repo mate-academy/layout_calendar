@@ -7,7 +7,11 @@ $weekday:
   "sat" $margin-left-var * 5,
   "sun" $margin-left-var * 6;
 
-$month-days: "28" 28, "29" 29, "30" 30, "31" 31;
+$month-days:
+  "28" 28,
+  "29" 29,
+  "30" 30,
+  "31" 31;
 
 .calendar {
   display: flex;
@@ -28,7 +32,7 @@ $month-days: "28" 28, "29" 29, "30" 30, "31" 31;
   }
 
    @each $name, $margin-left in $weekday {
-    &_start-day_#{$name} {
+    &--start-day--#{$name} {
       .calendar__cell:first-child {
         margin-left: $margin-left;
       }
@@ -37,7 +41,7 @@ $month-days: "28" 28, "29" 29, "30" 30, "31" 31;
 }
 
 @each $name, $amount in $month-days {
-  .calendar_month-length_#{$name} {
+  .calendar--month-length--#{$name} {
     @for $i from 1 through $amount {
       .calendar__cell:nth-child(#{$i}) {
         background-color: $day-color;
