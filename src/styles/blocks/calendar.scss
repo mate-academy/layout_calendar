@@ -1,14 +1,10 @@
 .calendar {
   display: flex;
+  margin: auto;
+  padding-top: $block-padding;
   gap: $calendar-gap;
   flex-wrap: wrap;
   max-width: $cal-width;
-
-  @each $name, $num in $cal-days {
-    &--day_#{$name} :first-child {
-      margin-left: ($block-width + $calendar-gap) * $num;
-    }
-  }
 
   @for $last-day from 28 through 31 {
     &--month-#{$last-day}
@@ -17,22 +13,29 @@
     }
   }
 
+  @each $name, $num in $cal-days {
+    &--start-day-#{$name} {
+      .calendar__block:first-child {
+        margin-left: $num * ($block-width + $calendar-gap);
+      }
+    }
+  }
+
   &__block {
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
-    gap: 1px;
     width: $block-width;
     height: 100px;
     background-color: #eee;
     border: 1px black solid;
     padding: $block-padding;
     font-size: 30px;
+    transition: 0.5s;
 
     &:hover {
       transform: translate(0,-20px);
-      transition: 0.5s;
       background-color: pink;
     }
   }
