@@ -7,9 +7,10 @@
   max-width: $cal-width;
 
   @for $last-day from 28 through 31 {
-    &--month-#{$last-day}
-    &__date:nth-child(n + #{$last-day + 1}) {
-      display: none;
+    &--month-#{$last-day} {
+      .calendar__block:nth-child(n + #{$last-day + 1}) {
+        display: none;
+      }
     }
   }
 
@@ -40,7 +41,7 @@
     }
   }
 
-  @for $index from 1 through 29 {
+  @for $index from 1 through 31 {
     &__block:nth-child(#{$index})::before {
       content: "#{$index}";
       color: black;
