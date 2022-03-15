@@ -28,6 +28,23 @@ body {
     }
   }
 
+  $start-day:
+    "mon" 0,
+    "tue" $cell-width + $cell-gap,
+    "wed" ($cell-width * 2) + ($cell-gap * 2),
+    "thu" ($cell-width * 3) + ($cell-gap * 3),
+    "fri" ($cell-width * 4) + ($cell-gap * 4),
+    "sat" ($cell-width * 5) + ($cell-gap * 5),
+    "sun" ($cell-width * 6) + ($cell-gap * 6);
+
+  @each $name, $padding in $start-day {
+    &--start-day--#{$name} {
+      .calendar__cell:first-child {
+        margin-left: $padding;
+      }
+    }
+  }
+
   &__cell {
     display: none;
     width: $cell-width;
@@ -53,21 +70,6 @@ body {
       cursor: pointer;
       transform: translateY(-20px);
       background-color: pink;
-    }
-
-    $start-day:
-      "mon" 0,
-      "tue" $cell-width + $cell-gap,
-      "wed" ($cell-width * 2) + ($cell-gap * 2),
-      "thu" ($cell-width * 3) + ($cell-gap * 3),
-      "fri" ($cell-width * 4) + ($cell-gap * 4),
-      "sat" ($cell-width * 5) + ($cell-gap * 5),
-      "sun" ($cell-width * 6) + ($cell-gap * 6);
-
-    @each $name, $padding in $start-day {
-      &--start-day--#{$name} {
-        margin-left: $padding;
-      }
     }
   }
 }
