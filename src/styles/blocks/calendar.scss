@@ -1,24 +1,9 @@
-$weekday:
-  "mon" $margin-left-var * 0,
-  "tue" $margin-left-var * 1,
-  "wed" $margin-left-var * 2,
-  "thu" $margin-left-var * 3,
-  "fri" $margin-left-var * 4,
-  "sat" $margin-left-var * 5,
-  "sun" $margin-left-var * 6;
-
-$month-days:
-  "28" 28,
-  "29" 29,
-  "30" 30,
-  "31" 31;
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   gap: 1px;
-  width: $day-size * 7 + 20px;
+  width: $day-size * $days-in-week + 20px;
   height: 100vh;
   padding: 10px;
   margin: 0 auto;
@@ -28,12 +13,17 @@ $month-days:
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
+    position:relative;
+    transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
+      transform: translateY(-20px);
     }
   }
 
+  //  Move it up by `20px` (use `transform`)
+ //both of these properties are to be animated with the duration of half a second.
    @each $name, $margin-left in $weekday {
     &--start-day--#{$name} {
       .calendar__cell:first-child {
