@@ -1,0 +1,21 @@
+@import "src/styles/utils/variables";
+
+@for $index from 1 through 31 {
+  .calendar__cell:nth-child(#{$index}):before {
+    content: "#{$index}";
+  }
+}
+
+@for $amount-of-days from 28 through 32 {
+  .calendar--month-length_#{$amount-of-days}
+  .calendar__cell:nth-of-type(n + #{$amount-of-days + 1}) {
+    display: none;
+  }
+}
+
+@each $day-name, $day-number in $days-in-week {
+  .calendar--start-day--#{$day-name}
+  .calendar__cell:nth-child(1) {
+    margin-left: $day-number * $cell-width + $day-number * $cells-gap;
+  }
+}
