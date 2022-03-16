@@ -18,6 +18,30 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
+
+  @each $day, $margin in (
+    mon: 0,
+    tue: $day-size + 1px,
+    wed: ($day-size + 1px) * 2,
+    thu: ($day-size + 1px) * 3,
+    fri: ($day-size + 1px) * 4,
+    sat: ($day-size + 1px) * 5,
+    sun: ($day-size + 1px) * 6
+  ) {
+    &-start-day--#{$day} {
+      .day:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &-month-length--#{$month-length} {
+      .day:nth-child(n+#{$month-length+1}) {
+        display: none;
+      }
+    }
+  }
 }
 
 .day {
@@ -39,32 +63,10 @@ main {
     transform: translateY(-20px);
     background-color: #ffc0ca;
   }
-
-  @each $day, $margin in (
-    mon: 0,
-    tue: $day-size + 1px,
-    wed: ($day-size + 1px) * 2,
-    thu: ($day-size + 1px) * 3,
-    fri: ($day-size + 1px) * 4,
-    sat: ($day-size + 1px) * 5,
-    sun: ($day-size + 1px) * 6
-  ) {
-    &--#{$day} {
-      margin-left: $margin;
-    }
-  }
 }
 
 @for $dayNumber from 1 through 31 {
   .day:nth-child(#{$dayNumber})::before {
     content: "#{$dayNumber}";
-  }
-}
-
-@for $month-length from 28 through 31 {
-  .month-length--#{$month-length} {
-    .day:nth-child(n+#{$month-length+1}) {
-      display: none;
-    }
   }
 }
