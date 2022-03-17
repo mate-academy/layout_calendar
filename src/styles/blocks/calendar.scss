@@ -8,13 +8,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: $calendar-height;
     width: $calendar-width;
     border: 1px solid black;
     font-size: 30px;
     cursor: pointer;
-    background-color: #eee;
-    transition: 0.5s;
+    background-color: $day-backgroudColor;
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
       transform: translate(0,-20px);
@@ -25,7 +25,7 @@
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: "#{$i}";
-      color: black;
+      color: $day-color;
     }
   }
 
