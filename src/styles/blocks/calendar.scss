@@ -19,27 +19,28 @@
       }
     }
   }
-}
 
-.calendar__day {
-  display: flex;
-  width: $cell-size;
-  height: $cell-size;
-  background-color: #eee;
-  border: 1px solid black;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-
-  &:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
-  }
-
-  @for $day-count from 1 through 31 {
-    &:nth-child(#{$day-count})::before {
-      content: "#{$day-count}";
+  &__day {
+    display: flex;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: background-color 0.5s, transform 0.5s;
+    }
+  
+    @for $day-count from 1 through 31 {
+      &:nth-child(#{$day-count})::before {
+        content: "#{$day-count}";
+      }
     }
   }
 }
