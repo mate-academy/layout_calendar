@@ -10,6 +10,8 @@
   gap: $gap-size;
 
   &__day {
+    display: flex;
+
     width: $day-box-size;
     height: $day-box-size;
 
@@ -21,6 +23,21 @@
     &:hover {
       cursor: pointer;
       background-color: pink;
+
+      transform: translateY(-20px);
+    }
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date}) {
+        align-items: center;
+        justify-content: center;
+
+        font-size: 30px;
+
+        &::before {
+          content: "#{$date}";
+        }
+      }
     }
   }
 
@@ -33,7 +50,7 @@
   }
 
   @for $month-length from 28 through 31 {
-    &--month-lenght_#{$month-length} {
+    &--month-length_#{$month-length} {
       #{$root}__day:nth-child(n+#{$month-length + 1}) {
         display: none;
       }
