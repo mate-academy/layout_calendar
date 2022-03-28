@@ -1,6 +1,5 @@
 .cell {
   display: flex;
-  box-sizing: border-box;
   background-color: $cell-color;
   width: $cell-side;
   height: $cell-side;
@@ -14,5 +13,11 @@
     cursor: pointer;
     transform: translateY(-20px);
     background-color: pink;
+  }
+
+  @for $date from 1 through 31 {
+    &:nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
   }
 }

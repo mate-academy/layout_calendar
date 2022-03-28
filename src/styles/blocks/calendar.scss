@@ -1,10 +1,19 @@
 .calendar {
   padding: 30px $calendar-padding;
   display: flex;
+  gap: $cell-gap;
   flex-wrap: wrap;
-  max-width: (7 * $cell-side) + (14 * $cell-gap) + (2 * $calendar-padding);
+  max-width: (7 * $cell-side) + (6 * $cell-gap) + (2 * $calendar-padding);
 
-  &__cell {
-    margin: $cell-gap;
+  @each $day, $index in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: #{(($cell-side + $cell-gap) * $index)};
+    }
+  }
+
+  @for $last-day from 28 to 31 {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
   }
 }
