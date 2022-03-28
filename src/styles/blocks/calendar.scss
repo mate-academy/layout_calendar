@@ -1,0 +1,36 @@
+.calandar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $day-gap * 7;
+
+  &__days {
+    margin: $gap;
+    background-color: #eee;
+    transition: background-color, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(-n + #{$month-length}) {
+      @include cal-block;
+    }
+
+    @for $day from 1 through $month-length {
+      &--#{$day}::before {
+        content: "#{$day}";
+        display: flex;
+        justify-content: center;
+        line-height: $day-height;
+      }
+    }
+
+    @each $start-day, $shift in $start-days {
+      &--start-day--#{$start-day} {
+        margin-left: $shift;
+      }
+    }
+  }
+}
