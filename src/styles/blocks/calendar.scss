@@ -1,4 +1,6 @@
 .calendar {
+  $root: &;
+
   display: flex;
   flex-wrap: wrap;
   padding: 30px $calender-padding;
@@ -13,7 +15,7 @@
 
   @for $lastDate from 28 through 31 {
     &--month-length--#{$lastDate} {
-      .calendar__date:nth-child(n + #{$lastDate + 1}) {
+      #{$root}__date:nth-child(n + #{$lastDate + 1}) {
         display: none;
       }
     }
@@ -21,7 +23,6 @@
 
   &__date {
     display: flex;
-    box-sizing: border-box;
     border: 1px solid black;
     height: $date-cell-side;
     width: $date-cell-side;
@@ -37,7 +38,7 @@
     }
 
     @for $index from 1 through 31 {
-      &--cell--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
