@@ -1,0 +1,23 @@
+.calendar__day {
+  @include square($cell-size);
+  box-sizing: border-box;
+  padding: $padding-size;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #000;
+  background-color: #eee;
+
+  &:hover {
+    transform: translateY($cell-size / (-5));
+    background-color: pink;
+  }
+
+  @for $day-count from 1 through 31 {
+    &:nth-child(#{$day-count})::before {
+      content: "#{$day-count}";
+    }
+  }
+}
