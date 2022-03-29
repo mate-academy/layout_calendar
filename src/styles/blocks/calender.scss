@@ -1,46 +1,44 @@
 .calendar {
-  $root: &;
-
   display: flex;
   flex-wrap: wrap;
-  padding: 30px $calender-padding;
-  gap: $date-cell-gap;
-  width: ($date-cell-side * 7) + ($date-cell-gap * 6) + ($calender-padding * 2);
+  gap: $day-gap;
+  max-width: (7 * $day-side) + (14 * $day-gap) + (2 * $calendar-padding);
+  padding: $calendar-padding;
 
-  @each $day, $date in $days {
+  @each $day, $index in $days {
     &--start-day--#{$day} :first-child {
-      margin-left: ($date-cell-side * $date) + ($date-cell-gap * $date);
+      margin-left: ($day-side * $index) + ($day-gap * $index);
     }
   }
 
   @for $lastDate from 28 through 31 {
     &--month-length--#{$lastDate} {
-      #{$root}__date:nth-child(n + #{$lastDate + 1}) {
+      .calendar__day:nth-child(n + #{$lastDate + 1}) {
         display: none;
       }
     }
   }
 
-  &__date {
-    display: flex;
-    border: 1px solid black;
-    height: $date-cell-side;
-    width: $date-cell-side;
-    background-color: #eee;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.5s, transform 0.5s;
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-      cursor: pointer;
+  &__day {
+    @for $day from 1 through 31 {
+      &--#{$day}::before {
+        content: "#{$day}";
+      }
     }
 
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-      }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $black;
+    height: $day-side;
+    width: $day-side;
+    background-color: $grey;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $pink;
+      transition: background-color 0.5s, transform 0.5s;
+      cursor: pointer;
     }
   }
 }
