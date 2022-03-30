@@ -3,27 +3,23 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  padding: 30#{$units} 10#{$units} 10#{$units};
-  width: 721#{$units};
-
+  gap: $dayGap;
+  width: 707px;
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-basis: calc(100% / 8);
     background: #eee;
-    margin-left: 1#{$units};
-    margin-top: 1#{$units};
-    width: 100#{$units};
-    height: 100#{$units};
-    border: 1#{$units} solid #000;
+    @include square (100px, 100px);
+
+    border: 1px solid #000;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day}):before {
         content: "#{$day}";
-        padding: 0;
       }
     }
+
   }
 
   @for $last-day from 28 through 31 {
@@ -34,10 +30,10 @@
     }
   }
 
-  @each $wkday, $dayshift in $week-days {
-    &--start-day--#{$wkday} {
+  @each $wkDay, $dayShift in $week-days {
+    &--start-day--#{$wkDay} {
       .calendar__day:first-child {
-        margin-left: ($dayshift)#{$units};
+        margin-left: ($dayShift);
       }
     }
   }
@@ -45,7 +41,7 @@
   &__day:hover {
     background-color: pink;
     cursor: pointer;
-    transform: translateY(-20#{$units});
+    transform: translateY(-20px);
     transition: all 0.5s;
   }
 }
