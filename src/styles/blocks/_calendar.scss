@@ -1,0 +1,36 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: ($day-card-width + (2 * $gap)) * 7;
+  padding: 10px;
+
+  @each $week-day, $shift in $week-days {
+    &--start-day--#{$week-day} :first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $days-num from 28 through 31 {
+    &--month-length--#{$days-num} :nth-child(n + #{$days-num + 1}) {
+      display: none;
+    }
+  }
+
+  &__days {
+    @include cal-blocks;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+  }
+}
