@@ -1,0 +1,22 @@
+.cell {
+  display: flex;
+  background-color: $cell-color;
+  @include cell_size($cell-side);
+  border: 1px solid black;
+
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+
+  @for $date from 1 through 31 {
+    &:nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
+  }
+}
