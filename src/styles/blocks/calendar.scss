@@ -1,0 +1,24 @@
+.calendar {
+  display: flex;
+
+  width: $calendarRow * $size + 2 * $calendarPadding
+    + ($calendarRow - 1) * $gap;
+
+  box-sizing: border-box;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &__day {
+    @include square ($size);
+
+    background-color: $dayColor;
+    border: 1px solid black;
+    gap: 1px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+    }
+  }
+}
