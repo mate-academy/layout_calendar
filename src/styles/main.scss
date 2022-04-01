@@ -1,3 +1,48 @@
-body {
-  margin: 0;
+@import "variables";
+@import "mixins";
+@import "page";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $length * 7 + $gap * 6;
+  margin: auto;
+  padding: 10px;
+  gap: $gap;
+
+  @each $day, $move-val in $start-day {
+    &--start-day--#{$day} :first-child {
+      margin-left: #{$move-val};
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @include square;
+    background-color: #eee;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    position: relative;
+    transition: 500ms;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        @include day-box;
+      }
+    }
+
+    &:hover {
+      background-color: #fcc;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
 }
