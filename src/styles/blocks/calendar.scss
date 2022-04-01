@@ -1,0 +1,56 @@
+@import "../utils/variables";
+
+.container {
+  position: relative;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $block-column * ($block + $cal-padding);
+  gap: $gap;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 5%);
+
+  &:nth-child(7n) {
+    margin-top: 0;
+  }
+
+  .days {
+    width: $block;
+    height: $block;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+
+  @each $day, $index in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: #{(($block + $gap) * $index)};
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
