@@ -1,3 +1,12 @@
+$days:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
 * {
   box-sizing: border-box;
 }
@@ -22,6 +31,12 @@ body {
 
   font-size: 30px;
 
+  @each $day, $margin in $days {
+    &-start-day--#{$day} &__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
   &__day {
     position: relative;
 
@@ -36,10 +51,6 @@ body {
   }
 
   @for $i from 1 through 31 {
-    // &__day:nth-child(#{$i}) {
-    //   background-color: green;
-    // }
-
     &__day:nth-child(#{$i}):before {
       position: absolute;
       display: flex;
