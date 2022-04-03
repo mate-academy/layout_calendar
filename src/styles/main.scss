@@ -9,7 +9,6 @@ body {
 $day-size: 100px;
 $calendar-size: $day-size * 7 + 10px;
 $digit-size: 30px;
-$shift-size: ($day-size - $digit-size) / 2;
 $transform-size: $day-size * 0.2;
 
 .calendar {
@@ -27,6 +26,9 @@ $transform-size: $day-size * 0.2;
     border: 1px solid black;
     position: relative;
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       background-color: pink;
@@ -44,8 +46,6 @@ $transform-size: $day-size * 0.2;
         content: "#{$var}";
         position: absolute;
         color: black;
-        top: #{$shift-size};
-        left: #{$shift-size};
         font-size: #{$digit-size};
       }
     }
@@ -60,7 +60,7 @@ $transform-size: $day-size * 0.2;
     sun 6 * $day-size;
 
   @each $day, $size in $days {
-    .start-day--#{$day} {
+    &__start-day--#{$day} {
       margin-left: $size;
     }
     
