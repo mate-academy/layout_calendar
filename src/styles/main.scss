@@ -10,6 +10,7 @@ $day-size: 100px;
 $calendar-size: $day-size * 7 + 10px;
 $digit-size: 30px;
 $transform-size: $day-size * 0.2;
+$gap: 1px;
 
 .calendar {
   display: flex;
@@ -52,18 +53,18 @@ $transform-size: $day-size * 0.2;
   }
   $days: 
     mon 0, 
-    tue $day-size, 
-    wed 2 * $day-size, 
-    thu 3 * $day-size, 
-    fri 4 * $day-size, 
-    sat 5 * $day-size, 
-    sun 6 * $day-size;
+    tue $day-size + $gap, 
+    wed 2 * $day-size + 2 * $gap, 
+    thu 3 * $day-size + 3 * $gap, 
+    fri 4 * $day-size + 4 * $gap, 
+    sat 5 * $day-size + 5 * $gap, 
+    sun 6 * $day-size + 6 * $gap;
 
   @each $day, $size in $days {
-    &__start-day--#{$day} {
+    &__start-day--#{$day} .calendar__day:first-child {
+
       margin-left: $size;
     }
-    
   }
 
   @for $day from 28 through 31 {
