@@ -1,11 +1,13 @@
+$sideOfSquare: 100px;
+
 $days:
   "mon" 0,
-  "tue" 101px,
-  "wed" 202px,
-  "thu" 303px,
-  "fri" 404px,
-  "sat" 505px,
-  "sun" 606px;
+  "tue" ($sideOfSquare + 1),
+  "wed" ($sideOfSquare + 1) * 2,
+  "thu" ($sideOfSquare + 1) * 3,
+  "fri" ($sideOfSquare + 1) * 4,
+  "sat" ($sideOfSquare + 1) * 5,
+  "sun" ($sideOfSquare + 1) * 6;
 
 * {
   box-sizing: border-box;
@@ -42,8 +44,8 @@ html {
   &__day {
     position: relative;
 
-    width: 100px;
-    height: 100px;
+    width: $sideOfSquare;
+    height: $sideOfSquare;
 
     background-color: #eee;
     border: 1px solid black;
