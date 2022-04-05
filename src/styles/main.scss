@@ -50,18 +50,23 @@ html {
     cursor: pointer;
 
     transition: 0.5s;
-  }
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i}):before {
-      position: absolute;
-      display: flex;
-      width: 100%;
-      height: 100%;
-      justify-content: center;
-      align-items: center;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
 
-      content: "#{$i}";
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
     }
   }
 
@@ -69,10 +74,5 @@ html {
     &-month-length--#{$i} > &__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
-  }
-
-  &__day:hover {
-    transform: translateY(-20px);
-    background-color: pink;
   }
 }
