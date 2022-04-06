@@ -1,0 +1,27 @@
+$map:
+  "mon" ($square-size + $gaps) * 0,
+  "tue" ($square-size + $gaps) * 1,
+  "wed" ($square-size + $gaps) * 2,
+  "thu" ($square-size + $gaps) * 3,
+  "fri" ($square-size + $gaps) * 4,
+  "sat" ($square-size + $gaps) * 5,
+  "sun" ($square-size + $gaps) * 6;
+
+@for $index from 28 through 31 {
+  .calendar--month-length_#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $padding in $map {
+  .calendar--start-day_#{$day} .calendar__day:first-child {
+    margin-left: $padding;
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
