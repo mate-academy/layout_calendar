@@ -1,3 +1,79 @@
+$sizeDay: 100px;
+$daysInRow: 7;
+$calendarGap: 1px;
+$calendarPadding: 10px;
+$weekDaysMarginLeft:
+  "monday" 0,
+  "tuesday" 101px,
+  "wednesday" 202px,
+  "thursday" 303px,
+  "friday" 404px,
+  "saturday" 505px,
+  "sunday" 606px;
+$monthLentgh:
+  28 "februaryEven" "3",
+  29 "februaryOdd" 2,
+  30 "montheven" 1,
+  31 "monthOdd" 0;
+
+@function calendarWidth($sizeDay, $daysInRow, $calendarGap) {
+  @return $sizeDay * $daysInRow + $calendarGap * $daysInRow - 1;
+}
+
+@mixin square {
+  height: $sizeDay;
+  width: $sizeDay;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendarGap;
+  padding: $calendarPadding;
+  width: calendarWidth($sizeDay, $daysInRow, $calendarGap);
+
+  &__day {
+    position: relative;
+    @include square;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition-duration: 500ms;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      line-height: $sizeDay;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  
+  @each $day, $margin in $weekDaysMarginLeft {
+    &__day--start--#{$day} {
+      margin-left: $margin;
+    }
+
+  }
+
+  @each $lentgh, $month, $excess in $monthLentgh {
+    &--month-lentgh--#{$month} :nth-last-child(-n + #{$excess}) {
+      visibility: hidden;
+    }
+  }
 }
