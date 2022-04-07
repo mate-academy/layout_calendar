@@ -25,6 +25,11 @@ $days:
   }
 }
 
+@mixin cell-size {
+  width: $blockWidth;
+  height: $blockHeight;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -33,8 +38,7 @@ $days:
 
   &__day {
     display: flex;
-    width: $blockWidth;
-    height: $blockHeight;
+    @include cell-size;
 
     font-size: $fontSize;
     padding-left: ($blockWidth - $fontSize) / 2;
