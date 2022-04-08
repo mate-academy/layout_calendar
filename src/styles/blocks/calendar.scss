@@ -1,8 +1,6 @@
 .calendar {
   padding: $paddingCalendar;
   display: flex;
-  gap: 1px;
-  flex-direction: row;
   flex-wrap: wrap;
 
   &__day {
@@ -13,6 +11,7 @@
 
     line-height: $dayFieldSize;
     text-align: center;
+    cursor: pointer;
 
     @for $day from 1 through $monthLength {
       &:nth-child(#{$day}):before {
@@ -22,12 +21,12 @@
 
     $days:
       "mon" 0,
-      "tue" #{$dayFieldSize + $gap},
-      "wed" #{($dayFieldSize + $gap) * 2},
-      "thu" #{($dayFieldSize + $gap) * 3},
-      "fri" #{($dayFieldSize + $gap) * 4},
-      "sat" #{($dayFieldSize + $gap) * 5},
-      "sun" #{($dayFieldSize + $gap) * 6};
+      "tue" #{$dayFieldSize}
+      "wed" #{$dayFieldSize * 2},
+      "thu" #{$dayFieldSize * 3},
+      "fri" #{$dayFieldSize * 4},
+      "sat" #{$dayFieldSize * 5},
+      "sun" #{$dayFieldSize * 6};
 
     @each $day, $margin in $days {
       &--start-day--#{$day} > &:nth-child(1) {
@@ -42,7 +41,6 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
       transition-duration: 0.5s;
