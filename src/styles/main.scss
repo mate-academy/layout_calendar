@@ -11,9 +11,9 @@ $weekDaysMarginLeft:
   "saturday" 505px,
   "sunday" 606px;
 $monthLentgh:
-  28 "februaryEven" "3",
+  28 "februaryEven" 3,
   29 "februaryOdd" 2,
-  30 "montheven" 1,
+  30 "monthEven" 1,
   31 "monthOdd" 0;
 
 @function calendarWidth($sizeDay, $daysInRow, $calendarGap) {
@@ -63,9 +63,9 @@ body {
       width: 100%;
     }
   }
-  
+
   @each $day, $margin in $weekDaysMarginLeft {
-    &__day--start--#{$day} {
+    &--start-day--#{$day} :nth-child(1) {
       margin-left: $margin;
     }
 
