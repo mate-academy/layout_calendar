@@ -1,0 +1,55 @@
+
+.calendar {
+
+  $days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  &__day {
+    display: flex;
+    width: $cell-size;
+    height: $cell-size;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    transition: translate 0.5s;
+
+    /*what day is start of week */
+
+    @each $day, $number in $days {
+      &--start-day--#{$day} {
+        margin-left: ($number - 1) * ($cell-size + $gap);
+      }
+    }
+
+    /*counting month-length */
+
+    @for $date from ($month-length + 1) through 32 {
+      &:nth-child(#{$date}) {
+        display: none;
+      }
+    }
+
+    /* numbers in the cells */
+
+    @for $count from 1 through $month-length {
+      &:nth-child(#{$count})::before {
+        content: "" + $count;
+        margin: auto;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+}
