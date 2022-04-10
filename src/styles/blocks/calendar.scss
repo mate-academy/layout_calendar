@@ -5,46 +5,29 @@
   width: 7 * $daySize + 6 * $gap;
   margin: auto;
 
-  $week-days:
-    "tue" 1,
-    "mon" 0,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
   @each $day, $num in $week-days {
-    &--start-day_#{$day} :first-child {
+    &--start-day_#{$day} &__day:first-child {
       margin-left: $num * ($daySize + $gap);
     }
   }
 
-  $month-day:
-    "28" 29,
-    "29" 30,
-    "30" 31,
-    "31" 32;
-
   @each $day, $value in $month-day {
-    @for $index from $value through 32 {
-      &--month-length_#{$day} :nth-child(n + #{$index}) {
+    @for $index from 1 through 31 {
+      &--month-length_#{$day} &__day:nth-child(n + #{$value}) {
         display: none;
       }
-    }
-  }
 
-  @for $index from 1 through 31 {
-    &__day:nth-child(#{$index}) {
-      display: flex;
-      box-sizing: border-box;
-      @include square($daySize);
-      border: 1px solid #000;
-      background-color: #eee;
+      &__day:nth-child(#{$index}) {
+        display: flex;
+        box-sizing: border-box;
+        @include square($daySize);
+        border: 1px solid #000;
+        background-color: #eee;
 
-      &::before {
-        margin: auto;
-        content: "#{$index}";
+        &::before {
+          margin: auto;
+          content: "#{$index}";
+        }
       }
     }
   }
