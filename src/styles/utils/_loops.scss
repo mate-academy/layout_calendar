@@ -1,0 +1,17 @@
+@each $day, $marginLeft in $weekDays {
+  .calendar--start-day--#{$day} > .calendar__day:first-child {
+    margin-left: $marginLeft;
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: "#{$number}";
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length--#{$day} > .calendar__day:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
