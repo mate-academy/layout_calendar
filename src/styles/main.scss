@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 $size : 100px;
 $weekDays :
   "mon" 0,
@@ -13,14 +17,16 @@ $weekDays :
   height: $size;
 }
 
-body {
+.page {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+
+  .page__calendar {
+    width: ($size + 1) * 7;
+  }
 }
 
 .calendar {
@@ -28,7 +34,6 @@ body {
   padding: 20px;
   justify-content: start;
   flex-wrap: wrap;
-  width: (($size + 1) * 7);
 
   &__day {
     @include square($size);
