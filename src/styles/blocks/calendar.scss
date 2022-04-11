@@ -1,0 +1,45 @@
+@import "./../utils/variables";
+
+.calendar {
+
+  @each $day, $margin in $days {
+    &-start-day--#{$day} &__days:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &-month-length--#{$index} &__days:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__days {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: $sizeBlock;
+    height: $sizeBlock;
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    transition: 0.5s;
+    cursor: pointer;
+
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: rgb(235, 167, 181);
+    }
+  }
+}
