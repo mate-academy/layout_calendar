@@ -1,0 +1,27 @@
+@import "./variables";
+
+@for $day from 1 through 31 {
+  .calendar {
+    &__day {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+  }
+}
+
+@each $item, $margin in $days {
+  .calendar {
+    &--start-day--#{$item} > &__day:first-child {
+      margin-left: $margin;
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar {
+    &--month-length--#{$index} > &__day:nth-child(n+#{$index+1}) {
+      display: none;
+    }
+  }
+}
