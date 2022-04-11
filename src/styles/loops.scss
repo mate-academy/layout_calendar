@@ -3,3 +3,18 @@
     content: "#{$index}";
   }
 }
+
+@for $index from 28 to 31 {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $DaysMargin in $days {
+  .calendar--first-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: $DaysMargin;
+    }
+  }
+}
