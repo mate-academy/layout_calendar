@@ -10,6 +10,14 @@
     "sat" 6,
     "sun" 7;
 
+  /*what day is start of week */
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: ($number - 1) * ($cell-size + $gap);
+    }
+  }
+
   &__day {
     display: flex;
     width: $cell-size;
@@ -18,15 +26,7 @@
     background-color: #eee;
     border: 1px solid #000;
 
-    transition-duration: 0.5s;
-
-    /*what day is start of week */
-
-    @each $day, $number in $days {
-      &--start-day--#{$day} {
-        margin-left: ($number - 1) * ($cell-size + $gap);
-      }
-    }
+    transition: transform 0.5s;
 
     /*counting month-length */
 
