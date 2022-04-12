@@ -66,6 +66,6 @@ BAD example:
 ```
 
 9. [FUNCTIONALITY] - Your project should work correctly (have 31 days and start
-on Monday) with invalid modifier values, like `start-day--ghy` or `days--27`.
+on Monday) with invalid modifier values, like `start-calendar__day--ghy` or `days--27`.
 10. [STYLES] - Don't be greedy, add some top paddings, so the top row don't go over
 top of the page on hover.
