@@ -1,0 +1,54 @@
+
+.calendar {
+
+  $days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  /*what day is start of week */
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: ($number - 1) * ($cell-size + $gap);
+    }
+  }
+
+  &__day {
+    display: flex;
+    width: $cell-size;
+    height: $cell-size;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    transition-property: all;
+    transition-duration: 0.5s;
+    cursor: pointer;
+
+    /* numbers in the cells */
+
+    @for $count from 1 through 31 {
+      &:nth-child(#{$count})::before {
+        content: "#{$count}";
+        margin: auto;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar--month-length--#{$date} > :nth-child(n + #{$date + 1}) {
+    display: none;
+  }
+}
