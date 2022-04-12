@@ -2,45 +2,28 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
+  padding: $padding;
 
-  @each $day, $margin in $days {
-    &-start-day--#{$day} &__day:first-child {
-      margin-left: $margin;
-    }
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
-    width: $squareWidth;
-    height: $squareWidth;
+    @include square($sideSquare);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #000;
     background-color: #eee;
-    border: 1px solid black;
-    position: relative;
-    cursor: pointer;
-    transition: 0.5s;
 
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index}):before {
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-
-        content: "#{$index}";
-      }
-    }
+    transition-duration: 0.5s;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &-month-length--#{$index} > &__day:nth-child(n + #{$index + 1}) {
-      display: none;
     }
   }
 }
