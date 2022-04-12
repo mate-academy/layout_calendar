@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: ($squareSize + 1) * 7 + 20px;
+  width: ($squareSize + 1) * 7 + $squareplus;
   gap: 1px;
   padding: $main-padding;
   padding-top: 30px;
@@ -9,7 +9,6 @@
     display: flex;
     width: $squareSize;
     height: $squareSize;
-    font-family: Arial, sans-serif;
     border: 1px solid black;
     font-size: 30px;
     transition: all 0.5s ease-out;
@@ -18,16 +17,18 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
+    }
+
+    &::before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $squareSize;
     }
 
     @for $index from 1 to 32 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: $squareSize;
       }
     }
   }
@@ -45,7 +46,3 @@
     }
   }
 }
-
-
-
-
