@@ -11,10 +11,10 @@ $weekDaysMarginLeft:
   "saturday" 505px,
   "sunday" 606px;
 $monthLentgh:
-  28 "februaryEven" 3,
-  29 "februaryOdd" 2,
-  30 "monthEven" 1,
-  31 "monthOdd" 0;
+  28 3,
+  29 2,
+  30 1,
+  31 0;
 
 @function calendarWidth($sizeDay, $daysInRow, $calendarGap) {
   @return $sizeDay * $daysInRow + $calendarGap * $daysInRow - 1;
@@ -71,8 +71,8 @@ body {
 
   }
 
-  @each $lentgh, $month, $excess in $monthLentgh {
-    &--month-lentgh--#{$month} :nth-last-child(-n + #{$excess}) {
+  @each $lentgh, $excess in $monthLentgh {
+    &--month-lentgh--#{$lentgh} :nth-last-child(-n + #{$excess}) {
       visibility: hidden;
     }
   }
