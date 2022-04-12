@@ -1,0 +1,12 @@
+@each $day, $margin in $Days {
+  .calendar__day-start--#{$day} > .calendar__day:first-child {
+    margin-left: #{$margin};
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar__month-length--#{$index} >
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
