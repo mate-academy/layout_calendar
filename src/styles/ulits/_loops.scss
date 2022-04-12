@@ -5,8 +5,8 @@
 }
 
 @for $index from 28 through 31 {
-  .calendar--month-length--#{$index} {
-    .calendar__cell:nth-child(n+#{$index+1}) {
+  .calendar__month-length--#{$index} {
+    .calendar__day:nth-child(n+#{$index+1}) {
       display: none;
     }
   }
@@ -22,8 +22,8 @@ $days:
   "sun" #{(6 * $cell-width) + 6px};
 
 @each $day, $margin-value in $days {
-  .calendar--start-day--#{$day} {
-    .calendar__day:first-child {
+  .calendar__start-day--#{$day} {
+    .calendar__cell:first-child {
       margin-left: $margin-value;
     }
   }
