@@ -26,21 +26,15 @@
     background-color: #eee;
     border: 1px solid #000;
 
-    transition: transform 0.5s;
-
-    /*counting month-length */
-
-    @for $date from ($month-length + 1) through 32 {
-      &:nth-child(#{$date}) {
-        display: none;
-      }
-    }
+    transition-property: all;
+    transition-duration: 0.5s;
+    cursor: pointer;
 
     /* numbers in the cells */
 
-    @for $count from 1 through $month-length {
+    @for $count from 1 through 31 {
       &:nth-child(#{$count})::before {
-        content: "" + $count;
+        content: "#{$count}";
         margin: auto;
       }
     }
@@ -51,5 +45,10 @@
       transform: translateY(-20px);
     }
   }
+}
 
+@for $date from 28 through 31 {
+  .calendar--month-length--#{$date} > :nth-child(n + #{$date + 1}) {
+    display: none;
+  }
 }
