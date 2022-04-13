@@ -1,3 +1,95 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+$day__color: #eee;
+$day__size: 95px;
+$col-number: 7;
+$col-padding: 10px;
+$gap: 1px;
+
+@mixin day($size) {
+  width: $size;
+  height: $size;
+}
+
+@function getWidth($size, $gap, $quantity, $padding) {
+  @return ($size + $gap) * $quantity + $padding;
+}
+
+.page__calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: getWidth($day__size, $gap, $col-number, $col-padding);
+
+  gap: 1px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.calendar__day {
+  position: relative;
+
+  @include day($day__size);
+
+  background-color: $day__color;
+  border: 1px solid #000;
+  transition: background-color 0.5s, transform 0.5s;
+  cursor: pointer;
+
+  &:hover {
+
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  &::after {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 30px;
+    color: #000;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@for $num from 28 through 31 {
+  .calendar--month-length_#{$num} {
+    @for $day-num from $num + 1 through 32 {
+      .calendar__day:nth-child(#{$day-num}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@for $num from 1 to 32 {
+  .calendar__day:nth-child(#{$num})::after {
+    content: "#{$num}";
+  }
+}
+
+$days:
+  "mon" 0,
+  "tue" $gap + $day__size,
+  "wed" 2 * $gap + 2 * $day__size,
+  "thu" 3 * $gap + 3 * $day__size,
+  "fri" 4 * $gap + 4 * $day__size,
+  "sat" 5 * $gap + 5 * $day__size,
+  "sun" 6 * $gap + 6 * $day__size;
+
+@each $day, $margin-left in $days {
+  .calendar--start-day_#{$day} {
+    .calendar__day:first-child {
+      margin-left: $margin-left;
+    }
+  }
 }
