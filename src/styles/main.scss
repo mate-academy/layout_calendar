@@ -43,11 +43,21 @@ $gap: 1px;
   background-color: $day__color;
   border: 1px solid #000;
   transition: background-color 0.5s, transform 0.5s;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
+
     background-color: pink;
     transform: translateY(-20px);
+  }
+
+  &::after {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 30px;
+    color: #000;
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -64,15 +74,6 @@ $gap: 1px;
 @for $num from 1 to 32 {
   .calendar__day:nth-child(#{$num})::after {
     content: "#{$num}";
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-
-    font-size: 30px;
-    color: #000;
-
-    transform: translate(-50%, -50%);
   }
 }
 
