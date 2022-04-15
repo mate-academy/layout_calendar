@@ -1,0 +1,57 @@
+@import url(./_mixin.scss); // why don't work?
+@import url(./variables.scss); // again
+
+$size: 100px;
+
+@mixin square () {
+  width: 100px;
+  height: 100px;
+}
+
+.calendar {
+  box-sizing: border-box;
+
+  padding: 10px;
+  width: $size*8;
+  gap: 1px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    @include square();
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    transition-duration: 0.5s;
+
+    cursor: pointer;
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+
+    @for $day from 30 through 31 {
+      &:nth-child(#{$day}) {
+        display: none;
+      }
+    }
+
+    &:first-child {
+      margin-left: 77.7%;
+    }
+
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(- 20px);
+    }
+  }
+}
