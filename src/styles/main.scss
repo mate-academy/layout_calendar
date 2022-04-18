@@ -1,3 +1,68 @@
 body {
   margin: 0;
+  
+}
+
+$cell-size: 100px;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  width: 706px;
+  height: 504px;
+  gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10% auto;
+  
+  @each $start-day in mon, tue, wed, thu, fri, sat, sun {
+    &--#{$start-day} {
+      color: blue;
+    }
+  
+  }
+
+  @for $month from 28 through 31 {
+    &--#{$month} {
+      color: red;
+
+    }
+  }
+        
+  &__cell {
+    @include square($cell-size);
+    background-color: #eee;
+    border: 1px black solid;
+    box-sizing: border-box;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    transition: background-color 0.5s, stransform 0.5s;
+
+    &:nth-child(1) {
+      margin-left: 606px;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 30px;
+        }
+
+      }
+    }
+    
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translate(0, -20px);
+    }
+
+  }
 }
