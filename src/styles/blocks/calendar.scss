@@ -1,0 +1,31 @@
+.page {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 707px;
+
+  gap: 1px;
+
+  &__day {
+    @include square ($size);
+
+    background-color: $dayColor;
+    border: 1px solid black;
+
+    transition: background-color 400ms, transform 300ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+
+      transform: translateY(-30px);
+    }
+  }
+}
