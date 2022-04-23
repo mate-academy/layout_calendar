@@ -1,5 +1,13 @@
 $day-size:100px;
 $base-gap:1px;
+$days:
+  "mon" 0,
+  "tue" $day-size + $base-gap,
+  "wed" 2 * ($day-size + $base-gap),
+  "thu" 3 * ($day-size + $base-gap),
+  "fri" 4 * ($day-size + $base-gap),
+  "sat" 5 * ($day-size + $base-gap),
+  "sun" 6 * ($day-size + $base-gap);
 
 body {
   margin: 0;
@@ -13,8 +21,6 @@ body {
 
   &__container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 7 * $day-size + 6 * $base-gap;
     gap: #{$base-gap};
     padding: 10px;
@@ -32,6 +38,7 @@ body {
     font-size: 30px;
     color: black;
     line-height: #{$day-size};
+    cursor: pointer;
     
     @for $index from 1 to 32 {
       &:nth-child(#{$index}) {
@@ -41,4 +48,21 @@ body {
       }
     }
   }
+
+  @each $start-day, $margin-left in $days {
+    &--start-day--#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: #{$margin-left};
+      }
+    }
+  }
+
+  @each $month-length in 28, 29, 30 {
+    &--month-length--#{$month-length} {
+      .calendar__day:nth-child(n + #{$month-length+1}) {
+        display: none;
+      }
+    }
+  }
+
 }
