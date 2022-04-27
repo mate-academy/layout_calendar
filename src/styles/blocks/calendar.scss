@@ -20,23 +20,28 @@
     }
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
         position: absolute;
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
     }
+  }
 
-    $days: "mon" 0, "tue" $cell-size + $cell-gap,
-      "wed" ($cell-size + $cell-gap) * 2, "thu" ($cell-size + $cell-gap) * 3,
-      "fri" ($cell-size + $cell-gap) * 4, "sat" ($cell-size + $cell-gap) * 5,
-      "sun" ($cell-size + $cell-gap) * 6;
+  $days:
+    "mon" 0,
+    "tue" $cell-size + $cell-gap,
+    "wed" ($cell-size + $cell-gap) * 2,
+    "thu" ($cell-size + $cell-gap) * 3,
+    "fri" ($cell-size + $cell-gap) * 4,
+    "sat" ($cell-size + $cell-gap) * 5,
+    "sun" ($cell-size + $cell-gap) * 6;
 
-    @each $day, $position in $days {
-      &--1--start-day_#{$day} {
-        margin-left: $position;
-      }
+  @each $day, $position in $days {
+    &--start-day_#{$day}
+    > .calendar__day:first-child {
+      margin-left: $position;
     }
   }
 
