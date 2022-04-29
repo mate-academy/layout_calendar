@@ -9,13 +9,6 @@ $day-gap: 1px;
   background-color: $day-color;
 }
 
-@mixin number {
-  font-family: "Arial", sans-serif;
-  color: black;
-  height: 30px;
-  
-}
-
 body {
   margin: 0;
 }
@@ -46,7 +39,7 @@ body {
   &-day:hover {
     background-color: pink;
     transform: translateY(-20px);
-    animation-duration: 0.5s;
+    transition-duration: 0.8s;
     cursor: pointer;
   }
 
@@ -59,10 +52,7 @@ body {
       line-height: 30px;
       content: "#{$index}";
     }
-
   }
-
-  
 
   $day-names:
     "mon" 0,
@@ -81,7 +71,6 @@ body {
 
   @for $index from 28 through 31 {
     &__month-length--#{$index} {
-     
       .calendar-day:nth-child(n + #{$index}) {
         display: none;
       }
