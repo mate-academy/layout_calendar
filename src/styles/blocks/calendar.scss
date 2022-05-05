@@ -1,5 +1,5 @@
 .calendar {
-  margin: auto;
+  @extend %center-element;
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
@@ -13,10 +13,7 @@
     transition: background-color 0.5s, transform 0.5s;
 
     &::before {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      @extend %center-element;
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
     }
@@ -30,7 +27,7 @@
 
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
-      content: "#{$i}"
+      content: "#{$i}";
     }
   }
 
