@@ -1,3 +1,65 @@
-body {
+$cell-size: 100px;
+$container-size: 7 * $cell-size + 6;
+$cell-shift: 
+  "mon" $container-size - 7 * $cell-size - 6,
+  "tue" $container-size - 6 * $cell-size - 5,
+  "wed" $container-size - 5 * $cell-size - 4,
+  "thu" $container-size - 4 * $cell-size - 3,
+  "fri" $container-size - 3 * $cell-size - 2,
+  "sat" $container-size - 2 * $cell-size - 1,
+  "sun" $container-size - 1 * $cell-size - 0;
+
+.page {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-container {
+  width: $container-size;
+  padding: 30px 10px;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 98px;
+    box-sizing: border-box;
+    transition-delay: 0.5s;
+    transition-property: background-color, transform;
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $index1 from 1 to 32 {
+    &__cell:nth-child(#{$index1}) {
+      &::before {
+        content: "#{$index1}";
+      }
+    }
+  }
+
+  @each $day, $shift in $cell-shift {
+    &--start-day--#{$day} &__cell:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $index2 from 28 to 31 {
+    &--month-length--#{$index2} &__cell:nth-child(n + #{$index2 + 1}) {
+      visibility: hidden;
+    }
+  }
 }
