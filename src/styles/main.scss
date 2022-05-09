@@ -1,7 +1,8 @@
 $gap-size: 1px;
+$calendar-height: 100vh;
+$calendar-margin: auto;
 $font-size: 30px;
 $border-size: 1px;
-$calendar-margin: auto;
 $wigth-cell: 100px;
 $height-cell: 100px;
 $width-calendar: $wigth-cell * 7 + $gap-size * 10;
@@ -35,11 +36,17 @@ body {
 
   .calendar {
     display: flex;
-    flex-wrap: wrap;
-    gap: $gap-size;
-    width: $width-calendar;
-    align-content: flex-start;
+    height: $calendar-height;
     margin: $calendar-margin;
+
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $gap-size;
+      width: $width-calendar;
+      align-content: flex-start;
+      margin: $calendar-margin;
+    }
 
     @each $day, $int in $days {
       &--start-day-#{$day} {
