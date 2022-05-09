@@ -7,10 +7,10 @@ html {
 .calendar {
   display: flex;
   justify-content: center;
-  height: $calendar-height;
-  @for $day-number from 1 to $day-count {
-    &--month-length_#{$day-number} {
-      .calendar__day:nth-child(n + #{$day-number + 1}) {
+  height: 100vh;
+  @for $number-of-days from 1 to $day-count {
+    &--month-length_#{$number-of-days} {
+      .calendar__day:nth-child(n + #{$number-of-days + 1}) {
         display: none;
       }
     }
@@ -24,15 +24,15 @@ html {
     }
   }
 
-  &__mockup {
+  &__container {
     display: flex;
     justify-content: flex-start;
     align-content: center;
     flex-wrap: wrap;
-    padding: $mockup-padding;
+    padding: $container-padding;
     gap: $gap-size;
-    min-width: $mockup-size;
-    max-width: $mockup-size;
+    min-width: $container-size;
+    max-width: $container-size;
   }
 
   &__day {
