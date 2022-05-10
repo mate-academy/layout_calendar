@@ -1,5 +1,5 @@
-@import './utils/_variables';
-@import './utils/_mixins';
+@import "./utils/_variables";
+@import "./utils/_mixins";
 
 .calendar {
   display: flex;
@@ -7,23 +7,6 @@
   gap: $cell-gap;
   width: $calendar-width;
   margin: auto;
-
-  @for $last-day from 28 through 31 {
-    &--days--#{$last-day} {
-      .calendar__day:nth-child(n + #{$last-day + 1}) {
-        display: none;
-        opacity: 0;
-      }
-    }
-  }
-
-  @each $day, $spacing in $days-of-week {
-    &--start-day--#{$day} {
-      .calendar__day:first-child {
-        margin-left: ($cell-size + $cell-gap) * (7 - $spacing);
-      }
-    }
-  }
 
   &__day {
     background-color: #eee;
@@ -48,6 +31,24 @@
       background-color: pink;
       transform: translateY(-20px);
       cursor: pointer;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    .calendar--days--#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day + 1}) {
+        display: none;
+        opacity: 0;
+        background-color: transparent;
+      }
+    }
+  }
+
+  @each $day, $spacing in $days-of-week {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($cell-size + $cell-gap) * (7 - $spacing);
+      }
     }
   }
 }
