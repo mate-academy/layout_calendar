@@ -1,5 +1,4 @@
 $gap-size: 1px;
-$calendar-height: 100vh;
 $calendar-margin: auto;
 $font-size: 30px;
 $border-size: 1px;
@@ -36,7 +35,7 @@ body {
 
   .calendar {
     display: flex;
-    height: $calendar-height;
+    height: 100vh;
     margin: $calendar-margin;
 
     &__container {
@@ -55,10 +54,11 @@ body {
         }
       }
     }
-
-    &--month-length {
-      .calendar__day:nth-child(n + #{$day-count + 1}) {
-        display: none;
+    @for $day-is from 27 through 31 {
+      &--month-length_#{$day-is} {
+        .calendar__day:nth-child(n + #{$day-is + 1}) {
+          display: none;
+        }
       }
     }
 
@@ -82,7 +82,7 @@ body {
     }
 
     @for $index from 1 through $day-count {
-      &__day--#{$index}::before {
+      &__day:nth-child(#{$index}):before {
         content: "#{$index}";
       }
     }
