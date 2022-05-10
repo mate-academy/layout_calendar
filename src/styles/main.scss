@@ -1,28 +1,10 @@
-$gap-size: 1px;
-$calendar-margin: auto;
-$font-size: 30px;
-$border-size: 1px;
-$wigth-cell: 100px;
-$height-cell: 100px;
-$width-calendar: $wigth-cell * 7 + $gap-size * 10;
-$day-count: 31;
-$shift: $wigth-cell + $gap-size;
-$days: (
-  "mon": 1,
-  "tue": 2,
-  "wed": 3,
-  "thu": 4,
-  "fri": 5,
-  "sat": 6,
-  "sun": 7);
+@import "_variables";
+@import "_function";
+@import "_mixin";
+@import "reset";
 
-@function shiftSpace($shift, $int_day) {
-  @return ($shift * $int-day) - $shift;
-}
-
-@mixin figure($width, $height) {
-  width: $width;
-  height: $height;
+* {
+  box-sizing: border-box;
 }
 
 html {
@@ -30,62 +12,56 @@ html {
   font-size: $font-size;
 }
 
-body {
-  margin: 0;
+.calendar {
+  display: flex;
+  height: 100vh;
+  margin: $calendar-margin;
 
-  .calendar {
+  &__container {
     display: flex;
-    height: 100vh;
+    flex-wrap: wrap;
+    gap: $gap-size;
+    width: $width-calendar;
+    flex-shrink: 0;
+    align-content: flex-start;
     margin: $calendar-margin;
+  }
 
-    &__container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: $gap-size;
-      width: $width-calendar;
-      flex-shrink: 0;
-      align-content: flex-start;
-      margin: $calendar-margin;
-    }
-
-    @each $day, $int in $days {
-      &--start-day_#{$day} {
-        .calendar__day:nth-child(1) {
-          margin-left: shiftSpace($shift, $int);
-        }
+  @each $day, $int in $days {
+    &--start-day_#{$day} {
+      .calendar__day:nth-child(1) {
+        margin-left: shiftSpace($shift, $int);
       }
     }
-    @for $day-is from 27 through 31 {
-      &--month-length_#{$day-is} {
-        .calendar__day:nth-child(n + #{$day-is + 1}) {
-          display: none;
-        }
+  }
+  @for $day-is from 28 through 31 {
+    &--month-length_#{$day-is} {
+      .calendar__day:nth-child(n + #{$day-is + 1}) {
+        display: none;
       }
     }
+  }
 
-    &__day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      box-sizing: border-box;
-      @include figure($wigth-cell, $height-cell);
-      background-color: #eee;
-      border: $border-size solid #000;
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    @include figure($cell-size);
+    background-color: #eee;
+    border: $border-size solid #000;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
       transition: 0.5s;
-
-      &:hover {
-        background-color: pink;
-        cursor: pointer;
-        transform: translateY(-20px);
-        transition: 0.5s;
-      }
     }
+  }
 
-    @for $index from 1 through $day-count {
-      &__day:nth-child(#{$index}):before {
-        content: "#{$index}";
-      }
+  @for $index from 1 through $day-count {
+    &__day:nth-child(#{$index}):before {
+      content: "#{$index}";
     }
   }
 }
