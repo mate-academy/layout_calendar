@@ -1,3 +1,70 @@
+
+@import "./utils/mixins";
+@import "./utils/variables";
+@import "./utils/extends";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+
+  @for $index from 28 through 31 {
+    &__box--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
+      @include remove-cell;
+      &::before {
+        content: "";
+      }
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $cell-gap;
+    width: $calendar-size;
+  }
+
+  &__cell {
+    border: 1px solid black;
+    background-color: #eee;
+    @include square($cell-size);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @for $index from 1 through 31 {
+      &--day--#{$index}::before {
+        content: "#{$index}";
+        @extend %text-props;
+      }
+    }
+
+    &--day--1 {
+      margin-left: $cell-size*6 + $cell-gap *6;
+    }
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -10px);
+    animation-name: move;
+    animation-duration: 0.5s;
+  }
+
+  @keyframes move {
+    from {
+      transform: translate(0, 0);
+      background-color: #eee;
+    }
+    to {
+      transform: translate(0, -10px);
+      background-color: pink;
+    }
+  }
 }
