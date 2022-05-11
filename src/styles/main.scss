@@ -1,10 +1,18 @@
-$start-day: 2;
-$month-length: 29;
+$start-days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7
+);
+
+$start-day: 1;
+$month-length: 31;
 $week-days: 7;
 $block-dimensions: 100px;
 $gap: 1px;
-$calc-margin: (($start-day - 1) * $block-dimensions) +
-  (($start-day - 1) * 2) + ($gap * ($start-day - 1));
 
 body {
   margin: 0;
@@ -18,7 +26,8 @@ h1 {
 
 .main {
   margin: 0 auto;
-  width: ($week-days * $block-dimensions) + ($week-days * 2 ) + $week-days;
+  width: ($week-days * $block-dimensions) + 
+    ($week-days * 2 ) + $week-days + ($gap * $week-days);
 }
 
 .calendar {
@@ -27,24 +36,15 @@ h1 {
   gap: $gap;
 
   &__days {
+    box-sizing: border-box;
     width: $block-dimensions;
     height: $block-dimensions;
     background-color: #eee;
     border: 1px solid #000;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     transition: all 0.5s;
-
-    &:nth-child(1) {
-      margin-left: $calc-margin;
-    }
-
-    @for $i from 1 through $month-length {
-      &:nth-child(#{$i}) {
-        display: flex;
-      }
-    }
 
     &::after {
       content: "1";
@@ -60,6 +60,19 @@ h1 {
       cursor: pointer;
       transform: translate(0, -20px);
       background-color: pink;
+    }
+  }
+
+  @each $day, $day-num in $start-days {
+    &--#{$day} :first-child {
+      margin-left: ($block-dimensions * ($day-num - 1)) + 
+        ($gap * ($day-num - 1));
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 }
