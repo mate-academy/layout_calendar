@@ -1,0 +1,52 @@
+.container {
+  @extend %flex-centre;
+  height: 700px;
+
+}
+
+.calendar {
+  display: flex;
+  width: $size-container;
+  flex-wrap: wrap;
+  gap: $size-gap;
+
+  &__item {
+    @include square($size-square);
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-size: 30px;
+    @extend %flex-centre;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: color 0.5s, transform 0.5s;
+    }
+
+    @for $num from 1 through 31 {
+      &:nth-of-type(#{$num})::before {
+        content: "#{$num}";
+      }
+    }
+  }
+
+  @for $mounth-length from 28 through 31 {
+    &--#{$mounth-length} {
+
+      .calendar__item:nth-of-type(n + #{$mounth-length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day,
+    $margis in $week {
+    &--#{$day} {
+      .calendar__item:first-child {
+        margin-left: $margis;
+      }
+    }
+  }
+}
