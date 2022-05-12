@@ -1,7 +1,6 @@
 .container {
   @extend %flex-centre;
   height: 700px;
-
 }
 
 .calendar {
@@ -35,15 +34,13 @@
 
   @for $mounth-length from 28 through 31 {
     &--#{$mounth-length} {
-
       .calendar__item:nth-of-type(n + #{$mounth-length + 1}) {
         display: none;
       }
     }
   }
 
-  @each $day,
-    $margis in $week {
+  @each $day,$margis in $week {
     &--#{$day} {
       .calendar__item:first-child {
         margin-left: $margis;
