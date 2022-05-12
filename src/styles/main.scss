@@ -8,9 +8,6 @@ $start-days: (
   sun: 7
 );
 
-$start-day: 1;
-$month-length: 31;
-$week-days: 7;
 $block-dimensions: 100px;
 $gap: 1px;
 
@@ -26,8 +23,8 @@ h1 {
 
 .main {
   margin: 0 auto;
-  width: ($week-days * $block-dimensions) + 
-    ($week-days * 2 ) + $week-days + ($gap * $week-days);
+  width: (7 * $block-dimensions) + 
+    + ($gap * 7);
 }
 
 .calendar {
@@ -50,7 +47,7 @@ h1 {
       content: "1";
     }
 
-    @for $i from 1 through $month-length {
+    @for $i from 1 through 31 {
       &:nth-child(#{$i})::after {
         content: "#{$i}";
       }
@@ -70,7 +67,7 @@ h1 {
     }
   }
 
-  @for $i from 1 through 31 {
+  @for $i from 28 through 31 {
     &--#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
