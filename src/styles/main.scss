@@ -1,3 +1,75 @@
+$start-days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7
+);
+
+$block-dimensions: 100px;
+$gap: 1px;
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.main {
+  margin: 0 auto;
+  width: (7 * $block-dimensions) + 
+    + ($gap * 7);
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__days {
+    box-sizing: border-box;
+    width: $block-dimensions;
+    height: $block-dimensions;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+
+    &::after {
+      content: "1";
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::after {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -20px);
+      background-color: pink;
+    }
+  }
+
+  @each $day, $day-num in $start-days {
+    &--#{$day} :first-child {
+      margin-left: ($block-dimensions * ($day-num - 1)) + 
+        ($gap * ($day-num - 1));
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
