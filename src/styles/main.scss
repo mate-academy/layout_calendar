@@ -15,9 +15,9 @@ body {
   @for $index from 28 through 31 {
     &__box--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
       @include remove-cell;
-      &::before {
-        content: "";
-      }
+      // &::before {
+      //   content: "";
+      // }
     }
   }
 
@@ -39,14 +39,25 @@ body {
     transition: 0.5s;
 
     @for $index from 1 through 31 {
-      &--day--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
         @extend %text-props;
       }
     }
 
-    &--day--1 {
-      margin-left: $cell-size*6 + $cell-gap *6;
+    $days:
+      'mon' $cell-size*6 + $cell-gap *6,
+      'tue' 0,
+      'wed' 0,
+      'thu' 0,
+      'fri' 0,
+      'sat' 0,
+      'sun' 0;
+
+    @each $name, $day in $days {
+      &--start-day--#{$name} {
+        margin-left: $day;
+      }
     }
   }
 
