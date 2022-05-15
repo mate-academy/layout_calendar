@@ -1,0 +1,23 @@
+@function calendarWidth($day, $gap, $count) {
+  @return $day * 7 + $gap * $count;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+@each $name, $num in $weekDays {
+  .calendar__start-day--#{$name}
+  .calendar__day:first-child {
+    margin-left: ($sizeSquare + $gap) * $num;
+  }
+}
+
+@for $countDays from 28 to 31 {
+  .calendar__month-length--#{$countDays}
+  .calendar__day:nth-child(n + #{$countDays + 1}) {
+    display: none;
+  }
+}
