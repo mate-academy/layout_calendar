@@ -1,0 +1,51 @@
+@import "../utils/functions";
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: getWidth($size-day, $gap-day, $count-col);
+  padding: 10px;
+
+  &__day {
+    box-sizing: border-box;
+    @include square($size-day);
+    background-color: $color-dark;
+    border: 1px solid black;
+
+    &:first-child {
+      margin-left: getWidth($size-day, $gap-day, ($count-col - 1));
+    }
+
+    &:hover {
+      transition: cursor, transform;
+      transition-duration: 500ms;
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @each $day, $start-number in $week {
+      &--start-day_:#{$day}:first-child {
+        margin-left: $start-number * ($size-day + $gap-day);
+      }
+    }
+
+    @for $length from 28 to 31 {
+      &--month-length_#{$length}::nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+
+    @for $index from 1 through $count-day {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $size-day;
+      }
+    }
+  }
+}
