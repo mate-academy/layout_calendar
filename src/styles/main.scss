@@ -9,6 +9,22 @@
   width: ($block-size + ($gap*2)) * 7 + $calendar-padding * 2;
   padding: $calendar-padding ;
 
+  @for $length from 28 to 32 {
+    &--month-length--#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $name, $number in $day {
+    &--start-day--#{$name} {
+      .calendar__day:nth-child(1) {
+        margin-left: 2 * $block-size + $gap;
+      }
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -23,28 +39,7 @@
       }
     }
 
-    @for $length from 28 to 31 {
-      &--month-length--#{length} :nth-child(n + #{$length + 1}) {
-        display: none;
-      }
-    }
-
-    @each $name, $number in $day {
-      &--start-day--#{$name} :first-child {
-        margin-left: $number * ($block-size + $gap);
-      }
-
-      &:hover {
-        transform: rotateX(20px);
-      }
-    }
-
-    &:first-child {
-      margin-left: ($block-size + $gap) * 5;
-    }
-
     &:hover {
-      display: flex;
       cursor: pointer;
       background-color: #ffc0cb;
       transform: translateY(-20px);
