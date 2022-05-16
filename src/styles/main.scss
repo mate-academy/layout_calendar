@@ -1,3 +1,66 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+}
+
+$block-size: 100px;
+$gap: 1px;
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: $block-size auto;
+  gap: $gap;
+  width: $block-size * 7 + $gap * 6;
+
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $block-size;
+    height: $block-size;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: color 0.5s, transform 0.5s;
+  }
+
+  &__block:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+}
+
+@for $day-num from 1 through 31 {
+  .calendar__block:nth-child(#{$day-num}):before {
+    content: "#{$day-num}";
+  }
+}
+
+@for $day-num from 28 through 31 {
+  .calendar--month-length-#{$day-num}
+  .calendar__block:nth-child(n + #{$day-num +1}) {
+    display: none;
+  }
+}
+
+$weekdays:(
+  "mon" : 0,
+  "tue" : 1,
+  "wed" : 2,
+  "thu" : 3,
+  "fri" : 4,
+  "sat" : 5,
+  "sun" : 6
+);
+
+@each $day, $i in $weekdays {
+  .calendar--start-day-#{$day} .calendar__block:first-child {
+    margin-left: $block-size * $i + $gap * $i;
+  }
 }
