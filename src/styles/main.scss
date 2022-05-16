@@ -1,3 +1,66 @@
-body {
+@import "./variables.scss";
+
+body,
+div,
+p {
   margin: 0;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  align-content: center;
+  justify-content: end;
+  flex-wrap: wrap;
+
+  gap: $gap;
+  padding: 10px;
+  width: 760px;
+
+  $start-days:
+    "mon" 0
+    "tue" ($cell-size + $gap),
+    "wed" 2 * ($cell-size + $gap),
+    "thu" 3 * ($cell-size + $gap),
+    "fri" 4 * ($cell-size + $gap),
+    "sat" 5 * ($cell-size + $gap),
+    "sun" 6 * ($cell-size + $gap);
+
+  @each $index in $start-days {
+    &__days:nth-child(-n + #{$countDayOfMonths}) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $cell-size;
+      height: $cell-size;
+
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+
+      cursor: pointer;
+
+      border: 1px solid black;
+      background-color: #eee;
+
+      @for $index from 1 through $countDayOfMonths {
+        &:nth-child(#{$index})::before {
+          content: "#{$index}";
+        }
+      }
+    }
+
+    &__days--1 {
+      margin-left: 650px;
+    }
+
+    &__days:hover {
+      transform: translateY(-20px);
+      transition-duration: 500ms;
+      background-color: pink;
+    }
+  }
 }
