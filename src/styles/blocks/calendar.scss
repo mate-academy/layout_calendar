@@ -1,0 +1,55 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  width: $monthWidth;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $boxSize;
+    width: $boxSize;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform 0.5s;
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-size: 30px;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    transform: translate(0, -20px);
+    background-color: pink;
+  }
+
+  $days:
+  'mon' 0,
+  'tue' $monthWidth - $dayMargin * 6 + $gap,
+  'wed' $monthWidth - $dayMargin * 5 + $gap,
+  'thu' $monthWidth - $dayMargin * 4 + $gap,
+  'fri' $monthWidth - $dayMargin * 3 + $gap,
+  'sat' $monthWidth - $dayMargin * 2 + $gap,
+  'sun' $monthWidth - $dayMargin + $gap;
+
+  @each $day, $intendation in $days {
+    &_start-day--#{$day} > :first-child {
+      margin-left: #{$intendation};
+    }
+  }
+
+  @for $endDay from 28 through 30 {
+    &_month-length--#{$endDay} > :nth-child(n + #{$endDay + 1}) {
+      display: none;
+    }
+  }
+}
