@@ -24,7 +24,7 @@
     border: 1px solid black;
 
     @for $index from 1 through $month-length {
-      &--#{$index}::after {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
@@ -35,4 +35,11 @@
       cursor: pointer;
     }
   }
+
+  @for $date from 28 through 31 {
+    &--month-length--#{$date} :nth-child(n + #{$date+ 1}) {
+      display: none;
+    }
+  }
+
 }
