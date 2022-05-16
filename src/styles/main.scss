@@ -1,17 +1,13 @@
 @import "reset";
 @import "variables";
-
-.page {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-}
+@import "normalize";
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   width: ($block-size + ($gap*2)) * 7 + $calendar-padding * 2;
-  padding: $calendar-padding;
+  padding: $calendar-padding ;
 
   &__day {
     display: flex;
@@ -19,6 +15,7 @@
     align-items: center;
 
     @extend %day-block;
+    transition: 0.5s;
 
     @for $index from 1 through $month-length {
       &:nth-child(#{$index})::before {
@@ -26,7 +23,17 @@
       }
     }
 
+    @for $length from 28 to 31 {
+      &--month-length--#{length} :nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+
     @each $name, $number in $day {
+      &--start-day--#{$name} :first-child {
+        margin-left: $number * ($block-size + $gap);
+      }
+
       &:hover {
         transform: rotateX(20px);
       }
@@ -39,9 +46,8 @@
     &:hover {
       display: flex;
       cursor: pointer;
-      background-color: $selected-color;
+      background-color: #ffc0cb;
       transform: translateY(-20px);
-      transition: 0.5s;
     }
   }
 }
