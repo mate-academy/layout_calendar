@@ -5,6 +5,7 @@
 
 $block-size: 100px;
 $gap: 1px;
+$whiteColor: #eee;
 
 .calendar {
   display: flex;
@@ -26,13 +27,14 @@ $gap: 1px;
     font-size: 30px;
 
     border: 1px solid #000;
-    background-color: #eee;
+    background-color: $whiteColor;
     transition: color 0.5s, transform 0.5s;
   }
 
   &__block:hover {
     transform: translateY(-20px);
     background-color: pink;
+    cursor: pointer;
   }
 }
 
@@ -61,6 +63,6 @@ $weekdays:(
 
 @each $day, $i in $weekdays {
   .calendar--start-day-#{$day} .calendar__block:first-child {
-    margin-left: $block-size * $i + $gap * $i;
+    margin-left: ($block-size + $gap) * $i;
   }
 }
