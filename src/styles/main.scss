@@ -1,3 +1,53 @@
-body {
-  margin: 0;
+@import "./page";
+@import "./variables";
+
+.calendar {
+  display: flex;
+  gap: $gap-size;
+  flex-wrap: wrap;
+
+  box-sizing: border-box;
+  width: 2 * $hor-padding + 7 * $cell-size + 6 * $gap-size;
+  padding: $transform-shift $hor-padding ;
+
+  @for $number from 28 to 31 {
+    &--month-length--#{$number} {
+      .calendar__day:nth-child(n + #{$number + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $margin in $days {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: #{$margin};
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-$transform-shift);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
 }
