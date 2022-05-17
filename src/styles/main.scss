@@ -1,3 +1,59 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.calendar__start-day--tue .calendar-container__day--1 {
+  margin-left: 103px;
+}
+
+.calendar__start-day--wed .calendar-container__day--1 {
+  margin-left: 206px;
+}
+
+.calendar__start-day--thu .calendar-container__day--1 {
+  margin-left: 309px;
+}
+
+.calendar__start-day--fri .calendar-container__day--1 {
+  margin-left: 412px;
+}
+
+.calendar__start-day--sat .calendar-container__day--1 {
+  margin-left: 515px;
+}
+
+.calendar-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: auto;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  max-width: 710px;
+
+  &__day {
+    background-color: #eee;
+    width: 100px;
+    border: 1px solid black;
+    line-height: 100px;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translate(10px, -20px);
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+
+  @for $index from 1 through 31 {
+    &__day--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
 }
