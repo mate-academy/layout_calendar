@@ -7,16 +7,17 @@
   padding: $calendar-pading;
 
   &__day {
-    height: $day-size;
-    width: $day-size;
+    height: $day-cell-size;
+    width: $day-cell-size;
     background-color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
     transition: all 0.5s;
+    cursor: pointer;
 
-    @for $index from 1 through $count {
+    @for $index from 1 through $count-day {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
@@ -24,7 +25,6 @@
 
     &:hover {
       transform: translate(0, -20px);
-      cursor: pointer;
       background-color: pink;
     }
   }
@@ -35,7 +35,7 @@
     }
   }
 
-  @for $last-day from 28 to $count {
+  @for $last-day from 28 to $count-day {
     &__month-length--#{$last-day} {
       .calendar__day:nth-child(n + #{$last-day + 1}) {
         visibility: hidden;
