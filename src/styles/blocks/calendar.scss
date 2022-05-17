@@ -5,15 +5,15 @@
   flex-wrap: wrap;
   gap: $gap;
   padding: 100px 10px 10px;
-  width: $monthWidth;
+  width: $calendarWidth;
 
   &__day {
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $boxSize;
-    width: $boxSize;
+    @include square($boxSize);
+    cursor: pointer;
     background-color: #eee;
     border: 1px solid black;
     transition: transform 0.5s;
@@ -22,13 +22,11 @@
   @for $index from 1 through 31 {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
-      font-size: 30px;
     }
   }
 
   &__day:hover {
-    cursor: pointer;
-    transform: translate(0, -20px);
+    transform: translateY(-20px);
     background-color: pink;
   }
 
