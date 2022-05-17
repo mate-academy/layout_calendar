@@ -22,6 +22,7 @@
     text-align: center;
     line-height: $size-bloc;
     border: $border-blok solid black;
+    transition-duration: 0.5s;
 
     @include square ($size-bloc, $backgroun-color);
 
@@ -29,6 +30,13 @@
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      
+      background-color: rgb(255, 61, 126);
     }
   }
 
@@ -38,12 +46,5 @@
         margin-left: #{($size-bloc + $block-indent) * $day-number};
       }
     }
-  }
-
-  &__date:hover {
-    cursor: pointer;
-    transform: translateY(-20px);
-    transition-duration: 0.5s;
-    background-color: rgb(255, 61, 126);
   }
 }
