@@ -13,6 +13,18 @@ html {
   padding: $padding;
   max-width: $neededWidth;
 
+  @each $name, $number in $days {
+    &__start-day--#{$name}>.calendar__day:first-child {
+      margin-left: ($cellwidth + $gapBetween) * $number;
+    }
+  }
+
+  @for $index from 28 through $numberOfDays {
+    &__month-length--#{$index}>.calendar__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -20,7 +32,7 @@ html {
     width: $cellwidth;
     height: $cellheight;
     background-color: #eee;
-    bottom: 1px solid #000;
+    border: 1px solid #000;
     transition: 0.5s;
 
     &:hover {
@@ -33,18 +45,6 @@ html {
       &:nth-child(#{$i})::after {
         content: "#{$i}";
       }
-    }
-  }
-
-  @each $name, $number in $days {
-    &__start-day--#{$name}>.calendar__day:first-child {
-      margin-left: ($cellwidth + $gapBetween) * $number;
-    }
-  }
-
-  @for $index from $minDays through $numberOfDays {
-    &__month-length--#{$index - 1}>.calendar__day:nth-child(n + #{$index}) {
-      display: none;
     }
   }
 }
