@@ -15,9 +15,6 @@ body {
   @for $index from 28 through 31 {
     &__box--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
       @include remove-cell;
-      // &::before {
-      //   content: "";
-      // }
     }
   }
 
@@ -36,7 +33,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -46,19 +43,23 @@ body {
     }
 
     $days:
-      'mon' $cell-size*6 + $cell-gap *6,
-      'tue' 0,
-      'wed' 0,
-      'thu' 0,
-      'fri' 0,
-      'sat' 0,
-      'sun' 0;
+      "mon" 0,
+      "tue" 0,
+      "wed" 0,
+      "thu" 0,
+      "fri" 0,
+      "sat" 0,
+      "sun" 0;
 
     @each $name, $day in $days {
       &--start-day--#{$name} {
         margin-left: $day;
       }
     }
+  }
+
+  &__cell:first-child {
+    margin-left: $cell-size*6 + $cell-gap *6;
   }
 
   &__cell:hover {
