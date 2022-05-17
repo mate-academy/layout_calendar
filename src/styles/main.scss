@@ -25,6 +25,12 @@ html {
     border: 1px solid black;
     transition: 0.5s;
 
+    @each $var, $num in $days {
+      &--#{$var} > :first-child {
+        margin-left: (101px * $num) + (2 * $num);
+      }
+    }
+
     &:hover {
       cursor: pointer;
       background-color: pink;
@@ -33,8 +39,14 @@ html {
   }
 }
 
-@for $i from 1 through $days {
+@for $i from 1 through $countDay {
   .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
+  }
+}
+
+@for $j from $countDay through 31 {
+  .calendar__day:nth-child(#{$j+1}) {
+    display: none;
   }
 }
