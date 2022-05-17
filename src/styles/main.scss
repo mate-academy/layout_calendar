@@ -39,14 +39,16 @@ html {
   }
 }
 
-@for $i from 1 through $countDay {
+@for $i from 1 through $daysOfMonth {
   .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
   }
 }
 
-@for $j from $countDay through 31 {
-  .calendar__day:nth-child(#{$j+1}) {
+@for $noFullMonth from 28 through 31 {
+  .calendar__day--len_#{$noFullMonth} {
+    .calendar__day:nth-child(n + #{$noFullMonth + 1}) {
     display: none;
   }
+}
 }
