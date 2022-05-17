@@ -9,7 +9,7 @@
   text-align: center;
 
   @each $day, $number in $week-days {
-    &__first-day--#{$day}>.calendar__day:first-child {
+    &--first-day--#{$day}>.calendar__day:first-child {
       margin-left: ($cell-size + $gap) * $number;
     }
   }
@@ -36,5 +36,12 @@
         content: "#{$index}";
       }
     }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length-#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
   }
 }
