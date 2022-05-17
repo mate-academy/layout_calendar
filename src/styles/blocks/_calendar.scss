@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $gap-size;
+  padding: $padding-size;
+  max-width: $day-size * $col + ($col - 1) * $gap-size;
+
+  &__day {
+    @include square($day-size);
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: #eee;
+    text-align: center;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+.page__calendar {
+  margin: auto;
+}

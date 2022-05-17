@@ -1,0 +1,12 @@
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index}):before {
+    content: "#{$index}";
+    line-height: $day-size;
+  }
+}
+
+@each $day, $column in $days {
+  .calendar__day--start-#{$day} {
+    margin-left: $column * ($day-size + $gap-size);
+  }
+}
