@@ -1,0 +1,43 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($day-size * 7) + ($gap * 6) + ($calendar-padding * 2);
+  gap: $gap;
+  padding: $calendar-padding;
+
+  @for $last-day from 28 through 32 {
+    &--length_#{$last-day} :nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  // Day what will the month start on
+  @each $start-day, $int in $week-days {
+    &--start-day_#{$start-day} :first-child {
+      margin-left: (($day-size + $gap) * $int);
+    }
+  }
+
+  &__day {
+    height: $day-size;
+    width: $day-size;
+    background-color: #eee;
+    border: 1px solid #000;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+
+  @for $day from 1 to 32 {
+    &__day:nth-child(#{$day})::before {
+      display: flex;
+      justify-content: center;
+      line-height: $day-size;
+      content: "#{$day}";
+    }
+  }
+}
