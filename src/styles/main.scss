@@ -6,7 +6,7 @@ html {
   font-size: 30px;
 }
 
-.calendar{
+.calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gapBetween;
@@ -14,20 +14,20 @@ html {
   max-width: $neededWidth;
 
   &__day {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: $cellwidth;
-  height: $cellheight;
-  background-color: #eee;
-  bottom: 1px solid #000;
-  transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cellwidth;
+    height: $cellheight;
+    background-color: #eee;
+    bottom: 1px solid #000;
+    transition: 0.5s;
 
-  &:hover{
-    cursor: pointer;
-    transform: translateY(-($cellheight * 0.2));
-    background-color: pink;
-  }
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-($cellheight * 0.2));
+      background-color: pink;
+    }
 
     @for $i from 1 through $numberOfDays {
       &:nth-child(#{$i})::after {
@@ -43,7 +43,7 @@ html {
   }
 
   @for $index from $minDays through $numberOfDays {
-    &__month-length--#{$index - 1}>.calendar__day:nth-child(n + #{$index}){
+    &__month-length--#{$index - 1}>.calendar__day:nth-child(n + #{$index}) {
       display: none;
     }
   }
