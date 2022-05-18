@@ -1,6 +1,6 @@
-@mixin square ($cellWidth) {
-  width: $cellWidth;
-  height: $cellWidth;
+@mixin square ($cell-width) {
+  width: $cell-width;
+  height: $cell-width;
 }
 
 .container {
@@ -13,11 +13,11 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $cellGap;
-  width: widthRow($cellWidth, 7, $cellGap);
+  gap: $cell-gap;
+  width: widthRow($cell-width, 7, $cell-gap);
   padding: 0 20px;
 
-  @each $day, $position in $sevenDays {
+  @each $day, $position in $seven-days {
     &--start-day--#{$day} :first-child {
       margin-left: $position;
     }
@@ -30,7 +30,7 @@
   }
 
   &__day {
-    @include square($cellWidth);
+    @include square($cell-width);
     flex-shrink: 0;
     display: flex;
     justify-content: center;
