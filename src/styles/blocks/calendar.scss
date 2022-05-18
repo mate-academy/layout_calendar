@@ -1,0 +1,57 @@
+@mixin square ($cellWidth) {
+  width: $cellWidth;
+  height: $cellWidth;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cellGap;
+  width: widthRow($cellWidth, 7, $cellGap);
+  padding: 0 20px;
+
+  @each $day, $position in $sevenDays {
+    &--start-day--#{$day} :first-child {
+      margin-left: $position;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include square($cellWidth);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: all 0.5s ease;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, serif;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
