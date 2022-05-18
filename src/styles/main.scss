@@ -1,3 +1,48 @@
-body {
-  margin: 0;
+@import "./variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  margin: 0 auto;
+  padding: $paddings;
+  width: $calendarSize;
+
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+
+  @each $day, $num in $week {
+    &__start-day--#{$day} :first-child {
+      margin-left: $num * ($daySize + $gap);
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &__month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    line-height: $daySize;
+    width: $daySize;
+    height: $daySize;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    @for $index from 1 to 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
 }
