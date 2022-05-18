@@ -5,6 +5,12 @@
   }
 }
 
+@for $index from $month-legth through 31 {
+  .calendar__day--month-length .calendar__day:nth-child(#{$index + 1}) {
+    display: none;
+  }
+}
+
 @each $day, $column in $days {
   .calendar__day--start-#{$day} {
     margin-left: $column * ($day-size + $gap-size);
