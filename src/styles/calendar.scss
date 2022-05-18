@@ -8,19 +8,23 @@
     margin: 0 auto;
   }
 
+  // @for $index from 28 through 31 {
+  //   &--month-length_#{$index} {
+  //     .calendar__day-cell:nth-child(n + #{$index + 1}) {
+  //       display: none;
+  //     }
+  //   }
+  // }
+
   @for $index from 28 through 31 {
-    &--month-length_#{$index} {
-      .calendar__day-cell:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
+    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 
   @each $day, $index in $days-of-week {
-    &--start-day_#{$day} {
-      .calendar__day-cell:first-child {
-        margin-left: $index * ($calendar-cell-size + $gap-size);
-      }
+    &--start-day_#{$day} :first-child {
+      margin-left: $index * ($calendar-cell-size + $gap-size);
     }
   }
 
