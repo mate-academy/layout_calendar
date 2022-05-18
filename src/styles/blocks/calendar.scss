@@ -11,7 +11,7 @@
     height: $calendar-height;
     width: $calendar-width;
     border: 1px solid black;
-    
+
     font-size: 30px;
     cursor: pointer;
     background-color: $day-backgroudColor;
@@ -31,13 +31,13 @@
   }
 
   @each $name, $num in $calendar-days {
-    &--start-day_#{$name} :first-child {
+    &--start-day--#{$name} :first-child {
       margin-left: ($calendar-width + $day-gap) * $num;
     }
   }
 
   @for $last-day from 28 through 31 {
-    &--month-length_#{$last-day}
+    &--month-length--#{$last-day}
     &__day:nth-child(n + #{$last-day + 1}) {
       display: none;
     }
