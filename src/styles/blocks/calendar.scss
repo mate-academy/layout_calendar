@@ -1,3 +1,5 @@
+@import "../utils/mixins";
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -22,11 +24,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $boxSize;
-    height: $boxSize;
+    @include square($boxSize);
     background-color: #eee;
     border: 1px solid black;
-    transition: background-color 500ms, transform 500ms;
+    transition:
+      background-color $duration,
+      transform $duration;
   }
 
   &__day:hover {
