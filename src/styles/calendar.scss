@@ -1,12 +1,13 @@
 .wrapper {
   padding: 200px 0;
   min-width: $calendarWidth;
+
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $daysGap;
 
   width: $calendarWidth;
   box-sizing: border-box;
@@ -34,9 +35,11 @@
     box-sizing: border-box;
     border: 1px solid #000;
     background-color: $daysColor;
+    cursor: pointer;
+
+    transition: 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: #ffc0cb;
       transform: translateY(-20px);
     }
@@ -44,11 +47,11 @@
     @for $count from 1 through 31 {
       &:nth-child(#{$count})::before {
         position: absolute;
+        text-align: center;
         top: ($daysWidthAndHeigh - $daysFontSize) / 2;
         width: 100%;
 
         content: "#{$count}";
-        text-align: center;
       }
     }
   }
