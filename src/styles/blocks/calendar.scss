@@ -1,0 +1,56 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1px;
+  width: $day-size * $days-in-week + 20px;
+  height: 100vh;
+  padding: 10px;
+  margin: 0 auto;
+
+
+  &__cell {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    position:relative;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  //  Move it up by `20px` (use `transform`)
+ //both of these properties are to be animated with the duration of half a second.
+   @each $name, $margin-left in $weekday {
+    &--start-day--#{$name} {
+      .calendar__cell:first-child {
+        margin-left: $margin-left;
+      }
+    }
+  }
+}
+
+@each $name, $amount in $month-days {
+  .calendar--month-length--#{$name} {
+    @for $i from 1 through $amount {
+      .calendar__cell:nth-child(#{$i}) {
+        background-color: $day-color;
+        border: 1px solid black;
+        &:hover {
+          background-color: pink;
+        }
+        &::before {
+          content: '#{$i}';
+          font-family: $number-font;
+          font-size: $number-size;
+          line-height: $day-size;
+          text-align: center;
+          display: block;
+        }
+      }
+    }
+  }
+}
