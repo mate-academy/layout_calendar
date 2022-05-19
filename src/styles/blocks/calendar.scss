@@ -3,49 +3,55 @@
   flex-wrap: wrap;
   align-content: center;
   gap: 1px;
-  width: $day-size * $days-in-week + 20px;
+  width: $day-cell-size * $days-in-week + 6px;
   height: 100vh;
   padding: 10px;
 
   &__cell {
+    display: none;
     box-sizing: border-box;
-    width: $day-size;
-    height: $day-size;
+    width: $day-cell-size;
+    height: $day-cell-size;
     position:relative;
     transition-duration: 0.5s;
+
+    text-align: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: $day-cell-size;
+
+    background-color: $day-color;
+    border: 1px solid black;
 
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
+      background-color: pink;
+
     }
   }
 
-   @each $name, $margin-left in $weekday {
+   @each $name, $margin-left in $weekdays {
     &--start-day--#{$name} {
       .calendar__cell:first-child {
         margin-left: $margin-left;
       }
     }
   }
-}
 
-@each $name, $amount in $month-days {
-  .calendar--month-length--#{$name} {
-    @for $i from 1 through $amount {
-      .calendar__cell:nth-child(#{$i}) {
-        background-color: $day-color;
-        border: 1px solid black;
-        &:hover {
-          background-color: pink;
-        }
-        &::before {
-          content: '#{$i}';
-          font-family: $number-font;
-          font-size: $number-size;
-          line-height: $day-size;
-          text-align: center;
-          display: block;
-        }
+  @for $i from 1 through 31{
+    &__cell:nth-child(#{$i}) {
+      &::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      .calendar__cell:nth-child(-n+#{$i}){
+      display: block;
       }
     }
   }
