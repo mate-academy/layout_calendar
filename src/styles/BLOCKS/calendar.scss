@@ -1,47 +1,52 @@
 .calendar {
   display: flex;
-  box-sizing: border-box;
   flex-wrap: wrap;
   gap: $gap;
+  box-sizing: border-box;
   width: calendarWidth($dayBoxSize, $gap, $Padding);
+  height: 100vh;
   padding: 20px $Padding;
+  align-content: center;
   margin: 0 auto;
 
   @each $dayName, $firstDayStart in $weekDay {
-    &__start-day--#{$dayName} {
-      .calendar__day--1 {
+    &--start-day_#{$dayName} {
+      .calendar__day:first-child {
         margin-left: #{$firstDayStart};
       }
     }
   }
 
   @for $length from 28 through 31 {
-    &__month-length--#{$length} :nth-child(n + #{$length+1}) {
+    &--month-length_#{$length} :nth-child(n + #{$length+1}) {
       display: none;
     }
   }
 
   &__day {
-    background-color: $ordinaryColor;
-    box-sizing: border-box;
-    border: 1px solid black;
-    height: $dayBoxSize;
-    width: $dayBoxSize;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: $dayBoxSize;
+    width: $dayBoxSize;
+
+    background-color: $ordinaryColor;
+    box-sizing: border-box;
+    border: 1px solid black;
+
     transition-duration: 0.5s;
 
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-      background-color: pink;
-    }
+    cursor: pointer;
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index}):before {
         content: "#{$index}";
       }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
     }
   }
 }
