@@ -1,0 +1,64 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  box-sizing: border-box;
+  padding: $month-block-padding;
+  width: $day-block-width * 7 + $gap * 6 + $month-block-padding * 2;
+
+  &__day {
+    position: relative;
+
+    @include day-block-size;
+
+    cursor: pointer;
+
+    &::after {
+      content: "";
+
+      @include day-block-pos-absolute;
+      @include day-block-size;
+
+      background-color: $day-block-color;
+      border: 1px solid #000;
+
+      @include day-block-animation;
+    }
+
+    &:hover::after {
+      z-index: 1;
+      transform: translateY($lift-day-block-hover) rotate(405deg);
+      background-color: $day-block-color-hover;
+    }
+
+    &:hover::before {
+      transform: translateY($lift-day-block-hover);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        content: "#{$i}";
+
+        @include day-block-pos-absolute;
+        z-index: 2;
+
+        @include flex-center;
+        @include day-block-size;
+        @include day-block-animation;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day-name, $day-number in $days {
+    &--start-day--#{$day-name} &__day:first-child {
+      margin-left: ($day-block-width + $gap) * $day-number;
+    }
+  }
+}
