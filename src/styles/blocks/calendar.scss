@@ -6,15 +6,17 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: 706px;
-  padding: 30px;
+  gap: $gap;
+
+  max-width: $cell-side * 7 + $calendar-padding * 2 + $gap * 6;
+  padding: $calendar-padding;
 
   &__cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    @include cell-size(100px);
+
+    @include cell-size($cell-side);
     box-sizing: border-box;
 
     font-family: Arial, Helvetica, sans-serif;
@@ -45,18 +47,9 @@
     }
   }
 
-  $days:
-    "mon" 0,
-    "tue" 101px,
-    "wed" 202px,
-    "thu" 303px,
-    "fri" 404px,
-    "sat" 505px,
-    "sun" 606px;
-
-  @each $day, $margin-value in $days {
+  @each $day, $modifier in $days {
     &--start-day--#{$day} > :first-child {
-      margin-left: $margin-value;
+      margin-left: ($cell-side + $gap) * $modifier;
     }
   }
 }
