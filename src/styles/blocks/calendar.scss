@@ -22,23 +22,24 @@
   }
 
   @for $index from $days_per_month through 1 {
-    &__days--day--#{$index} {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: $cell_size;
-      height: $cell_size;
-      padding: $horizontal_padding;
-      text-align: center;
-      background-color: $base_color;
-      border: 1px solid black;
-      transition: transform 0.5s ease-in-out;
-      cursor: pointer;
-    }
 
     &__days--day--#{$index}::before {
       content: "#{$index}";
     }
+  }
+
+  &__days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell_size;
+    height: $cell_size;
+    padding: $horizontal_padding;
+    text-align: center;
+    background-color: $base_color;
+    border: 1px solid black;
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
   }
 
   @for $index from 1 through $days_per_month {
