@@ -2,7 +2,8 @@ $day-size: 100px;
 $day-gap: 0.01 * $day-size;
 $calendar-padding: 0.1 * $day-size;
 $calendar-width: $day-size * 7 + $day-gap * 6 + 2 * $calendar-padding;
-$day-count: 29;
+$day-count: 31;
+
 $start-days:
   "mon" 1,
   "tue" 2,
@@ -60,8 +61,8 @@ body {
     }
   }
 
-  @for $last-day from $day-count through 31 {
-    &--month-length :nth-child(n + #{$last-day + 1}) {
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
