@@ -1,0 +1,45 @@
+@import "../utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $widthCalendar;
+  padding: 40px 10px;
+  gap: $widthgap;
+  line-height: $sizeсell;
+  text-align: center;
+
+  &__day {
+    height: $sizeсell;
+    width: $sizeсell;
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: 0.5s;
+  }
+
+  @for $index from 1 through $maxLengthMonth {
+    &__day--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $index from 28 through $maxLengthMonth {
+    &--month-length--#{$index} :nth-child(n + #{$index+ 1}) {
+      display: none;
+    }
+  }
+
+  @each $weekDay, $orderDay in $weekDays {
+    &--start-day--#{$weekDay} &__day--1 {
+      margin-left: $orderDay*($sizeсell + $widthgap);
+    }
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: pink ;
+    cursor: pointer;
+  }
+}
