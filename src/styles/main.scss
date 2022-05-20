@@ -26,32 +26,34 @@ body {
     font-size: 30px;
     text-align: center;
     line-height: 100px;
+    transition-duration: 0.5s;
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
-      }
-    }
-    $week--days:
-      "startday_mon" 0,
-      "startday_tue" 1,
-      "startday_wed" 2,
-      "startday_thu" 3,
-      "startday_fri" 4,
-      "startday_sat" 5,
-      "startday_sun" 6;
-  
-    @each $week-day, $value in $week--days {
-      &--#{$week-day} {
-        margin-left: $day-width * $value + $day-gap * $value;
       }
     }
     &:hover {
       cursor: pointer;
       background-color: #ff95d7;
       transform: translateY(-20px);
-      animation-duration: 0.5s;
+      transition-duration: 0.5s;
     }
   }
+    $week--days:
+    "startday_mon" 0,
+    "startday_tue" 1,
+    "startday_wed" 2,
+    "startday_thu" 3,
+    "startday_fri" 4,
+    "startday_sat" 5,
+    "startday_sun" 6;
+
+    @each $week-day, $value in $week--days {
+      &--#{$week-day} :first-child{
+        margin-left: $day-width * $value + $day-gap * $value;
+      }
+    }
+
   @for $month-length from 28 through 31 {
     &--month-length_#{$month-length}
     &__day:nth-child(n + #{$month-length + 1}) {
