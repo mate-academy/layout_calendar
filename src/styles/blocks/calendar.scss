@@ -34,14 +34,14 @@
 
    @each $name, $margin-left in $weekdays {
     &--start-day--#{$name} {
-      .calendar__cell:first-child {
+      > :first-child  {
         margin-left: $margin-left;
       }
     }
   }
 
   @for $i from 1 through 31{
-    &__cell:nth-child(#{$i}) {
+    > :nth-child(#{$i}) {
       &::before {
         content: '#{$i}';
       }
@@ -50,7 +50,7 @@
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} {
-      .calendar__cell:nth-child(-n+#{$i}){
+      > :nth-child(-n+#{$i}){
       display: block;
       }
     }
