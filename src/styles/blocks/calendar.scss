@@ -20,7 +20,6 @@
   &-day:hover {
     background-color: pink;
     transform: translateY(-20px);
-    transition-duration: 1s;
     cursor: pointer;
   }
 
@@ -39,13 +38,14 @@
   }
  
   @each $name, $size in $day-names {
-    &-day__start-day--#{$name} {
+    &-day__start-day--#{$name} :first-child {
       margin-left: #{$size};
     }
   }
+
   @for $index from 28 through 31 {
     &__month-length--#{$index} {
-      .calendar-day:nth-child(n + #{$index+2}) {
+      .calendar-day:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
