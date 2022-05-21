@@ -1,0 +1,59 @@
+@import "../variables.scss";
+
+@mixin square ($size) {
+  height: $size;
+  width: $size;
+}
+
+@function calendar-width() {
+  @return 7 * $day-size + 6 * $day-gap + 2 * $calendar-hr-padding;
+}
+
+.calendar {
+  width: calendar-width();
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-hr-padding;
+
+  margin: 20px;
+
+  @each $day, $index in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($index - 1) * ($day-size + $day-gap);
+    }
+  }
+
+  @for $index from 28 through $total-count-of-days {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+
+  @include square($day-size);
+
+  background-color: $day-background;
+  border: 1px solid #000;
+
+  @for $index from 1 through $total-count-of-days {
+    &--#{$index}::before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+}
