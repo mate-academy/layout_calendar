@@ -1,0 +1,49 @@
+@import "./variables.scss";
+
+.month {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1px;
+
+  width: 726px;
+  padding: 100px 10px;
+
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  &__day {
+    width: $square;
+    height: $square;
+    box-sizing: border-box;
+    line-height: $square;
+
+    text-align: center;
+    border: 1px solid black;
+    background-color: $day-color;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+
+  @for $day from 1 through $month-length {
+    &__day:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
+  @each $day-name, $day-number in $week {
+    &--start-day-#{$day-name} :first-child {
+      margin-left: ($square + 1) * $day-number;
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
