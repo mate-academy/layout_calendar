@@ -1,3 +1,58 @@
+$cell-size: 100px;
+$font-size: 30px;
+$gap: 1px;
+$main-padding: 10px;
+$main-width: calc(
+  #{$cell-size} *
+  7 + (#{$main-padding} * 2));
+$first-cell-margin-left: calc(
+  #{$main-width} -
+  #{$cell-size} -
+  #{$main-padding} -
+  (#{$gap} * 4));
+$cell-background-color: #eee;
+$cell-hover-color: pink;
+$cell-transform: -20px;
+$cell-transform-speed: 300ms;
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $main-padding;
+  max-width: $main-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    font-size: $font-size;
+    background-color: $cell-background-color;
+    border: 1px black solid;
+  
+    &:nth-child(1) {
+      margin-left: $first-cell-margin-left;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-color;
+      transition: transform $cell-transform-speed;
+      transform: translateY($cell-transform);
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
 }
