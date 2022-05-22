@@ -23,6 +23,10 @@ body {
     flex-wrap: wrap;
     gap: $cell-gap;
     width: $calendar-size;
+
+    &--start-day--mon :nth-child(1) {
+      margin-left: $cell-size*6 + $cell-gap *6;
+    }
   }
 
   &__cell {
@@ -41,25 +45,6 @@ body {
         @extend %text-props;
       }
     }
-
-    $days:
-      "mon" 0,
-      "tue" 0,
-      "wed" 0,
-      "thu" 0,
-      "fri" 0,
-      "sat" 0,
-      "sun" 0;
-
-    @each $name, $day in $days {
-      &--start-day--#{$name} {
-        margin-left: $day;
-      }
-    }
-  }
-
-  &__cell:first-child {
-    margin-left: $cell-size*6 + $cell-gap *6;
   }
 
   &__cell:hover {
