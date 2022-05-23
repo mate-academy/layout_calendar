@@ -1,0 +1,18 @@
+@each $day, $count in $start-day {
+  .calendar__start-day--#{$day} :first-child {
+    margin-left: ($cell-width + $cell-gap) * $count;
+  }
+}
+
+@for $day-in-month from 28 through 31 {
+  .calendar__month-length--#{$day-in-month}
+  :nth-child(n + #{$day-in-month + 1}) {
+    display: none;
+  }
+}
+
+@for $date from 1 through 31 {
+  .calendar__cell:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}

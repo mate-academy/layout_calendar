@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px 10px;
+  gap: $cell-gap;
+  max-width: ($cell-width * 7) + ($cell-gap * 6);
+
+  &__cell {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: $cell-height;
+    width: $cell-width;
+    background-color: #eee;
+    border: 1px solid black;
+    transition-duration: 0.5s;
+
+    &::before {
+      content: "1";
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+}
