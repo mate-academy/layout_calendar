@@ -1,0 +1,53 @@
+@import "../utils/_variables.scss";
+
+.calendar {
+  margin-top: 10vh;
+  gap: $gapField;
+  box-sizing: border-box;
+  width: ($scaleCardWidth + $gapField) * 7;
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $scaleCardWidth;
+    height: $scaleCardHeight;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform $transformTime, background-color $transformTime;
+  }
+
+  &__cell:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+
+  @each $dayName, $dayNumber in $start-day {
+    &--start--day--#{$dayName} :first-child {
+      margin-left: ($scaleCardWidth + $gapField) * $dayNumber;
+    }
+  }
+
+  @for $index from 1 through $daysInMonth {
+    &__cell:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--start--day--#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      visibility: hidden;
+    }
+  }
+}
+
+.cell-with-background {
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6cy7Y7h-3C7md5CMadxJmnEiAV7sK1mVxDtU5skKaksUjjCnFIaZUS6NTH_F-cTepDG8&usqp=CAU);
+  background-size: contain;
+  color: transparent;
+}
