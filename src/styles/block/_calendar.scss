@@ -20,26 +20,18 @@
     width: $day-size;
     height: $day-size;
     border: 1px solid black;
+    cursor: pointer;
 
-    @for $index from 1 through $daysOfMonth {
+    @for $index from 1 through $max-month-duration {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
   }
 
-
-  @for $index from 28 through $daysOfMonth {
-    &__month-length--#{$index}{
-      .calendar__day:nth-child(n + #{$index +1}) {
+  @for $index from 28 through $max-month-duration {
+    &__month-length--#{$index} .calendar__day:nth-child(n + #{$index +1}) {
         display: none;
-      }
-
     }
   }
-
-
-
-
 }
-
