@@ -1,0 +1,24 @@
+.calendar {
+  margin: auto;
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $size * 7 + 7 * $gap;
+  padding: 50px 10px;
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day+ 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $number, $day  in $w-days {
+    &--first-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $number * ($size+$gap);
+      }
+    }
+  }
+}
