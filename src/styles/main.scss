@@ -13,9 +13,20 @@ $first-cell-margin-left: calc(
 $cell-background-color: #eee;
 $cell-hover-color: pink;
 $cell-transform: -20px;
-$cell-transform-speed: 300ms;
+$cell-transform-speed: 500ms;
+$month-length: 31;
+$days:
+  mon,
+  tue,
+  wed,
+  thu,
+  fri,
+  sat,
+  sun;
 
 body {
+  display: flex;
+  justify-content: center;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -37,6 +48,8 @@ body {
     font-size: $font-size;
     background-color: $cell-background-color;
     border: 1px black solid;
+    transition: transform $cell-transform-speed;
+
   
     &:nth-child(1) {
       margin-left: $first-cell-margin-left;
@@ -45,7 +58,6 @@ body {
     &:hover {
       cursor: pointer;
       background-color: $cell-hover-color;
-      transition: transform $cell-transform-speed;
       transform: translateY($cell-transform);
     }
   }
@@ -53,6 +65,18 @@ body {
   @for $index from 1 through 31 {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
+    }
+  }
+
+  @each $number in $month-length {
+    &--month-length--#{$number}::before {
+      content: "#{$number}";
+    }
+  }
+
+  @each $day in $days {
+    &--start-day--#{$day}::before {
+      content: "#{$day}";
     }
   }
 }
