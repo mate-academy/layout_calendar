@@ -24,8 +24,19 @@ body {
     gap: $cell-gap;
     width: $calendar-size;
 
-    &--start-day--mon :nth-child(1) {
-      margin-left: $cell-size*6 + $cell-gap *6;
+    $days:
+      "mon" 0,
+      "tue" $cell-size + $cell-gap,
+      "wed" $cell-size*2 + $cell-gap*2,
+      "thu" $cell-size*3 + $cell-gap*3,
+      "fri" $cell-size*4 + $cell-gap*4,
+      "sat" $cell-size*5 + $cell-gap*5,
+      "sun" $cell-size*6 + $cell-gap*6;
+
+    @each $day, $start in $days {
+      &--start-day--#{$day} :nth-child(1) {
+        margin-left: $start;
+      }
     }
   }
 
