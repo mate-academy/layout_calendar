@@ -14,16 +14,16 @@ $cell-background-color: #eee;
 $cell-hover-color: pink;
 $cell-transform: -20px;
 $cell-transform-speed: 500ms;
-$month-length: 28;
-$least-month-length: 28;
+$month-length: 31;
+$least-month-length: 29;
 $days:
-  mon,
-  tue,
-  wed,
-  thu,
-  fri,
-  sat,
-  sun;
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 body {
   display: flex;
@@ -70,15 +70,14 @@ body {
   }
 
   @for $number from $least-month-length through $month-length {
-    &__day :nth-child(#{$number}),
-    &__month-length--#{$month-length} :nth-child(#{$number}) {
+    &__month-length--#{$month-length} :nth-last-child(-n + #{31 - $number}) {
       display: none;
     }
   }
 
-  @each $day in $days {
+  @each $day, $number in $days {
     &__start-day--#{$day} :first-child {
-      margin-left: $first-cell-margin-left + $cell-size;
+      margin-left: $first-cell-margin-left + #{$cell-size * $number};
     }
   }
 }
