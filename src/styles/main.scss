@@ -1,3 +1,66 @@
+
+@import "./utils/mixins";
+@import "./utils/variables";
+@import "./utils/extends";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+
+  @for $index from 28 through 31 {
+    &__box--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
+      @include remove-cell;
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $cell-gap;
+    width: $calendar-size;
+
+    $days:
+      "mon" 0,
+      "tue" $cell-size + $cell-gap,
+      "wed" $cell-size*2 + $cell-gap*2,
+      "thu" $cell-size*3 + $cell-gap*3,
+      "fri" $cell-size*4 + $cell-gap*4,
+      "sat" $cell-size*5 + $cell-gap*5,
+      "sun" $cell-size*6 + $cell-gap*6;
+
+    @each $day, $start in $days {
+      &--start-day--#{$day} :nth-child(1) {
+        margin-left: $start;
+      }
+    }
+  }
+
+  &__cell {
+    border: 1px solid black;
+    background-color: #eee;
+    @include square($cell-size);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        @extend %text-props;
+      }
+    }
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
 }
