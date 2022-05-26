@@ -1,3 +1,7 @@
+%nodisplay {
+  display: none;
+}
+
 .calendar {
   margin: 0 auto;
   width: 706px;
@@ -16,7 +20,6 @@
     font-size: 30px;
     line-height: 100px;
     text-align: center;
-    display: none;
     transition-duration: 0.5s;
     &:hover {
       cursor: pointer;
@@ -30,10 +33,10 @@
     }
   }
 
-  @for $i from 28 through 31 {
+  @for $i from 28 through 30 {
     &--month-length--#{$i} {
-      > :nth-child(-n + #{$i}) {
-        display: block;
+      > :nth-child(n + #{$i + 1}) {
+        @extend %nodisplay;
       }
     }
   }
