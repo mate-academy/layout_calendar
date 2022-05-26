@@ -14,7 +14,8 @@ $cell-background-color: #eee;
 $cell-hover-color: pink;
 $cell-transform: -20px;
 $cell-transform-speed: 500ms;
-$month-length: 31;
+$month-length: 28;
+$least-month-length: 28;
 $days:
   mon,
   tue,
@@ -51,7 +52,7 @@ body {
     transition: transform $cell-transform-speed;
 
   
-    &:nth-child(1) {
+    &:first-child {
       margin-left: $first-cell-margin-left;
     }
 
@@ -62,21 +63,22 @@ body {
     }
   }
 
-  @for $index from 1 through 31 {
+  @for $index from 1 through $month-length {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
 
-  @each $number in $month-length {
-    &--month-length--#{$number}::before {
-      content: "#{$number}";
+  @for $number from $least-month-length through $month-length {
+    &__day :nth-child(#{$number}),
+    &__month-length--#{$month-length} :nth-child(#{$number}) {
+      display: none;
     }
   }
 
   @each $day in $days {
-    &--start-day--#{$day}::before {
-      content: "#{$day}";
+    &__start-day--#{$day} :first-child {
+      margin-left: $first-cell-margin-left + $cell-size;
     }
   }
 }
