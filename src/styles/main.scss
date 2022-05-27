@@ -6,16 +6,13 @@ $main-width: calc(
   #{$cell-size} *
   7 + (#{$main-padding} * 2));
 $first-cell-margin-left: calc(
-  #{$main-width} -
-  #{$cell-size} -
-  #{$main-padding} -
-  (#{$gap} * 4));
+  (#{$cell-size} + #{$gap}) * 6);
 $cell-background-color: #eee;
 $cell-hover-color: pink;
 $cell-transform: -20px;
 $cell-transform-speed: 500ms;
 $month-length: 31;
-$least-month-length: 29;
+$least-month-length: 28;
 $days:
   "mon" 0,
   "tue" 1,
@@ -38,6 +35,7 @@ body {
   gap: $gap;
   padding: $main-padding;
   max-width: $main-width;
+  max-height: $main-height;
 
   &__day {
     display: flex;
@@ -70,14 +68,17 @@ body {
   }
 
   @for $number from $least-month-length through $month-length {
-    &__month-length--#{$month-length} :nth-last-child(-n + #{31 - $number}) {
+    &__month-length--#{$number} :nth-last-child(-n + #{31 - $number}) {
       display: none;
     }
   }
 
   @each $day, $number in $days {
     &__start-day--#{$day} :first-child {
-      margin-left: $first-cell-margin-left + #{$cell-size * $number};
+      margin-left: calc(
+        #{$first-cell-margin-left} +
+        (#{$cell-size} * #{$number}));
     }
   }
+
 }
