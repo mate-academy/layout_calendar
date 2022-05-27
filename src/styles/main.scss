@@ -5,8 +5,7 @@ $main-padding: 10px;
 $main-width: calc(
   #{$cell-size} *
   7 + (#{$main-padding} * 2));
-$first-cell-margin-left: calc(
-  (#{$cell-size} + #{$gap}) * 6);
+$cell-margin-left: calc(#{$cell-size} + #{$gap});
 $cell-background-color: #eee;
 $cell-hover-color: pink;
 $cell-transform: -20px;
@@ -35,7 +34,6 @@ body {
   gap: $gap;
   padding: $main-padding;
   max-width: $main-width;
-  max-height: $main-height;
 
   &__day {
     display: flex;
@@ -48,11 +46,6 @@ body {
     background-color: $cell-background-color;
     border: 1px black solid;
     transition: transform $cell-transform-speed;
-
-  
-    &:first-child {
-      margin-left: $first-cell-margin-left;
-    }
 
     &:hover {
       cursor: pointer;
@@ -75,9 +68,7 @@ body {
 
   @each $day, $number in $days {
     &__start-day--#{$day} :first-child {
-      margin-left: calc(
-        #{$first-cell-margin-left} +
-        (#{$cell-size} * #{$number}));
+      margin-left: calc(#{$cell-margin-left} * #{$number});
     }
   }
 
