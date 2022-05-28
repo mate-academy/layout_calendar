@@ -1,0 +1,56 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1px;
+  min-width: 8 * $days-size;
+  max-width: 8 * $days-size;
+  padding: 10px;
+
+  @for $i from 1 through $month-lengh {
+    &__days:nth-child(#{$i})::before {
+      content: "#{$i}";
+      font-family: Arial, Helvetica, sans-serif;
+      color: #000;
+      font-weight: 30px;
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" $days-size + $gap,
+    "wed" ($days-size + $gap) * 2,
+    "thu" ($days-size + $gap) * 3,
+    "fri" ($days-size + $gap) * 4,
+    "sat" ($days-size + $gap) * 5,
+    "sun" ($days-size + $gap) * 6;
+
+  @each $name, $margin-left in $days {
+    &__days:nth-child(#{$name}) {
+      margin-left: $margin-left;
+    }
+  }
+
+  &__days {
+    @include square($days-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transition-property: background-color, ;
+    transition-timing-function: ease;
+  }
+
+  &__days:hover {
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+
+  &__days:nth-child(1) {
+    margin-left: $name;
+  }
+}
