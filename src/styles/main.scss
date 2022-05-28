@@ -1,3 +1,78 @@
+$cell-size: 100px;
+$font-size: 30px;
+$gap: 1px;
+$main-padding: 10px;
+$main-width: calc(
+  #{$cell-size} *
+  7 + (#{$main-padding} * 2));
+$cell-margin-left: calc(#{$cell-size} + #{$gap});
+$cell-background-color: #eee;
+$cell-hover-color: pink;
+$cell-transform: -20px;
+$cell-transform-speed: 500ms;
+$month-length: 31;
+$min-month-length: 28;
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $main-padding;
+  max-width: $main-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    font-size: $font-size;
+    background-color: $cell-background-color;
+    border: 1px black solid;
+    transition: transform $cell-transform-speed;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-color;
+      transform: translateY($cell-transform);
+      
+    }
+  }
+
+  @for $index from 1 through $month-length {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $number from $min-month-length through $month-length {
+    &__month-length--#{$number} :nth-last-child(-n + #{31 - $number}) {
+      display: none;
+    }
+  }
+
+  @each $day, $number in $days {
+    &__start-day--#{$day} :first-child {
+      margin-left: calc(#{$cell-margin-left} * #{$number});
+    }
+  }
+
 }
