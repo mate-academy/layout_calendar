@@ -1,0 +1,34 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 50px $padding-size;
+    gap: #{$gap-width};
+    width: $cell-size * 7 + $gap-width * 7 + $padding-size * 2;
+
+    @for $day-number from 1 through $month-length {
+      & :nth-child(#{$day-number})::before {
+        content: "#{$day-number}";
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}
