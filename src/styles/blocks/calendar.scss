@@ -1,7 +1,14 @@
 .calendar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
   gap: 1px;
   min-width: 8 * $days-size;
   max-width: 8 * $days-size;
@@ -18,7 +25,7 @@
 
   @for $index from 28 through 31 {
     &--month-length--#{$index}
-    &__block:nth-last-child(-n + #{31 - $index}) {
+    &__days:nth-last-child(-n + #{31 - $index}) {
       display: none;
     }
   }
@@ -32,9 +39,7 @@
     border: 1px solid black;
     background-color: #eee;
     cursor: pointer;
-    transition-duration: 0.5s;
-    transition-property: background-color, ;
-    transition-timing-function: ease;
+    transition: background-color 0.5s ease;
   }
 
   &__days:hover {
@@ -53,7 +58,7 @@
 
   @each $day, $i in $days {
     &--start-day--#{$day}
-    &__block:first-child {
+    &__days:first-child {
       margin-left: calc((#{$days-size} + #{$gap}) * (#{$i} - 1));
     }
   }
