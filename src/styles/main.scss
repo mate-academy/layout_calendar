@@ -1,4 +1,3 @@
-$count-days: 29;
 $width-column: 100px;
 
 body {
@@ -14,6 +13,27 @@ body {
   padding: 5px;
   box-sizing: border-box;
   position: relative;
+
+  $days-of-week:
+    "start-day-mon" 1,
+    "start-day-tue" 2,
+    "start-day-wed" 3,
+    "start-day-thu" 4,
+    "start-day-fri" 5,
+    "start-day-sat" 6,
+    "start-day-sun" 7;
+
+  @each $start-day, $number-of-day in $days-of-week {
+    &--#{$start-day} > :nth-child(1) {
+      margin-left: ($number-of-day - 1) * ($width-column + 1px);
+    }
+  }
+
+  @for $count-days from 28 through 31 {
+    &--month-length-#{$count-days} > :nth-child(n + #{$count-days + 1}) {
+      display: none;
+    }
+  }
 
   &__day {
     height: $width-column;
@@ -35,32 +55,10 @@ body {
       }
     }
 
-    @for $month-length from $count-days through 31 {
-      &:nth-child(n + #{$count-days + 1}) {
-        display: none;
-      }
-    }
-
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
       background-color: #ffc0cb;
     }
   }
-
-  $days-of-week:
-    "start-day-mon" 1,
-    "start-day-tue" 2,
-    "start-day-wed" 3,
-    "start-day-thu" 4,
-    "start-day-fri" 5,
-    "start-day-sat" 6,
-    "start-day-sun" 7;
-
-  @each $start-day, $number-of-day in $days-of-week {
-    &__day--#{$start-day} {
-      margin-left: ($number-of-day - 1) * ($width-column + 1px);
-    }
-  }
-
 }
