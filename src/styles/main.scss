@@ -2,7 +2,6 @@ $square-size: 100px;
 $calendar-padding: 10px;
 $calendar-gap: 1px;
 $columns: 7;
-$dayPerMonth: 28;
 $days:
   "mon" 0,
   "tue" $square-size + $calendar-gap,
@@ -46,8 +45,8 @@ html {
     }
   }
 
-  @for $month-length from $dayPerMonth through 31 {
-    &--month-length_28 :nth-child(#{$month-length + 1}) {
+  @for $month-length from 28 through 31 {
+    &--month-length_#{$month-length} :nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
