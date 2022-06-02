@@ -7,6 +7,7 @@
   gap: #{$gap};
 
   &__day {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,8 +30,8 @@
   }
 
   @each $name, $number in $days {
-    &__start-day--#{$name}>.calendar__day:first-child {
-      margin-left: ($cell-size + ($number + 1) * $gap) * $number;
+    &__start-day--#{$name} .calendar__day:first-child {
+      margin-left: ($cell-size + $gap) * $number;
     }
   }
 
