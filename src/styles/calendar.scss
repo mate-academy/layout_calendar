@@ -1,0 +1,50 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  width: $cellSize * $col + (($col - 1) * $gap) + ($mainPadding * 2);
+  height: $cellSize * $row + (($row - 1) * $gap) + ($mainPadding * 2);
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: $gap;
+  padding: $mainPadding;
+
+  &__days {
+    display: flex;
+    position: relative;
+    @include square($cellSize);
+    justify-content: center;
+    align-items: center;
+    font-size: $fontDay;
+    border: $gap solid $fontColorMain;
+    background-color: $colorMain;
+    transition: transform 0.5s ease-in-out;
+    &:hover {
+      background-color: $colorActive;
+      transform: translateY(-20px);
+    }
+    &:nth-last-child(-n + #{31 - $monthLength}) {
+      display: none;
+    }
+
+    @for $index from 1 through $monthLength {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+
+    @each $day, $number in $dayWeek {
+      &--start-#{$day}:first-child {
+        margin-left: calc(#{$cellMarginLeft} * #{$number});
+      }
+    }
+  }
+}
