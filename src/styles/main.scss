@@ -1,3 +1,84 @@
-body {
+//variables
+$size: 100px;
+$gap:1px;
+$padding:10px;
+$variableCalendarWidth: $size * 7 + $gap * 6 + $padding * 2;
+$firstDayMargin: $size * 2 + $gap * 2 ;
+$weekendsColor:rgb(198, 255, 141);
+//styles
+
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+div ,
+img ,
+h1 ,
+h2 {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  display: flex;
+  min-height: 100vh ;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $variableCalendarWidth;
+
+  &--position {
+    margin: auto ;
+  }
+
+  &__day {
+    width: $size;
+    height: $size;
+    background: #eee;
+    border: 1px solid black;
+    transition: all 0.5s ease-in-out;
+
+    &:nth-child(4) ,
+    &:nth-child(5) ,
+    &:nth-child(7n + 4) ,
+    &:nth-child(7n + 5) {
+      background: $weekendsColor;
+    }
+    
+
+    &--first_day {
+      margin-left: $firstDayMargin;
+    }
+
+    &:before {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $i from 1 through 30 {
+
+      &:nth-child(#{$i}):before {
+        content: "#{$i}";
+      }
+
+    }
+
+    &:hover ,
+    &:focus {
+      cursor: pointer;
+      background: pink;
+      transform: translateY(-20px);
+    }
+  }
+
 }
