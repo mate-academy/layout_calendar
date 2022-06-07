@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap__day;
   width: 7 * $calendar__block-size + 6;
   margin: 0 auto;
   padding: 20px;
@@ -16,11 +16,11 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
-    transition: color 0.5s, transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       transform: translateY(-20px);
-      color: pink;
+      background-color: pink;
     }
     
     @for $index from 1 through 31 {
@@ -28,20 +28,20 @@
         content: "#{$index}";
       }
     }
+  }
 
-    $start-day:
-      "mon" 0,
-      "tue" $calendar__block-size + 1,
-      "wed" $calendar__block-size * 2 + 2,
-      "thu" $calendar__block-size * 3 + 3,
-      "fri" $calendar__block-size * 4 + 4,
-      "sat" $calendar__block-size * 5 + 5,
-      "sun" $calendar__block-size * 6 + 6;
+  $start-day:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-    @each $name, $day in $start-day {
-      &--day--#{$name} {
-        margin-left: $day;
-      }
+  @each $name, $day in $start-day {
+    &--day--#{$name} .calendar__block:first-child {
+      margin-left: ($calendar__block-size + $gap__day) * $day;
     }
   }
 
