@@ -1,0 +1,36 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: $calendarWidth;
+  gap: $pixel;
+  margin: auto;
+
+  &__day {
+    @extend %dayStyle;
+
+    &:hover {
+      transform: translate(0, -20px);
+      cursor: pointer;
+      background-color: #ffc0cb;
+    }
+  }
+
+  @for $day from $shortMonth through $fullMonth {
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @for $index from $startMonth through $fullMonth {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @each $firstDay, $placing in $week {
+    &--start-#{$firstDay} :first-child {
+      margin-left: $placing;
+    }
+  }
+}
