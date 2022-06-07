@@ -1,0 +1,20 @@
+@import "../styles/utils/variables";
+
+@each $day, $index in $start-day {
+  &__start-day--#{$day} :first-child {
+    margin-left: ($cell-size + $cell-gap) * $index;
+  }
+}
+
+@for $index from 1 through $month-lenght {
+  &__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+    margin: 0 auto;
+  }
+}
+
+@for $index from $short-month-length through $month-lenght {
+  &__month-lenght--#{$index} :nth-last-child(-n + #{31-$index}) {
+    display: none;
+  }
+}
