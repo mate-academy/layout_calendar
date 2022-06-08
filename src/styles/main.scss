@@ -1,3 +1,65 @@
+$data-size: 100px;
+$gap: 1px;
+$month-width-size: 7 * ($data-size + $gap);
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $month-width-size;
+  padding: 10px;
+
+  @for $value from 28 through 31 {
+    &--month-length--#{$value} :nth-child(n + #{$value + 1}) {
+      display: none;
+    }
+  }
+    
+  &__data {
+    display: flex;
+    box-sizing: border-box;
+    width: $data-size;
+    height: $data-size;
+    background-color: #eee;
+    border: 1px solid rgb(0, 0, 0);
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-20px);
+      transition: 0.5s;
+      background: pink;
+    }
+    
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  $week-days:
+    "mon" 0,
+    "tue" ($data-size + $gap),
+    "wen" (($data-size + $gap) * 2),
+    "thu" (($data-size + $gap) * 3),
+    "fri" (($data-size + $gap) * 4),
+    "sat" (($data-size + $gap) * 5),
+    "sun" (($data-size + $gap) * 7);
+    
+  @each $day, $value in $week-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
 }
