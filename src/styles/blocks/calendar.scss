@@ -1,0 +1,64 @@
+@use "../utils/variables" as *;
+@use "../utils/mixins";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: 2 * $calendar-pad + ($cell-size + $gap-size) * $col-number - $gap-size;
+  padding: $calendar-pad;
+
+  $week:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+    
+  @each $name, $order in $week {
+    &--start-day-#{$name} :first-child {
+      margin-left: ($order * ($cell-size + $gap-size)) ;
+    }
+  }
+    
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length}
+    :nth-last-child(-n + #{31 - $month-length}) {
+      display: none;
+    }
+  }
+  
+  
+  &__day {
+    @include mixins.square($cell-size);
+    background-color: #eee;
+    border: 1px solid black;
+    
+    @for $day from 1 through 31 {
+      &--#{$day}::before {
+        content: "#{$day}";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        line-height: $cell-size;
+        display: flex;
+        justify-content: center;
+      }
+    }
+
+    @keyframes hovered-day {
+      to {
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      animation-name: hovered-day;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
