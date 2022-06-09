@@ -1,3 +1,61 @@
 body {
   margin: 0;
 }
+
+@for $n from 1 through 31 {
+  .container > div:nth-child(#{$n})::before {
+    content: "#{$n}";
+  }
+}
+
+$days: (
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+
+$size: 101px;
+
+@each $day, $number in $days {
+  .container-#{$day} > div:first-child {
+    margin-left: $size * $number;
+  }
+}
+
+.container {
+  width: 706px;
+  gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  margin-top: 25px;
+
+  & > div {
+    border: 1px solid black;
+    background-color: #eee;
+    width: 100px;
+    transition: 0.5s;
+
+    &::before {
+      content: "";
+      display: block;
+      font-size: 30px;
+      line-height: 98px;
+      text-align: center;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  &-30 div:last-child,
+  &-29 div:nth-child(n+30),
+  &-28 div:nth-child(n+29) {
+    display: none;
+  }
+}
