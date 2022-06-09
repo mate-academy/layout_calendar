@@ -32,29 +32,29 @@ main {
     align-items: center;
 
     transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 
   @each $name, $num in $start-day {
-    &__day--first--#{$name} {
+    &--first--#{$name} :first-child {
       margin-left: $num;
     }
   }
 
-  @for $i from 1 through $month-length {
-    &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+  @for $i from 28 to 31 {
+    &--end--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
     }
-  }
-
-  @for $var from 28 to 31 {
-    &__day:nth-child(n + #{$month-length +1}) {
-      visibility: hidden;
-    }
-  }
-
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
   }
 }
