@@ -2,9 +2,15 @@ body {
   margin: 0;
 }
 
-@for $n from 1 through 31 {
-  .container > div:nth-child(#{$n})::before {
-    content: "#{$n}";
+@for $n from 0 through 31 {
+  .calendar > div:nth-child(#{$n + 1})::before {
+    content: "#{$n + 1}";
+  }
+}
+
+@for $d from 28 through 31 {
+  .calendar__field--start-day--mon > div:nth-child(#{$d + 1}) {
+    display: none;
   }
 }
 
@@ -15,17 +21,17 @@ $days: (
   "fri": 4,
   "sat": 5,
   "sun": 6
-);
+  );
 
 $size: 101px;
 
 @each $day, $number in $days {
-  .container-#{$day} > div:first-child {
+  .calendar-#{$day} > div:first-child {
     margin-left: $size * $number;
   }
 }
 
-.container {
+.calendar {
   width: 706px;
   gap: 1px;
   display: flex;
@@ -51,11 +57,5 @@ $size: 101px;
       background-color: pink;
       transform: translateY(-20px);
     }
-  }
-
-  &-30 div:last-child,
-  &-29 div:nth-child(n+30),
-  &-28 div:nth-child(n+29) {
-    display: none;
   }
 }
