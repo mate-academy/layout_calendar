@@ -5,12 +5,12 @@ $padding:10px;
 $calendarWidth:$padding*2 + $gap * 6 + $boxSize * 7;
 $margins: ( 
   "mon":0 , 
-  "tue": 101px , 
-  "wed":202px , 
-  "thu":303px , 
-  "fri":404px , 
-  "sat":505px , 
-  "sun":606px
+  "tue": $gap + $boxSize , 
+  "wed":$gap*2 + $boxSize*2 ,
+  "thu":$gap*3 + $boxSize*3 ,
+  "fri":$gap*4 + $boxSize*4 ,
+  "sat":$gap*5 + $boxSize*5 ,
+  "sun":$gap*6 + $boxSize*6 
 );
 //styles
 
@@ -39,7 +39,7 @@ $margins: (
     height: $boxSize;
     background: #eee;
     border: 1px solid black;
-    display: none;
+    display: flex; ///here
     justify-content: center;
     align-items: center;
     transition: all 0.5s ease-in-out;
@@ -52,29 +52,23 @@ $margins: (
     }
 
     @for $ind from 1 through 31 {
-
       &:nth-child(#{$ind})::before {
         content: "#{$ind}";
         font-size: 30px;
         font-family: Arial, Helvetica, sans-serif;
       }
-
     }
-
   }
-
 }
 
 @each $key , $value in $margins {
   .calendar--#{$key} .calendar__day:first-child {
     margin-left: $value;
   }
-
 }
 
 @for $index from 28 through 31 {
-  .calendar--#{$index} .calendar__day:nth-child( -n+#{$index} ) {
-    display: flex;
+  .calendar--#{$index} .calendar__day:nth-child( n+#{$index+1}) {
+    display: none;
   }
-
 }
