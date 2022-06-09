@@ -1,0 +1,48 @@
+@import "./utils/variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: $pixelPadding;
+  width: $calendarWidth;
+  margin: auto;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $cellSize;
+    width: $cellSize;
+    background-color: $mainColor;
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $activeColor;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  @for $day from $shortMonth through $longMonth {
+    &--month-length-#{$day} :nth-child(n+#{$day + 1}) {
+      display: none;
+    }
+  }
+  
+  @for $index from $startMonth through $longMonth {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+  
+  @each $first, $place in $week {
+    &--start-#{$first} :first-child {
+      margin-left: $place;
+    }
+  }
+}
