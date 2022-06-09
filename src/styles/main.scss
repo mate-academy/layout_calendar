@@ -1,3 +1,45 @@
 body {
-  margin: 0;
+  margin: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 860px; 
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: 0.5s;
+
+    &::before { 
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+
+      @for $i from 1 through 31 {
+        &:nth-child(#{$i}) { 
+          content: '#{$i}';
+        }
+      }
+      
+    }
+
+    &:hover { 
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+  
 }
