@@ -8,12 +8,6 @@ body {
   }
 }
 
-@for $d from 28 through 31 {
-  .calendar__field--start-day--mon > div:nth-child(#{$d + 1}) {
-    display: none;
-  }
-}
-
 $days: (
   "tue": 1,
   "wed": 2,
@@ -21,18 +15,12 @@ $days: (
   "fri": 4,
   "sat": 5,
   "sun": 6
-  );
+);
 
-$size: 101px;
-
-@each $day, $number in $days {
-  .calendar-#{$day} > div:first-child {
-    margin-left: $size * $number;
-  }
-}
+$size: 103px;
 
 .calendar {
-  width: 706px;
+  width: 720px;
   gap: 1px;
   display: flex;
   flex-wrap: wrap;
@@ -57,5 +45,17 @@ $size: 101px;
       background-color: pink;
       transform: translateY(-20px);
     }
+  }
+
+  &-30 div:last-child,
+  &-29 div:nth-child(n+30),
+  &-28 div:nth-child(n+29) {
+    display: none;
+  }
+}
+
+@each $day, $number in $days {
+  .calendar-#{$day} > div:first-child {
+    margin-left: $size * $number;
   }
 }
