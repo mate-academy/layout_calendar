@@ -4,6 +4,7 @@
   padding: 2 * $calendar-padding $calendar-padding;
   margin: auto;
   width: $calendar-width;
+  gap: $calendar-gap;
 
   &__day {
     display: flex;
@@ -33,13 +34,13 @@
   }
 
   @each $first-day, $margin in $week {
-    &--start#{$first-day} :first-child {
+    &--start--#{$first-day} :first-child {
       margin-left: $margin;
     }
   }
 
   @for $day from 28 through 31 {
-    &--month-lenght--#{$day} :nth-child(n + #{day} + 1) {
+    &--month-lenght--#{$day} :nth-child(n + #{$day} + 1) {
       display: none;
     }
   }
