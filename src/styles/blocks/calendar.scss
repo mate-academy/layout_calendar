@@ -1,4 +1,5 @@
 @import "../utils/variables";
+@import "../utils/mixins";
 
 .calendar {
   width: $field-size * 7 + $calendar-gap * 6 + $calendar-padding * 2;
@@ -7,17 +8,31 @@
   padding: $calendar-padding;
   gap: $calendar-gap;
 
+  $days:
+    1 "mon",
+    2 "tue",
+    3 "wed",
+    4 "thu",
+    5 "fri",
+    6 "sat",
+    7 "sun";
+
+  @each $num, $day in $days {
+    &--start-day_#{$day} &__field:first-child {
+      margin-left: $field-size * ($num - 1) + $calendar-gap * ($num - 1);
+    }
+  }
+
   @for $number from 28 to 31 {
     &--month-length_#{$number} {
-      .calendar__field:nth-child(1n + #{$number + 1}) {
+      .calendar__field:nth-child(n + #{$number + 1}) {
         display: none;
       }
     }
   }
 
   &__field {
-    width: $field-size;
-    height: $field-size;
+    @include square($field-size);
     border: 1px solid black;
     background-color: #eee;
     counter-increment: number;
@@ -37,21 +52,6 @@
     @for $num from 1 to 31 {
       &::before {
         content: counter(number);
-      }
-    }
-
-    $days:
-      1 "mon",
-      2 "tue",
-      3 "wed",
-      4 "thu",
-      5 "fri",
-      6 "sat",
-      7 "sun";
-
-    @each $num, $day in $days {
-      &--start-day_#{$day} {
-        margin-left: $field-size * ($num - 1) + $calendar-gap * ($num - 1);
       }
     }
   }
