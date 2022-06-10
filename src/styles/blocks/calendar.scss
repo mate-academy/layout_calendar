@@ -8,15 +8,6 @@
   padding: $calendar-padding;
   gap: $calendar-gap;
 
-  $days:
-    1 "mon",
-    2 "tue",
-    3 "wed",
-    4 "thu",
-    5 "fri",
-    6 "sat",
-    7 "sun";
-
   @each $num, $day in $days {
     &--start-day_#{$day} &__field:first-child {
       margin-left: $field-size * ($num - 1) + $calendar-gap * ($num - 1);
@@ -24,10 +15,8 @@
   }
 
   @for $number from 28 to 31 {
-    &--month-length_#{$number} {
-      .calendar__field:nth-child(n + #{$number + 1}) {
-        display: none;
-      }
+    &--month-length_#{$number}  &__field:nth-child(n + #{$number + 1}) {
+      display: none;
     }
   }
 
