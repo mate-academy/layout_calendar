@@ -1,0 +1,26 @@
+.day {
+  display: flex;
+  justify-content: center;
+
+  background-color: #eee;
+  border: 1px solid #000;
+
+  height: $day-sight;
+  width: $day-sight;
+  line-height: $day-sight;
+
+  transition: transform 0.5s, background-color 0.5s;
+
+  @for $index from 1 through 31 {
+    &--#{$index}::before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+}
