@@ -1,3 +1,5 @@
+@import 'tools/variables.scss';
+
 body {
   margin: 30px;
   display: flex;
@@ -5,41 +7,55 @@ body {
   align-items: center;
 }
 
-.container {
+.calendar {
   position: relative;
-  width: 860px; 
+  width: 860px;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $base-gap;
+
+  $calendar:
+  "mon" 0,
+  "tue" 1, 
+  "wed" 2, 
+  "thu" 3, 
+  "fri" 4, 
+  "sat" 5, 
+  "sun" 6;
+
+@each $day, $number in $calendar {
+
+  &--start-day-#{$day} .cell:first-child { 
+    margin-left: $number * ($cell-size + $base-shift);
+  }
+}
 
   .cell {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
-    padding: 10px;
+    height: $cell-size;
+    width: $cell-size;
+    padding: $base-padding;
     background-color: #eee;
-    border: 1px solid #000;
+    border: $base-border solid #000;
     transition: 0.5s;
 
-    &::before { 
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
+    @for $i from 1 through 31 {
 
-      @for $i from 1 through 31 {
-        &:nth-child(#{$i}) { 
-          content: '#{$i}';
-        }
+      &:nth-child(#{$i})::before {
+
+        content: "#{$i}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
       }
-      
     }
 
-    &:hover { 
+    &:hover {
+
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
   }
-  
 }
