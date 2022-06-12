@@ -1,61 +1,10 @@
 @import 'tools/variables.scss';
+@import 'calendar.scss';
+
 
 body {
   margin: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.calendar {
-  position: relative;
-  width: 860px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $base-gap;
-
-  $calendar:
-  "mon" 0,
-  "tue" 1, 
-  "wed" 2, 
-  "thu" 3, 
-  "fri" 4, 
-  "sat" 5, 
-  "sun" 6;
-
-@each $day, $number in $calendar {
-
-  &--start-day-#{$day} .cell:first-child { 
-    margin-left: $number * ($cell-size + $base-shift);
-  }
-}
-
-  .cell {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: $cell-size;
-    width: $cell-size;
-    padding: $base-padding;
-    background-color: #eee;
-    border: $base-border solid #000;
-    transition: 0.5s;
-
-    @for $i from 1 through 31 {
-
-      &:nth-child(#{$i})::before {
-
-        content: "#{$i}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-      }
-    }
-
-    &:hover {
-
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-  }
 }
