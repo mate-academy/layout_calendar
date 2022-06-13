@@ -1,9 +1,10 @@
 .calendar {
   margin-top: 40px;
+  margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: $gap-size;
-  width: $coll-number * $square-size + $square-pad;
+  gap: $gap;
+  width: $coll-number * $cell-size + $square-pad;
 
   &__day {
     display: flex;
@@ -12,46 +13,46 @@
     justify-content: center;
     align-items: center;
     color: #000;
-    width: $square-size;
-    height: $square-size;
+    width: $cell-size;
+    height: $cell-size;
     border: 1px solid #000;
     font-size: 30px;
     font-family: Arial, sans-serif;
     background-color: #eee;
     transition: color 0.5s, transform 0.5s;
 
-    $start-day:
-    "mon" 1,
-    "tue" 2,
-    "wed" 3,
-    "thu" 4,
-    "fri" 5,
-    "sat" 6,
-    "sun" 7;
-
-    @each $name, $number in $start-day {
-      &--start-day--#{name}:first-child {
-        margin-left: ($number ($square-size + $gap-size));
-      }
-    }
-
-    @for $start-day from 1 through 31 {
-      &--#{$start-day}::before {
-        content: "#{$start-day}";
-      }
-    }
-
-    @for $month-length from 28 through 31 {
-      &--month-length-#{$month-length}:nth-child(-n + #{31 - $month-length}) {
-        display: none;
-      }
-    }
-    
     &:hover {
       color: black;
       background-color: pink;
       transform: translateY(-20px);
       cursor: pointer;
+    }
+  }
+
+  $days: 
+    "mon" 0,
+    "tue"$cell-size + $gap,
+    "wed"($cell-size + $gap) * 2,
+    "thu"($cell-size + $gap) * 3,
+    "fri"($cell-size + $gap) * 4,
+    "sat"($cell-size + $gap) * 5,
+    "sun"($cell-size + $gap) * 6;
+
+  @each $day, $value in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(-n + #{$index}) {
+      display: flex;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
     }
   }
 }
