@@ -1,3 +1,8 @@
+.content {
+  display: flex;
+  justify-content: center;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -20,6 +25,7 @@
     font-size: 30px;
 
     cursor: pointer;
+    transition: transform 500ms;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -29,6 +35,7 @@
 
     &:hover {
       background-color: pink;
+      transform: translateY(-20px);
     }
   }
 
@@ -38,10 +45,10 @@
     }
   }
 
-  @each $day, $margin-left in $days {
+  @each $day,
+    $margin-left in $days {
     &--start-day--#{$day} :first-child {
       margin-left: $margin-left;
     }
   }
-
 }
