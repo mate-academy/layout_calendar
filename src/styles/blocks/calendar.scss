@@ -19,7 +19,7 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 0.5s
+      transition-duration: 0.5s;
     }
 
     @for $day from 1 through $max-month-length {
@@ -37,9 +37,8 @@
 
   @for $index from 28 through 31 {
     &--month-length--#{$index}
-    &__day:nth-child(n + #{$index + 1}) {
+    &__day:nth-last-child(-n + #{31 - $index}) {
       display: none;
     }
   }
 }
-//-n + #{31 - $index}
