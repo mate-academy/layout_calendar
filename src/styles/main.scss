@@ -1,3 +1,76 @@
-body {
-  margin: 0;
+@import "./disable.scss";
+
+$day-size: 100px;
+$calendar-size: 7 * $day-size + 6px;
+$font-size: 30px;
+$font: "Arial";
+$gap: 1px;
+
+@function cellShift($count) {
+  @return $count * ($day-size + $gap);
+}
+
+.header {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  gap: $gap;
+
+  $days:
+    "mon" cellShift(0),
+    "tue" cellShift(1),
+    "wed" cellShift(2),
+    "thu" cellShift(3),
+    "fri" cellShift(4),
+    "sat" cellShift(5),
+    "sun" cellShift(6);
+
+  @each $start-day, $shift in $days {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: #{$shift};
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    width: $day-size;
+    height: $day-size;
+
+    font-family: $font;
+    font-size: $font-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        position: absolute;
+        content: "#{$index}";
+      }
+    }
+  }
 }
