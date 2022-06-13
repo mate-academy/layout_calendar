@@ -1,9 +1,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  flex-basis: ($cell-width * 7) + ($cell-gap * 6);
+  flex-basis: calendarWidth($cell-width, $cell-gap);
   gap: $cell-gap;
-  padding: 10px;
+  padding: 20px 10px 0;
 
   &__cell {
     @include cellSize($cell-width, $cell-height);
@@ -33,9 +33,9 @@
     }
   }
 
-  @each $day, $shift in $daysOfWeek {
+  @each $day, $num in $daysOfWeek {
     &--start-day--#{$day} > :first-child {
-      margin-left: $shift;
+      margin-left: dayShift($cell-width, $cell-gap, $num);
     }
   }
 
