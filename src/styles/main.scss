@@ -1,5 +1,13 @@
 $cell-size: 100px;
 
+@for $index from 1 through 31 {
+
+  .calendar__cell:nth-child(#{$index}):before {
+
+    content: "#{$index}";
+  }
+}
+
 @mixin square($size) {
   width: $size;
   height: $size;
@@ -35,22 +43,6 @@ body {
     gap: 1px;
     padding: 10px;
     transition: background-color 0.5s, transform 0.5s;
-
-    $week-days: 
-      "mon" 0,
-      "tue" $cell-size, 
-      "wed" 2 * $cell-size, 
-      "thu" 3 * $cell-size, 
-      "fri" 4 * $cell-size, 
-      "sat" 5 * $cell-size, 
-      "sun" 6 * $cell-size;
-
-    @each $name, $start-day in $week-days {
-
-      &--#{$name} {
-        margin-left: $start-day;
-      }
-    }
   }
 
   &__cell:hover {
@@ -59,11 +51,30 @@ body {
     cursor: pointer;
     transform: translate(0,-20px);
   }
-}
 
-@for $index from 1 through 31 {
-  .calendar__cell:nth-child(#{$index}):before {
-    
-    content: "#{$index}";
+  $week-days: 
+    "mon" 0,
+    "tue" $cell-size, 
+    "wed" 2 * $cell-size, 
+    "thu" 3 * $cell-size, 
+    "fri" 4 * $cell-size, 
+    "sat" 5 * $cell-size, 
+    "sun" 6 * $cell-size;
+
+  @each $name, $start-day in $week-days {
+
+    &--start-day--#{$name} &__cell:first-child {
+
+      margin-left: $start-day;
+    }
   }
+
+  @for $index from 28 through 30 {
+    
+    &--month-length-#{$index} &__cell:not(:nth-child(-n+#{$index})) {
+
+      visibility: hidden;
+    }
+  }
+
 }
