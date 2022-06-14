@@ -1,0 +1,63 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  gap: $gap-size;
+  display: flex;
+  flex-wrap: wrap;
+  width: $width-calendar;
+
+  &__day {
+    width: $size-day;
+    height: $size-day;
+    background-color: $background-cell;
+    border: $border-cell-size solid $border-color-cell;
+    font-size: $font-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day--#{$i}::before {
+      content: "#{$i}";
+    }
+  }
+
+  $start-day: (
+    "mon": 0,
+    "tue": calc(#{$size-day * 1} + #{$gap-size * 1}),
+    "wed": calc(#{$size-day * 2} + #{$gap-size * 2}),
+    "thu": calc(#{$size-day * 3} + #{$gap-size * 3}),
+    "fri": calc(#{$size-day * 4} + #{$gap-size * 4}),
+    "sat": calc(#{$size-day * 5} + #{$gap-size * 5}),
+    "sun": calc(#{$size-day * 6} + #{$gap-size * 6}),
+  );
+
+  @each $key, $value in $start-day {
+    &--#{$key} {
+      .calendar__day:first-child {
+        margin-left: $value;
+      }
+    }
+  }
+
+  @for $i from 1 through 3 {
+    &--month-length-#{31 - $i} {
+      .calendar__day:nth-last-child(-n + #{$i}) {
+        display: none;
+      }
+    }
+  }
+}
