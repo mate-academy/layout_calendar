@@ -1,25 +1,42 @@
 .month {
-  @include month($field-width-size, $field-height-size, $field-size-padding);
-  margin: auto;
 
+  @include month($field-width-size, $field-size-padding);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  flex-grow: 1;
   gap: $cell-gap;
 
   &__day {
-    @include square($cell-size);
+    position: relative;
 
-    $start-day:
-    "mon" 0,
-    "tue" $cell-size + $cell-gap,
-    "wed" 2 * ($cell-size + $cell-gap),
-    "thu" 3 * ($cell-size + $cell-gap),
-    "fri" 4 * ($cell-size + $cell-gap),
-    "sat" 5 * ($cell-size + $cell-gap),
-    "sun" 6 * ($cell-size + $cell-gap);
+    @include square($cell-size);
+    @for $i from 1 through $maxDaysInMonth {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        @extend %date-text;
+      }
+    }
 
     @each $day, $margin-left in $start-day {
       &--start-day--#{$day} {
         margin-left: $margin-left;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      color: red;
+      border-radius: 50%;
+      transition: background-color 0.5s, transform 0.5s, border-radius 0.5s;
+    }
+  }
+
+  @for $rest from 28 to $maxDaysInMonth {
+    &--month-length--#{$rest} .month__day:nth-child(n + #{$rest + 1}) {
+      display: none;
     }
   }
 }
