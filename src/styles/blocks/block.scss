@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.conteiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  padding: $padding;
+  &__day {
+    @include square($boxSize);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+    transition-duration: 500ms;
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition-duration: 500ms;
+    }
+  }
+  @for $nth-day from 1 through 31 {
+    &__day:nth-child(#{$nth-day})::before {
+      content: "#{$nth-day}";
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+
+  @for $nth-day from 28 through 31 {
+    &--#{$nth-day} > &__day:nth-child(n + #{$nth-day + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  @each $num, $day in $days {
+    &--#{$day} > &__day:first-child {
+      margin-left: ($boxSize + $gap) * ($num - 1);
+    }
+  }
+}
