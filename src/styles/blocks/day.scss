@@ -1,0 +1,47 @@
+@import "../utils/mixins.scss";
+@import "./utils/variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $days-gap;
+  width: $calendar-width;
+  margin: 0 auto;
+
+  &__day {
+    display: flex;
+    @include cell-size;
+    background: #eee;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+
+  @each $day, $day-margin in $week {
+    &-start-day-#{$day} :first-child {
+      margin-left: $day-margin;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &-month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      visibility: hidden;
+    }
+  }
+
+}
