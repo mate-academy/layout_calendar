@@ -24,7 +24,7 @@ $size: 103px;
   gap: 1px;
   display: flex;
   flex-wrap: wrap;
-  position: absolute;
+  margin: 0 auto;
   margin-top: 25px;
 
   & > div {
@@ -47,15 +47,15 @@ $size: 103px;
     }
   }
 
-  &-30 div:last-child,
-  &-29 div:nth-child(n+30),
-  &-28 div:nth-child(n+29) {
+  &--month-length--30 div:last-child,
+  &--month-length--29 div:nth-child(n+30),
+  &--month-length--28 div:nth-child(n+29) {
     display: none;
   }
 }
 
 @each $day, $number in $days {
-  .calendar--#{$day} > div:first-child {
+  .calendar--start-day--#{$day} > div:first-child {
     margin-left: $size * $number;
   }
 }
