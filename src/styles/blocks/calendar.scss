@@ -1,10 +1,13 @@
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
-  width: $calendar-size;
-  margin: auto;
-  padding: 50px $padding;
-  gap: $gap;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 50px $padding;
+    width: $calendar-size;
+    gap: $gap;
+  }
 
   &__cell {
     display: flex;
@@ -34,13 +37,14 @@
   }
 
   @each $day, $indent in $week {
-    &--start-day--#{$day} :first-child {
+    .calendar__container--start-day--#{$day} :first-child {
       margin-left: $indent;
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+    .calendar__container--month-length--#{$index}
+    :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
