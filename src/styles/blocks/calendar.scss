@@ -1,13 +1,9 @@
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: $font-size-day;
-}
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-day;
-  padding: $paddings-calendar;
+  padding: $paddings-calendar*2 $paddings-calendar;
   width: getCalendarSize(
     $length-day,
     $gap-day,
@@ -16,13 +12,13 @@ body {
   );
 
   @each $day, $start in $week-days {
-    &--start-day-#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: $start;
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
@@ -35,17 +31,17 @@ body {
     background-color: $color-day;
     border: 1px solid black;
     transition: transform 0.5s, background-color 0.5s;
-  }
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
-  }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 }
