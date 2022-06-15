@@ -1,9 +1,15 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: $cell-gap;
   padding: $inner-padding-y $inner-padding-x;
+
+  @each $day, $num in $week {
+    &--start-day--#{$day} &__cell:first-child {
+    margin-left:  707px - 101 * $num;
+    }
+  }
 
   &__cell {
     @include square($side);
