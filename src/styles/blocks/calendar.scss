@@ -1,18 +1,18 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap;
   padding-top: 100px;
-  max-width: $cell-size * 7 + 10px;
+  max-width: $cell-size * 7 + $gap * 7;
 
   $days:
-    "mon" 0px,
-    "tue" $cell-size + 1px,
-    "wed" ($cell-size + 1px) * 2,
-    "thu" ($cell-size + 1px) * 3,
-    "fri" ($cell-size + 1px) * 4,
-    "sat" ($cell-size + 1px) * 5,
-    "sun" ($cell-size + 1px) * 6;
+    "mon" $cell-with-gap * 0,
+    "tue" $cell-with-gap,
+    "wed" $cell-with-gap * 2,
+    "thu" $cell-with-gap * 3,
+    "fri" $cell-with-gap * 4,
+    "sat" $cell-with-gap * 5,
+    "sun" $cell-with-gap * 6;
 
   @each $day, $margin in $days {
     &--start-day--#{$day} .calendar__day:first-child {
@@ -33,7 +33,7 @@
     border: 1px solid black;
     transition-duration: 0.5s;
     cursor: pointer;
-    
+
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
