@@ -6,7 +6,7 @@
   max-width: $cell-size * 7 + 10px;
 
   $days:
-    "mon" 0px
+    "mon" 0px,
     "tue" $cell-size + 1px,
     "wed" ($cell-size + 1px) * 2,
     "thu" ($cell-size + 1px) * 3,
@@ -21,7 +21,7 @@
   }
 
   @for $length from 28 to 31 {
-    &--month-length--#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+    &--month-length--#{$length} &__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
@@ -33,6 +33,7 @@
     border: 1px solid black;
     transition-duration: 0.5s;
     cursor: pointer;
+    
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
