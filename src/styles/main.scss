@@ -1,6 +1,6 @@
-@import './utils/reset';
-@import './utils/normalize';
-@import './utils/variables';
+@import "./utils/reset";
+@import "./utils/normalize";
+@import "./utils/variables";
 
 @mixin square($size) {
   width: $size;
@@ -32,6 +32,12 @@
   @each $first-day, $margin in $week {
     &--start--#{$first-day} :first-child {
       margin-left: $margin;
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 }
