@@ -8,7 +8,17 @@
   &__cell {
     @include square($side);
 
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #000;
     background-color: $grey;
+
+    @for $idx from 1 through 31 {
+      &:nth-child(#{$idx})::before {
+        content: "#{$idx}";
+      }
+    }
   }
 }
