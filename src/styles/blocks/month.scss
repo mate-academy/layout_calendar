@@ -1,0 +1,45 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: $month-width;
+  margin: 0 auto;
+  padding: $month-padding-vertical $month-padding-horizontal;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include square;
+
+    border: 1px solid black;
+    background-color: #eee;
+    transition: background-color 0.8s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day, $margin in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
