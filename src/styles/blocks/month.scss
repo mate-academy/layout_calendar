@@ -1,0 +1,41 @@
+.month {
+  width: $field-width-size;
+  padding: $field-size-padding;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  gap: $cell-gap;
+
+  @each $day, $margin-left in $start-day {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin-left;
+    }
+  }
+
+  &__day {
+    position: relative;
+    transition: background-color 0.5s, transform 0.5s, border-radius 0.5s;
+    cursor: pointer;
+
+    @include square($cell-size);
+    @for $i from 1 through $maxDaysInMonth {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        @extend %date-text;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      color: red;
+      border-radius: 50%;
+    }
+  }
+
+  @for $rest from 28 to $maxDaysInMonth {
+    &--month-length--#{$rest} .month__day:nth-child(n + #{$rest + 1}) {
+      display: none;
+    }
+  }
+}
