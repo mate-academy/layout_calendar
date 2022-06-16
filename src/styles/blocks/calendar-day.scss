@@ -6,7 +6,6 @@
   width: $width-calendar;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-  margin: auto;
 
   &__day {
     display: flex;
@@ -16,15 +15,15 @@
     background-color: #eee;
     border: 1px solid #000;
     transition: background-color 0.4s, transform 0.4s;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
 
     @for $index from 1 through 31 {
-      &--number--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
