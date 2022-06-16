@@ -1,0 +1,25 @@
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding: 20px $padding-calendar;
+
+  &__day {
+    @include square ($size-day-box);
+    background-color: #eee;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: $size-day-box;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+
+
+    &:hover {
+      background: #faafd3;
+      transform:
+        translateY(-20px)
+        matrix3d(1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, (1/1000), 0, 0, 0, 1);
+    }
+  }
+}

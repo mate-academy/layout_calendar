@@ -1,0 +1,27 @@
+$week:
+  "mon" 0,
+  "tue" $margin-day,
+  "wed" 2 * $margin-day,
+  "thu" 3 * $margin-day,
+  "fri" 4 * $margin-day,
+  "sat" 5 * $margin-day,
+  "sun" 6 * $margin-day;
+
+@each $name, $margin in $week {
+  .calendar--start-day--#{$name} :first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $index from 1 through $day-in-month {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@for $day-display-none from 28 through 31 {
+  .calendar--month-length--#{$day-display-none}
+  :nth-child(n + #{$day-display-none + 1}) {
+    display: none;
+  }
+}
