@@ -6,6 +6,12 @@
   align-items: start;
   gap: $cell-gap;
 
+  @each $day, $margin-left in $start-day {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin-left;
+    }
+  }
+
   &__day {
     position: relative;
     transition: background-color 0.5s, transform 0.5s, border-radius 0.5s;
@@ -16,12 +22,6 @@
       &:nth-child(#{$i})::before {
         content: "#{$i}";
         @extend %date-text;
-      }
-    }
-
-    @each $day, $margin-left in $start-day {
-      &--start-day--#{$day} {
-        margin-left: $margin-left;
       }
     }
 
