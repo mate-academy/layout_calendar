@@ -1,19 +1,18 @@
 .calendar {
-  margin: 100px auto;
+  padding-top: 100px;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  text-align: center;
   width: $calendar-day-width * 7 + 10px;
 
   @each $name,
     $day in $days {
-    &__day--start-day--#{$name} {
+    &--start-day--#{$name} > :first-child {
       margin-left: $day;
     }
   }
 
-  @for $index from 1 through $calendar-day-count {
+  @for $index from 1 through 31 {
     &__day:nth-child(n + #{$index}):before {
       content: "#{$index}";
     }
@@ -28,7 +27,6 @@
   }
 
   &__day {
-    align-items: center;
     text-align: center;
     background-color: #eee;
     height: $calendar-day-width;
