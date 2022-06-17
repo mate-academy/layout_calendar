@@ -1,0 +1,29 @@
+.calendar {
+  padding: 10px;
+  width: 750px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+$day-of-week: 
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+  
+@each $day, $value in $day-of-week {
+  .calendar--day-of-week-#{$day} :first-child {
+    margin-left: calc(#{$value} * #{$cell-size-horisontal});
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} :nth-child(n + #{$i}) {
+    display: none;
+  }
+}
