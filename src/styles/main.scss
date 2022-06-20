@@ -1,3 +1,74 @@
 body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  padding: 0;
+}
+
+$bg__color: #eee;
+$border__color: #000;
+$hover__color: #ffc0cb;
+$calendar__size: 100px;
+$gap: 1px;
+$font__family: "Arial, Helvetica, sans-serif";
+$font__size: 30px;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * #{$calendar__size} + 7 * #{$gap});
+  gap: $gap;
+
+  &__day {
+    display: inline-block;
+    background-color: $bg__color;
+    width: $calendar__size;
+    height: $calendar__size;
+    line-height: $calendar__size;
+    box-sizing: border-box;
+    border: 1px solid $border__color;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: 0.5s;
+      background-color: $hover__color;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  $days:
+    "start-day--tue" 0 1,
+    "start-day--wed" 1 2,
+    "start-day--thu" 2 3,
+    "start-day--fri" 3 4,
+    "start-day--sat" 4 5,
+    "start-day--sun" 5 6;
+
+  @each $name, $gap-index, $cell-index in $days {
+    &--#{$name}::before {
+      content: "";
+      margin-left: calc(#{$cell-index} * #{$calendar__size} 
+      + #{$gap} * #{$gap-index});
+    }
+  }
+  
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      .calendar__day:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+  
 }
