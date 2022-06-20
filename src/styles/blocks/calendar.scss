@@ -2,8 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  padding: 2 * $calendar-padding $calendar-padding;
-  margin: auto;
+  padding: 20 * $calendar-padding $calendar-padding;
   width: $calendar-width;
 
   &__day {
@@ -16,17 +15,16 @@
     font-size: 30px;
     cursor: pointer;
 
-  &:before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
+    }
+
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
   }
@@ -38,9 +36,9 @@
   }
 
   @each $day, $index  in $week {
-  &--start--day--#{$day} :first-child {
-    margin-left: $index;
-   }
+    &--start--day--#{$day} :first-child {
+      margin-left: $index;
+    }
   }
 
   @for $index from 28 through 31 {
