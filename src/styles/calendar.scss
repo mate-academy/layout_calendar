@@ -1,0 +1,21 @@
+
+.calendar {
+  padding: 30px;
+  width: $calendar-size;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1px;
+
+  @each $day, $value in $day-of-week {
+    &--day-of-week-#{$day} :first-child {
+      margin-left: calc(#{$value} * #{$cell-size-horisontal});
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i+1}) {
+      display: none;
+    }
+  }
+}

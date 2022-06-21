@@ -1,0 +1,25 @@
+.day {
+  box-sizing: border-box;
+  border: solid 1px black;
+  background-color: #eee;
+  height: $cell-size;
+  min-width: $cell-size;
+  display: flex;
+  gap: 1px;
+  justify-content: center;
+  align-items: center;
+  transition: color 500ms, translate 500ms;
+
+  @for $i from 1 through 31 {
+    &:nth-child(n + #{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    padding-top: -20px;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}

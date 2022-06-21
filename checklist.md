@@ -1,11 +1,11 @@
 1. [BEM] - Check your BEM structure using BEM-linter (`npm run lint`) and
-[this list](https://mate-academy.github.io/fe-program/css/typical-bem-mistakes)
+[this list](https://mate-academy.github.io/fe-program/css/typical-bem-mistakes) +
 2. [BEM] - Make sure to follow BEM naming convention for complex modifiers:
-`block-name--modifier-name--modifier-value`;
+`block-name--modifier-name--modifier-value`; +
 3. [BEM] - Create a separate file per each BEM block styles that have the same
-   name as the block
+   name as the block +
 4. [SASS] - Make use of SASS nesting - write pseudo-class, pseudo-element
-selectors inside general selector. As well as media queries.
+selectors inside general selector. As well as media queries. +
 
 GOOD example:
 ```scss
@@ -31,15 +31,15 @@ BAD example:
 }
 ```
 
-5. [SASS] - Check your import syntax. It's differs from plain CSS.
+5. [SASS] - Check your import syntax. It's differs from plain CSS. +
 6. [SASS] - use variables for the main values so that you'll be able to reuse
 them and give them descriptive names. But don't overuse them, don't create
-variable for the value that's used just once.
+variable for the value that's used just once. +
 7. [SASS] - Don't use SASS loops for styles that stay the same for all elements
-of the group, e.g. `display` or `position`.
-8. [STYLES] - Make sure to list all styles that you apply transition to.
+of the group, e.g. `display` or `position`. +
+8. [STYLES] - Make sure to list all styles that you apply transition to. +
 9. [STYLES] - Make sure to add transition style under general selector, not the
-one with `:hover` - this way transition will work smoothly both ways.
+one with `:hover` - this way transition will work smoothly both ways. +
 
 GOOD example:
 ```scss
