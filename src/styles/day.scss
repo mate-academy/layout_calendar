@@ -8,18 +8,18 @@
   gap: 1px;
   justify-content: center;
   align-items: center;
-  transition: 500ms;
-}
+  transition: color 500ms, translate 500ms;
 
-@for $i from 1 through 31 {
-  .day:nth-child(n + #{$i})::before {
-    content: "#{$i}";
+  @for $i from 1 through 31 {
+    &:nth-child(n + #{$i})::before {
+      content: "#{$i}";
+    }
   }
-}
 
-.day:hover {
-  background-color: pink;
-  margin-top: -20px;
-  cursor: pointer;
-  transform: translateY(-20px);
+  &:hover {
+    background-color: pink;
+    padding-top: -20px;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
 }
