@@ -1,7 +1,15 @@
 $cell-size: 100px;
 $gap: 1px;
 $calendar-width: 7 * $cell-size + 6 * $gap;
-$start-margin: 0;
+$days: (
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6,
+);
 
 .calendar {
   display: flex;
@@ -41,12 +49,10 @@ $start-margin: 0;
     }
   }
 
-  @each $day in mon, tue, wed, thu, fri, sat, sun {
+  @each $day, $index in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: $start-margin;
+      margin-left: ($cell-size + $gap) * $index;
     }
-
-    $start-margin: $start-margin + $cell-size + $gap;
   }
 
   @for $last-day from 28 through 31 {
