@@ -1,0 +1,52 @@
+@import "../utils/_functions";
+
+.container {
+  height: 100vh;
+  @include flex(center, center);
+}
+
+.cdr {
+  @include flex(flex-start, center);
+  gap: $day_margin;
+  flex-wrap: wrap;
+  max-width: $calendar_width;
+  padding: $cdr_padding;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $grey-color;
+    border: 1px solid black;
+    text-align: center;
+    line-height: $day-size;
+    font-family: $fontFamily;
+    font-size: $text-normal;
+    transition: all 0.5s;
+
+    @for $i from 1 through $month-length {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    @for $i from $month-length through 31 {
+      &--month-length:nth-child(#{$i + 1}) {
+        display: none;
+      }
+    }
+
+    @each $name, $marginLeft in $week-days {
+      @if ($name == $start-day) {
+        &--start-day {
+          margin-left: $marginLeft;
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink-color;
+      transform: translateY(-20px);
+    }
+  }
+}
