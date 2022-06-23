@@ -1,0 +1,64 @@
+$square-size: 100px;
+$interval-size: 1px;
+
+@for $dayNumber from 1 through 31 {
+  .calendar__square--#{$dayNumber}::before {
+    content: "#{$dayNumber}";
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: auto;
+  }
+}
+
+@for $amountOfDays from 28 through 31 {
+  .calendar--amountOfDays--#{$amountOfDays} 
+  :nth-last-child(-n + #{31 - $amountOfDays}) {
+    display: none;
+  }
+}
+
+@function cellShift($count) {
+  @return $count * ($square-size + $interval-size);
+}
+
+$days:
+  "mon" cellShift(0),
+  "tue" cellShift(1),
+  "wed" cellShift(2),
+  "thu" cellShift(3),
+  "fri" cellShift(4),
+  "sat" cellShift(5),
+  "sun" cellShift(6);
+
+@each $firstDay, $cellShift in $days {
+  .calendar--firstDay--#{$firstDay} :first-child {
+    margin-left: #{$cellShift};
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: 1px;
+  width: 7 * $square-size + 6 * $interval-size;
+  height: 5 * $square-size + 4 * $interval-size;
+
+}
+
+.calendar__square {
+  width: $square-size;
+  height: $square-size;
+  position: relative;
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+  cursor: pointer;
+}
+
+.calendar__square:hover {
+  background-color: pink;
+  bottom: 20px;
+  transition-duration: 0.5s;
+}
