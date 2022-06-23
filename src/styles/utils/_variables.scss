@@ -7,19 +7,15 @@ $day-size: 100px;
 $day_margin: 1px;
 
 $fontFamily: ("Arial", sans-serif);
-$text-normal: 30px;
+$text-normal: $day-size * 0.3;
 
 $cdr_padding: 10px;
-$calendar_width: 7 * $day-size + 6 * $day_margin + 2 * $cdr_padding;
+$cdr_width: 7 * $day-size + 6 * $day_margin + 2 * $cdr_padding;
 
-$week-days: "mon" 0, "tue" getShift($day-size, $day_margin, 1),
+$week-days: "mon" getShift($day-size, $day_margin, 0),
+  "tue" getShift($day-size, $day_margin, 1),
   "wed" getShift($day-size, $day_margin, 2),
   "thu" getShift($day-size, $day_margin, 3),
   "fri" getShift($day-size, $day_margin, 4),
   "sat" getShift($day-size, $day_margin, 5),
   "sun" getShift($day-size, $day_margin, 6);
-
-$start-day: "sun";
-
-// month Lengths: 28, 29, 30, 31;
-$month-length: 29;
