@@ -17,15 +17,15 @@
     }
 
     // start-day
-    @each $start-day, $marginLeft in $week-days {
-      &--#{$start-day} > :first-child {
+    @each $day, $marginLeft in $week-days {
+      &--start-day-#{$day} > :first-child {
         margin-left: $marginLeft;
       }
     }
 
     // month-length
-    @for $month-length from 28 through 31 {
-      &--#{$month-length} > :nth-child(n + #{$month-length + 1}) {
+    @for $i from 28 through 31 {
+      &--month-length-#{$i} > :nth-child(n + #{$i + 1}) {
         display: none;
       }
     }
