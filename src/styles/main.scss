@@ -1,3 +1,90 @@
 body {
   margin: 0;
 }
+
+$cell-size: 100px;  /*size cell of calendar*/
+$col-count: 7;
+$content-size: 30px; /*size number of date*/
+$min-days-in-month: 28;
+$max-days-in-month: 31;
+$gap: 1px;
+
+@function getShift($size, $index) {
+  @return $size * ($index - 1);
+}
+
+@function getShift-date($size_block, $size_content) {
+  @return ($size_block - $size_content) / 2;
+}
+
+@function widthCalendar($size_block, $size, $index) {
+  @return $size_block * $index + $size * ($index - 1);
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  position: relative;
+  width: widthCalendar($cell-size, $gap, $col-count);
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  
+  @for $day from 1 through $max-days-in-month {
+    &--#{$day} :nth-child(-n+#{$day}) {
+      background-color: #eee;
+      box-sizing: border-box;
+      @include square($cell-size);
+      border: 1px solid #000;
+    }
+  }
+
+  $start-days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+  @each $name, $item in $start-days {
+    &--#{$name} :nth-child(1) {
+      margin-left: getShift($cell-size, $item);
+    }
+  }
+   
+  &__day {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    top: getShift-date($cell-size, $content-size);
+    align-items: center;
+  }
+    
+  @for $day from 1 through $max-days-in-month {
+    &__day:nth-child(#{$day})::before {
+      content: "#{$day}";
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+
+  @for $day from 1 through $max-days-in-month {
+    &--#{$day} :nth-child(-n+#{$day}):hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+  }
+
+  @for $day from $min-days-in-month through $max-days-in-month {
+    &--#{$day} :nth-last-child(-n + #{$max-days-in-month - $day}) {
+      display: none;
+    }
+  }
+}
