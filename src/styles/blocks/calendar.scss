@@ -2,11 +2,28 @@ $square-size: 100px;
 $interval-size: 1px;
 
 @for $dayNumber from 1 through 31 {
-  .calendar__square--#{$dayNumber}::before {
+  .calendar__square-#{$dayNumber}::before {
     content: "#{$dayNumber}";
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     margin: auto;
+  }
+
+  .calendar__square-#{$dayNumber} {
+    width: $square-size;
+    height: $square-size;
+    position: relative;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    cursor: pointer;
+  }
+
+  .calendar__square-#{$dayNumber}:hover {
+    background-color: pink;
+    transition-duration: 0.5s;
+    transform: translate(0, -20px);
   }
 }
 
@@ -44,21 +61,4 @@ $days:
   width: 7 * $square-size + 6 * $interval-size;
   height: 5 * $square-size + 4 * $interval-size;
 
-}
-
-.calendar__square {
-  width: $square-size;
-  height: $square-size;
-  position: relative;
-  background-color: #eee;
-  border: 1px solid black;
-  box-sizing: border-box;
-  display: flex;
-  cursor: pointer;
-}
-
-.calendar__square:hover {
-  background-color: pink;
-  bottom: 20px;
-  transition-duration: 0.5s;
 }
