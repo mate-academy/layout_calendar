@@ -1,3 +1,71 @@
+$days:31;
+$calendar-gap: 1px;
+$day-size: 100px;
+$font: arial, helvetica, sans-serif;
+$font-size: 30px;
+@function Shift($count) {
+  @return $count * ($day-size + $calendar-gap);
+}
+
 body {
   margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: 706px;
+
+  $day-off:
+    "mon" Shift(0),
+    "tue" Shift(1),
+    "wed" Shift(2),
+    "thu" Shift(3),
+    "fri" Shift(4),
+    "sat" Shift(5),
+    "sun" Shift(6);
+
+  @each $start,$marg in $day-off {
+    &--start-day--#{$start} :first-child {
+      margin-left: #{$marg};
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    font-family: $font;
+    font-size: $font-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: 0.5s;
+
+    
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through $days {
+      &:nth-child(#{$index})::before {
+        position: absolute;
+        content: "#{$index}";
+      
+      }
+    }
+  }
 }
