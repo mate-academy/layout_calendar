@@ -1,0 +1,39 @@
+$padding: 10px;
+$cell-size: 100px;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 706px;
+  padding: $padding;
+  gap: 1px;
+
+  @for $month-lenght from 1 through 31 {
+    &__start-day:nth-child(#{$month-lenght}) {
+      display: flex;
+      box-sizing: border-box;
+      @include square($cell-size);
+
+      background-color: #eee;
+      border: 1px black solid;
+    }
+  
+    &__start-day:nth-child(#{$month-lenght})::before {
+      display: flex;
+      margin: auto;
+      content: "#{$month-lenght}";
+    }
+
+    &__start-day:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+      transition: 0.5s;
+    }
+  }
+
+  &__start-day:first-child {
+    margin-left: 606px;
+  }
+}
