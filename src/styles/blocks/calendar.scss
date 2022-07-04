@@ -31,7 +31,7 @@
     }
   }
 
-  @each $day-of-week in 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun' {
+  @each $day-of-week in mon, tue, wed, thu, fri, sat, sun {
     &--start-day--#{$day-of-week} {
       margin: 0;
     }
@@ -42,10 +42,12 @@
     @include day-square;
     background-color: #eee;
     border: 1px solid black;
+    transition: color 0.5s, transform 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
+      transform: translate(0, -20px);
     }
   }
 }
