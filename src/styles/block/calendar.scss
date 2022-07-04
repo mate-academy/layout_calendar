@@ -1,0 +1,50 @@
+.calendar {
+  &__date {
+    transition: 0.5s;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $date from 1 through 31 {
+    &__date {
+      @include square($square-size);
+      @extend %date-number;
+  
+      &--number--#{$date} {
+        &::before {
+          content: '#{$date}';
+        }
+      }
+  
+      text-align: center;
+      line-height: $square-size;
+    }
+  }
+  
+  @for $day from 28 through 30 {
+    @for $n from 1 through 31 - $day {
+        &--month-legth--#{$day} &__date:nth-child(#{$n + $day}){
+          display: none;
+        }
+    }
+  }
+
+  $days-of-week:
+  'mon' 7,
+  'tue' 6,
+  'wed' 5,
+  'thu' 4,
+  'fri' 3,
+  'sat' 2,
+  'sun' 1;
+
+  @each $day, $value in $days-of-week {
+    &--start-day--#{$day} &__date:first-child {
+        margin-left: $calendar-width - $square-size * $value - $gap-distance * ($value - 1);
+    }
+  }
+}
