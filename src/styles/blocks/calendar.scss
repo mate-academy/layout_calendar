@@ -24,16 +24,18 @@
   }
 
   @for $i from 28 through 31 {
-    & :nth-child(n + #{$i}) {
-      &--month-length--#{$i} {
-        margin: 0;
+    &--month-length--#{$i} {
+      & :nth-child(n + #{$i + 1}) {
+        display: none;
       }
     }
   }
 
-  @each $day-of-week in mon, tue, wed, thu, fri, sat, sun {
-    &--start-day--#{$day-of-week} {
-      margin: 0;
+  @each $name, $day-position-in-row in $days-of-week {
+    &--start-day--#{$name} {
+      & :first-child {
+        margin-left: ($day-widht-and-hight + 1) * $day-position-in-row;
+      }
     }
   }
 
