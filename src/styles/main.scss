@@ -1,4 +1,4 @@
-$days:31;
+
 $calendar-gap: 1px;
 $day-size: 100px;
 $font: arial, helvetica, sans-serif;
@@ -24,6 +24,35 @@ body {
   gap: $calendar-gap;
   width: 706px;
 
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    font-family: $font;
+    font-size: $font-size;
+    border: 1px solid #000;
+    background-color: #eee;
+
+    
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      
+      }
+    }
+  }
+
   $day-off:
     "mon" Shift(0),
     "tue" Shift(1),
@@ -39,32 +68,10 @@ body {
     }
   }
 
-  &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    box-sizing: border-box;
-    width: $day-size;
-    height: $day-size;
-    font-family: $font;
-    font-size: $font-size;
-    border: 1px solid #000;
-    background-color: #eee;
-    transition: 0.5s;
-
-    
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
-    @for $index from 1 through $days {
-      &:nth-child(#{$index})::before {
-        position: absolute;
-        content: "#{$index}";
-      
+  @for $num from 28 through 31 {
+    &--month-lenght--#{$num} {
+      & > :nth-child(n + #{$num + 1}) {
+        display: none;
       }
     }
   }
