@@ -1,0 +1,61 @@
+
+@import "../utils/_mixins.scss";
+@import "../utils/_variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $cell-gap;
+  padding: 30px 10px 10px;
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      :nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+  
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    padding: $cell-padding;
+    background-color: #eee;
+    border: 1px solid black;
+    @include square($cell-size)
+
+      &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+      cursor: pointer;
+    }
+  
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        $start-day: $start-day + $i;
+        content: "#{$start-day}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    $week:
+      "mon" 0,
+      "tue" $cell-with-gap,
+      "wed" $cell-with-gap * 2,
+      "thu" $cell-with-gap * 3,
+      "fri" $cell-with-gap * 4,
+      "sat" $cell-with-gap * 5,
+      "sun" $cell-with-gap * 6;
+ 
+    @each $day, $shift in $week {
+      &--start--#{$day} {
+        margin-left: $shift;
+      }
+    }
+  }
+}
