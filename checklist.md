@@ -67,8 +67,8 @@ BAD example:
 }
 ```
 
-10. [FUNCTIONALITY] - Your project should work correctly (have 31 days and start
-on Monday) with invalid modifier values, like `start-day--ghy` or `days--27`.
+10. [FUNCTIONALITY] - Your project should work correctly (have 31 calendar__cells and start
+on Moncalendar__cell) with invalid modifier values, like `start-calendar__cell--ghy` or `calendar__cells--27`.
 11. [STYLES] - Don't be greedy, add some top paddings, so the top row don't go over
 top of the page on hover.
 12. [CODE STYLE] - Remember about styles properties order - ([css order](https://codeguide.academy/html-css.html#css-order))
