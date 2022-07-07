@@ -31,6 +31,7 @@ $calendar-width:7 * $day-size+ 6 * $shift;
     height: #{$day-size};
     width: #{$day-size};
     border: 1px solid black;
+    transition: color 500ms transform 500ms;
 
     &::before {
       font-family: Arial, Helvetica, sans-serif;
@@ -39,6 +40,7 @@ $calendar-width:7 * $day-size+ 6 * $shift;
       display: flex;
       justify-content: center;
     }
+    
     @for $days-number from 1 through 31 {
       &:nth-child(#{$days-number}):before {
         content: "#{$days-number}";
@@ -62,7 +64,6 @@ $calendar-width:7 * $day-size+ 6 * $shift;
     &:hover {
       cursor: pointer;
       background-color: pink;
-      transition-duration: 500ms;
       transform: translateY(-20px);
     }
   }
