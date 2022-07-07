@@ -20,15 +20,21 @@ $last-month-day: 28, 29, 30, 31;
 $blocks-size: 100px;
 $gap-size: 1px;
 
-.container {
+.calendar {
   display: flex;
   flex-wrap: wrap;
   width: 706px;
   margin: auto;
   gap: $gap-size;
 
+  // @each $name, $index in $start-days {
+  //   &--start-day-#{$name} &__block {
+  //     margin-left: ($index * $blocks-size) + ($index * $gap-size);
+  //   }
+  // }
+
   @each $number in $last-month-day {
-    &.month-length--#{$number} .container__block {
+    &--month-length-#{$number} &__block {
       &:nth-child(n + #{$number + 1}) {
         display: none;
       }
@@ -54,7 +60,7 @@ $gap-size: 1px;
     }
 
     @each $name, $index in $start-days {
-      &.start-day--#{$name} {
+      &--start-day-#{$name} {
         margin-left: ($index * $blocks-size) + ($index * $gap-size);
       }
     }
