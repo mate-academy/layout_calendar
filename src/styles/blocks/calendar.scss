@@ -1,31 +1,33 @@
-$padding: 10px;
+// #region variables
 $cell-size: 100px;
+$cell-gap: 1px;
+$padding: 10px;
+$max-width: $cell-size * 7 + $cell-gap * 6 + $padding * 2; 
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+// #endregion
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-
-  max-width: 706px;
+  max-width: $max-width;
   padding: $padding;
-  gap: 1px;
+  gap: $cell-gap;
 
-  @for $month-lenght from 1 through 31 {
-    &__start-day:nth-child(#{$month-lenght}) {
-      display: flex;
-      box-sizing: border-box;
-      @include square($cell-size);
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    @include square($cell-size);
+    background-color: #eee;
+    border: 1px black solid;
 
-      background-color: #eee;
-      border: 1px black solid;
-    }
-  
-    &__start-day:nth-child(#{$month-lenght})::before {
-      display: flex;
-      margin: auto;
-      content: "#{$month-lenght}";
-    }
-
-    &__start-day:hover {
+    &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
@@ -33,7 +35,26 @@ $cell-size: 100px;
     }
   }
 
-  &__start-day:first-child {
-    margin-left: 606px;
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      display: flex;
+      margin: auto;
+      content: "#{$index}";
+    }
+  }
+
+  @each $name-day, $number-day in $days {
+    &__start-day--#{$name-day}
+    &__day:first-child {
+      margin-left: 
+        ($cell-size * $number-day) + ($cell-gap * $number-day);
+    }
+  }
+
+  @for $month-length from 28 to 31 {
+    &__month-length--#{$month-length}
+    &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
   }
 }
