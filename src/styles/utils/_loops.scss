@@ -1,0 +1,28 @@
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+$day-off:
+  "mon" Shift(0),
+  "tue" Shift(1),
+  "wed" Shift(2),
+  "thu" Shift(3),
+  "fri" Shift(4),
+  "sat" Shift(5),
+  "sun" Shift(6);
+
+@each $start,$marg in $day-off {
+  .calendar--start-day--#{$start} :first-child {
+    margin-left: #{$marg};
+  }
+}
+
+@for $num from 28 through 31 {
+  .calendar--month-lenght--#{$num} {
+    & > :nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
+}

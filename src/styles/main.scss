@@ -1,11 +1,6 @@
-
-$calendar-gap: 1px;
-$day-size: 100px;
-$font: arial, helvetica, sans-serif;
-$font-size: 30px;
-@function Shift($count) {
-  @return $count * ($day-size + $calendar-gap);
-}
+@import "./utils/function";
+@import "./utils/variables";
+@import "./utils/loops";
 
 body {
   margin: 0;
@@ -37,42 +32,11 @@ body {
     border: 1px solid #000;
     background-color: #eee;
 
-    
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
       transition: 0.5s;
-    }
-
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-      
-      }
-    }
-  }
-
-  $day-off:
-    "mon" Shift(0),
-    "tue" Shift(1),
-    "wed" Shift(2),
-    "thu" Shift(3),
-    "fri" Shift(4),
-    "sat" Shift(5),
-    "sun" Shift(6);
-
-  @each $start,$marg in $day-off {
-    &--start-day--#{$start} :first-child {
-      margin-left: #{$marg};
-    }
-  }
-
-  @for $num from 28 through 31 {
-    &--month-lenght--#{$num} {
-      & > :nth-child(n + #{$num + 1}) {
-        display: none;
-      }
     }
   }
 }
