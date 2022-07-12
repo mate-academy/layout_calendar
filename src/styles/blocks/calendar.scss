@@ -1,4 +1,3 @@
-
 .calendar {
   display: flex;
   padding: 50px;
@@ -29,16 +28,17 @@
     &:first-of-type {
       margin-left: 0;
     }
-  }
-  @for $day from 1 through 31 {
-    &__day--#{$day}::before {
-      content: "#{$day}";
-      margin: auto;
+  
+    @for $day from 1 through 31 {
+      &--#{$day}::before {
+        content: "#{$day}";
+        margin: auto;
+      }
     }
   }
 
   @for $days from 28 through 31 {
-    &--month-length-#{$days} > &_day:nth-child(n + #{$days+1}) {
+    &--month-length-#{$days} > &__day:nth-child(n + #{$days+1}) {
       display: none;
     }
   }
