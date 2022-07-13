@@ -1,0 +1,19 @@
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+    margin: auto;
+  }
+}
+
+@for $month-length from 28 to 31 {
+  .calendar--month-length-#{$month-length} 
+  :nth-child(n + #{$month-length + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $value in $days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: $value;
+  }
+}
