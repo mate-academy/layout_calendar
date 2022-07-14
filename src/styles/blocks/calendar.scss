@@ -50,9 +50,9 @@
   $y: $startYear - $year + 1;
 
   @for $m from 1 through 12 {
-    // $startDayIndex: startDayOfWeek($m, $y);
-    // $daysInMonth: daysInMonth($m, $y);
-    // $currentDate: 1;
+    $startDayIndex: startDayOfWeek($m, $year);
+    $daysInMonth: daysInMonth($m, $year);
+    $currentDate: 1;
     $isStarted: false;
     $isFinished: false;
 
@@ -60,23 +60,24 @@
       $opacity: 0;
       $content: "";
 
-      // @if not $isStarted and not $isFinished and $i >= $startDayIndex {
-      //   $isStarted: true;
-      // }
+      @if not $isStarted and not $isFinished and $i == $startDayIndex {
+        $isStarted: true;
+      }
 
-      // @if $isStarted and not $isFinished {
-      //   $opacity: 1;
-      //   $content: "#{$currentDate}";
-      //   $currentDate: $currentDate + 1;
+      @if $isStarted and not $isFinished {
+        $opacity: 1;
+        $content: "#{$currentDate}";
 
-      //   @if $currentDate > $daysInMonth {
-      //     $isFinished: true;
-      //   }
-      // }
+        $currentDate: $currentDate + 1;
 
-      .calendar__set-month:nth-child(#{$m}):checked +
-      .calendar__set-year:nth-child(#{$y}):checked +
-      .calendar__grid .calendar__day:nth-child(#{$i}) {
+        @if $currentDate > $daysInMonth {
+          $isFinished: true;
+        }
+      }
+
+      .calendar__set-month:nth-of-type(#{$m}):checked ~
+      .calendar__set-year:nth-of-type(#{12 + $y}):checked ~
+      .calendar__grid > .calendar__day:nth-child(#{$i}) {
         opacity: $opacity;
 
         &::after {
@@ -87,4 +88,3 @@
 
   }
 }
-
