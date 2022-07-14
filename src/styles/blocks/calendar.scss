@@ -11,11 +11,12 @@
 .calendar__set-month,
 .calendar__set-year {
   display: none;
-}
 
-.calendar__set-month:checked + .calendar__set-label,
-.calendar__set-year:checked + .calendar__set-label {
-  font-weight: bold;
+  &:checked + .calendar__set-label {
+    font-weight: bold;
+    color: red;
+  }
+
 }
 
 .calendar__grid {
@@ -37,14 +38,27 @@
   background-color: #eee;
   border: 1px solid #000;
   opacity: 0;
+  visibility: hidden;
+
+  cursor: pointer;
+
+  transition: background-color 0.5s, transform 0.5s, opacity 0.5s;
+
+  &::after {
+    content: "";
+
+    font-size: 30px;
+    line-height: 98px;
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
 }
 
-.calendar__day:after {
-  content: "";
-
-  font-size: 30px;
-  line-height: 98px;
-}
+// Calendar grid generator for all month and years
 
 @for $year from $startYear through $endYear {
   $y: $year - $startYear + 1;
@@ -58,6 +72,7 @@
 
     @for $i from 1 through 42 {
       $opacity: 0;
+      $visibility: hidden;
       $content: "";
 
       @if not $isStarted and not $isFinished and $i == $startDayIndex {
@@ -66,6 +81,7 @@
 
       @if $isStarted and not $isFinished {
         $opacity: 1;
+        $visibility: visible;
         $content: "#{$currentDate}";
 
         $currentDate: $currentDate + 1;
@@ -79,6 +95,7 @@
       .calendar__set-year:nth-of-type(#{12 + $y}):checked ~
       .calendar__grid > .calendar__day:nth-child(#{$i}) {
         opacity: $opacity;
+        visibility: $visibility;
 
         &::after {
           content: $content;
