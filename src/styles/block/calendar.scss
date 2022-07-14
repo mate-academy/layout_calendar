@@ -1,0 +1,58 @@
+.calendar {
+  width: calendarWidth($square-size, $space-between-blocks, $week);
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: $space-between-blocks;
+
+  @for $style-square from 1 through 31 {
+    .day {
+      content: "";
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include square ($square-size);
+      box-sizing: border-box;
+      background-color: #eee;
+      border: 1px solid #000;
+
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
+  }
+
+  @for $number-day from 1 through 31 {
+    & :nth-child(#{$number-day})::before {
+      position: absolute;
+      content: "#{$number-day}";
+      font-family: "Arial", sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  $days-of-week:
+    "mon" 0,
+    "tue" 101px,
+    "wed" 202px,
+    "thu" 303px,
+    "fri" 404px,
+    "sat" 505px,
+    "sun" 606px;
+
+  @each $name, $position-in-week in $days-of-week {
+    &--start-day-#{$name} :first-child {
+      margin-left: $position-in-week;
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} :not(:nth-child(-n + #{$month-length})) {
+      display: none;
+    }
+  }
+}
