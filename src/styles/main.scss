@@ -1,3 +1,73 @@
+$days-count: 31;
+$square-side: 100px;
+$square-gap: 1px;
+$calendar-width: 7 * $square-side + $square-gap * 6;
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $day-number in $days {
+  .calendar__start-day--#{$day} {
+    .calendar__days:first-child {
+      margin-left: ($square-side + $square-gap) * $day-number;
+    }
+  }
+}
+
+@mixin square($size) {
+  box-sizing: border-box;
+  width: $size;
+  height: $size;
+  border: 1px solid black;
+  background-color: #eee;
+}
+
+@for $calendar-size from 1 through $days-count {
+  .calendar__month-length--#{$calendar-size} {
+    .calendar__days:nth-child(-n + #{$calendar-size}) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  margin: 100px 250px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $square-gap;
+  padding: 10px;
+  width: $calendar-width;
+
+  @for $number-days from 1 through $days-count {
+    &__days:nth-child(n + #{$number-days}):before {
+      content: "#{$number-days}";
+      font-size: 30px;
+    }
+  }
+
+  &__days {
+    @include square($square-side);
+    display: none;
+    transition: background-color 0.5s,
+      transform 0.5s,
+      translate 0.5s,
+      transform 0.5s;
+  }
+
+  &__days:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translate(0, -20px);
+  }
 }
