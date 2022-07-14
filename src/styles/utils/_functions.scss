@@ -26,18 +26,23 @@
 
 // Found position of first day of week
 
-@function startDayOfWeek($month, $year) {
+@function firstDayOfWeekInMonth($curMonth, $curYear) {
   $dayOfWeek: $startDayOfWeek;
 
-  @for $y from $startYear through $year {
-    $lastMonth: if($y == $year, $month, 12);
+  @for $year from $startYear through $curYear {
+    $lastMonth: if($startYear == $curYear, $curMonth, 12);
 
-    @for $m from 1 through $lastMonth {
-      $days: daysInMonth($m, $y);
+    @for $month from 1 through 12 {
 
-      @for $d from 1 through $days {
-        $nextDay: $dayOfWeek + 1;
-        $dayOfWeek: if($nextDay <= 7, $nextDay, 1);
+    @if $startYear == $curYear and $month == $curMonth {
+      @return $dayOfWeek;
+    }
+
+      $days: daysInMonth($month, $year);
+
+      @for $day from 1 through $days {
+        $dayOfWeek: $dayOfWeek + 1;
+        $dayOfWeek: if($dayOfWeek <= 7, $dayOfWeek, 1);
       }
     }
   }

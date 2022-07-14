@@ -47,11 +47,11 @@
 }
 
 @for $year from $startYear through $endYear {
-  $y: $startYear - $year + 1;
+  $y: $year - $startYear + 1;
 
-  @for $m from 1 through 12 {
-    $startDayIndex: startDayOfWeek($m, $year);
-    $daysInMonth: daysInMonth($m, $year);
+  @for $month from 1 through 12 {
+    $startDayIndex: firstDayOfWeekInMonth($month, $year);
+    $daysInMonth: daysInMonth($month, $year);
     $currentDate: 1;
     $isStarted: false;
     $isFinished: false;
@@ -75,7 +75,7 @@
         }
       }
 
-      .calendar__set-month:nth-of-type(#{$m}):checked ~
+      .calendar__set-month:nth-of-type(#{$month}):checked ~
       .calendar__set-year:nth-of-type(#{12 + $y}):checked ~
       .calendar__grid > .calendar__day:nth-child(#{$i}) {
         opacity: $opacity;
