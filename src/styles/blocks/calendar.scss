@@ -1,0 +1,90 @@
+.calendar {
+  text-align: center;
+}
+
+.calendar__set-label {
+  padding-right: 10px;
+
+  cursor: pointer;
+}
+
+.calendar__set-month,
+.calendar__set-year {
+  display: none;
+}
+
+.calendar__set-month:checked + .calendar__set-label,
+.calendar__set-year:checked + .calendar__set-label {
+  font-weight: bold;
+}
+
+.calendar__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  margin: 0 auto;
+  padding: 30px 10px 10px;
+
+  width: 706px;
+}
+
+.calendar__day {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+
+  background-color: #eee;
+  border: 1px solid #000;
+  opacity: 0;
+}
+
+.calendar__day:after {
+  content: "";
+
+  font-size: 30px;
+  line-height: 98px;
+}
+
+@for $year from $startYear through $endYear {
+  $y: $startYear - $year + 1;
+
+  @for $m from 1 through 12 {
+    // $startDayIndex: startDayOfWeek($m, $y);
+    // $daysInMonth: daysInMonth($m, $y);
+    // $currentDate: 1;
+    $isStarted: false;
+    $isFinished: false;
+
+    @for $i from 1 through 42 {
+      $opacity: 0;
+      $content: "";
+
+      // @if not $isStarted and not $isFinished and $i >= $startDayIndex {
+      //   $isStarted: true;
+      // }
+
+      // @if $isStarted and not $isFinished {
+      //   $opacity: 1;
+      //   $content: "#{$currentDate}";
+      //   $currentDate: $currentDate + 1;
+
+      //   @if $currentDate > $daysInMonth {
+      //     $isFinished: true;
+      //   }
+      // }
+
+      .calendar__set-month:nth-child(#{$m}):checked +
+      .calendar__set-year:nth-child(#{$y}):checked +
+      .calendar__grid .calendar__day:nth-child(#{$i}) {
+        opacity: $opacity;
+
+        &::after {
+          content: $content;
+        }
+      }
+    }
+
+  }
+}
+
