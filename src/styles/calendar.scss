@@ -13,12 +13,6 @@ section {
   flex-wrap: wrap;
   gap: $gap;
 
-  @for $month from 28 through 31 {
-    &--month-length--#{$month} :nth-child(n + #{$month + 1}) {
-      display: none;
-    }
-  }
-
   .calendar__day {
     display: flex;
     text-align: center;
@@ -60,5 +54,11 @@ section {
       background-color: pink;
       transform: translateY(-0.2 * $square-size);
     }
+  }
+}
+
+@for $month from 28 through 31 {
+  .calendar--month-length--#{$month} :nth-child(n + #{$month + 1}) {
+    display: none;
   }
 }
