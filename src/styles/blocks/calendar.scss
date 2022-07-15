@@ -24,13 +24,13 @@
 
     @for $i from 1 through 31 {
 
-      &:nth-child(#{$i}) {    //days counter
+      &:nth-child(#{$i}) {
 
-        &::before {    //day number on the calendar
+        &::before {
           content: "#{$i}";
         }
 
-        &:hover {    //hover for day
+        &:hover {
           cursor: pointer;
           background-color: pink;
           transform: translateY(-20px);
@@ -38,7 +38,7 @@
       }
     }
 
-    @each $name, $day in $week-days {    //week day search
+    @each $name, $day in $week-days {
       &--start-day_#{$name} {
         margin-left: $day;
       }
@@ -46,9 +46,9 @@
 
   }
 
-  @for $index from 28 through 31 {    //number of days per month
+  @for $index from 28 through 31 {
     &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
-      visibility: hidden;
+      display: none;
     }
   }
 }
