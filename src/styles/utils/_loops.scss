@@ -1,0 +1,25 @@
+$days:
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day, $gap in $days {
+  .calendar__day--#{$day} >
+  .calendar__day:first-child {
+    margin-left: #{$gap};
+  }
+}
+
+@for $count from 0 to 32 {
+  .calendar__length--#{$count} >
+  .calendar__day:nth-child(n+#{$count+1}) {
+    display: none;
+  }
+
+  .calendar__day:nth-child(#{$count})::after {
+    content: "#{$count}";
+  }
+}
