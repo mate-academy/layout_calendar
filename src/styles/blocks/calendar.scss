@@ -1,0 +1,46 @@
+@import "../utils/variables";
+@import "../utils/extends";
+@import "../utils/mixins";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 1px;
+  padding: 10px;
+  width: $calendar-day-width * 7 + $calendar-colums - 1;
+  height: $calendar-day-width * 6 + $calendar-colums - 1;
+
+  @each $day, $ident in $start-day {
+    &--start-day_#{$day} > &__day:first-child {
+      margin-left: $ident;
+    }
+  }
+
+  @for $count-of-days from 28 to 31 {
+    &--#{$count-of-days}-days 
+    > .calendar__day:nth-child(n + #{$count-of-days + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include square($calendar-day-width);
+    @extend %desing-calendar-day;
+    transition: 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        display: flex;
+        justify-content: center;
+        line-height: $calendar-day-width;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
