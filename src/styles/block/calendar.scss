@@ -12,18 +12,23 @@
     @extend %square-style;
     cursor: pointer;
     transition-duration: 0.5s;
-  }
 
-  @for $index from 1 through 31 {
-    &__day--#{$index}::before {
-      content: "#{$index}";
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
     }
-  }
 
-  @each $day, $colums-day in $days {
-    &__day--start-day_#{$day} {
-      margin-left: $colums-day;
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before{
+        content: "#{$index}";
+      }
     }
+
+    @each $day, $colums-day in $days {
+       &--start-day_#{$day} {
+         margin-left: $colums-day;
+       }
+     }
   }
 
   @for $month from 28 through 31 {
@@ -32,8 +37,4 @@
     }
   }
 
-  & > :hover {
-    background-color: pink;
-    transform: translateY(-20px);
-  }
 }
