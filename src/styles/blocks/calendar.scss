@@ -14,25 +14,26 @@
       transform: translateY(-10px);
       background-color: pink;
     }
-  }
-}
 
-@each $day, $gap in $days {
-  .calendar__day--#{$day} >
-  .calendar__day:first-child {
-    margin-left: #{$gap};
-  }
-}
+    @each $day, $gap in $days {
+      &--#{$day} >
+      &:first-child {
+        margin-left: #{$gap};
+      }
 
-@for $count from 28 to 32 {
-  .calendar__length--#{$count} >
-  .calendar__day:nth-child(n+#{$count+1}) {
-    display: none;
-  }
-}
+    @for $count from 0 to 32 {
+        &:nth-child(#{$count})::after {
+        content: "#{$count}";
+      }
+    }
 
-@for $count from 0 to 32 {
-  .calendar__day:nth-child(#{$count})::after {
-    content: "#{$count}";
+    }
+  }
+  
+  @for $count from 28 to 32 {
+    &__length--#{$count} >
+    &__day:nth-child(n+#{$count+1}) {
+      display: none;
+    }
   }
 }
