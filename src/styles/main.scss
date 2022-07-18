@@ -1,3 +1,67 @@
-body {
+@import "./-variables.scss";
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: calc(7 * #{$cell-size} + 16px);
+
+  $week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  &__cell {
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+
+    border: 1px solid black;
+    background-color: #eee;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $index from 1 through $max-day-count {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+    }
+  }
+  @each $cell, $number in $week {
+    &--start-cell_#{$cell} &__cell:first-child {
+      margin-left: ($cell-size + $calendar-gap) * $number;
+    }
+  }
+
+  @for $last-cell from $feb-day-count through $max-day-count {
+    &--month-length_#{$last-cell} &__cell:nth-child(n + #{$last-cell + 1}) {
+      display: none;
+    }
+  }
 }
