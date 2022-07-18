@@ -1,5 +1,6 @@
 .calendar {
-  width: 706px;
+  width: $size*7 + $padding*2 + $gap*6;
+  padding: 10px;
   display: flex;
   flex-flow: row wrap;
   gap: 1px;
@@ -7,11 +8,31 @@
   &__day {
     @extend %cell-style;
     transition: 0.5s;
+    cursor: pointer;
 
     &:hover {
       transform: translateY(-10px);
-      cursor: pointer;
       background-color: pink;
     }
+  }
+}
+
+@each $day, $gap in $days {
+  .calendar__day--#{$day} >
+  .calendar__day:first-child {
+    margin-left: #{$gap};
+  }
+}
+
+@for $count from 28 to 32 {
+  .calendar__length--#{$count} >
+  .calendar__day:nth-child(n+#{$count+1}) {
+    display: none;
+  }
+}
+
+@for $count from 0 to 32 {
+  .calendar__day:nth-child(#{$count})::after {
+    content: "#{$count}";
   }
 }
