@@ -1,0 +1,98 @@
+@import "../utils/variabless";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 0 auto;
+  max-width: $width;
+  padding: $padding-size;
+
+  border-radius: 10px;
+  box-shadow: 0 0 15px 7px #b1b343;
+
+  &__days-title {
+    display: flex;
+    justify-content: space-around;
+    gap: 1px;
+  }
+
+  &__day-title {
+    width: $day-size;
+    margin-bottom: 24px;
+
+    color: $bg-color;
+    background-color: $main-color;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__days {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+
+  &__day {
+    display: none;
+    position: relative;
+    width: $day-size;
+    height: $day-size;
+
+    font-size: 36px;
+    background-color: $bg-color;
+    border: 1px solid $main-color;
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition: transform 0.1s linear,
+      border-radius 0.2s ease-in-out,
+      box-shadow 0.3s ease-in-out;
+
+    @for $index from 1 through $month-length {
+      &:nth-child(#{$index}) {
+        display: block;
+
+        &::after {
+          position: absolute;
+          width: $day-size;
+          line-height: $day-size;
+
+          content: "#{$index}";
+          text-align: center;
+        }
+      }
+    }
+
+    &::before {
+      position: absolute;
+      bottom: $day-size * 0.2;
+      width: $day-size;
+
+      content: "";
+      text-align: center;
+      font-size: 16px;
+    }
+
+    &:hover {
+      transform: scale(1.25);
+      z-index: 2;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 5px #b1b343;
+
+      &::before {
+        content: "#{$month-name}";
+      }
+
+      &::after {
+        line-height: $day-size - $day-size * 0.2;
+      }
+    }
+
+    @each $name, $position in $start-position {
+      &--first-day--#{$name} {
+        margin-left: $position;
+      }
+    }
+  }
+}
