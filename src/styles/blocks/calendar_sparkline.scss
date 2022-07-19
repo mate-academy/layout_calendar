@@ -1,0 +1,20 @@
+.sparkline {
+  @extend %flex-view--center;
+  gap: $gap-size;
+  padding: $padding;
+
+  &__day {
+    @extend %flex-view--center;
+    @extend %font;
+
+    @for $days from 1 through 7 {
+      &:nth-child(#{$days}) {
+        width: $cell-size;
+        height: 50px;
+        text-transform: uppercase;
+        background-color: #eee;
+        border: 1px solid #000;
+      }
+    }
+  }
+}
