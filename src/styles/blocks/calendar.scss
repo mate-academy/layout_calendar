@@ -1,0 +1,54 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  width: (6 * $gap) + (7 * $cell-size);
+  padding: 10px;
+  flex-wrap: wrap;
+
+  &__day {
+    @include size($cell-size);
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+      
+    @for $dayNumber from 1 through 31 {
+      &--number_#{$dayNumber}::before {
+        content: "#{$dayNumber}";
+      }
+    }
+  }
+
+  $days:
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $num in $days {
+    &--start-day_#{$day} &__day:first-child {
+      margin-left: $num * $gap + $num * $cell-size;
+    }
+  }
+  
+  @for $length from 28 through 31 {
+    $last: 31 - $length;
+    &--month-length_#{$length} &__day:nth-last-child(-n + #{$last}) {
+      visibility: hidden;
+    }
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+    cursor: pointer;
+  }
+}
