@@ -7,6 +7,8 @@ $days:
   "sat" 505px,
   "sun" 606px;
 
+$month-length: 29;
+
 * {
   box-sizing: border-box;
 }
@@ -44,18 +46,24 @@ body {
       transition-duration: 0.5s;
     }
 
-    @for $count from 1 through 29 {
+    @for $count from 1 through 31 {
       &:nth-child(#{$count})::before {
         content: "#{$count}";
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
     }
+
+    @for $month-length from 28 through 31 {
+      &-#{$month-length} ~ * {
+        display: none;
+      }
+    }
   }
 }
 
 @each $start-day, $day-1-gap in $days {
-  .start-day_#{$start-day} {
+  .calendar__day--start-day_#{$start-day} {
     margin-left: $day-1-gap;
   }
 }
