@@ -1,0 +1,11 @@
+@each $i in $month-length {
+  .calendar__length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::after {
+    content: "#{$i}";
+  }
+}
