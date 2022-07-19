@@ -1,0 +1,56 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 100px 10px;
+  margin: 0 auto;
+  width: 726px;
+  gap: 1px;
+
+  @for $count from 1 through 31 {
+    &__day-#{$count} {
+      $root: &;
+      @include size($size);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+
+      background-color: $main-color;
+      cursor: pointer;
+      border: 1px solid #000;
+
+      transition-duration: 0.5s;
+
+      &::before {
+        content: "#{$count}";
+      }
+
+      &:hover {
+        position: relative;
+        background-color: pink;
+
+        transform: translateY(-20px);
+      }
+    }
+  }
+
+  @for $antidays from 28 through 31 {
+    &--month-length--#{$antidays} {
+      @for $antiday from $antidays through 31 {
+        .calendar__day-#{$antiday + 1} {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @each $first-day, $which-day in $days {
+    .start-day_#{$first-day} {
+      margin-left: $which-day;
+    }
+  }
+}
