@@ -1,13 +1,18 @@
 .calendar {
-  height: 100vh;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 100vh;
+  }
 
   &__title {
     display: flex;
     justify-content: center;
 
-    padding-top: 25px;
-
-    font-size: 55px;
+    @extend %calendar-font;
     color: black;
     cursor: pointer;
 
@@ -16,16 +21,24 @@
     }
   }
 
+  &__second-title {
+    display: flex;
+    justify-content: center;
+
+    @extend %calendar-font;
+    font-size: 15px;
+  }
+
   &__content {
     display: flex;
     flex-wrap: wrap;
     gap: $day-gap;
 
-    max-width: $calendar-width;
+    width: $calendar-width;
 
-    padding: 25px $calendar-padding;
+    padding: 35px $calendar-padding;
 
-    margin: auto;
+    margin: 0 auto;
   }
 
   &__day {
@@ -44,7 +57,7 @@
     background-color: $day-color;
 
     cursor: pointer;
-    transition: background-color 0.5s, transform 0.5s;
+    transition: 0.5s;
 
     &:hover {
       box-shadow: 5px 5px gray;
@@ -62,7 +75,7 @@
 
   @each $day, $index in $days {
     &--start-day--#{$day} &__day:nth-child(1) {
-      margin-left: getFirstDayShift($index);
+      margin-left: getFirstDay($index);
     }
   }
 
