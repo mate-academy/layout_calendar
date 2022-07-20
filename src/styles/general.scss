@@ -1,12 +1,13 @@
-// @import 'mixin';
-// @import 'function';
-// @import 'variables';
-// @import 'styles';
+@import 'mixin';
+@import 'function';
+@import 'variables';
+@import 'placeholder';
 
-@use 'mixin' as *;
-@use 'function' as *;
-@use 'variables' as *;
-@use 'styles' as *;
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
 
 .calendar {
   width: $week-length * ($day-size + $gap);
@@ -24,12 +25,12 @@
     background-color: #eee;
     text-align: center;
     line-height: $day-size;
+    transition: 0.5s
   }
 
   &__day:hover {
     background-color: pink;
     transform: translate(0, -20px);
-    transition: 0.5s
   }
 
   @for $i from 1 through $month-days {
