@@ -1,0 +1,54 @@
+.calendar {
+  display: flex;
+  gap: $cell-gap;
+  flex-wrap: wrap;
+  width: $column-count * $cell-size + 
+    (($column-count - 1) * $cell-gap);
+  padding: 3 * $calendar-padding;
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} 
+    :nth-last-child(-n + #{$cell-count - $last-day}) {
+      display: none;
+    }
+  }
+
+  $start-day:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $count in $start-day {
+    &--start-day--#{$name} :first-child {
+      margin-left: ($cell-size + $cell-gap) * $count;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition: transform 0.5s, background-color 0.5s;
+    @extend %large-text;
+    @include square($cell-size);
+    background-color: #eee;
+    border: 1px solid #000;
+
+    @for $count from 1 through $cell-count {
+      &:nth-child(#{$count})::before {
+        content: "#{$count}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
