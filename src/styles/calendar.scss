@@ -14,15 +14,16 @@
 
     @include square($cell-size);
     @include font-style ($font-family, $font-size);
+    cursor: pointer;
     
     border: 1px solid black;
     border-radius: 5%;
     background-color: #eee;
 
-    transition: transform 0.3s, background-color 0.2s;
+    transition: transform 0.3s,
+      background-color 0.2s;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
       box-shadow: 4px 4px teal;
@@ -39,10 +40,13 @@
   }
 
   @each $day, $graf in $start-day {
-    &__start-day--#{$day} {
+    &__start-day_#{$day} {
       .calendar__day:first-child {
         margin-left: #{$graf};
       }
+
+      display: flex;
+      flex-wrap: wrap;
     }
   }
 
