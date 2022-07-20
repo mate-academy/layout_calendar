@@ -1,0 +1,62 @@
+@import 'mixin';
+@import 'function';
+@import 'variables';
+@import 'placeholder';
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  width: $week-length * ($day-size + $gap);
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    @include square($day-size);
+    @extend %style-text;
+    box-sizing: border-box;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: #eee;
+    text-align: center;
+    line-height: $day-size;
+    transition: 0.5s
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+
+  @for $i from 1 through $month-days {
+    &__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+  }
+
+  $start-day:
+  'mon' margin-left(0),
+  'tue' margin-left(1),
+  'wed' margin-left(2),
+  'thu' margin-left(3),
+  'fri' margin-left(4),
+  'sat' margin-left(5),
+  'sun' margin-left(6);
+
+  @each $start, $margin in $start-day {
+    &--start-day--#{$start} :first-child {
+      margin-left: #{$margin};
+    }
+  }
+
+  @for $j from 28 through 31 {
+    &--month-length--#{$j} :nth-last-child(-n + #{31 - $j}){
+     display: none;
+    }
+  }
+}
