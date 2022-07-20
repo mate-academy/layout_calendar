@@ -13,6 +13,12 @@
     }
   }
 
+  @each $day, $margin in $week-day {
+    &--start-day-#{$day} > :first-child {
+      margin-left: $margin;
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -22,26 +28,20 @@
     margin: 1px;
     background-color: #eee;
     transition: color 0.5s, transform 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: #000;
 
-    @each $day, $margin in $week-day {
-      &--start-day-#{$day} {
-        margin-left: $margin;
+    @for $count from 1 through 31 {
+      &:nth-child(n+#{$count})::before {
+        content: "#{$count}";
+        align-self: center;
       }
     }
-  }
 
-  @for $count from 1 through 31 {
-    &__day--#{$count}::before {
-      content: "#{$count}";
-      align-self: center;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
+    &:hover {
+      background-color: rgb(245, 206, 236);
+      transform: translateY(-20px);
     }
-  }
-
-  &__day:hover {
-    background-color: rgb(245, 206, 236);
-    transform: translateY(-20px);
   }
 }
