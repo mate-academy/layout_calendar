@@ -2,12 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   width: 7 * $square-size + 6;
-  gap: 1px;
+  gap: $gap-size;
   margin: auto;
 
   @for $index from 28 through 31 {
     &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
+    }
+  }
+
+  @each $day, $indent in $days {
+    &__start-day--#{$day} {
+      margin-left: #{$indent};
     }
   }
 
