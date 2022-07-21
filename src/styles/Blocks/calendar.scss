@@ -1,8 +1,8 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  gap: $dayGap;
   width: $calendarWidth;
-  height: $calendarHeight;
   padding: $calendarPadding;
   margin: auto;
 
@@ -10,7 +10,6 @@
 
     display: flex;
     justify-content: center;
-    gap: $dayGap;
     align-items: center;
     background-color: #eee;
     border: 1px solid black;
@@ -26,6 +25,12 @@
       }
     }
 
+    @each $name, $day in $week-days {
+      &--start-day_#{$name} {
+        margin-left: $day;
+      }
+    }
+
     &:hover {
       cursor: pointer;
       background-color: pink;
@@ -33,13 +38,7 @@
     }
 
     &--start-day {
-      margin-left: $dayWidth * 6;
-    }
-  }
-
-  @each $name, $day in $week-days {
-    &--start-day_#{$name} {
-      margin-left: $day;
+      margin-left: $dayWidth * 6 + $dayGap*5;
     }
   }
 
