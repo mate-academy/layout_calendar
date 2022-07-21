@@ -1,0 +1,48 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $gap;
+  padding: $padding;
+
+  width: $width*7 + $padding*2 + $gap*6;
+
+  &__day {
+    @extend %day__style;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition-duration: 250ms;
+
+    &:hover {
+      transform: translate(10px,-5px);
+      background-color: pink;
+    }
+
+      @for $num from 0 to 32 {
+        &:nth-child(#{$num})::after {
+        content: "#{$num}";
+        }
+      }
+
+        @each $day, $spaces in $days {
+          &--#{$day} >
+          &:first-child {
+            margin-left: #{$spaces};
+          }
+        }
+
+  }
+
+  @for $day from 28 to 32 {
+    &__length--#{$day} >
+      &__day:nth-child(n+#{$day+1}){
+        display: none;
+      }
+  }
+}
+
+
+
