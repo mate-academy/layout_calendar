@@ -1,0 +1,31 @@
+.calendar {
+  display: flex;
+  margin: auto;
+  width: $day-size * 7 + $day-gap * 6;
+  flex-wrap: wrap;
+  gap: $day-gap;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid #000;
+    background: #eee;
+    cursor: pointer;
+    display: flex;
+    transition: 300ms;
+
+    &:hover {
+      transform: translateY(-20px);
+      background: #ffbfcb;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        margin: auto;
+        font-size: 30px;
+        font-family: Arial, sans-serif;
+      }
+    }
+  }
+}
