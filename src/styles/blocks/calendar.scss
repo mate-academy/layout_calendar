@@ -4,13 +4,14 @@
 
   padding: 100px 10px;
   margin: 0 auto;
-  width: 726px;
+  width: calc(100px * 8);
   gap: 1px;
 
   @for $count from 1 through 31 {
-    &__day-#{$count} {
+    &__day:nth-child(#{$count}) {
       $root: &;
       @include size($size);
+      position: relative;
 
       display: flex;
       align-items: center;
@@ -23,6 +24,7 @@
       cursor: pointer;
       border: 1px solid #000;
 
+      transition-property: transform;
       transition-duration: 0.5s;
 
       &::before {
@@ -30,7 +32,6 @@
       }
 
       &:hover {
-        position: relative;
         background-color: pink;
 
         transform: translateY(-20px);
@@ -41,7 +42,7 @@
   @for $antidays from 28 through 31 {
     &--month-length--#{$antidays} {
       @for $antiday from $antidays through 31 {
-        .calendar__day-#{$antiday + 1} {
+        .calendar__day:nth-child(#{$antiday + 1}) {
           display: none;
         }
       }
@@ -49,7 +50,7 @@
   }
 
   @each $first-day, $which-day in $days {
-    .start-day_#{$first-day} {
+    &--start-day_#{$first-day} &__day:first-child {
       margin-left: $which-day;
     }
   }
