@@ -1,0 +1,46 @@
+.calendar {
+  margin: auto;
+  padding: 10px;
+  max-width: $max-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-square;
+
+  &__day {
+    box-sizing: border-box;
+    @extend %sizes-square;
+    background-color: $color-square;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    border: $gap-square solid black;
+    transition: 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @each $day, $gap in $days {
+      &--#{$day} >
+      &:first-child {
+        margin-left: #{$gap};
+      }
+    }
+
+    @for $day from 0 to 32 {
+      &:nth-child(#{$day})::after {
+        content: "#{$day}";
+      }
+    }
+  }
+
+  @for $day from 28 to 32 {
+    &__length--#{$day} &__day:nth-child(n+#{$day+1}) {
+      display: none;
+    }
+  }
+}
