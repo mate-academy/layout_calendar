@@ -1,61 +1,57 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  align-content: center;
-  height: $square-size * 6 + 4 ;
-  width: $square-size * 7 + 14;
+
+  height: $square-size * 5 + 4;
+  width: $square-size * 7 + $gap * 6 + 10 + 10;
+  gap: $gap;
   &__day {
     width: $square-size;
     height: $square-size;
     background-color: $square-color;
     border: 1px solid black;
   }
+
+  @for $dayNumber from 1 through 31 {
+    .calendar__day:nth-child(#{$dayNumber}):before {
+      content: "#{$dayNumber}";
+      font-size: $number-size;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: auto;
+    }
+
+    &__day:nth-child(#{$dayNumber}) {
+      background-color: $square-color;
+      border: 1px solid black;
+      cursor: pointer;
+      display: flex;
+      transition: 0.5s;
+
+      &:hover {
+        transform: translateY(-20px);
+        background-color: $hover-color;
+      }
+    }
+  }
+}
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $firstDay, $index in $days {
+  .calendar--firstDay--#{$firstDay} :first-child {
+    margin-left: ($square-size + $gap)* $index;
+  }
 }
 
-@for $dayNumber from 1 through 31 {
-  .calendar__day:nth-child(#{$dayNumber}):before {
-    content: "#{$dayNumber}";
-    font-size: $number-size;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: auto;
+@for $monthLength from 28 through 31 {
+  .calendar--amountOfDays--#{$monthLength}
+  :nth-last-child(-n + #{31 - $monthLength}) {
+    display: none;
   }
-
-  .calendar__day:nth-child(#{$dayNumber}) {
-    width: $square-size;
-    height: $square-size;
-    margin: $gap;
-    background-color: $square-color;
-    border: 1px solid black;
-    cursor: pointer;
-    display: flex;
-    transition: 0.5s;
-
-    &:hover {
-      transform: translateY(-20px);
-      background-color: $hover-color;
-    }
-  }
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
-  @each $firstDay, $index in $days {
-    .calendar--firstDay--#{$firstDay} :first-child {
-      margin-left: ($square-size + $gap)* $index;
-    }
-  }
-
-  @for $monthLength from 28 through 31 {
-    .calendar--amountOfDays--#{$monthLength}
-    :nth-last-child(-n + #{31 - $monthLength}) {
-      display: none;
-    }
-  }
-
 }
