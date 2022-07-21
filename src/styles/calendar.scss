@@ -1,17 +1,34 @@
-$month-length: 29;
+$day-width: 100px;
+$gap: 1px;
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: 800px;
-  gap: 1px;
+  gap: $gap;
   padding: 10px;
-}
 
-.day {
+  &__day {
+    height: 100px;
+    width: $day-width;
+    border: 1px solid black;
+    color: #eee;
+    box-sizing: border-box;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.5s, background 0.5s;
+
+    &:hover {
+      transform: translateY(-10px);
+      cursor: pointer;
+      background: pink;
+    }
+  }
+
   @for $index from 1 through 31 {
 
-    &--#{$index}::before {
+    &__day:nth-child(#{$index})::before {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -24,38 +41,22 @@ $month-length: 29;
 
   $start-day:
     "mon" 0,
-    "tue" 101px,
-    "wed" 202px,
-    "thu" 303px,
-    "fri" 404px,
-    "sat" 505px,
-    "sun" 606px;
+    "tue" $day-width + $gap,
+    "wed" $day-width * 2 + $gap * 2,
+    "thu" $day-width * 3 + $gap * 3,
+    "fri" $day-width * 4 + $gap * 4,
+    "sat" $day-width * 5 + $gap * 5,
+    "sun" $day-width * 6 + $gap * 6;
 
   @each $name, $start-day in $start-day {
-    &--#{$name} {
+    &--start-day-#{$name} :first-child {
       margin-left: $start-day;
     }
   }
 
-  height: 100px;
-  width: 100px;
-  border: 1px solid black;
-  color: #eee;
-  box-sizing: border-box;
-  background-color: #eee;
-  display: flex;
-  justify-content: center;
-  transition: transform 0.5s, background 0.5s;
-
-  &:hover {
-    transform: translateY(-10px);
-    cursor: pointer;
-    background: pink;
-  }
-
-  @for $month-length from $month-length+1 through 32 {
-    &--#{$month-length} {
-      visibility: hidden;
+  @for $month from 28 through 31 {
+    &--month-length-#{$month} :nth-child(n + #{$month + 1}) {
+      display: none;
     }
   }
 }
