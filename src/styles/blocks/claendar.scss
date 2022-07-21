@@ -1,5 +1,5 @@
 
-.calendar{
+.calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -8,8 +8,8 @@
   box-sizing: border-box;
   width: 726px;
   @for $index from 1 through 31 {
-    &__day-#{$index}::before{
-      content: '#{$index}';
+    &__day-#{$index}::before {
+      content: "#{$index}";
       display: flex;
       justify-content: center;
       align-items: center;
@@ -19,19 +19,18 @@
       @extend %box;
       border: 1px solid black;
       border-radius: 5px;
-      font-family: Arial;
-      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
       cursor: pointer;
       transition: 0.5s;
     }
-    & > :hover::before{
+    & > :hover::before {
       background-color: pink;
       transform: translate(0, -20px);
     }
   }
 
   @each $day, $margin in $daysOfWeek {
-    .start-#{$day}{
+    .start-#{$day} {
       margin-left: $margin;
     }
   }
