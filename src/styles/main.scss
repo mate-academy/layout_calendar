@@ -1,3 +1,54 @@
-body {
-  margin: 0;
+@import "./variables";
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  color: black;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 7 * $size + 6 + 2 * 10;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $size;
+    height: $size;
+
+    background-color: #eee;
+    border: 1px solid black;
+    transition: 0.5s;
+
+    @each $var, $num in $days {
+      &--#{$var} > :first-child {
+        margin-left: (101px * $num) + (2 * $num);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through $daysOfMonth {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+@for $noFullMonth from 28 through 31 {
+  .calendar__day--len_#{$noFullMonth} {
+    .calendar__day:nth-child(n + #{$noFullMonth + 1}) {
+    display: none;
+  }
+}
 }
