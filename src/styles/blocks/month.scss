@@ -1,0 +1,48 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  width: $size-square-day * 7 +  $gap-beetween_day*6;
+  gap: $gap-beetween_day;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: $size-square-day;
+    width: $size-square-day;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid black;
+
+    @each $day, $number in $start-day {
+      &--start-day--#{$day} {
+        margin-left: $number * $size-square-day + $number*$gap-beetween_day;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      position: relative;
+      animation: day-hover 0.5s linear;
+
+    }
+    @for $index from 1 through 31 {
+      &--number-day--#{$index}::before {
+        content: "#{$index}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  @for $amount from 28 through 30 {
+    &--month-length--#{$amount} :nth-child(n+#{$amount+1}) {
+      display: none;
+    }
+  }
+}
