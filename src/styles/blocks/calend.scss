@@ -5,6 +5,12 @@
   gap: $days-gap;
   padding: $calend-padding;
 
+  @for $number from 1 through 31 {
+    & :nth-child(#{$number})::before {
+      content: "#{$number}";
+    }
+  }
+
   $start-days:
   "mon" 0,
   "tue" $day-side + $days-gap,
@@ -47,13 +53,7 @@
       background-color: pink;
       transform: translateY(-20px);
     }
-
-    @for $number from 1 through 31 {
-      &--date--#{$number}::before {
-        content: "#{$number}";
-      }
-    }
-  
+ 
   }
   
 }
