@@ -1,11 +1,27 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: auto ;
+  // align-items: center;
+  // align-content: flex-start;
+  // justify-content: center;
 
   gap: $gap;
   padding: $padding;
   max-width: 7*$date-width + 2*$padding + 6*$gap;
+
+  &__date {
+    display: flex;
+    justify-content: center;
+    height: $date-height;
+    width: $date-width;
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+    }
+  }
 
   @for $index from 28 through 31 {
     &--month-length--#{$index} {
@@ -16,29 +32,14 @@
   }
 
   @for $i from 1 through 31 {
-    &__date-#{$i} {
-      height: $date-height;
-      width: $date-width;
-      background-color: #eee;
-      border: 1px solid black;
-      cursor: pointer;
-    }
-
-    &__date-#{$i}::before {
+    & :nth-child(#{$i})::before {
       content: "#{$i}";
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      color: black;
-    }
-
-    &__date-#{$i}:hover {
-      background-color: pink;
     }
   }
 
   $days:
     "mon" 0,
-    "tue" ($date-width + $gap),
+    "tue" 1*($date-width + $gap),
     "wed" 2*($date-width + $gap),
     "thu" 3*($date-width + $gap),
     "fri" 4*($date-width + $gap),
@@ -46,7 +47,7 @@
     "sun" 6*($date-width + $gap);
 
   @each $day, $margin in $days {
-    &_start-day_#{$day} {
+    &--start-day--#{$day} :first-child {
       margin-left: $margin;
     }
   }
