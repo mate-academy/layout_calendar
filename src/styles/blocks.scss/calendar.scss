@@ -1,6 +1,6 @@
 .calendar {
   display: flex;
-  width: $width*7 + 6px;
+  width: $width*8 + 6px;
   flex-wrap: wrap;
   gap: 1px;
   padding: 10px;
@@ -37,3 +37,16 @@
     }
   }
 }
+
+@each $start-day, $day-position in $days {
+  .calendar--start-day_#{$start-day} > .calendar__day:first-child {
+    margin-left: #{$day-position};
+  }
+}
+
+
+// @each $start-day, $day-position in $days {
+//   .calendar--start-day_#{$start-day} {
+//     margin-left: #{$day-position};
+//   }
+// }
