@@ -3,7 +3,7 @@
   justify-content: space-around;
   gap: 10px;
 
-  width: 726px;
+  width: $week-width;
 
   font-size: 20px;
   font-family: Arial, serif;
@@ -30,6 +30,18 @@
     margin-top: 40px;
   }
 
+  @each $day, $index in $week-days {
+    &--start-day--#{$day} > &__day:first-child {
+      margin-left: $index;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     display: flex;
     border: 1px solid black;
@@ -43,38 +55,22 @@
     font-weight: bold;
     text-shadow: 3px 5px 2px black;
 
-
     width: $cell-size;
     height: $cell-size;
     transition: transform , 0.5s;
-
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       transform: translateY(-20px);
       border-radius: 50%;
     }
 
     @for $i from 1 through 31 {
-
       &:nth-child(#{$i}) {
-
         &::before {
           content: "#{$i}";
         }
       }
-    }
-
-    @each $day, $index in $week-days {
-      &--start-day-#{$day} {
-        margin-left: $index;
-      }
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
-      display: none;
     }
   }
 }
