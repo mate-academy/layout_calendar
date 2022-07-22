@@ -8,8 +8,7 @@
   box-sizing: border-box;
   max-width: $calendarWidth;
   @for $index from 1 through 31 {
-    &__day-#{$index}::before {
-      content: "#{$index}";
+    &__day{
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,22 +21,29 @@
       font-family: Arial, Helvetica, sans-serif;
       cursor: pointer;
       transition: 0.5s;
-    }
-    & > :hover::before {
-      background-color: pink;
-      transform: translate(0, -20px);
-    }
-  }
 
-  @each $day, $margin in $daysOfWeek {
-    .start-#{$day} {
-      margin-left: $margin;
+      &:hover{
+        background-color: pink;
+        transform: translate(0, -20px);
+      }
+
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
     }
   }
 
   @for $days from 28 through 31 {
     &--month-length--#{$days} :nth-child(n + #{$days + 1}) {
       display: none;
+    }
+  }
+}
+
+@each $day, $margin in $daysOfWeek {
+  .calendar--start-day_#{$day} {
+    .calendar__day:first-child{
+    margin-left: $margin;
     }
   }
 }
