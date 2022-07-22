@@ -6,27 +6,33 @@
   padding: $padding;
   @include calendar-max-size($calendar-width);
 
-  &__block {
+  &__day {
     @include square($block-size);
     background-color: $block-color;
     border: 1px solid #000;
     border-radius: 5px;
     transition: transform 1s, color 1s;
     cursor: pointer;
-  }
 
-  @for $i from 1 through 31 {
-    &__block:nth-child(#{$i})::before {
-      content: "#{$i}";
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100px;
+    &:hover {
+      transform: translateY(50%)  translateX(50%) rotate(1turn) scale(2, 2);
+      background-color: pink;
     }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+    }
+
   }
 
   @each $start, $day-1-possition in $days {
-    &__block--start_#{$start} {
+    &--start-day--#{$start} {
       margin-left: $day-1-possition;
     }
   }
@@ -35,10 +41,5 @@
     &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
-  }
-
-  &__block:hover {
-    transform: translateY(50%)  translateX(50%) rotate(1turn) scale(2, 2);
-    background-color: pink;
   }
 }
