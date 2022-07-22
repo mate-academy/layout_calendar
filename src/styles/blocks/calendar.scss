@@ -2,6 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   margin: auto;
+  align-items: center;
+  justify-content: center;
   width: $width;
   gap: $gap;
   padding: $padding;
@@ -32,11 +34,11 @@
         }
       }
     }
+  }
 
-    @each $day, $day-width in $week {
-      &--start_#{$day} {
-        margin-left: $day-width;
-      }
+  @each $day, $day-width in $week {
+    &--start-day_#{$day} &__day:nth-child(1) {
+      margin-left: $day-width;
     }
   }
 
