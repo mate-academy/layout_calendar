@@ -1,0 +1,14 @@
+@each $day, $value in $firstDate {
+  .calendar__day--first-day_#{$day} {
+    margin-left: #{$value * 100 - 100 + $value -1}px;
+  }
+}
+@for $i from 1 through 12 {
+  .calendar--month-length_#{$i} {
+    @for $a from ($i + 1) through 30 {
+      & > .calendar__days:nth-child(#{$a}) {
+        display: none;
+      }
+    }
+  }
+}
