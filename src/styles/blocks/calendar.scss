@@ -3,6 +3,14 @@
   @extend %font;
   flex-wrap: wrap;
 
+  @each $day-of-week, $day-width in $week {
+    &--start-day--#{$day-of-week} {
+      .calendar__day:first-child {
+        margin-left: $day-width;
+      }
+    }
+  }
+
   &__field {
     padding: $padding;
     display: flex;
@@ -32,16 +40,10 @@
       transform: translateY(-20px);
       background-color: pink;
     }
-
-    @each $day-of-week, $day-width in $week {
-      &--#{$day-of-week} {
-        margin-left: $day-width;
-      }
-    }
   }
 
   @for $days from 28 through 31 {
-    &__month-length--#{$days} :nth-child(n + #{$days + 1}) {
+    &--month-length--#{$days} :nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
