@@ -1,0 +1,76 @@
+.calendar {
+
+  &__title {
+    display: flex;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:hover {
+      text-shadow: 3px 3px pink;
+    }
+  }
+
+  &__second-title {
+    display: flex;
+    justify-content: center;
+
+    font-size: 15px;
+  }
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $day-gap;
+
+    width: $calendar-width;
+
+    padding: 35px $calendar-padding;
+
+    margin: 0 auto;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: $day-square-size;
+
+    height: $day-square-size;
+
+    text-align: center;
+    border: 1px solid black;
+
+    background-color: $day-color;
+
+    cursor: pointer;
+
+    transition: transform 0.5s, background-color 0.5s, box-shadow 0.5s;
+
+    &:hover {
+      box-shadow: 5px 5px gray;
+      background-color: pink;
+      transform: translate(-5px, -20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day, $index in $days {
+    &--start-day--#{$day} &__day:nth-child(1) {
+      margin-left: getFirstDay($index);
+    }
+  }
+
+  @each $length, $index in $calendar-days-length {
+    &--month-length--#{$length} &__day:nth-last-child(-n + #{$index}) {
+      display: none;
+    }
+  }
+}
