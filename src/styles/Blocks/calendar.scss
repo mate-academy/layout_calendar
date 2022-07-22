@@ -7,7 +7,6 @@
   margin: auto;
 
   &__day {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,12 +24,6 @@
       }
     }
 
-    @each $name, $day in $week-days {
-      &--start-day_#{$name} {
-        margin-left: $day;
-      }
-    }
-
     &:hover {
       cursor: pointer;
       background-color: pink;
@@ -39,6 +32,12 @@
 
     &--start-day {
       margin-left: $dayWidth * 6 + $dayGap*5;
+    }
+
+    @each $name, $day in $week-days {
+      &--start-day_#{$name} {
+        margin-left: $day;
+      }
     }
   }
 
