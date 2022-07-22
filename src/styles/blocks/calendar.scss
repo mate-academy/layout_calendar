@@ -13,16 +13,14 @@
     height: $size;
     background: #eee;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 
     @for $index from 1 through 31 {
-      &:nth-child(#{$index}) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-
-        &::before {
+      &:nth-child(#{$index})::before {
           content: "#{$index}";
         }
 
@@ -34,7 +32,7 @@
         }
       }
     }
-  }
+  
 
   @each $day, $day-width in $week {
     &--start-day_#{$day} &__day:nth-child(1) {
