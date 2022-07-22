@@ -1,6 +1,11 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .calendar {
-  margin-top: 10%;
-  margin-left: 30%;
   display: flex;
   align-self: center;
   gap: 1px;
@@ -20,8 +25,25 @@
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-      transition: transform 0.5s ease, background-color 0.5s;
     }
 
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::after {
+        content: "#{$i}";
+      }
+    }
+
+    @each $x, $y in $day-list {
+      &--#{$x} &:nth-child(1) {
+        margin-left: #{$y}px;
+      }
+    }
   }
+
+  @each $i in $month-length {
+    &__length--#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
 }
