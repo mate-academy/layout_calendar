@@ -11,8 +11,9 @@
     }
   }
 
-  @for $show from $month-length to 31 {
-    &--month-length--#{$month-length} > &__block:nth-child(#{$show + 1}) {
+  @for $show from 28 to 31 {
+    $noshow: 31 - $show;
+    &--month-length--#{$show} > &__block:nth-last-child(-n + #{$noshow}) {
       display: none;
     }
   }
