@@ -25,19 +25,18 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
+  }
 
-    &--start-day {
-      margin-left: $dayWidth * 6 + $dayGap*5;
-    }
+  &--start-day > &__day:first-child {
+    margin-left: $dayWidth * 6 + $dayGap*5;
+  }
 
-    @each $name, $day in $week-days {
-      &--start-day_#{$name} {
-        margin-left: $day;
-      }
+  @each $name, $day in $week-days {
+    &--start-day_#{$name} > &__day:first-child {
+      margin-left: $day;
     }
   }
 
