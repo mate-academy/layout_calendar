@@ -1,0 +1,28 @@
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  margin: 50px auto;
+  gap: 1px;
+  flex-wrap: wrap;
+
+  @each $day, $order in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: $block-width * $order;
+    }
+  }
+
+  @for $show from 28 to 31 {
+    $noshow: 31 - $show;
+    &--month-length--#{$show} > &__block:nth-last-child(-n + #{$noshow}) {
+      display: none;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &__block:nth-child(#{$day})::before {
+      content: "#{$day}";
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+}
