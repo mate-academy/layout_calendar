@@ -6,11 +6,11 @@
   width: $col-amount * $block-length + ($gap * 6);
 
   @for $day from 1 through 31 {
-    &:nth-child(-n + #{$day}) {
+    & :nth-child(-n + #{$day}) {
       @include day-block($block-length);
     }
 
-    &:nth-child(#{$day})::after {
+    & :nth-child(#{$day})::after {
       content: "#{$day}";
     }
   }
@@ -23,14 +23,14 @@
   }
 
   @for $day from 28 through 31 {
-    &--month-length--#{$day}:nth-child(n + #{$day + 1}) {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
 
   @each $weekday, $offset in $first-day-offset {
     &--start-day--#{$weekday} {
-      &:first-child {
+      & :first-child {
         margin-left: ($block-length * $offset) + ($gap * $offset);
       }
     }
