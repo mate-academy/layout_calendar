@@ -1,19 +1,19 @@
 
 .calendar {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   max-width: $calendar-max-width;
+  padding: $calendar-paddings;
 
   @each $name, $value in $days {
-    &--day_#{$name} > &__day:first-child {
+    &--start-day_#{$name} > :first-child {
       margin-left: $value;
     }
   }
 
   @for $var from $month-length-min to $month-length-max {
-    &--month-length_#{$var} > &__day:nth-child( n + #{$var + 1}) {
+    &--month-length_#{$var} > :nth-child( n + #{$var + 1}) {
       display: none;
     }
   }
