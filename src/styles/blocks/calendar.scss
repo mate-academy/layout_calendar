@@ -7,23 +7,22 @@
   width: #{$calendar-width};
 
   &__cell {
+    width: $cell-size;
+    height: $cell-size;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     background-color: #eee;
+    border: 1px solid #000;
+    color: #000;
+
     transition-duration: 0.5s;
-
+    
     @for $day from 1 through 31 {
-      &--day--#{$day}::before {
-        box-sizing: border-box;
-
+      &:nth-child(#{$day}n):before {
         content: "#{$day}";
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: $cell-size;
-        height: $cell-size;
-
-        border: 1px solid #000;
-        color: #000;
       }
     }
 
@@ -36,13 +35,8 @@
 
   @for $day from 28 through 31 {
     &--month-lenght--#{$day} {
-      .calendar__cell:nth-child(n + #{$day + 1})::before {
-        visibility: hidden;
-      }
-
       .calendar__cell:nth-child(n + #{$day + 1}) {
-        background-color: transparent;
-        cursor: default;
+        display: none;
       }
     }
   }
@@ -57,7 +51,7 @@
     "sun" #{$cell-size * 6 + 6px};
 
   @each $day, $start in $days {
-    &--start-day--#{$day} > &__cell--day--1 {
+    &--start-day--#{$day} > &__cell:first-child {
       margin-left: #{$start};
     }
   }
