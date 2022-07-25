@@ -1,0 +1,26 @@
+.calendar {
+  width: $main-width;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: $main-pading;
+  margin: auto;
+  gap: $gap;
+
+  @for $number from 28 to 31 {
+    &__month-length--#{$number} {
+      .calendar__day:nth-child(n + #{$number + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $placing in $days {
+    &__start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: #{$placing};
+      }
+    }
+  }
+}

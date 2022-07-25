@@ -1,0 +1,22 @@
+.calendar__day {
+  cursor: pointer;
+  transition: 0.5s;
+
+  @include square($day-size);
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-color: $main-color;
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index}):before {
+      content: "#{$index}";
+
+      @extend %main-text;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(237, 120, 219);
+    transform: translate(0, -20px);
+  }
+}
