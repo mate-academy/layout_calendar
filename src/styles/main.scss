@@ -17,37 +17,37 @@ body {
   width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
 
   &__day {
-    &_mon {
+    &--mon {
       margin-left: 0;
     }
 
-    &_tue {
+    &--tue {
       margin-left: $cell-size + $gap-size;
     }
 
-    &_wed {
+    &--wed {
       margin-left: ($cell-size + $gap-size) * 2;
     }
 
-    &_thu {
+    &--thu {
       margin-left: ($cell-size + $gap-size) * 3;
     }
 
-    &_fri {
+    &--fri {
       margin-left: ($cell-size + $gap-size) * 4;
     }
 
-    &_sat {
+    &--sat {
       margin-left: ($cell-size + $gap-size) * 5;
     }
 
-    &_sun {
+    &--sun {
       margin-left: ($cell-size + $gap-size) * 6;
     }
   }
 
   @for $index from 1 through $month-length {
-    &__day_#{$index} {
+    &__day--#{$index} {
       box-sizing: border-box;
       height: $cell-size;
       width: $cell-size;
@@ -62,7 +62,7 @@ body {
   }
 
   @for $index from 1 through $month-length {
-    &__day_#{$index}::after {
+    &__day--#{$index}::after {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -70,7 +70,7 @@ body {
   }
 
   @for $index from 1 through $month-length {
-    &__day_#{$index}:hover {
+    &__day--#{$index}:hover {
       background-color: $hover-color;
       transform: translate(0, -20px);
     }
@@ -84,7 +84,7 @@ body {
 // fri,
 // sat,
 // sun {
-//   .calendar__day_#{$start-day} {
+//   .calendar__day--#{$start-day} {
 //     margin-left: 0;
 //   }
 // }
