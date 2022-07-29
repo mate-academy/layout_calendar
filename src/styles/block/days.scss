@@ -1,12 +1,12 @@
-@each $day, $value in $firstDate {
+@each $day, $index in $firstDate {
   .calendar__day--first-day_#{$day} {
-    margin-left: #{$value * 100 - 100 + $value -1}px;
+    margin-left: #{$index * 100 - 100 + $index - 1}px;
   }
 }
 
 @for $i from 1 through 31 {
   .calendar--month-length_#{$i} {
-    @for $a from ($i + 1) through 31 {
+    @for $a from ($i + 1) through 32 {
       & > .calendar__day:nth-child(#{$a}) {
         display: none;
       }
