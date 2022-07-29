@@ -1,0 +1,31 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: $gap;
+  max-width: $boxSize * 7 + $gap * 6 + $paddings * 2;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $boxSize;
+    height: $boxSize;
+
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform 0.8s;
+
+    font-size: 30px;
+
+    cursor: pointer;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar > .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
