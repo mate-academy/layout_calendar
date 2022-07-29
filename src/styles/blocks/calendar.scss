@@ -1,48 +1,71 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  font-size: $font_size;
+}
+
 body {
   margin: 0;
 }
 
 .calendar {
-  box-sizing: border-box;
+  gap: $gap;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 700px;
-  gap: 1px;
-  padding: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
+  width: $month_width;
+}
 
-  &__box {
-    height: 100px;
-    width: 100px;
-    border: 1px solid black;
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s easy-out;
+@mixin square {
+  width: $day_size;
+  height: $day_size;
+  border: 1px black solid;
+  background-color: $day_color;
+}
 
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-      cursor: pointer;
+.calendar--month-length {
+  @for $index from 28 through 31 {
+    .calendar--#{$index} {
+      $month: $index;
+      .calendar__day:nth-child(n + #{$month + 1}) {
+        display: none;
+      }
     }
+  }
+}
 
-    @for $i from 1 through 31 {
+@each $name, $value in $days {
+  .calendar--start-day--#{$name} {
+    .calendar__day:nth-child(1) {
+      margin-left: ($value - 1) * $day_size + ($value - 1) * $gap;
+    }
+  }
+}
 
-      &:nth-child(#{$i}) {
+.calendar__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: $day_size;
+  height: $day_size;
+  border: 1px black solid;
+  background-color: $day_color;
 
-        &::before {
-          content: "#{$i}";
-        }
+  @for $index from 1 through 31 {
+
+    &:nth-child(#{$index}) {
+
+      &::before {
+        content: "#{$index}";
       }
     }
   }
 
-  @for $index from 28 through 31 {
-    &--month-length_#{$index} :nth-child(n + #{$index + 1}) {
-      display: none;
-    }
+  &:hover {
+    background-color: pink;
+    transform: translate(0, -30px);
+    transition-duration: 0.5s;
   }
 }
