@@ -47,7 +47,7 @@ body {
   }
 
   @for $index from 1 through $month-length {
-    &__day--#{$index} {
+    &__day:nth-child(#{$index}) {
       box-sizing: border-box;
       height: $cell-size;
       width: $cell-size;
@@ -62,7 +62,7 @@ body {
   }
 
   @for $index from 1 through $month-length {
-    &__day--#{$index}::after {
+    &__day:nth-child(#{$index})::after {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -70,7 +70,7 @@ body {
   }
 
   @for $index from 1 through $month-length {
-    &__day--#{$index}:hover {
+    &__day:nth-child(#{$index}):hover {
       background-color: $hover-color;
       transform: translate(0, -20px);
     }
