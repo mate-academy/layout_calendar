@@ -1,0 +1,49 @@
+.calender {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $width-week;
+
+  @each $day, $size in $days {
+    .calender--start-day-#{$day}
+    &__block:first-child {
+      margin-left: $size;
+    }
+  }
+
+  @for $index from $min-last-days-month to $max-last-days-month {
+    .calender--month-length-#{$index}
+    &__block:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__block {
+    @include square($width);
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: relative;
+
+    @for $index from $first-day through $number-of-days-month {
+      &:nth-child(#{$index})::before {
+        position: absolute;
+        content: "#{$index}";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+      }
+    }
+
+    &:hover {
+      transform: translate(0, -20px);
+      transition: transform 0.5s;
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
