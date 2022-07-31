@@ -17,32 +17,10 @@ body {
   width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
 
   &__day {
-    &--mon {
-      margin-left: 0;
-    }
-
-    &--tue {
-      margin-left: $cell-size + $gap-size;
-    }
-
-    &--wed {
-      margin-left: ($cell-size + $gap-size) * 2;
-    }
-
-    &--thu {
-      margin-left: ($cell-size + $gap-size) * 3;
-    }
-
-    &--fri {
-      margin-left: ($cell-size + $gap-size) * 4;
-    }
-
-    &--sat {
-      margin-left: ($cell-size + $gap-size) * 5;
-    }
-
-    &--sun {
-      margin-left: ($cell-size + $gap-size) * 6;
+    @each $name, $day in $days-of-week {
+      &--#{$name} {
+        margin-left: ($cell-size + $gap-size) * $day;
+      }
     }
   }
 
