@@ -1,3 +1,97 @@
 body {
   margin: 0;
 }
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+// #region variables
+
+$columns: 7;
+$padding: 10px;
+$gap: 1px;
+$cell-width: 100px + $gap;
+$row-width: $cell-width * $columns + $padding*2;
+$month-position: $cell-width + $gap;
+$max-days: 31;
+
+@mixin square ($cell-size) {
+  height: 100px;
+  width: 100px;
+}
+
+%position-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// #endregion
+
+.box {
+  @extend %position-center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  width: $row-width;
+  gap: $gap;
+
+  :nth-child(n) {
+    @extend %position-center;
+    text-align: center;
+    box-sizing: border-box;
+
+    @include square(cell-size);
+    width: $cell-width;
+ 
+    border: 1px solid #000;
+    background-color: #eee;
+
+    transition: transform 0.5s;
+    
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
+
+    @for $index from 1 through $max-days {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-size: 30px;
+      }
+    }
+  }
+
+  $days-of-week:
+    "mon" $month-position * 0,
+    "tue" $month-position * 1,
+    "wen" $month-position * 2,
+    "thu" $month-position * 3,
+    "fri" $month-position * 4,
+    "sat" $month-position * 5,
+    "sun" $month-position * 6;
+
+  @each $start-day, $margin in $days-of-week {
+    &--start-day--#{$start-day} {
+      :nth-child(-n + 1) {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $index from 28 through $max-days {
+    &--month-length--#{$index} {
+      & :nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+}
