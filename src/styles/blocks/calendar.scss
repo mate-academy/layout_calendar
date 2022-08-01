@@ -1,19 +1,19 @@
 .calendar {
   display: flex;
-  gap: $gap;
   flex-wrap: wrap;
+  gap: $gap;
+  width: $width-container;
   padding: 10px;
-  width: $calendar-width;
 
-  @each $name, $size in $days {
-    .calendar--start-day--#{$name} &__cell:first-child {
+  @each $day, $size in $days {
+    .calendar--start-day--#{$day} &__block:first-child {
       margin-left: $size;
     }
   }
 
-  @for $index from $last-day-start to $last-day-end {
+  @for $index from 28 to 31 {
     .calendar--month-length--#{$index}
-    &__cell:nth-child(n + #{$index+1}) {
+    &__block:nth-child(n + #{$index+1}) {
       display: none;
     }
   }
@@ -21,24 +21,26 @@
   &__cell {
     @include square($width);
 
+    background-color: #eee;
     box-sizing: border-box;
     position: relative;
-    background-color: #eee;
 
     @for $index from $calendar-start through $calendar-end {
       &:nth-child(#{$index})::before {
-      
+        position: absolute;
         content: "#{$index}";
-        font-family: Arial, sans-serif;
-        font-style: 30px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
         font-weight: bold;
       }
     }
-
     &:hover {
       cursor: pointer;
       transform: translate(0, -20px);
-      transition-duration: 500ms;
+      transition: transform 500ms;
       background-color: pink;
     }
   }
