@@ -7,31 +7,31 @@
   flex-wrap: wrap;
   
   $days-week:
-    "mon",
-    "tue",
-    "wed",
-    "thu",
-    "fri",
-    "sat",
-    "sun";
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
   
-  @each $name in $days-week {
-    &--start-day--#{$name} {
+  @each $name, $day-number in $days-week {
+    &--start-day_#{$name} {
       div:first-of-type {
-        margin-left: getShift($day-size, $day-gap, $day-start);
+        margin-left: getShift($day-size, $day-gap, $day-number);
       }
     }
   }
   
-  @for $index from 28 to ($month-length + 1) {
-    &--month-length--#{$index} {
-      div:nth-last-child(-n+#{$days-hide}) {
+  @for $index from 28 to 32 {
+    &--month-length_#{$index} {
+      div:nth-last-child(-n+#{31 - $index}) {
         display: none;
       }
     }
   }
   
-  &--position--center {
+  &--position_center {
     margin: auto;
   }
   
@@ -42,10 +42,11 @@
     border: 1px solid black;
     box-sizing: border-box;
     cursor: pointer;
+    transition-property: color, transform;
     transition-duration: 0.5s;
   
-    @for $index from 1 to ($month-length + 1) {
-      &--number--#{$index} {
+    @for $index from 1 to ($full-month + 1) {
+      &:nth-child(#{$index}) {
         &::before {
           content: "#{$index}";
           line-height: #{$day-size};
