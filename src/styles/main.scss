@@ -17,6 +17,7 @@ body {
   width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
 
   &__day {
+
     @each $name, $day in $days-of-week {
       &--#{$name} {
         margin-left: ($cell-size + $gap-size) * $day;
@@ -24,7 +25,7 @@ body {
     }
   }
 
-  @for $index from 1 through $month-length {
+  @for $index from 1 through $max-month-length {
     &__day:nth-child(#{$index}) {
       box-sizing: border-box;
       height: $cell-size;
@@ -39,7 +40,7 @@ body {
     }
   }
 
-  @for $index from 1 through $month-length {
+  @for $index from 1 through $max-month-length {
     &__day:nth-child(#{$index})::after {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
@@ -47,22 +48,40 @@ body {
     }
   }
 
-  @for $index from 1 through $month-length {
+  @for $index from 1 through $max-month-length {
     &__day:nth-child(#{$index}):hover {
       background-color: $hover-color;
       transform: translate(0, -20px);
     }
   }
-}
 
-// @each $start-day in mon,
-// tue,
-// wed,
-// thu,
-// fri,
-// sat,
-// sun {
-//   .calendar__day--#{$start-day} {
-//     margin-left: 0;
-//   }
-// }
+  &--28 {
+    .calendar__day:nth-child(29) {
+      display: none;
+    }
+
+    .calendar__day:nth-child(30) {
+      display: none;
+    }
+
+    .calendar__day:nth-child(31) {
+      display: none;
+    }
+  }
+
+  &--29 {
+    .calendar__day:nth-child(30) {
+      display: none;
+    }
+
+    .calendar__day:nth-child(31) {
+      display: none;
+    }
+  }
+
+  &--30 {
+    .calendar__day:nth-child(31) {
+      display: none;
+    }
+  }
+}
