@@ -32,7 +32,7 @@ $days:
 }
 
 @each $name, $start in $days {
-  .calendar--start--#{$name} .calendar__day:first-child {
+  .calendar--start-#{$name} .calendar__day:first-child {
     margin-left: $start;
   }
 }
@@ -65,8 +65,10 @@ $days:
   }
 }
 
-@for $index from 29 through 31 {
-  .calendar--month-length .calendar__day:nth-child(#{$index}) {
-    display: none;
+@for $index from 28 through 31 {
+  .calendar--month-length-#{$index} {
+    .calendar__day:nth-child(n+#{$index+1}) {
+      display: none;
+    }
   }
 }
