@@ -1,0 +1,64 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $square-size / 100;
+  max-width: ($square-size + $square-gap) * 7;
+
+  padding: $square-size / 10;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    flex-grow: 0;
+    position: relative;
+    box-sizing: border-box;
+    transition: 0.5s;
+  
+    @include square($square-size);
+  
+    background-color: #eee;
+    border: $square-size / 100 solid black;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &::before {
+      position: absolute;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $square-size * 0.3;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translatey(-($square-size) * 0.2);
+      background-color: rgb(236, 159, 159);
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" ($square-size + $square-gap) * 1,
+    "wed" ($square-size + $square-gap) * 2,
+    "thu" ($square-size + $square-gap) * 3,
+    "fri" ($square-size + $square-gap) * 4,
+    "sat" ($square-size + $square-gap) * 5,
+    "sun" ($square-size + $square-gap) * 6;
+
+  @each $name, $retreat in $days {
+    &--start-day_#{$name} :first-child {
+      margin-left: $retreat;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length_#{$i} :not(:nth-child(-n + #{$i})) {
+      display: none;
+    }
+  }
+}
