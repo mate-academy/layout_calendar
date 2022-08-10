@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://yevhenii-stanchenko.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://yevhenii-stanchenko.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -37,3 +37,27 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 
 ## Here is a preview:
 ![reference image](reference.png).
+
+
+- Создать разметку для блока календаря с 31 днем ​​внутри
+  - НЕ добавляйте числа в HTML (вы сделаете это с помощью CSS)
+- Каждый день представляет собой серый (`#eee`) квадрат размером 100 пикселей (включая черную рамку шириной 1 пиксель).
+  - Добавьте число (`Arial 30px`) в центре каждого дня, используя `::before` и [@for](https://sass-lang.com/documentation/at-rules/control/for)
+- Используйте flex с зазором 1px и ограничьте его ширину ровно 7 столбцами + отступы 10px.
+  - Не используйте жестко заданные значения `px`, если они используются несколько раз.
+  - Используйте правильно названные переменные, чтобы сделать все расчеты более понятными.
+- Реализовать модификатор «начало дня» для «календаря» со значениями «пн», «вт», «ср», «чт», «пт», «сб» и «вс».
+  - Используйте [@each](https://sass-lang.com/documentation/at-rules/control/each), чтобы создать все модификаторы.
+  - Месяц должен начинаться в правильном столбце (понедельник - 1-е, пятница - 5-е)
+  - Вы можете просто добавить правильную маржу слева для первого дня
+- Добавьте модификатор `month-length` для `календаря` со значениями 28, 29, 30 и 31 (используйте `@for`)
+  - Он устанавливает последний день для отображения (используйте [nth-child](https://css-tricks.com/how-nth-child-works/))
+- При наведении на ячейку курсор должен стать указателем.
+- Наведенная ячейка должна стать розовой
+  - (**Необязательно**) Переместите его вверх на «20px» (используйте «transform»).
+  - (**Необязательно**) оба этих свойства должны анимироваться продолжительностью полсекунды.
+
+--> [КОНТРОЛЬНЫЙ СПИСОК] (https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
+
+## Вот предварительный просмотр:
+![референсное изображение](reference.png).
