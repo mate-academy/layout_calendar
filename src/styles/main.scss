@@ -1,12 +1,16 @@
 @import "./utils/_variables";
 @import "./utils/normalize";
 
+@function getShift($cell-size, $gap-size, $value) {
+  @return ($value * $cell-size) + ($value * $gap-size);
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   padding: 10px;
-  width: calc(7 * #{$cell-size } + 18px);
+  width: calc((7 * #{$cell-size} + (6 * #{$gap-size})));
   color: #000;
 
   &__cell {
@@ -20,6 +24,7 @@
     border: 1px solid black;
     cursor: pointer;
     transition: color 0.5s, transform 0.5s;
+    align-items: center;
   
 
     &:hover {
@@ -28,7 +33,7 @@
     }
   
     @for $index from 1 through 31 {
-      &_:nth-child(#{$index})::before {
+      &:nth-child(#{$index})::after {
         content: "#{$index}";
       }
     }
@@ -40,19 +45,10 @@
     }
   }
 
-  $start-days:
-    "mon" 1px,
-    "tue" 103px,
-    "wed" 205px,
-    "thu" 307px,
-    "fri" 409px,
-    "sat" 511px,
-    "sun" 613px;
-
   @each $name, $value in $start-days {
     &--start-day--#{$name} {
       & :first-child {
-        margin-left: $value;
+        margin-left: getShift($cell-size, $gap-size, $value);
       }
     }
   }
