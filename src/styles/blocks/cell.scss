@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 70px auto;
+  margin: 50px auto;
   gap: $gap;
   width: ($cell-size + $gap) *7;
   padding: 10px;
@@ -13,45 +13,29 @@
     @include square($cell-size);
     background-color: $color--cell;
     border: 1px solid $color--border;
-  }
-
-  &__day::before {
-    @extend %position-center;
-    margin: auto;
+    transition: transform 0.5s;
     font-size: 30px;
-    font-weight: 500;
     font-family: Arial, Helvetica, sans-serif;
   }
 
   :nth-child(n) {
-    transition: transform 0.5s;
 
     &:hover {
       transform: translateY(-20px);
       cursor: pointer;
-      background-color: pink;
+      background-color: $color--translate;
     }
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-size: 30px;
       }
     }
   }
 
-  $days-of-week:
-    "mon" $cell-width * 0,
-    "tue" $cell-width * 1,
-    "wen" $cell-width * 2,
-    "thu" $cell-width * 3,
-    "fri" $cell-width * 4,
-    "sat" $cell-width * 5,
-    "sun" $cell-width * 6;
-
   @each $start-day, $margin in $days-of-week {
     &--start-day--#{$start-day} {
-      :nth-child(-n + 1) {
+      :first-child {
         margin-left: $margin;
       }
     }
@@ -64,5 +48,4 @@
       }
     }
   }
-
 }
