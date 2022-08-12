@@ -1,0 +1,52 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+@import "../utils/functions";
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  width: widthMonth($size, $number-day, $shift);
+  flex-wrap: wrap;
+  gap: $shift;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    @include square($size);
+    border: 1px solid #000;
+
+    @for $data from 1 through 31 {
+      &:nth-child(#{$data}):before {
+        content: "#{$data}";
+        color: #000;
+      }
+    }
+
+    @for $index from 1 through 31 {
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+        transition-duration: 500ms;
+        transform: translateY(-20px);
+        transition-property: background-color;
+      }
+    }
+  }
+
+  @each $day-week, $shift in $day {
+    &__start-day--#{$day-week} &__day:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index}  &__day:nth-child(n + #{$index + 1}) {
+      visibility: hidden;
+    }
+  }
+}
