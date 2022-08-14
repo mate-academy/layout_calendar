@@ -1,0 +1,69 @@
+$field-size: 100px;
+$fields-count: 31;
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wen: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+);
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: arial, sans-serif;
+  font-size: 30px;
+
+  &__container {
+    display: flex;
+    justify-items: start;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    min-width: ($field-size*7) + 6px;
+    max-width: ($field-size*7) + 6px;
+    gap: 1px;
+  }
+
+  &__item {
+    position: relative;
+    box-sizing: border-box;
+    min-width: $field-size;
+    min-height: $field-size;
+    border: 1px solid black;
+    background: #eee;
+    transition: background 0.5s, transform 0.5s;
+
+    &:hover {
+      background: #ffbfcb;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+
+  @for $i from 1 through $fields-count {
+    &__item:nth-child(#{$i}n)::before {
+      content: "#{$i}";
+      position: absolute;
+      top: 33px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @each $start-day , $start-day-value in $start-days {
+    &--start-day--#{$start-day} &__item:first-child {
+      margin-left: $field-size * $start-day-value + $start-day-value;
+    }
+  }
+
+  @for $i from 29 through 31 {
+    &--month-length--#{$i - 1} &__item:nth-child(n + #{$i}) {
+      display: none;
+    }
+  }
+
+}
