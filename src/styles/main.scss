@@ -1,3 +1,61 @@
-body {
-  margin: 0;
+@import "./utils/_variables";
+@import "./utils/normalize";
+
+@function getShift($cell-size, $gap-size, $value) {
+  @return ($value * $cell-size) + ($value * $gap-size);
+}
+
+.page {
+  width: 100vh;
+  margin: auto;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: 30px;
+  width: calc((7 * #{$cell-size} + (6 * #{$gap-size})));
+  color: #000;
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    color: #000;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
+    align-items: center;
+  
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} &__cell:nth-last-child(-n + #{31 - $index}) {
+      display: none;
+    }
+  }
+
+  @each $name, $value in $start-days {
+    &--start-day--#{$name} {
+      & :first-child {
+        margin-left: getShift($cell-size, $gap-size, $value);
+      }
+    }
+  }
 }
