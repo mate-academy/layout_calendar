@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   gap: 1px;
   padding: $calendar-padding-size;
-  margin: 0 auto;
+  margin: 100px auto;
 
   &__day {
     display: none;
@@ -15,16 +15,16 @@
 
     border: 1px solid black;
     transition: 0.5s;
+    transition-property: transform, background-color;
 
     &:hover {
       background-color: pink;
       transform: translate(0, -20px);
-      transition: 0.5s;
     }
 
-    @for $day-number from 1 through 31 {
-      &--day_#{$day-number}::before {
-        content: "#{$day-number}";
+    @for $day-value from 1 through 31 {
+      &:nth-child(n+#{$day-value})::before {
+        content: "#{$day-value}";
       }
     }
   }
