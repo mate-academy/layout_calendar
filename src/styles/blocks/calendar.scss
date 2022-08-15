@@ -1,0 +1,50 @@
+@import "../utils/var.scss";
+@import "../utils/mixin.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 7 * $cellsize + 6 * $gapsize;
+  padding: 10px;
+  gap: $gapsize $gapsize;
+
+  &__day {
+    @include squeare($cellsize);
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: #eee;
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+      background-color: pink;
+    }
+  }
+
+  @for $number from 1 through 31 {
+    & :nth-child(#{$number})::before {
+      content: "#{$number}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      line-height: $cellsize;
+      text-align: center;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index}>:nth-child(n+#{$index + 1}) {
+      display: none;
+    }
+  }
+
+
+
+  @each $day, $gapday in $days-of-week {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $gapday;
+      }
+    }
+  }
+}
