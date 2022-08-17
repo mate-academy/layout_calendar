@@ -1,3 +1,78 @@
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
+@function shift($day) {
+  @return $day * 101;
+}
+
+$day-square: 100px;
+$step: 101px;
+
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
 }
+
+.calendar {
+  display: flex;
+  left: 50%;
+  flex-wrap: wrap;
+  width: 706px;
+  gap: 1px;
+}
+
+.day {
+  @include square($day-square);
+  box-sizing: border-box;
+  border: 1px solid #004 ;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transition-duration: 0.9s;
+    transform:translateY(-20px);
+    background-color: pink;
+    cursor: pointer;
+  }
+
+}
+@for $index from 0 through 30 {
+  .day--#{$index}:before {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 30px;
+    color: #004;
+    content: "#{$index + 1}";
+  }
+}
+
+@for $index from 27 through 30 {
+.calendar--month-lenth--#{$index} .day:nth-child(n + #{$index + 1}) {
+  display: none;
+}
+}
+
+$week:
+  "mon" shift(0),
+  "tue" shift(1),
+  "wed" shift(2),
+  "thu" shift(3),
+  "fri" shift(4),
+  "sat" shift(5),
+  "sun" shift(6);
+
+  @each $name, $value in $week {
+    .calendar--start-day--#{$name}:first-child {
+      margin-left: $value * 1px;
+    }
+  }
+
+
+
