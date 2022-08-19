@@ -7,7 +7,7 @@
 
   @for $days-count from 28 through 31 {
     &--month-length--#{$days-count} {
-      & :nth-child(1n + #{ $days-count + 1 }) {
+      & :nth-child(n + #{ $days-count + 1 }) {
         display: none;
       }
     }
@@ -49,7 +49,7 @@
     }
 
     @for $number from 1 through 31 {
-      &--day-#{$number} {
+      &--day--#{$number} {
         &::before {
           content: "#{$number}";
           // display: block;
