@@ -1,13 +1,13 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: $block-side-size * 7 + $gap-between-blocks * 6 + $calendar-padding * 2;
+  max-width: $calendar-max-width;
   gap: 1px;
 
   &__block {
     display: flex;
     justify-content: center;
-    align-items: center;;
+    align-items: center;
     height: $block-side-size;
     width: $block-side-size;
     background-color: #eee;
@@ -22,16 +22,24 @@
   }
 
   @for $i from 1 through 31 {
-    &__block-#{$i}::before {
+    &__block--#{$i}::before {
       content: "#{$i}";
     }
   }
 
-  $days: ('mon': '0', 'tue': '1', 'wed': '2', 'thu': '3', 'fri': '4', 'sat': '5', 'sun': '6');
+  $days: (
+    "mon": "0",
+    "tue": "1",
+    "wed": "2",
+    "thu": "3",
+    "fri": "4",
+    "sat": "5",
+    "sun": "6"
+  );
 
   @each $day, $i in $days {
     &--start-day-#{$day} {
-      .calendar__block-1 {
+      .calendar__block--1 {
         margin-left: calc(#{$block-margin} * #{$i});
       }
     }
@@ -40,9 +48,8 @@
   @for $i from 28 through 31 {
     &--month-length-#{$i} {
       .calendar__block:nth-child(#{$i}) ~ .calendar__block {
-            display: none;
-        }
+        display: none;
       }
     }
+  }
 }
-
