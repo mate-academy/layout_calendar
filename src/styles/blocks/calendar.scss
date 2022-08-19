@@ -1,13 +1,18 @@
 //VARIABLES:
 @import "../variables";
 
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
 //CALENDAR BLOCK:
 .calendar {
 
   &__box {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: $gap-size;
 
     width: $calendar-width;
     padding-top: 40px;
@@ -41,12 +46,16 @@
     align-items: center;
     text-align: center;
 
-    height: $day-size;
-    width: $day-size;
+    @include square($day-size);
     border: 1px solid black;
-    background-color: #eee;
+    background-color: $cell-bg;
 
-    transition: color 0.5s, background-color 0.5s, transform 0.5s;
+    /* stylelint-disable */
+    transition:
+      color $transition-duration,
+      background-color $transition-duration,
+      transform $transition-duration;
+    /* stylelint-enable */
 
     @for $i from 1 through 31 {
       &--day--#{$i} {
@@ -64,7 +73,7 @@
     }
     &:hover {
       cursor: pointer;
-      background-color: pink;
+      background-color: $cell-hover-bg;
       transform: translateY(-20px);
     }
   }
