@@ -16,7 +16,7 @@
     @each $day, $number in $days-of-week {
       &--start-day--#{$day} {
         & :first-child {
-          margin-left: #{$number};
+          margin-left: (#{($number - 1) * ($cell-size + 3px)});
         }
       }
     }
@@ -50,12 +50,12 @@
         content: "#{$i}";
       }
     }
-  }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
 
-    transform: translateY(-$move-cell-size);
+      transform: translateY(-$move-cell-size);
+    }
   }
 }
