@@ -1,0 +1,57 @@
+/* region Calendar */
+.calendar {
+  max-width: getWidth($day-count, $day-size);
+  max-height: getHeight($week-count, $day-size);
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  
+  @each $name, $day-number in $days-week {
+    &--start-day_#{$name} {
+      div:first-of-type {
+        margin-left: getShift($day-size, $day-gap, $day-number);
+      }
+    }
+  }
+  
+  @for $index from 28 to 32 {
+    &--month-length_#{$index} {
+      div:nth-last-child(-n+#{31 - $index}) {
+        display: none;
+      }
+    }
+  }
+  
+  &--position_center {
+    margin: auto;
+  }
+  
+  &__day {
+    width: #{$day-size};
+    height: #{$day-size};
+    background-color: #{$day-color};
+    border: 1px solid black;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition-property: color, transform;
+    transition-duration: 0.5s;
+  
+    @for $index from 1 to ($full-month + 1) {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+          line-height: #{$day-size};
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+  
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+    
+}
+/* #endregion */
