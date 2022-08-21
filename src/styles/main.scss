@@ -16,15 +16,6 @@ body {
   gap: $gap-size $gap-size;
   width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
 
-  &__day {
-
-    @each $name, $day in $days-of-week {
-      &--#{$name} {
-        margin-left: ($cell-size + $gap-size) * $day;
-      }
-    }
-  }
-
   @for $index from 1 through $max-month-length {
     &__day:nth-child(#{$index}) {
       box-sizing: border-box;
@@ -55,33 +46,21 @@ body {
     }
   }
 
-  &--28 {
-    .calendar__day:nth-child(29) {
-      display: none;
-    }
-
-    .calendar__day:nth-child(30) {
-      display: none;
-    }
-
-    .calendar__day:nth-child(31) {
-      display: none;
+  @for $index from 28 through 31 {
+    &--#{$index} {
+      @for $newindex from ($index + 1) through 31 {
+        .calendar__day:nth-child(#{$newindex}) {
+          display: none;
+        }
+      }
     }
   }
 
-  &--29 {
-    .calendar__day:nth-child(30) {
-      display: none;
-    }
-
-    .calendar__day:nth-child(31) {
-      display: none;
-    }
-  }
-
-  &--30 {
-    .calendar__day:nth-child(31) {
-      display: none;
+  @each $name, $day in $days-of-week {
+    &--#{$name} {
+      .calendar__day:nth-child(1) {
+        margin-left: ($cell-size + $gap-size) * $day;
+      }
     }
   }
 }
