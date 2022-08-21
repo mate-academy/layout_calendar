@@ -1,0 +1,16 @@
+@each $day, $week in $weeks {
+  .calendar--weeks-day-#{$day} {
+    margin-left: calc(101px * #{$weeks});
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@mixin calendar-size($size-calendar) {
+  width: $size-calendar;
+  height: $size-calendar;
+}
