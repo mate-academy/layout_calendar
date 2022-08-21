@@ -1,0 +1,62 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__month {
+    width: $calendar-width;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: $gap-size;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    @include square($box-size);
+    transition: transform 0.5s, background-color 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
+
+@for $data-number from 1 through 31 {
+  .calendar__day--#{$data-number}::before {
+    content: "#{$data-number}";
+    font-size: 30px;
+  }
+}
+
+$start-day: (
+  "mon": 0,
+  "tue": $box-size * 1 + $gap-size * 1,
+  "wed": $box-size * 2 + $gap-size * 2,
+  "thu": $box-size * 3 + $gap-size * 3,
+  "fri": $box-size * 4 + $gap-size * 4,
+  "sat": $box-size * 5 + $gap-size * 5,
+  "sun": $box-size * 6 + $gap-size * 6
+);
+
+@each $weekday, $margin in $start-day {
+  .calendar__month--start-day--#{$weekday} {
+    .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+}
+
+@for $number-of-days from 28 through 31 {
+  .calendar__month--month-length--#{$number-of-days}
+  :nth-last-child(-n + #{31 - $number-of-days}) {
+    display: none;
+  }
+}
