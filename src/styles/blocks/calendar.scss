@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+
+  &__box {
+    width: getCalendarSize($cell-size);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    padding-top: $raise-cell;
+
+    @each $day, $number in $days-of-week {
+      &--start-day--#{$day} {
+        & :first-child {
+          margin-left: (#{($number - 1) * ($cell-size + 1px)});
+        }
+      }
+    }
+
+  }
+
+  &__day {
+    @include square($cell-size);
+    transition: 0.5s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @for $day from 30 through 31 {
+      &--#{$day} {
+        display: none;
+      }
+    }
+
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        position: absolute;
+
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-$raise-cell);
+    }
+  }
+}
