@@ -14,7 +14,15 @@
     text-align: center;
 
     background-color: #eee;
-    cursor: pointer;
+
+    @include animation(all, 0.5s);
+
+    &:hover {
+      transform: translateY(-20px);
+
+      background-color: #ffc0cb;
+      cursor: pointer;
+    }
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
