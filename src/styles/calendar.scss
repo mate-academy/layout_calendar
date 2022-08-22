@@ -8,20 +8,17 @@
   justify-content: flex-start;
   max-width: $container-width;
   padding: 30px;
-  gap: 1px;
+  gap: $block-gap;
 
   &__block {
-    height: 98px;
-    width: 98px;
+    height: $block-part - 2 * $block-gap;
+    width: $block-part - 2 * $block-gap;
     background-color: #eee;
     border: 1px solid #000;
     transition: background-color 0.5s, transform 0.5s;
-
-    &::before {
-      line-height: 100px;
-      display: flex;
-      justify-content: center;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       cursor: pointer;
@@ -42,7 +39,7 @@
 @each $var, $index in $week-day {
   .calendar__start--#{$var} .calendar__block {
     &:first-child {
-      margin-left: $container-width - ($index * $block-width) - $index - 3;
+      margin-left: $index * ($block-part + $block-gap);
     }
   }
 }
