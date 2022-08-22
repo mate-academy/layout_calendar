@@ -1,7 +1,7 @@
 .calendar {
   width: $calendar-width;
 
-  padding: 30px 10px;
+  padding: $calendar-paddings;
 
   display: flex;
   flex-wrap: wrap;
@@ -10,7 +10,7 @@
   @each $day, $margin in $days-of-week {
     &--start-day--#{$day} {
       & :first-child {
-        margin-left: #{$margin};
+        margin-left: getCellMargin($cell-size, $cell-gap, $margin);
       }
     }
   }
