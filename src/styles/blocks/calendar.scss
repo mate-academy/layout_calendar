@@ -11,15 +11,6 @@
     }
   }
 
-  $start-day: 
-    "mon" $width-calendar - (7 * $width-day) - 7px,
-    "tue" $width-calendar - (6 * $width-day) - 6px,
-    "wed" $width-calendar - (5 * $width-day) - 5px,
-    "thu" $width-calendar - (4 * $width-day) - 4px,
-    "fri" $width-calendar - (3 * $width-day) - 3px,
-    "sat" $width-calendar - (2 * $width-day) - 2px,
-    "sun" $width-calendar - (1 * $width-day) - 1px;
-
   @each $day, $start in $start-day {
     &--start-day-#{$day} {
       .calendar__day {
@@ -33,13 +24,12 @@
   &__field {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: $gap;
   }
 
   &__day {
     background-color: $color-day;
-    width: $width-day;
-    height: $width-day;
+    @include day-square($width-day);
     border: 1px solid #000;
     display: flex;
     align-items: center;
