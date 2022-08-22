@@ -1,0 +1,37 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+
+    width: getCalendarWidth($day-block-size);
+    padding-top: $move-block-value;
+
+    @each $name, $index in $days-of-week {
+      &--day-start--#{$name}:first-child {
+        margin-left: #{$day-block-size * $index};
+      }
+    }
+  }
+
+  &__day {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include square($day-block-size);
+
+    border: 1px solid $color-black;
+    background-color: $color-grey;
+
+    @for $number from 1 to 32 {
+      &--#{$number}::before {
+        content: "#{$number}";
+      }
+    }
+  }
+}
