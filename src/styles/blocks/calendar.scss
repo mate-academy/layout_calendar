@@ -1,5 +1,5 @@
 .calendar {
-  width: $width-calendar + 6px;
+  width: $width-calendar;
 
   @for $i from 28 to $day-count {
     &--month-length-#{$day-count} {
@@ -12,14 +12,13 @@
   }
 
   $start-day: 
-    "mon" $width-calendar - (7 * $width-day),
-    "tue" $width-calendar - (6 * $width-day) + 1px,
-    "wed" $width-calendar - (5 * $width-day) + 2px,
-    "thu" $width-calendar - (4 * $width-day) + 3px,
-    "fri" $width-calendar - (3 * $width-day) + 4px,
-    "sat" $width-calendar - (2 * $width-day) + 5px,
-    "sun" $width-calendar - (1 * $width-day) + 6px;
-      
+    "mon" $width-calendar - (7 * $width-day) - 7px,
+    "tue" $width-calendar - (6 * $width-day) - 6px,
+    "wed" $width-calendar - (5 * $width-day) - 5px,
+    "thu" $width-calendar - (4 * $width-day) - 4px,
+    "fri" $width-calendar - (3 * $width-day) - 3px,
+    "sat" $width-calendar - (2 * $width-day) - 2px,
+    "sun" $width-calendar - (1 * $width-day) - 1px;
 
   @each $day, $start in $start-day {
     &--start-day-#{$day} {
