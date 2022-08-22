@@ -1,0 +1,40 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  max-width: $calendar-width;
+  padding: 50px $horizontal-padding;
+
+  &__day {
+    @include day($cell-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-color: #eee;
+    cursor: pointer;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}'
+      }
+    }
+  }
+
+  $start-day:
+    'mon' 0,
+    'tue' 1,
+    'wed' 2,
+    'thu' 3,
+    'fri' 4,
+    'sat' 5,
+    'sun' 6;
+
+  @each $day, $index in $start-day {
+    &--start-day-#{$day} :first-child {
+      margin-left: #{($cell-size * $index) + ($gap * $index)};
+    }
+  }
+}
