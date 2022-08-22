@@ -3,11 +3,11 @@
   flex-wrap: wrap;
   gap: $gap;
 
-  max-width: $calendar-width;
-  padding: 50px $horizontal-padding;
+  max-width: $calendarWidth;
+  padding: 50px $hPadding;
 
   &__day {
-    @include day($cell-size);
+    @include day($cellSize);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,23 +18,14 @@
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
-        content: '#{$day}'
+        content: "#{$day}";
       }
     }
   }
 
-  $start-day:
-    'mon' 0,
-    'tue' 1,
-    'wed' 2,
-    'thu' 3,
-    'fri' 4,
-    'sat' 5,
-    'sun' 6;
-
-  @each $day, $index in $start-day {
+  @each $day, $index in $startDay {
     &--start-day-#{$day} :first-child {
-      margin-left: #{($cell-size * $index) + ($gap * $index)};
+      margin-left: getWidth($cellSize, $index, $gap, 0);
     }
   }
 }
