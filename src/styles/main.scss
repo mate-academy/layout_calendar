@@ -1,3 +1,36 @@
-body {
-  margin: 0;
+@import "./reset";
+@import "./tools/variables";
+@import "./tools/mixin";
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $gap-size;
+  padding-top: 40px;
+}
+
+.calendar__day {
+  font-style: arial, helvetica;
+  font-size: 30px;
+  @include square($cell-size);
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index}) {
+      &::before {
+      content: "#{$index}";
+      }
+    }
+  }
+
 }
