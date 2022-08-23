@@ -1,10 +1,4 @@
-@import "./utils/mixins";
-@import "./utils/variables";
-
 .calendar {
-  margin: auto;
-  padding-top: 60px;
-  
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -40,10 +34,10 @@
     }
   }
 
-  @each $day-name, $margin-left in $day-of-week {
+  @each $day-name, $day-start in $day-of-week {
     &--start-day-#{$day-name} {
       .calendar__day:nth-child(1) {
-        margin-left: $margin-left;
+        margin-left: ($day-start * ($day-size + $days-gap));
       }
     }
   }
