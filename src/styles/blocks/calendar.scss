@@ -1,8 +1,4 @@
 .calendar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
   flex-wrap: wrap;
   width: $day-size * 7 + $gap-size * 6;
   height: $day-size * 6 + $gap-size * 4;
@@ -16,15 +12,11 @@
 
   @for $month-length from 28 through 31 {
     &--length--#{$month-length} :nth-child(n + #{$month-length + 1}) {
-      visibility: hidden;
+      display: none;
     }
   }
 
   &__days {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
     height: $day-size;
     width: $day-size;
     border: 1px solid;
@@ -41,6 +33,7 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
+      transition-duration: 0.5s;
     }
   }
 }
