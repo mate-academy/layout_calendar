@@ -1,13 +1,13 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+
   width: $container-width;
   gap: $box-gap;
   padding: $padding;
-  margin: auto;
 
   &__box {
-    @include box-size;
+    @include square($box-size);
     position: relative;
     border: 1px solid black;
     background-color: #eee;
@@ -18,21 +18,20 @@
       background-color: pink;
       transform: translateY(-20px);
     }
-  }
 
-  @for $last-day from 1 through 31 {
-    &__box--#{$last-day}:before {
-      position: absolute;
-      content: "#{$last-day}";
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    @for $day-num from 1 through 31 {
+      &--#{$day-num}::before {
+        position: absolute;
+        content: "#{$day-num}";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 
   @for $last-day from 28 through 31 {
-    &--month-length--#{$last-day}
-    &__box:nth-child(n + #{$last-day + 1}) {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
