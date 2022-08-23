@@ -3,13 +3,12 @@
   flex-wrap: wrap;
   gap: $calendar-gap;
   width: $calendar-width;
-
   padding: 10px;
 
   &--start-day {
     @each $day, $day-number in $days-of-week {
       &--#{$day} :first-child {
-        margin-left: getOffset($day-number, $day-size, $calendar-gap);
+        margin-left: get-offset($day-number, $day-size, $calendar-gap);
       }
     }
   }
@@ -24,9 +23,25 @@
 
   &__day {
     box-sizing: border-box;
+    @extend %flex-center;
     @include square($day-size);
 
     background-color: #eee;
     border: 1px solid black;
+
+    transition: transform $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 }
