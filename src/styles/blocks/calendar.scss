@@ -1,30 +1,24 @@
 .calendar {
   width: $width-calendar;
+  padding: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
 
-  @for $i from 28 to $day-count {
-    &--month-length--#{$day-count} {
-      .calendar__day {
-        &:nth-last-child(-n+#{$remaining-days}) {
-          display: none;
-        }
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      & :nth-child(n + #{$i + 1}) {
+        display: none;
       }
     }
   }
 
   @each $day, $start in $start-day {
     &--start-day--#{$day} {
-      .calendar__day {
-        &:first-child {
-          margin-left: $start;
-        }
+      & :first-child {
+        margin-left: $start * $width-day + $gap * $start;
       }
     }
-  }
-
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap;
   }
 
   &__day {
@@ -42,8 +36,8 @@
       transform: translateY(-20px);
     }
 
-    @for $i from 1 through $day-count {
-      &--#{$i} {
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
         &::before {
           content: "#{$i}";
           font-size: $font-size;
