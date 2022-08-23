@@ -7,23 +7,15 @@
   padding: 40px $calendar-side-paddings 0;
 
   &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
     @include square($day-size);
     border: 1px solid #000;
     background-color: #eee;
-    transition: ease 0.5s;
+    transition: background-color, transform 0.5s;
     cursor: pointer;
 
     &:hover {
       background-color: #ffc0cb;
       transform: translateY(-20px);
-    }
-
-    &::before {
-      position: absolute;
     }
 
     @for $index from 1 through 31 {
@@ -34,18 +26,15 @@
   }
 
   @each $day, $number in $days-count {
-    &--start-day--#{$day} {
-      & :first-child {
-        margin-left: $number * $day-size + $gap-width * $number;
+    &--start-day--#{$day} :first-child {
+        margin-left: $number * ($day-size + $gap-width);
       }
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length--#{$index} {
-      & :nth-child(n + #{$index + 1}) {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
         display: none;
-      }
     }
   }
 }
