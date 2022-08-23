@@ -5,19 +5,15 @@
   width: $calendar-width;
   padding: 10px;
 
-  &--start-day {
-    @each $day, $day-number in $days-of-week {
-      &--#{$day} :first-child {
-        margin-left: get-offset($day-number, $day-size, $calendar-gap);
-      }
+  @each $day, $day-number in $days-of-week {
+    &--start-day--#{$day} :first-child {
+      margin-left: get-offset($day-number, $day-size, $calendar-gap);
     }
   }
 
-  &--month-length {
-    @for $num-of-days from 28 through 31 {
-      &--#{$num-of-days} :nth-child(n + #{$num-of-days + 1}) {
-        display: none;
-      }
+  @for $num-of-days from 28 through 31 {
+    &--month-length--#{$num-of-days} :nth-child(n + #{$num-of-days + 1}) {
+      display: none;
     }
   }
 
