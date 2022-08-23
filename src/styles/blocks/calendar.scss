@@ -9,7 +9,15 @@
   @each $name, $day in $days {
     &--start-day--#{$name} {
       .calendar__day:first-child {
-        margin-left: ($cell-size + $cell-gap) * ($day - 1);
+        margin-left: getOrder($cell-size, $cell-gap, $day);
+      }
+    }
+  }
+
+  @for $cell-num from 28 through 31 {
+    &--month-length--#{$cell-num} {
+      & :nth-child(n + #{$cell-num + 1}) {
+        display: none;
       }
     }
   }
@@ -24,7 +32,7 @@
     background-color: #eee;
     border: 1px solid black;
 
-    transition: all 0.5s;
+    @include smoothTransition ($background-transition, $cell-transform);
 
     @for $index from 1 through 31 {
       &--#{$index}::before {
@@ -32,16 +40,10 @@
       }
     }
 
-    @for $cell-num from 30 through 31 {
-      &--#{$cell-num} {
-        display: none;
-      }
-    }
-
     &:hover {
       background-color: pink;
-
       cursor: pointer;
+
       transform: translateY(-20px);
     }
   }
