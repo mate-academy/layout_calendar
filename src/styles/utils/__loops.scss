@@ -1,0 +1,34 @@
+@each $length, $value in $month-length {
+  .calendar__box--#{$length} {
+
+    .calendar {
+      @for $date from 1 through $value {
+        &__day--#{$date} {
+          background-color: #eee;
+          border: 1px solid #000;
+        }
+
+        &__day--#{$date}::before {
+          content: "#{$date}";
+        }
+
+        &__day--#{$date}:hover {
+          background-color: pink;
+
+          cursor: pointer;
+
+          transform: translateY(-20px);
+          transition: 0.5s;
+        }
+      }
+    }
+  }
+}
+
+@each $day, $value in $start-day {
+  .calendar__box--#{$day}:first-child {
+    .calendar__day--1 {
+      margin-left: #{$value * $cel-size + $value};
+    }
+  }
+}
