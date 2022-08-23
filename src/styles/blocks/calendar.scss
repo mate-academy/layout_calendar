@@ -14,8 +14,8 @@
   }
 
   &--month-length {
-    @for $i from 28 through 31 {
-      &--#{$i} :nth-child(n + #{$i + 1}) {
+    @for $num-of-days from 28 through 31 {
+      &--#{$num-of-days} :nth-child(n + #{$num-of-days + 1}) {
         display: none;
       }
     }
@@ -39,9 +39,9 @@
       background-color: pink;
     }
 
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
       }
     }
   }
