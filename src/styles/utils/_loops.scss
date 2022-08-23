@@ -1,0 +1,22 @@
+@for $index from 1 through 31 {
+  .calendar > :nth-child(#{$index}) {
+    background-color: #eee;
+    border: 1px solid black;
+
+    &::before {
+      content: "#{$index}";
+    }
+  }
+}
+
+@for $index from 28 through 30 {
+  .calendar--month-length--#{$index}>:nth-child(n+#{$index+1}) {
+    display: none;
+  }
+}
+
+@each $start-day, $shift in $week {
+  .calendar--start-day--#{$start-day} > :first-child {
+    margin-left: $shift;
+  }
+}
