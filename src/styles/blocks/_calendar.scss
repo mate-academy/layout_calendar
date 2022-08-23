@@ -1,9 +1,6 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  min-width: getMaxWidth(
-    $day-box-size, $day-box-gap, $day-box-paddings
-  );
   max-width: getMaxWidth(
     $day-box-size, $day-box-gap, $day-box-paddings
   );
@@ -35,7 +32,7 @@
 
     background-color: $day-box-color;
     border: 1px solid black;
-    transition: background-color, transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -44,10 +41,8 @@
     }
 
     @for $day-value from 1 through 31 {
-      &:nth-child(#{$day-value}) {
-        &::before {
-          content: "#{$day-value}";
-        }
+      &:nth-child(#{$day-value})::before {
+        content: "#{$day-value}";
       }
     }
   }
