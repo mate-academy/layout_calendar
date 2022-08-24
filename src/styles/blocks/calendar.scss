@@ -1,0 +1,20 @@
+.calendar {
+  display: flex;
+  margin: auto;
+  width: $calendar-width;
+  padding: $calendar-padding * 2 $calendar-padding;
+  gap: $gap;
+  flex-wrap: wrap;
+
+  @for $idx from 1 through 3 {
+    &--month-length--#{31 - $idx} :nth-last-child(-n + #{$idx}) {
+      display: none;
+    }
+  }
+
+  @each $day-of-week, $index in $week {
+    &--start-day--#{$day-of-week} :first-child {
+      margin-left: ($cell-size + $gap) * $index;
+    }
+  }
+}
