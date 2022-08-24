@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     margin: 0 auto;
     gap: 1px;
-    width: 7 * $square-side + 6 * $gap;
+    width: $days-number * $square-side + ($days-number - 1) * $gap;
   }
 
   &__day {
@@ -22,7 +22,8 @@
 
     border: 1px solid $border-color;
 
-    transition: transform 0.5s ease, background-color 0.5s ease;
+    transition: transform $transition-duration ease,
+      background-color $transition-duration ease;
 
     @for $i from 1 through 31 {
       &--#{$i}::before {
@@ -39,7 +40,7 @@
 
   @each $day, $margin in $days {
     &__container--start-day--#{$day}
-    &__day:first-child:first-child {
+    &__day:first-child {
       margin-left: $margin;
     }
   }
