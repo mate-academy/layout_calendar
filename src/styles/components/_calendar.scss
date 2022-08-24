@@ -1,6 +1,5 @@
 .calendar {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
   width: $container-width;
   margin: auto;
@@ -33,19 +32,16 @@
       background-color: pink;
       transform: translate(0, -20px);
     }
-  }
 
-  @for $i from 1 through 31 {
-    &__day--#{$i}::before {
-      content: "#{$i}";
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        content: "#{$i}";
 
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
