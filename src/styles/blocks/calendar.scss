@@ -1,7 +1,3 @@
-@import "./utils/function";
-@import "./utils/mixin";
-@import "./utils/variables";
-
 .calendar {
   display: flex;
   justify-content: center;
@@ -14,7 +10,7 @@
     padding: 20px 10px 0;
 
     @each $day, $number in $weekdays {
-      &--start-day--#{$day} {
+      &--start-day--#{$day}.calendar__day--1 {
         margin-left: (#{$number * ($size-form + 1px)});
       }
     }
@@ -37,7 +33,7 @@
     align-items: center;
     @include square($size-form);
 
-    transition: background-color 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
       &--#{$index}::before {
