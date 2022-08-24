@@ -9,18 +9,18 @@
   &__box {
     @include square($box-size);
     position: relative;
-    border: 1px solid black;
-    background-color: #eee;
-    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+    border: 1px solid $border-color;
+    background-color: $background-color;
+    transition: background-color $duration, transform $duration;
 
     &:hover {
       cursor: pointer;
-      background-color: pink;
+      background-color: $hover-color;
       transform: translateY(-20px);
     }
 
     @for $day-num from 1 through 31 {
-      &--#{$day-num}::before {
+      &:nth-child(#{$day-num})::before {
         position: absolute;
         content: "#{$day-num}";
         top: 50%;
@@ -37,8 +37,8 @@
   }
 
   @each $day, $day-num in $week {
-    &--start-day--#{$day} &__box--1 {
-      margin-left: $day-num * $box-shift;
+    &--start-day--#{$day} :first-child {
+      margin-left: calcMargin($day-num);
     }
   }
 }
