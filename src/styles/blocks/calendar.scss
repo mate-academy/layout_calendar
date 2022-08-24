@@ -4,22 +4,24 @@
   gap: $gap;
 
   max-width: $calendarWidth;
-  padding: 50px $hPadding;
+  padding: 50px $horizontalPadding;
 
   &__day {
-    @include day($cellSize);
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-color: #eee;
+    @include cell($cellSize);
 
-    @include animation(all, 0.5s);
+    border: 1px solid $cellBorderColor;
+    background-color: $cellBgColor;
+
+    transition: transform $transitionDuration, background-color $transitionDuration;
 
     &:hover {
       transform: translateY(-20px);
 
-      background-color: #ffc0cb;
+      background-color: $cellBgColorOnHover;
       cursor: pointer;
     }
 
@@ -32,7 +34,7 @@
 
   @each $day, $index in $startDay {
     &--start-day-#{$day} :first-child {
-      margin-left: getWidth($cellSize, $index, $gap, 0);
+      margin-left: calcWidth($cellSize, $index, $gap, 0);
     }
   }
 
