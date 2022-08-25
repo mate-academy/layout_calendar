@@ -1,3 +1,83 @@
+$day-size: 100px;
+$gap: 1px;
+$shift: $day-size + $gap;
+
+$week:
+  "mon" 0,
+  "tue" $shift,
+  "wed" $shift * 2,
+  "thu" $shift * 3,
+  "fri" $shift * 4,
+  "sat" $shift * 5,
+  "sun" $shift * 6;
+
+%numCenter {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin square {
+  width: $day-size;
+  height: $day-size;
+  border: 1px solid;
+}
+
+html,
 body {
+  @include flex;
   margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 7 * $shift + 10px;
+  gap: 1px;
+
+  @each $day, $shift in $week {
+    &--start-day--#{$day} *:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &--month-length--#{$index}
+    &__day:nth-last-child(-n + #{31 - $index}) {
+      display: none;
+    }
+  }
+ 
+  &__day {
+    @include flex;
+    @include square;
+    @extend %numCenter;
+    background-color: #eee;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $numDay from 1 through 31 {
+      &:nth-child(n + #{$numDay})::before {
+        content: "#{$numDay}";
+      }
+    }
+  }
 }
