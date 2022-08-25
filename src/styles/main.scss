@@ -1,48 +1,83 @@
-$days--sixe:100px;
+$day-size: 100px;
+$gap: 1px;
+$shift: $day-size + $gap;
+
+$week:
+  "mon" 0,
+  "tue" $shift,
+  "wed" $shift * 2,
+  "thu" $shift * 3,
+  "fri" $shift * 4,
+  "sat" $shift * 5,
+  "sun" $shift * 6;
+
+%numCenter {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin square {
+  width: $day-size;
+  height: $day-size;
+  border: 1px solid;
+}
+
+html,
+body {
+  @include flex;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
 
 * {
   box-sizing: border-box;
 }
 
-.page {
-  display: flex;
-  height: 100vh;
-}
-
 .calendar {
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  width: 7 * $days--sixe + 10px;
+
+  width: 7 * $shift + 10px;
   gap: 1px;
-}
 
-.calendar__days {
-  width: $days--sixe;
-  height: $days--sixe;
-  background-color: #eee;
-  border: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-  transition: transform 0.5s;
-
-  @for $index from 1 through 31 {
-    &:nth-child( n + #{$index})::before {
-      content: "#{$index}";
+  @each $day, $shift in $week {
+    &--start-day--#{$day} *:first-child {
+      margin-left: $shift;
     }
   }
 
-  &:hover {
-    cursor: pointer;
-    background-color: #faafbe;
-    transform: translateY(-20px);
+  @for $index from 1 through 31 {
+    &--month-length--#{$index}
+    &__day:nth-last-child(-n + #{31 - $index}) {
+      display: none;
+    }
   }
+ 
+  &__day {
+    @include flex;
+    @include square;
+    @extend %numCenter;
+    background-color: #eee;
+    transition: transform 0.5s;
 
-  &:nth-child(1) {
-    margin-left: 6 * $days--sixe + 6px;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $numDay from 1 through 31 {
+      &:nth-child(n + #{$numDay})::before {
+        content: "#{$numDay}";
+      }
+    }
   }
 }
