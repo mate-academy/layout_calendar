@@ -1,0 +1,56 @@
+.calender {
+  width: $width-calc;
+  display: flex;
+  flex-direction: row;
+
+  flex-wrap: wrap;
+  gap: $box-gap;
+  padding: $padding;
+
+  &__box {
+    background-color: $calender-color;
+    height: $box-size;
+    line-height: $box-size;
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 30px;
+    text-align: center;
+    flex-basis: $box-size;
+    border: 1px solid black;
+
+    transition: background-color, transform 500ms ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background: $block-hover-bg;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $i in $week-days {
+    &--start-day_#{$day} {
+      .calender__box:first-child {
+        margin-left: ($box-size + 2 + $box-gap) * $i ;
+      }
+    }
+  }
+
+  @for $end-of-month from 1 through 31 {
+    &--month-length_#{$end-of-month} {
+      .calender__box:nth-child(n + #{$end-of-month + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  @for $i from 1 through 31 {
+    div:nth-child(#{$i})::after {
+      content: "#{$i}";
+    }
+  }
+}
