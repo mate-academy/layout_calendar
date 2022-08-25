@@ -3,3 +3,52 @@
   align-items: center;
   justify-content: center;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width;
+  padding: 50px $calendar-padding 0;
+
+  @each $day, $number in $days-of-the-week {
+    &--start-day--#{$day} {
+      & :first-child {
+        margin-left: $calendar-day-width * $number;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-lenght--#{$i} {
+      & :nth-child(1n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+
+    background-color: #eee;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    transition: background-color 0.3s, transform 0.3s;
+
+    @include square($calendar-day-width);
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #c56f6f;
+      transform: translateY(-20px);
+    }
+  }
+}
