@@ -12,10 +12,10 @@
     justify-content: center;
     align-items: center;
 
-    border: 1px solid black;
-    background: #eee;
+    border: 1px solid $color-black;
+    background: $color-white;
 
-    transition: background-color 0.5s, transform 0.5s;
+    transition: background-color $transition-duration, transform $transition-duration;
 
     @for $index from 1 through 31 {
 
@@ -23,15 +23,13 @@
 
         &::before {
           content: '#{$index}';
-          font-family: Arial, sans-serif;
-          font-size: 30px;
         }
       }
     }
 
     &:hover {
       cursor: pointer;
-      background-color: pink;
+      background-color: $color-pink;
       transform: translateY(-20px);
     }
   }
@@ -49,7 +47,7 @@
     &--month-length {
 
     @for $day from 28 through 31 {
-      
+
       &--#{$day - 1} :nth-child(n + #{$day}) {
         visibility: hidden;
       }
