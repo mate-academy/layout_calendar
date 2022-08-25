@@ -32,18 +32,18 @@
       transform: translateY(-$cell-transform-hover);
       transition: 0.5s;
     }
-  }
 
-  @for $i from 1 through 31 {
-    &__cell--day--#{$i}::before {
-      content: "#{$i}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
     }
   }
 
-  @each $day, $margin in $week {
+  @each $day, $start in $week {
     &__field--start-day--#{$day} {
       & :first-child {
-        margin-left: #{$margin};
+        margin-left: $start * $cell-shift;
       }
     }
   }
