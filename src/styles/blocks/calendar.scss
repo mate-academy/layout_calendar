@@ -22,6 +22,12 @@
     }
   }
 
+  @for $i from 1 through 31 {
+    & > :nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -39,12 +45,6 @@
       cursor: pointer;
       background-color: $hover-color;
       transform: translateY(-20px);
-    }
-
-    @for $i from 1 through 31 {
-      &--date--#{$i}::before {
-        content: "#{$i}";
-      }
     }
   }
 }
