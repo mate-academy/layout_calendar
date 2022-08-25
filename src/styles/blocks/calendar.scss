@@ -21,19 +21,20 @@
     background-color: $background-color-of-blocks;
 
     cursor: pointer;
-    transition: transform 0.5s, background-color 0.5s;
+    transition: transform $transition-duration,
+      background-color $transition-duration;
 
     &:hover {
       transform: translateY(-20px);
       background-color: $hover-color;
     }
-  }
 
-  @for $day from 1 through 31 {
-    &__day--number-#{$day}::before {
-      content: "#{$day}";
-      position: absolute;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+        position: absolute;
 
+      }
     }
   }
 
@@ -47,7 +48,7 @@
 
   @for $day from 28 through 31 {
     &--month-length-#{$day} {
-      & :nth-child(n+#{$day+1}) {
+      & :nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
