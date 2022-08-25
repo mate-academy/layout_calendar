@@ -5,9 +5,11 @@
   align-items: center;
   gap: 1px;
   width: 725px;
+  margin: auto;
+  margin-top: 35px;
 }
 
-.day {
+.calendar__day {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +18,21 @@
   border: 1px solid;
   background-color: #eee;
   transition: transform 0.5s;
+
+  @for $index from 29 through 31 {
+    &:nth-child(#{$index}) {
+      display: none;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      position: absolute;
+      font-family: Arial, sans-serif;
+      font-size: 40px;
+    }
+  }
 
   &:hover {
     transform: translateY(-20px);
