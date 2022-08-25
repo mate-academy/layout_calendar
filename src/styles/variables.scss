@@ -1,11 +1,14 @@
 $size: 100px;
 $gap: 1px;
-$width: ($size * 7) + ($gap * 6);
-
+$amountOfDays: ($size * 7) + ($gap * 6);
+$backgtoundcolor: #f698a9;
+@function getSize($size, $gap) {
+  @return $size + $gap;
+}
 $days:
-  "tue" ($size+$gap),
-  "wed" 2 * ($size+$gap),
-  "thu" 3 * ($size+$gap),
-  "fri" 4 * ($size+$gap),
-  "sat" 5 * ($size+$gap),
-  "sun" 6 * ($size+$gap);
+  "tue" (getSize($size, $gap)),
+  "wed" 2 * (getSize($size, $gap)),
+  "thu" 3 * (getSize($size, $gap)),
+  "fri" 4 * (getSize($size, $gap)),
+  "sat" 5 * (getSize($size, $gap)),
+  "sun" 6 * (getSize($size, $gap));
