@@ -14,9 +14,6 @@
 
     @include square;
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-
     background-color: #eee;
     border: 1px solid black;
 
@@ -35,27 +32,11 @@
     }
   }
 
-  &--month-length--28 {
-    @for $var from 29 through 31 {
-      .calendar__day--#{$var} {
-        display: none;
-      }
-    }
-  }
-
-  &--month-length--29 {
-    @for $var from 30 through 31 {
-      .calendar__day--#{$var} {
-        display: none;
-      }
-    }
-  }
-
-  &--month-length--30 {
-    .calendar__day--31 {
+  @for $var from 28 to 32 {
+    &--month-length--#{$var}
+    &__day:nth-child(n + #{$var + 1}) {
       display: none;
     }
-
   }
 
   @each $day, $margin in $margins {
@@ -66,3 +47,6 @@
     }
   }
 }
+
+
+
