@@ -22,6 +22,7 @@
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::after {
         content: "#{$i}";
+        font-size: 30px;
       }
     }
 
@@ -34,7 +35,7 @@
   }
 
   @each $day-name,
-  $day-i in $day-of-week {
+    $day-i in $day-of-week {
     &--start-day-#{$day-name} {
       .calendar__day:nth-child(1) {
         margin-left: ($day-i * ($cell-size + $cell-gap));
