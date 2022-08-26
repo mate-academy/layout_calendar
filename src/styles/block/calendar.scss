@@ -1,0 +1,48 @@
+.calendar {
+  @extend %display;
+  padding-top: 50px;
+
+  &__list {
+    width: $widthCalendar;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+
+    @each $weekday, $number in $days {
+      &--start-day--#{$weekday} {
+        & :first-child {
+          margin-left: $number * ($ceilSize + $gap);
+        }
+      }
+    }
+
+    @for $day from 28 through 31 {
+      &--month-length--#{$day} {
+        & :nth-child(n + #{$day + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__item {
+    box-sizing: inherit;
+    @include square($ceilSize);
+    @extend %display;
+    background-color: #eee;
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $increment from 1 through 31 {
+      &--#{$increment}::before {
+        content: "#{$increment}";
+        color: black;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
