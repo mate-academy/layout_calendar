@@ -1,0 +1,66 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__field {
+    display: flex;
+    width: getWidthCalendar(
+      $cell-size, 
+      $cell-gap, 
+      $days-of-week-count, 
+      $padding-field);
+
+    flex-wrap: wrap;
+    gap: $cell-gap;
+    padding: $padding-field;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+
+    font-size: $cell-font-size;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: lightpink;
+      transform: translateY(-$cell-translateY);
+    }
+
+    @for $index from 1 through $days-of-month-count {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  $week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $day in $week {
+    &__field--start-day--#{$name} &__day:first-child {
+      margin-left: getMarginLeft($day, $cell-size, $cell-gap);
+    }
+  }
+
+  @for $index from 28 through $days-of-month-count {
+    &__field--month-lenth--#{$index} &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
