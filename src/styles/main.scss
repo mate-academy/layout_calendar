@@ -1,3 +1,70 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+  box-sizing: border-box;
+}
+
+.calendar {
+  --cell-size: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 750px;
+  gap: 1px;
+  padding: 10px;
+  margin: auto;
+}
+
+.day {
+  background-color: #eee;
+  height: var(--cell-size);
+  width: var(--cell-size);
+  border: 1px black solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.day:hover {
+  background-color: pink;
+  transform: translateY(-20px);
+  cursor: pointer;
+}
+
+@for $index from 1 through 31 {
+  .day--#{$index}:before {
+    content: "#{$index}";
+  }
+}
+
+$days-of-week: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+
+@for $day from 28 through 31 {
+
+  .calendar--month-length--#{$day - 1} :nth-child(n + #{$day}) {
+    visibility: hidden;
+  }
+}
+
+@each $day-name, $day-number in $days-of-week {
+  .calendar--start-day-#{$day-name} .day:nth-child(1) {
+    margin-left: #{$day-number * 101}px;
+  }
 }
