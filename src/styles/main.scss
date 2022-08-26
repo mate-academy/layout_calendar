@@ -35,28 +35,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition-duration: 0.9s;
 
   &:hover {
-    transition-duration: 0.9s;
-    transform:translateY(-20px);
+    transform: translateY(-20px);
     background-color: pink;
     cursor: pointer;
   }
 
 }
+
 @for $index from 0 through 30 {
-  .day--#{$index}:before {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 30px;
-    color: #004;
-    content: "#{$index + 1}";
+  .day:nth-child(#{$index}):before{
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 30px;
+        color: #004;
+        content: "#{$index}";
   }
 }
 
 @for $index from 27 through 30 {
-.calendar--month-lenth--#{$index} .day:nth-child(n + #{$index + 1}) {
-  display: none;
-}
+  .calendar--month-lenth--#{$index} .day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
 }
 
 $week:
@@ -68,11 +69,8 @@ $week:
   "sat" shift(5),
   "sun" shift(6);
 
-  @each $name, $value in $week {
-    .calendar--start-day--#{$name}:first-child {
-      margin-left: $value * 1px;
-    }
+@each $name, $value in $week {
+  .calendar--start-day--#{$name}:first-child {
+    margin-left: $value * 1px;
   }
-
-
-
+}
