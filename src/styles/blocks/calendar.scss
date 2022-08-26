@@ -20,24 +20,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.5s ease-in-out, transform 0.3s ease-in-out;
 
     &:hover {
       background-color: pink;
-
-      transition: 0.5s;
 
       transform: translate(0, -20px);
     }
   }
 
-
-  @for $number from 1 through 31 {
-    &__day--day-#{$number} {
-      &::before {
-        content: "#{$number}";
+    @for $date from 1 through 31 {
+      &__day:nth-child(#{$date})::before {
+        content: "#{$date}";
       }
     }
-  }
+
 
   @for $count from 28 through 31 {
     &--month-length--#{$count} {
@@ -47,10 +44,11 @@
     }
   }
 
-  &__day--day-1 {
-    margin-left: calc(
-      (#{$width-day} * 6) + (#{$gap} * 6)
-    );
+  @each $day, $number in $start-days {
+    &--start-day--#{$day} {
+      & :first-child {
+        margin-left: ($width-day * $number) + $number;
+      }
+    }
   }
-
 }
