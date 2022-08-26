@@ -1,7 +1,5 @@
 .calendar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @extend %display;
   padding-top: 50px;
 
   &__list {
@@ -13,7 +11,7 @@
     @each $weekday, $number in $days {
       &--start-day--#{$weekday} {
         & :first-child {
-          margin-left: $number * ($ceilSize + $gap + 2px);
+          margin-left: $number * ($ceilSize + $gap);
         }
       }
     }
@@ -30,9 +28,7 @@
   &__item {
     box-sizing: inherit;
     @include square($ceilSize);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %display;
     background-color: #eee;
     transition: transform 0.5s, background-color 0.5s;
 
@@ -45,7 +41,8 @@
 
     &:hover {
       transform: translateY(-20px);
-      background-color: rgb(173, 54, 54);
+      background-color: pink;
+      cursor: pointer;
     }
   }
 }
