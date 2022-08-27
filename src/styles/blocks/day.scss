@@ -1,0 +1,40 @@
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include square($dayBlockSize);
+
+  background-color: $dayBlockBackground;
+  border: 1px solid $dayBorderColor;
+
+  font-size: 30px;
+
+  transition: backgroudd-color, transform 400ms ease-in-out;
+
+  @each $weekDay, $dayValue in $weekDays {
+    &:first-child {
+      margin-left: ($dayBlockSize + $dayBlockGap) * $dayValue;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length_#{$lastDay} {
+      &:nth-child(n + #{$lastDay + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $dayBlockHoverBG;
+    transform: translateY(-20px);
+  }
+}
