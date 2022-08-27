@@ -1,0 +1,49 @@
+@import "../utils/mixins";
+@import "../utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 706px;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include square;
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    cursor: pointer;
+    transition: background-color 0.5s;
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+
+  @for $var from 1 to 32 {
+    & :nth-child(#{$var}):before {
+      content: "#{$var}";
+    }
+  }
+
+  @for $var from 28 to 32 {
+    &--month-length--#{$var}
+    &__day:nth-child(n + #{$var + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $margin in $margins {
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+}
