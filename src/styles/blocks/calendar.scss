@@ -27,7 +27,7 @@
   }
 
   @for $var from 1 to 32 {
-    &__day--#{$var}::before {
+    & :nth-child(#{$var}):before {
       content: "#{$var}";
     }
   }
@@ -41,12 +41,9 @@
 
   @each $day, $margin in $margins {
     &--start-day--#{$day} {
-      .calendar__day--1 {
+      .calendar__day:first-child {
         margin-left: $margin;
       }
     }
   }
 }
-
-
-
