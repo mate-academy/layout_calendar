@@ -17,16 +17,22 @@
     "sat" 505px,
     "sun" 606px;
 
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 
   &__flex {
     width: 710px;
     display: flex;
     flex-wrap: wrap;
     gap: 1px;
+
+    @each $name, $number in $numbers {
+      &--first--#{$name}:first-child {
+        margin-left: #{$number};
+      }
+    }
   }
 
   &__day {
@@ -41,12 +47,6 @@
     justify-content: center;
     flex-shrink: 0;
     transition: background-color 0.5s, transform 0.5s;
-
-    @each $name, $number in $numbers {
-      &--first--#{$name} {
-        margin-left: #{$number};
-      }
-    }
 
     &:hover {
       cursor: pointer;
