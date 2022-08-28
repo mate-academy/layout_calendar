@@ -10,27 +10,7 @@
 
   font-size: 30px;
 
-  transition: backgroudd-color, transform 400ms ease-in-out;
-
-  @each $weekDay, $dayValue in $weekDays {
-    &:first-child {
-      margin-left: ($dayBlockSize + $dayBlockGap) * $dayValue;
-    }
-  }
-
-  @for $day from 1 through 31 {
-    &:nth-child(#{$day})::before {
-      content: "#{$day}";
-    }
-  }
-
-  @for $lastDay from 28 through 31 {
-    &--month-length_#{$lastDay} {
-      &:nth-child(n + #{$lastDay + 1}) {
-        visibility: hidden;
-      }
-    }
-  }
+  transition: background-color, transform 500ms ease-in-out;
 
   &:hover {
     cursor: pointer;
