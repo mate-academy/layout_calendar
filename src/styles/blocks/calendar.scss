@@ -7,7 +7,7 @@
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} {
-      & :nth-child(n + #{$i + 1}) {
+      & :nth-child(n + #{$i + 2}) {
         display: none;
       }
     }
@@ -28,7 +28,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.5s ease;
+    transition: $time-transition ease;
     cursor: pointer;
 
     &:hover {
@@ -40,7 +40,7 @@
       &:nth-child(#{$i}) {
         &::before {
           content: "#{$i}";
-          font-size: $font-size;
+          font-size: $content-font;
         }
       }
     }
