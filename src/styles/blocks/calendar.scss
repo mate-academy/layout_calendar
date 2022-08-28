@@ -11,18 +11,15 @@
     margin: auto;
   }
 
-  $start-day:
-    "mon"  0,
-    "tue" $margin-cell-shift,
-    "wed" 2 * $margin-cell-shift,
-    "thu" 3 * $margin-cell-shift,
-    "fri" 4 * $margin-cell-shift,
-    "sat" 5 * $margin-cell-shift,
-    "sun" 6 * $margin-cell-shift;
-
   @each $day, $margin-left in $start-day {
-    &--start-day--#{$day} &__day--1 {
+    &--start-day--#{$day} &__day:first-child {
       margin-left: $margin-left;
+    }
+  }
+
+  @each $i in $month-length {
+    &--month-length--#{$i} > .calendar__day:nth-child(#{$i}) ~ .calendar__day {
+      display: none;
     }
   }
 
@@ -44,16 +41,10 @@
       animation-fill-mode: forwards;
     }
 
-    @for $i from 1 through $month-length {
-      &--#{$i}::before {
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::after {
         content: "#{$i}";
         margin: auto;
-      }
-    }
-
-    @for $i from 1 through $month-length {
-      &:nth-child(#{$month-length}) ~ .calendar__day {
-        display: none;
       }
     }
   }
