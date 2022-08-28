@@ -1,0 +1,44 @@
+.page {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  &__calendar {
+    margin: auto;
+    padding: 30px $calendar-hrz-padding;
+  }
+}
+
+.calendar {
+  max-width: $calendar-withd;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    display: flex;
+    width: $square-size;
+    height: $square-size;
+    align-items: center;
+    justify-content: center;
+    background-color: $bg-color;
+    border: $square-border;
+  
+    @for $date from 1 through 31 {
+      &:nth-child(n + #{$date})::before {
+        content: '#{$date}';
+      }
+    }
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: background-color 0.5s, transform 0.5s;
+  }
+
+  @each $day, $pos in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $pos;
+    }
+  }
+}
