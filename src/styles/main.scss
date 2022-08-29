@@ -1,3 +1,15 @@
+@import "variables";
+@import "calendar.scss";
+
+// якщо це перенести в calendsr.scss, то перестає виділятись first-child
+@each $day-of-week, $day-number in $week {
+  .calendar--start-day--#{$day-of-week} {
+    .calendar__day:first-child {
+      margin-left: ($day-number - 1) * ($day-cell-size + 1);
+    }
+  }
+}
+
 body {
   margin: 0;
 }
