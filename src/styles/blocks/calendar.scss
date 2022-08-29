@@ -1,0 +1,23 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 50px 0;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+  }
+
+  @each $day-of-week, $margin in $days-of-week {
+    &--start-day--#{$day-of-week} > &__day:nth-child(1) {
+      margin-left: $margin;
+    }
+  }
+
+  @each $last-day, $cut in $last-days {
+    &--month-length--#{$last-day} > &__day:nth-last-child(-n + #{$cut}) {
+      display: none;
+    }
+  }
+}
