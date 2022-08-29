@@ -6,6 +6,15 @@
   gap: $gap--width;
   padding: 150px $calendar--padding 0;
 
+  @each $day, $number in $days-of-week {
+    &--start-day--#{$day} {
+      & :nth-child(1) {
+        margin-left: $number * $calendar-day--width +
+          $gap--width * $number;
+      }
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -23,22 +32,9 @@
       transform: translateY(-20px);
     }
 
-    &::before {
-      position: absolute;
-    }
-
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-      }
-    }
-  }
-
-  @each $day, $number in $days-of-week {
-    &--start-day--#{$day} {
-      & :first-child {
-        margin-left: $number * $calendar-day--width +
-          $gap--width * $number;
       }
     }
   }
