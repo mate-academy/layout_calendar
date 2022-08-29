@@ -7,6 +7,16 @@
   width: 725px;
   margin: auto;
   margin-top: 35px;
+
+  @for $day from 28 through 31 {
+    &--month-lenght_#{$day} {
+      @for $index from ($day) through 31 {
+        &__day:nth-child(#{$day + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .calendar__day {
@@ -18,12 +28,6 @@
   border: 1px solid;
   background-color: #eee;
   transition: transform 0.5s;
-
-  @for $index from 29 through 31 {
-    &:nth-child(#{$index}) {
-      display: none;
-    }
-  }
 
   @for $index from 1 through 31 {
     &:nth-child(#{$index})::before {
