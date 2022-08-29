@@ -6,6 +6,13 @@
   font-size: 30px;
   padding: 10px;
   width: calendarWidth($gap, $size, $columns);
+  @each $day, $num  in $days {
+    &--start-day-#{$day} {
+      .calendar__item:first-child {
+        margin-left: start-day-margin($num);
+      }
+    }
+  }
   &__item {
     list-style: none;
     box-sizing: border-box;
@@ -23,19 +30,13 @@
       transform: translateY(-20px);
     }
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
-      }
-    }
-
-    @each $day, $num  in $days {
-      &--start-day {
-        margin-left: calendarWidth($gap, $size, $columns) - $size;
       }
     }
   }
   @for $index from 28 through 31 {
-    &__month-length--#{$index} {
+    &--month-length-#{$index} {
       @for $index from $index through 31 {
         .calendar__item:nth-child(#{$index + 1}) {
           display: none;
