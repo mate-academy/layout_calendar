@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+
+  margin: auto;
+  margin-top: 25px;
+
+  width: container-size($block-size, $number-of-coluns, $block-padding);
+  flex-wrap: wrap;
+
+  gap: $gap;
+
+  &__blocks {
+    display: flex;
+    box-sizing: border-box;
+
+    padding: $block-padding;
+    align-items: center;
+    justify-content: center;
+
+    @include square($block-size);
+
+    background-color: #eee;
+    border: 1px black solid;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+
+  &__blocks:hover {
+    cursor: pointer;
+
+    background-color: pink;
+
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+
+  @for $block from 1 through 31 {
+    &__blocks:nth-child(#{$block})::before {
+      content: "#{$block}";
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $day-num in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: firstDay($gap, $block-size, $day-num - 1);
+    }
+  }
+}
