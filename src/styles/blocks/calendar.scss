@@ -1,0 +1,23 @@
+.calendar {
+  display: flex;
+  width: $width-page;
+  flex-direction: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &--start-day {
+    @each $day, $margin-left in $week-day {
+      &--#{$day} > :first-child {
+        margin-left: $margin-left;
+      }
+    }
+  }
+
+  &--month-length {
+    @for $days-month from 28 through 31 {
+      &--#{$days-month} > :nth-child(n + #{$days-month +1}) {
+        visibility: hidden;
+      }
+    }
+  }
+}
