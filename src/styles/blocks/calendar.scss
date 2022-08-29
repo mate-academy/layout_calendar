@@ -31,38 +31,18 @@
     width: 707px;
     margin: $blocks-padding;
 
-    @for $index from 1 through $days-in-monts {
-      &-length--#{$index} {
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #eee;
-        height: $squre-size;
-        width: $squre-size;
-        border: 1px solid black;
-        margin: $small-blocks--margin;
-        cursor: pointer;
-      }
-    }
-
-    @for $index from 1 through $days-in-monts {
-      &-length--#{$index}::before {
-        content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        transition-property: transform;
-      }
-    }
-
-    @for $index from 1 through $days-in-monts {
-      &-length--#{$index}:hover {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        background-color: rosybrown;
-        transform: translate(0, -20px);
-        transition-duration: 0.5s;
-      }
+    
+    &-length {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #eee;
+      height: $squre-size;
+      width: $squre-size;
+      border: 1px solid black;
+      margin: $small-blocks--margin;
+      cursor: pointer;
     }
 
     $days:
@@ -75,8 +55,34 @@
       "sun" 6*$block-size;
 
     @each $name, $value in $days {
-      &--start-days-#{$name} {
+      &--start-days--#{$name} div:nth-child(1) {
         margin-left: $value;
+      }
+    }
+    
+
+    @for $index from 1 through 31 {
+      &-length:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        transition-property: transform;
+      }
+    }
+
+    &-length:hover {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      background-color: rosybrown;
+      transform: translate(0, -20px);
+      transition-duration: 0.5s;
+    }
+
+    @for $date from 28 through 31 {
+      &-length--#{$date} {
+        div:nth-child(n+#{$date+1}) {
+          display: none;
+        }
       }
     }
   }
