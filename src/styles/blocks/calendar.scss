@@ -1,3 +1,8 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -9,7 +14,7 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  padding-top: 20px;
+  padding-top: 30px;
 
   gap: $gap-size;
   margin: auto;
@@ -21,28 +26,31 @@ body {
     }
   }
 
+  @each $day, $num in $days {
+    &-start-day--#{$day} :first-child {
+      margin-left: $num;
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
+
     @include square;
     background-color: #eee;
     border: 1px solid black;
+
     cursor: pointer;
+    transition: transform 500ms, background-color 500ms;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i}) {
         &::before {
           content: "#{$i}";
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 30px;
         }
       }
     }
-  }
-
-  &__day:first-of-type {
-    margin-left: (6 * $day-size) + (5 * $gap-size);
   }
 
   &__day:hover {
