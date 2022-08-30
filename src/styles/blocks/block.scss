@@ -5,18 +5,14 @@
   gap: $gap;
   width: $width-week;
 
-  @each $day, $size in $days {
-    &--start-day--#{$day}
-
-    &__block:first-child {
-      margin-left: $size;
+  @each $day, $index in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: $width-week - $index * ($width - $gap);
     }
   }
 
   @for $index from $min-last-days-month to $max-last-days-month {
-    &--month-length--#{$index}
-
-    &__block:nth-child(n + #{$index + 1}) {
+    &--month-length--#{$index} > :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
@@ -36,9 +32,6 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        font-weight: bold;
       }
     }
 
