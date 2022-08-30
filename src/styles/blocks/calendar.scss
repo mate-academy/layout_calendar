@@ -1,14 +1,15 @@
 .calendar {
   display: flex;
+  margin: 0 auto;
   width: $width-page;
   flex-direction: flex;
   flex-wrap: wrap;
   gap: 1px;
 
   &--start-day {
-    @each $day, $margin-left in $week-day {
+    @each $starting-value, $day, $gap in $week-day {
       &--#{$day} > :first-child {
-        margin-left: $margin-left;
+        margin-left: $starting-value * $gap + $width-box * $starting-value;
       }
     }
   }
