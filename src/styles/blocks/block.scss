@@ -1,4 +1,4 @@
-.calender {
+.calendar {
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -6,7 +6,7 @@
   width: $width-week;
 
   @each $day, $size in $days {
-    .calender--start-day--#{$day}
+    &--start-day--#{$day}
 
     &__block:first-child {
       margin-left: $size;
@@ -14,7 +14,7 @@
   }
 
   @for $index from $min-last-days-month to $max-last-days-month {
-    .calender--month-length--#{$index}
+    &--month-length--#{$index}
 
     &__block:nth-child(n + #{$index + 1}) {
       display: none;
@@ -28,7 +28,6 @@
     box-sizing: border-box;
     position: relative;
     transition: transform 0.5s;
-
 
     @for $index from $first-day through $number-of-days-month {
       &:nth-child(#{$index})::before {
