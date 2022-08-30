@@ -1,3 +1,74 @@
-body {
-  margin: 0;
+@import url(../styles/__normalize.scss);
+$num--size: 100px;
+$font: arial, helvetica, sans-serif;
+$amount-of-days: 31;
+$cell-gap: 1px;
+
+@function shift($num) {
+  @return $num * ($num--size + $cell-gap);
+}
+
+.calendar {
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 7 * $num--size + 7;
+  gap: 1px;
+
+  &__numbers {
+    width: $num--size;
+    height: $num--size;
+    border: 1px solid #000;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: $font;
+    font-size: 30px;
+    transition: transform 0.5s;
+
+    @for $index from 1 through $amount-of-days {
+      &:nth-child( n + #{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    // @for $index from 28 to 31 {
+    //   &:nth-child(#{$index}) {
+    //     display: none;
+    //   }
+    // }
+
+    $week: 
+      "mon" shift(0), 
+      "tue" shift(1), 
+      "wed" shift(2), 
+      "thu" shift(3),
+      "fri" shift(4), 
+      "sat" shift(5), 
+      "sun" shift(6);
+
+    @each $day, $num in $week {
+      &__number--star-day--#{$day}:first-child {
+        margin-left: #{$num};
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #faafbe;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(1) {
+      margin-left: 6 * $num--size + 6;
+    }
+
+    &:nth-last-child(1) {
+      margin-right: 5 * $num--size + 5;
+    }
+  }
 }
