@@ -46,11 +46,17 @@ body {
 
   @for $index from 28 through 31 {
     &--#{$index} {
-      @for $newindex from ($index + 1) through 31 {
+      @for $newindex from ($index+1) through 31 {
         .calendar__day:nth-child(#{$newindex}) {
           display: none;
         }
       }
+    }
+  }
+
+  &--31 {
+    .calendar__day:nth-child(31) {
+      display: flex;
     }
   }
 
