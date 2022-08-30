@@ -8,19 +8,13 @@
   @for $i from 1 through 31 {
     & :nth-child(#{$i}) {
       &::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         content: "#{$i}";
-        color: #000;
-        font-size: 30px;
       }
     }
   }
 
   @each $start-day, $day-val in $week-days {
-    &--#{$start-day} {
+    &--start-day--#{$start-day} {
       .day:first-child {
         margin-left: $day-val * ($day-size + $day-gap);
       }
