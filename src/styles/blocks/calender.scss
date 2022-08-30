@@ -1,4 +1,5 @@
 .calender {
+  box-sizing: border-box;
   width: $width-calc;
   display: flex;
   flex-direction: row;
@@ -8,6 +9,7 @@
   padding: $padding;
 
   &__box {
+    box-sizing: border-box;
     background-color: $calender-color;
     height: $box-size;
     display: flex;
@@ -21,7 +23,8 @@
     flex-basis: $box-size;
     border: $box-border-size solid black;
 
-    transition: background-color, transform 500ms ease-in-out;
+    transition: background-color 500ms ease-in-out,
+      transform 500ms ease-in-out;
 
     &:hover {
       cursor: pointer;
@@ -31,18 +34,14 @@
   }
 
   @each $day, $i in $week-days {
-    &--start-day_#{$day} {
-      .calender__box:first-child {
-        margin-left: ($box-size + 2*$box-border-size + $box-gap) * $i ;
-      }
+    &--start-day_#{$day} > :first-child {
+      margin-left: ($box-size + $box-gap) * $i;
     }
   }
 
   @for $end-of-month from 1 through 31 {
-    &--month-length_#{$end-of-month} {
-      .calender__box:nth-child(n + #{$end-of-month + 1}) {
-        visibility: hidden;
-      }
+    &--month-length_#{$end-of-month} > :nth-child(n + #{$end-of-month + 1}) {
+      visibility: hidden;
     }
   }
 
