@@ -1,4 +1,3 @@
-
 .month {
   display: flex;
   flex-wrap: wrap;
@@ -9,14 +8,10 @@
   width: $cal-width;
   padding: $cal-padding;
 
-  &:first-child {
-    justify-content: flex-end;
-  }
-
   @each $day, $day-value in $days {
     &--start-day_#{$day} {
       .day:first-child {
-        margin-left: ($day-size + $day-gap) * $day-value;
+        margin-left: ($day-size + $day-gap) * $day-value + $cal-padding;
       }
     }
   }
