@@ -1,0 +1,33 @@
+.month {
+  display: flex;
+
+  gap: $dayBlockGap;
+  flex-wrap: wrap;
+
+  width: ($dayBlockSize + $dayBlockGap) * $daysInWeek + $monthPadding * 2 - 1;
+  height: ($dayBlockSize + $dayBlockGap) * $weekRowsInMonth + $monthPadding * 2
+    - 1;
+  padding: $monthPadding;
+
+  @each $weekDay, $dayValue in $weekDays {
+    &--start-day_#{$weekDay} {
+      .day:first-child {
+        margin-left: ($dayBlockSize + $dayBlockGap) * $dayValue;
+      }
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length_#{$lastDay} {
+      .day:nth-child(n + #{$lastDay + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  @for $day from 1 through 31 {
+    .day:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+}
