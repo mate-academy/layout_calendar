@@ -1,0 +1,59 @@
+$days:
+  'mon' 0,
+  'tue' 1,
+  'wed' 2,
+  'thu' 3,
+  'fri' 4,
+  'sat' 5,
+  'sun' 6;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: getBoxGridWidth($day-size, $calendar-columns-amount, $calendar-gap, $calendar-padding);
+  padding: 0 $calendar-padding;
+
+  @each $day, $number in $days {
+    &--start--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $number * $day-size + $number * $calendar-gap;
+      }
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &--lenght--#{$index} {
+      .calendar__day:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @include day($day-size, $color-secondary);
+  
+    border: 1px solid $color-black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: $transition;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: $color-primary;
+      transition: $transition;
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+        }
+      }
+    }
+  }
+}
