@@ -1,0 +1,24 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $days-gap;
+  width: $day-size * 7 + $days-gap * 6;
+  padding: 10px;
+  border: 1px solid #000;
+
+  &--start-day {
+    @each $week-day, $shift in $week-days-shift {
+      &_#{$week-day} > :nth-child(1) {
+        margin-left: $shift;
+      }
+    }
+  }
+
+  &--month-length {
+    @for $total-days from 28 through 31 {
+      &_#{$total-days} > :nth-child(n + #{$total-days +1}) {
+        display: none;
+      }
+    }
+  }
+}
