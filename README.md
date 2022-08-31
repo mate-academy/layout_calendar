@@ -1,14 +1,14 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://11Olya112.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://11Olya112.github.io/layout_calendar/report/html_report/)
 
-___
+__
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
-___
+__
 
 ## ❗️❗️❗️ DON'T FORGET TO PROOFREAD YOUR CODE WITH [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md) BEFORE SENDING YOUR PULL REQUEST❗️❗️❗️
 
@@ -22,7 +22,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 - Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
   - Don't use hardcoded `px` values if they are used several times
   - Use properly named variables to make all the calculations more clear.
-- Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
+- Implement `start` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
   - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
   - You can just add correct `margin-left` for the first day
@@ -33,7 +33,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - (**Optional**) Move it up by `20px` (use `transform`)
   - (**Optional**) both of these properties are to be animated with the duration of half a second.
 
---> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
+-> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
 
 ## Here is a preview:
 ![reference image](reference.png).
