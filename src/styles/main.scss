@@ -1,3 +1,14 @@
-body {
+@import "./block/calendar.scss";
+@import "./utils/variables";
+
+.body {
   margin: 0;
+}
+
+@each $name, $margin_px in $day-of-week {
+  .calendar--day-of-week_#{$name} {
+    .calendar__day:first-child {
+      margin-left: $margin_px * $day_cell;
+    }
+  }
 }
