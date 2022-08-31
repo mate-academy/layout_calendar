@@ -1,0 +1,21 @@
+.days {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #000;
+  background-color: #eee;
+  box-sizing: border-box;
+}
+
+
+@for $index from 1 through 31 {
+  .days:nth-child(#{$index})::before {
+    content: "#{$index}";
+    font-size: 30px;
+  }
+}
+
+@for $index from 30 through 31 {
+    .days:nth-child(#{$index}) {
+      visibility: hidden;
+    }
+}
