@@ -29,15 +29,23 @@
       position: relative;
       bottom: 20px;
       cursor: pointer;
+      animation: move 2s;
+    }
+
+    @keyframes move {
+      from {transform: translateY(20px);}
+      to {transform: translateY(0);}
     }
   }
 
   @for $last-day from $days-month-min through $days-month-max {
     &--month-length_#{$last-day} {
+
       @for $hidden-day from $last-day through $days-month-max - 1 {
         .calendar__day:nth-child(#{$hidden-day}) {
           display: none;
         }
+        
       }
     }
   }
