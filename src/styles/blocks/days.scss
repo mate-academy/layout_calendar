@@ -4,6 +4,14 @@
   flex-wrap: wrap;
   gap: $gap;
 
+  @each $day, $num in $start-day {
+    &--start-day_#{$day} {
+      .days__day:first-child {
+        margin-left: ($days-size +$gap) * $num;
+      }
+    }
+  }
+
   &__day {
     @include square($days-size);
     border: 1px solid #000;
@@ -17,19 +25,13 @@
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index}):before {
         content: "#{$index}";
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 30px;
-      }
-    }
-
-    @each $day, $num in $start-day {
-      &--1--start-day_#{$day} {
-        margin-left: ($days-size +$gap) * $num;
       }
     }
   }
