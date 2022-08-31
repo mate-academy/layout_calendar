@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   position: absolute;
   gap: 1px;
-  max-width: 706px;
+  max-width: 100vh;
   top: 50%;
   left: 50%;
   margin-right: -50%;
@@ -17,8 +17,9 @@
     height: $cell-size;
     border: 1px solid #000;
     background-color: #eee;
+    transition: all 0.5s ease-out;
     
-    @for $index from 1 to 32 {
+    @for $index from 1 to 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
@@ -27,7 +28,7 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.5s;
+      transition: all 0.5s ease-out;
     }
   }
 
@@ -38,10 +39,8 @@
   }
 
   @for $num from 28 to 31 {
-    &--month-length-#{$num} {
-      & > :nth-child(n + #{$num + 1}) {
-        display: none;
-      }
+    &--month-length-#{$num} :nth-child(n + #{$num + 1}) {
+      display: none;
     }
   }
 }
