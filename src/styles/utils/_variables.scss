@@ -6,16 +6,20 @@ $min-last-days-month: 28;
 $max-last-days-month: 31;
 $gap: 1px;
 $width: 100px;
-$width-week:
-  $width * $number-of-days-week +
-  ($gap * $number-of-days-week) - 1;
+$width-week :
+  $width * $number-of-days-week + $number-of-days-week - 1;
+
+@function calcSize($width-week, $width,$num,$gap) {
+  @return $width-week - $num * ($width - $gap);
+}
 
 $days: (
-  "sun" $width-week - $width,
-  "sat" $width-week - $width * 2 - $gap,
-  "fri" $width-week - $width * 3 - $gap * 2,
-  "thu" $width-week - $width * 4 - $gap * 3,
-  "wed" $width-week - $width * 5 - $gap * 4,
-  "tue" $width-week - $width * 6 - $gap * 5,
-  "mon" $width-week - $width * 7 - $gap * 6,
+  "sun" 1,
+  "sat" 2,
+  "fri" 3,
+  "thu" 4,
+  "wed" 5,
+  "tue" 6,
+  "mon" 7,
+
 );
