@@ -5,6 +5,8 @@
   flex-wrap: wrap;
   padding: 10px;
   width: $week-width;
+  transform: translateY(0);
+  transition: transform 4s;
 
   &__day {
     @include square($width-day);
@@ -29,13 +31,9 @@
       position: relative;
       bottom: 20px;
       cursor: pointer;
-      animation: move 2s;
+      transform: translate(0, -20px);
     }
 
-    @keyframes move {
-      from {transform: translateY(20px);}
-      to {transform: translateY(0);}
-    }
   }
 
   @for $last-day from $days-month-min through $days-month-max {
@@ -45,7 +43,7 @@
         .calendar__day:nth-child(#{$hidden-day}) {
           display: none;
         }
-        
+
       }
     }
   }
