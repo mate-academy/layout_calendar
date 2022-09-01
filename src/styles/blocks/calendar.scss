@@ -4,46 +4,36 @@
   flex-direction: column;
   align-items: center;
 
-  &__days {
+  &__week {
     display: flex;
     flex-wrap: wrap;
     width: $calendar-size;
     margin: $blocks-padding;
 
-    @for $day from 1 through 7 {
-      &--#{$day} {
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(76, 231, 218);
-        height: 45px;
-        width: $squre-size;
-        border: 1px solid black;
-        margin: $small-blocks--margin;
+    &-day {
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(76, 231, 218);
+      height: 45px;
+      width: $squre-size;
+      border: 1px solid black;
+      margin: $small-blocks--margin;
+      transition: all, 0.2s;
+
+      &:hover {
+        box-shadow: 0 3px 6px rgba(0, 83, 181, 0.46);
       }
     }
+
   }
   
   &__month {
     display: flex;
     flex-wrap: wrap;
-    width: 707px;
+    width: 7*$block-size;
     margin: $blocks-padding;
-
-    
-    &-length {
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #eee;
-      height: $squre-size;
-      width: $squre-size;
-      border: 1px solid black;
-      margin: $small-blocks--margin;
-      cursor: pointer;
-    }
 
     $days:
       "mon" 0,
@@ -55,34 +45,47 @@
       "sun" 6*$block-size;
 
     @each $name, $value in $days {
-      &--start-days--#{$name} div:nth-child(1) {
-        margin-left: $value;
+      &--start-day--#{$name} {
+        .calendar__day:nth-child(1) {
+          margin-left: $value;
+        }
       }
     }
     
-
-    @for $index from 1 through 31 {
-      &-length:nth-child(#{$index})::before {
-        content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        transition-property: transform;
+    @for $date from 28 through 31 {
+      &-length--#{$date} {
+        .calendar__day:nth-child(n+#{$date+1}) {
+          display: none;
+        }
       }
     }
+  }
 
-    &-length:hover {
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    height: $squre-size;
+    width: $squre-size;
+    border: 1px solid black;
+    margin: $small-blocks--margin;
+    cursor: pointer;
+    transition: transform, 0.5s;
+
+    &:hover {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
       background-color: rosybrown;
       transform: translate(0, -20px);
-      transition-duration: 0.5s;
     }
 
-    @for $date from 28 through 31 {
-      &-length--#{$date} {
-        div:nth-child(n+#{$date+1}) {
-          display: none;
-        }
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
       }
     }
   }
