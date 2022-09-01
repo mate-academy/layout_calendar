@@ -1,4 +1,3 @@
-
 .calendar {
   display: flex;
   gap: $gap-day;
@@ -6,7 +5,8 @@
   padding: 10px;
   width: $week-width;
   transform: translateY(0);
-  transition: transform 4s;
+  transition-property: transform color;
+  transition-duration: 0.5s;
 
   &__day {
     @include square($width-day);
@@ -19,6 +19,10 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
+
+    &--first {
+      margin-left: ($width-day * 6) + 6;
+    }
 
     @for $day-count from 1 through 31 {
       &:nth-child(#{$day-count})::before {
@@ -34,24 +38,11 @@
       transform: translate(0, -20px);
     }
 
-  }
-
-  @for $last-day from $days-month-min through $days-month-max {
-    &--month-length_#{$last-day} {
-
-      @for $hidden-day from $last-day through $days-month-max - 1 {
-        .calendar__day:nth-child(#{$hidden-day}) {
-          display: none;
+    @each $day, $num in $days {
+      &--start-day_#{$day} {
+        .calendar__day:first-child {
+          margin-left: ($width-day + $gap-day) * $num;
         }
-
-      }
-    }
-  }
-
-  @each $day, $num in $days {
-    &--start-day_#{$day} {
-      .calendar__day:first-child {
-        margin-left: ($width-day + $gap-day) * $num;
       }
     }
   }
