@@ -1,0 +1,31 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $day-gap;
+
+  width: $cal-width;
+  padding: $cal-padding;
+
+  @each $day, $day-value in $days {
+    &--start-day_#{$day} {
+      .day:first-child {
+        margin-left: ($day-size + $day-gap) * $day-value;
+      }
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length_#{$i} {
+      .day:nth-child(n + #{$i + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+}
