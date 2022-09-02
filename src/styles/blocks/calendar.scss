@@ -6,6 +6,7 @@
   width: $calendar-width;
   transform: translateY(0);
 
+
   &__day {
     @include square($size);
 
@@ -36,9 +37,11 @@
         content: "#{$i}";
       }
     }
+  }
 
-    @for $index from 30 through $last-day + 1 {
-      &:nth-child(#{$index}n) {
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      #{$root}__day:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
