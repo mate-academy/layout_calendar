@@ -27,6 +27,7 @@
   }
 
   &__day {
+    position: relative;
     box-sizing: border-box;
     border: 1px solid black;
     height: 100px;
@@ -46,9 +47,20 @@
 
     &:hover {
       background-color: pink;
-      transform: translateY(-20%);
+      transition: 0.5s;
+      animation-name: move;
       animation-duration: 0.5s;
+      animation-fill-mode: forwards;
       cursor: pointer;
+    }
+
+    @keyframes move {
+      from {
+        top: 0;
+      }
+      to {
+        bottom: 20px;
+      }
     }
   }
 }
