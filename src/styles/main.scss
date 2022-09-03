@@ -1,9 +1,11 @@
 @use "../styles/utils/variables.scss" as *;
 
 body {
-  margin: 0;
-  width: 100%;
   height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,56 +15,51 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: $gap-size $gap-size;
+  gap: $gap-size;
   width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
+  min-width: $cell-size * $days-in-week + $gap-size*($days-in-week - 1);
 
-  @for $index from 1 through $max-month-length {
-    &__day:nth-child(#{$index}) {
-      box-sizing: border-box;
-      height: $cell-size;
-      width: $cell-size;
-      background-color: $base-color;
-      border: 1px solid #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.5s;
-      cursor: pointer;
-    }
-  }
+  &__day {
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $base-color;
+    border: 1px solid #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    transition: transform $time;
 
-  @for $index from 1 through $max-month-length {
-    &__day:nth-child(#{$index})::after {
-      content: "#{$index}";
+    &::after {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
     }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translate(0, -20px);
+    }
+
+    @for $index from 1 through $max-month-length {
+      &:nth-child(#{$index})::after {
+        content: "#{$index}";
+      }
+    }
   }
 
-  &__day:hover {
-    background-color: $hover-color;
-    transform: translate(0, -20px);
-  }
-
-  @for $index from 28 through 31 {
+  @for $index from 1 through $max-month-length {
     &--#{$index} {
-      @for $newindex from ($index+1) through 31 {
+      @for $newindex from 1 through $index {
         .calendar__day:nth-child(#{$newindex}) {
-          display: none;
+          display: flex;
         }
       }
     }
   }
 
-  &--31 {
-    .calendar__day:nth-child(31) {
-      display: flex;
-    }
-  }
-
   @each $name, $day in $days-of-week {
     &--#{$name} {
-      .calendar__day:nth-child(1) {
+      .calendar__day:first-child {
         margin-left: ($cell-size + $gap-size) * $day;
       }
     }
