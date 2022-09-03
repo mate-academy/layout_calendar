@@ -1,7 +1,7 @@
 1. [BEM] - Check your BEM structure using BEM-linter (`npm run lint`) and
 [this list](https://mate-academy.github.io/fe-program/css/typical-bem-mistakes)
 2. [BEM] - Make sure to follow BEM naming convention for complex modifiers:
-`block-name--modifier-name--modifier-value`;
+`block-name-modifier-name-modifier-value`;
 3. [BEM] - Create a separate file per each BEM block styles that have the same
    name as the block
 4. [SASS] - Make use of SASS nesting - write pseudo-class, pseudo-element
@@ -9,7 +9,7 @@ selectors inside general selector. As well as media queries.
 
 GOOD example:
 ```scss
-&__buy-link {
+&_buy-link {
   display: flex;
   margin-top: 20px;
 
@@ -21,12 +21,12 @@ GOOD example:
 
 BAD example:
 ```scss
-&__buy-link {
+&_buy-link {
   display: flex;
   margin-top: 20px;
 }
 
-&__buy-link:hover {
+&_buy-link:hover {
   color: blue;
 }
 ```
@@ -68,7 +68,7 @@ BAD example:
 ```
 
 10. [FUNCTIONALITY] - Your project should work correctly (have 31 days and start
-on Monday) with invalid modifier values, like `start-day--ghy` or `days--27`.
+on Monday) with invalid modifier values, like `start-ghy` or `days-27`.
 11. [STYLES] - Don't be greedy, add some top paddings, so the top row don't go over
 top of the page on hover.
 12. [CODE STYLE] - Remember about styles properties order - ([css order](https://codeguide.academy/html-css.html#css-order))
