@@ -14,9 +14,11 @@
 
   }
 
-  @for $index from 28 through 31 {
-    &--month-lenght--#{$index}>:nth-child(n+#{$index} + 1) {
-      display: none;
+  @for $index from 28 to 32 {
+    &--month-lenght--#{$index} {
+      & :nth-child(n + #{$index + 1}) {
+        display: none;
+      }
     }
   }
 
