@@ -20,6 +20,7 @@
     background-color: #eee;
     box-sizing: border-box;
     border: 1px black solid;
+    transition-duration: 0.5s;
   }
 
   &__day::before {
@@ -38,7 +39,6 @@
     background-color: pink;
     cursor: pointer;
     transform: translateY(-20px);
-    transition-duration: 0.5s;
   }
   
   @for $i from 1 through 31 {
@@ -46,15 +46,22 @@
       content: ($i + "");
     }
   }
+}
 
-  @for $index from 28 through 31 {
-    .calendar--month-lenght--#{$index} {
-      @for $index from ($index) through 31 {
-        .calendar__day:nth-child(#{$index + 1}) {
-          display: none;
-        }
+@for $index from 28 through 31 {
+  .calendar--month-lenght--#{$index} {
+    @for $index from ($index)   through 31 {
+      .calendar__day:nth-child(#{$index + 1}) {
+        display: none;
       }
     }
   }
+}
 
+@each $day-of-week, $day-number in $week {
+  .calendar--start-day--#{$day-of-week} {
+    .calendar__day:first-child {
+      margin-left: ($day-number - 1) * ($day-cell-size + 1);
+    }
+  }
 }
