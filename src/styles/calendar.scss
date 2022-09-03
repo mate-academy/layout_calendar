@@ -1,0 +1,67 @@
+.calendar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: $day-cell-size * 7 + 6;
+  height: $day-cell-size * 5 + 4;
+  justify-content: flex-start;
+  padding: 10px;
+  gap: 1px;
+  margin: auto;
+
+  &__day {
+    width: $day-cell-size;
+    height: $day-cell-size;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px black solid;
+    transition-duration: 0.5s;
+  }
+
+  &__day::before {
+    position: relative;
+    display: block;
+    width: 34px;
+    height: 35px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    top: ($day-cell-size - 30) / 2;
+    left: ($day-cell-size - 30) / 2;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+  
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: ($i + "");
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-lenght--#{$index} {
+    @for $index from ($index)   through 31 {
+      .calendar__day:nth-child(#{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@each $day-of-week, $day-number in $week {
+  .calendar--start-day--#{$day-of-week} {
+    .calendar__day:first-child {
+      margin-left: ($day-number - 1) * ($day-cell-size + 1);
+    }
+  }
+}
