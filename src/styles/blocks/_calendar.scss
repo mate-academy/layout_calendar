@@ -1,0 +1,66 @@
+.calendar {
+  width: $content-size;
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  $weekend:
+    "mon" 0,
+    "tue" $square-width + $gap,
+    "wed" $square-width * 2 + $gap * 2,
+    "thu" $square-width * 3 + $gap * 3,
+    "fri" $square-width * 4 + $gap * 4,
+    "sat" $square-width * 5 + $gap * 5,
+    "sun" $square-width * 6 + $gap * 6;
+
+  @each $day, $value in $weekend {
+    &--start-day--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-lenth--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    border: 1px solid black;
+    height: 100px;
+    width: $square-width;
+    background-color: #eee;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transition: 0.5s;
+      animation-name: move;
+      animation-duration: 0.5s;
+      animation-fill-mode: forwards;
+      cursor: pointer;
+    }
+
+    @keyframes move {
+      from {
+        top: 0;
+      }
+      to {
+        bottom: 20px;
+      }
+    }
+  }
+}
