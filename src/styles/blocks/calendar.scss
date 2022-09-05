@@ -6,7 +6,6 @@
   width: $calendar-width;
   transform: translateY(0);
 
-
   &__day {
     @include square($size);
 
@@ -18,10 +17,6 @@
     align-items: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-
-    &--first {
-      margin-left: ($size * 6) + 6;
-    }
 
     &:hover {
       background-color: pink;
@@ -43,6 +38,14 @@
     &--month-length_#{$index} {
       #{$root}__day:nth-child(n + #{$index + 1}) {
         display: none;
+      }
+    }
+  }
+
+  @each $days, $margin in $day {
+    &--start-day_#{$days} {
+      #{$root}__day:first-child {
+        margin-left: #{$margin};
       }
     }
   }
