@@ -7,13 +7,6 @@
     }
   }
   
-  
-  @for $index from 1 through 31 {
-    &__days--#{$index}::before {
-      content: "#{$index}";
-    }
-  }
-  
   @each $day, $margin in $days {
     &__start-day--#{$day} :first-child {
       margin-left: $margin;
@@ -44,9 +37,11 @@
         transform $transform-time ease-in-out;
       cursor: pointer;
     }
-  }
-  
-  &__day--1 {
-    margin-left: 606px;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
   }
 }
