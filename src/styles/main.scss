@@ -1,3 +1,58 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./utils/exends";
+
 body {
   margin: 0;
+  height: 100vh;
+  @extend %display-flex-centr;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  width: $max-width;
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} {
+      & :first-child {
+        margin-left: ($day-size + $gap) * $number;
+      }
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &__month-length--#{$day} {
+      & :nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+
+    @extend %text-arial-30px;
+
+    background-color: #eee;
+    border: 1px solid black;
+    @include square($day-size);
+    @extend %display-flex-centr;
+
+    @for $day-index from 1 through 31 {
+      &:nth-child(#{$day-index}):before {
+        content: "#{$day-index}";
+      }
+    }
+
+    transition: background-color 0.5s, transform 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
 }
