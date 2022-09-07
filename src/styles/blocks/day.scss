@@ -12,32 +12,32 @@
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    transition: transform 0.5s ease, background-color 0.5s;
     
     &:hover {
       cursor: pointer;
       background-color: #ffc0cb;
       transform: translate(0, -20px);
-      transition-duration: 0.5s;
     }
-  }
 
-  @for $index from 1 through 31 {
-    &__day:nth-last-child(#{$index})::before {
-      content: "#{$index}";
+    @for $index from 1 through 31 {
+      &:nth-last-child(#{$index})::before {
+        content: "#{$index}";
+      }
     }
-  }
 
-  @for $index from 28 through 31 {
-    &--month-lenght--#{$index}
-    &__day:nth-child(n + #{$index + 1}) {
-      display: none;
+    @for $index from 28 through 31 {
+      &--month-lenght--#{$index}
+      &:nth-child(n + #{$index + 1}) {
+        visibility: hidden;
+      }
     }
-  }
-
-  @each $days, $margin in $day {
-    &--start-day--#{$days} {
-      :first-child {
-        margin-left: #{$margin};
+  
+    @each $days, $margin in $day {
+      &--start-day--#{$days} {
+        :first-child {
+          margin-left: #{$margin};
+        }
       }
     }
   }
