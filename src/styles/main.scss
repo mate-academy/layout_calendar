@@ -1,4 +1,4 @@
-@import url(../styles/__normalize.scss);
+@import "./_normalize";
 $num--size: 100px;
 $font: arial, helvetica, sans-serif;
 $amount-of-days: 31;
@@ -12,10 +12,31 @@ $cell-gap: 1px;
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-items: flex-start;
   width: 7 * $num--size + 7;
   gap: 1px;
+
+  $week: 
+    "mon" shift(0), 
+    "tue" shift(1), 
+    "wed" shift(2), 
+    "thu" shift(3),
+    "fri" shift(4), 
+    "sat" shift(5), 
+    "sun" shift(6);
+
+  @each $day, $num in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: #{$num};
+    }
+  }
+
+  @for $index from 28  through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
 
   &__numbers {
     width: $num--size;
@@ -33,27 +54,6 @@ $cell-gap: 1px;
     @for $index from 1 through $amount-of-days {
       &:nth-child( n + #{$index})::before {
         content: "#{$index}";
-      }
-    }
-
-    // @for $index from 28 to 31 {
-    //   &:nth-child(#{$index}) {
-    //     display: none;
-    //   }
-    // }
-
-    $week: 
-      "mon" shift(0), 
-      "tue" shift(1), 
-      "wed" shift(2), 
-      "thu" shift(3),
-      "fri" shift(4), 
-      "sat" shift(5), 
-      "sun" shift(6);
-
-    @each $day, $num in $week {
-      &__number--star-day--#{$day}:first-child {
-        margin-left: #{$num};
       }
     }
 
