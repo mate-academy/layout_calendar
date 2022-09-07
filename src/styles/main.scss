@@ -1,3 +1,80 @@
+$size-value: 100px;
+$gap-value: 1px;
+
+@function getMonthWidth($size, $gap) {
+  @return ($size-value + $gap-value) * 7 - $gap-value ;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+  line-height: $size;
+}
+
 body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-value;
+  width: getMonthWidth($size-value, $gap-value);
+  margin: 0 auto;
+  padding: 10px;
+  perspective: 100px;
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  &__day {
+    @include square($size-value);
+    box-sizing: border-box;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid #000;
+    border-radius: 8px;
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day-of-week, $number in $days {
+    &--start-day--#{$day-of-week} {
+      .month__day:first-child {
+        margin-left: ($size-value + 1px) * $number;
+      }
+    }
+  }
+
+  $last-day: (28,29,30,31);
+  @each $index in $last-day {
+    &--month-length--#{$index} {
+      .month__day:nth-child(n+#{$index+1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate3D(0, 0, 6px);
+    z-index: 1;
+  }
 }
