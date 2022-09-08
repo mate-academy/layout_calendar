@@ -1,23 +1,12 @@
-@import "../utils/variables";
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: 7 * $cell-size;
   border: 1px solid #000;
 
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
   @each $day, $date in $days {
     &--start-day--#{$day}:first-child {
-      margin-left: $cell-size * $date + $cell-gap * $date;
+      margin-left: ($cell-size * $date) + ($cell-gap * $date);
     }
   }
 
@@ -29,6 +18,8 @@
     border: 1px solid #000;
     justify-content: center;
     align-items: center;
+    transition-duration: 0.5s;
+    background-color: rgb(238, 238, 238);
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -37,10 +28,9 @@
     }
 
     &:hover {
-      background-color: pink;
       cursor: pointer;
       margin-top: -20px;
-      transition-duration: 0.5s;
+      background-color: pink;
     }
   }
 }
