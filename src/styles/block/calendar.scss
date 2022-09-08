@@ -15,7 +15,7 @@
     @each $day, $number in $days-of-week {
       &--start-day--#{$day} {
         & :first-child {
-          margin-left: $calendar-day-width * $number + $gap * 6;
+          margin-left: (#{($number) * ($calendar-day-width + 1px)});
         }
       }
     }
@@ -39,7 +39,7 @@
     background-color: #eee;
     border: 1px solid black;
 
-    transition: 0.3s;
+    transition: transform 0.5s;
 
     @include square($calendar-day-width);
 
