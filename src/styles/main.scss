@@ -1,3 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+@function shift($n) {
+  @return $n * 100 + px;
+}
+
+$month-length: 31;
+
+.calendar {
+  max-width: 720px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    background: #eee;
+    border: 1px solid black;
+    position: relative;
+
+    &:hover {
+      background: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $num from 1 through $month-length {
+      &:nth-child(n + #{$num})::before {
+        content: "#{$num}";
+        position: absolute;
+        font-size: 30px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  $week:
+    "mon" shift(0),
+    "tue" shift(1),
+    "wed" shift(2),
+    "thu" shift(3),
+    "fri" shift(4),
+    "sat" shift(5),
+    "sun" shift(6);
+
+  @each $day, $value in $week {
+    &--start-day-#{$day} :first-child {
+      margin-left: #{$value};
+    }
+  }
+
+  @for $num from 28 through $month-length {
+    &--month-length-#{$num} :nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
 }
