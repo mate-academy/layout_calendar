@@ -1,14 +1,27 @@
 .calendar {
+  $root: &;
+
   display: flex;
   flex-wrap: wrap;
-  width: 7 * $cell-size;
+  padding: 30px 0 30px 10px;
+  width: (7 * $cell-size) + ($cell-gap * 6) + ($calendar-padding *2);
   border: 1px solid #000;
+  gap: $cell-gap;
+
 
   @each $day, $date in $days {
-    &--start-day--#{$day}:first-child {
-      margin-left: ($cell-size * $date) + ($cell-gap * $date);
+      &--start-day--#{$day} :first-child {
+        margin-left: ($cell-size + $cell-gap) * $date;
+      }
     }
-  }
+
+  @for $lastDate from 28 through 31 {
+      &--month-length--#{$lastDate} {
+        #{$root}__cell:nth-child(n + #{$lastDate + 1}) {
+          display: none;
+        }
+      }
+    }
 
   &__cell {
     display: flex;
