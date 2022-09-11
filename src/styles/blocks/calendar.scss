@@ -6,6 +6,12 @@
   padding: $calendar-padding;
   width: calendar-width($square-size, $calendar-gap, $calendar-padding);
 
+  @for $day from 1 to 32 {
+    &__day:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
   $start-day:
     1 "mon",
     2 "tue",
@@ -36,12 +42,6 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-    }
-
-    @for $day from 1 to 32 {
-      &--#{$day}::before {
-        content: "#{$day}";
-      }
     }
   }
 
