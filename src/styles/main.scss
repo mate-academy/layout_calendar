@@ -1,3 +1,57 @@
+@import "./utils/vars";
+@import "./utils/functions";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.calendar {
+  max-width: 720px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    background: #eee;
+    border: 1px solid black;
+    position: relative;
+
+    &:hover {
+      background: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $num from 1 through $month-length {
+      &:nth-child(n + #{$num})::before {
+        content: "#{$num}";
+        position: absolute;
+        font-size: 30px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @each $day, $value in $week {
+    &--start-day-#{$day} :first-child {
+      margin-left: #{$value};
+    }
+  }
+
+  @for $num from 28 through $month-length {
+    &--month-length-#{$num} :nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
 }
