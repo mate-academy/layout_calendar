@@ -1,3 +1,6 @@
+@import "./utils/vars";
+@import "./utils/functions";
+
 * {
   box-sizing: border-box;
 }
@@ -8,12 +11,6 @@ body {
   display: grid;
   place-content: center;
 }
-
-@function shift($n) {
-  @return $n * 100 + px;
-}
-
-$month-length: 31;
 
 .calendar {
   max-width: 720px;
@@ -45,15 +42,6 @@ $month-length: 31;
       }
     }
   }
-
-  $week:
-    "mon" shift(0),
-    "tue" shift(1),
-    "wed" shift(2),
-    "thu" shift(3),
-    "fri" shift(4),
-    "sat" shift(5),
-    "sun" shift(6);
 
   @each $day, $value in $week {
     &--start-day-#{$day} :first-child {
