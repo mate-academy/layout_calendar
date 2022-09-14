@@ -1,13 +1,14 @@
 $side: 100px;
 $min-days: 28;
 $max-days: 31;
-$days-margins: mon 0,
-               tue 101px,
-               wed 202px,
-               thu 303px,
-               fri 404px,
-               sat 505px,
-               sun 606px;
+$days-margins:
+  mon 0,
+  tue 101px,
+  wed 202px,
+  thu 303px,
+  fri 404px,
+  sat 505px,
+  sun 606px;
 
 .calendar {
   display: flex;
@@ -21,7 +22,9 @@ $days-margins: mon 0,
     height: $side;
     background-color: rgb(238, 238, 238);
     border: 1px solid black;
+    border-radius: 7px;
     box-sizing: border-box;
+    transition: all 500ms;
 
     &::after {
       display: block;
@@ -33,9 +36,8 @@ $days-margins: mon 0,
 
     &:hover {
       cursor: pointer;
-      animation-name: translate;
-      animation-duration: 500ms;
-      animation-fill-mode: forwards;
+      transform: translateY(-20px);
+      background-color: pink;
     }
 
     @for $n from 1 through 31 {
@@ -43,18 +45,11 @@ $days-margins: mon 0,
         content: "#{$n}";
       }
     }
-
-    @keyframes translate {
-      100% {
-        transform: translateY(-20px);
-        background-color: pink;
-      }
-    }
   }
 
   @for $i from $min-days through $max-days {
     @for $n from $i to $max-days {
-      &--month-length-#{$i} &__day:nth-child(#{$n + 1}){
+      &--month-length-#{$i} &__day:nth-child(#{$n + 1}) {
         display: none;
       }
     }
