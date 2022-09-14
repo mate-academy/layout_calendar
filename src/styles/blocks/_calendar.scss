@@ -30,20 +30,18 @@
         content: "#{$date}";
       }
     }
-    @for $date from 28 through 31 {
-        &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
-          display: none;
-        }
-    }
+    
+  }
 
-    @each $day, $number in $days {
-      &--start-day--#{$day} :first-child {
-        margin-left: $number;
-      }
+  @for $date from 28 through 31 {
+    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
+      display: none;
     }
   }
 
- 
-
- 
+  @each $day, $number in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $number;
+    }
+  }
 }
