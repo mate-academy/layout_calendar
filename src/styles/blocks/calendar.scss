@@ -1,0 +1,63 @@
+$side: 100px;
+$min-days: 28;
+$max-days: 31;
+$days-margins:
+  mon 0,
+  tue 101px,
+  wed 202px,
+  thu 303px,
+  fri 404px,
+  sat 505px,
+  sun 606px;
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: 7 * $side + 7;
+  padding: 10px;
+
+  &__day {
+    width: $side;
+    height: $side;
+    background-color: rgb(238, 238, 238);
+    border: 1px solid black;
+    border-radius: 7px;
+    box-sizing: border-box;
+    transition: all 500ms;
+
+    &::after {
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      line-height: $side;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n})::after {
+        content: "#{$n}";
+      }
+    }
+  }
+
+  @for $i from $min-days through $max-days {
+    @for $n from $i to $max-days {
+      &--month-length-#{$i} &__day:nth-child(#{$n + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $margin in $days-margins {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: #{$margin};
+    }
+  }
+}
