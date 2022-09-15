@@ -34,7 +34,7 @@ $days-margins: mon 0,
     background-color: #eee;
     border: 1px solid black;
     box-sizing: border-box;
-    transition-duration: 1s;
+    transition: transform 0.5s;
 
     &::before {
       display: block;
@@ -46,21 +46,13 @@ $days-margins: mon 0,
 
     &:hover {
       cursor: pointer;
-      animation-name: translate;
-      animation-duration: 500ms;
-      animation-fill-mode: forwards;
+      transform: translateY(-20px);
+      background-color: pink;
     }
 
     @for $n from 1 through 31 {
       &:nth-child(#{$n})::before {
         content: "#{$n}";
-      }
-    }
-
-    @keyframes translate {
-      100% {
-        transform: translate(-20px);
-        background-color: pink;
       }
     }
   }
