@@ -43,8 +43,10 @@
 
   background-color: #eee;
 
+  transition: all 0.3s;
+
   @for $index from 1 through $month-length {
-    &--#{$index} {
+    &:nth-child(#{$index}) {
       &::before {
         content: "#{$index}";
       }
@@ -53,8 +55,6 @@
         background-color: pink;
         cursor: pointer;
         transform: translateY(-20px);
-
-        transition: 0.3s;
       }
     }
   }
