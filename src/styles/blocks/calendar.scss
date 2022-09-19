@@ -4,7 +4,11 @@
 
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+
+  margin: 10vh auto;
 
   &__day {
     position: relative;
@@ -13,8 +17,7 @@
     background-color: #eee;
     border: 1px solid black;
 
-    transition-duration: 0.5s;
-    transition-property: background-color, transform;
+    transition-property: background-color, transform 0.5s;
   }
 
   &__day::before {
@@ -23,8 +26,6 @@
     top: 50%;
 
     transform: translate(-50%, -50%);
-
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
   }
 
@@ -35,8 +36,12 @@
   }
 
   @each $day, $margin-left in $days {
-    &__day:first-child {
-      margin-left: $margin-left;
+    &--start-day--#{$day} {
+      .calendar__day {
+        &:first-child {
+          margin-left: $margin-left;
+        }
+      }
     }
   }
 
