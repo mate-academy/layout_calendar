@@ -23,7 +23,7 @@
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &^nth-child(#{$index})::before {
         content: "#{$index}";
         display: flex;
         justify-content: center;
@@ -50,7 +50,7 @@
     }
   }
 
-  @for $month-type from 28 through 30 {
+  @for $month-type from 28 through 31 {
     &--month-length-#{$month-type} :nth-child(n + #{$month-type + 1}) {
       display: none;
     }
