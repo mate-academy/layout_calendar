@@ -29,20 +29,20 @@
         content: "#{$index}";
       }
     }
+  }
 
-    $days:
-      "mon" 0,
-      "tue" ($start-day-position),
-      "wed" ($start-day-position * 2),
-      "thu" ($start-day-position * 3),
-      "fri" ($start-day-position * 4),
-      "sat" ($start-day-position * 5),
-      "sun" ($start-day-position * 6);
+  $days:
+    "mon" 0,
+    "tue" ($start-day-position),
+    "wed" ($start-day-position * 2),
+    "thu" ($start-day-position * 3),
+    "fri" ($start-day-position * 4),
+    "sat" ($start-day-position * 5),
+    "sun" ($start-day-position * 6);
 
-    @each $day, $position in $days {
-      &--start-day--#{$day} {
-        margin-left: $position;
-      }
+  @each $day, $position in $days {
+    &--start-day--#{$day} > :first-child {
+      margin-left: $position;
     }
   }
 
