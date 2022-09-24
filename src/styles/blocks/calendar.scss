@@ -1,0 +1,47 @@
+@import "../utils/mixins.scss";
+@import "../utils/Functions.scss";
+
+.calendar {
+  display: flex;
+  margin: 0 auto;
+  padding: 10px;
+  padding-top: 30px;
+  flex-wrap: wrap;
+  gap: $gap-day;
+  width: getWidth($cell-size, $count-day, $gap-day, $padding-calendar);
+
+  @for $date from 28 through 31 {
+    &__length--#{$date}:nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    border: solid 1px black;
+    @include square;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    transition: $transitions;
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
+
+@for $date from 1 through 31 {
+  .calendar__day:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@each $day-of-week, $number in $days {
+  &--start-day--#{$day-of-week} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size + 1px) * $number;
+    }
+  }
+}
