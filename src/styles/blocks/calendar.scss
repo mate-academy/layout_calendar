@@ -41,10 +41,8 @@ $dayWeek:
     }
   }
 
-  //  calendrar--month-length--29 > :nth-child(n + 29)
-
   @for $month-length from 28 through 31 {
-    &-month--length--#{$month-length} {
+    &--month--length--#{$month-length} {
       .calendar__day:nth-child(n+#{$month-length+1}) {
         display: none;
       }
@@ -52,7 +50,7 @@ $dayWeek:
   }
 
   @each $dayNumber, $margin in $dayWeek {
-    calendar--start-day--#{$dayNumber} :first-child {
+    &--start-day--#{$dayNumber} :first-child {
       margin-left: $margin;
     }
   }
