@@ -10,12 +10,6 @@
   gap: $gap-day;
   width: getWidth($cell-size, $count-day, $gap-day, $padding-calendar);
 
-  @for $date from 28 through 31 {
-    &__length--#{$date}:nth-child(n + #{$date + 1}) {
-      display: none;
-    }
-  }
-
   &__day {
     display: flex;
     border: solid 1px black;
@@ -39,9 +33,15 @@
 }
 
 @each $day-of-week, $number in $days {
-  &--start-day--#{$day-of-week} {
+  .calendar--start-day--#{$day-of-week} {
     .calendar__day:first-child {
       margin-left: ($cell-size + 1px) * $number;
     }
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar__length--#{$date}:nth-child(n + #{$date + 1}) {
+    display: none;
   }
 }
