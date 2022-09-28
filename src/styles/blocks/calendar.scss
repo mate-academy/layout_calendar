@@ -16,12 +16,6 @@
     height: $cell-size;
     border: 1px solid black;
 
-    &:hover {
-      background-color: pink;
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
@@ -39,5 +33,11 @@
     &--month-length--#{$num} :nth-child(n + #{$num + 1}) {
       display: none;
     }
+  }
+
+  &__day:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
   }
 }
