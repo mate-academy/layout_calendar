@@ -1,12 +1,3 @@
-$dayWeek:
-  "mon" 0,
-  "tue" $day-size+1px,
-  "wed" ($day-size+1px) * 2,
-  "thu" ($day-size+1px) * 3,
-  "fri" ($day-size+1px) * 4,
-  "sat" ($day-size+1px) * 5,
-  "sun" ($day-size+1px) * 6;
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +5,7 @@ $dayWeek:
   margin: auto;
   justify-content: center;
   align-items: center;
-  gap: 1px;
+  gap: $gap-size;
 
   &__day {
     display: flex;
@@ -23,11 +14,10 @@ $dayWeek:
     background-color: $block-color;
     border: 1px solid black;
     color: #000;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s, background-color 0.5s;
+    transition: transform $transition-duration, background-color $transition-duration;
     &:hover {
       cursor: pointer;
       background-color: #ffc0cb;
