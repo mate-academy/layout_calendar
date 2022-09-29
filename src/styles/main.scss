@@ -27,13 +27,6 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 1px;
-
-    @each $day, $order in $days {
-      .calendar--#{$day} > &__wrapper > div:first-child {
-        margin-left: $order * ($size+($gap));
-
-      }
-    }
   }
 
   &__cell {
@@ -60,5 +53,12 @@ body {
   .calendar__cell:nth-child(#{$index}):before {
     content: "" + $index ;
     color: black;
+  }
+}
+
+@each $day, $order in $days {
+  .calendar--#{$day} > .calendar__wrapper > div:first-child {
+    margin-left: $order * ($size+($gap));
+
   }
 }
