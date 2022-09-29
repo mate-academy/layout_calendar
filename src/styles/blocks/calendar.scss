@@ -1,0 +1,68 @@
+$cell-side: 100px;
+$cell-color: #eee;
+$cell-color-hovered: pink;
+$days: 31;
+$week-day:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+* {
+  box-sizing: border-box;
+}
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: $cell-side * 7 + 6px + 20px;
+  gap: 1px;
+
+  @each $name, $num in $week-day {
+    &--start-day--#{$name} :first-child {
+      margin-left: ($num - 1) * $cell-side + ($num - 1);
+    }
+  }
+
+  @for $date from 28 through 31 {
+    $delete-day: $date + 1;
+    &--month-length--#{$date} :nth-child(n + #{$delete-day}) {
+      display: none;
+    }
+  }
+
+  &__cell {
+    @include square($cell-side);
+    position: relative;
+    background-color: $cell-color;
+    border: 1px solid black;
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $day from 1 through $days {
+      &--#{$day}::before {
+        content: "#{$day}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-color-hovered;
+      transform: translate(0, -20px);
+    }
+  }
+}
