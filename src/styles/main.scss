@@ -23,17 +23,17 @@ body {
 
   }
 
-  @each $day, $order in $days {
-    .calendar--#{$day} > &__wrapper > div:first-child {
-      margin-left: $order * ($size+($gap));
-
-    }
-  }
-
   &__wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 1px;
+
+    @each $day, $order in $days {
+      .calendar--#{$day} > &__wrapper > div:first-child {
+        margin-left: $order * ($size+($gap));
+
+      }
+    }
   }
 
   &__cell {
@@ -46,12 +46,7 @@ body {
     transition: 0.5s;
     width: 100px;
     height: 100px;
-    @for $index from 1 through 31 {
-      &--day--#{$index}::before {
-        content: "" + $index  ;
-        color: black;
-      }
-    }
+
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
@@ -60,4 +55,10 @@ body {
     }
   }
 
+}
+@for $index from 1 through 31 {
+  .calendar__cell:nth-child(#{$index}):before {
+    content: "" + $index ;
+    color: black;
+  }
 }
