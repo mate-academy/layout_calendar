@@ -1,0 +1,43 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: calendarWidth($days-in-week, $gap, $box-side, $side-padings);
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+    align-items: center;
+    @include dayBox($box-side);
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: #ffc0cb;
+      cursor: pointer;
+      transform: translate(0, -20px);
+    }
+  }
+}
+
+@each $day, $first-day-shift in $days-of-the-week {
+  .calendar--start-day--#{$day}
+  .calendar__day:first-of-type {
+    margin-left: $first-day-shift;
+  };
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-of-type(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
