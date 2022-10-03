@@ -7,6 +7,10 @@ body {
   font-size: 30px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 @for $day from 1 through 31 {
   .calendar__cell:nth-child(#{$day}):before {
     content: "#{$day}";
@@ -27,7 +31,6 @@ body {
     width: #{$cell-width};
     height: #{$cell-width};
     background-color: #eee;
-    box-sizing: border-box;
     border: 1px solid black;
     transition-duration: 0.5s;
   }
@@ -65,8 +68,8 @@ body {
     
     @each $daynumber,$dayname in $days {
       &--start-day--#{$dayname} {
-        .calendar__cell:nth-child(#{$daynumber}) {
-          margin-left: 10px;
+        .calendar__cell:nth-child(1) {
+          margin-left: ($cell-width * $daynumber) + $daynumber;
         }
       }
     }
