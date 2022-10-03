@@ -4,7 +4,17 @@
 
 body {
   margin: 0;
+
 }
+
+
+$start-day-mon: 0px;
+$start-day-tue: 100px;
+$start-day-wed: 201px;
+$start-day-thu: 302px;
+$start-day-fri: 403px;
+$start-day-sat: 504px;
+$start-day-sun: 605px;
 
 .calendar {
   margin-top: 150px;
@@ -16,32 +26,50 @@ body {
   gap: 1px;
   flex-wrap: wrap;
 
-  &__item {
-    width: 100px;
-    height: 100px;
-    border: 1px solid #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
+  // &__item {
+  //   width: 100px;
+  //   height: 100px;
+  //   border: 1px solid #000;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   background-color: #eee;
 
-    transition: 0.5s;
-    cursor: pointer;
-    position: relative;
-    top: 0;
-  }
+  //   transition: 0.5s;
+  //   cursor: pointer;
+  //   position: relative;
+  //   top: 0;
+  // }
 
   &__item:nth-child(1) {
-    margin-left: 605px;
+    margin-left: $start-day-thu;
   }
 
-  @for $index from 1 through 31 {
+  @for $index from 1 through 29 {
     &__item:nth-child(#{$index})::before {
       content: "#{$index}";
       font-family: "Arial", sans-serif ;
       font-size: 30px;
     }
+
+    &__item:nth-child(#{$index}) {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #eee;
+
+      transition: 0.5s;
+      cursor: pointer;
+      position: relative;
+      top: 0;
+    }
+
+
   }
+
 
   &__item:hover {
     top: -20px;
