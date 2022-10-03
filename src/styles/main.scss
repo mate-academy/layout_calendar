@@ -34,7 +34,7 @@ body {
   }
 
   @for $index from 1 through 31 {
-    &__block:nth-child(#{$index})::before{
+    &__block:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
@@ -47,10 +47,10 @@ body {
     }
   }
 
-  &--month-length {
-    @for $num from 28 through 31 {
-      .calendar__block:nth-child(#{$num}) {
-        display: none ;
+  @for $num from 28 through 31 {
+    &--month-#{$num} {
+      & :nth-child(n + #{$num + 1}) {
+        display: none;
       }
     }
   }
