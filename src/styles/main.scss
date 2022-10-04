@@ -1,3 +1,128 @@
+@import "var.scss";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  margin-top: 150px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  max-width: 706px;
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+
+  &--start-day-sun .calendar__item:first-child {
+    margin-left: $sun;
+  }
+
+  &--start-day-tue .calendar__item:first-child {
+    margin-left: $tue;
+  }
+
+  &--start-day-wed .calendar__item:first-child {
+    margin-left: $wed;
+  }
+
+  &--start-day-thu .calendar__item:first-child {
+    margin-left: $thu;
+  }
+
+  &--start-day-fri .calendar__item:first-child {
+    margin-left: $fri;
+  }
+
+  &--start-day-sat .calendar__item:first-child {
+    margin-left: $sat;
+  }
+
+  &--start-day-mon .calendar__item:first-child {
+    margin-left: $mon;
+  }
+
+  &--month-lenght--29 {
+    @for $index from 1 through 29 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  &--month-lenght--30 {
+    @for $index from 1 through 30 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  &--month-lenght--31 {
+    @for $index from 1 through 31 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  & &__item:hover {
+    top: -20px;
+    background-color: #ffc0cb;
+  }
 }
