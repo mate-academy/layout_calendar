@@ -1,4 +1,4 @@
-@import url("./var.scss");
+@import "var.scss";
 
 * {
   box-sizing: border-box;
@@ -18,34 +18,110 @@ body {
   gap: 1px;
   flex-wrap: wrap;
 
-  &__item:nth-child(1) {
-    margin-left: $start-day-thu;
+  &--start-day-sun .calendar__item:first-child {
+    margin-left: $sun;
   }
 
-  @for $index from 1 through 29 {
-    &__item:nth-child(#{$index})::before {
-      content: "#{$index}";
-      font-family: "Arial", sans-serif ;
-      font-size: 30px;
-    }
+  &--start-day-tue .calendar__item:first-child {
+    margin-left: $tue;
+  }
 
-    &__item:nth-child(#{$index}) {
-      width: 100px;
-      height: 100px;
-      border: 1px solid #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #eee;
+  &--start-day-wed .calendar__item:first-child {
+    margin-left: $wed;
+  }
 
-      transition: 0.5s;
-      cursor: pointer;
-      position: relative;
-      top: 0;
+  &--start-day-thu .calendar__item:first-child {
+    margin-left: $thu;
+  }
+
+  &--start-day-fri .calendar__item:first-child {
+    margin-left: $fri;
+  }
+
+  &--start-day-sat .calendar__item:first-child {
+    margin-left: $sat;
+  }
+
+  &--start-day-mon .calendar__item:first-child {
+    margin-left: $mon;
+  }
+
+  &--month-lenght--29 {
+    @for $index from 1 through 29 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
     }
   }
 
-  &__item:hover {
+  &--month-lenght--30 {
+    @for $index from 1 through 30 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  &--month-lenght--31 {
+    @for $index from 1 through 31 {
+      .calendar__item:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: "Arial", sans-serif ;
+        font-size: 30px;
+      }
+  
+      .calendar__item:nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eee;
+  
+        transition: 0.5s;
+        cursor: pointer;
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  & &__item:hover {
     top: -20px;
     background-color: #ffc0cb;
   }
