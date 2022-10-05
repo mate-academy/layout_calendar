@@ -1,4 +1,6 @@
 .calendar {
+  $root: &;
+
   width: $calendar-width;
   padding-left: $calendar-block-padding;
   padding-top: $calendar-block-padding * 2; 
@@ -32,25 +34,25 @@
       background-color: $hover-day-block-col;
       transform: translate(0, -20px);
     }
-  }
 
-  @for $count from 28 through 31 {
-    &--days-count--#{$count} 
-    div:nth-child(n + #{$count + 1}) {
-      display: none;
+    @for $count from 28 through 31 {
+      #{$root}--days-count--#{$count} 
+      &:nth-child(n + #{$count + 1}) {
+        display: none;
+      }
     }
-  }
-
-  @for $i from 1 through 31 {
-    &__day:nth-child(n + #{$i}):before {
-      content: "#{$i}";
+  
+    @for $i from 1 through 31 {
+      &:nth-child(n + #{$i}):before {
+        content: "#{$i}";
+      }
     }
-  }
-
-  @each $day, $position in $week-day {
-    &--start-day--#{$day}
-    &__day:first-of-type {
-      margin-left: $base-first-day-margin * $position;
+  
+    @each $day, $position in $week-day {
+      #{$root}--start-day--#{$day}
+      &:first-of-type {
+        margin-left: $base-first-day-margin * $position;
+      }
     }
   }
 }
