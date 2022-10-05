@@ -1,3 +1,62 @@
-body {
-  margin: 0;
+@import url("./zeroing");
+
+$cellSize: 100px;
+$daysInWeek: 7;
+$gap: 1px;
+$calendarPadding: 10px;
+$calendarWidth: ($cellSize * $daysInWeek) + ($gap * 6);
+$cellGap: $cellSize + $gap;
+$daysOfWeek:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+.calendar {
+  $root: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  width: $calendarWidth;
+  padding-top: $calendarPadding * 2;
+
+  &__item {
+    width: $cellSize;
+    height: $cellSize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px #000 solid;
+    background-color: #eee;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    transition: background-color 0.4s, transform 0.4s;
+
+    &:hover {
+      background-color: #ffc0cb;
+
+      transform: translate(0, -20px);
+      cursor: pointer;
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(n + #{$day}):before {
+        content: "#{$day}";
+      }
+    }
+
+    @each $day, $position in $daysOfWeek {
+      #{$root}--start-day--#{$day} &:first-of-type {
+        margin-left: $cellGap * $position;
+      }
+    }
+  }
 }
