@@ -1,6 +1,5 @@
 .calendar {
   width: getwidth($block-size, $spacing, $columns-count, $paddings);
-  box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
@@ -8,10 +7,8 @@
   padding: $paddings;
 
   @each $day, $margin in $days {
-    &--start-day_#{$day} {
-      .calendar__block:first-child {
-        margin-left: $margin * ($block-size + $spacing);
-      }
+    &--start-day_#{$day} &__block:first-child {
+      margin-left: $margin * ($block-size + $spacing);
     }
   }
 
@@ -21,16 +18,13 @@
     }
   }
 
-  @for $lenth from 29 through 32 {
-    &--month-lenth_#{$lenth - 1} {
-      .calendar__block:nth-child(n + #{$lenth}) {
-        display: none;
-      }
+  @for $lenth from 28 through 31 {
+    &--month-lenth_#{$lenth} &__block:nth-child(n + #{$lenth + 1}) {
+      display: none;
     }
   }
 
   &__block {
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
