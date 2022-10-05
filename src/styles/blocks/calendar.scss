@@ -12,7 +12,6 @@
     max-width: ($square-size * 7) + 10px;
     margin-top: 21px;
     gap: $gap-size;
-
   }
 
   &__day {
@@ -28,31 +27,31 @@
     list-style: none;
 
     cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
   }
 
-  &__day:hover {
-    background-color: pink;
-
-    transform: translateY(-20px);
-    transition: 0.5s;
+  @for $i from 1 through 31 {
+    &__day--#{$i}::before {
+      content: "#{$i}";
+      position: absolute;
+    }
   }
-}
 
-@for $i from 1 through 31 {
-  .calendar__day--#{$i}::before {
-    content: "#{$i}";
-    position: absolute;
+  @each $value, $week-day in $week-days {
+    &__day--start-day-#{$week-day} {
+      margin-left: ($square-size * (-1 + $value)) + ($gap-size * (-1 + $value));
+    }
   }
-}
 
-@each $value, $week-day in $week-days {
-  .calendar__day--start-day-#{$week-day} {
-    margin-left: ($square-size * (-1 + $value)) + ($gap-size * (-1 + $value));
-  }
-}
-
-@for $i from 28 through 30 {
-  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-    display: none;
+  @for $i from 28 through 30 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
   }
 }
