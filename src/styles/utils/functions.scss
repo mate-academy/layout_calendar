@@ -1,0 +1,9 @@
+@function getMarginRight($dayName) {
+  $check: 0;
+  @if map-get($map: $days, $key: $dayName) != 1 {
+    $check: 1px;
+  }
+  // @return #{(map-get($map: $days, $key: $dayName) -1) + $width};
+  @return $gap * (map-get($map: $days, $key: $startingDay) - 1)
+    + (map-get($map: $days, $key: $startingDay) - 1) * $width;
+}
