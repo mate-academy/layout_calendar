@@ -1,8 +1,10 @@
 .calendar {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  width: $cell-size * 7 + $gap-size * 6;
-  padding: 25px 10px 10px;
+
+  width: $cell-size * 7 + $gap-size * 6 + $padding-size;
+  padding: $padding-size;
   gap: $gap-size;
 
   @each $day, $num in $days {
@@ -12,9 +14,7 @@
   }
 
   @for $monthDay from 28 through 31 {
-    $monthDayNew: $monthDay + 1;
-
-    &--month-length--#{$monthDay} :nth-child(n + #{$monthDayNew}) {
+    &--month-length--#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
       display: none;
     }
   }
