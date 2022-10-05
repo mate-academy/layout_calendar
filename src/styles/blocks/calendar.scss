@@ -1,14 +1,14 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  gap: $item-gap;
   width: ($item-size * 8) + ($item-gap * 6);
   margin: 0 auto;
   padding-top: 50px;
-  gap: $item-gap;
 
-  @each $day, $count in $days {
+  @each $day, $index in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: calc((#{$item-gap} + #{$item-size}) * #{$count});
+      margin-left: calc((#{$item-gap} + #{$item-size}) * #{$index});
     }
   }
 
