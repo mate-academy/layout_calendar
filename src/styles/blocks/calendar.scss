@@ -1,0 +1,31 @@
+@import "../styles/utils/variables";
+@import "../styles/utils/mixins";
+@import "../styles/utils/loops";
+@import "../styles/utils/functions";
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: calendarWidth($square-size,$gap);
+
+  &__block {
+    display: block;
+    text-align: center;
+    line-height: $square-size;
+    @include square($square-size);
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    &:hover {
+      transform: translate(0, -20px);
+      transition-duration: 500ms;
+
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
