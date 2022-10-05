@@ -1,0 +1,32 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-basis: $width;
+  height: $height;
+  background-color: $color;
+  border: 1px solid #000;
+
+  transition: transform 0.5s, background-color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY($tranformY);
+    background-color: pink;
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(n + #{$index}) {
+      &::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $index from $daysAmount through 31 {
+    &:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
