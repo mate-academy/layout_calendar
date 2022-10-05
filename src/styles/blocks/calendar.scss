@@ -1,0 +1,47 @@
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $cell-size * 7 + $gap + 10px;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include daySize($cell-size);
+
+    background-color: #eee;
+    border: 1px solid #000;
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: #eea3a3;
+
+      transform: translate(0, -20px);
+      transition: background-color 0.5s, transform 0.5s;
+      cursor: pointer;
+    }
+  }
+
+  @each $day, $retreat in $days {
+    &--start-day--#{$day}
+    &__day:first-child {
+      margin-left: $retreat * $day-retreat;
+    }
+  }
+
+  @for $index from 1 through $days-in-month {
+    &__day:nth-of-type(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $index from 28 through $days-in-month {
+    &--month-length--#{$index}
+    &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
