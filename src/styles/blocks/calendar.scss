@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   gap: $cell-gap;
   width: $calendar-width;
-  padding: $calendar-padding;
+  padding: 20px $calendar-padding;
 
   &__day {
     box-sizing: border-box;
@@ -23,6 +23,8 @@
     background-color: #eee;
     border: 1px solid black;
 
+    transition: transform 0.5s, background-color 0.5s;
+
     @for $count from 1 through 31 {
       &:nth-child(n + #{$count}):before {
         content: "#{$count}";
@@ -36,19 +38,10 @@
     }
 
     &:hover {
-      animation-duration: 50ms;
-      animation-name: move;
-      animation-iteration-count: 1;
-      animation-fill-mode: forwards;
-
+      transform: translate(0, -20px);
+      background-color: pink;
+    
       cursor: pointer;
-    }
-
-    @keyframes move {
-      to {
-        transform: translate(0, -20px);
-        background-color: pink;
-      }
     }
 
     @each $day, $order in $week {
