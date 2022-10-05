@@ -1,0 +1,18 @@
+@for $index from 1 through 31 {
+  .calendar__days:nth-child(#{0 + $index})::before {
+    content: "#{$index}";
+
+    display: block;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: 98px;
+  }
+}
+
+@for $daysInMonth from 28 through 31 {
+  .calendar--month-length--#{$daysInMonth} :nth-child(n + #{$daysInMonth + 1}) {
+    display: none;
+  }
+}

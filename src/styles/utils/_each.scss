@@ -1,0 +1,17 @@
+/* variables for this loop from _variables.scss file
+
+$daysOfWeek:
+  "mon" 0,
+  "tue" ($boxWidth),
+  "wed" ($boxWidth * 2),
+  "thu" ($boxWidth * 3),
+  "fri" ($boxWidth * 4),
+  "sat" ($boxWidth * 5),
+  "sun" ($boxWidth * 6);
+  */
+
+@each $day, $dayShift in $daysOfWeek {
+  .calendar--start-day--#{$day} :nth-child(1) {
+    margin-left: #{$dayShift};
+  }
+}
