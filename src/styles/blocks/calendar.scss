@@ -1,21 +1,24 @@
 .calendar {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   flex-wrap: wrap;
-  width: $cell-size * 7 + $gap * 6 + $padding * 2;
+  width: $calendar-width;
   padding: $padding;
   gap: $gap;
 
   &__day {
     @include cellSize($cell-size);
 
-    font-size: 30px;
-    border: 1px solid #000;
-    background-color: #eee;
-    transition: background-color 0.5s, transform 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: #eee;
+
+    font-size: 30px;
+
+    border: 1px solid #000;
+    transition: background-color 0.5s, transform 0.5s;
 
     &::before {
       display: flex;
@@ -47,7 +50,8 @@
   }
 
   @for $dayOfMonth from 28 through 31 {
-    &--month-length--#{$dayOfMonth}:nth-child(n + #{$dayOfMonth + 1}) {
+    &--month-length--#{$dayOfMonth}
+    .calendar__day:nth-child(n + #{$dayOfMonth + 1}) {
       display: none;
     }
   }
