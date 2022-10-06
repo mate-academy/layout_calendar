@@ -1,24 +1,22 @@
 .calendar {
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 
-  max-width: getWidth($daySize, $columnNum, $padding, $gap);
+  width: getWidth($daySize, $columnNum, $paddingSpace, $gapSpace);
+  gap: $gapSpace;
+  padding: $paddingSpace;
 
-  gap: $gap;
-  padding: $padding;
-
-  @each $weekDay, $number in $weekDays {
-    &--start-day--#{$weekDay} {
+  @each $weekDay, $margin in $weekDays {
+    &--start-day_#{$weekDay} {
       :first-child {
-        margin-left: $firstDayMargin * $number;
+        margin-left: $firstDayMargin * $margin;
       }
     }
   }
 
   @for $lastDay from 28 through 31 {
-    &--month-length--#{$lastDay} {
+    &--month-length_#{$lastDay} {
       :nth-child(n + #{$lastDay + 1}) {
         display: none;
       }
@@ -30,12 +28,12 @@
     justify-content: center;
     align-items: center;
 
-    height: $daySize;
-    width: $daySize;
+    @include calCellSize ($daySize);
+
     background-color: $mainBackgroundColor;
     border: 1px solid #000;
 
-    transition: all 0.5s ease-out;
+    transition: background-color 0.5s, transform 0.5s ease-out;
 
     @for $monthDay from 1 through 31 {
       &:nth-child(n + #{$monthDay})::before {
