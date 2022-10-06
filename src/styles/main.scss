@@ -1,62 +1,64 @@
 @import url("./zeroing");
 
-$cellSize: 100px;
-$daysInWeek: 7;
+$box-side: 100px;
 $gap: 1px;
-$calendarPadding: 10px;
-$calendarWidth: ($cellSize * $daysInWeek) + ($gap * 6);
-$cellGap: $cellSize + $gap;
-$daysOfWeek:
+$days-in-week: 7;
+$calendar-padding: 20px;
+$box-with-gap: $box-side + $gap;
+
+$days-of-the-week:
   "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5,
-  "sun" 6;
+  "tue" ($box-with-gap),
+  "wed" ($box-with-gap * 2),
+  "thu" ($box-with-gap * 3),
+  "fri" ($box-with-gap * 4),
+  "sat" ($box-with-gap * 5),
+  "sun" ($box-with-gap * 6);
 
 .calendar {
-  $root: &;
-
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-
-  width: $calendarWidth;
-  padding-top: $calendarPadding * 2;
+  width: $box-side * 7 + $gap * ($days-in-week - 1) + $calendar-padding * 2;
+  margin: 0 auto;
+  padding-top: $calendar-padding;
 
   &__item {
-    width: $cellSize;
-    height: $cellSize;
     display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px #000 solid;
-    background-color: #eee;
-
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-
-    transition: background-color 0.4s, transform 0.4s;
+    justify-content: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    align-items: center;
+    width: $box-side;
+    height: $box-side;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       background-color: #ffc0cb;
-
-      transform: translate(0, -20px);
       cursor: pointer;
+      transform: translate(0, -20px);
     }
+  }
 
-    @for $day from 1 through 31 {
-      &:nth-child(n + #{$day}):before {
-        content: "#{$day}";
-      }
+  @each $day, $first-day-shift in $days-of-the-week {
+    &--start-day--#{$day}
+    &__item:first-of-type {
+      margin-left: $first-day-shift;
+    };
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index}
+    &__item:nth-child(n + #{$index + 1}) {
+      display: none;
     }
+  }
 
-    @each $day, $position in $daysOfWeek {
-      #{$root}--start-day--#{$day} &:first-of-type {
-        margin-left: $cellGap * $position;
-      }
+  @for $index from 1 through 31 {
+    &__item:nth-of-type(#{$index})::before {
+      content: "#{$index}";
     }
   }
 }
