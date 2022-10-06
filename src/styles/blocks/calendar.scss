@@ -1,10 +1,11 @@
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: $item-gap;
-  width: ($item-size * 8) + ($item-gap * 6);
-  margin: 0 auto;
-  padding-top: 50px;
+  width: ($item-size * 7) + ($item-gap * 6);
+  margin: 50px auto;
+  padding: 10px;
 
   @each $day, $index in $days {
     &--start-day--#{$day} &__day:first-child {
@@ -13,9 +14,7 @@
   }
 
   @for $monthDay from 28 through 31 {
-    $monthDayNew: $monthDay + 1;
-
-    &--month-length--#{$monthDay} :nth-child(n + #{$monthDayNew}) {
+    &--month-length--#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
       display: none;
     }
   }
@@ -24,11 +23,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     @include itemSize($item-size);
     font-size: 30px;
     background-color: #eee;
     border: 1px solid #000;
-    transition: background-color 1s, transform 0.5s;
+    
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
