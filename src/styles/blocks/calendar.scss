@@ -1,0 +1,64 @@
+.calendar {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  gap: $dayGap;
+
+  width: 7 * $daySize + 6 * $dayGap;
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include size-for-box($daySize);
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    transition: transform $trnDur, background-color $trnDur, z-index $trnDur;
+
+    &:hover {
+      z-index: 1;
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $index from 1 through 29 {
+      &:nth-last-child(n + #{$index}) {
+        &::before {
+          content: "#{$index}";
+        }
+      }
+    }
+    // @for $index from $daysAmount through 31 {
+    //   &:nth-child(n + #{$index + 1}) {
+    //     display: none;
+    //   }
+    // }
+
+  }
+
+  @each $day in $days {
+    &--start-day-#{$day} :first-child {
+      @if $day == mon {
+        margin-right: 6 * $daySize + 6 * $dayGap;
+      }
+      @else if $day == tue {
+        margin-right: 5 * $daySize + 5 * $dayGap;
+      }
+      @else if $day == wed {
+        margin-right: 4 * $daySize + 4 * $dayGap;
+      }
+      @else if $day == thu {
+        margin-right: 3 * $daySize + 3 * $dayGap;
+      }
+      @else if $day == fri {
+        margin-right: 2 * $daySize + 2 * $dayGap;
+      }
+      @else if $day == sat {
+        margin-right: 1 * $daySize + $dayGap;
+      }
+    }
+  }
+}
