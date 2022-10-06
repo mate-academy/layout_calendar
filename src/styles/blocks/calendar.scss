@@ -2,24 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  padding: 10px;
-
-  @for $lastDay from 28 through 31 {
-    &--month-length--#{$lastDay} {
-      :nth-child(n + 1 + #{$lastDay}) {
-        display: none;
-      }
-    }
-  }
-
-  @for $index from 1 through 31 {
-    & :nth-child(#{$index})::before {
-      content: "#{$index}";
-      display: block;
-      line-height: 100px;
-      text-align: center;
-    }
-  }
+  padding: $calendar-padding;
 
   &__day {
     @include squre($cell-size);
@@ -32,22 +15,29 @@
     &:hover {
       background-color: #ffbfcb;
       cursor: pointer;
-      transform: translate(0, -20px);
+      transform: translateY(-20px);
     }
   }
+}
 
-  $days:
-    "mon" 0,
-    "tue" ($cell-size + $gap-between-size),
-    "wed" ($cell-size + $gap-between-size) * 2,
-    "thu" ($cell-size + $gap-between-size) * 3,
-    "fri" ($cell-size + $gap-between-size) * 4,
-    "sat" ($cell-size + $gap-between-size) * 5,
-    "sun" ($cell-size + $gap-between-size) * 6;
+@each $day, $margin in $days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: $margin;
+  }
+}
 
-  @each $day, $margin in $days {
-    &--start-day--#{$day} :first-child {
-      margin-left: $margin;
-    }
+@for $lastDay from 28 through 31 {
+  .calendar--month-length--#{$lastDay}
+  .calendar__day:nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar :nth-child(#{$index})::before {
+    content: "#{$index}";
+    display: block;
+    line-height: 100px;
+    text-align: center;
   }
 }
