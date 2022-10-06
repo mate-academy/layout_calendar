@@ -1,38 +1,42 @@
 @import url("./zeroing");
 
-$box-side: 100px;
+$itemSize: 100px;
 $gap: 1px;
-$days-in-week: 7;
-$calendar-padding: 20px;
-$box-with-gap: $box-side + $gap;
+$daysInWeek: 7;
+$calendarPadding: 20px;
+$totalSize: $itemSize + $gap;
 
 $days-of-the-week:
   "mon" 0,
-  "tue" ($box-with-gap),
-  "wed" ($box-with-gap * 2),
-  "thu" ($box-with-gap * 3),
-  "fri" ($box-with-gap * 4),
-  "sat" ($box-with-gap * 5),
-  "sun" ($box-with-gap * 6);
+  "tue" ($totalSize),
+  "wed" ($totalSize * 2),
+  "thu" ($totalSize * 3),
+  "fri" ($totalSize * 4),
+  "sat" ($totalSize * 5),
+  "sun" ($totalSize * 6);
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: $box-side * 7 + $gap * ($days-in-week - 1) + $calendar-padding * 2;
+  width: $itemSize * 7 + $gap * ($daysInWeek - 1) + $calendarPadding * 2;
   margin: 0 auto;
-  padding-top: $calendar-padding;
+  padding-top: $calendarPadding;
 
   &__item {
     display: flex;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
     justify-content: center;
+    align-items: center;
+
     background-color: #eee;
     border: 1px solid #000;
-    align-items: center;
-    width: $box-side;
-    height: $box-side;
+
+    width: $itemSize;
+    height: $itemSize;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
     transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
