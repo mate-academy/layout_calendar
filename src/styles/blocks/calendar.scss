@@ -1,46 +1,59 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
 .calendar {
-  box-sizing: border-box;
+  $ampersand: &;
+
   display: flex;
   flex-wrap: wrap;
   gap: $item-gap;
-  width: ($item-size * 8) + ($item-gap * 6);
-  margin: 50px auto;
-  padding: 10px;
-
-  @each $day, $index in $days {
-    &--start-day--#{$day} &__day:first-child {
-      margin-left: calc((#{$item-gap} + #{$item-size}) * #{$index});
-    }
-  }
-
-  @for $monthDay from 28 through 31 {
-    &--month-length--#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
-      display: none;
-    }
-  }
+  width: $calendar-width;
+  padding-left: $calendar-padding;
+  padding-top: $calendar-padding * 2;
 
   &__item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    box-sizing: border-box;
     @include itemSize($item-size);
-    font-size: 30px;
-    background-color: #eee;
-    border: 1px solid #000;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    border: 1px $border-col solid;
+    background-color: $item-col;
 
     transition: background-color 0.5s, transform 0.5s;
 
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-item-col;
+      transform: translate(0, -20px);
+    }
+
     @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
+      &:nth-child(n + #{$index})::before {
         content: "#{$index}";
       }
     }
 
-    &:hover {
-      background-color: #ffbfcb;
-      transform: translateY(-20px);
-      cursor: pointer;
+    @for $count from 28 through 31 {
+      #{$ampersand}--days-count--#{$count}
+      &:nth-child(n + #{$count + 1}) {
+        display: none;
+      }
+    }
+
+    @each $day, $position in $week-day {
+      #{$ampersand}--start-day--#{$day}
+      &:first-of-type {
+        margin-left: $first-day-of-margin * $position;
+      }
     }
   }
 }
