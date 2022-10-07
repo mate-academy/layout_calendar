@@ -19,12 +19,11 @@
     transition: color 0.5s, transform 0.5s;
   }
 
-  &__square:hover{
+  &__square:hover {
     background-color: #ffc0cb;
     cursor: pointer;
-    transform: translate(0, -20px)
+    transform: translate(0, -20px);
   }
-
 
   @for $index from 1 through 31 {
     &__square:nth-child(#{$index}):before {
@@ -33,21 +32,14 @@
   }
 
   @for $index from 28 through 31 {
-    &--month--length--#{$index} &__square:nth-child(n + #{$index + 1}){
+    &--month--length--#{$index} &__square:nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
 
   @each $day, $number in $day-from-week {
-  &--start--day--#{$day} &__square:first-of-type{
-    margin-left: calc((#{$square-size} + #{$gap} ) * #{$number});
+    &--start--day--#{$day} &__square:first-of-type {
+      margin-left: calc((#{$square-size} + #{$gap} ) * #{$number});
+    }
   }
-  }
-
-
 }
-
-
-
-
-
