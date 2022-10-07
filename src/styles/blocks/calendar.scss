@@ -7,18 +7,14 @@
   padding: 20px $dayBoxPadding;
 
   @each $day, $number in $weekDays {
-    &--start-day-#{$day} {
-      :first-child {
+    &--start-day-#{$day} :first-child {
         margin-left: (100px + $dayBoxGapSize) * $number;
-      }
     }
   }
 
   @for $lastDay from 28 through 31 {
-    &--month-length-#{$lastDay} {
-      :nth-child(n + #{$lastDay + 1}) {
+    &--month-length-#{$lastDay} :nth-child(n + #{$lastDay + 1}) {
         display: none;
-      }
     }
   }
 
