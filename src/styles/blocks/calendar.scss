@@ -1,0 +1,46 @@
+@import "./utils/mixins";
+@import "./utils/variables";
+@import "./utils/extends";
+
+.calendar {
+  width: $col-count * $cell-size + 6 * $gap;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+  }
+
+  @each $month in $month-length {
+    @for $index from 1 through $month {
+      &--month-length--#{$month} > * > :nth-child(#{$index}) {
+        @include square($cell-size);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        box-sizing: border-box;
+        border: 1px solid #000;
+        background-color: #eee;
+        cursor: pointer;
+        transition-duration: 0.5s;
+      }
+    
+      &--month-length--#{$month} > * > :nth-child(#{$index})::after {
+        content: "#{$index}";
+        @extend %calendar-text;
+      }
+
+      &--month-length--#{$month} > * > :nth-child(#{$index}):hover {
+        transform: translateY(-20px);
+        background-color: #ffc0cb;
+      }
+    }
+  }
+
+  @each $day-name, $day-number in $start-day {
+    &--start-day--#{$day-name} > * > :first-child {
+      margin-left: $cell-size * $day-number + $gap * $day-number;
+    }
+  }
+}
