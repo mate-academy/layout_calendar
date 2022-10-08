@@ -1,0 +1,19 @@
+@for $index from 1 through 31 {
+  .calendar__item:nth-child(31n + #{$index}) {
+    &::before {
+      content: "#{$index}";
+    }
+  }
+}
+  
+@for $num from 28 through 31 {
+  .calendar--month-length-#{$num} :nth-child(n + #{$num + 1}) {
+    display: none;
+  }
+}
+  
+@each $day, $start-position in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: #{$start-position};
+  }
+}
