@@ -1,18 +1,18 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  width: $cell-side * 7 + $gap * ($days-in-week - 1) + $calendar-padding * 2;
+  gap: $cell-gap;
+  width: $calendar-width;
   padding: 0 $calendar-padding;
 
   &__day {
     display: flex;
-    @include day-square($cell-side);
+    @include day-square($cell-size);
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
     justify-content: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 
     background-color: #eee;
     border: 1px solid #000;
@@ -20,9 +20,31 @@
     transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: #ffc0cb;
-      transform: translate(0, -20px);
+      cursor: pointer;
+      transform: translateY(-20px);
     }
   }
 }
+
+@each $day, $first-day-shift in $days-of-the-week {
+  .calendar--start-day--#{$day}
+  .calendar__day:first-of-type {
+    margin-left: $first-day-shift;
+  };
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-of-type(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+
