@@ -7,7 +7,6 @@
 }
 
 .calendar {
-  $ampersand: &;
 
   display: flex;
   flex-wrap: wrap;
@@ -43,14 +42,14 @@
     }
 
     @for $count from 28 through 31 {
-      #{$ampersand}--days-count--#{$count}
+      &--days-count--#{$count}
       &:nth-child(n + #{$count + 1}) {
         display: none;
       }
     }
 
     @each $day, $position in $week-day {
-      #{$ampersand}--start-day--#{$day}
+      &--start-day--#{$day}
       &:first-of-type {
         margin-left: $first-day-of-margin * $position;
       }
