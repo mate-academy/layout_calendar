@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $item-gap;
+  width: $calendar-width;
+  padding-left: $calendar-padding;
+  padding-top: $calendar-padding * 2;
+
+  &__item {
+    box-sizing: border-box;
+    @include itemSize($item-size);
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    border: 1px $border-col solid;
+    background-color: $item-col;
+
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-item-col;
+      transform: translate(0, -20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(n + #{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    @for $count from 28 through 31 {
+      &--days-count--#{$count}
+      &:nth-child(n + #{$count + 1}) {
+        display: none;
+      }
+    }
+
+    @each $day, $position in $week-day {
+      &--start-day--#{$day}
+      &:first-of-type {
+        margin-left: $first-day-of-margin * $position;
+      }
+    }
+  }
+}
