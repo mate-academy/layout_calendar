@@ -1,5 +1,3 @@
-@import "./mixins.scss";
-
 .calendar {
   display: flex;
   width: 720px;
@@ -9,6 +7,7 @@
 
   &__day {
     @include square($dayBox-size);
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +51,7 @@ $weekDays:
   "sun" ($dayBox-size + $borders + $gap) * 6;
 
 @each $weekDay, $dayShift in $weekDays {
-  .calendar--start-day--#{$weekDay} > .calendar__day:first-child {
+  .calendar--start-day--#{$weekDay} .calendar__day:first-child {
     margin-left: $dayShift;
   }
 }
