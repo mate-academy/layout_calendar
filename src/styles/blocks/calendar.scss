@@ -1,10 +1,21 @@
 .calendar {
   display: flex;
-  flex-direction: row-reverse;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   gap: $dayGap;
 
   width: $calendarWidth;
+
+  @each $day, $num in $days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($dayGap + $daySize)  * $num;
+    }
+  }
+  @for $monthDay from 28 through 31 {
+    &--month-length--#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -15,44 +26,19 @@
     background-color: #eee;
     border: 1px solid #000;
 
-    transition: 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
-      z-index: 1;
       cursor: pointer;
       transform: translateY(-20px);
       background-color: #ffc0cb;
     }
 
-    @for $index from 1 through 29 {
-      &:nth-last-child(n + #{$index}) {
-        &::before {
-          content: "#{$index}";
-        }
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
       }
     }
-  }
 
-  @each $day in $days {
-    &--start-day-#{$day} :first-child {
-      @if $day == mon {
-        margin-right: 6 * $daySize + 6 * $dayGap;
-      }
-      @else if $day == tue {
-        margin-right: 5 * $daySize + 5 * $dayGap;
-      }
-      @else if $day == wed {
-        margin-right: 4 * $daySize + 4 * $dayGap;
-      }
-      @else if $day == thu {
-        margin-right: 3 * $daySize + 3 * $dayGap;
-      }
-      @else if $day == fri {
-        margin-right: 2 * $daySize + 2 * $dayGap;
-      }
-      @else if $day == sat {
-        margin-right: 1 * $daySize + $dayGap;
-      }
-    }
   }
 }
