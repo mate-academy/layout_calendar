@@ -1,6 +1,6 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://drhtka.github.io/layout_calendar/)
+- [DEMO LINK](https://drhtka.github.io/layout_calendar/src/)
 - [TEST REPORT LINK](https://drhtka.github.io/layout_calendar/report/html_report/)
 
 ___
