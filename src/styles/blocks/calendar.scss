@@ -6,18 +6,6 @@
   width: $calendarWidth;
   padding: 20px $dayBoxPadding;
 
-  @each $day, $number in $weekDays {
-    &--start-day-#{$day} :first-child {
-        margin-left: (100px + $dayBoxGapSize) * $number;
-    }
-  }
-
-  @for $lastDay from 28 through 31 {
-    &--month-length-#{$lastDay} :nth-child(n + #{$lastDay + 1}) {
-        display: none;
-    }
-  }
-
   &__day {
     @include dayBoxSize($dayBoxSize);
 
@@ -36,12 +24,6 @@
       background-color: pink;
 
       transform: translateY(-20px);
-    }
-
-    @for $index from 1 through 31 {
-      &:nth-of-type(#{$index})::before {
-        content: "#{$index}";
-      }
     }
   }
 }
