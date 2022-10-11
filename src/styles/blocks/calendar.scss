@@ -15,13 +15,33 @@
 
     text-align: center;
     line-height: $content-size;
-    transition: 0.5s;
+    transition: transform 0.5s;
 
     &:hover {
       cursor: pointer;
 
       background-color: pink;
       transform: translateY(-20px);
+    }
+
+    @each $day, $firstDay in $days {
+      .calendar--start-day--#{$day}
+      &:first-child {
+        margin-left: #{($cell-size + $calendar-gap) * $firstDay};
+      }
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    @for $index from 28 through 31 {
+      .calendar--month-length--#{$index}
+      &:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
     }
   }
 }
