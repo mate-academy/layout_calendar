@@ -14,7 +14,28 @@
 
     background-color: #eee;
     border: 1px solid black;
-    transition: $transition-time, transform $transition-time;
+    transition: $transition-time,
+      background-color $transition-time,
+      transform $transition-time;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    @for $index from 28 through 31 {
+      .calendar--month-length--#{$index}
+      &:nth-child(n + #{$index + 1}) {
+        opacity: 0%;
+      }
+    }
+
+    @each $start-day, $distance in $days-of-week {
+      .calendar--start-day--#{$start-day} &:first-child {
+        margin-left: $distance * $days-distance;
+      }
+    }
 
     &:hover {
       transform: translate(0, -20px);
