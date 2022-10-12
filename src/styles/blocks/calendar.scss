@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: 720px;
+  width: getWidth($daySize, $gap, $columns-count, $paddings);
   gap: $gap;
 
   &__day {
@@ -22,25 +22,25 @@
       cursor: pointer;
       transform: translate(0, -20px);
     }
-  }
 
-  @each $day, $margin in $days {
-    .calendar--start-day--#{$day}
-    &__day:first-child {
-      margin-left: $margin * ($daySize + $gap);
-    };
-  }
-
-  @for $index from 1 to 32 {
-    &__day:nth-of-type(#{$index})::before {
-      content: '#{$index}';
+    @each $day, $margin in $days {
+      .calendar--start-day--#{$day}
+      &:first-child {
+        margin-left: $margin * ($daySize + $gap);
+      };
     }
-  }
 
-  @for $index from 28 through 32 {
-    .calendar--month-length--#{$index}
-    &__day:nth-child(n + #{$index + 1}) {
-      display: none;
+    @for $index from 1 to 32 {
+      &:nth-of-type(#{$index})::before {
+        content: '#{$index}';
+      }
+    }
+
+    @for $index from 28 through 31 {
+      .calendar--month-length--#{$index}
+      &:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
     }
   }
 }
