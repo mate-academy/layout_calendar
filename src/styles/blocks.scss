@@ -1,41 +1,17 @@
-@for $index from 1 to 32 {
-  .day-#{$index} {
-    position: relative;
-    box-sizing: border-box;
-    width: #{$square-size};
-    height: #{$square-size};
-    background-color: #eee;
-    border: 1px solid black;
-    transition: all ease 0.5s;
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
+@each $name, $num in $start-days {
+  .calendar--start-day_#{$name} {
+    .calendar__day:first-child {
+      margin-left: $num * ($square-size + $square-gap);
     }
-  }
-  
-  .day-#{$index}::before {
-    content: "#{$index}";
-    position: absolute;
-    left: 0;
-    right: 0;
-    display: block;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    text-align: center;
-    line-height: #{$square-size};
-  }
-}
-
-@each $name-day in mon, tue, wed, thu, fri, sat, sun {
-  .calendar__day--start-day--#{$name-day} {
-    margin-left: #{$first-element-margin};
   }
 }
 
 @for $last-number from 28 to 32 {
-  .calendar__day--month-length--#{$last-number}:nth-child(#{$last-number}) {
-    display: none;
+  $last-conv: $last-number + 1;
+  .calendar--month-length_#{$last-number} {
+    .calendar__day:nth-child(n + #{$last-conv}) {
+      display: none;
+    }
   }
 }
 
@@ -45,4 +21,31 @@
   padding: 30px 5px 0;
   width: #{$container-width};
   gap: #{$square-gap};
+  @for $index from 1 to 32 {
+    .day-#{$index} {
+      position: relative;
+      box-sizing: border-box;
+      width: #{$square-size};
+      height: #{$square-size};
+      background-color: #eee;
+      border: 1px solid black;
+      transition: all ease 0.5s;
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
+    .day-#{$index}::before {
+      content: "#{$index}";
+      position: absolute;
+      left: 0;
+      right: 0;
+      display: block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      line-height: #{$square-size};
+    }
+  }
 }
