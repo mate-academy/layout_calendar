@@ -3,10 +3,13 @@
   flex-wrap: wrap;
   justify-content: start;
   box-sizing: border-box;
-  margin: auto;
   gap: $dayGap;
   width: getCalendarSize($daySize, $dayGap, $padding);
   padding: 20px $padding 0;
+
+  &--margin {
+    margin: auto;
+  }
 
   &__day {
     display: flex;
@@ -47,7 +50,8 @@
   }
 
   @each $day, $dayNumber in $week {
-    &--start-day--#{$day} &__day:first-child {
+    &--start-day--#{$day}
+    &__day:first-child {
       margin-left: #{($daySize + $dayGap) * $dayNumber};
     }
   }
