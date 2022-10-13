@@ -7,7 +7,6 @@
   gap: #{$gap-size};
 
   &__cell {
-    box-sizing: border-box;
     background-color: #{$main-color};
     border: 1px solid #{$border-color};
   
@@ -28,7 +27,7 @@
    
     @for $index from 1 through 31 {
       &:nth-of-type(#{$index}):before {
-      content: "#{$index}";
+        content: "#{$index}";
       }
     }
   }
@@ -40,19 +39,11 @@
     }
   }
 
-  $days-of-week:
-  "mon" 0,
-  "tue" ($cell-size + $gap-size),
-  "wed" (($cell-size + $gap-size) * 2),
-  "thu" (($cell-size + $gap-size) * 3),
-  "fri" (($cell-size + $gap-size) * 4),
-  "sat" (($cell-size + $gap-size) * 5),
-  "sun" (($cell-size + $gap-size) * 6);
-
+  
   @each $day, $day-shift in $days-of-week {
     &--start-day--#{$day} 
     &__cell:first-of-type {
-      margin-left: #{$day-shift};
+      margin-left: $day-shift * $cell-gap-size;
     }
   }
 }
