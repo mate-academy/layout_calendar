@@ -31,7 +31,7 @@
   }
 
   $start-days:
-    "mon" ($cell-size + $between-cells),
+    "mon" $cell-size - $cell-size,
     "tue" ($cell-size * 2 + $between-cells) - $cell-size,
     "wed" ($cell-size * 3 + $between-cells * 2) - $cell-size,
     "thu" ($cell-size * 4 + $between-cells * 3) - $cell-size,
@@ -45,7 +45,7 @@
     }
   }
 
-  @for $index from 29 through 31 {
+  @for $index from 28 through 31 {
     &--month-lengt--#{$index} &__day:nth-child(n + #{$index+1}) {
       display: none;
     }
