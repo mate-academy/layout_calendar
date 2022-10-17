@@ -14,16 +14,10 @@
     box-sizing: border-box;
     border: 1px solid black;
 
-    &:nth-of-type(8) {
-      margin-left: 6*$cell-size + 6*$gap-size;
-    }
-
-    &:nth-of-type(n + 8) {
-      &:hover {
-        cursor: pointer;
-        animation-name: cover-cell;
-        animation-duration: 0.5s;
-      }
+    &:hover {
+      cursor: pointer;
+      animation-name: cover-cell;
+      animation-duration: 0.5s;
     }
 
     @each $day in $days {
@@ -32,15 +26,25 @@
       }
     }
 
-    @for $i from 8 to 40 {
+    @for $i from 1 to 32 {
       &:nth-of-type(#{$i})::before {
-        content: "#{$i - 7}";
+        content: "#{$i}";
       }
     }
+  }
 
-    @for $j from 28 to 32 {
-      &--month-length-#{$j}::before {
-        content: "#{$j}";
+  @each $day, $margin in $days {
+    &--start-day--#{$day} {
+      .calendar__cell:nth-of-type(1) {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $i from 28 to 32 {
+    &--month-length--#{$i} {
+      .calendar__cell:nth-of-type(n + #{$i + 1}) {
+        display: none;
       }
     }
   }
