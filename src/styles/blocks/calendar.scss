@@ -6,6 +6,12 @@
   padding: 50px $calendar-hor-padding;
   width: $calendar-size;
 
+  @each $day, $number in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: shift($number, $cell-width, $cell-gap);
+    }
+  }
+
   @for $index from 28 to 31 {
     &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
@@ -19,17 +25,11 @@
     @include cell-size($cell-height, $cell-width);
     border: 1px solid $cell-color-border;
     background-color: $cell-background;
+    transition: 0.5s;
 
     &:hover {
       background-color: $cell-background-hover;
       transform: translate(0, -20px);
-      transition: 0.5s;
-    }
-
-    @each $day, $number in $days {
-      &--start-day--#{$day}:first-child {
-        margin-left: shift($number, $cell-width, $cell-gap);
-      }
     }
 
     @for $index from 1 through 31 {
