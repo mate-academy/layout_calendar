@@ -1,12 +1,6 @@
-.container {
-  display: flex;
-  justify-content: center;
-  margin: 50px auto;
-}
-
 .calendar {
   box-sizing: border-box;
-  width: $cell-size * 7 + 10px;
+  width: $cell-size * 7 + 14px;
   display: flex;
   flex-wrap: wrap;
   gap: $between-cells;
@@ -21,6 +15,7 @@
     font-size: 30px;
     text-align: center;
     line-height: $cell-size;
+    list-style: none;
   }
 
   &__day:hover {
@@ -29,15 +24,6 @@
     transform: translateY(-20px);
     transition-duration: 0.5s;
   }
-
-  $start-days:
-    "mon" $cell-size - $cell-size,
-    "tue" ($cell-size * 2 + $between-cells) - $cell-size,
-    "wed" ($cell-size * 3 + $between-cells * 2) - $cell-size,
-    "thu" ($cell-size * 4 + $between-cells * 3) - $cell-size,
-    "fri" ($cell-size * 5 + $between-cells * 4) - $cell-size,
-    "sat" ($cell-size * 6 + $between-cells * 5) - $cell-size,
-    "sun" ($cell-size * 7 + $between-cells * 6) - $cell-size;
 
   @each $name, $width_day in $start-days {
     &--start-day--#{$name} &__day:first-child {
