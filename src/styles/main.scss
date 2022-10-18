@@ -1,5 +1,6 @@
 @import "./utils/variables";
 @import "./utils/function";
+@import "calendar";
 
 body {
   margin: 0;
@@ -10,60 +11,4 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  width: get-width($ceil-width, $gap);
-  padding: 0;
-
-  &__item {
-    position: relative;
-    box-sizing: border-box;
-    height: $ceil-height;
-    width: $ceil-width;
-    background-color: #eee;
-    list-style: none;
-    transition: 0.5s ease;
-
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-  }
-}
-
-@for $index from 1 to 32 {
-  .calendar__item:nth-child(#{$index})::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    font-size: 30px;
-    text-align: center;
-    line-height: $ceil-height;
-    content: "#{$index}";
-  }
-}
-
-@for $i from 28 to 31 {
-  .calendar--month-length_#{$i} {
-
-    @for $j from $i to 31 {
-      .calendar__item:nth-child(#{$j+1}) {
-        display: none;
-      }
-    }
-  }
-}
-
-@each $day in $week-days {
-  .calendar__item--start-day_#{$day} {
-    margin-left: $ceil-width*$n+$gap*$n;
-  }
-  $n:$n+1;
 }
