@@ -1,5 +1,12 @@
-.calendar {
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
   box-sizing: border-box;
+}
+
+.calendar {
   width: $cell-size * 7 + 14px;
   display: flex;
   flex-wrap: wrap;
@@ -11,18 +18,17 @@
     width: $cell-size;
     border: 1px solid #000;
     background-color: #eee;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     text-align: center;
     line-height: $cell-size;
     list-style: none;
+    transition-duration: 0.5s;
   }
 
   &__day:hover {
     cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
-    transition-duration: 0.5s;
   }
 
   @each $name, $width_day in $start-days {
