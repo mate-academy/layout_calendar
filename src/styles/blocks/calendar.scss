@@ -1,17 +1,29 @@
 .calendar {
-
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
   padding: $main-padding;
   width: getWidth($cell-size, $cell-gap, $main-padding);
-
   @for $index from 28 to 32 {
-
     &--month-length--#{$index - 1} :nth-of-type(n + #{$index}) {
       visibility: hidden;
     }
   }
+
+  $days:
+      "mon" $cell-size * 0,
+      "tue" $cell-size * 1,
+      "wed" $cell-size * 2,
+      "thu" $cell-size * 3,
+      "fri" $cell-size * 4,
+      "sat" $cell-size * 5,
+      "sun" $cell-size * 6;
+
+    @each $name, $margin-left in $days {
+      &--start-day--#{$name} :first-child {
+        margin-left: $margin-left;
+      }
+    }
 
   &__cell {
     display: flex;
@@ -23,34 +35,18 @@
     color: grey;
     background-color: #eee;
     transition-duration: 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
-    $days:
-      "mon" $cell-size * 0,
-      "tue" $cell-size * 1,
-      "wed" $cell-size * 2,
-      "thu" $cell-size * 3,
-      "fri" $cell-size * 4,
-      "sat" $cell-size * 5,
-      "sun" $cell-size * 6;
-
-    @each $name, $margin-left in $days {
-      &--#{$name} {
-        margin-left: $margin-left;
-      }
-    }
-
     @for $index from 1 through 31 {
       &--#{$index}::before {
         content: "#{$index}";
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
   }
 }
