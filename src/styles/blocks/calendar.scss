@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: #{$gap};
   width: #{$calendar-size};
-  padding: 10px;
+  padding: #{$padding};
 
   @for $index from 28 through 31 {
     &--month-length-#{$index} {
@@ -16,15 +16,11 @@
   &__day {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: #{$cell-size};
     height: #{$cell-size};
-    box-sizing: border-box;
     background-color: #eee;
-    border: 1px solid black;
-    transition:
-      background-color 0.5s,
-      transform 0.5s;
+    border: 1px solid #{$color-border};
+    transition: background-color #{$trs-speed}, transform #{$trs-speed};
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index}) {
@@ -41,10 +37,8 @@
     }
 
     &:hover {
-      background-color: #fdc7d0;
+      background-color: #{$color-background};
       transform: translate(0, -20px);
     }
   }
-
-
 }
