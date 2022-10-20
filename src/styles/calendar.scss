@@ -1,17 +1,4 @@
-$cell-size: 100px;
-$cell-color: #eee;
-$cell-gap: 1px;
-$first-cell-margin: 100px;
-$days:
-  (
-    "mon" : 1,
-    "tue" : 2,
-    "wed" : 3,
-    "thu" : 4,
-    "fri" : 5,
-    "sat" : 6,
-    "sun" : 7
-  );
+@use '../styles/variables' as *;
 
 .calendar {
   display: flex;
@@ -31,18 +18,6 @@ $days:
 
     background-color: $cell-color;
 
-    @keyframes optional {
-      from {
-        transform: translate(0, 0);
-        background-color: #eee;
-      }
-
-      to {
-        transform: translate(0, -20px);
-        background-color: #ffc0cb;
-      }
-    }
-
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
@@ -50,8 +25,9 @@ $days:
     }
 
     &:hover {
-      animation: optional 0.5s;
-      animation-fill-mode: forwards;
+      translate: 0 -20px;
+      background-color: #ffc0cb;
+      transition: translate, background-color 0.5s, 0.5s;
       cursor: pointer;
     }
 
