@@ -1,0 +1,20 @@
+
+@each $day, $first-day-shift in $days-of-week {
+  .calendar--start-day--#{$day}
+  .calendar__days:first-of-type {
+    margin-left: $first-day-shift;
+  };
+}
+
+@for $dayNumber from 1 through $daysCount {
+  .calendar__days:nth-child(n+#{$dayNumber})::before {
+    content: "#{$dayNumber}";
+  }
+}
+
+@for $dayNumber from 28 through 31 {
+  .calendar--month-length--#{$dayNumber}
+  .calendar__days:nth-child(n + #{$dayNumber + 1}) {
+    display: none;
+  }
+}
