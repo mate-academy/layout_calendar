@@ -1,4 +1,4 @@
-@use '../styles/variables' as *;
+@use "../styles/variables" as *;
 
 .calendar {
   display: flex;
@@ -27,7 +27,7 @@
     &:hover {
       translate: 0 -20px;
       background-color: #ffc0cb;
-      transition: translate, background-color 0.5s, 0.5s;
+      transition: translate 0.5s, background-color 0.5s;
       cursor: pointer;
     }
 
@@ -35,7 +35,7 @@
 
   @each $day, $day-number in $days {
     &--start-day--#{$day} > :first-child {
-      margin-left: $first-cell-margin * $day-number + $day-number - 101px;
+      margin-left: ($cell-size + $cell-gap) * ($day-number - 1);
     }
   }
 
