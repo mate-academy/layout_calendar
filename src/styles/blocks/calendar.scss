@@ -1,9 +1,8 @@
 .calendar {
-  box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
+  gap: $gap;
+  padding: $paddin-for-calendar;
 
   @each $multiplier, $day in $days-list {
     &--start-day--#{$day} &__day:first-child {
@@ -24,7 +23,7 @@
     align-items: center;
     border: 1px solid #000;
     background-color: #eee;
-    transition: background-color 0.5s, transform 0.5s;
+    transition: background-color $trans-duration, transform $trans-duration;
 
     &:hover {
       cursor: pointer;
