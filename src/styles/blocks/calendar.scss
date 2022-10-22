@@ -2,9 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
-  padding: $main-padding;
   width: getWidth($cell-size, $cell-gap, $main-padding);
-  @for $index from 28 to 32 {
+  @for $index from 28 through 31 {
     &--month-length--#{$index - 1} :nth-of-type(n + #{$index}) {
       visibility: hidden;
     }
@@ -32,19 +31,18 @@
     @include cell ($cell-size);
     border: 1px solid black;
     border-radius: 20px;
+    font-size: 30px;
     color: grey;
     background-color: #eee;
-    transition-duration: 0.5s;
+    cursor: pointer;
+    transition: transform 0.5s;
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
