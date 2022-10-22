@@ -7,8 +7,8 @@
 
   &__item {
     display: flex;
-    width: $width - $border;
-    height: $height - $border;
+    width: $width;
+    height: $height;
     border: $border solid black;
     position: relative;
     background-color: #eee;
@@ -33,7 +33,7 @@
     @each $weekday, $number in $weekset {
       &--start-day--#{$weekday}
       &:first-child {
-        margin-left: calc((#{$width} + #{$gap}) * #{$number});
+        margin-left: #{($width + ($border * 2) + $gap) * $number};
       }
     }
 
