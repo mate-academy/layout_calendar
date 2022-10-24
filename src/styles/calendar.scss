@@ -1,5 +1,9 @@
 @import "variables";
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .calendar {
   width: 706px;
   height: max-content;
@@ -20,6 +24,12 @@
     align-items: center;
     text-align: center;
     transition-duration: 0.5s;
+    @for $i from 1 through 31 {
+      & :nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: $text-size-calendar-day;
+      }
+    }
   }
 
   &__day:hover {
@@ -35,14 +45,7 @@
     }
   }
 
-  @for $i from 1 through 31 {
-    & :nth-child(#{$i})::before {
-      content: "#{$i}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: $text-size-calendar-day;
-    }
-  }
-
+  
   @each $name, $width_day in $start-days {
     &--start-day--#{$name} &__day:first-child {
       margin-left: $width_day;
