@@ -13,13 +13,13 @@
         display: none;
     }
   }
-
+  
   @each $name, $day-of-week in $days-of-week {
     &--start-day--#{$name} :first-child {
-      margin-left: ($day-block-size + $gap-size) * $day-of-week;
+        margin-left: ($day-block-size + $gap-size) * $day-of-week;
     }
   }
-
+  
   &__day {
     display: flex;
     justify-content: center;
@@ -29,20 +29,22 @@
     @include mixin.square($day-block-size);
     background-color: $day-block-color;
     border: 1px solid #000;
-
+    
+    @for $index from $month-lenght through 1 {
+      &:nth-child(-n + #{$index}){
+        &::before {
+          display: flex;
+          content: "#{$index}";
+          color: #000;
+        }
+      }
+    }
+    
     &:hover {
       cursor: pointer;
       background-color: lightpink;
       transform: translate(0, -20%);
       transition-duration: 0.5s;
     }
-    
-    @for $index from $month-lenght through 1 {
-      &:nth-child(-n + #{$index})::before {
-        display: flex;
-        content: "#{$index}";
-        color: #000;
-      }
-    }
-  }
+  } 
 }

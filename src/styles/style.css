@@ -26,7 +26,7 @@ html {
   display: flex;
   flex-wrap: wrap;
   flex-shrink: 0;
-  width: 726px;
+  width: 446px;
   padding: 10px;
   gap: 1px;
 }
@@ -39,43 +39,45 @@ html {
 .calendar--month-lenght--30 :nth-child(n+31) {
   display: none;
 }
+.calendar--month-lenght--31 :nth-child(n+32) {
+  display: none;
+}
 .calendar--start-day--mon :first-child {
   margin-left: 0px;
 }
 .calendar--start-day--tue :first-child {
-  margin-left: 101px;
+  margin-left: 61px;
 }
 .calendar--start-day--wed :first-child {
-  margin-left: 202px;
+  margin-left: 122px;
 }
 .calendar--start-day--thu :first-child {
-  margin-left: 303px;
+  margin-left: 183px;
 }
 .calendar--start-day--fri :first-child {
-  margin-left: 404px;
+  margin-left: 244px;
 }
 .calendar--start-day--sat :first-child {
-  margin-left: 505px;
+  margin-left: 305px;
 }
 .calendar--start-day--sun :first-child {
-  margin-left: 606px;
+  margin-left: 366px;
 }
 .calendar__day {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
+  font-size: 18px;
   flex-shrink: 0;
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   background-color: #eee;
   border: 1px solid #000;
 }
-.calendar__day:hover {
-  cursor: pointer;
-  background-color: lightpink;
-  transform: translate(0, -20%);
-  transition-duration: 0.5s;
+.calendar__day:nth-child(-n+31)::before {
+  display: flex;
+  content: "31";
+  color: #000;
 }
 .calendar__day:nth-child(-n+30)::before {
   display: flex;
@@ -226,6 +228,12 @@ html {
   display: flex;
   content: "1";
   color: #000;
+}
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: lightpink;
+  transform: translate(0, -20%);
+  transition-duration: 0.5s;
 }
 
 /*# sourceMappingURL=style.css.map */
