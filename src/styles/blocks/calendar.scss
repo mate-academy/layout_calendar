@@ -10,7 +10,7 @@
     @include cell($cell-side);
     @extend %center;
     cursor: pointer;
-    transition-duration: 500ms;
+    transition: transform 500ms, background-color 500ms;
   
     &:hover {
       background-color: pink;
@@ -23,9 +23,7 @@
       }
     }
   }
-  
-  $week-days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
-  
+    
   @each $week-day, $week-day-number in $week-days {
     &--start-day--#{$week-day} :first-child {
       margin-left: $first-day-margin * $week-day-number ;
