@@ -1,0 +1,48 @@
+@use "../utils/variables" as *;
+@use "../utils/mixin";
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  width: $calendar-width;
+  padding: $padding-size;
+  gap: $gap-size;
+
+  @for $index from 28 through $month-lenght { 
+    &--month-lenght--#{$index} :nth-child(n + #{$index + 1}) {
+        display: none;
+    }
+  }
+
+  @each $name, $day-of-week in $days-of-week {
+    &--start-day--#{$name} :first-child {
+      margin-left: ($day-block-size + $gap-size) * $day-of-week;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $font-size;
+    flex-shrink: 0;
+    @include mixin.square($day-block-size);
+    background-color: $day-block-color;
+    border: 1px solid #000;
+
+    &:hover {
+      cursor: pointer;
+      background-color: lightpink;
+      transform: translate(0, -20%);
+      transition-duration: 0.5s;
+    }
+    
+    @for $index from $month-lenght through 1 {
+      &:nth-child(-n + #{$index})::before {
+        display: flex;
+        content: "#{$index}";
+        color: #000;
+      }
+    }
+  }
+}
