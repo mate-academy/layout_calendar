@@ -10,6 +10,7 @@
 
 @function check($count_of_step) {
   @if $count_of_step > $days_of_mounth {
+    $counter: false !global;
     @return "";
   }
   @else {
@@ -48,6 +49,11 @@
   }
 
   @else {
+    @if $day_before == "Null" {
+      $day_before: $day !global;
+      $counter: true !global;
+      @return "#{check($count_of_step)}";
+    }
     $day_before: $day !global;
     $count_of_step: $count_of_step - $reset - 7 !global;
     $counter: true !global;
