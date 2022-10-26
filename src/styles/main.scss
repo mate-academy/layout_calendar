@@ -1,3 +1,37 @@
-body {
-  margin: 0;
+@import "./normalize.scss";
+
+@import "./utilis/variables";
+@import "./utilis/mixins";
+@import "./utilis/functions";
+
+.calendar_container {
+  display: flex;
+  justify-content: center;
+  gap: 1px;
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    border-color: black;
+    gap: 1px;
+  }
+}
+
+.day {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+}
+
+@each $day, $column in $days {
+  .calendar_container__#{$day} {
+    @for $step from 1 through 6 {
+      & > *:nth-child(#{$step}) {
+        @include mixinDay($day, $step, $column);
+      }
+    }
+  }
 }
