@@ -1,22 +1,20 @@
-//для функций/функцій
-
 @function findDay($start_of_day) {
   @each $day, $column in $days {
     @if $start_of_day == $day {
       @return $column;
     }
   }
-}//пошук корекції якщо день не понеділок
+}
 
 @function check($count_of_step) {
-  @if $count_of_step > $days_of_mounth {
+  @if $count_of_step > $month-length {
     $counter: false !global;
     @return "";
   }
   @else {
     @return $count_of_step;
   }
-} //днів у місяці
+}
 
 @function getDay($day, $step) {
 
@@ -59,4 +57,4 @@
     $counter: true !global;
     @return "#{check($count_of_step)}";
   }
-} //загальна функція
+}
