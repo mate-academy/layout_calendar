@@ -1,6 +1,6 @@
-@function findDay($start_of_day) {
+@function findDay($start-day) {
   @each $day, $column in $days {
-    @if $start_of_day == $day {
+    @if $start-day == $day {
       @return $column;
     }
   }
@@ -18,13 +18,13 @@
 
 @function getDay($day, $step) {
 
-  @if $day == $start_of_day {
+  @if $day == $start-day {
     $status: false !global;
   }
 
   @if $status {
     @if $count_of_step == 1 {
-      $correct: findDay($start_of_day) !global;
+      $correct: findDay($start-day) !global;
     }
     @else {
       $correct: 0 !global;
