@@ -6,9 +6,9 @@
   gap: #{$gap};
   padding: 20px #{$padding-left-right};
 
-  @for $i from 28 through 31 {
-    &--month-length--#{$i} {
-      :nth-child(n+#{$i + 1}) {
+  @for $start-day from 28 through 31 {
+    &--month-length-#{$start-day} {
+      :nth-child(n+#{$start-day  + 1}) {
         opacity: 0;
       }
     }
@@ -35,16 +35,16 @@
     }
 
     $start-days:
-      "mon" 0,
-      "tue" #{$size-day + $gap},
-      "wed" #{($size-day + $gap)*2},
-      "thu" #{($size-day + $gap)*3},
-      "fri" #{($size-day + $gap)*4},
-      "sat" #{($size-day + $gap)*5},
-      "sun" #{($size-day + $gap)*6};
+      "mon" getShift($size-day, $gap, 1),
+      "tue" getShift($size-day, $gap, 2),
+      "wed" getShift($size-day, $gap, 3),
+      "thu" getShift($size-day, $gap, 4),
+      "fri" getShift($size-day, $gap, 5),
+      "sat" getShift($size-day, $gap, 6),
+      "sun" getShift($size-day, $gap, 7);
 
     @each $start-day, $shift in $start-days {
-      &--start-day--#{$start-day} {
+      &--start-day-#{$start-day} {
         margin-left: $shift;
       }
     }
