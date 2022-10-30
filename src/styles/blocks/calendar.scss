@@ -1,0 +1,60 @@
+.calendar {
+  min-width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__month {
+    min-width: calcWidth($column-width, $gap, $num-columns, $calendar-padding);
+    max-width: calcWidth($column-width, $gap, $num-columns, $calendar-padding);
+    padding: #{$calendar-padding};
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: #{$gap};
+    
+    @for $end-day from 28 through 31 {
+      &--month-length_#{$end-day} {
+        $days-skipped: (31 - #{$end-day});
+        .calendar__day:nth-child(n + #{$end-day + 1}) {
+          display: none;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    min-width: #{$column-width};
+    min-height: #{$column-width};
+    border: 1px solid #000;
+    position: relative;
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $day from 1 through 31 {
+      &--#{$day}::before {
+        content: "#{$day}";
+        position: absolute;
+        font-size: #{$font-size};
+        line-height: #{$column-width};
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    @each $day, $number in $weekdays {
+      &--start-day_#{$day} {
+        margin-left: calcStartDayMargin($column-width, $gap, $number);
+      }
+    }
+  }
+}
