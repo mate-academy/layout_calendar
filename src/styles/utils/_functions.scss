@@ -1,0 +1,9 @@
+@function calcWidth($column-width, $gap, $num-columns, $calendar-padding) {
+  @return (($column-width * $num-columns) + 
+  (($gap * $num-columns) - $gap) + ($calendar-padding * 2));
+}
+
+@function calcStartDayMargin($column-width, $gap, $day-number) {
+  $days-skipped: $day-number - 1;
+  @return (($column-width * $days-skipped) + ($gap * $days-skipped));
+}
