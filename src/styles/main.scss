@@ -37,11 +37,12 @@ html {
     }
   }
 
-  @each $day, $shift in $weekDays {
+  @each $day in $weekDays {
     &--start-day--#{$day}
     &__day:first-child {
-      margin-left: $shift;
+      margin-left: $fullSize * $shift;
     }
+    $shift: $shift + 1;
   }
 
   @for $index from 28 through 31 {
