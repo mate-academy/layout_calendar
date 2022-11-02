@@ -1,7 +1,6 @@
 body {
   margin: 0;
-  font-family: "Arial",
-    sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: $font-size;
   min-height: 100vh;
   @include flex-justify-align(center, center);
@@ -10,7 +9,7 @@ body {
 .main {
   .calendar {
     @for $i from 1 through $days-in-month {
-      &__day:nth-child(n+#{$i}):before {
+      &__day:nth-child(n+#{$i})::before {
         content: "#{$i}";
       }
     }
@@ -28,11 +27,11 @@ body {
       box-sizing: border-box;
       @include flex-justify-align(center, center);
       cursor: pointer;
+      transition: all 0.5s;
 
       &:hover {
         background-color: pink;
         transform: translateY(-$cell-size/5);
-        transition: all 0.5s;
       }
     }
   }
