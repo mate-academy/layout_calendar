@@ -12,6 +12,22 @@
     }
   }
 
+  $days:
+    mon 0,
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
+
+  @each $dayName, $number in $days {
+    &--start-day--#{$dayName}
+    &__day:first-child {
+      margin-left: ($number * $calendarDaySize + $number * $dayGap);
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -27,21 +43,6 @@
         content: "#{$number}";
         font-family: Arial, sans-serif;
         font-size: 30px;
-      }
-    }
-
-    $days:
-      mon 0,
-      tue ($calendarDaySize + $dayGap),
-      wed (2 * $calendarDaySize + 2 * $dayGap),
-      thu (3 * $calendarDaySize + 3 * $dayGap),
-      fri (4 * $calendarDaySize + 4 * $dayGap),
-      sat (5 * $calendarDaySize + 5 * $dayGap),
-      sun (6 * $calendarDaySize + 6 * $dayGap);
-
-    @each $dayName, $marginLeft in $days {
-      &--start-day--#{$dayName} {
-        margin-left: #{$marginLeft};
       }
     }
 
