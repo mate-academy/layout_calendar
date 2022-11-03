@@ -1,0 +1,69 @@
+.calendar {
+  &__top {
+    display: flex;
+    width: $calendar-width;
+    gap: $box-gap;
+    border-bottom: 1px solid #eaeaea;
+
+    @each $day, $number in $days {
+      & .calendar__cell:nth-child(#{$number})::after {
+        content: "#{$day}";
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $box-width;
+    height: $box-width;
+    background-color: $box-color;
+    border: 1px solid #eaeaea;
+
+    &--top-style {
+      border: none;
+    }
+  }
+}
+
+
+
+.calendar__days {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $box-gap;
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} .calendar__cell:first-child {
+      margin-inline-start: ($box-width * ($number - 1)) + ($number * $box-gap - 1);
+    }
+  }
+
+  @for $amount from 28 through 31 {
+    &--month-length--#{$amount} {
+      :nth-child(n + #{$amount + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  & .calendar__cell {
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: $color-secondary;
+      cursor: pointer;
+      transform: translateY(-5px);
+      transition-duration: 0.5s;
+      box-shadow: 0px 20px 40px -20px rgba(0,0,0,0.5);
+    }
+  }
+}
