@@ -24,36 +24,11 @@ body {
   @return $day * $daysCount + $gap * ($daysCount - 1);
 }
 
-@function firstDayMargin($day) {
-  /* monday is default */
-  @if $day == "tue" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 1);
-  }
-  @else if $day == "wed" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 2);
-  }
-  @else if $day == "thu" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 3);
-  }
-  @else if $day == "fri" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 4);
-  }
-  @else if $day == "sat" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 5);
-  }
-  @else if $day == "sun" {
-    @return calcCalendarWidth($day-size, $calendar-gap, 6);
-  }
-  @else {
-    @return 0;
-  }
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  width: calcCalendarWidth($day-size, $calendar-gap, 7);
+  min-width: calcCalendarWidth($day-size, $calendar-gap, 7);
   padding: 30px;
 
   &__day {
@@ -71,22 +46,22 @@ body {
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    @for $i from 1 to 32 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
     &:hover {
       background-color: $secondary-color;
       transform: translateY(-20px);
     }
   }
 
-  @for $i from 1 to 31 {
-    &-#{$i}::before {
-      content: "#{$i}";
-    }
-  }
-
-  @for $i from 28 to 31 {
+  @for $i from 28 to 32 {
     &--month-length--#{$i} {
-      @for $j from 1 to 31 - $i {
-        &:nth-child(#{$i + $j}) {
+      @for $j from 1 to 32 - $i {
+        & :nth-child(#{$i + $j}) {
           display: none;
         }
       }
@@ -94,10 +69,10 @@ body {
   }
 
   @each $day in $days {
-    &--start-day--#{$day} {
-      & :first-child {
-        margin-left: firstDayMargin($day);
-      }
+    $i: index($days, $day);
+    &--start-day--#{$day} :first-child {
+      margin-left: $calendar-gap
+        + calcCalendarWidth($day-size, $calendar-gap, ($i - 1));
     }
   }
 }
