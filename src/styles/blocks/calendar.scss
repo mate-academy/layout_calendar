@@ -1,20 +1,20 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $calendar-item-gap;
   padding: 50px $calendar-paddings;
   width: $calendar-width;
 
   &__item {
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     width: $item-side;
     height: $item-side;
-    font-size: 30px;
+
     background-color: #eee;
     border: 1px solid;
+
     transition: background-color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
@@ -25,22 +25,24 @@
 
     &:hover {
       background-color: pink;
+
       transform: translateY(-20px);
+
       cursor: pointer;
     }
   }
 
   $values: "mon" 0,
-    "tue"$item-side + 1px,
-    "wed" 2 * $item-side + 2* 1px,
-    "thu" 3 * $item-side + 3 * 1px,
-    "fri" 4 * $item-side + 4 * 1px,
-    "sat" 5 * $item-side + 5 * 1px,
-    "sun" 6 * $item-side + 6 * 1px;
+    "tue" $item-side + $calendar-item-gap,
+    "wed" 2 * $item-side + 2 * $calendar-item-gap,
+    "thu" 3 * $item-side + 3 * $calendar-item-gap,
+    "fri" 4 * $item-side + 4 * $calendar-item-gap,
+    "sat" 5 * $item-side + 5 * $calendar-item-gap,
+    "sun" 6 * $item-side + 6 * $calendar-item-gap;
 
-  @each $name, $values in $values {
+  @each $name, $value in $values {
     &--start-day--#{$name} &__item:first-child {
-      margin-left: $values;
+      margin-left: $value;
     }
   }
 
