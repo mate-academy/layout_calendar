@@ -2,8 +2,15 @@
   display: flex;
   flex-wrap: wrap;
   gap: #{$dayGap};
-  width: 7 * $daySize + 6 * $dayGap;
-  padding: 10px;
+  width: getWidth($daySize, $dayGap);
+  margin: 10px auto;
+
+  @each $dayName, $number in $days {
+    &--start-day--#{$dayName}
+    &__day:first-child {
+      margin-left: ($number * $daySize + $number * $dayGap);
+    }
+  }
 
   @for $lastDay from 28 through 31 {
     &--month-length--#{$lastDay}
@@ -16,7 +23,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
     @include square(#{$daySize});
 
     border: 1px solid black;
@@ -26,14 +32,6 @@
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: "#{$number}";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-      }
-    }
-
-    @each $dayName, $marginLeft in $days {
-      &--start-day--#{$dayName} {
-        margin-left: #{$marginLeft};
       }
     }
 
