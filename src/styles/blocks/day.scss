@@ -1,0 +1,21 @@
+.day {
+  @extend %position-content;
+  justify-content: center;
+  @include days($day-size);
+  background-color: #eee;
+  box-sizing: border-box;
+  border: 1px solid #000;
+
+  @for $day-index from 1 through $day-count {
+    &:nth-child(#{$day-index})::before {
+      content: '#{$day-index}';
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+}

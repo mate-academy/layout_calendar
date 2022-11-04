@@ -1,0 +1,35 @@
+.calendar {
+  padding: 10px;
+  @extend %position-content;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: $width-calendar;
+  margin: 20px auto;
+  gap: $gap-between-day;
+
+  $days-of-week:
+      'mon' 6,
+      'tue' 5,
+      'wed' 4,
+      'thu' 3,
+      'fri' 2,
+      'sat' 1,
+      'sun' 0;
+
+  @each $name-day, $number-day in $days-of-week {
+    &--start-day--#{$name-day} {
+      .calendar__day:first-child {
+        margin-left: $number-day * ($day-size + $gap-between-day);
+      }
+    }
+  }
+
+  @for $month-length from 28 through $day-count {
+    &--month-length--#{$month-length} {
+      $month-length-correction: $month-length + 1;
+      .calendar__day:nth-child(n + #{$month-length-correction}) {
+        display: none;
+      }
+    }
+  }
+}
