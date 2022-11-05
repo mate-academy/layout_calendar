@@ -1,0 +1,13 @@
+@for $numberOfDay from 1 through $month-length {
+  .calendar__day--#{$numberOfDay}:before {
+    content: "#{$numberOfDay}";
+  }
+}
+
+@function calendarSize($totalDays, $widthOfDays) {
+  @return $widthOfDays * $totalDays + ($totalDays - 1);
+}
+
+@function marginLeft($totalDays, $widthOfDays) {
+  @return $widthOfDays * ($totalDays - 1) + ($totalDays - 1);
+}
