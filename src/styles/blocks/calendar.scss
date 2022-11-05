@@ -1,21 +1,17 @@
 .calendar {
-
-  &__body {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    margin: 100px auto 0;
-    padding: 20px 0;
-
-    width: calendarSize($DaysInRow, $card-day-width);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: 100px auto 0;
+  padding: 20px 0;
+  width: calendarSize($DaysInRow, $card-day-width);
 
   &__day {
-    @extend %days-parameters;
     display: flex;
+    width: $card-day-width;
+    height: $card-day-width;
     justify-content: center;
     align-items: center;
-
     box-sizing: border-box;
 
     font-family: Arial, Helvetica, sans-serif;
@@ -33,6 +29,12 @@
 
     &:first-child {
       margin-left: marginLeft($DaysInRow, $card-day-width);
+    }
+
+    @for $numberOfDay from 1 through $amountDays {
+      &:nth-child(#{$numberOfDay}):before {
+        content: "#{$numberOfDay}";
+      }
     }
   }
 }
