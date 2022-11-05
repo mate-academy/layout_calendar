@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: $cellGap;
+  padding: 2 * $containerPaddings $containerPaddings; // cl: 11.
+
+  min-width: getWidth($cellSize, $cellGap, $containerPaddings);
+  max-width: getWidth($cellSize, $cellGap, $containerPaddings);
+    
+  // Position of the first day based on --start-day modifier.
+  @each $day, $dayNum in $days {
+    &--start-day_#{$day} &__day:first-child {
+      margin-left: firstDayPos($cellSize, $cellGap, $dayNum);
+    }
+  }
+
+  // Amount of days to display based on --month-length modifier.
+  // Could use :nth-last-child(-n + #{31 - $days})
+  @for $days from 28 through 31 {
+    &--month-length_#{$days} &__day:nth-child(n + #{1 + $days}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include square($cellSize);
+    text-align: center;
+
+    border: 1px solid #000;
+    background: $color-main;
+
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: $color-accent;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    // Add a pseudo-element with number to each day.
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+        line-height: $cellSize;
+      }
+    }
+  }
+}
