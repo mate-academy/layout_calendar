@@ -1,0 +1,36 @@
+.calendar {
+  width: $col-count * $cell-size + 26px;
+  padding: 10px;
+  margin: 0 auto;
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+
+  &__cell {
+    @include square($cell-size);
+    border: 1px solid #000;
+    background: #eee;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+      background: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include square($cell-size);
+      }
+    }
+  }
+}
