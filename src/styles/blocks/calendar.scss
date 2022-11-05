@@ -1,64 +1,53 @@
-html {
-  transition-duration: 0.5s;
-  border: 1px solid black;
-  font-size: 30px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
-  width: $width;
+  max-width: #{7 * $size + 6 * $gap-size + 2 * $pading};
+  padding: #{$pading};
+  gap: #{$gap-size};
 
-  &__day {
-    @include day-size($size);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
-    color: black;
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-      cursor: pointer;
-    }
-
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index}):before {
-        content: "#{$index}";
-      }
-    }
-
-    $days:
-      "mon" 0,
-      "tue" ($first-day),
-      "wed" ($first-day * 2),
-      "thu" ($first-day * 3),
-      "fri" ($first-day * 4),
-      "sat" ($first-day * 5),
-      "sun" ($first-day * 6);
-
-    @each $day, $position in $days {
-      &--first-day--#{$day} {
-        margin-left: $position;
-      }
+  @each $day, $num in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: #{$num * $size + $gap-size * $num};
     }
   }
 
-  @for $index from 28 through 31 {
-    &--month-length--#{$index} > &__day:not(:nth-child(-n + #{$index})) {
+  @for $monthDay from 28 through 31 {
+    &--month-length--#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
       display: none;
+    }
+  }
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    background-color: #eee;
+
+    &::before {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+
+      @include daySize($size);
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+    
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transition: transform 0.5s ease, background-color 0.5s ease;
+      transform: translateY(-20px);
     }
   }
 }
