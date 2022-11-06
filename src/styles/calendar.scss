@@ -3,7 +3,8 @@
   flex-wrap: wrap;
   gap: $gap;
 
-  @each $weekday,$number in $weekset {
+  @each $weekday,
+  $number in $weekset {
     &--start-day--#{$weekday} :first-child {
       margin-left: #{($width + ($border * 2) + $gap) * $number};
     }
@@ -23,7 +24,7 @@
     background-color: #eee;
     position: relative;
     transition: background-color $transform-duration,
-    transform $transform-duration;
+      transform $transform-duration;
     cursor: pointer;
 
     @for $day from 1 through 31 {
