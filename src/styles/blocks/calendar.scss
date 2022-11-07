@@ -1,0 +1,44 @@
+.calendar {
+  width: ($day-size * 7) + ($calendar-padding * 2) + ($calendar-gap * 6);
+  padding: $calendar-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid #000;
+
+    background-color: #eee;
+
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+
+    @each $day, $margin in $days {
+      .calendar--start-day--#{$day} &:first-child {
+        margin-left: $day-size * $margin + $margin;
+      }
+    }
+
+    @for $number from 27 to 32 {
+      .calendar--month-length--#{$number} &:not(:nth-child(-n + #{$number})) {
+        display: none;
+      }
+    }
+  }
+}
