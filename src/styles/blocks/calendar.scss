@@ -1,24 +1,14 @@
 .calendar {
+  @extend %position-content;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  padding: 10px;
-  @extend %position-content;
-  justify-content: flex-start;
+  transform: translate(-50%, -50%);
   flex-wrap: wrap;
-  width: $width-calendar;
-  margin: auto;
   gap: $gap-between-day;
-
-  $days-of-week:
-    "mon" 6,
-    "tue" 5,
-    "wed" 4,
-    "thu" 3,
-    "fri" 2,
-    "sat" 1,
-    "sun" 0;
+  margin: auto;
+  padding: 10px;
+  width: $width-calendar;
 
   @each $name-day, $number-day in $days-of-week {
     &--start-day--#{$name-day} {
