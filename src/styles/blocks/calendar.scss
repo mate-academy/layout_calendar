@@ -4,7 +4,7 @@
   justify-content: flex-start;
   align-content: center;
   gap: $gap;
-  padding: 0 10px;
+  padding: 0 $padding;
 
   $start-days:(
     "mon": 0,
@@ -18,7 +18,7 @@
 
   @each $day, $margin in $start-days {
     &--start-day--#{$day} {
-      .calendar__day--1 {
+      .calendar__day:nth-child(1) {
         margin-left: #{$margin};
       }
     }
@@ -35,7 +35,7 @@
   &__day {
     display: flex;
     justify-content: center;
-    @include cell;
+    @include cell-size;
     padding-top: ($cell-size - 34px) / 2;
     box-sizing: border-box;
     
@@ -45,7 +45,7 @@
     background-color: #eee;
     border: 1px solid black;
 
-    transition: background-color 0.5s, transform 0.5s;
+    transition: background-color $duration, transform $duration;
 
     &:hover {
       background-color: pink;
@@ -55,7 +55,7 @@
     }
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
     }
