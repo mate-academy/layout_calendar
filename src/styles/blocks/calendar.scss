@@ -6,8 +6,16 @@
   padding: 40px $calendar-padding;
 
   @for $lastDays from 28 through 31 {
-    &--month-length--#{$lastDays} &__cell:nth-child(n + #{$lastDays + 1}) {
+    &--month-length--#{$lastDays} 
+    &__cell:nth-child(n + #{$lastDays + 1}) {
       display: none;
+    }
+  }
+
+  @each $name, $dayOfWeek in $daysOfWeek {
+    &--first-day--#{$name} 
+    &__cell:first-child {
+      margin-left: $dayOfWeek;
     }
   }
 
@@ -20,6 +28,7 @@
 
     background-color: $color-cells;
     border: 1px solid #000;
+    cursor: pointer;
     transition: all ease 0.5s;
 
     @for $index from 1 through 31 {
@@ -31,14 +40,7 @@
 
     &:hover {
       background-color: $color-cells-hover;
-      cursor: pointer;
       transform:translateY(-20px);
-    }
-
-    @each $name, $dayOfWeek in $daysOfWeek {
-      &--first-day--#{$name} {
-        margin-left: $dayOfWeek;
-      }
     }
   }
 }
