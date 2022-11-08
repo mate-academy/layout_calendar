@@ -24,10 +24,12 @@
   }
   
   @for $length from $length-of-month to 31 {
-    &--month-length--#{$length-of-month} :nth-last-child(31 - #{$length}) {
+    &--month-length--#{$length-of-month} :nth-last-child(#{31 - $length}) {
       display: none;
     }
   }
+//   &--month-length--#{$length-of-month}
+// &__day:nth-last-child(-n + #{31 - $length})
 
   &__day {
     width: 100px;
