@@ -1,0 +1,22 @@
+.day {
+  @include square($day-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  background-color: #eee;
+  transition: transform 0.5s, background-color 0.5s;
+
+  @for $day-index from 1 through $day-count {
+    &:nth-child(#{$day-index})::before {
+      content: "#{$day-index}";
+    }
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: #ffc0cb;
+    cursor: pointer;
+  }
+}
