@@ -1,0 +1,21 @@
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: "#{$number}";
+    font-size: 30px;
+    line-height: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@each $name, $number-day in $days-0f-week {
+  .calendar--start-day--#{$name} > :first-child {
+    margin-left: ($cell-size + 1px) * ($number-day - 1) ;
+  }
+  
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-lenght--#{$day} > :nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
