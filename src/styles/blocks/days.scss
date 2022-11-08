@@ -1,0 +1,43 @@
+.days {
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  @each $day,
+    $num in $start-day {
+    &--start-day_#{$day} {
+      .days__day:first-child {
+        margin-left: ($days-size +$gap) * $num;
+      }
+    }
+  }
+
+  &__day {
+    @include square($days-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: $transition;
+    @extend %number-properties;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--#{$days} {
+      .days__day:nth-child(n + #{$days+1}) {
+        display: $none;
+      }
+    }
+  }
+}
