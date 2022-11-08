@@ -1,10 +1,12 @@
 .day {
-  @extend %position-content;
-  @include days($day-size);
+  @include square($day-size);
+  display: flex;
+  align-items: center;
   justify-content: center;
   box-sizing: border-box;
   border: 1px solid #000;
   background-color: #eee;
+  transition: transform 0.5s, background-color 0.5s;
 
   @for $day-index from 1 through $day-count {
     &:nth-child(#{$day-index})::before {
@@ -14,7 +16,6 @@
 
   &:hover {
     transform: translateY(-20px);
-    transition: 0.5s;
     background-color: #ffc0cb;
     cursor: pointer;
   }
