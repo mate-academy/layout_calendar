@@ -1,18 +1,23 @@
 # Calendar
-Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
 
-___
+Replace `<your_account>` with your Github username and copy the links to Pull Request description:
+
+- [DEMO LINK](https://Iksich.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Iksich.github.io/layout_calendar/report/html_report/)
+
+---
+
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
-___
+
+---
 
 ## ❗️❗️❗️ DON'T FORGET TO PROOFREAD YOUR CODE WITH [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md) BEFORE SENDING YOUR PULL REQUEST❗️❗️❗️
 
 ## Task
+
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
 - Create a markup for the calendar block with 31 days inside
@@ -36,4 +41,5 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 --> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
 
 ## Here is a preview:
+
 ![reference image](reference.png).
