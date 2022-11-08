@@ -1,0 +1,35 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $days-gap;
+  width: $caledar-width;
+
+  margin: 50px auto;
+
+  &__day {
+    text-align: center;
+
+    background-color: #eee;
+    width: $day-width;
+    height: $day-hight;
+    border: 1px solid black;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: $day-hight;
+
+    transition: 0.5s ease;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
