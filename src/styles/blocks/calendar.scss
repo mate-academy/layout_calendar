@@ -4,7 +4,7 @@
   gap: $day-gap;
   width: $calendar-width;
   margin: auto;
-  padding: 70px 10px;
+  padding: 70px $side-paddings;
 
   @for $index from 28 through 31 {
     &--month-length_#{$index - 1}
@@ -39,15 +39,6 @@
         content: "#{$index}";
       }
     }
-
-    $days:
-      mon 0,
-      tue ($day-width * 1 + $day-gap * 1),
-      wed ($day-width * 2 + $day-gap * 2),
-      thu ($day-width * 3 + $day-gap * 3),
-      fri ($day-width * 4 + $day-gap * 4),
-      sat ($day-width * 5 + $day-gap * 5),
-      sun ($day-width * 6 + $day-gap * 6);
 
     @each $day, $left-margin in $days {
       &--start-day_#{$day} {
