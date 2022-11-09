@@ -42,17 +42,17 @@
   }
 
   $days:
-    "mon" $daySize * 0 + $daysGap * 0,
-    "tue" $daySize * 1 + $daysGap * 1,
-    "wed" $daySize * 2 + $daysGap * 2,
-    "thu" $daySize * 3 + $daysGap * 3,
-    "fri" $daySize * 4 + $daysGap * 4,
-    "sat" $daySize * 5 + $daysGap * 5,
-    "sun" $daySize * 6 + $daysGap * 6;
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-  @each $day, $firstDayMargin in $days {
+  @each $day, $murginsNumber in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: $firstDayMargin;
+      margin-left: ($daySize + $daysGap) * $murginsNumber;
     }
   }
 
