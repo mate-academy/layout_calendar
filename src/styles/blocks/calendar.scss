@@ -8,17 +8,17 @@
   padding: 50px $calendar-padding;
 
   $days:
-    "mon" -7,
-    "tue" -6,
-    "wed" -5,
-    "thu" -4,
-    "fri" -3,
-    "sat" -2,
-    "sun" -1;
+    "mon" 0,
+    "tue" $box-cell-size + $box-gap,
+    "wed" 2 * $box-cell-size + 2 * $box-gap,
+    "thu" 3 * $box-cell-size + 3 * $box-gap,
+    "fri" 4 * $box-cell-size + 4 * $box-gap,
+    "sat" 5 * $box-cell-size + 5 * $box-gap,
+    "sun" 6 * $box-cell-size + 6 * $box-gap;
 
-  @each $day, $order in $days {
-    &--start-day--#{$day} {
-      order: $order;
+  @each $day, $margin in $days {
+    &--start-day--#{$day} &__box:first-child {
+      margin-left: $margin;
     }
   }
 
@@ -43,10 +43,6 @@
     &:hover {
       background-color: #ffc0cb;
       transform: translateY(-20px);
-    }
-
-    &:first-child {
-      margin-left: getMarginLeft($box-cell-size, $box-gap);
     }
 
     @for $index from 1 through 31 {
