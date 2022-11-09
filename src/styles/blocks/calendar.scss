@@ -15,7 +15,7 @@
   @each $name, $dayOfWeek in $daysOfWeek {
     &--start-day--#{$name} 
     &__day:first-child {
-      margin-left: $dayOfWeek;
+      margin-left: getMargine($dayOfWeek);
     }
   }
 
@@ -26,19 +26,19 @@
     justify-content: center;
     align-items: center;
 
-    background-color: $cell-color;
+    background-color: #fff;
     border: 1px solid #000;
     transition: all ease 0.5s;
 
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-        display: block;
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
       }
     }
 
     &:hover {
-      background-color: $cell-color-hover;
+      cursor: pointer;
+      background-color:  #ffc0cb;
       transform: translateY(-20px);
     }
   }
