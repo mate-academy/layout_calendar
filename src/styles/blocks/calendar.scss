@@ -18,10 +18,11 @@
     background-color: #eee;
     transition: 0.5s transform ease, 0.5s background-color ease;
 
+    color: black;
+
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
-        color: black;
       }
     }
 
@@ -33,7 +34,7 @@
   }
 
   @each $name, $value in $dam {
-    &--start-day--#{$name} &__day--1 {
+    &__day:first-child {
       margin-left: ($day-size + 1) * $value ;
     }
   }
