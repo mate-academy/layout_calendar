@@ -1,0 +1,29 @@
+.calendar__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include square(100px);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: #000;
+
+  background-color: #eee;
+  border: 1px solid black;
+
+  transition: 0.5s background-color ease, 0.5s transform ease;
+
+  &:hover {
+    background-color: pink;
+
+    cursor: pointer;
+
+    transform: translateY(-20px);
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+}

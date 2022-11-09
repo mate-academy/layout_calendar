@@ -1,0 +1,20 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cellGap;
+  width: getCalendarWidth($cellWidth, $cellGap, $calendarSidePadding);
+  margin: 0 auto;
+  padding: 30px $calendarSidePadding;
+
+  @for $index from 28 through 31 {
+    &__month-length--#{$index} .calendar__cell:nth-child(n+#{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day in $days {
+    &__start-day--#{$day} .calendar__cell:first-child {
+      margin-left: getLeftMargin($cellWidth, $cellGap, index($days, $day));
+    }
+  }
+}
