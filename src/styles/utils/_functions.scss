@@ -1,0 +1,15 @@
+@function calendarSize($totalDays, $widthOfDays) {
+  @return $widthOfDays * $totalDays + ($totalDays - 1);
+}
+
+@function indentLeft($dayNumber) {
+  @return
+    ($card-day-width * ($dayNumber - 1)) + $calendar-gap * ($dayNumber - 1);
+}
+
+@for $month-end from 28 through 31 {
+  .calendar--days--#{$month-end}
+  .calendar__day:nth-child(n + #{$month-end + 1}) {
+    display: none;
+  }
+}
