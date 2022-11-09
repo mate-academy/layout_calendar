@@ -7,15 +7,6 @@
   margin: 0 auto;
   padding: 50px $calendar-padding;
 
-  $days:
-    "mon" 0,
-    "tue" $box-cell-size + $box-gap,
-    "wed" 2 * $box-cell-size + 2 * $box-gap,
-    "thu" 3 * $box-cell-size + 3 * $box-gap,
-    "fri" 4 * $box-cell-size + 4 * $box-gap,
-    "sat" 5 * $box-cell-size + 5 * $box-gap,
-    "sun" 6 * $box-cell-size + 6 * $box-gap;
-
   @each $day, $margin in $days {
     &--start-day--#{$day} &__box:first-child {
       margin-left: $margin;
@@ -37,7 +28,7 @@
     font-size: 30px;
     background-color: #eee;
     border: 1px solid #000;
-    transition: color 0.5s, transform 0.5s;
+    transition: color $general-duration, transform $general-duration;
     cursor: pointer;
 
     &:hover {
