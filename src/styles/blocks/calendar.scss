@@ -11,9 +11,13 @@ $gap-between-one-block: 1px;
   &__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: $gap-between-one-block;
     width: ($one-column-width * 7) + 20px + $gap-between-one-block * 6;
     padding: 10px;
+
+    &:hover:nth-child(n) {
+
+    }
   }
 
   $days:
@@ -33,9 +37,9 @@ $gap-between-one-block: 1px;
     }
   }
 
-  @for $month from 28 to 31 {
+  @for $month from 28 through 31 {
     &__list--month-length--#{$month}
-    &__days:nth-child(n + #{$month}) {
+    &__days:not(:nth-child(-n + #{$month})) {
       display: none;
     }
   }
@@ -50,15 +54,15 @@ $gap-between-one-block: 1px;
     border: 1px solid black;
     background-color: #eee;
 
+
+    transition: 0.5s;
+    transform: 0.5s;
+
     &:hover {
-      position: relative;
 
       cursor: pointer;
       background-color: pink;
-
       transform: translateY(-20px);
-      animation: 0.5s;
-      transition: 0.5s;
     }
 
     @for $date from 1 through 31 {
