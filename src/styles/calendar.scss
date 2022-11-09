@@ -1,9 +1,3 @@
-$side-block: 100px;
-$width-calendar: calc(#{$side-block} * 7 + 8px);
-$font-title: calc(#{$side-block}/6);
-$font-card: calc(#{$side-block}/3.33);
-
-
 .calendar {
   display: flex;
   flex-direction: column;
@@ -14,22 +8,13 @@ $font-card: calc(#{$side-block}/3.33);
   &__days {
     display: flex;
     justify-content: space-around;
-    }
+  }
 
   &__day {
     width: 100px;
 
-    $days:
-      "monday" 1 ,
-      "thuesday" 2,
-      "wednsday" 3,
-      "thersday" 4,
-      "friday" 5,
-      "saturday" 6,
-      "sunday" 7;
-
       @each $day, $number in $days {
-        &--#{$number}::before {
+        &:nth-child(#{$number})::before {
           content: "#{$day}";
           text-transform: uppercase;
           display: flex;
@@ -51,15 +36,6 @@ $font-card: calc(#{$side-block}/3.33);
         }
       }
     }
-
-  $daysOfBegining:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $day, $margin in $daysOfBegining {
     &--start-day--#{$day}
@@ -86,11 +62,10 @@ $font-card: calc(#{$side-block}/3.33);
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
         font-size: #{$font-card};
       }
     }
   }
 }
-
