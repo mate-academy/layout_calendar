@@ -1,15 +1,14 @@
 .calendar {
-  font-family: Arial, Helvetica, sans-serif;
-  width: 720px;
+  max-width: $max-wight;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap;
   padding: 10px;
   margin: 0 auto;
   
   @each $day-week, $position in $days-week {
     &--start-day--#{$day-week} :nth-child(1) {
-      margin-left: $position;
+      margin-left: $position * ($cell-size + 3);
     }
   }
 
@@ -30,8 +29,8 @@
   }
 
   &__day {
-    width: 100px;
-    height: 100px;
+    width: $cell-size;
+    height: $cell-size;
     background-color: #eee;
     border: 1px solid black;
     transition-property: bottom;
