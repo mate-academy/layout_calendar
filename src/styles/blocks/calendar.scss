@@ -4,8 +4,8 @@
   margin: 0 auto;
   width: $calendar-width;
 
-  gap: 1px;
-  padding: 10px;
+  gap: $gap;
+  padding: $col-padding;
 
   @each  $day, $count in $days {
     &--start-day--#{$day} {
@@ -17,7 +17,7 @@
 
   @for $num from 28 through 31 {
     &--month-length--#{$num} {
-      .calendar__day:nth-child(n+#{$num+1}) {
+      .calendar__day:nth-child(n + #{$num + 1}) {
         display: none;
       }
     }
