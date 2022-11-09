@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: widthCalendar($day-size, $gap-size);
+  width: widthCalendar($day-size, $gap-size, $calendar-padding);
   padding: $calendar-padding;
   gap: $gap-size;
 
@@ -18,18 +18,16 @@
   }
 
   &__day {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     width: $day-size;
     height: $day-size;
     @include blockCentering;
     border: 1px solid #000;
     background-color: #eee;
-    transition: 0.5s;
+    cursor: pointer;
+    transition: background-color, transform, 0.5s ease;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
