@@ -1,0 +1,46 @@
+@import '../utils/variables';
+
+.calendar {
+  display: flex;
+  width: 706px;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: 20px auto;
+
+  &__cell {
+    box-sizing: border-box;
+    display: flex;
+    height: 100px;
+    width: 100px;
+    border: 1px solid #000;
+    background-color: #eee;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: #ffc0cb;
+    transform: translate(0, -20px);
+  }
+
+  @each $countDay, $shift in $week {
+    &--start-day--#{$countDay} .calendar__cell:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day--#{$i}::before {
+      content: "" + $i;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} .calendar__cell:nth-child(n + #{$i + 1}) {
+      visibility: hidden;
+    }
+  }
+}
