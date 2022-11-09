@@ -1,0 +1,52 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-item-gap;
+  width: $calendar-width;
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $item-side;
+    height: $item-side;
+
+    background-color: #eee;
+    border: 1px solid;
+
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  $values: "mon" 0,
+    "tue" $item-side + $calendar-item-gap,
+    "wed" 2 * $item-side + 2 * $calendar-item-gap,
+    "thu" 3 * $item-side + 3 * $calendar-item-gap,
+    "fri" 4 * $item-side + 4 * $calendar-item-gap,
+    "sat" 5 * $item-side + 5 * $calendar-item-gap,
+    "sun" 6 * $item-side + 6 * $calendar-item-gap;
+
+  @each $name, $value in $values {
+    &--start-day--#{$name} &__item:first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__item:not(::nth-child(-n + #{$i})) {
+      visibility: hidden;
+    }
+  }
+}
