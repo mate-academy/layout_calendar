@@ -12,7 +12,7 @@
     padding: 10px;
   }
 
-  $days:
+  $day:
     mon 0,
     tue 1,
     wed 2,
@@ -21,9 +21,9 @@
     sat 5,
     sun 6;
 
-  @each $day, $value in $days {
+  @each $day, $value in $day {
     &__list--start-day-#{$day}
-    &__days:first-child {
+    &__day:first-child {
       margin-left: $gap-between-one-block * $value
         + $one-column-width * $value;
     }
@@ -31,12 +31,12 @@
 
   @for $month from 28 through 31 {
     &__list--month-length--#{$month}
-    &__days:not(:nth-child(-n + #{$month})) {
+    &__day:not(:nth-child(-n + $month)) {
       display: none;
     }
   }
 
-  &__days {
+  &__day {
     height: $one-column-height;
     width: $one-column-width;
 
@@ -46,11 +46,9 @@
     border: 1px solid black;
     background-color: #eee;
 
-    transition: 0.5s;
-    transform: 0.5s;
+    transition: 0.5s background-color ease, 0.5s transform ease;
 
     &:hover {
-
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
