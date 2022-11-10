@@ -1,0 +1,33 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1px;
+  width: getWidth($cellWidth);
+  margin: auto;
+  padding: $padding;
+
+  $days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  @each $name, $value in $days {
+    &--start-day-#{$name} :first-child {
+      margin-left: ($value - 1) * ($cellWidth + 1px);
+    }
+  }
+
+  @for $var from 28 through 31 {
+    @for $i from 1 through 31 - $var {
+      &--month-length-#{$var} :nth-child(#{$var + $i}) {
+        display: none;
+      }
+    }
+  }
+}
