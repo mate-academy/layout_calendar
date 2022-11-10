@@ -1,0 +1,60 @@
+@use "../utils/variables" as *;
+@use "../utils/mixin" as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  min-width: $calendar-width;
+  max-width: $calendar-width;
+  padding: $calendar-padding;
+  gap: $day-gap;
+
+  &__day {
+    @include center;
+
+    height: $day-width-height;
+    width: $day-width-height;
+    box-sizing: border-box;
+    border: 1px solid #000;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    transition: all 0.5s ease;
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  $week: (
+    "mon": 0,
+    "tue": 1,
+    "wed": 2,
+    "thu": 3,
+    "fri": 4,
+    "sat": 5,
+    "sun": 6
+  );
+
+  @each $day, $index in $week {
+    &--start-day-#{$day} :first-child {
+      margin-left: $index * ($day-width-height + $day-gap);
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length-#{$last-day} :nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
