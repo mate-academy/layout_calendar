@@ -38,17 +38,17 @@
     }
   }
 
-    $values: "mon" 0,
-      "tue" $square-size + $flex-gap,
-      "wed" 2 * $square-size + 2 * $flex-gap,
-      "thu" 3 * $square-size + 3 * $flex-gap,
-      "fri" 4 * $square-size + 4 * $flex-gap,
-      "sat" 5 * $square-size + 5 * $flex-gap,
-      "sun" 6 * $square-size + 6 * $flex-gap;
+    $values: mon 0,
+      tue 1,
+      wed 2,
+      thu 3,
+      fri 4,
+      sat 5,
+      sun 6;
 
     @each $name, $value in $values {
       &--start-day--#{$name} &__day:first-child {
-        margin-left: ($square-size * 6) + 6px;
+        margin-left: ($square-size * $value) + ($flex-gap * $value);
     }
   }
 }
