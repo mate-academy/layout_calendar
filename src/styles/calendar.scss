@@ -1,0 +1,38 @@
+.calendar {
+  width: 7 * $day-box-size + 10px;
+  border: 2px solid black;
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+
+  &__date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-box-size;
+    height: $day-box-size;
+    background-color: #eee;
+    border: 1px solid #eee;
+
+    transition: transform 0.3s linear;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    // @each $day in list {
+
+    // }
+  }
+}
