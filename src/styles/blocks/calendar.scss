@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  margin: auto;
+
+  width: $calendar-width;
+  padding: 10px;
+
+  &__cell {
+    @include cell($boxsize);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @for $days from 1 through $total-days {
+    :nth-child(#{$days}):before {
+      content: "#{$days}";
+    }
+  }
+
+  &__cell:not(:nth-child(-n+#{$total-days}):nth-child(-n+31)) {
+    display: none;
+  }
+}
