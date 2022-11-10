@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-width;
+
+  width: getCalendarWidth($square-side, $squares-in-row, $gap-width, $padding);
+  padding: 30px $padding;
+
+  @each $day, $value in $days-of-week {
+    &--start-day--#{$day}
+    &__cell:first-child {
+      margin-left: getStartDayMargin($value, $square-side, $gap-width);
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day}
+    &__cell:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include CalendarCell($square-side);
+    border: 1px solid #000;
+    background-color: #eee;
+    
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
