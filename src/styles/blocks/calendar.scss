@@ -1,0 +1,43 @@
+.calendar {
+  @include flexPosition (flex-start,center);
+
+  flex-wrap: wrap;
+  gap: $day-box-gap;
+  width: getWidth($day-box-size, $day-box-gap);
+
+  @for $var from 28 through 31 {
+    &--month-length--#{$var} :nth-child(n + #{$var + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $num in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($num - 1) * ($day-box-size + $day-box-gap);
+    }
+  }
+
+  &__day {
+  @include flexPosition (center,center);
+
+    box-sizing: border-box;
+    width: $day-box-size;
+    height: $day-box-size;
+
+    border: 1px solid #000;
+    background-color: #eee;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $var from 1 through 31 {
+      &:nth-child(#{$var})::before {
+        content: "#{$var}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
