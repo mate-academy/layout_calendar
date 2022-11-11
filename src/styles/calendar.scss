@@ -1,12 +1,11 @@
 .calendar {
-  width: 7 * $day-box-size + 10px;
-  border: 2px solid black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $field-gap;
 
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-  }
+  width: $width-of-calendar-sheet;
+  padding: 50px 10px;
 
   &__date {
     display: flex;
@@ -15,7 +14,7 @@
     width: $day-box-size;
     height: $day-box-size;
     background-color: #eee;
-    border: 1px solid #eee;
+    border: 1px solid black;
 
     transition: transform 0.3s linear;
     cursor: pointer;
@@ -30,9 +29,17 @@
         content: "#{$i}";
       }
     }
+  }
 
-    // @each $day in list {
+  @each $name, $value in $day-name {
+    &--start-date--#{$name} &__date:first-child {
+      margin-left: $value;
+    }
+  }
 
-    // }
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__date:not(:nth-child(-n + #{$i})) {
+      visibility: hidden;
+    }
   }
 }
