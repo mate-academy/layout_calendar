@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
 - [DEMO LINK](https://novytskyi-d.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://novytkyi-d.github.io/layout_calendar/report/html_report/)
+- [TEST REPORT LINK](https://novytskyi-d.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
