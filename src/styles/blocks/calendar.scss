@@ -1,0 +1,47 @@
+@import '../utils/variables';
+@import '../utils/extends';
+
+.calendar {
+  @extend %display-flex;
+  width: $cell-shift * 6 + $cell-size;
+  flex-wrap: wrap;
+  gap: $gap;
+  margin: 20px auto;
+
+  &__cell {
+    box-sizing: border-box;
+    @extend %display-flex;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid $black-colour;
+    background-color: #eee;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+  }
+
+  &__cell:hover {
+    cursor: pointer;
+    background-color: #ffc0cb;
+    transform: translate(0, -20px);
+  }
+
+  @each $countDay, $shift in $week {
+    &--start-day--#{$countDay} .calendar__cell:first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $i from 1 through $days-count {
+    &__cell:nth-child(#{$i})::before {
+      content: "" + $i;
+    }
+  }
+
+  @for $i from 28 through $days-count {
+    &--month-length--#{$i} .calendar__cell:nth-child(n + #{$i + 1}) {
+      visibility: hidden;
+    }
+  }
+}
