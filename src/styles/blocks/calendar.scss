@@ -1,0 +1,59 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px ;
+  padding: 10px;
+
+  margin: auto;
+  width: (7 * $cell-width) + 10px;
+  // Use flex with 1px gap
+  // and limit its width to
+  // exactly 7 columns + 10px paddings
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $number in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($cell-width + 1px) * $number;
+    }
+  }
+
+  @for $value from 28 through 31 {
+    &-month-length--#{$value} :nth-child(n + #{$value + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day {
+  width: $cell-width;
+  height: $cell-height;
+  display: block;
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid black;
+  font-size: 30px;
+  text-align: center;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+
+    cursor: pointer;
+  }
+
+  @for $day from 1 through 31 {
+    &--day#{$day}::before {
+      content: "#{$day}";
+      line-height: $cell-height;
+    }
+  }
+}
