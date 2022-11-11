@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: getWidth($day-size, $border-size);
+  gap: $border-size;
+
+  @each $dayName, $dayCount in $daysWeek {
+    &--start-day--#{$dayName}
+    &__day:first-child {
+      margin-left: ($dayCount * $day-size) + ($dayCount * $border-size);
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length--#{$days - 1}
+
+    &__day:nth-child(n + #{$days}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include flex-centering();
+    height: $day-size;
+    width: $day-size;
+    border: $border-size solid #000;
+    background-color: #eee;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    @for $dayCount from 1 through 31 {
+      &:nth-child(#{$dayCount})::after {
+        content: "#{$dayCount}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+  }
+
+}
