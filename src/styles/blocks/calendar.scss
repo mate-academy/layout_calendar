@@ -2,21 +2,20 @@
   display: flex;
   align-items: center;
   padding: $calendar-padding;
-  justify-content: flex-start;
   gap: $cell-gap;
   flex-wrap: wrap;
   max-width: ($cell-side-size + $cell-gap)
     * $columns-amount + $calendar-padding * 2;
 
   @each $weeknum, $weekday in $weekdays {
-    &__start-day--#{$weekday} &__date:first-child {
+    &--start-day--#{$weekday} &__date:first-child {
       margin-left: ($cell-side-size + $cell-gap) * $weeknum;
     }
   }
 
   @for $month-length from 28 through 31 {
     $month-index: $month-length + 1;
-    &__month-length--#{$month-length} &__date:nth-child(n + #{$month-index}) {
+    &--month-length--#{$month-length} &__date:nth-child(n + #{$month-index}) {
       display: none;
     }
   }
