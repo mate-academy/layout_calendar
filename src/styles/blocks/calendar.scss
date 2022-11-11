@@ -1,47 +1,40 @@
-.page {
-
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: $gapsX;
+  padding: 10px;
+  max-width: containerWidth($blockWidth, $gapsX);
   @each $day,
     $value in $dayz {
-    &__calendar-start-day--#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: ($blockWidth+$gapsX)*$value;
     }
   }
-
   @for $var from 28 to 31 {
-    &__calendar-month-length--#{$var} :nth-child(n + #{$var +1}) {
+    &--month-length--#{$var} :nth-child(n + #{$var +1}) {
       display: none;
     }
   }
-
-  &__calendar {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    gap: $gapsX;
-    padding: 0 #{$paddingX};
-    max-width: calendarWidth($blockWidth, $gapsX);
-  }
-
   &__day {
-    background-color: #eee;
-    width: $blockWidth;
-    height: 100px;
-    border: 1px solid black;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
-
+    box-sizing: border-box;
+    position: relative;
+    background-color: #eee;
+    width: $blockWidth;
+    height: $blockWidth;
+    border: 1px solid #000;
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
+      cursor: pointer;
     }
-
-    @for $var from 1 through 31 {
-      &:nth-child(#{$var})::before {
-        content: "#{$var}";
+    transition: background-color 0.5s, transform 0.5s;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
       }
     }
   }
