@@ -1,6 +1,5 @@
 .calendar {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: $field-gap;
 
@@ -10,12 +9,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $day-box-size;
-    height: $day-box-size;
+    @include square($day-box-size);
     background-color: #eee;
     border: 1px solid black;
 
-    transition: transform 0.3s linear;
+    transition: transform 0.3s linear,
+      background-color 0.3s linear;
     cursor: pointer;
 
     &:hover {
