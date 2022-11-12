@@ -51,7 +51,7 @@
   @for $i from 28 through 31 {
     &--month_length-#{$i} {
       @for $j from $i through 31 {
-        .calendar__day-#{$j + 1} {
+        & :nth-last-child(-n + #{31 - $j}) {
           display: none;
         }
       }
