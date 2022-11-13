@@ -1,12 +1,9 @@
-@import "../cell.scss";
+@import "../variables.scss";
+@import "../move.scss";
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-@function getWidth($shift) {
-  @return (7 * $shift);
 }
 
 .calendar {
@@ -25,9 +22,8 @@ body {
   
   @each $day, $margin in $start-days {
     &.calendar--start-day--#{$day} :first-child {
-      margin-left: $margin;
+      margin-left: $margin * $shift;
     }
-
   }
 
   @for $i from 28 through 31 {
