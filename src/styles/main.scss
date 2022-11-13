@@ -1,17 +1,22 @@
-@import "./src/cell";
+@import "../cell.scss";
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+@function getWidth($shift) {
+  @return (7 * $shift);
+}
+
 .calendar {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 725px;
+  width: getWidth($shift);
   padding: 10px;
-  background-color: #eee;
+  gap: 1px;
+   
   @for $i from 1 through 31 {
     :nth-child(#{$i})::before {
       content: "#{$i}";
@@ -37,11 +42,10 @@ body {
     justify-content: center;
     font-size: 30px;
     border: 1px solid black;
-    gap: 1px;
     @include square($size);
     cursor: pointer;
     transition: transform 0.5s;
-    background-color: 0.5s;
+    background-color: #eee;
   }
    
   .calendar__day:hover {
