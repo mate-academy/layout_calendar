@@ -23,6 +23,8 @@ body {
     cursor: pointer;
     box-sizing: border-box;
     font-size: $font-size;
+    transition: 0.5s;
+
   }
 
   @for $index from 1 through 31 {
@@ -34,28 +36,5 @@ body {
   &__cell:hover {
     background-color: pink;
     transform: translateY(-20px);
-    transition: 0.5s;
-  }
-}
-
-$days:
-  "mon" 0,
-  "tue" $distance-cell-left,
-  "wed" (2 * $distance-cell-left),
-  "thu" (3 * $distance-cell-left),
-  "fri" (4 * $distance-cell-left),
-  "sat" (5 * $distance-cell-left),
-  "sun" (6 * $distance-cell-left);
-
-@each $name-day, $day in $days {
-  .calendar--start-day--#{$name-day}
-  .calendar__cell:first-child {
-    margin-left: $day;
-  }
-}
-
-@for $index from 28 through 31 {
-  .calendar--month-length--#{$index} :nth-child(n + #{$index + 1}) {
-    display: none;
   }
 }
