@@ -1,0 +1,51 @@
+.calendar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-end;
+  width: ($width-of-day-tale * 7) + ($gap-between-tales * 6);
+  height: ($height-of-day-tale * 6) + ($gap-between-tales * 5);
+  gap: $gap-between-tales;
+
+  &__day {
+    @extend %day-block-parametrs;
+    transition: background-color 0.5s, transform 0.5s;
+  }
+
+  &__day:hover {
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+  }
+
+  & :nth-child(1) {
+    position: absolute;
+    margin-left: calc(100% - #{$width-of-day-tale});
+  }
+
+  @for $index from 1 through $number-of-days {
+    &__day--#{$index}:before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @each $start-day in mon, tue, wed, thu, fri, sat, sun {
+    &__day--start-day-#{$start-day} {
+      margin-left: 0;
+    }
+  }
+
+  @for $month-length from 30 through 31 {
+    &__day--month-length-#{$month-length} {
+      @extend %disable-last-days;
+    }
+  }
+
+  @for $month-length from 30 through 31 {
+    &__day--month-length-#{$month-length}:hover {
+      background-color: white;
+      transform: none;
+    }
+  }
+}
