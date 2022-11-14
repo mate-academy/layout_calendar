@@ -6,21 +6,19 @@ $amount-day: 7;
 $calendar-size: $amount-day * $cell-size + $cell-distance * ($amount-day - 1);
 $distance-cell-left: $cell-size + $cell-distance;
 
-@for $index from 2 through 6 {
-  $days:
+$days:
   "mon" 0,
-  "tue" $distance-cell-left,
-  "wed" ($index * $distance-cell-left),
-  "thu" ($index * $distance-cell-left),
-  "fri" ($index * $distance-cell-left),
-  "sat" ($index * $distance-cell-left),
-  "sun" ($index * $distance-cell-left);
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
-  @each $name-day, $day in $days {
-    .calendar--start-day--#{$name-day}
-    .calendar__cell:first-child {
-      margin-left: $day;
-    }
+@each $name-day, $day in $days {
+  .calendar--start-day--#{$name-day}
+  .calendar__cell:first-child {
+    margin-left: $day * $distance-cell-left;
   }
 }
 
