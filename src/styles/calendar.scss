@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: #{$border};
+  gap: $border;
   padding: 10px;
   max-width: 7 * $cellSize + 6 * $border;
 
@@ -11,15 +11,6 @@
       display: none;
     }
   }
-
-  $days:
-    mon 0,
-    tue 1,
-    wed 2,
-    thu 3,
-    fri 4,
-    sat 5,
-    sun 6;
 
   @each $day, $number in $days {
     &--weekday-#{$day}
@@ -32,7 +23,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
 
     @include square(#{$cellSize});
     border: 1px solid black;
