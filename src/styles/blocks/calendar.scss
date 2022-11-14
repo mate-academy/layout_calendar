@@ -3,6 +3,7 @@
   flex-wrap: wrap;
   gap: $box-gap;
   width: 7 * $box-size + 6 * $box-gap;
+  cursor: pointer;
 
   @for $lastDay from 28 through 31 {
     &--month-length--#{$lastDay}
@@ -32,13 +33,10 @@
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: "#{$number}";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
       }
 
       &:hover {
         background-color: pink;
-        cursor: pointer;
         transform: translateY(-20px);
       }
     }
