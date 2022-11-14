@@ -1,0 +1,29 @@
+$cell-size: 100px;
+$font-size: 30px;
+$cell-distance: 3px;
+$padding-calendar: 10px;
+$amount-day: 7;
+$calendar-size: $amount-day * $cell-size + $cell-distance * ($amount-day - 1);
+$distance-cell-left: $cell-size + $cell-distance;
+
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $name-day, $day in $days {
+  .calendar--start-day--#{$name-day}
+  .calendar__cell:first-child {
+    margin-left: $day * $distance-cell-left;
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}

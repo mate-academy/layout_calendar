@@ -1,3 +1,39 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  width: $calendar-size;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: $padding-calendar;
+  gap: $cell-distance;
+
+  &__cell {
+    @include square ($cell-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    box-sizing: border-box;
+    font-size: $font-size;
+    transition: transform 0.5s;
+  }
+
+  @for $index from 1 through 31 {
+    &__cell:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  &__cell:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 }
