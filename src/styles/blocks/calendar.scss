@@ -2,10 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  width: 726px;
+  width: $calendar-width;
   margin: auto;
-  gap: 1px;
-  padding: 10px;
+  gap: $flex-gap;
+  padding: $calendar-padding;
   
   $days:
     mon 0,
@@ -18,7 +18,8 @@
   
   @each $day,$dayNum in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: $dayNum * 103px;
+      margin-left: $dayNum * $square-size;
+      
     }
   }
   
@@ -30,8 +31,8 @@
   }
   
   &__day {
-    width: 100px;
-    height: 100px;
+    width: $square-size;
+    height: $square-size;
     background-color: #eee;
     border: 1px solid #000;
     font-size: 30px;
