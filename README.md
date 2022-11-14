@@ -1,5 +1,5 @@
 # Calendar
-Replace `<yur_account>` ith your Github username and copy the links to Pull Request description:
+Replace `<yur_account>` ith your Github username and copy the links to Pul Request description:
 - [DEMO LINK](https://nazar-medushevskyi.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://nazar-medushevskyi.github.io/layout_calendar/report/html_report/)
 
