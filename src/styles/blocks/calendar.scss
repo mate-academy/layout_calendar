@@ -5,13 +5,6 @@
   gap: $day-gaps;
   padding: 10px;
 
-  @for $extra-day from 28 through 31 {
-    &--month-length--#{$extra-day}
-    &__day:nth-child(n + #{$extra-day + 1}) {
-      display: none;
-    }
-  }
-
   @each $day-name, $number in $days {
     &--start-day--#{$day-name}
     &__day:first-child {
@@ -38,10 +31,17 @@
       cursor: pointer;
     }
 
-    @for $number-of-day from 1 through $amount-of-days {
+    @for $number-of-day from 1 through 31 {
       &:nth-child(#{$number-of-day}):before {
         content: "#{$number-of-day}";
       }
+    }
+  }
+
+  @for $extra-day from 28 through 31 {
+    &--month-length--#{$extra-day}
+    &__day:nth-child(n + #{$extra-day+1}) {
+      display: none;
     }
   }
 }
