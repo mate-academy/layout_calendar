@@ -1,0 +1,44 @@
+@use "../utils/variables" as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-shift;
+  padding: 0 10px;
+
+  &__date {
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid $borders-color;
+    background-color: $background-color;
+    text-align: center;
+    line-height: $cell-size;
+    transition: background-color 0.5s, transform 0.5s;
+  }
+
+  @for $index from 1 through 31 {
+    &__date--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length--#{$days - 1}
+    &__date:nth-child(n + #{$days}) {
+      display: none;
+    }
+  }
+
+  @each $day-name, $day-count in $week-day {
+    &--start-day--#{$day-name}
+    &__date:first-child {
+      margin-left: ($cell-size + $cell-shift) * $day-count;
+    }
+  }
+
+  &__date:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+}
