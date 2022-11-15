@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   width: $width-calendar;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
 
   &__days {
     display: flex;
@@ -13,15 +13,15 @@
   &__day {
     width: 100px;
 
-      @each $day, $number in $days {
-        &:nth-child(#{$number})::before {
-          content: "#{$day}";
-          text-transform: uppercase;
-          display: flex;
-          justify-content: center;
-          font-size: #{$font-title};
-        }
+    @each $day, $number in $days {
+      &:nth-child(#{$number})::before {
+        content: "#{$day}";
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        font-size: #{$font-title};
       }
+    }
   }
 
   &__numbers {
@@ -37,8 +37,8 @@
       }
     }
 
-  @each $day, $margin in $daysOfBegining {
-    &--start-day--#{$day}
+    @each $day, $margin in $daysOfBegining {
+      &--start-day--#{$day}
       .calendar__number--1 {
         margin-left: calc((#{$side-block} + 1px) * #{$margin});
       }
@@ -54,7 +54,7 @@
     height: #{$side-block};
     border: 1px solid black;
     cursor: pointer;
-    transition: 0.5s;
+    transition: $transition;
 
     &:hover {
       background-color: rgb(245, 111, 207);
