@@ -8,6 +8,11 @@ $start-day : (
   "sun" : 6
 );
 
+.html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 .body {
   margin: 0;
   width: 100%;
@@ -42,8 +47,6 @@ $start-day : (
   @for $index from 1 through 31 {
     &_cell:nth-child(#{$index})::before {
       content: "#{$index}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
     }
   }
 
@@ -58,15 +61,15 @@ $start-day : (
     align-items: center;
     text-align: center;
     transition: 1s;
-  }
+    
+    &:first-child {
+      margin-left: $cell_size * 6 + 6;
+    }
   
-  &_cell:first-child {
-    margin-left: $cell_size * 6 + 6;
-  }
-  
-  &_cell:hover {
+    &:hover {
     transform: translateY(-20px);
     background-color: pink;
     cursor: pointer;
+    }
   }
 }
