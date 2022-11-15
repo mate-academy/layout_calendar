@@ -4,22 +4,21 @@
   gap: 1px;
   padding: 10px;
 
-  width: ($cell-size * 7) + 6px;
+  width: ($cell-size * 7) + $gap-shift;
+
+  &__day {
+    @include square($cell-size);
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 30px;
+    line-height: 100px;
+    background-color: #eee;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+  }
 
   @for $index from 1 through 31 {
-    &__day:nth-child(#{$index}) {
-      box-sizing: border-box;
-      border: 1px solid black;
-      width: $cell-size;
-      height: $cell-size;
-
-      font-family: "Arial", sans-serif;
-      font-size: 30px;
-      line-height: 100px;
-      background-color: #eee;
-      text-align: center;
-    }
-
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
@@ -33,12 +32,12 @@
 
   $start-days:
     "mon" 0,
-    "tue" ($cell-size + 1),
-    "wed" (2 * ($cell-size + 1)),
-    "thu" (3 * ($cell-size + 1)),
-    "fri" (4 * ($cell-size + 1)),
-    "sat" (5 * ($cell-size + 1)),
-    "sun" (6 * ($cell-size + 1));
+    "tue" $shift,
+    "wed" 2 * $shift,
+    "thu" 3 * $shift,
+    "fri" 4 * $shift,
+    "sat" 5 * $shift,
+    "sun" 6 * $shift;
 
   @each $first-day, $shift in $start-days {
     &--start-day--#{$first-day} &__day:first-child {
@@ -47,9 +46,7 @@
   }
 
   &__day:hover {
-    cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
-    transition-duration: 0.5s;
   }
 }
