@@ -1,56 +1,7 @@
 @import "./variables.scss";
+@import "./month.scss";
 
-.month {
-
-  display: flex;
-  flex-wrap: wrap;
-  max-width: $width;
-  gap: 1px;
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thr" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
-  @each $day, $value in $days {
-    &-start-day--#{$day} :first-child {
-      margin-left: ($day-width + $gap) * $value;
-    }
-  }
-  
-  &__day {
-    display: flex;
-    background-color: #eee;
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    padding: 10px;
-    transition: background-color 0.5s linear, transform 0.5s linear;
-  
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-      background-color: pink;
-    }
-  
-    @for $count from 1 to 32 {
-      &:nth-child(#{$count}):before {
-        content: "#{$count}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        margin: auto;
-      }
-    }
-  }
-}
-
-@for $i from 1 through 4 {
-  .month-length--#{31 - ($i - 1)} .month__day:not(:nth-last-child(n + #{$i})) {
-    display: none;
-  }
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
