@@ -2,18 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   gap: $border;
-  padding: 10px;
-  max-width: 7 * $cellSize + 6 * $border;
+  padding: $padding;
+  max-width: 7 * $cellSize + 6 * $border + $padding * 2;
 
   @for $lastDay from 28 through 31 {
-    &--month-length-#{$lastDay}
+    &--month-length--#{$lastDay}
     &__day:nth-child(n + #{$lastDay + 1}) {
       display: none;
     }
   }
 
   @each $day, $number in $days {
-    &--weekday-#{$day}
+    &--weekday--#{$day}
     &__day:first-child {
       margin-left: ($number * $cellSize + $number * $border);
     }
