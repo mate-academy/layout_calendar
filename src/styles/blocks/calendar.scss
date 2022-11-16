@@ -16,6 +16,13 @@
   padding: 10px;
   gap: $gapSize;
 
+  @each $day in $days {
+    $i: index($days, $day);
+    &--start-day--#{$day} :first-child {
+      margin-left: ($i - 1) * ($daySize + $gapSize);
+    }
+  }
+
   &__day {
     display: flex;
     align-items: center;
@@ -36,13 +43,6 @@
       background-color: pink;
       transform: translateY(-20px);
       cursor: pointer;
-    }
-
-    @each $day in $days {
-      $i: index($days, $day);
-      &--start-day--#{$day} :first-child {
-        margin-left: ($i - 1) * ($daySize + $gapSize);
-      }
     }
 
     @for $i from 1 through 31 {
