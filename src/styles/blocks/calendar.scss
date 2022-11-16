@@ -1,8 +1,5 @@
 
 .calendar {
-  position: relative;
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
 
   display: flex;
@@ -39,6 +36,14 @@
       .calendar--start-day--#{$day} &:first-child {
         margin-left: $dayBoxSize * $margin + $margin;
       }
+    }
+
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length--#{$lastDay}
+    &__day:nth-child(n + #{$lastDay + 1}) {
+      display: none;
     }
   }
 }
