@@ -1,0 +1,27 @@
+.day {
+  display: flex;
+  box-sizing: border-box;
+  @include square($cell-size);
+
+  justify-content: center;
+  align-items: center;
+
+  background-color: #eee;
+  border: 1px solid black;
+
+  font-size: 30px;
+
+  @for $day from 1 through 31 {
+    &--#{$day}::before {
+      content: "#{$day}";
+    }
+  }
+
+  transition: color 0.5s, transform 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
