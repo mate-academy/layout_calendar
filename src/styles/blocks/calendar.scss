@@ -1,0 +1,49 @@
+.calendar {
+  gap: $gap;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: $calendar-size;
+  padding: 20px 10px 10px;
+  
+  &__cell {
+    @include square($cell-size);
+    font-size: $text-size;
+    line-height: $cell-size;
+    box-sizing: border-box;
+    border: 1px #000 solid;
+    background-color: #eee;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $index from 1 through $days-amount {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+
+      &:nth-child(#{$days-amount + $index}) {
+        display: none;
+      }
+    }
+
+    $week: 
+      "mon" 1,
+      "tue" 2,
+      "wed" 3,
+      "thu" 4,
+      "fri" 5,
+      "sat" 6,
+      "sun" 7;
+
+    @each $name, $day in $week {
+      &--start-day--#{$name} {
+        margin-left: ($day - 1) * ($cell-size + $gap);
+      }
+    }
+  }
+}
