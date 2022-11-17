@@ -1,3 +1,77 @@
-body {
+$cell_size : 100px;
+$start-day : ( 
+  "tue" : 1,
+  "wed" : 2,
+  "thu" : 3,
+  "fri" : 4,
+  "sat" : 5,
+  "sun" : 6
+);
+
+.html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.body {
   margin: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  align-items: center;
+  width: $cell_size * 7 + 6;
+  text-align: center;
+
+  @each $day, $n in $start-day {
+    &--start-day-#{$day} &_cell:first-child {
+      margin-left: $n * ($cell-size + 1px);
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &_cell:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  &_cell {
+    width: $cell_size;
+    height: $cell_size;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: 1s;
+    
+    &:first-child {
+      margin-left: $cell_size * 6 + 6;
+    }
+  
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
 }
