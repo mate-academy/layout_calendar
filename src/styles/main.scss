@@ -42,8 +42,8 @@ $start-day : (
   }
 
   @for $day from 1 through 31 {
-    &--#{$day} &_cell:nth-child(-n + #{$day}) {
-      display: flex;
+    &--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 
@@ -58,7 +58,7 @@ $start-day : (
     height: $cell_size;
     background-color: #eee;
     border: 1px solid black;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
