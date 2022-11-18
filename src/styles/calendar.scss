@@ -11,8 +11,8 @@
     }
   }
 
-  @for $length from 28 to 31 {
-    &--month-length--#{$length} :nth-child(n + 1) {
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
@@ -25,7 +25,7 @@
     position: relative;
     background-color: #eee;
     cursor: pointer;
-    transition: 0.5s;
+    transition-duration: 0.5s;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
@@ -36,9 +36,9 @@
       }
     }
 
-    .calendar:hover {
+    &:hover {
       background-color: #ffc0cd;
-      transform: translateY(+20px);
+      transform: translateY(-25px);
     }
   }
 }
