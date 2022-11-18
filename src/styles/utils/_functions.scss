@@ -1,7 +1,9 @@
-@function getWidthCalendar($card-padding-right, $card-padding-left, $cellSize, $count, $gap) {
-  @return $card-padding-right + $card-padding-left + ($cellSize * $count) + $gap * ($count - 1);
+@function getWidthCalendar($card-padding-right, $card-padding-left,
+$cellSize, $count, $gap) {
+  @return $card-padding-right
+    + $card-padding-left + ($cellSize * $count) + $gap * ($count - 1);
 }
 
 @function calcInstead($orderNumber, $cellSize, $gap) {
-  @return $orderNumber * ($cellSize + $gap);
+  @return ($orderNumber - 1) * $cellSize + ($gap * $orderNumber - 1);
 }

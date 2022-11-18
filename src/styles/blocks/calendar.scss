@@ -1,22 +1,11 @@
-.calendar{
+.calendar {
   display: flex;
   flex-wrap: wrap;
-  width: getWidthCalendar($card-padding-right, $card-padding-left, $cellSize, $count, $gap);
+  width: getWidthCalendar($card-padding-right,
+  $card-padding-left, $cellSize, $count, $gap);
   gap: $gap;
   padding-right: $card-padding-right;
   padding-left: $card-padding-left;
-
-  @each $modifierName, $orderNumber in $startDay {
-    &--start-day#{$modifierName} :first-child {
-      margin-left: calcInstead($orderNumber, $cellSize, $gap);
-    }
-  }
-
-  @for $daysAmount from 28 through 31 {
-    &--month-length#{$daysAmount} :nth-child(n + #{$daysAmount + 1}) {
-      display: none;
-    }
-  }
 
   &__day {
     @include area($cellSize);
@@ -25,9 +14,20 @@
     background-color: #eee;
     text-align: center;
     line-height: 100px;
-    transition: transform $transitionTime;
 
-    @for $i from 1 to $days-number {
+    @each $modifierName, $orderNumber in $startDay {
+      &:first-child {
+        margin-left: calcInstead($orderNumber, $cellSize, $gap);
+      }
+    }
+
+    @for $daysAmount from 28 through 31 {
+      &:nth-child(n + #{$daysAmount + 1}) {
+        display: none;
+      }
+    }
+
+    @for $i from 1 through $days-number {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
         font-size: 30px;
@@ -39,6 +39,7 @@
       background-color: pink;
       cursor: pointer;
       transform: translateY(-20px);
+      transition: $transitionTime;
     }
   }
 }
