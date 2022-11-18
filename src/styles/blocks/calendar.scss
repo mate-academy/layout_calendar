@@ -1,0 +1,86 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: ($width-cell * 7) + 20 + 6;
+  margin: 0 auto;
+  padding: 30px 10px 10px;
+
+  &__day {
+    width: $width-cell;
+    height: $height-cell;
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        font-family: "Arial", Helvetica, sans-serif;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        line-height: $height-cell;
+      }
+    }
+
+    $days:
+      "1" "mon",
+      "2" "tue",
+      "3" "wed",
+      "4" "thu",
+      "5" "fri",
+      "6" "sat",
+      "7" "sun",
+      "8" "mon",
+      "9" "tue",
+      "10" "wed",
+      "11" "thu",
+      "12" "fri",
+      "13" "sat",
+      "14" "sun",
+      "15" "mon",
+      "16" "tue",
+      "17" "wed",
+      "18" "thu",
+      "19" "fri",
+      "20" "sat",
+      "21" "sun",
+      "22" "mon",
+      "23" "tue",
+      "24" "wed",
+      "25" "thu",
+      "26" "fri",
+      "27" "sat",
+      "28" "sun",
+      "29" "mon",
+      "30" "tue",
+      "31" "wed";
+
+    @each $number, $day in $days {
+      &--#{$day}--#{$number} {
+        visibility: visible;
+      }
+    }
+
+    &--1 {
+      margin-left: ($width-cell * 6) + 6;
+    }
+
+    @for $index from 28 through 31 {
+      &--month-length--#{$index} {
+        visibility: visible;
+      }
+    }
+
+    &:nth-child(n + 30) {
+      visibility: hidden;
+    }
+  }
+}
