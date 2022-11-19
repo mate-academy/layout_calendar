@@ -15,7 +15,7 @@
     background-color: #eee;
     text-align: center;
     cursor: pointer;
-    transition-duration: 0.5s;
+    transition: transform $law-time, background-color $law-time;
   }
 
   @for $index from 1 through 31 {
@@ -30,18 +30,9 @@
     }
   }
 
-  $start-days:
-    "mon" 0,
-    "tue" $shift,
-    "wed" 2 * $shift,
-    "thu" 3 * $shift,
-    "fri" 4 * $shift,
-    "sat" 5 * $shift,
-    "sun" 6 * $shift;
-
-  @each $first-day, $shift in $start-days {
+  @each $first-day, $order in $start-days {
     &--start-day--#{$first-day} &__day:first-child {
-      margin-left: #{$shift};
+      margin-left: $order * $shift;
     }
   }
 
