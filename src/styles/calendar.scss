@@ -20,18 +20,17 @@
   &__item {
     display: flex;
     width: $width;
-    height: $height;
+    line-height: $height;
+    font-size: $font-size;
     border: $border solid black;
     position: relative;
     background-color: #eee;
     cursor: pointer;
-    transition-duration: background-color 0.5s;
+    transition: background-color 0.5s transform 0.5s;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
-        font-size: $font-size;
-        line-height: $height;
         margin: 0 auto;
       }
     }
