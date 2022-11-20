@@ -7,11 +7,11 @@
   gap: $gap;
   width: $container-width;
   padding: $padding-in-container;
-  margin: auto;
+  margin: 30px auto;
 
   @each $name, $coefficient in $days {
     &--start-day--#{$name} :first-child {
-      margin-left: (($cell-size + $gap) * $coefficient) + ($coefficient * 2);
+      margin-left: (($cell-size + $gap) * $coefficient);
     }
   }
 
@@ -22,21 +22,23 @@
   }
 
   &__cell {
-    justify-content: center;
-    transition: linear 0.5s;
+    transition: transform 0.5s;
+    
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
       background-color: pink;
+    }
+    &::after {
+      margin: 0 auto;
+      line-height: $cell-size;
+      font-size: 30px;
     }
   }
 
   @for $index from 1 through $cell-count {
     &__cell:nth-child(#{$index}):after {
       content: "#{$index}";
-      display: flex;
-      align-items: center;
-      font-size: 30px;
     }
   }
 }
