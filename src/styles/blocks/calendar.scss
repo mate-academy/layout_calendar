@@ -9,23 +9,14 @@
   padding: $padding-in-container;
   margin: auto;
 
-  $days:
-    "mon" 0,
-    "tue" $cell-size,
-    "wed" ($cell-size + $gap) * 2,
-    "thu" ($cell-size + $gap) * 3,
-    "fri" ($cell-size + $gap) * 4,
-    "san" ($cell-size + $gap) * 5,
-    "sut" ($cell-size + $gap) * 6;
-
-  @each $name, $margin in $days {
+  @each $name, $coefficient in $days {
     &--start-day--#{$name} :first-child {
-      margin-left: $margin;
+      margin-left: (($cell-size + $gap) * $coefficient) + ($coefficient * 2);
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length--#{$index} :nth-child(n + #{$index}) {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
