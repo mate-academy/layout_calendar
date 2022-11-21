@@ -20,67 +20,39 @@
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
-        content: "#{$index}";
-        font-family: "Arial", Helvetica, sans-serif;
-        font-size: 30px;
-        display: flex;
-        justify-content: center;
-        line-height: $height-cell;
+      &:nth-child(#{$index})::before {
+          content: "#{$index}";
+          font-family: "Arial", Helvetica, sans-serif;
+          font-size: 30px;
+          display: flex;
+          justify-content: center;
+          line-height: $height-cell;
+        }
+    }
+  }
+
+  $days:
+  "mon" "1",
+  "tue" "2",
+  "wed" "3",
+  "thu" "4",
+  "fri" "5",
+  "sat" "6",
+  "sun" "7";
+
+  @each $name, $day in $days {
+    &--start-day--#{$name} {
+      .calendar__day:nth-child(#{$day}) {
+        margin-left: ($width-cell * 6) + 6;
       }
     }
+  }
 
-    $days:
-      "1" "mon",
-      "2" "tue",
-      "3" "wed",
-      "4" "thu",
-      "5" "fri",
-      "6" "sat",
-      "7" "sun",
-      "8" "mon",
-      "9" "tue",
-      "10" "wed",
-      "11" "thu",
-      "12" "fri",
-      "13" "sat",
-      "14" "sun",
-      "15" "mon",
-      "16" "tue",
-      "17" "wed",
-      "18" "thu",
-      "19" "fri",
-      "20" "sat",
-      "21" "sun",
-      "22" "mon",
-      "23" "tue",
-      "24" "wed",
-      "25" "thu",
-      "26" "fri",
-      "27" "sat",
-      "28" "sun",
-      "29" "mon",
-      "30" "tue",
-      "31" "wed";
-
-    @each $number, $day in $days {
-      &--#{$day}--#{$number} {
-        visibility: visible;
+  @for $index from 28 to 31 {
+    &--month-length--#{$index} {
+      .calendar__day:nth-child(n + #{$index + 1}) {
+        visibility: hidden;
       }
-    }
-
-    &--1 {
-      margin-left: ($width-cell * 6) + 6;
-    }
-
-    @for $index from 28 through 31 {
-      &--month-length--#{$index} {
-        visibility: visible;
-      }
-    }
-
-    &:nth-child(n + 30) {
-      visibility: hidden;
     }
   }
 }
