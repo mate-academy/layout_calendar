@@ -1,6 +1,11 @@
 @import "./reset.scss";
 @import "./variables.scss";
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -19,32 +24,31 @@
       display: none;
     }
   }
-}
 
-.calendar__day {
-  position: relative;
-  height: 100px;
-  width: $calendar-cell-width;
-  background-color: #eee;
-  border: 1px solid black;
-  gap: 1px;
-  transition: transform 0.5s;
+  &__day {
+    position: relative;
+    height: 100px;
+    width: $calendar-cell-width;
+    background-color: #eee;
+    border: 1px solid black;
+    gap: 1px;
+    transition: transform 0.5s;
+    cursor: pointer;
 
-  @for $index from 1 through 31 {
-    &:nth-child(#{$index})::before {
-      content: "#{$index}";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
     }
   }
 
-  &:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
-  }
 }
