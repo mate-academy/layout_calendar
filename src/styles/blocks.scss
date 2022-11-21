@@ -21,31 +21,33 @@
   padding: 30px 5px 0;
   width: #{$container-width};
   gap: #{$square-gap};
-  @for $index from 1 to 32 {
-    .day-#{$index} {
-      position: relative;
-      box-sizing: border-box;
-      width: #{$square-size};
-      height: #{$square-size};
-      background-color: #eee;
-      border: 1px solid black;
-      transition: all ease 0.5s;
-      &:hover {
-        cursor: pointer;
-        background-color: pink;
-        transform: translateY(-20px);
-      }
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    width: #{$square-size};
+    height: #{$square-size};
+    background-color: #eee;
+    border: 1px solid black;
+    transition: all ease 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
-    .day-#{$index}::before {
-      content: "#{$index}";
-      position: absolute;
-      left: 0;
-      right: 0;
-      display: block;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      text-align: center;
-      line-height: #{$square-size};
+    @for $index from 1 to 32 {
+      &--#{$index} {
+        &::before {
+          content: "#{$index}";
+          position: absolute;
+          left: 0;
+          right: 0;
+          display: block;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 30px;
+          text-align: center;
+          line-height: #{$square-size};
+        }
+      }
     }
   }
 }
