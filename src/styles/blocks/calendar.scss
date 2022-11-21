@@ -1,0 +1,45 @@
+@import "../utils/variables";
+@import "./cells.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $container-width;
+  padding: $padding-in-container;
+  margin: 30px auto;
+
+  @each $name, $coefficient in $days {
+    &--start-day--#{$name} :first-child {
+      margin-left: (($cell-size + $gap) * $coefficient) + $coefficient * 2;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__cell {
+    transition: transform 0.5s;
+    
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+    
+    &::after {
+      margin: 0 auto;
+      line-height: $cell-size;
+      font-size: 30px;
+    }
+  }
+
+  @for $index from 1 through $cell-count {
+    &__cell:nth-child(#{$index}):after {
+      content: "#{$index}";
+    }
+  }
+}
