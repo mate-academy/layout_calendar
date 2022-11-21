@@ -21,29 +21,29 @@
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
-          content: "#{$index}";
-          font-family: "Arial", Helvetica, sans-serif;
-          font-size: 30px;
-          display: flex;
-          justify-content: center;
-          line-height: $height-cell;
-        }
+        content: "#{$index}";
+        font-family: "Arial", Helvetica, sans-serif;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        line-height: $height-cell;
+      }
     }
   }
 
   $days:
-  "mon" "1",
-  "tue" "2",
-  "wed" "3",
-  "thu" "4",
-  "fri" "5",
-  "sat" "6",
-  "sun" "7";
+    "mon" "0px",
+    "tue" "101px",
+    "wed" "202px",
+    "thu" "303px",
+    "fri" "404px",
+    "sat" "505px",
+    "sun" "606px";
 
-  @each $name, $day in $days {
+  @each $name, $shift in $days {
     &--start-day--#{$name} {
-      .calendar__day:nth-child(#{$day}) {
-        margin-left: ($width-cell * 6) + 6;
+      .calendar__day:first-child {
+        margin-left: #{$shift};
       }
     }
   }
