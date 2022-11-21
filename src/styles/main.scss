@@ -10,12 +10,23 @@ html {
   display: flex;
   flex-wrap: wrap;
   position: relative;
+  margin-left: $calendar-cell-width * $num;
   padding: 10px;
   width: $calendar-cell-width * 7;
+  gap: $calendar-gap;
 
-  @each $day in mon, tue, wed, thu, fri, sat, sun {
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $num in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: $calendar-cell-width * 5 + 7px;
+      margin-left: ($calendar-cell-width + $gap) * $num;
     }
   }
 
@@ -31,7 +42,6 @@ html {
     width: $calendar-cell-width;
     background-color: #eee;
     border: 1px solid black;
-    gap: 1px;
     transition: transform 0.5s;
     cursor: pointer;
 
