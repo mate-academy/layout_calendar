@@ -12,7 +12,7 @@
     background-color: #eee;
     border: 1px solid black;
     cursor: pointer;
-    transition: 0.5s;
+    transition: transform 0.5s;
 
     &:hover {
       background-color: #ffc0cb;
@@ -22,7 +22,6 @@
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-family: "Arial", Helvetica, sans-serif;
         font-size: 30px;
         display: flex;
         justify-content: center;
@@ -32,19 +31,17 @@
   }
 
   $days:
-    "mon" "0px",
-    "tue" "101px",
-    "wed" "202px",
-    "thu" "303px",
-    "fri" "404px",
-    "sat" "505px",
-    "sun" "606px";
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
   @each $name, $shift in $days {
-    &--start-day--#{$name} {
-      .calendar__day:first-child {
-        margin-left: #{$shift};
-      }
+    &--start-day--#{$name} .calendar__day:first-child {
+      margin-left: ($width-cell * $shift) + $shift;
     }
   }
 
