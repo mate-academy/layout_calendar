@@ -19,12 +19,12 @@
     background-color: $days-color;
     border: $calendar-border solid $font-color;
     cursor: pointer;
+    transition: all $calendar__day-transition ease 0s;
   }
 
   &__day:hover {
     background-color: $day-hover-color;
     transform: translateY($calendar__day-transform);
-    transition: all $calendar__day-transition ease 0s;
   }
 
   @for $i from 1 through 31 {
@@ -41,7 +41,7 @@
 
   @each $name, $num in $week {
     &--start-day--#{$name} &__day:first-child {
-        margin-left: $first-day-margin;
+      margin-left: $first-day-margin;
     }
   }
 }
