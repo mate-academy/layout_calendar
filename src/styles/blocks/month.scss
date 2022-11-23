@@ -36,16 +36,17 @@ body {
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 }
 
 @each $num, $day in $week-days {
-  .month--start-#{$day} {
+  .start-#{$day} {
     margin-left: $num * ($card-square + ($card-gapNborder * 3)) ;
   }
 }
 
-@for $index from 29 through 31 {
-  .month-length div:nth-child(#{$index}) {
+@for $index from $one-overmonth-length through 31 {
+  .month__day:nth-child(#{$index}) {
     display: none;
   }
 }
