@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: 20px auto 0;
   gap: $box-gap;
   width: $calendar-width;
   padding: $box-padding;
@@ -12,7 +12,7 @@
     }
   }
 
-  @for $day from 28 through 31 {
+  @for $day from $min-days-in-month through $max-days-in-month {
     &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
@@ -23,9 +23,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eee;
-    border: 1px solid black;
-    font: 30px Arial, sans-serif;
+    background-color: $main-bcg-color;
+    border: 1px solid $main-border-color;
     transition: transform 0.5s, background-color 0.5s;
 
     @for $day from 1 through 31 {
@@ -36,7 +35,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #ffc0cb;
+      background-color: $main-hover-color;
       transform: translateY(-20px);
     }
   }
