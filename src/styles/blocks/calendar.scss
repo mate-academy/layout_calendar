@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: $box-gap;
-  margin: $calendar-width / 5 auto;
   width: $calendar-width;
 
   &__day {
@@ -15,12 +14,12 @@
     transition: 0.5s ease;
 
     @for $i from 1 through 31 {
-    &:nth-child(#{$i}) {
-      &::before {
-        content: "#{$i}";
-        margin: auto;
+      &:nth-child(#{$i}) {
+        &::before {
+          content: "#{$i}";
+          margin: auto;
+        }
       }
-    }
     }
 
     &:hover {
@@ -29,17 +28,15 @@
     }
   }
 
-    @for $day from 28 through 31 {
-      &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
-        display: none;
-      }
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
     }
+  }
 
-    @each $week-day, $margin in $week-days {
-      &--start-day--#{$week-day} :nth-child(1) {
-        margin-left: $margin;
-      }
+  @each $week-day, $margin in $week-days {
+    &--start-day--#{$week-day} :nth-child(1) {
+      margin-left: $margin;
     }
+  }
 }
-
-
