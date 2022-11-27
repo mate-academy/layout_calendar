@@ -1,0 +1,50 @@
+@each $day-number, $day in $start-day {
+  .calendar__days-start-day--#{$day} {
+    margin-left: calc((#{$cell-size} + 1px) * (#{$day-number} - 1));
+  }
+}
+
+@for $lenght from 28 through 31 {
+  .calendar-days--#{$lenght} {
+    @for $days from 1 through $lenght {
+      .calendar__days:nth-child(#{$days})::before {
+        display: inline;
+        width: #{$cell-size};
+        line-height: #{$cell-size};
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: calc(#{$cell-size} * 30 / 100);
+        content: "#{$days}";
+        text-align: center;
+      }
+    }
+  }
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  &__container {
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: calc(7 * (#{$cell-size} + 1px) + 20px);
+  }
+
+  &__days {
+    display: flex;
+    @include square($cell-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
