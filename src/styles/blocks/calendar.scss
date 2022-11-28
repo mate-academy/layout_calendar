@@ -2,7 +2,7 @@
   margin: 50px auto 0;
   display: flex;
   flex-wrap: wrap;
-  gap: $cell-gup;
+  gap: $cell-gap;
   width: getWidthCatalog($cell-size, $calendar-block-padding, $cell-row);
 
   @for $index from 28 through 31 {
@@ -13,21 +13,20 @@
 
   @each $name, $day-index in $start-day {
     &--start-day--#{$name} :first-child {
-      margin-left: ($cell-size * $day-index) + ($cell-gup * $day-index);
+      margin-left: ($cell-size * $day-index) + ($cell-gap * $day-index);
     }
   }
 
   &__day {
     @include square($cell-size);
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
     font-size: 30px;
     background-color: $cell-color;
     border: 1px solid #000;
-    transition-duration: 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
 
     @for $date from 1 through 31 {
       &:nth-child(#{$date})::before {
@@ -36,7 +35,6 @@
     }
 
     &:hover {
-      cursor: pointer;
       transform: translateY(-20px);
       background-color: pink;
     }
