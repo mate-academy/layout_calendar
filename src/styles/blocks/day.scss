@@ -1,0 +1,36 @@
+.day {
+  background-color: #eee;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: color 0.5s, transform 0.5s;
+
+  @for $index from 1 through 31 {
+    &--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $month-length from $month-length through 31 {
+    &:nth-child(#{$month-length+1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $margin in $margin-start-day {
+    &--1--#{$name} {
+      margin-left: $margin;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
