@@ -6,18 +6,19 @@
 
   &__day {
     display: flex;
+    justify-content: center;
+    align-items: center;
     @include square ($box-size);
     border: 1px solid black;
     background-color: $box-color;
-    color: black;
     cursor: pointer;
     transition: 0.5s ease;
+    transition-property: background-color, transform;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i}) {
         &::before {
           content: "#{$i}";
-          margin: auto;
         }
       }
     }
@@ -34,9 +35,9 @@
     }
   }
 
-  @each $week-day, $margin in $week-days {
+  @each $week-day, $multiplier in $week-days {
     &--start-day--#{$week-day} :nth-child(1) {
-      margin-left: $margin;
+      margin-left: $day-margin * $multiplier;
     }
   }
 }
