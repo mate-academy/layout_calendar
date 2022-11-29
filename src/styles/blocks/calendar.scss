@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  margin: 0 auto;
+  padding: $calendar-padding;
+  width: 7*($day-size + 1px) - 1px;
+  gap: 1px;
+  flex-wrap: wrap;
+
+  @for $last-day from 28 to 31 {
+    $new-last-day: $last-day + 1;
+    &_month-length_#{$last-day} .calendar__day:nth-child(n + #{$new-last-day}) {
+      display: none;
+    }
+  }
+
+  $start-day:
+    "mon" getFirstDayShift(1),
+    "tue" getFirstDayShift(2),
+    "wed" getFirstDayShift(3),
+    "thu" getFirstDayShift(4),
+    "fri" getFirstDayShift(5),
+    "sat" getFirstDayShift(6),
+    "sun" getFirstDayShift(7);
+
+  @each $day, $margin in $start-day {
+    &_start-day_#{$day} .calendar__day:nth-child(1) {
+      margin-left: $margin;
+    }
+  }
+}

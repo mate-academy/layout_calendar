@@ -1,0 +1,25 @@
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: #eee;
+  @include square($day-size);
+  border: 1px solid black;
+  position: relative;
+
+  @for $number from 1 to 32 {
+    &:nth-child(#{$number})::before {
+      content: "#{$number}";
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
