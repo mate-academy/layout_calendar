@@ -1,15 +1,36 @@
 .calendar {
   width: $calendar-padding * 2 + $days-gap * ($days-columns - 1) + $days-size * 7;
+  // width: getContainerSize(
+  //   $calendar-padding,
+  //   $days-gap,
+  //   $days-size,
+  //   $days-columns
+  // );
   padding: 20px $calendar-padding;
   display: flex;
   flex-wrap: wrap;
 
   @for $index from 1 through $month-length {
     .day--#{$index} {
-      width: 100px;
-      height: 100px;
+      width: $days-size;
+      height: $days-size;
       border: 1px solid black;
       background-color: #eee;
+    }
+  }
+
+  $days:
+    0 'mon',
+    1 'tue',
+    2 'wen',
+    3 'thu',
+    4 'fri',
+    5 'sat',
+    6 'sun';
+
+  @each $index, $day in $days {
+    &__day--start_#{$day} {
+      margin-left: $days-size * $index;
     }
   }
 
