@@ -1,0 +1,47 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  width: ($day-size-desktop * 7) + ($calendar-padding * 2) + ($gap * 6);
+
+  &--start-day {
+    @each $day, $index in $days {
+      &-#{$day} .day:first-child {
+        margin-left: ($day-size-desktop + $gap) * $index;
+      }
+    }
+  }
+
+  &--month-length {
+    @for $index from 28 to $days-count {
+      &-#{$index} .day:nth-last-child(-n + #{$days-count - $index}) {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width:768px) {
+    width: ($day-size-tablet * 7) + ($calendar-padding * 2) + ($gap * 6) ;
+
+    &--start-day {
+      @each $day, $index in $days {
+        &-#{$day} .day:first-child {
+          margin-left: ($day-size-tablet + $gap) * $index;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width:414px) {
+    width: ($day-size-tablet * 7) + ($calendar-padding * 2) + ($gap * 6) ;
+
+    &--start-day {
+      @each $day, $index in $days {
+        &-#{$day} .day:first-child {
+          margin-left: ($day-size-mobile + $gap) * $index;
+        }
+      }
+    }
+  }
+}
