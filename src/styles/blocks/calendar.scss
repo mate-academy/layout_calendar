@@ -14,7 +14,7 @@
 
     @each $day, $start in $days {
       &--start-day--#{$day} :first-child {
-        margin-left: $start;
+        margin-left: ($square-size * $start) + ($gap-size * $start);
       }
     }
 
@@ -36,7 +36,7 @@
 
     background-color: #eee;
 
-    transition: transform 0.5s, bottom 0.3s, background-color 0.3s;
+    transition: $transition-time;
 
     &:hover {
       transform: translateY(-20px);
@@ -45,7 +45,7 @@
     }
 
     @for $day from 1 through 31 {
-      &--day-#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
 
         display: block;
