@@ -13,6 +13,21 @@
       display: none;
     }
   }
+
+  $days-of-week: 
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $start-day, $start-day-value in $days-of-week {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: $start-day-value * ($day-size + $gap-size);
+    }
+  }
 }
 
 .calendar__day {
@@ -31,21 +46,6 @@
  
       content: "#{$day-number}";
       margin: auto;
-    }
-  }
-
-  $days-of-week: 
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
-  @each $start-day, $start-day-value in $days-of-week {
-    &--start-day--#{$start-day}:first-child {
-      margin-left: $start-day-value * ($day-size + $gap-size);
     }
   }
 
