@@ -1,0 +1,56 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  box-sizing: border-box;
+  width: 710px;
+  gap: 1px;
+  padding-top: 30px;
+  margin: 0 auto;
+
+  &__day-box {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    $day-list:
+      "tue" 101px,
+      "wed" 202px,
+      "thu" 303px,
+      "fri" 404px,
+      "sat" 505px,
+      "sun" 606px;
+
+    @each $start-day, $position in $day-list {
+      &--#{$start-day} {
+        margin-left: $position;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 500ms;
+    }
+  }
+
+  @for $day-number from 1 to 32 {
+    &__day-box--#{$day-number}::before {
+      content: ""+$day-number;
+      font-size: 30px;
+      color: black;
+    }
+  }
+
+  @for $month-length from 28 to 32 {
+    &--month-length-#{$month-length} >*:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
