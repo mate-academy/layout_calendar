@@ -65,6 +65,21 @@
     }
   }
 
+  $days:
+    "sun" ($cell-width * 6) + ($cell-gap * 5),
+    "sat" ($cell-width * 5) + ($cell-gap * 4),
+    "fri" ($cell-width * 4) + ($cell-gap * 3),
+    "thu" ($cell-width * 3) + ($cell-gap * 2),
+    "wed" ($cell-width * 2) + ($cell-gap * 1),
+    "tue" $cell-width,
+    "mon" 0;
+
+  @each $name, $parameter in $days {
+    &--start-day--#{$name} &__cell:first-child {
+      margin-left: $parameter;
+    }
+  }
+
   @for $index from 28 through 31 {
     &--month-length--#{$index} &__cell:nth-child(n + #{$index + 1}) {
       height: 0;
@@ -74,12 +89,6 @@
 
     &--month-length--#{$index} &__cell:nth-child(n + #{$index + 1})::before {
       content: "";
-    }
-  }
-
-  @each $day-in-week in mon, tue, wed, thu, fri, sat, sun {
-    &--start-day--#{$day-in-week} &__cell:first-child {
-      margin-left: ($cell-width * 6) + ($cell-gap * 5);
     }
   }
 }
