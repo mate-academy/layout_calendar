@@ -1,11 +1,10 @@
 .calendar {
-  width: $calendar-padding * 2 + $days-gap * ($days-columns - 1) + $days-size * 7;
-  // width: getContainerSize(
-  //   $calendar-padding,
-  //   $days-gap,
-  //   $days-size,
-  //   $days-columns
-  // );
+  width: getContainerSize(
+    $calendar-padding,
+    $days-gap,
+    $days-size,
+    $days-columns
+  );
   padding: 20px $calendar-padding;
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +18,16 @@
     }
   }
 
+  @for $index from 28 through 31{
+    &--month-length_#{$index} >:nth-child(n + #{$index + 1}){
+      display: none;
+    }
+  }
+
+  .day--10 {
+    display: none;
+  }
+
   $days:
     0 'mon',
     1 'tue',
@@ -29,7 +38,7 @@
     6 'sun';
 
   @each $index, $day in $days {
-    &__day--start_#{$day} {
+    &--start_#{$day} {
       margin-left: $days-size * $index;
     }
   }
@@ -41,3 +50,5 @@
     cursor: pointer;
   }
 }
+
+
