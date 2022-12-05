@@ -9,23 +9,11 @@
   display: flex;
   flex-wrap: wrap;
 
-  @for $index from 1 through $month-length {
-    .day--#{$index} {
-      width: $days-size;
-      height: $days-size;
-      border: 1px solid black;
-      background-color: #eee;
-    }
-  }
 
   @for $index from 28 through 31{
     &--month-length_#{$index} >:nth-child(n + #{$index + 1}){
       display: none;
     }
-  }
-
-  .day--10 {
-    display: none;
   }
 
   $days:
@@ -38,9 +26,13 @@
     6 'sun';
 
   @each $index, $day in $days {
-    &--start_#{$day} {
+    &--start_#{$day}>:first-child {
       margin-left: $days-size * $index;
     }
+  }
+
+  &__day {
+    transition-duration: 500ms;
   }
 
   &__day:hover {
@@ -50,5 +42,3 @@
     cursor: pointer;
   }
 }
-
-
