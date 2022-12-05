@@ -1,38 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: start;
   box-sizing: border-box;
-  width: 710px;
+  width: ($cell-size * 7) + 10px;
   gap: 1px;
   padding-top: 30px;
   margin: 0 auto;
 
+  $day-list:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $start-day, $position in $day-list {
+    &__day--#{$start-day} > &__day-box:first-child {
+      margin-left: $position * 101px;
+    }
+  }
+
   &__day-box {
-    box-sizing: border-box;
-    width: 100px;
-    height: 100px;
+    width: $cell-size;
+    height: $cell-size;
     background-color: #eee;
     border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: 500ms;
+    font-size: 30px;
+    color: black;
 
-    $day-list:
-      "tue" 101px,
-      "wed" 202px,
-      "thu" 303px,
-      "fri" 404px,
-      "sat" 505px,
-      "sun" 606px;
-
-    @each $start-day, $position in $day-list {
-      &--#{$start-day} {
-        margin-left: $position;
-      }
-    }
+    transition-duration: 500ms;
 
     &:hover {
       background-color: pink;
@@ -41,10 +48,8 @@
   }
 
   @for $day-number from 1 to 32 {
-    &__day-box--#{$day-number}::before {
-      content: ""+$day-number;
-      font-size: 30px;
-      color: black;
+    &__day-box:nth-child(#{$day-number})::before {
+      content: "" + $day-number;
     }
   }
 
