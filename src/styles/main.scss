@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Arial", sans-serif;
+}
+
 body {
   margin: 0;
 }
@@ -40,7 +48,6 @@ body {
     }
 
     &__cell {
-      box-sizing: border-box;
       background-color: #eee;
       width: $col-width;
       height: $col-width;
@@ -48,16 +55,16 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: "Arial", sans-serif;
       font-size: 30px;
-      transition-duration: 0.5s;
-    }
-    &__cell:hover {
       cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
+      transition-property: all;
+      transition-duration: 0.5s;
 
+      &:hover {
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
     @for $index from 1 through 31 {
       &__cell:nth-child(#{$index})::before {
         content: "#{$index}";
