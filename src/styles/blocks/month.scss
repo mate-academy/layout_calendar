@@ -11,14 +11,14 @@ body {
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
-  gap: #{$card-gapNborder};
+  gap: $cell-gap;
   width: 750px;
 
   &__day {
     @extend %centre-flex;
     @extend %card-perimeter;
     background-color: #eee;
-    border: #{$card-gapNborder} solid #000;
+    border: $cell-border solid #000;
     transition-duration: 0.5s;
 
     &:hover {
@@ -39,14 +39,14 @@ body {
 
 }
 
-@each $num, $day in $week-days {
-  .start-#{$day} {
-    margin-left: $num * ($card-square + ($card-gapNborder * 3)) ;
+@each $day, $num in $week-days {
+  .month__day--start-day-#{$day} {
+    margin-left: $num * ($card-square + ($cell-gap * 3)) ;
   }
 }
 
-@for $index from $one-overmonth-length through 31 {
-  .month__day:nth-child(#{$index}) {
+@for $index from $month-length through 31 {
+  .month__day:nth-child(n + #{$index + 1}) {
     display: none;
   }
 }
