@@ -1,0 +1,24 @@
+.day {
+  width: $size;
+  height: $size;
+  background-color: #eee;
+  border: 1px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $font-size;
+  transition: color 0.5s, transform 0.5s;
+
+  @for $day from 1 through 31 {
+    &--#{$day}::before {
+      content: "#{$day}";
+      position: relative;
+      top: $number-shift;
+      left: $number-shift;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
