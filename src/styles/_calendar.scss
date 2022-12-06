@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
-  width: (($cell-size * 7) + ($cell-gap * 6)) + $padding * 2;
+  width: getWidth($cell-size, $cell-gap, $columns, $padding);
   padding: $padding;
 
   @each $day, $n in $days {
@@ -23,14 +23,14 @@
     border: 1px solid black;
     background-color: #eee;
     cursor: pointer;
-    transition: 0.5s;
+    transition: background-color $duration, transform $duration;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         @extend %display;
         text-align: center;
         content: "#{$index}";
-        animation-timing-function: 0.5s;
+        animation-timing-function: $duration;
       }
     }
 
