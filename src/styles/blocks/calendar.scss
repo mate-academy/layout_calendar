@@ -9,21 +9,20 @@
   display: flex;
   flex-wrap: wrap;
 
-
-  @for $index from 28 through 31{
-    &--month-length_#{$index} >:nth-child(n + #{$index + 1}){
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} >:nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
 
   $days:
-    0 'mon',
-    1 'tue',
-    2 'wen',
-    3 'thu',
-    4 'fri',
-    5 'sat',
-    6 'sun';
+    0 "mon",
+    1 "tue",
+    2 "wen",
+    3 "thu",
+    4 "fri",
+    5 "sat",
+    6 "sun";
 
   @each $index, $day in $days {
     &--start_#{$day}>:first-child {
@@ -37,7 +36,7 @@
 
   &__day:hover {
     background-color: pink;
-    transform: translate(0, -20%);
+    transform: translate(0, -20px);
     justify-content: center;
     cursor: pointer;
   }
