@@ -1,0 +1,27 @@
+.calendar__day {
+  @include square($sizeCardDay);
+  background-color: $colorCardDay;
+  border: 1px solid black;
+  position: relative;
+  cursor: pointer;
+  transition-property: transform, background-color;
+  transition-duration: 500ms;
+
+  &::before {
+    font-family: inherit;
+    font-size: 30px;
+    @include centering();
+
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: $colorCardDayHover;
+  }
+
+  @for $day from 1 to 32 {
+    &:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+}
