@@ -1,0 +1,66 @@
+.calender {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: $calender-padding;
+  gap: $cell-gap;
+  width: ($cell-width * 7) + ($cell-gap * 6) + ($calender-padding * 2);
+
+  &--position {
+    position: absolute;
+    top: $calender-positioning;
+    left: $calender-positioning;
+    transform: translate(-50%, -50%);
+  }
+
+  &__cell {
+    position: relative;
+    height: 100px;
+    width: $cell-width;
+    line-height: 100px;
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #eee;
+    font-size: 30px;
+    transition: background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $count-days from 1 through 31 {
+      &:nth-child(#{$count-days})::before {
+        content: "#{$count-days}";
+      }
+    }
+  }
+
+  $days:
+    ("sun": 6, 
+    "sat": 5,
+    "fri": 4,
+    "thu": 3,
+    "wed": 2,
+    "tue": 1,
+    "mon": 0);
+
+  @each $name, $parameter in $days {
+    &--start-day--#{$name} &__cell:first-child {
+      margin-left: ($cell-width * $parameter) + ($cell-gap * $parameter - 1);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} &__cell:nth-child(n + #{$index + 1}) {
+      height: 0;
+      width: 0;
+      border: 0;
+    }
+
+    &--month-length--#{$index} &__cell:nth-child(n + #{$index + 1})::before {
+      content: "";
+    }
+  }
+}
