@@ -1,8 +1,8 @@
 .calendar {
   display: flex;
+  width: 7*($day-size + 1px) - 1px;
   margin: 0 auto;
   padding: $calendar-padding;
-  width: 7*($day-size + 1px) - 1px;
   gap: 1px;
   flex-wrap: wrap;
 
@@ -25,6 +25,31 @@
   @each $day, $margin in $start-day {
     &_start-day_#{$day} .calendar__day:nth-child(1) {
       margin-left: $margin;
+    }
+  }
+
+  &__day {
+    position: relative;
+    display: flex;
+    @include square($day-size);
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid black;
+
+    @for $number from 1 to 32 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+        position: absolute;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 1s;
     }
   }
 }
