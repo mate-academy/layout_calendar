@@ -7,6 +7,7 @@
   gap: $gap-size;
   width: 7 * $day-size + 6 * $gap-size;
   padding: 10px;
+  transition: transform $animation-duration;
 
   @for $day from 28 through 30 {
     &--month-length--#{$day} :nth-child(n+#{$day+1}) {
@@ -28,27 +29,26 @@
       margin-left: $start-day-value * ($day-size + $gap-size);
     }
   }
-}
 
-.calendar__cell {
-  @include day-size($day-size);
-  box-sizing: border-box;
-  background-color: #eee;
-  border: 1px solid #000;
-  display: flex;
+  &__cell {
+    @include day-size($day-size);
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
 
-  @for $day-number from 1 through 31 {
-    &:nth-child(#{$day-number}):before {
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number}):before {
 
-      content: "#{$day-number}";
-      margin: auto;
+        content: "#{$day-number}";
+        margin: auto;
+      }
     }
-  }
 
-  &:hover {
-    cursor: pointer;
-    transform: translateY(-20px);
-    animation-duration: $animation-duration;
-    background-color: pink;
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
   }
 }
