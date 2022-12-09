@@ -1,0 +1,20 @@
+.calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  @include maxWidth();
+  @include centering();
+
+  @each $day, $startDay in $week {
+    &__start-day--#{$day} :first-child {
+      margin-left: $startDay * $sizeCardDay + $startDay;
+    }
+  }
+
+  @for $days from 28 to 31 {
+    &__month--length--#{$days} :nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
