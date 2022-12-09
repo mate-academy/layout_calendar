@@ -1,0 +1,24 @@
+@import "../utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $gap;
+
+  &--position {
+    margin: 70px auto 0;
+  }
+
+  @each $day-num, $number in $week {
+    &--first-day-num--#{$day-num} &__cell:first-child {
+      margin-left: $number * ($cell-size + $gap);
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} &__cell:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}

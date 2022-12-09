@@ -1,0 +1,26 @@
+@import "../utils/variables";
+
+.calendar__cell {
+  width: $cell-size;
+  height: $cell-size;
+  border: 1px solid #000;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition-property: background-color, transform;
+  transition-duration: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+
+  @for $days from 1 to 32 {
+
+    &:nth-child(#{$days})::before {
+      content: "#{$days}";
+    }
+  }
+}
