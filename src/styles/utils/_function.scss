@@ -1,0 +1,18 @@
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $day, $number in $week {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(#{$cell-width} * #{$number - 1} + #{$number -1 }px);
+  }
+}
+
+@each $day, $number in $month-length {
+  .calendar--month-length-#{$day}
+  .calendar__day:nth-last-child(-n + #{$number}) {
+    display: none;
+  }
+}
