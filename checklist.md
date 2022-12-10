@@ -2,7 +2,7 @@
 [this list](https://mate-academy.github.io/fe-program/css/typical-bem-mistakes)
 2. [BEM] - Make sure to follow BEM naming convention for complex modifiers:
 `block-name--modifier-name--modifier-value`;
-3. [BEM] - create a separate file per each BEM block styles that have the same
+3. [BEM] - Create a separate file per each BEM block styles that have the same
    name as the block
 4. [SASS] - Make use of SASS nesting - write pseudo-class, pseudo-element
 selectors inside general selector. As well as media queries.
