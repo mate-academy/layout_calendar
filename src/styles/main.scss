@@ -9,20 +9,20 @@ html {
 .body {
   display: flex;
   justify-content: center;
-  text-align: center;
 }
 
 .calendar {
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
   padding: 20px;
-  width: $calendsr-cell-width * 7 + $calendar-gap * 6;
+  top: 50px;
+  width: $calendar-cell-width * 7 + $calendar-gap * 6;
   gap: $calendar-gap;
 
   @each $day, $num in $days {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: ($calendsr-cell-width + $calendar-gap) * $num;
+      margin-left: ($calendar-cell-width + $calendar-gap) * $num;
     }
   }
 
@@ -33,22 +33,20 @@ html {
   }
 
   &__day {
-    box-sizing: border-box;
     position: relative;
     height: 100px;
-    width: $calendsr-cell-width;
+    box-sizing: border-box;
+    width: $calendar-cell-width;
     background-color: #eee;
     transition: background-color 0.5s, transform 0.5s;
     border: 1px solid black;
     cursor: pointer;
+    text-align: center;
+    line-height: 100px;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
       }
     }
 
