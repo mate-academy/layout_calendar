@@ -4,7 +4,7 @@
   gap: 1px;
   @include max_width();
   @include center();
-  padding: 10px;
+  padding: 30px 10px 10px;
 
   @each $day, $startDay in $week {
     &__startday--#{$day}>:first-child {
@@ -15,6 +15,32 @@
   @for $days from 28 through 31 {
     &__month-lenth--#{$days}>:nth-child(n + #{$days + 1}) {
       display: none;
+    }
+  }
+
+  &__days {
+    display: flex;
+    background-color: $day_color;
+    @include square($day_size);
+    border: 1px solid $border_color;
+    cursor: pointer;
+    transition-property: transform, background-color;
+    transition-duration: 0.5s;
+  
+    &::before {
+      font-size: 30px;
+      @include center();
+    }
+  
+    @for $day from 1 through $month-length {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+  
+    &:hover {
+      background-color: $hover_color;
+      transform: translateY($hover_hight);
     }
   }
 }
