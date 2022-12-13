@@ -13,6 +13,14 @@
     }
   }
 
+  @each $day,
+  $margin in $days {
+    &--start-day--#{$day}
+    &__day:first-child {
+      margin-left: #{$margin};
+    }
+  }
+
   &__day {
     display: flex;
     justify-content: center;
@@ -31,23 +39,6 @@
     @for $day-count from 1 through 31 {
       &:nth-child(#{$day-count})::before {
         content: "#{$day-count}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-      }
-    }
-
-    $days:
-      "mon" 0,
-      "tue" $day-width + $month-gap,
-      "wen" $day-width * 2 + $month-gap * 2,
-      "thu" $day-width * 3 + $month-gap * 3,
-      "fri" $day-width * 4 + $month-gap * 4,
-      "sat" $day-width * 5 + $month-gap * 5,
-      "sun" $day-width * 6 + $month-gap * 6;
-
-    @each $day, $margin in $days {
-      &--start-day--#{$day} {
-        margin-left: #{$margin};
       }
     }
   }
