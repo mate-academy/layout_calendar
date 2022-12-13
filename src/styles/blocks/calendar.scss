@@ -1,0 +1,21 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: ($day-size+$day-gap+$day-border*2)*$number-of-columns;
+  @for $days from 28 through 30 {
+    &--month-length-#{$days} :nth-child(n+#{$days}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include day-size-and-posotion;
+    @for $i from 2 through 31 {
+      &--#{$i}::before {
+        content: "#{$i}";
+        @include day-before-element-position;
+      }
+    }
+  }
+}

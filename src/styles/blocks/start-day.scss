@@ -1,0 +1,12 @@
+.start-day {
+  @include day-size-and-posotion;
+  &::before {
+    content: "1";
+    @include day-before-element-position;
+  }
+  @each $day, $day-number in $week-days {
+    &--#{$day} {
+      margin-left: $basis-margin-left*$day-number;
+    }
+  }
+}
