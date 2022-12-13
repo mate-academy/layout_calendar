@@ -1,9 +1,7 @@
 .calendar {
-  font-family: Arial, Helvetica, sans-serif;
   display: flex;
-  box-sizing: border-box;
   flex-wrap: wrap;
-  margin: 0 auto;
+  box-sizing: border-box;
   padding: 40px $calendar-x-paddings;
   gap: $calendar-box-gap;
   width: caclCalendarWidth(
@@ -12,15 +10,6 @@
     $calendar-x-paddings,
     $calendar-box-gap
   );
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $day, $margin in $days {
     &--start-day--#{$day} :first-child {
@@ -35,13 +24,13 @@
   }
 
   &__day {
-    background-color: #eee;
+    box-sizing: border-box;
     width: $calendar-box-size;
     height: $calendar-box-size;
+    background-color: #eee;
     border: 1px solid #000;
-    box-sizing: border-box;
-    cursor: pointer;
     transition: background-color 0.5s, transform 0.5s;
+    cursor: pointer;
 
     &:hover {
       background-color: #ffbfcb;
@@ -49,7 +38,7 @@
     }
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(n + #{$day})::before {
         content: "#{$day}";
         display: flex;
         align-items: center;
