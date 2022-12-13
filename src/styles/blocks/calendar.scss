@@ -9,6 +9,12 @@
   gap: $margin-size;
   width: getWidth($cell-size, $col-count, $margin-size);
 
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
   &__day {
     box-sizing: border-box;
     display: flex;
@@ -26,26 +32,11 @@
       transform: translateY(-20px);
       background-color: pink;
     }
-
-    @for $index from 1 through 31 {
-      &--#{$index}::before {
-        content: "#{$index}";
-      }
-    }
   }
 
-  $days:
-    mon 0,
-    tue $cell-size + $margin-size,
-    wed 2 * ($cell-size + $margin-size),
-    thu 3 * ($cell-size + $margin-size),
-    fri 4 * ($cell-size + $margin-size),
-    sat 5 * ($cell-size + $margin-size),
-    sun 6 * ($cell-size + $margin-size);
-
-  @each $day, $margin-l in $days {
+  @each $day, $number in $days {
     &--start-day--#{$day} :first-child {
-      margin-left: $margin-l;
+      margin-left: $number * ($cell-size + $margin-size);
     }
   }
 
