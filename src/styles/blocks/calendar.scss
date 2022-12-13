@@ -10,17 +10,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $box-background-size;
+    background-color: $box-background-color;
     height: $height-box-day;
     width: $width-box-day;
     border: 1px solid black;
-    cursor: grab;
+    transition: transform 0.5s, background-color 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
   }
 
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: "#{$i}";
-      font-size: 30px;
     }
   }
 
