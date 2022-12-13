@@ -1,7 +1,6 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  box-sizing: border-box;
   padding: 40px $calendar-x-paddings;
   gap: $calendar-box-gap;
   width: caclCalendarWidth(
@@ -24,9 +23,13 @@
   }
 
   &__day {
-    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: $calendar-box-size;
     height: $calendar-box-size;
+    font-size: 30px;
+    color: #000;
     background-color: #eee;
     border: 1px solid #000;
     transition: background-color 0.5s, transform 0.5s;
@@ -40,12 +43,6 @@
     @for $day from 1 through 31 {
       &:nth-child(n + #{$day})::before {
         content: "#{$day}";
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        font-size: 30px;
-        color: #000;
       }
     }
   }
