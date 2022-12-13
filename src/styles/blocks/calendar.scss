@@ -6,7 +6,7 @@
   padding-top: 75px;
 
   @each $day,
-    $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+    $index in $days {
     &--start-day--#{$day} {
       &__cell:first-child {
         margin-left: #{($cell-size + $cell-gap) * $index};
@@ -14,9 +14,9 @@
     }
   }
 
-  @for $dayCount from 28 through 31 {
-    &--month-lenght--#{$dayCount} {
-      &__cell:nth-child(n + #{$dayCount + 1}) {
+  @for $index from 28 through 31 {
+    &--month-lenght--#{$index} {
+      &__cell:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
@@ -31,6 +31,9 @@
 
     @include square($cell-size);
 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
     background-color: $cell-color;
     border: 1px solid #000;
     padding: 7px;
@@ -41,8 +44,6 @@
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
