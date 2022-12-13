@@ -1,0 +1,48 @@
+.calendar {
+  width: getCalendarWidth($width-height-cell-day, $padding-calendar);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+
+  $start-days:
+    "mon" 0,
+    "tue" 101px,
+    "wed" 202px,
+    "thu" 303px,
+    "fri" 404px,
+    "sat" 505px,
+    "sun" 606px;
+
+  @each $name-day, $cell-margin-left in $start-days {
+    &--start-day_#{$name-day} &__day:first-child {
+      margin-left: $cell-margin-left;
+    }
+  }
+
+  @for $month-days from 28 through 31 {
+    &--month-length_#{$month-days} &__day:not(:nth-child(-n + #{$month-days})) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include cell($width-height-cell-day);
+    @include flex;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: transform 0.5s, background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $n-day from 1 through 31 {
+      &:nth-child(n + #{$n-day}):before {
+        content: "#{$n-day}";
+      }
+    }
+  }
+}
