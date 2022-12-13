@@ -1,22 +1,22 @@
 .calendar {
-  width: getCalendarWidth($width-height-cell-day, $padding-calendar);
+  width: getCalWidth($width-cell, $cells-in-row, $padd-sides, $cells-gap);
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
+  gap: $cells-gap;
+  padding: $padd-sides;
 
   $start-days:
     "mon" 0,
-    "tue" 101px,
-    "wed" 202px,
-    "thu" 303px,
-    "fri" 404px,
-    "sat" 505px,
-    "sun" 606px;
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-  @each $name-day, $cell-margin-left in $start-days {
+  @each $name-day, $cell-numbers in $start-days {
     &--start-day_#{$name-day} &__day:first-child {
-      margin-left: $cell-margin-left;
+      margin-left: ($width-cell + $cells-gap) * $cell-numbers;
     }
   }
 
@@ -27,10 +27,10 @@
   }
 
   &__day {
-    @include cell($width-height-cell-day);
+    @include cell($width-cell, $height-cell-day);
     @include flex;
     border: 1px solid black;
-    background-color: #eee;
+    background-color: $cell-bgc;
     transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
