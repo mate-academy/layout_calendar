@@ -1,0 +1,8 @@
+@function getCalendarWidth($width, $gap, $padding, $amount) {
+  @return ($width * $amount) + ($gap * ($amount - 1)) + ($padding * 2);
+}
+
+@function getLeftMargin($sizes, $number, $gap) {
+  @return getCalendarWidth($sizes, $gap, 0, 7)
+    - ($sizes * (7 - $number)) - ($gap * (6 - $number));
+}
