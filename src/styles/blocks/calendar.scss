@@ -2,20 +2,29 @@
   display: flex;
   flex-wrap: wrap;
   gap: $day-gap;
-  width: ($day-size+$day-gap+$day-border*2)*$number-of-columns;
-  @for $days from 28 through 30 {
-    &--month-length-#{$days} :nth-child(n+#{$days}) {
-      display: none;
-    }
-  }
+  padding: 20px 10px;
+  width: ($day-size+$day-gap)*$number-of-columns;
 
   &__day {
+    box-sizing: border-box;
     @include day-size-and-posotion;
-    @for $i from 2 through 31 {
+    @for $i from 1 through 31 {
       &--#{$i}::before {
         content: "#{$i}";
         @include day-before-element-position;
       }
+    }
+  }
+
+  @each $day, $day-number in $week-days {
+    &--start-day-#{$day} :nth-child(1) {
+      margin-left: $basis-margin-left*$day-number;
+    }
+  }
+
+  @for $days from 28 through 30 {
+    &--month-length-#{$days} :nth-child(n+#{$days+1}) {
+      display: none;
     }
   }
 }
