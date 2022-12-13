@@ -1,0 +1,32 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $c-gap;
+  padding: $c-padding;
+  width: size($cell-size, $number-of-cells, $c-gap);
+
+  &__day {
+    @include squar;
+    display: flex;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date}):before {
+        content: "#{$date}";
+        color: black;
+        margin: auto;
+      }
+    }
+  }
+
+  &__day:first-child {
+    margin-left: firstMargin($cell-size, 6, $c-gap);
+  }
+
+}
