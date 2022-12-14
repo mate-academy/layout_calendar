@@ -1,0 +1,11 @@
+@each $day, $value in $days {
+  .calendar--day--#{$day} :first-child {
+    margin-left: $value;
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--length--#{$length} :nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
