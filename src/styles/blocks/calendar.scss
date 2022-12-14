@@ -4,7 +4,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  width: $block-size * 7 + $calendar-gap * 6;
+  width: $block-size * 7 + $calendar-gap * 6 + $padding * 2;
+  padding: $padding;
 
   &__block {
     display: flex;
@@ -14,6 +15,9 @@
     height: $block-size;
     background-color: #eee;
     border: 1px #000 solid;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: #000;
     transition: transform 0.5s, background-color 0.5s ;
 
     &:hover {
@@ -25,9 +29,6 @@
     @for $index from 1 through 31 {
       &:nth-child(#{$index}):before {
         content: "#{$index}";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-        color: #000;
       }
     }
   }
