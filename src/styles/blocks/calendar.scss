@@ -5,6 +5,7 @@
   padding: $calendar-padding;
   gap: 1px;
   flex-wrap: wrap;
+  box-sizing: content-box;
 
   @for $last-day from 28 to 31 {
     $new-last-day: $last-day + 1;
@@ -37,6 +38,7 @@
     background-color: #eee;
     border: 1px solid #000;
     cursor: pointer;
+    transition: background-color 1s, transform 1s;
 
     @for $number from 1 to 32 {
       &:nth-child(#{$number})::before {
@@ -49,7 +51,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 1s;
     }
   }
 }
