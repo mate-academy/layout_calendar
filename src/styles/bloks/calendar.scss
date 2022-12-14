@@ -5,6 +5,23 @@
   gap: 1px;
   padding: 70px 10px;
 
+  @each $days, $index in
+    (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+    &--start-day--#{$days} {
+      .calendar__day:first-child {
+        margin-left: #{($day-width + $gap-between-days) * $index};
+      }
+    }
+  }
+
+  @for $daysCount from 28 through 31 {
+    &--month-lenght--#{$daysCount} {
+      .calendar__day:nth-child(n + #{$daysCount + 1}) {
+        display: none;
+      }
+    }
+  }
+
   &__cell {
     display: flex;
     justify-content: center;
@@ -17,23 +34,19 @@
     &:first-child {
       margin-left: $margin-fist-child;
     }
-  
+    
+    @for $dayNumber from 1 through 31 {
+      &:nth-child(#{$dayNumber})::before {
+        content: "#{$dayNumber}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
-    }
-  
-    @for $index from 1 through 31 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-      }
-    }
-
-    @for $index from 28 through 31 {
-      &--month-duration--#{$index} &__cell:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
     }
   }
 }
