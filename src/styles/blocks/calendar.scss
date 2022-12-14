@@ -9,6 +9,7 @@
     @include squar;
     display: flex;
     transition: transform 0.5s;
+    color: black;
 
     &:hover {
       cursor: pointer;
@@ -19,20 +20,16 @@
     @for $date from 1 through 31 {
       &:nth-child(#{$date}):before {
         content: "#{$date}";
-        color: black;
-        margin: auto;
       }
     }
   }
 }
 
-  @each $week-day, $value in $week-days {
-    .calendar--start-day-#{$week-day}
-      .calendar__day:first-child {
-        margin-left: $cell-size * ($value - 1) + ($number-of-cells - 2) * $c-gap;;
-      }
-  }
-
+@each $week-day, $value in $week-days {
+  .calendar--start-day-#{$week-day} .calendar__day:first-child {
+    margin-left: $cell-size * ($value - 1) + ($value - 1) * $c-gap;
+  };
+}
 
 @for $number-of-days from 28 through 31 {
   .calendar--month-length-#{$number-of-days} {
