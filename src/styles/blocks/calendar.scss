@@ -9,7 +9,7 @@
     box-sizing: border-box;
     @include day-size-and-posotion;
     @for $i from 1 through 31 {
-      &--#{$i}::before {
+      &:nth-child(#{$i}):before {
         content: "#{$i}";
         @include day-before-element-position;
       }
@@ -17,7 +17,7 @@
   }
 
   @each $day, $day-number in $week-days {
-    &--start-day-#{$day} :nth-child(1) {
+    &--start-day-#{$day} :first-child {
       margin-left: $basis-margin-left*$day-number;
     }
   }
