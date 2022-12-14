@@ -2,11 +2,39 @@
   display: flex;
   gap: $gap;
   flex-wrap: wrap;
-  width: 706px;
+  width: $calendarWidth;
 
   &--container {
-    display: flex;
-    margin: 70px auto 0;
+    margin: 50px auto 0;
+  }
+
+  &__day {
+    background-color: $cellColor;
+    width: $cellSize;
+    height: $cellSize;
+    padding: $cellPadding;
+    border: 1px solid black;
+    transition: color 0.5s, transform 0.5s;
+
+    &::before {
+      content: "";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
   }
 
   @each $day, $margin-left in $week-day {
