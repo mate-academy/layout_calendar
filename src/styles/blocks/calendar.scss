@@ -24,9 +24,20 @@
       }
     }
   }
+}
 
-  &__day:first-child {
-    margin-left: firstMargin($cell-size, 6, $c-gap);
+  @each $week-day, $value in $week-days {
+    .calendar--start-day-#{$week-day}
+      .calendar__day:first-child {
+        margin-left: $cell-size * ($value - 1) + ($number-of-cells - 2) * $c-gap;;
+      }
   }
 
+
+@for $number-of-days from 28 through 31 {
+  .calendar--month-length-#{$number-of-days} {
+    .calendar__day:nth-child(n + #{$number-of-days + 1}) {
+      display: none;
+    }
+  }
 }
