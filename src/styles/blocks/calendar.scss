@@ -13,16 +13,12 @@
     border: 1px solid #000;
     background-color: #eee;
 
-    font-family: "Arial", sans-serif;
-    font-size: 30px;
-
-    transition:
-      transform 0.3s ease 0s,
+    transition: transform 0.3s ease 0s,
       background-color 0.3s ease 0s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
-        content:"#{$i}";
+        content: "#{$i}";
       }
     }
 
@@ -31,25 +27,21 @@
       background-color: #ffbfcb;
       cursor: pointer;
     }
-
-    
-
   }
 
-  $days: 
-      "mon" 0,
-      "tue" 1,
-      "wed" 2,
-      "thu" 3,
-      "fri" 4,
-      "sat" 5,
-      "sun" 6;
+  $days: "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-    @each $day, $i in $days {
-      &--start-day--#{$day} .calendar__day:first-child {
-        margin-left: ($cell-width + $col-gap) * $i;
-      }
+  @each $day, $i in $days {
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: ($cell-width + $col-gap) * $i;
     }
+  }
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} .calendar__day:nth-last-child(-n + #{31 - $i}) {
