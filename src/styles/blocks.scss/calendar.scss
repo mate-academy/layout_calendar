@@ -1,6 +1,18 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: 720px;
+  gap: $gap;
+  width: $calendar-width;
+}
+
+@each $day, $margin-left in $week-day {
+  .calendar--start-#{$day} .calendar__day:first-child {
+    margin-left: $margin-left;
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar--length-#{$date} .calendar__day:nth-child(n + #{$date + 1}) {
+    display: none;
+  }
 }
