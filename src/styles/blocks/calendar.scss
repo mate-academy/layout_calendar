@@ -1,0 +1,56 @@
+.calendar {
+  display: flex;
+  width: 7*($day-size + 1px) - 1px;
+  margin: 0 auto;
+  padding: $calendar-padding;
+  gap: 1px;
+  flex-wrap: wrap;
+  box-sizing: content-box;
+
+  @for $last-day from 28 to 31 {
+    $new-last-day: $last-day + 1;
+    &_month-length_#{$last-day} .calendar__day:nth-child(n + #{$new-last-day}) {
+      display: none;
+    }
+  }
+
+  $start-day:
+    "mon" getFirstDayShift(1),
+    "tue" getFirstDayShift(2),
+    "wed" getFirstDayShift(3),
+    "thu" getFirstDayShift(4),
+    "fri" getFirstDayShift(5),
+    "sat" getFirstDayShift(6),
+    "sun" getFirstDayShift(7);
+
+  @each $day, $margin in $start-day {
+    &_start-day_#{$day} .calendar__day:nth-child(1) {
+      margin-left: $margin;
+    }
+  }
+
+  &__day {
+    position: relative;
+    display: flex;
+    @include square($day-size);
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: background-color 1s, transform 1s;
+
+    @for $number from 1 to 32 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+        position: absolute;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
