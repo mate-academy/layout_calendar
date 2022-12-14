@@ -1,3 +1,80 @@
+@import "./variables.scss";
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1px;
+  margin: 100px $general-margin 0 $general-margin;
+  text-align: center;
+  
+  &__elem {
+    display: block;
+    width: $day-field;
+    height: $day-field;
+    background-color: $color-main;
+    border: 1px solid $color-border;
+    transition: transform $transition-value, background-color $transition-value;
+  }
+
+  &__elem:hover {
+    transform: translateY(-20px);
+    background-color: $color-hover;
+    cursor: pointer;
+  }
+  
+  @for $day from 1 through 31 {
+    &__elem:nth-child(#{$day})::before {
+      content: "#{$day}";
+
+      position: relative;
+      top: 35px;
+
+      font-family: inherit;
+    }
+  }
+  
+  $weekdays:
+    "mon" $one,
+    "tue" $two,
+    "wed" $three,
+    "thu" $four,
+    "fri" $five,
+    "sat" $six,
+    "sun" $seven;
+
+  @each $wday, $num in $weekdays {
+    &--start-day-#{$wday} {
+      .calendar__elem:first-child {
+        margin-left: $num;
+      }
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length-#{$lastDay} {
+      @if $lastDay == 28 {
+        .calendar__elem:nth-child(n+29) {
+          display: none;
+        }
+      }
+      @else if $lastDay == 29 {
+        .calendar__elem:nth-child(n+30) {
+          display: none;
+        }
+      }
+      @else {
+        .calendar__elem:nth-child(n+31) {
+          display: none;
+        }
+      }
+    }
+  }
 }
