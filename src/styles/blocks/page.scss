@@ -1,9 +1,5 @@
 .html {
-  font-family: arial, helvetica, sans-serif;
-}
-
-.body {
-  padding-top: 50px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
@@ -12,7 +8,6 @@
   gap: $day-gap;
   padding: $calendar-padding;
   max-width: $calendar-max-width;
-  margin: 0 auto;
 
   @each $name, $num in $calendar-days {
     &--start-day--#{$name} :first-child {
@@ -36,12 +31,11 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        // font-family: $day-font-family;
         font-size: 30px;
       }
     }
@@ -49,7 +43,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      cursor: pointer;
     }
   }
 }
