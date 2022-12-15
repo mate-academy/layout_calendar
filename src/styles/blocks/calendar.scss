@@ -5,8 +5,7 @@
   width: $calendar-width;
   padding-top: 50px;
 
-  @each $days, $index in
-    (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+  @each $days, $index in $days-number {
     &--start-day--#{$days} {
       .calendar__day:first-child {
         margin-left: ($box-size + $gap-size) * $index;
@@ -32,17 +31,17 @@
     background-color: #eee;
     border: 1px solid #000;
     padding: 7px;
+    transition: color 0.5s, transform 0.5s;
 
     @for $dayNumber from 1 through 31 {
       &:nth-child(#{$dayNumber})::before {
         content: "#{$dayNumber}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
 
     &:hover {
       background-color: pink;
+      transform: translateY(-20px);
     }
   }
 }
