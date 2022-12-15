@@ -1,0 +1,21 @@
+.calendar__day {
+  box-sizing: border-box;
+  height: $card-width;
+  width: $card-width;
+  border: 1px solid black;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  line-height: $card-width;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+}
