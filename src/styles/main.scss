@@ -1,3 +1,61 @@
+@import "../utils/variebeles.scss";
+@import "../utils/mixins.scss";
+
 body {
+
   margin: 0;
+}
+
+.conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $block-gap;
+  width: $total-width;
+  padding: 50px $horizontal-padding;
+}
+
+.conteiner__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  @include square($block-size);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  background-color: #eee;
+  border: 1px solid black;
+  transition: color 0.5s, transform 0.5s;
+}
+
+.conteiner__block:hover {
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+}
+
+@for $day from 1 through 31 {
+  .conteiner__block:nth-child(#{$day})::before {
+      content: "#{$day}";
+  }
+}
+
+$week-day:
+  'mon' 0,
+  'tue' 1 * $block-size + 1 * $block-gap,
+  'wed' 2 * $block-size + 2 * $block-gap,
+  'thu' 3 * $block-size + 3 * $block-gap,
+  'fri' 4 * $block-size + 4 * $block-gap,
+  'sat' 5 * $block-size + 5 * $block-gap,
+  'sun' 6 * $block-size + 6 * $block-gap;
+
+@each $start-day, $value in $week-day {
+  .conteiner--start--#{$start-day} :first-child {
+    margin-left: #{$value};
+  }
+}
+
+@for $month from 28 through 31 {
+  .calendar--month-length--#{$month} :nth-child(n + #{$month + 1}) {
+    display: none;
+  }
 }
