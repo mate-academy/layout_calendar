@@ -8,11 +8,11 @@
   &__day {
     @include squar;
     display: flex;
-    transition: transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
     color: black;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       transform: translateY(-20px);
       background-color: pink;
     }
@@ -20,6 +20,7 @@
     @for $date from 1 through 31 {
       &:nth-child(#{$date}):before {
         content: "#{$date}";
+        margin: auto;
       }
     }
   }
