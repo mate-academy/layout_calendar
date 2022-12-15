@@ -4,15 +4,6 @@
   width: $calendar-width;
   gap: $gap-size;
 
-  $days-of-week:
-    "mon" 1,
-    "tue" 2,
-    "wed" 3,
-    "thu" 4,
-    "fri" 5,
-    "sat" 6,
-    "sun" 7;
-
   @each $start-day, $start-day-value in $days-of-week {
     &--start-day--#{$start-day} :first-child {
       margin-left: ($start-day-value - 1) * ($cell-size + $gap-size);
@@ -36,6 +27,7 @@
     background-color: #eee;
     border: 1px solid #000;
     cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
@@ -47,7 +39,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.4s transform;
     }
   }
 }
