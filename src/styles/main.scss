@@ -10,7 +10,7 @@ body {
   margin: 0;
 }
 
-.conteiner {
+.container {
   display: flex;
   flex-wrap: wrap;
   gap: $block-gap;
@@ -18,7 +18,7 @@ body {
   padding: 50px $horizontal-padding;
 }
 
-.conteiner__block {
+.container__block {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,26 +31,26 @@ body {
   transition: background-color $transition, transform $transition;
 }
 
-.conteiner__block:hover {
+.container__block:hover {
   cursor: pointer;
   background-color: pink;
   transform: translateY(-20px);
 }
 
 @for $day from 1 through 31 {
-  .conteiner__block:nth-child(#{$day})::before {
+  .container__block:nth-child(#{$day})::before {
     content: "#{$day}";
   }
 }
 
 @each $start-day, $value in $weekday {
-  .conteiner--start--#{$start-day} :first-child {
+  .container--start--#{$start-day} :first-child {
     margin-left: #{$value * ($block-size + $block-gap)};
   }
 }
 
 @for $month from 28 through 31 {
-  .conteiner--month-length--#{$month} :nth-child(n + #{$month + 1}) {
+  .container--month-length--#{$month} :nth-child(n + #{$month + 1}) {
     display: none;
   }
 }
