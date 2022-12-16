@@ -1,5 +1,9 @@
-@import "../utils/variebeles.scss";
+@import "../utils/variables.scss";
 @import "../utils/mixins.scss";
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 body {
 
@@ -20,11 +24,11 @@ body {
   align-items: center;
   box-sizing: border-box;
   @include square($block-size);
-  font-family: Arial, Helvetica, sans-serif;
+
   font-size: 30px;
   background-color: #eee;
   border: 1px solid black;
-  transition: color 0.5s, transform 0.5s;
+  transition: background-color $transition, transform $transition;
 }
 
 .conteiner__block:hover {
@@ -39,18 +43,9 @@ body {
   }
 }
 
-$week-day:
-  'mon' 0,
-  'tue' 1 * $block-size + 1 * $block-gap,
-  'wed' 2 * $block-size + 2 * $block-gap,
-  'thu' 3 * $block-size + 3 * $block-gap,
-  'fri' 4 * $block-size + 4 * $block-gap,
-  'sat' 5 * $block-size + 5 * $block-gap,
-  'sun' 6 * $block-size + 6 * $block-gap;
-
-@each $start-day, $value in $week-day {
+@each $start-day, $value in $weekday {
   .conteiner--start--#{$start-day} :first-child {
-    margin-left: #{$value};
+    margin-left: #{$value * ($block-size + $block-gap)};
   }
 }
 
