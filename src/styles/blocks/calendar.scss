@@ -11,7 +11,6 @@
     justify-content: center;
     width: $day-size;
     height: $day-size;
-    font-size: 30px;
     background-color: $day-color;
     border: 1px solid black;
     transition: 0.5s linear;
@@ -35,9 +34,11 @@
     }
   }
 
-  @for $index from 28 through 30 {
-    &--month-length_#{$index} :first-child(n + #{$index + 1}) {
-      display: none;
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      .calendar__day:first-child(n + #{$index + 1}) {
+        display: none;
+      }
     }
   }
 }
