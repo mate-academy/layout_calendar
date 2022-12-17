@@ -2,20 +2,9 @@
   gap: $day-gap;
   display: flex;
   flex-wrap: wrap;
-  width: $content-width;
+  max-width: $content-width;
+  min-width: $content-width;
   padding: $day-paddings;
-
-  @for $daysCount from 28 through 31 {
-    &--month-length--#{$daysCount} &__day:nth-child(n + #{$daysCount + 1}) {
-      display: none;
-    }
-  }
-
-  @each $day, $index in $week-day {
-    &--start-day--#{$day} &__day:first-child {
-      margin-left: ($day-size + $day-gap) * $index;
-    }
-  }
 
   &__day {
     @include square($day-size);
@@ -23,7 +12,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     background-color: #eee;
     border: 1px solid #000;
@@ -39,6 +27,18 @@
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
+    }
+  }
+
+  @for $daysCount from 28 through 31 {
+    &--month-length--#{$daysCount} &__day:nth-child(n + #{$daysCount + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $index in $week-day {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($day-size + $day-gap) * $index;
     }
   }
 }
