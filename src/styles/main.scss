@@ -2,20 +2,9 @@
 @import "./utils/mixins.scss";
 @import "./reset.scss";
 
-@for $i from 1 to 32 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
-  }
+html {
+  font-family: Arial, sans-serif;
 }
-
-$days:
-  "mon" 0,
-  "tue" 103px,
-  "wed" 206px,
-  "thu" 309px,
-  "fri" 412px,
-  "sat" 515px,
-  "sun" 618px;
 
 @each $name, $margin-size in $days {
   .calendar__start-day--#{$name} >:first-child {
@@ -32,7 +21,7 @@ $days:
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: calc( (#{$block-size} + 1px) * 7 + (#{$calendar-padding} * 2) );
+  max-width: calc((#{$block-size} + 1px) * 7 + (#{$calendar-padding} * 2));
   gap: 1px;
   padding: $calendar-padding;
   margin: auto;
@@ -44,8 +33,15 @@ $days:
     display: flex;
     align-items: center;
     justify-content: center;
-    font-style: arial, sans-serif;
     font-size: 30px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    @for $i from 1 to 32 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
 
     &:hover {
       background-color: pink;
