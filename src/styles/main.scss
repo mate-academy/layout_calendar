@@ -1,23 +1,11 @@
-$block-size: 100px;
-$block-color: #eee;
-$calendar-padding: 10px;
-
-body {
-  margin: 0;
-}
+@import "./utils/variables.scss";
+@import "./utils/mixins.scss";
+@import "./reset.scss";
 
 @for $i from 1 to 32 {
-  .day:nth-child(#{$i})::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
-    font-style: arial, sans-serif;
-    font-size: 30px;
-    text-align: center;
   }
-}
-
-@mixin square($size) {
-  width: $size;
-  height: $size;
 }
 
 $days:
@@ -48,20 +36,22 @@ $days:
   gap: 1px;
   padding: $calendar-padding;
   margin: auto;
-}
 
-.day {
-  @include square($block-size);
-  background-color: $block-color;
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  &__day {
+    @include square($block-size);
+    background-color: $block-color;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: arial, sans-serif;
+    font-size: 30px;
 
-.day:hover {
-  background-color: pink;
-  cursor: pointer;
-  transform: translateY(-20px);
-  transition-duration: 0.5s;
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
 }
