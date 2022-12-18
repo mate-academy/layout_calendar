@@ -6,16 +6,9 @@ html {
   font-family: Arial, sans-serif;
 }
 
-@each $name, $margin-size in $days {
-  .calendar__start-day--#{$name} >:first-child {
-    margin-left: #{$margin-size};
-  }
-}
-
-@for $i from 28 to 31 {
-  .calendar__month-length--#{$i} >:nth-child(n + #{$i + 1}) {
-    display: none;
-  }
+.page {
+  display: flex;
+  justify-content: center;
 }
 
 .calendar {
@@ -24,7 +17,19 @@ html {
   max-width: calc((#{$block-size} + 1px) * 7 + (#{$calendar-padding} * 2));
   gap: 1px;
   padding: $calendar-padding;
-  margin: auto;
+  padding-top: 50px;
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} >:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $index in $days {
+    &--start-day--#{$name} >:first-child {
+      margin-left: calc((#{$block-size} + 3px) * #{$index});
+    }
+  }
 
   &__day {
     @include square($block-size);
@@ -45,7 +50,6 @@ html {
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
   }
