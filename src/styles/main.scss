@@ -2,7 +2,10 @@
 
 body {
   margin: 0;
+}
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
@@ -20,15 +23,18 @@ body {
   }
   
   &__number {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eee;
     width: $cell-size;
     height: $cell-size;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 30px;
+    font-size: 30px;
     border: 1px solid black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    transition-property: transform;
   
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -37,10 +43,9 @@ body {
     }
 
     &:hover {
-      cursor: pointer;
       transform: translate(0, -20px);
       background-color: pink;
-      transition-duration: 0.5s;
+
     }
   }
 
