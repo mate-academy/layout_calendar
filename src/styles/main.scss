@@ -1,3 +1,50 @@
+@import "./variables";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 710px;
+  gap: 1px;
+
+  @for $index from 1 through $month-length {
+    &__day:nth-child(n + #{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $date from 28 through $month-length {
+    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $number in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $number * ($square-size + 1px);
+    }
+  }
+}
+
+.calendar__day {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $square-size;
+  height: $square-size;
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px black solid;
+  transition: transform 0.5s;
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
 }
