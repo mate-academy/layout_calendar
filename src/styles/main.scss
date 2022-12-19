@@ -1,6 +1,5 @@
 @import "./variables";
 
-
 body {
   margin: 0;
 }
@@ -10,7 +9,24 @@ body {
   flex-wrap: wrap;
   width: 710px;
   gap: 1px;
-  // margin: 0 auto;
+
+  @for $index from 1 through $month-length {
+    &__day:nth-child(n + #{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @for $date from 28 through $month-length {
+    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $number in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $number * ($square-size + 1px);
+    }
+  }
 }
 
 .calendar__day {
@@ -25,18 +41,6 @@ body {
   background-color: #eee;
   border: 1px black solid;
 
-  @for $index from 1 through $month-length {
-    &--#{$index}::before {
-      content: "#{$index}";
-    }
-  }
-
-  @for $date from 28 through $month-length {
-    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
-      display: none;
-    }
-  }
-
   &:hover {
     background-color: pink;
     cursor: pointer;
@@ -45,12 +49,3 @@ body {
   }
 }
 
-@each $day, $number in $week {
-  &--start-day--#{$day} :first-child {
-    margin-left: $number * ($square-size + 1px);
-  }
-}
-
-// .calendar__start-day_mon {
-//   margin-left: 606px;
-// }
