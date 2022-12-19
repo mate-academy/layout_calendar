@@ -1,6 +1,5 @@
-$square-count: 31;
-$square-size: 100px;
-// $days: mon, tue, wed, thu, fri, sat, sun;
+@import "./variables";
+
 
 body {
   margin: 0;
@@ -26,9 +25,15 @@ body {
   background-color: #eee;
   border: 1px black solid;
 
-  @for $index from 1 through $square-count {
+  @for $index from 1 through $month-length {
     &--#{$index}::before {
       content: "#{$index}";
+    }
+  }
+
+  @for $date from 28 through $month-length {
+    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
+      display: none;
     }
   }
 
@@ -39,15 +44,6 @@ body {
     transition-duration: 0.5s;
   }
 }
-
-$week:
-  "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5,
-  "sun" 6;
 
 @each $day, $number in $week {
   &--start-day--#{$day} :first-child {
