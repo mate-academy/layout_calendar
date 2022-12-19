@@ -1,3 +1,60 @@
+$square-count: 31;
+$square-size: 100px;
+// $days: mon, tue, wed, thu, fri, sat, sun;
+
 body {
   margin: 0;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 710px;
+  gap: 1px;
+  // margin: 0 auto;
+}
+
+.calendar__day {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $square-size;
+  height: $square-size;
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px black solid;
+
+  @for $index from 1 through $square-count {
+    &--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+}
+
+$week:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $number in $week {
+  &--start-day--#{$day} :first-child {
+    margin-left: $number * ($square-size + 1px);
+  }
+}
+
+// .calendar__start-day_mon {
+//   margin-left: 606px;
+// }
