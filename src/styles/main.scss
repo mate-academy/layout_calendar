@@ -21,26 +21,26 @@ $days: (
   gap: 1px;
 
   @for $i from 28 through 31 {
-    &--month-#{$i} > :nth-child(n + #{$i + 1}) {
+    &--month--#{$i} > :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
 
   @each $day, $order in $days {
-    &--start-day-#{$day} > :first-child {
+    &--start-day--#{$day} > :first-child {
       margin-left: $order * (100px + 1px);
     }
   }
 
   &__cell {
-    position: relative;
+    display: flex;
     margin-top: 1px;
     box-sizing: border-box;
     width: 100px;
     height: 100px;
     background-color: #eee;
     border: 1px solid #000;
-    transition: 0.6s;
+    transition: top, background-color 0.6s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -48,11 +48,8 @@ $days: (
       }
     }
 
-    &:before {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    &::before {
+      margin: auto;
 
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -60,7 +57,7 @@ $days: (
 
     &:hover {
       cursor: pointer;
-      top: -20px;
+      transform: translateY(-20px);
       background-color: #ffb6c1;
     }
   }
