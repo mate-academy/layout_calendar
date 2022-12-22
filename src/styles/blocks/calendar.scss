@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  width: $width-calendar;
+
+  @each $name,$numb in $days {
+    &--start-day--#{$name} &__day:first-child {
+      margin-left: ($gap + $day-size) * $numb;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--calendar-length--#{$index} &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include day-style();
+
+    @for $numberOfDay from 1 through 31 {
+      &:nth-child(#{$numberOfDay})::before {
+        content: "#{$numberOfDay}";
+      }
+      
+    }
+  }
+}
