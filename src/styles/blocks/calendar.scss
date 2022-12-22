@@ -23,22 +23,20 @@
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
-        content: "#{$index}";
+        content: $index + "";
       }
+    }
+  }
+
+  @for $index from 28 through 30 {
+    &__month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 
   @each $day, $index in $days {
-    &--start-day_#{$day} :first-child {
+    &__start-day--#{$day} :first-child {
       margin-left: $index * ($day-size + $day-gap);
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &--month-length_#{$index} {
-      .calendar__day:first-child(n + #{$index + 1}) {
-        display: none;
-      }
     }
   }
 }
