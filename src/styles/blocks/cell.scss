@@ -1,0 +1,26 @@
+.cell {
+  box-sizing: border-box;
+  display: flex;
+  width: $cell-size;
+  height: $cell-size;
+  background-color: #eee;
+  border: 1px solid black;
+  transition: background-color 0.5s,transform 0.5s;
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      align-self: center;
+      width: $cell-size;
+      font-family: "Arial", serif;
+      font-size: 30px;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
