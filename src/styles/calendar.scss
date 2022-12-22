@@ -26,25 +26,25 @@
       transform: translateY(-20px);
     }
 
-  &:first-child {
-    margin-left: 6 * ($cell-size + $gap-size);
+    &:first-child {
+      margin-left: 6 * ($cell-size + $gap-size);
     }
 
   }
   @for $numday from 1 to 32 {
     &__day:nth-child(n + #{$numday})::before {
-    content: "#{$numday}";
+      content: "#{$numday}";
     }
   }
 
   @each $day, $number in $days {
     &__day--start--#{$day} {
       margin-left: 20px + $number * ($cell-size);
-      }
+    }
   }
 
   @for $lastDay from 28 to 32 {
-    &--month-length:nth-child(n + #{$lastDay}){
+    &--month-length:nth-child(n + #{$lastDay}) {
       display: none;
     }
   }
