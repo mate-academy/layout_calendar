@@ -5,6 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
+  transform: translateY(10%);
 
   &--start-day {
 
@@ -38,12 +39,10 @@
       margin-left: ($cell-size * $count) + ($days-gap * $count);
     }
   }
-
-  &--month-lenth {
-    @for $lastDay from 28 through 31 {
-      &:nth-child(n + #{$lastDay}) {
-        display: none;
-      }
+  
+  @for $date from 28 through 31 {
+    &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
+      display: none;
     }
   }
 
