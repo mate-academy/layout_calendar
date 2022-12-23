@@ -5,6 +5,31 @@
   margin: 0 auto;
   padding: 10px;
   gap: 1px;
+
+  &__cell {
+    box-sizing: border-box;
+    display: flex;
+    width: $cell-size;
+    height: $cell-size;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: background-color 0.5s, transform 0.5s;
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
   
   @each $day, $num in $week {
     &--start-day--#{$day}>:first-child {
