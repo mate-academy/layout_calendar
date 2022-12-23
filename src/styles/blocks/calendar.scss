@@ -1,0 +1,54 @@
+.calendar {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $calendar-gap;
+    width: getMonthWidth(
+      $calendar-gap,
+      $day-width,
+      $month-horizontal-padding);
+    padding: 0 $month-horizontal-padding;
+    margin-top: 20px;
+
+    @for $daysAmount from 28 through 31 {
+      &--length_#{$daysAmount} :nth-child(n + #{$daysAmount + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    @include square($day-width);
+    transition: $transitionTime;
+
+    @for $dayNumber from 1 through $numberOfDays {
+      &:nth-child(#{$dayNumber})::before {
+        content: "#{$dayNumber}";
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $modifierName, $orderNumber in $startDay {
+    &__month--start-day_#{$modifierName} &__day:first-child {
+      margin-left: getDayOfWeek($orderNumber, $day-width, $calendar-gap);
+    }
+  }
+}
