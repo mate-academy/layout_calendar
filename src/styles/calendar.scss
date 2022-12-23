@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $gap-size;
-  padding: 20px;
+  padding: 50px 10px;
 
   &__day {
     width: $cell-size;
@@ -16,7 +16,7 @@
     background-color: #eee;
     border: 1px solid #000;
     border-radius: 10%;
-    transition: (0.5s);
+    transition: color 0.5s, background-color 0.5s, transform 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -26,25 +26,21 @@
       transform: translateY(-20px);
     }
 
-    &:first-child {
-      margin-left: 6 * ($cell-size + $gap-size);
-    }
-
   }
-  @for $numday from 1 to 32 {
+  @for $numday from 1 through 31 {
     &__day:nth-child(n + #{$numday})::before {
       content: "#{$numday}";
     }
   }
 
   @each $day, $number in $days {
-    &__day--start--#{$day} {
-      margin-left: 20px + $number * ($cell-size);
+    &--start-day--#{$day} :first-child {
+      margin-left: ($cell-size * $number) + ($gap-size * $number);
     }
   }
 
-  @for $lastDay from 28 to 32 {
-    &--month-length:nth-child(n + #{$lastDay}) {
+  @for $lastDay from 28 through 31 {
+    &--month-length--#{$lastDay} :nth-child(n + #{$lastDay + 1}) {
       display: none;
     }
   }
