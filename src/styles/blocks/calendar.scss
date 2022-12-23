@@ -1,5 +1,4 @@
 .calendar {
-  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
@@ -8,29 +7,28 @@
   padding: $calendar-padding;
 
   &__day {
-    box-sizing: border-box;
     background-color: #eee;
     border: 1px solid black;
     cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    display: block;
+    line-height: $day-size;
+    text-align: center;
+    transition-duration: 0.5s;
+    transition-property: transform, background-color;
 
     @include square ($day-size);
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 2s;
-      transition-property: transform, background-color;
     }
   }
 
   @for $i from 1 through 31 {
     &__day:nth-child(n + #{$i})::before {
       content: "#{$i}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      display: block;
-      line-height: $day-size;
-      text-align: center;
     }
   }
 
