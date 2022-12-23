@@ -1,0 +1,21 @@
+@import "./utils/variables";
+
+.calendar {
+  width: $cell-size * 7 + 6px;
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @each $weekday, $weekday-number in $week-days {
+    &--start-day--#{$weekday} :first-child {
+      margin-left: #{$weekday-number * 101}px;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}

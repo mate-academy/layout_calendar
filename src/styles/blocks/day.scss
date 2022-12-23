@@ -1,0 +1,26 @@
+.day {
+  position: relative;
+  width: $cell-size;
+  height: $cell-size;
+  background-color: #eee;
+  border: 1px solid #000;
+  transition: color 0.5s, transform 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+
+  @for $i from 1 through $days {
+    &--#{$i}::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      content: "#{$i}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+}
