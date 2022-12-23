@@ -1,13 +1,15 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+
+  margin: 0 auto;
   padding: 100px $padding;
-  width: $week-width;
+  max-width: calendarWidth($gap, $day-width, $padding);
+  gap: $gap;
 
   &__day {
     box-sizing: border-box;
     border: 1px solid black;
-    margin: $gap;
     width: $day-width;
     height: 100px;
     transition: transform 0.5s;
@@ -37,13 +39,13 @@
 
   @each $weekday, $number in $week-days {
     &--start-day--#{$weekday} :first-child {
-      margin-left: $day-width * $number;
+      margin-left: (($day-width + $gap) * $number);
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length:nth-child(#{$i}) {
-      content: none;
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 }
