@@ -11,30 +11,29 @@
   gap: $gap-day;
     
   @each $day, $num in $days {
-     &--first-day--#{$day} &__day:first-child {
-       margin-left: ($size-day + $gap-day) * $num;
+    &--first-day--#{$day} &__day:first-child {
+      margin-left: ($size-day + $gap-day) * $num;
     }
   }
 
   @for $i from 28 through 31 {
-     &--size-#{$i} :nth-child(n + #{$i + 1}) {
-       display: none;
+    &--size-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 
-  .month__day {
-    box-sizing: border-box;
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-    color:black;
+    color: black;
     font-size: 30px;
     width: $size-day;
     height: $size-day;
     background-color: #eee;
     border: 1px solid #000;
     cursor: pointer;
-    transition: 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
       
     &:hover {
       background-color: #ffc0cb;
