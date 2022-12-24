@@ -18,4 +18,34 @@
       display: none;
     }
   }
+
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $i from 1 through $days {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
 }
