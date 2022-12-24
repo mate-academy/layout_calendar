@@ -1,3 +1,65 @@
+@import "./utils/variables";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+@for $index from 1 through 31 {
+  .cal__day--#{$index}::before {
+    content: "#{$index}";
+  }
+}
+
+@for $index from 28 through 31 {
+  .cal--month-length-#{$index} {
+    .cal__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
+
+$start-days: ('mon', 1, 'tue', 2, 'wed', 3, 'thu', 4, 'fri', 5, 'sat', 6, 'sun', 7);
+
+// @each $day, $index in $start-days {
+//   .cal--start-day-#{$day} {
+//     .cal__day:nth-last-child(-n #{$index}) {
+//       margin-left: ($cal-cell-size * (#{$index} - 1)) + 6px;
+//     }
+//   }
+// }
+
+// start-day sat
+.cal__day--1 {
+  order: 0;
+  margin-left: ($cal-cell-size * 6) + 6px;
+}
+
+// start-day sun
+.cal__day--1 {
+  order: 0;
+}
+
+
+.cal {
+  display: flex;
+  flex-flow: row wrap;
+  max-width: $max-width-cal;
+  gap: 1px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $cal-cell-size;
+    width: $cal-cell-size;
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+  }
 }
