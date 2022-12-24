@@ -1,0 +1,51 @@
+@import "./utils/variables";
+
+.calendar {
+  width: $cell-size * 7 + 6px;
+  padding-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @each $weekday, $weekday-number in $week-days {
+    &--start-day--#{$weekday} :first-child {
+      margin-left: #{$weekday-number * 101}px;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $i from 1 through $days {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}
