@@ -38,13 +38,16 @@
     @include dayBlockSquare($size-day-block);
     background-color: #eee;
     border: 1px solid black;
-    transition: 0.5s;
+    transition: background-color $transition-time, transform $transition-time;
 
     @for $day-number from 1 through 31 {
       &:nth-child(#{$day-number})::before {
         content: "#{$day-number}";
-        margin: auto;
       }
+    }
+
+    &::before {
+      margin: auto;
     }
 
     &:hover {
