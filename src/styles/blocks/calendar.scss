@@ -7,16 +7,34 @@
   &__days {
     position: relative;
     @include square($cell-size);
-    background-color: #eee;
-    border: 1px solid black;
   }
 
-  ::before {
-    position: absolute;
-    content: "22";
-    top: 50%;
-    left: 50px;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
+  @for $day from 1 through 31 {
+    &__days:nth-child(#{$day})::before {
+      @extend %number-position;
+      content: "#{$day}";
+    }
   }
+
+  @for $day from 28 through 31 {
+    &__month-lenght--#{$day} &__days:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  $days:
+    0 "mon",
+    1 "tue",
+    2 "wed",
+    3 "thu",
+    4 "fri",
+    5 "sat",
+    6 "sun";
+
+  @each $cols, $day in $days {
+    &__start-day--#{$day} &__days:first-child() {
+      margin-left: $cols * ($cell-size + $cells-gap);
+    }
+  }
+
 }
