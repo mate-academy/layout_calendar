@@ -1,3 +1,70 @@
+$cell-width: 100px;
+$cell-gap: $cell-width * 0.01;
+$days-of-the-week:
+  "--start-day-mon" 0,
+  "--start-day-tue" 1,
+  "--start-day-wed" 2,
+  "--start-day-thu" 3,
+  "--start-day-fri" 4,
+  "--start-day-sat" 5,
+  "--start-day-sun" 6;
+
+@function margin-first-day($cell, $day, $gap) {
+  @return $cell * $day + $gap * $day;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: $cell-gap;
+  flex-wrap: wrap;
+  padding: $cell-width * 0.1;
+  width: $cell-width * 7 + $cell-gap * 6;
+  
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} {
+      & :nth-child(-n + #{$index}) {
+        display: block;
+      }
+    }
+  }
+  
+  @each $day, $number-of-day in $days-of-the-week {
+    &#{$day} :first-child {
+      margin-left: margin-first-day($cell-width, $number-of-day, $cell-gap);
+    }
+  }
+
+  &__day {
+    display: none;
+    width: $cell-width;
+    height: $cell-width;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: $cell-width * 0.01 solid rgb(0, 0, 0);
+    transition-duration: 0.5s;
+    &:nth-child(n) {
+      display: flex;
+      color: black;
+      font-size: $cell-width * 0.3;
+      justify-content: center;
+      align-items: center;
+      height: $cell-width;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-$cell-width * 0.2);
+    }
+  }
 }
