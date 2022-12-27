@@ -9,7 +9,7 @@ body {
 }
 
 @for $index from 1 through 31 {
-  .cal__day--#{$index}::before {
+  .cal__day:nth-child(#{$index})::before {
     content: "#{$index}";
   }
 }
@@ -22,27 +22,40 @@ body {
   }
 }
 
-$start-days: ('mon', 1, 'tue', 2, 'wed', 3, 'thu', 4, 'fri', 5, 'sat', 6, 'sun', 7);
+$start-days: (
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6,
+  "sun": 7,
+);
 
-// @each $day, $index in $start-days {
-//   .cal--start-day-#{$day} {
-//     .cal__day:nth-last-child(-n #{$index}) {
-//       margin-left: ($cal-cell-size * (#{$index} - 1)) + 6px;
-//     }
-//   }
-// }
+// fix little margin offset.!!!!                 IMPORTANT
 
-// start-day sat
-.cal__day--1 {
-  order: 0;
-  margin-left: ($cal-cell-size * 6) + 6px;
+// 1.QAULITY IMPROVEMENT = use &mon on @each first rule
+// 2.MOVE TO SASS STRUCTURE >>>
+
+@each $day, $index in $start-days {
+  .cal--start-day-#{$day} {
+    .cal__day:nth-child(1) {
+      margin-left: ($cal-cell-size * ($index)) + ($index);
+    }
+  }
+
+  .cal--start-day-mon {
+    .cal__day:nth-child(1) {
+      margin-left: $cal-cell-size;
+    }
+  }
+
+  .cal--start-day-sun {
+    .cal__day:nth-child(1) {
+      margin-left: 0;
+    }
+  }
 }
-
-// start-day sun
-.cal__day--1 {
-  order: 0;
-}
-
 
 .cal {
   display: flex;
@@ -59,7 +72,16 @@ $start-days: ('mon', 1, 'tue', 2, 'wed', 3, 'thu', 4, 'fri', 5, 'sat', 6, 'sun',
     height: $cal-cell-size;
     width: $cal-cell-size;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.74);
     text-align: center;
+    border-radius: 2px;
+
+    &:hover {
+      transform: translateY(-20px) scale(1.03);
+      transition: 0.6s;
+      cursor: pointer;
+      background-color: pink;
+      border-radius: 5px;
+    }
   }
 }
