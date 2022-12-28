@@ -1,4 +1,4 @@
-.cal {
+.calendar {
   display: flex;
   flex-flow: row wrap;
   max-width: $max-width-cal;
@@ -16,10 +16,10 @@
     border: 1px solid rgba(0, 0, 0, 0.74);
     text-align: center;
     border-radius: 4px;
+    transition: transform 0.5s ease-in;
 
     &:hover {
       transform: translateY(-20px) scale(1.03);
-      transition: 0.6s;
       cursor: pointer;
       background-color: pink;
       border-radius: 8px;
@@ -34,7 +34,7 @@
 
   @for $index from 28 through 31 {
     &--month-length-#{$index} {
-      .cal__day:nth-child(n + #{$index + 1}) {
+      .calendar__day:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
@@ -43,19 +43,19 @@
   @each $day, $index in $start-days {
     & {
       &--start-day-#{$day} {
-        .cal__day:nth-child(1) {
+        .calendar__day:nth-child(1) {
           margin-left: ($cal-cell-size * ($index)) + ($index);
         }
       }
 
       &--start-day-mon {
-        .cal__day:nth-child(1) {
+        .calendar__day:nth-child(1) {
           margin-left: $cal-cell-size + 1px;
         }
       }
 
       &--start-day-sun {
-        .cal__day:nth-child(1) {
+        .calendar__day:nth-child(1) {
           margin-left: 0;
         }
       }
