@@ -14,7 +14,7 @@
     justify-content: center;
     background-color: #eee;
     border: 1px solid #000;
-    transition: 0.5s;
+    transition: color .5s, transform .5s;
   }
 
   &__cell:hover {
@@ -30,13 +30,13 @@
   }
 
   @each $modifier, $day-number in $days {
-    &--start-day-#{$modifier} &__cell:first-child {
+    &--start-day--#{$modifier} &__cell:first-child {
       margin-left: ($gap + $cell-size) * ($day-number - 1);
     }
   }
 
   @for $number from 28 through $number-of-days {
-    &--month-length-#{$number} &__cell:nth-child(n + #{$number + 1}) {
+    &--month-length--#{$number} &__cell:nth-child(n + #{$number + 1}) {
       display: none;
     }
   }
