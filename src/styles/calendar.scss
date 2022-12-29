@@ -1,38 +1,11 @@
 .calendar {
-  margin: auto;
-  width: $calendar-width;
-  padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
   transform: translateY(10%);
-
-  &--start-day {
-
-    $days:
-      "mon" 0,
-      "tue" 1,
-      "wed" 2,
-      "thu" 3,
-      "fri" 4,
-      "sat" 5,
-      "sun" 6;
-  
-    @each $name, $count in $days {
-      &--#{$name} &__day:first-child {
-        margin-left: ($cell-size * $count) + ($days-gap * $count);
-      }
-    }
-  }
-  
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
+  width: $calendar-width; 
+  margin: auto;
+  padding: 10px;
+  gap: 1px;
 
   @each $name, $count in $days {
     &--start-day--#{$name} &__day:first-child {
@@ -46,17 +19,17 @@
     }
   }
 
-  &__day {
-    display: flex;
-    min-height: $cell-size;
-    min-width: $cell-size;
-    font-family: "Arial", sans-serif;
-    font-size: 30px;
+  &__day {    
     justify-content: center;
     align-items: center;
-    background-color: #eee;
-    border: 1px solid #000;
+    display: flex;
     box-sizing: border-box;
+    min-height: $cell-size;
+    min-width: $cell-size;
+    border: 1px solid #000; 
+    background-color: #eee;
+    font-family: "Arial", sans-serif;
+    font-size: 30px;
 
     @for $numDay from 1 through 31 {
       &:nth-child(n + #{$numDay})::before {
@@ -66,8 +39,8 @@
 
     &:hover {
       transform: translate(0, -20px);
-      background-color: pink;
       transition-duration: 0.5s;
+      background-color: pink;
       cursor: pointer;
     }
 
