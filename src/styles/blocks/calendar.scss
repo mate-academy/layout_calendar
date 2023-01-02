@@ -1,0 +1,30 @@
+@import "../utils/variables.scss";
+@import "../utils/mixin";
+
+.calendar {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  gap: $day-gap;
+  padding: 0 10px;
+  max-width: getWidth($day-size, $row-count, $day-gap);
+  
+  &__day {
+    @include square($day-size);
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #fcabb8;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through $days-number {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
