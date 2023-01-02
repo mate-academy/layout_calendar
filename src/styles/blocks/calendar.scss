@@ -1,0 +1,36 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-day;
+  width: $calendar-width;
+  padding: 100px 0;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $height-day;
+    width: $width-day;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 29 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day, $number in $calendar-week {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: $number * $width-day + $number * $gap-day;
+    }
+  }
+}
