@@ -1,16 +1,29 @@
 @import "../utils/variables.scss";
-@import "../utils/mixin";
+@import "../utils/mixin.scss";
+@import "../utils/funcktions.scss";
 
 .calendar {
+  height: 100vh;
   display: flex;
-  margin: auto;
-  gap: $day-gap;
-  padding: 0 10px;
-  max-width: getWidth($day-size, $row-count, $day-gap);
-  
+  justify-content: center;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    gap: $day-gap;
+    padding: 0 $month-horizontal-padding;
+    max-width: getMonthWidth(
+      $day-size,
+      $row-count,
+      $day-gap,
+      $month-horizontal-padding);
+  }
+ 
   &__day {
     display: flex;
     justify-content: center;
+    align-items: center;
     @include square($day-size);
     background-color: #eee;
     border: 1px solid #000;
@@ -25,6 +38,12 @@
     @for $index from 1 through $days-number {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
+      }
+    }
+
+    @each $dayName, $orderNumber in $start-day {
+      &__month--start-day_#{$dayName} &__day:first-child {
+        margin-left: getDayOfWeek($orderNumber, $day-size, $day-gap);
       }
     }
   }
