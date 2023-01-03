@@ -14,6 +14,13 @@
     }
   }
 
+  @each $day, $column in $week-days {
+    &--start-#{$day} 
+    &__day:first-child {
+      margin-left: $column * ($base-size + $gap-size);
+    }
+  }
+
   &__day {
     background-color: $color-base;
     @include square($base-size);
@@ -23,6 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color $duratine-time, transform $duratine-time;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index}):before {
@@ -30,16 +38,15 @@
       }
     }
 
-    @each $day, $column in $week-days {
-      &--start-#{$day} {
-        margin-left: $column * ($base-size + $gap-size);
-      }
-    }
+    // @each $day, $column in $week-days {
+    //   &--start-#{$day} {
+    //     margin-left: $column * ($base-size + $gap-size);
+    //   }
+    // }
 
     &:hover {
       background-color: $color-animation;
       transform: translateY(-20px);
-      transition: background-color $duratine-time, transform $duratine-time;
     }
   }
 }
