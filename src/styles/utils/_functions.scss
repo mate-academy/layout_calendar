@@ -1,0 +1,15 @@
+@import "./variables.scss";
+
+@function getMonthWidth(
+  $day-size,
+  $row-count, 
+  $day-gap, 
+  $month-horizontal-padding) {
+  @return $day-size * $row-count + $day-gap * ($row-count - 1) +
+    2 * $month-horizontal-padding;
+}
+
+@function getDayOfWeek($orderNumber, $day-size, $day-gap) {
+  @return ($orderNumber - 1) * $day-size +
+    ($orderNumber - 1) * $day-gap;
+}
