@@ -1,9 +1,4 @@
-$first-day-position: 6; // 0 - is first column, 6 - the last one
-$gap: 1px;
-$days: 31;
-$day-width: 100px;
-$column: 7;
-$mounth-width: ($day-width * $column) + ($column * $gap - $gap);
+@import 'variables';
 
 * {
   margin: 0;
@@ -43,7 +38,7 @@ $mounth-width: ($day-width * $column) + ($column * $gap - $gap);
   }
 
   @for $index from 1 through $days {
-    .day-#{$index}::before {
+    &__day:nth-child(#{$index}):before {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -60,49 +55,55 @@ $mounth-width: ($day-width * $column) + ($column * $gap - $gap);
   $some-days-sunday: 1, 8, 15, 22, 29;
 
   @each $day in $some-days-monday {
-    .day-#{$day}__start-day--mon {
+    &__day:nth-child(#{$day})--mon {
       display: flex;
     }
   }
 
   @each $day in $some-days-tuesday {
-    .day-#{$day}__start-day--tue {
+    &__day:nth-child(#{$day})--tue {
       display: flex;
     }
   }
 
   @each $day in $some-days-wednesday {
-    .day-#{$day}__start-day--wed {
+    &__day:nth-child(#{$day})--wed {
       display: flex;
     }
   }
 
   @each $day in $some-days-thursday {
-    .day-#{$day}__start-day--thu {
+    &__day:nth-child(#{$day})--thu {
       display: flex;
     }
   }
 
   @each $day in $some-days-friday {
-    .day-#{$day}__start-day--fri {
+    &__day:nth-child(#{$day})--fri {
       display: flex;
     }
   }
 
   @each $day in $some-days-saturday {
-    .day-#{$day}__start-day--sat {
+    &__day:nth-child(#{$day})--sat {
       display: flex;
     }
   }
 
   @each $day in $some-days-sunday {
-    .day-#{$day}__start-day--sun {
+    &__day:nth-child(#{$day})--sun {
       display: flex;
     }
   }
 
   @for $index from 28 through 31 {
-    .day-#{$index}--month-length {
+    &__day:nth-child(#{$index})--month-length {
+      display: flex;
+    }
+  }
+
+  @for $index from 1 through 1 {
+    &__day:nth-child(#{$index})--start-day {
       display: flex;
     }
   }
