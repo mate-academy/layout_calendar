@@ -1,54 +1,44 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calendarWidth($calendar-gap, $day-size, $calendar-padding);
-  gap: $calendar-gap;
-  margin: auto;
-  padding: $calendar-padding;
+  width: ($day-size * 7) + ($gap-size * 6) + ($padding-size * 2);
+  padding: $padding-size;
+  gap: $gap-size;
 
   &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    font-size: 30px;
     background-color: #eee;
     border: 1px solid black;
-    cursor: pointer;
-
-    @include square($day-size);
+    transition: 0.5s transform;
 
     &:hover {
       background-color: pink;
-      transform: translateY(-20px);
-      transition-duration: 0.5s;
+      cursor: pointer;
+      transform: translateY(-20%);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: $i + "";
+      }
     }
   }
 
-  @for $number from 1 through 31 {
-    &__day:nth-child(n + #{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      display: block;
-      line-height: $day-size;
-      text-align: center;
-    }
-  }
-
-  $start-day: "mon" 0,
-    "tue"$day-size +$calendar-gap,
-    "wed"($day-size * 2)+($calendar-gap * 2),
-    "thu"($day-size * 3)+($calendar-gap * 3),
-    "fri"($day-size * 4)+($calendar-gap * 4),
-    "sat"($day-size * 5)+($calendar-gap * 5),
-    "sun"($day-size * 6)+($calendar-gap * 6);
-
-  @each $name,
-    $margin in $start-day {
-    &--start-day--#{$name}>*:first-child {
-      margin-left: $margin;
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &--month-length--#{$index} &__day:nth-child(n + #{$index + 1}) {
+  @for $i from 28 through 30 {
+    &--month-length_#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
+    }
+  }
+
+  @each $day,
+    $i in $days {
+    &--start-day_#{$day} :first-child {
+      margin-left: $i * ($day-size + $gap-size);
     }
   }
 }
