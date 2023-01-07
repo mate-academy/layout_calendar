@@ -1,0 +1,27 @@
+@for $monthLength from 28 through 31 {
+  .calendar__container--month-length-#{$monthLength}
+  .calendar__day:not(:nth-child(-n+#{$monthLength})) {
+    display: none;
+  }
+}
+
+$startDays:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $startDay, $margin-left in $startDays {
+  .calendar__container--start-day-#{$startDay} .calendar__day:nth-child(1) {
+    margin-left: $margin-left;
+  }
+}
+
+@for $dayNumber from 1 through 31 {
+  .day-#{$dayNumber}::before {
+    content: "#{$dayNumber}";
+  }
+}
