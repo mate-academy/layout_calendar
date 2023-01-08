@@ -18,6 +18,13 @@
     background-color: pink;
     transform: translateY(-20px);
   }
+
+  @for $dayNumber from 1 through 31 {
+    &__day:nth-child(#{$dayNumber})::before {
+      content: "#{$dayNumber}";
+    }
+  }
+
 }
 
 .calendar__container {
@@ -31,4 +38,12 @@
   &--top {
     margin-top: $day-size;
   }
+
+  @for $monthLength from 28 through 31 {
+    &--month-length-#{$monthLength}
+    .calendar__day:not(:nth-child(-n+#{$monthLength})) {
+      display: none;
+    }
+  }
 }
+
