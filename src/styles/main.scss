@@ -1,4 +1,4 @@
-@import 'variables';
+@import "./variables";
 
 * {
   margin: 0;
@@ -14,6 +14,14 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: $gap;
+
+  &--start-day {
+    display: flex;
+  }
+
+  &--month-length {
+    display: flex;
+  }
 
   &__day {
     box-sizing: border-box;
@@ -98,12 +106,6 @@
 
   @for $index from 28 through 31 {
     &__day:nth-child(#{$index})--month-length {
-      display: flex;
-    }
-  }
-
-  @for $index from 1 through 1 {
-    &__day:nth-child(#{$index})--start-day {
       display: flex;
     }
   }
