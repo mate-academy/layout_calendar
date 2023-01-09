@@ -9,7 +9,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 31px;
     background-color: grey;
-    transition: background-color 0.5s, transform 0.5s;
+    transition: background-color $trans-dur, transform $trans-dur;
     border: 1px solid black;
     @include daySize();
   }
@@ -40,10 +40,9 @@
   }
 
   @for $monthLength from 28 through 31 {
-    &--month-length-#{$monthLength}
+    &--month-length--#{$monthLength}
     .calendar__day:not(:nth-child(-n+#{$monthLength})) {
       display: none;
     }
   }
 }
-
