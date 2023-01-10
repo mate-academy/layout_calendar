@@ -1,0 +1,26 @@
+@import "./_variables";
+@import "./_cycle";
+@import "./_mixin";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  gap: $gap-backdown;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: $border-size solid $border-color;
+    background-color: $calendar-color;
+    transition: color 0.5s, transform 0.5s;
+    @include square($box-size);
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $calendar-hover-color ;
+    transform: scale(1) translate(+0%, -20px);
+  }
+}
