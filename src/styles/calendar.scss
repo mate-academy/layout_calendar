@@ -1,5 +1,4 @@
 @import "./_variables";
-@import "./_cycle";
 @import "./_mixin";
 
 .calendar {
@@ -14,7 +13,7 @@
     align-items: center;
     border: $border-size solid $border-color;
     background-color: $calendar-color;
-    transition: color 0.5s, transform 0.5s;
+    transition: color $transform-time, transform $transform-time;
     @include square($box-size);
   }
 
@@ -22,5 +21,27 @@
     cursor: pointer;
     background-color: $calendar-hover-color ;
     transform: scale(1) translate(+0%, -20px);
+  }
+
+  
+  @for $index from 1 through 31 {
+    .calendar__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+  
+  @for $lenght from 28 through 31 {
+    &--month-lenght--#{$lenght}
+    .calendar__day:nth-child(n + #{$lenght + 1}) {
+      display: none;
+    }
+  }
+  
+  @each $day, $start in $start-days {
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: ($box-size + $border-size) * $start;
+    }
   }
 }
