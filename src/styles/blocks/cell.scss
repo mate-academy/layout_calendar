@@ -1,0 +1,28 @@
+$square-size: 100px;
+$duration: 500ms;
+
+.cell {
+  width: $square-size;
+  height: $square-size;
+  background-color: #eee;
+  border: 1px solid black;
+  transition: background-color $duration, transform $duration;
+  cursor: pointer;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i}):before {
+      content: $i + "";
+      display: block;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: auto;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
