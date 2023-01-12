@@ -9,29 +9,8 @@
   padding: $calendar-padding;
   gap: $calendar-gap;
 
-  @for $index from 28 through 31 {
-    &--month-length--#{$index} > :nth-child(n+#{$index+1}) {
-      display: none;
-    }
-  }
-
-  &--month-length--28:nth-child(n+3) {
-    background-color: aqua;
-  }
-}
-
-.calendar__day {
-  @include square($cell-size);
-  background-color: #eee;
-  box-sizing: border-box;
-  border: 1px solid black;
-  text-align: center;
-  line-height: $cell-size;
-  transition-property: background-color, transform;
-  transition-duration: 0.5s;
-
   @for $index from 1 through 31 {
-    &--date--#{$index}::before {
+    & > :nth-child(#{$index})::before {
       content: "#{$index}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -47,16 +26,33 @@
     "fri" 4 * ($calendar-gap + $cell-size),
     "sat" 5 * ($calendar-gap + $cell-size),
     "sun" 6 * ($calendar-gap + $cell-size);
-    
+  
   @each $name, $value in $start-day {
-    &--start-day--#{$name} {
+    &--start-day--#{$name} > :first-child {
       margin-left: $value;
     }
   }
 
-  &:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translate(0, -20px);
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} > :nth-child(n+#{$index+1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include square($cell-size);
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid black;
+    text-align: center;
+    line-height: $cell-size;
+    transition-property: background-color, transform;
+    transition-duration: 0.5s;
+  
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
   }
 }
