@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   padding: $calendar-padding;
   gap: $gap;
-  width: $square;
+  width: $calendar-width;
 
   @each $weekday, $number in $weekset {
     &--start-day--#{$weekday} :first-child {
@@ -24,6 +24,7 @@
     height: $height;
     border: $border solid black;
     background-color: $day-color;
+    transition: transform $day-transition-duration;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
@@ -36,9 +37,8 @@
 
     &:hover {
       cursor: pointer;
-      background-color: pink;
       transform: translateY(-20px);
-      transition: transform $day-transition-duration;
+      background-color: pink;
     }
   }
 }
