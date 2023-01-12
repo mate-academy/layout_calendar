@@ -1,0 +1,42 @@
+$days: 
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+$month-length: 28, 29, 30, 31;
+
+.calendar {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 726px;
+  padding: 10px;
+  gap: 1px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @each $day, $margin in $days {
+    &--start-day--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @each $day in $month-length {
+    &--month-length--#{$day} {
+      @for $i from $day + 1 through 32 {
+        .calendar__cell:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
