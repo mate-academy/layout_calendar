@@ -1,4 +1,5 @@
 .calendar {
+  padding-top: 50px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
@@ -24,7 +25,13 @@
     height: $block-size;
     background-color: #eee;
     border: 1px solid black;
-   
+    transition: transform 0.5s ease-in-out 0.1s;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+      
+    }
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
