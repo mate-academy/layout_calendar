@@ -58,9 +58,9 @@
   }
 }
 
-@for $i from 1 to 4 {
-  .calendar--month-length--#{31-$i} {
-    .calendar__item:nth-last-child(-n + #{$i}) {
+@for $last-day from 28 to 31 {
+  .calendar--month-length--#{$last-day} {
+    .calendar__item:nth-child(#{$last-day}) ~ * {
       display: none;
     }
   }
