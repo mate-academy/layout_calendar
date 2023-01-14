@@ -13,8 +13,6 @@
     }
   }
 
-  $day: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
-
   @each $name, $index in $day {
     &__field--start-day--#{$name} >:first-child {
       margin-left: ($width-cell + $gap) * $index;
@@ -25,6 +23,8 @@
     width: $width-cell;
     height: $width-cell;
     box-sizing: border-box;
+    transition: transform 0.5s;
+
     border: 1px solid #000;
     background-color: #eee;
 
@@ -47,7 +47,6 @@
       cursor: pointer;
       transform: translateY(-20px);
       background: pink;
-      transition-duration: 0.5s;
     }
   }
 }
