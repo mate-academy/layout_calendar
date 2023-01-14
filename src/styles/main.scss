@@ -1,11 +1,12 @@
 body {
   margin: 0;
+  padding-top: 10px;
 }
 
-$time: 0.6s;
+$transition-time: 0.6s;
 $wite: #eee;
-$black: #000;
-$pink: #ffb6c1;
+$first-color: #000;
+$hover-color: #ffb6c1;
 
 $days: (
   mon: 0,
@@ -19,7 +20,6 @@ $days: (
 
 .calendar {
   width: 760px;
-  margin: 0 auto;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -44,8 +44,8 @@ $days: (
     width: 100px;
     height: 100px;
     background-color: $wite;
-    border: 1px solid $black;
-    transition: transform $time, background-color $time;
+    border: 1px solid $first-color;
+    transition: transform $transition-time, background-color $transition-time;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -63,7 +63,7 @@ $days: (
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
-      background-color: $pink;
+      background-color: $hover-color;
     }
   }
 }
