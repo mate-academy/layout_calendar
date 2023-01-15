@@ -17,6 +17,7 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     background-color: #eee;
+    transition: all 0.5s linear;
 
     &::before {
       position: absolute;
@@ -33,27 +34,8 @@
 
     &:hover {
       cursor: pointer;
-      animation: background-color 0.5s linear forwards,
-        translate 0.5s linear forwards;
-    }
-
-    @keyframes background-color {
-      0% {
-        background-color: #eee;
-      }
-
-      100% {
-        background-color: #ffbfcb;
-      }
-    }
-    @keyframes translate {
-      0% {
-        transform: translateY(0);
-      }
-
-      100% {
-        transform: translateY(-20px);
-      }
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
     }
   }
 }
@@ -66,10 +48,10 @@
   }
 }
 
-@each $week-day, $margin in $week-days {
-  .calendar--start-day--#{$week-day} {
+@each $w, $m in zip($week-days, $margins) {
+  .calendar--start-day--#{$w} {
     .calendar__item:first-child {
-      margin-left: $margin;
+      margin-left: $m;
     }
   }
 }
