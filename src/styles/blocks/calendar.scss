@@ -1,0 +1,57 @@
+@import "../utils/variables";
+
+.calendar {
+  padding: 20px 10px;
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  max-width: 706px;
+
+  &__item {
+    display: flex;
+    position: relative;
+    width: $item-length;
+    height: $item-length;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    transition: all 0.5s linear;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @for $day from 1 to ($days-amount + 1) {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $last-day from 28 to 31 {
+  .calendar--month-length--#{$last-day} {
+    .calendar__item:nth-child(#{$last-day}) ~ * {
+      display: none;
+    }
+  }
+}
+
+@each $w, $m in zip($week-days, $margins) {
+  .calendar--start-day--#{$w} {
+    .calendar__item:first-child {
+      margin-left: $m;
+    }
+  }
+}
