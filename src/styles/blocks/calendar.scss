@@ -14,6 +14,7 @@
     align-items: center;
     font-size: 30px;
     cursor: pointer;
+    transition: transform 500ms;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -24,7 +25,6 @@
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-      transition: 500ms;
     }
   }
 
@@ -35,8 +35,7 @@
   }
 
   @for $last-day from 28 through 31 {
-    &--month-length_#{$last-day}
-    &__day:nth-child(n + #{$last-day + 1}) {
+    &--month-length_#{$last-day} &__day:nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
