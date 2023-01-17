@@ -38,13 +38,13 @@ body {
   }
 
   @each $day, $num in $week-days {
-    &__day--start-day-#{$day} {
+    &--start-day-#{$day} > div:nth-child(1) {
       margin-left: $num * ($card-square + ($cell-gap * 3)) ;
     }
   }
 
-  @for $index from $month-length through 31 {
-    &__day:nth-child(n + #{$index + 1}) {
+  @for $index from 28 through 31 {
+    &--length-#{$index} > div:nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
