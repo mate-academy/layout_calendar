@@ -3,7 +3,10 @@
   display: flex;
   flex-wrap: wrap;
   width: 7 * $size-day + 12 * $margin + 1px;
-  padding: 50px 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @for $date from 28 through 31 {
     &--month-length--#{$date} :nth-child(n + #{$date + 1}) {
@@ -35,11 +38,11 @@
     width: $size-day;
     height: $size-day;
     border: $border;
+    transition: 500ms;
   }
 
   &__elem:hover {
     transform: translateY(-20px);
-    transition-duration: 500ms;
     background-color: rgb(249, 165, 192);
     cursor: pointer;
   }
