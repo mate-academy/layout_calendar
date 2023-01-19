@@ -1,3 +1,73 @@
+$days: 28;
+$start-day: "sun";
+$cell-size: 100px;
+$gap: 1px;
+$calendar-size: ($cell-size+$gap)*7;
+
+$start-day-num-map: (
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6,
+  "sun": 7
+);
+
+$start-day-num: map-get($start-day-num-map, #{$start-day});
+$prev-day-num: ($start-day-num)-1;
+
+@mixin cell-style {
+  box-sizing: border-box;
+  width: $cell-size;
+  height: $cell-size;
+  background-color: #eee;
+  border: 1px solid #000;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  margin-right: -$gap;
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  &__cell {
+    @include cell-style;
+    margin-right: $gap;
+    margin-bottom: $gap;
+
+    &:nth-child(n+#{$days+1}) {
+      display: none;
+    }
+
+    &:first-child {
+      margin-left: $prev-day-num*($cell-size+$gap);
+    }
+    &::before {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    @for $i from 1 through $days {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      transition: transform 0.5s;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
 }
