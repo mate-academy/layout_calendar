@@ -6,9 +6,9 @@
   padding: $containerPadding;
 
   &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 98px;
     width: $squareSide;
     height: $squareSide;
     border: $border solid black;
@@ -25,14 +25,14 @@
   }
 
   @for $index from 1 through 31 {
-    &__day--#{$index}::before {
+    &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
 
   @each $firstDayName, $numDay in $week {
     &__start_day--#{$firstDayName} &__day:first-child {
-      margin-left: $numDay * ($squareSide + $border * 2 + $gap);
+      margin-left: $squareSide * ($numDay - 1) + ($numDay - 1);
     }
   }
 
