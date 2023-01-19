@@ -1,3 +1,32 @@
+@import "utils/variables";
+@import "utils/helpers";
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  margin: 40px auto;
+  gap: $gap;
+
+  &__day {
+    width: $block-size;
+    height: $block-size;
+    border: $border solid $border-color;
+    background-color: $calendar-block-color;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+
+    &:hover {
+      background-color: $calendar-hover-block-color;
+      transform: translateY(-20px);
+    }
+  }
 }
