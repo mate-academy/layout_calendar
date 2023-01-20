@@ -18,11 +18,14 @@ $start-day-num: map-get($start-day-num-map, #{$start-day});
 $prev-day-num: ($start-day-num)-1;
 
 @mixin cell-style {
-  box-sizing: border-box;
   width: $cell-size;
   height: $cell-size;
   background-color: #eee;
   border: 1px solid #000;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -44,7 +47,8 @@ body {
     @include cell-style;
     margin-right: $gap;
     margin-bottom: $gap;
-
+    cursor: pointer;
+    transition: transform 0.5s;
     &:nth-child(n+#{$days+1}) {
       display: none;
     }
@@ -64,8 +68,6 @@ body {
       }
     }
     &:hover {
-      cursor: pointer;
-      transition: transform 0.5s;
       transform: translateY(-20px);
       background-color: pink;
     }
