@@ -30,7 +30,6 @@
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
-        margin: auto;
       }
     }
   }
@@ -43,11 +42,11 @@
     }
   }
 
-  @each $day in $days {
-    &--start-day--#{$day} &__day:first-child {
-      margin-left: $start-margin;
+  @each $day, $days in $days {
+    &--start-day--#{$day} {
+      .calendar__day {
+        margin-left: $days;
+      }
     }
-
-    $start-margin: $start-margin + $block-width + $block-gap;
   }
 }
