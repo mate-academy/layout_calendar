@@ -14,11 +14,9 @@
     border: 1px solid black;
     cursor: pointer;
 
-    @for $day-number from 1 to 32 {
-      &--#{$day-number}::before {
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
         content: "#{$day-number}";
-        font-family: "Arial", sans-serif;
-        font-size: 30px;
       }
     }
 
@@ -37,7 +35,7 @@
     sun 7;
 
   @each $day,
-  $position in $days {
+    $position in $days {
     &--start-day--#{$day}>&__day:first-child {
       margin-left: getFirstDayShift($gap, $position, $day-size);
     }
