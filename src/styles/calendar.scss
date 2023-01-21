@@ -12,6 +12,7 @@
     box-sizing: border-box;
     border: 1px solid #000;
     background-color: #{$background-numbers};
+    transition: all 0.5s;
   }
 
   &__day::before {
@@ -26,7 +27,6 @@
     cursor: pointer;
     background-color: #ffc0cb;
     transform: translateY(-20px);
-    transition: background-color 0.5s, transform 0.5s;
   }
 
   @for $i from 1 through 31 {
@@ -34,15 +34,6 @@
       content: "#{$i}";
     }
   }
-
-  $days-of-the-week:
-    "mon" 1,
-    "tue" 2,
-    "wed" 3,
-    "thu" 4,
-    "fri" 5,
-    "sat" 6,
-    "sun" 7;
 
   @each $name, $index in $days-of-the-week {
     &--start-day--#{$name}:first-child {
