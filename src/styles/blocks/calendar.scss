@@ -1,0 +1,51 @@
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: getWidth($count-col,$interval-col,$size-col,$flex-padding );
+  padding: 10px;
+  @extend %large-text;
+
+  &__day {
+
+    @include square($size-col);
+    display: flex;
+    box-sizing: border-box;
+    border: 1px black solid;
+    background-color: #eee;
+    justify-content: center;
+    align-items: center;
+
+    transition: background-color 1s, transform 0.5s;
+
+    &:hover {
+      background-color: #ffc2cc;
+      transform: translate(0, -20%);
+    }
+  }
+
+  @for $countDay from 1 through 31 {
+    &__day:nth-child(#{$countDay})::before {
+      content: "#{$countDay}";
+    }
+    &--lenght--#{$countDay} .calendar__day:nth-child(n + #{$countDay + 1}) {
+      display: none;
+    }
+  }
+
+  $weekDays:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  @each $name, $value in $weekDays {
+    &--start--#{$name} :first-child {
+      margin-left: ($interval-col + $size-col)*($value - 1);
+    }
+  }
+}
