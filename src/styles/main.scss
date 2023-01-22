@@ -1,4 +1,4 @@
-$days: 28;
+$days: 31;
 $start-day: "sun";
 $cell-size: 100px;
 $gap: 1px;
@@ -49,10 +49,6 @@ body {
     margin-bottom: $gap;
     cursor: pointer;
     transition: transform 0.5s;
-    &:nth-child(n+#{$days+1}) {
-      display: none;
-    }
-
     &:first-child {
       margin-left: $prev-day-num*($cell-size+$gap);
     }
@@ -70,6 +66,14 @@ body {
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length_#{$i} {
+    .calendar__cell:nth-child(n+#{$i+1}) {
+      display: none;
     }
   }
 }
