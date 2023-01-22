@@ -4,15 +4,31 @@ $cell-size: 100px;
 $gap: 1px;
 $calendar-size: ($cell-size+$gap)*7;
 
+@for $i from 28 through 31 {
+  .calendar--month-length_#{$i} {
+    .calendar__cell:nth-child(n+#{$i+1}) {
+      display: none;
+    }
+  }
+}
+
 $start-day-num-map: (
-  "mon": 1,
-  "tue": 2,
-  "wed": 3,
-  "thu": 4,
-  "fri": 5,
-  "sat": 6,
-  "sun": 7
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
 );
+
+@each $day, $num in $start-day-num-map {
+  .calendar--start-day_#{$day} {
+    .calendar__cell:first-child {
+      margin-left: $num*($cell-size+$gap);
+    }
+  }
+}
 
 $start-day-num: map-get($start-day-num-map, #{$start-day});
 $prev-day-num: ($start-day-num)-1;
@@ -49,9 +65,6 @@ body {
     margin-bottom: $gap;
     cursor: pointer;
     transition: transform 0.5s;
-    &:first-child {
-      margin-left: $prev-day-num*($cell-size+$gap);
-    }
     &::before {
       height: 100%;
       display: flex;
@@ -66,14 +79,6 @@ body {
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-    }
-  }
-}
-
-@for $i from 28 through 31 {
-  .calendar--month-length_#{$i} {
-    .calendar__cell:nth-child(n+#{$i+1}) {
-      display: none;
     }
   }
 }
