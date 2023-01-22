@@ -1,5 +1,3 @@
-$days: 31;
-$start-day: "sun";
 $cell-size: 100px;
 $gap: 1px;
 $calendar-size: ($cell-size+$gap)*7;
@@ -29,9 +27,6 @@ $start-day-num-map: (
     }
   }
 }
-
-$start-day-num: map-get($start-day-num-map, #{$start-day});
-$prev-day-num: ($start-day-num)-1;
 
 @mixin cell-style {
   width: $cell-size;
@@ -71,7 +66,7 @@ body {
       justify-content: center;
       align-items: center;
     }
-    @for $i from 1 through $days {
+    @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
