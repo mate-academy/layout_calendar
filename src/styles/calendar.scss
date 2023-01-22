@@ -1,59 +1,50 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: 726px;
-  margin: 0 auto;
-  padding: 10px;
+  gap: $gap-cell;
+  padding: $padding-cell;
+  max-width: getWidth(
+    $cell-size,
+    $gap-cell,
+    $padding-cell,
+    $row-cell
+  );
+
+  @for $day from 28 through 31 {
+    &--month-length--#{$day}
+    &__day:nth-child(#{$day})
+    ~ &__day {
+      display: none;
+    }
+  }
+
+  @each $day-name, $day-number in $week {
+    &--start-day--#{$day-name}
+    &__day:first-child {
+      margin-left: ($cell-size * $day-number) + ($gap-cell * $day-number);
+    }
+  }
 
   &__day {
-    background-color: #808080;
-    height: 99px;
-    width: 99px;
-    border: 1px solid;
-    position: relative;
+    @include cell-day ($cell-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s, background-color 0.5s;
+    cursor: pointer;
 
     &:hover {
-      transform: translate(0, -20px);
-      transition-duration: 500ms;
-      cursor: pointer;
+      transform: translateY(-20px);
       background-color: #ffc0cb;
     }
-  }
 
-  @for $day from 1 through 31 {
-    &__day:nth-child(#{$day})::before {
-      content: "#{$day}";
-      display: flex;
-      font-size: 30px;
-      line-height: 100px;
-      justify-content: center;
-      transform: translate(-50%, -50%);
-      top: 50%;
-      left: 50%;
-      font-family: Arial, sans-serif;
-      position: absolute;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
     }
-  }
-}
-
-@for $days from 28 through 31 {
-  &__month-lenght--#{$days} &__day:nth-child(n + #{$days}) {
-    display: none;
-  }
-}
-
-$week: 0 "mon",
-  1 "tue",
-  2 "wed",
-  3 "thu",
-  4 "fri",
-  5 "sat",
-  6 "sun";
-
-@each $name-day,
-  $margin-left in $week {
-  .calendar__start-day--#{$name-day}>:first-child {
-    margin-left: $margin-left;
   }
 }
