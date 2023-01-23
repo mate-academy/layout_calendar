@@ -1,0 +1,48 @@
+.calendar {
+  padding-top: 100px;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 1px;
+    width: getWidth($calendar-day, $calendar-width, $calendar-padding);
+
+    @each $name, $value in $weekDays {
+      &--start-day_#{$name} :first-child {
+        margin-left: ($calendar-width + 1) * ($value - 1);
+      }
+    }
+
+    @for $lastDay from 28 through 31 {
+      &--month-lenght_#{$lastDay} :nth-child(n + #{$lastDay+1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @extend %style-number;
+    @include square($day-size);
+    @for $index from 1 through 31 {
+      &::before {
+        content: counter(myIndex);
+      }
+    }
+
+    background-color: #eee;
+    list-style: none;
+    border: 1px solid #000;
+    counter-increment: myIndex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+  }
+}
