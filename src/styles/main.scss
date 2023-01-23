@@ -1,3 +1,75 @@
+$cell-size: 100px;
+$month-length: 29;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  position: relative;
+  width: 7 * $cell-size + 26px ;
+  padding: 10px;
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+
+  }
+
+  &__cell {
+    @include square($cell-size);
+
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid black;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: $cell-size;
+
+    visibility: hidden;
+  }
+
+  &__cell:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+
+  @for $index from 1 through $month-length {
+    &__cell:nth-child(#{$index}):before {
+      content: "#{$index}";
+      visibility: visible;
+    }
+    &__cell:nth-child(#{$index}) {
+      content: "#{$index}";
+      visibility: visible;
+    }
+  }
+
+  $days:
+    "mon" "0",
+    "tue" "#{1 * $cell-size + 1px}",
+    "wed" "#{2 * $cell-size + 2px}",
+    "thu" "#{3 * $cell-size + 3px}",
+    "fri" "#{4 * $cell-size + 4px}",
+    "sat" "#{5 * $cell-size + 5px}",
+    "sun" "#{6 * $cell-size + 6px}";
+
+  @each $start-day, $margin in $days {
+    &__cell--start-day--#{$start-day} {
+      margin-left: #{$margin} ;
+    }
+  }
 }
