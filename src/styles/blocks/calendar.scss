@@ -1,23 +1,20 @@
 .calendar {
   padding-top: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  gap: 1px;
+  width: getWidth($calendar-day, $calendar-width, $calendar-padding);
 
-  &__month {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    gap: 1px;
-    width: getWidth($calendar-day, $calendar-width, $calendar-padding);
-
-    @each $name, $value in $weekDays {
-      &--start-day_#{$name} :first-child {
-        margin-left: ($calendar-width + 1) * ($value - 1);
-      }
+  @each $name, $value in $weekDays {
+    &--start-day--#{$name} :first-child {
+      margin-left: ($calendar-width + 1) * ($value - 1);
     }
+  }
 
-    @for $lastDay from 28 through 31 {
-      &--month-lenght_#{$lastDay} :nth-child(n + #{$lastDay+1}) {
-        display: none;
-      }
+  @for $lastDay from 28 through 31 {
+    &--month-lenght--#{$lastDay} :nth-child(n + #{$lastDay+1}) {
+      display: none;
     }
   }
 
@@ -37,10 +34,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition-duration: 0.5s;
+    transition-property: color, transform;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
     }
