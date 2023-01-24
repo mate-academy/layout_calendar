@@ -1,5 +1,4 @@
 $cell-size: 100px;
-$month-length: 29;
 
 @mixin square($size) {
   width: $size;
@@ -15,16 +14,12 @@ body {
 }
 
 .calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
   position: relative;
   width: 7 * $cell-size + 26px ;
   padding: 10px;
-
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-
-  }
 
   &__cell {
     @include square($cell-size);
@@ -36,8 +31,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     line-height: $cell-size;
-
-    visibility: hidden;
   }
 
   &__cell:hover {
@@ -47,14 +40,17 @@ body {
     transition-duration: 0.5s;
   }
 
-  @for $index from 1 through $month-length {
+  @for $index from 1 through 31 {
     &__cell:nth-child(#{$index}):before {
       content: "#{$index}";
-      visibility: visible;
     }
-    &__cell:nth-child(#{$index}) {
-      content: "#{$index}";
-      visibility: visible;
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      .calendar__cell:nth-child(n + #{$index + 1}) {
+        visibility: hidden;
+      }
     }
   }
 
