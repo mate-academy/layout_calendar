@@ -1,3 +1,62 @@
+@import "./utils/variables";
+
 body {
   margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $box-gap;
+  padding: $calendar-paddings;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: $box-width;
+    height: $box-height;
+    border: 1px solid $border-color;
+
+    background-color: $background-color;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      translate: 0 -25%;
+      // transform-origin: 20px;
+      background-color: pink;
+    }
+  }
+
+  @each $day, $value in $week-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $date from 1 through $days-in-month {
+    &__day:nth-child(#{$date})::before {
+      content: "#{$date}";
+    }
+  }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i+1}) {
+      display: none;
+    }
+  }
 }
