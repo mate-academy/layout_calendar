@@ -1,0 +1,37 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 711px;
+  gap: 1px;
+  perspective: 400px;
+
+  &__day-1--start-day {
+    margin-left: 609px;
+  }
+
+  @for $month-length from 1 through 31 {
+    &__day-#{$month-length}::before {
+      position: absolute;
+      content: "#{$month-length}";
+      font-family: Arial, sans-serif;
+      font-size: 32px;
+    }
+
+    &__day-#{$month-length} {
+      position: relative;
+      @include square($day-size);
+      background-color: #eee;
+      border: 1px solid black;
+      cursor: pointer;
+      transition: 500ms 50ms;
+    }
+
+    &__day-#{$month-length}:hover {
+      background-color: pink;
+      box-shadow: 0  10px gray;
+      transform: translateY(-20px);
+    }
+  }
+}
