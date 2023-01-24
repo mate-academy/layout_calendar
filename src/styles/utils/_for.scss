@@ -1,0 +1,13 @@
+@for $index from 1 through 31 {
+  .square:nth-child(#{$index})::before {
+    content: "#{$index}";
+    margin: auto;
+    font-size: 30px;
+  }
+}
+
+@for $index from 28 through 30 {
+  .calendar--month-length--#{$index} > :nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
