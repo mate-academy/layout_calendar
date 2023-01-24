@@ -1,6 +1,7 @@
 .calendar {
   display: flex;
   flex-flow: row wrap;
+  margin: 0 auto;
   padding: 0 10px;
   gap: 1px;
   width: $week-lenth * $cell-size + ($week-lenth - 1);
@@ -13,6 +14,14 @@
     }
   }
 
+  @each $name, $day-revers in $days {
+    &--start-day--#{$name} &__day:first-of-type {
+      margin-left: ($week-lenth - $day-revers) *
+        $cell-size +
+        ($week-lenth - $day-revers);
+    }
+  }
+
   &__day {
     @include square ($cell-size);
     display: flex;
@@ -21,24 +30,9 @@
     align-items: center;
     background-color: #eee;
     border: 1px solid #000;
-    transition-duration: 0.5s;
-
-    $days:
-      "mon" 7,
-      "tue" 6,
-      "wed" 5,
-      "thu" 4,
-      "fri" 3,
-      "sat" 2,
-      "sun" 1;
-
-    @each $name, $day-revers in $days {
-      &--start-day--#{$name} {
-        margin-left: ($week-lenth - $day-revers) *
-          $cell-size +
-          ($week-lenth - $day-revers);
-      }
-    }
+    cursor: pointer;
+    transition-duration: 0.5s, 0.5s;
+    transition-property: background-color, transform;
 
     @for $index from 1 through $month-lenth {
       &:nth-of-type(#{$index})::before {
@@ -49,7 +43,6 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
