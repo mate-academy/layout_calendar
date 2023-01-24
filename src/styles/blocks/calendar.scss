@@ -1,0 +1,71 @@
+.calendar {
+  max-width: max-width($week, $day-size, $day-shift);
+  display: flex;
+  flex-wrap: wrap;
+
+  &__day {
+    @include square($day-size);
+    box-sizing: border-box;
+    background-color: $main-color;
+    border: 1px solid black;
+    text-align: center;
+    position: relative;
+    transition: color 0.5s, transform 0.5s;
+    @include square-shift($day-shift);
+
+    &:hover {
+      background-color: $secondary-color;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: all 0.5s ease-in-out;
+    }
+
+    @for $index from 1 through $month-length {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  $days:
+  'mon' 1,
+  'tue' 2,
+  'wed' 3,
+  'thu' 4,
+  'fri' 5,
+  'sat' 6,
+  'sun' 7;
+
+  @each $day, $day-numb in $days {
+    &--start-day-#{$day} &__day:first-child{
+      margin-left: ($day-numb - 1) * ($day-size + $day-shift);
+    }
+  }
+
+  @for $index from 29 through $month-length {
+    &__day:nth-child(#{$index}) {
+      display: none;
+    }
+  }
+
+  $days-amount:
+  28,
+  29,
+  30,
+  31;
+
+  @each $days in $days-amount {
+    @for $index from 28 through $days {
+      &--month-length-#{$days} &__day:nth-child(#{$index}) {
+        display: initial;
+      }
+    }
+  }
+}
