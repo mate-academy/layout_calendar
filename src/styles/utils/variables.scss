@@ -1,0 +1,26 @@
+$day-size: 100px;
+$calendar-padding: 10px;
+$day-color: #eee;
+$gap: 1px;
+
+$days: mon 1,
+  tue 2,
+  wed 3,
+  thu 4,
+  fri 5,
+  sat 6,
+  sun 7;
+
+@each $day,$count in $days {
+  .calendar__day--start-day--#{$day} :first-child {
+    margin-left: $count*($day-size+$gap);
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--#{$i} {
+    .calendar__day:nth-child(n + #{$i+1}) {
+      display: none;
+    }
+  }
+}
