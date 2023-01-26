@@ -1,32 +1,43 @@
 .calendar {
-  gap: $gap-distance-between-blocks;
+  gap: $distance-between-blocks;
   display: flex;
   flex-wrap: wrap;
-  width: calculate-container-size($day-block-size, $gap-distance-between-blocks);
+  width: calculate-container-size($cell-size, $distance-between-blocks);
 
   &__day {
     display: flex;
     box-sizing: border-box;
-    @include square($day-block-size);
+    @include square($cell-size);
     border: 1px solid black;
     background-color: #eee;
     justify-content: center;
     align-items: center;
   }
 
-  &__day:first-child {
-    margin-left: calculate-container-size($day-block-size, $gap-distance-between-blocks) - $day-block-size;
+  @for $day-number from 1 through $days {
+    &__day:nth-child(n + #{$day-number})::before {
+      content: "#{$day-number}";
+    }
   }
 
   &__day:hover {
     cursor: pointer;
     background-color: pink;
   }
+}
 
-  @for $day-number from 1 through 31 {
+@each $day, $number in $start-day {
+  .calendar__start-day--#{$day} {
+   .calendar__day:first-child  {
+    margin-left: $cell-size * $number  + ($number * $distance-between-blocks);
+   }
+  }
+}
 
-    &__day--#{$day-number}::before {
-      content: "#{$day-number}";
+@for $days-amount from 28 through 31 {
+  .calendar__days--#{$days-amount} {
+    .calendar__day:nth-child(n + #{$days-amount + 1}) {
+      display: none;
     }
   }
 }
