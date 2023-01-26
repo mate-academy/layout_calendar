@@ -7,31 +7,40 @@
   gap: 1px;
   perspective: 400px;
 
-  &__day-1--start-day {
+  &__day:first-child {
     margin-left: 609px;
   }
 
-  @for $month-length from 1 through 31 {
-    &__day-#{$month-length}::before {
-      position: absolute;
-      content: "#{$month-length}";
-      font-family: Arial, sans-serif;
-      font-size: 32px;
-    }
-
-    &__day-#{$month-length} {
-      position: relative;
+  @for $index-day from 1 through 31 {
+    &__day:nth-child(n + #{$index-day}) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       @include square($day-size);
       background-color: #eee;
       border: 1px solid black;
       cursor: pointer;
       transition: 500ms 50ms;
     }
+  }
 
-    &__day-#{$month-length}:hover {
-      background-color: pink;
-      box-shadow: 0  10px gray;
-      transform: translateY(-20px);
+  @for $index-day from 1 through 31 {
+    &__day:nth-child(n + #{$index-day})::before {
+      content: "#{$index-day}";
+      font-family: Arial, sans-serif;
+      font-size: 32px;
     }
+  }
+
+  @for $index-day from 25 through 31 {
+    &__day:nth-child(n + #{$index-day}) {
+      display: none;
+    }
+  }
+
+  &__day:hover {
+    background-color: pink;
+    box-shadow: 0  10px gray;
+    transform: translateY(-20px);
   }
 }
