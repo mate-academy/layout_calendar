@@ -1,12 +1,16 @@
-body {
-  margin: 0;
+.container {
+  margin: 0 auto;
 }
 
-.calendar {
+.container__calendar {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+  margin: 0 auto;
+}
+
+.calendar {
   display: flex;
   gap: $distance-between-columns;
   width: ($square-width * $number-of-columns) 
@@ -24,7 +28,8 @@ body {
     @include square($square-width);
     background-color: #eee;
     border: 1px solid black;
-    transition: color 0.5s, transform 0.5s;
+    cursor: pointer;
+    transition: background-color $transition-time, transform $transition-time;
 
     @for $index from 1 through 31 {
       &:nth-of-type(#{$index})::before {
@@ -36,24 +41,23 @@ body {
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
   }
 
   $days:
     "mon" 0,
-    "tue" $square-width+$distance-between-columns,
-    "wed" 2 * ($square-width+$distance-between-columns),
-    "thu" 3 * ($square-width+$distance-between-columns),
-    "fri" 4 * ($square-width+$distance-between-columns),
-    "sat" 5 * ($square-width+$distance-between-columns),
-    "sun" 6 * ($square-width+$distance-between-columns);
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
     
   @each $name, $day in $days {
     &--start-day--#{$name} {
       .calendar__day:first-child {
-        margin-left: #{$day};
+        margin-left: $day * ($square-width+$distance-between-columns);
       }
     }
   }
