@@ -1,0 +1,52 @@
+@use "../utils/extends";
+@use "../utils/variables" as *;
+
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: $month-margin;
+  @extend %centre-flex;
+}
+
+.month {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: $calander-width;
+
+  &__day {
+    @extend %centre-flex;
+    @extend %card-perimeter;
+    background-color: #eee;
+    border: $cell-border solid #000;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: #FFC0CB;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $index from 1 through 31{
+    &__day:nth-child(#{$index}):before {
+      content: '#{$index}';
+      color: #000;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+
+  @each $day, $num in $week-days {
+    &--start-day-#{$day} > div:nth-child(1) {
+      margin-left: $num * ($card-square + ($cell-gap * 3)) ;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--length-#{$index} > div:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
+}
