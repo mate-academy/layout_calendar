@@ -6,28 +6,25 @@
   padding: 0 $calendar__padding;
   gap: $calendar__gap;
 
-  @for $day from 1 to $calendar__month-length {
+  &__day {
+    @include square($calendar__size);
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    transition: transform 1s;
 
-    &__day {
-      @include square($calendar__size);
-      box-sizing: border-box;
-      background-color: #eee;
-      border: 1px solid black;
-      text-align: center;
-      line-height: 100px;
+    &:hover {
+      background-color: #f5c2cb;
+      transform: translateY(-20px);
       cursor: pointer;
-      transition: transform 1s;
+    }
 
-      &:hover {
-        background-color: #f5c2cb;
-        transform: translateY(-20px);
-        cursor: pointer;
-      }
-
-      @for $index from 1 through $calendar__month-length {
-        &:nth-child(#{$index})::before {
-          content: "#{$index}";
-        }
+    @for $index from 1 through $calendar__month-length {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
       }
     }
   }
