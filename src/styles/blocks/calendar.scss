@@ -9,7 +9,8 @@
   &__day {
     @include day-size ($day-size);
     @include flex-decoration ($flex, $center, $center);
-    transition: color 0.5s, transform 0.5s;
+    @include day-decoration;
+    transition: background-color 0.5s, transform 0.5s;
   }
 
   &__day:hover {
@@ -18,28 +19,25 @@
     transform: translate(0, -20px);
   }
 
-  &__day:first-child {
-    margin-left: margin-first-day($day-size, $calendar-count, $gap);
+  @each $name, $day in $days {
+    &--start-day--#{$name} {
+      :first-child {
+        margin-left: ($day-size * $day) + ($gap * $day);
+      }
+    }
   }
 
-  @for $index from 1 through $day-count {
-    &__day--number--#{$index}::before {
+  @for $index from 1 through $day31-length {
+    &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
 
-  $days: 
-    "mon" mon,
-    "tue" tue,
-    "wed" wed,
-    "thu" thu,
-    "fri" fri,
-    "sat" sat,
-    "sun" sun;
-
-  @each $name, $day in $days {
-    &__day--week--#{$name} {
-      @include day-decoration;
+  @for $i from $day28-length through $day31-length {
+    &--month-length--#{$i} {
+      :nth-child(n+#{$i + 1}) {
+        display: none;
+      }
     }
   }
 }
