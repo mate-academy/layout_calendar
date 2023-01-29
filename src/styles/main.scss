@@ -1,3 +1,72 @@
+$square-size: 100px;
+$gap-size: 1px;
+$calendar-padding: 10px;
+
+$days: "mon" 0,
+  "tue"$gap-size + $square-size,
+  "wed" 2 * ($gap-size + $square-size),
+  "thu" 3 * ($gap-size + $square-size),
+  "fri" 4 * ($gap-size + $square-size),
+  "sat" 5 * ($gap-size + $square-size),
+  "sun" 6 * ($gap-size + $square-size);
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+.content {
+  height: 100vh;
+  display: flex;
+  margin: auto;
+}
+
+.calendar {
+  width: (7 * ($square-size + $gap-size)) + (2 * $calendar-padding);
+  margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: flex-start;
+  gap: $gap-size;
+  padding: $calendar-padding;
+
+  &__day {
+    background-color: #eee;
+    width: $square-size;
+    height: $square-size;
+    border: 1px black solid;
+    display: flex;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $i from 1 to 32 {
+      &:nth-of-type(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+        margin: auto;
+      }
+    }
+  }
+
+  @each $day, $distance in $days {
+    &--start-day_#{$day} > &__day:first-of-type {
+      margin-left: $distance;
+    }
+  }
+
+  @each $length in 28, 29, 30, 31 {
+    &--month-length_#{$length}> :not(:nth-child(-n + #{$length})) {
+      visibility: hidden;
+    }
+  }
 }
