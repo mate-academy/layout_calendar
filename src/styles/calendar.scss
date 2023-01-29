@@ -14,6 +14,18 @@
     background-color: #{$background-numbers};
     transition-duration: 0.5s;
     transition-property: background-color transform;
+
+    @each $name, $index in $days-of-the-week {
+      &--start-day--#{$name}:first-child {
+        margin-left: ($day-size + 1px) * $index;
+      }
+    }
+
+    @for $i from 28 through 31 {
+      &--month-length:nth-child(#{$i}) {
+        display: none;
+      }
+    }
   }
 
   &__day::before {
@@ -33,18 +45,6 @@
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: "#{$i}";
-    }
-  }
-
-  @each $name, $index in $days-of-the-week {
-    &--start-day--#{$name}:first-child {
-      margin-left: ($day-size + 1px) * $index;
-    }
-  }
-
-  @for $i from 28 through 31 {
-    &--month-length:nth-child(#{$i}) {
-      display: none;
     }
   }
 }
