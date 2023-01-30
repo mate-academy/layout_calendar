@@ -1,0 +1,18 @@
+@function getCalendarWidth(
+  $day-box-width, $day-boxes-per-row,
+  $calendar-horizontal-padding,
+  $calendar-gap
+) {
+  $width-for-days: $day-box-width * $day-boxes-per-row;
+  $width-for-paddings: $calendar-horizontal-padding * 2;
+  $width-for-gaps: $calendar-gap * ($day-boxes-per-row - 1);
+
+  @return $width-for-days + $width-for-paddings + $width-for-gaps;
+}
+
+@function getDayBoxMarginLeft($day-box-width, $calendar-gap, $day-index) {
+  $width-for-days: $day-box-width * ($day-index - 1);
+  $width-for-gaps: $calendar-gap * ($day-index - 1);
+
+  @return $width-for-days + $width-for-gaps;
+}
