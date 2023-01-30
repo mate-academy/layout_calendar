@@ -16,7 +16,7 @@
     "sun" ($cell-size + $cell-gap) * 6;
 
   @each $day, $margin in $start-day-margin {
-    &.calendar--start-day--#{$day} .cell-1 {
+    &.calendar--start-day--#{$day} .calendar__cell--1 {
       margin-left: $margin;
     }
   }
@@ -41,17 +41,17 @@
 
     transition: 0.5s;
 
-    @for $number from 1 through 31 {
-      &.cell-#{$number}::before {
-        content: "#{$number}";
-      }
-    }
-
     &:hover {
       cursor: pointer;
       transform: translateY(-20px);
 
       background-color: #ffbfcb;
+    }
+
+    @for $number from 1 through 31 {
+      &--#{$number}::before {
+        content: "#{$number}";
+      }
     }
   }
 }
