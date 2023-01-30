@@ -1,7 +1,8 @@
 .calendar {
-  max-width: calcCalendarWidth($day-width-height, $gap);
+  width: calcCalendarWidth($day-width-height, $gap);
   display: flex;
   flex-wrap: wrap;
+  padding: 10px;
 
   &__day {
     @include square($day-width-height);
@@ -21,10 +22,6 @@
     }
 
     @for $day-number from 1 through 31 {
-      &:nth-child(7n) {
-        margin-right: 0;
-      }
-
       &:nth-child(#{$day-number}):after {
         content: "#{$day-number}";
         margin: auto;
@@ -35,14 +32,6 @@
   @each $day-name, $day-num in $starting-day-names {
     &--starting-day-#{$day-name} &__day:first-child {
       margin-left: calcFirstDayMarginLeft($day-width-height, $day-num, $gap);
-    }
-
-    &--starting-day-#{$day-name} &__day:nth-child(7n) {
-      margin-right: $gap;
-    }
-
-    &--starting-day-#{$day-name} &__day:nth-child(7n + calc(7 - #{$day-num})) {
-      margin-right: 0;
     }
   }
 
