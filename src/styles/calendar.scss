@@ -15,12 +15,18 @@
     height: $box-size;
     background-color: #eee;
     border: $cell-border solid black;
-    transition: transform 500ms ease-in-out;
+    transition: transform 500ms, background-color 500ms ease-in-out;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0,-20px);
     }
   }
   
@@ -45,11 +51,5 @@
     &--month-length--#{$data} .calendar__day:nth-child(n + #{$data+1}) {
       display: none;
     }
-  }
-
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translate(0,-20px);
   }
 }
