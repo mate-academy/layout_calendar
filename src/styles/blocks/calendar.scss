@@ -23,22 +23,24 @@ $week-days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3,
 .calendar {
   $block-name: &;
 
-  padding: 0 $calendar-padding-x;
-  max-width: $calendar-width;
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-inner-gap;
 
+  max-width: $calendar-width;
+  padding: 0 $calendar-padding-x;
+
+  list-style: none;
+
   &__cell {
+    @extend %cell-size;
+
     position: relative;
 
     box-sizing: border-box;
     border: 1px solid #000;
-    @extend %cell-size;
 
     background-color: #eee;
-
     transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
@@ -48,12 +50,15 @@ $week-days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3,
     }
 
     &:before {
+      @extend %cell-size;
+
       position: absolute;
       top: 0;
-      @extend %cell-size;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       color: #000;
     }
 
