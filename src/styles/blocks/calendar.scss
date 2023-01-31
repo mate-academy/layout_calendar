@@ -2,8 +2,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  padding: 10px;
   width: container-width($square-size, 7, $sides-paddings);
+  padding: 10px;
 
   @each $day, $day-value in $week-days {
     &--start-day-#{$day} &__day:first-child {
@@ -21,15 +21,12 @@
   &__day {
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
 
-    width: $square-size;
-    height: $square-size;
+    @include square($square-size);
 
-    font-family: "Arial", sans-serif;
     font-size: 30px;
     text-align: center;
 
