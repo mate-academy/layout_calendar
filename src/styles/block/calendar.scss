@@ -4,16 +4,13 @@
   margin: 0 auto;
   margin-top: 100px;
   width: 711px;
-  gap: 1px;
+  gap: $gap-size;
   perspective: 400px;
-
-  &__day:first-child {
-    margin-left: 609px;
-  }
 
   @for $index-day from 1 through 31 {
     &__day:nth-child(n + #{$index-day}) {
       display: flex;
+      box-sizing: border-box;
       justify-content: center;
       align-items: center;
       @include square($day-size);
@@ -32,9 +29,15 @@
     }
   }
 
-  @for $index-day from 28 through 31 {
+  @for $index-day from 3 through 31 {
     &__day:nth-child(n + #{$index-day}) {
       display: none;
+    }
+  }
+
+  @each $day, $index in $weekday {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($day-size + $gap-size) * $index;
     }
   }
 
