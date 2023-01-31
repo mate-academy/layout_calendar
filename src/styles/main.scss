@@ -6,6 +6,11 @@ $listWidth: $listItemWidth * 7 + $gap * 6;
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
 }
 
 .list {
@@ -25,4 +30,20 @@ body {
   flex-direction: row;
   border: solid $gap #000;
   box-sizing: border-box;
+  transition: background-color 0.5s, transform 0.5s;
+  
+  @for $index from 1 through 31 {
+    &--#{$index}::before {
+      content: "#{$index}";
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+      margin: auto;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffc0cb;
+    transform: translateY(-20px);
+  }
 }
