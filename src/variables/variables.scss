@@ -1,14 +1,20 @@
-$block-width: 100px;
-$block-heigth: 100px;
+$block-size: 100px;
 $block-gap: 1px;
+$block-padding: 10px;
 $start-margin: 0;
 $transition-time: 0.5s;
-$calendar-width: 7 * $block-width + 6 * $block-gap;
-$days:
-  "mon" 0,
-  "tue" $block-width + $block-gap,
-  "wen" 2 * ($block-width + $block-gap),
-  "thu" 3 * ($block-width + $block-gap),
-  "fri" 4 * ($block-width + $block-gap),
-  "sat" 5 * ($block-width + $block-gap),
-  "sun" 6 * ($block-width + $block-gap);
+$calendar-width: 7 * $block-size + 6 * $block-gap + 2 * $block-padding;
+
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
+$days-of-week: 
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;

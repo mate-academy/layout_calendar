@@ -1,4 +1,3 @@
-@import "./utils/utils.scss";
 @import "./variables/variables.scss";
 
 .calendar {
@@ -10,14 +9,13 @@
   padding-left: 0;
   padding-top: 30px;
   list-style: none;
+  position: relative;
 
   &__day {
+    @include square($block-size);
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $block-width;
-    height: $block-heigth;
-    box-sizing: border-box;
     border: 1px solid #000;
     background-color: #eee;
     transition: all $transition-time;
@@ -36,18 +34,14 @@
   }
 
   @for $i from 28 through 31 {
-    &--month-length_#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
-        display: none;
-      }
+    &--month-length--#{$i}:nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 
-  @each $day, $days in $days {
-    &--start-day--#{$day} {
-      .calendar__day {
-        margin-left: $days;
-      }
+  @each $day, $i in $days-of-week {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: $block-size * ($i - 1) + $block-gap * ($i - 1);
     }
   }
 }
