@@ -1,19 +1,19 @@
 .calendar {
   display: flex;
-  padding: $ver-paddings $hor-paddings;
-  margin: 0 auto;
-  gap: $gaps;
   width: 7 * $cell-size + 6 * $gaps + 2 * $hor-paddings;
+  margin: 0 auto;
+  padding: $ver-paddings $hor-paddings;
+  gap: $gaps;
   flex-wrap: wrap;
 
   @each $weekDay, $numDay in $weekDays {
-    &--start-day_#{$weekDay} > :first-child {
+    &--start-day--#{$weekDay} > :first-child {
       margin-left: $numDay * ($cell-size + $gaps);
     }
   }
 
   @for $monthLength from 28 through 31 {
-    &--month-length_#{$monthLength} > :nth-child(n + #{$monthLength + 1}) {
+    &--month-length--#{$monthLength} > :nth-child(n + #{$monthLength + 1}) {
       display: none;
     }
   }
@@ -21,10 +21,10 @@
   &__day {
     @include square($cell-size);
     display: flex;
+    flex-shrink: 0;
     justify-content: center;
     justify-items: center;
     line-height: 100px;
-    flex-shrink: 0;
     background-color: #eee;
     border: 1px solid #000;
     transition: all 0.5s;
