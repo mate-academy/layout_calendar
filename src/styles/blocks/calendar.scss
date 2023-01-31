@@ -20,7 +20,7 @@
   }
 
   &__day {
-    @include square;
+    @extend %square;
     border: 1px solid black;
     line-height: 100px;
     text-align: center;
@@ -28,17 +28,17 @@
     background-color: #eee;
 
     transition: transform 0.5s ease, background-color 0.5s ease;
-  }
 
-  @for $dayNumber from 1 through 31 {
-    &__day:nth-child(#{$dayNumber}):before {
-      content: "#{$dayNumber}";
+    @for $dayNumber from 1 through 31 {
+      &:nth-child(#{$dayNumber}):before {
+        content: "#{$dayNumber}";
+      }
     }
-  }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
   }
 }
