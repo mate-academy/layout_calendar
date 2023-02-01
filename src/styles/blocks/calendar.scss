@@ -7,7 +7,6 @@
   max-width: $week-size;
   gap: $gap-between-days;
   padding: $calendar-padding;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
 
   @each $day, $value in $days {
@@ -20,7 +19,7 @@
 
   @for $index from 28 through 31 {
     &--month-length--#{$index} {
-      :nth-child(n + #{$index}) {
+      :nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
@@ -31,7 +30,6 @@
   &__day {
     display: flex;
     align-items: center;
-    box-sizing: border-box;
     justify-content: center;
     @include square($day-cell-size);
     border: 1px black solid;
