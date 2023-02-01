@@ -1,10 +1,15 @@
 @import "../utils/mixins";
 @import "../utils/variables";
 
+.container {
+  padding-top: 20px;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
+  margin: 0 auto;
   padding: $padding-size;
   width: $calendar-size;
 
@@ -42,13 +47,13 @@
     "sun" 606px;
 
   @each $day, $margin in $days {
-    &--start-day_#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: $margin;
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length_#{$index} {
+    &--month-length--#{$index} {
       :nth-child(n + #{$index + 1}) {
         display: none;
       }
