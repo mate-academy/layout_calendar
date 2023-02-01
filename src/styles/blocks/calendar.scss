@@ -16,7 +16,7 @@
     "sun" ($cell-size + $cell-gap) * 6;
 
   @each $day, $margin in $start-day-margin {
-    &--start-day--#{$day} &__cell--1 {
+    &--start-day--#{$day} &__cell:first-child {
       margin-left: $margin;
     }
   }
@@ -49,7 +49,7 @@
     }
 
     @for $number from 1 through 31 {
-      &--#{$number}::before {
+      &:nth-child(#{$number}):before {
         content: "#{$number}";
       }
     }
