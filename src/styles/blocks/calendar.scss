@@ -8,17 +8,17 @@
     display: flex;
     flex-wrap: wrap;
     gap: $day-gap;
-    width: 7 * $day-size + $main-padding + 7 * $day-gap;
+    width: $main-width;
     padding: $main-padding;
 
     @each $day, $number in $days {
-      &--starting-day--#{$day} :nth-child(1) {
+      &--starting-day--#{$day} :first-child {
         margin-left: $number * ($day-gap + $day-size);
       }
     }
 
     @for $num from 28 through 31 {
-      &--month-length--#{$num}>.calendar__day:nth-child(n + #{$num + 1}) {
+      &--month-length--#{$num}>&--calendar__day:nth-child(n + #{$num + 1}) {
         display: none;
       }
     }
@@ -28,7 +28,6 @@
     @include square($day-size);
     border: 1px solid #000;
     background-color: #eee;
-    box-sizing: border-box;
 
     align-items: center;
     text-align: center;
@@ -40,7 +39,6 @@
       cursor: pointer;
       transform: translateY(-20px);
       background-color: pink;
-      border: 1px solid #000;
     }
 
     @for $num from 1 through 31 {
