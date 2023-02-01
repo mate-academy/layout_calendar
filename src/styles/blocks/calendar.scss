@@ -14,7 +14,7 @@
     }
   }
 
-  @for $monthLength from 1 through 31 {
+  @for $monthLength from 1 through $days-count {
     &__month-length--#{$monthLength} > :nth-child(n + #{$monthLength + 1}) {
       display: none;
     }
@@ -31,7 +31,7 @@
 
     transition: transform 0.5s, background-color 0.5s;
 
-    @for $dayNumber from 1 through 31 {
+    @for $dayNumber from 1 through $days-count {
       &:nth-child(#{$dayNumber}):before {
         content: "#{$dayNumber}";
       }
