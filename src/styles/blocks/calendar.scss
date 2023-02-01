@@ -5,9 +5,17 @@
   gap: $cell-gap;
   padding: $calendar-padding;
 
+  $cal: &;
+
   @for $lastDay from 28 through $lastDayOfMonth {
     &--month-length_#{$lastDay} &__cell:nth-child(n + #{$lastDay + 1}) {
       display: none;
+    }
+  }
+
+  @each $day, $num in $daysOfWeek {
+    &--day_#{$day} > :first-child {
+      margin-left: $num * $cell-size + $num;
     }
   }
 
@@ -31,12 +39,6 @@
     &:hover {
       background-color: $transformColor;
       transform: translateY(-20px);
-    }
-
-    @each $day, $num in $daysOfWeek {
-      &--day_#{$day} {
-        margin-left: $num * $cell-size + $num;
-      }
     }
   }
 }
