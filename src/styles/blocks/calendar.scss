@@ -1,0 +1,45 @@
+.calendar {
+  @extend %calendar-styles;
+
+  // Calculating start-day modifier ↓ ↓ ↓
+
+  @each $day, $day-index in $day-order {
+    &--start-day-#{$day} :first-child {
+      margin-left: getStartDayShift(
+        $day-size,
+        $day-index,
+        $calendar-gap
+      );
+    }
+  }
+
+  // Calculating month-length modifier ↓ ↓ ↓
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} :nth-child(
+    n + #{$month-length + 1}
+  ) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @extend %day-styles;
+
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $day-index from 1 to 32 {
+      &--#{$day-index}::before {
+        content: "#{$day-index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      z-index: 1;
+
+      background-color: $day-hover-color;
+      transform: translateY(-20%);
+    }
+  }
+}
