@@ -1,0 +1,23 @@
+.day {
+  @extend %square-geometry;
+  text-align: center;
+  line-height: 100px;
+
+  background-color: #eee;
+  border: 1px solid black;
+
+  transition: transform $trans-time, background-color $trans-time;
+
+  @for $dayNum from 1 through 31 {
+    &:nth-child(#{$dayNum}):before {
+      content: "#{$dayNum}";
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+
+    cursor: pointer;
+  }
+}
