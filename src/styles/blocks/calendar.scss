@@ -8,6 +8,28 @@
   width: 710px;
   gap: $gap-between-days;
 
+  $week-days:
+  "mon" 0,
+  "tues" $box-size + $gap-between-days,
+  "wed" 2 * ($box-size + $gap-between-days),
+  "thurs" 3 * ($box-size + $gap-between-days),
+  "fri" 4 * ($box-size + $gap-between-days),
+  "sat" 5 * ($box-size + $gap-between-days),
+  "sun" 6 * ($box-size + $gap-between-days);
+
+  @each $day, $margin in $week-days {
+    &--day-#{$day} &__day--1 {
+      margin-left: $margin;
+    }
+  }
+
+  @for $num from 28 through 31 {
+    &--day-month-#{$num}
+    &__day:nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     cursor: pointer;
     @include square($box-size);
@@ -23,26 +45,11 @@
       color: yellowgreen;
       transform: translate(0, -20px);
     }
-  }
-}
 
-$week-days:
-  "mon" 0,
-  "tues" $box-size + $gap-between-days,
-  "wed" $box-size * 2 + (2 * $gap-between-days),
-  "thurs" $box-size * 3 + (3 * $gap-between-days),
-  "fri" $box-size * 4 + (4 * $gap-between-days),
-  "sat" $box-size * 5 + (5 * $gap-between-days),
-  "sun" $box-size * 6 + (6 * $gap-between-days);
-
-@each $day-of-the-week, $margin in $week-days {
-  .calendar__day--#{$day-of-the-week} {
-    margin-left: $margin;
-  }
-}
-
-@for $days from 1 through $month-length {
-  .calendar__day--#{$days}::before {
-    content: "#{$days}";
+    @for $days from 1 through $month-length {
+      &--#{$days}::before {
+        content: "#{$days}";
+      }
+    }
   }
 }
