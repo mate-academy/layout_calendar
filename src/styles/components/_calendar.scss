@@ -4,5 +4,16 @@
   gap: $gap;
   width: $calendar-width;
 
-  @include margin-left-of-first-week;
+  @each $day, $place-in-week in $week-days {
+    &--first-day--#{$day} > :first-child {
+      margin-left: ($size + $gap) * $place-in-week;
+    }
+  }
+
+  @for $length-of-month from 28 through 31 {
+    &--month-length--#{$length-of-month} >
+    :nth-child(n + #{$length-of-month + 1}) {
+      display: none;
+    }
+  }
 }

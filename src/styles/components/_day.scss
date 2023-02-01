@@ -8,7 +8,11 @@
 
   transition: transform $trans-time, background-color $trans-time;
 
-  @extend %num-of-day;
+  @for $dayNum from 1 through 31 {
+    &:nth-child(#{$dayNum}):before {
+      content: "#{$dayNum}";
+    }
+  }
 
   &:hover {
     background-color: pink;
