@@ -15,7 +15,10 @@
   $day-index,
   $calendar-gap
 ) {
-  @return
-    ($day-size * ($day-index - 1)) +
-    ($calendar-gap * ($day-index - 1));
+  $total-cells-before: $day-size * ($day-index - 1);
+  $total-gaps: $calendar-gap * ($day-index - 1);
+
+  $margin-left: $total-cells-before + $total-gaps;
+
+  @return $margin-left;
 }
