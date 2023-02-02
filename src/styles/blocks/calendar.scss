@@ -5,33 +5,31 @@
   gap: $cells-gap;
   padding: 30px $padding;
 
-  @for $day from 1 through 31 {
-    $this: &;
-    &--month-length_#{$day} {
-      #{$this}__day {
-        @for $index from 1 through $day {
-          &:nth-child(#{$index}) {
-            display: flex;
-          }
-          &:nth-child(#{$index})::before {
-            content: '#{$index}';
-          }
-        }
+  @for $day from 28 through 31 {
+    &--month-length_#{$day} > :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @for $day-number from 1 through 31 {
+    &__day:nth-child(#{$day-number}) {
+      &::before {
+        content: "#{$day-number}";
       }
     }
   }
 
   @each $week-day,$day-InWeek in $week-days {
     $that: &;
-    &--start-day_#{$week-day}{
-      #{$that}__day:first-child{
+    &--start-day_#{$week-day} {
+      #{$that}__day:first-child {
         margin-left: marginLeft($day-InWeek,$cell-size,$cells-gap);
       }
     }
   }
 
   &__day {
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #eee;
@@ -45,6 +43,4 @@
       transform: translateY(-20px);
     }
   }
-
-
 }
