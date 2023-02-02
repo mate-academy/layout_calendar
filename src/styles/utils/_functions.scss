@@ -1,0 +1,24 @@
+@function getCalendarWidth (
+  $colomns,
+  $padding,
+  $day,
+  $gap
+) {
+  @return
+    ($padding * 2) +
+    ($day * $colomns) +
+    ($gap * ($colomns - 1));
+}
+
+@function getStartDayShift (
+  $day-size,
+  $day-index,
+  $calendar-gap
+) {
+  $total-cells-before: $day-size * ($day-index - 1);
+  $total-gaps: $calendar-gap * ($day-index - 1);
+
+  $margin-left: $total-cells-before + $total-gaps;
+
+  @return $margin-left;
+}

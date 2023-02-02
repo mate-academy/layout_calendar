@@ -1,0 +1,33 @@
+%calendar-styles {
+
+  //Contains all styles for calendar block
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  padding: 50px $calendar-padding;
+  margin: auto;
+
+  width: getCalendarWidth(
+    $colomns-in-a-row,
+    $calendar-padding,
+    $day-size,
+    $calendar-gap
+  );
+}
+
+%day-styles {
+
+  //Contains all styles for day block
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include square($day-size);
+
+  color: $day-number-color;
+  background-color: $day-color;
+  border: 1px solid $day-number-color;
+}
