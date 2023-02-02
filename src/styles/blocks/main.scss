@@ -1,0 +1,43 @@
+.calendar {
+  @extend %flex;
+  flex-wrap: wrap;
+  max-width: getDaysWidth($days-block);
+  padding: 50px 0 50px $block-padding-left;
+  margin: 0 auto;
+  gap: 1px;
+
+  @each $day, $indexCount in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($days-block * $indexCount) + $indexCount;
+    }
+  }
+
+  @for $monthCount from 28 through 31 {
+    &--month-length--#{$monthCount} > :nth-child(n + #{$monthCount + 1}) {
+      display: none;
+    }
+  }
+
+  &__days {
+    box-sizing: border-box;
+    position: relative;
+    @extend %full-flex-pack;
+    @extend %block-pack;
+    background-color: #ebebeb;
+    border: 1px solid #3e3e3e;
+    cursor: pointer;
+    transition: all 0.5s ease;
+
+    @for $startCounter from 1 through 31 {
+      &:nth-child(#{$startCounter})::before {
+        content: "#{$startCounter}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffcfd6;
+    }
+
+  }
+}
