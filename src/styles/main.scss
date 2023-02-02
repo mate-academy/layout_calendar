@@ -1,3 +1,83 @@
+$c-grey: #eee;
+$squareSize: 100px;
+$padding: 10px;
+$gap: 1px;
+$week: 7;
+$weekStartMON: 0;
+$dayNamesLeft: (
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6,
+  "sun": 7
+);
+
+%flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+
+  height: 100vh;
+  @extend %flex-center;
+}
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  padding: 10px;
+
+  width: $week * $squareSize + 2 * $padding + ($week + 1) * $gap;
+
+  &__day {
+    width: $squareSize;
+    height: $squareSize;
+    background-color: $c-grey;
+
+    @extend %flex-center;
+
+    transition: 0.5s linear;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day})::after {
+      content: "#{$day}";
+    }
+  }
+
+  @for $days from 28 through 30 {
+    &--month-length--#{$days} {
+      .month__day:not(:nth-child(-n + #{$days})) {
+        display: none;
+      }
+    }
+  }
+
+  @each $dayName, $left in $dayNamesLeft {
+    &--start-day--#{$dayName} {
+      .month__day:first-child {
+        margin-left: #{($left - $weekStartMON) * ($squareSize + $gap)};
+      }
+    }
+  }
 }
