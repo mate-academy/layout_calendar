@@ -27,7 +27,6 @@
   }
 }
 
-
 @for $index from 1 through 31 {
   .day_day-#{$index}::before {
     content: "#{$index}";
@@ -35,16 +34,17 @@
   }
 }
 
-$days: ("mon": "1", "tue": "2", "wed":"3", "thu": "4", "fri": "5", "sat":"6", "sun":"7");
+$days: ("mon": "1", "tue": "2", "wed":"3", "thu": "4", "fri": "5",
+"sat":"6", "sun":"7");
 
 @each $day, $number in $days {
   .day_start-day_#{$day} {
     margin-left: calc(101px * (#{$number} - 1));
-    }
   }
+}
 
-  @for $length from 28 to 31 {
-     .month-length_#{$length} ~ .day:nth-child(n + #{$length + 1}) {
-      display:none;
+@for $length from 28 to 31 {
+  .month-length_#{$length} ~ .day:nth-child(n + #{$length + 1}) {
+    display: none;
   }
 }
