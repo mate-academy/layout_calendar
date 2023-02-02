@@ -35,17 +35,19 @@
       }
     }
   }
+
   @for $i from 28 through 31 {
     &--month-length-#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
+      .calendar__day:nth-child(n + #{$i+1}) {
         display: none;
       }
     }
   }
-  @each $day, $num in $start-day {
+
+  @each $day, $amountDaysLeft in $start-day {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: (($day-size + 1) * $num);
+        margin-left: (($day-size + 1) * $amountDaysLeft);
       }
     }
   }
