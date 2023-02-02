@@ -1,8 +1,8 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  max-width: calendarWidth($size-day);
+  gap: $gap;
+  max-width: calendarWidth($size-day, $daysInWeek, $gap);
   margin: 0 auto;
   padding: 100px 10px 10px;
 
@@ -10,19 +10,17 @@
     display: flex;
     @include square($size-day);
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-
     border: 1px solid #000;
     background-color: #eee;
 
     cursor: pointer;
+
     transition: background-color, transform;
-    transition-duration: 0.3s;
+    transition-duration: .5s;
+    transition-timing-function: ease-out;
 
     &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
+      @extend %easyIn;
     }
 
     &::before {
@@ -38,7 +36,7 @@
 
   @each $prop, $value in $start-day {
     &--start-day--#{$prop} &__day:first-child {
-      margin-left: monthStartDay($size-day, $value);
+      margin-left: monthStartDay($size-day, $value, $gap);
     }
   }
 
