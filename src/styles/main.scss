@@ -1,57 +1,6 @@
+@import "./utils/reset";
 @import "./utils/variables";
+@import "./utils/functions";
 
-body {
-  display: flex;
-  justify-content: center;
-
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  width: $squareSide * 7 + $gap * 6 + $border * 14;
-  padding: 10px;
-
-  &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: $squareSide;
-    height: $squareSide;
-    border: $border solid black;
-    background-color: #eee;
-    font-family: Arial, sans-serif;
-    font-size: 30px;
-    transition: 0.5s;
-  }
-
-  &__day:hover {
-    background-color: #ffc0cb;
-    transform: translateY(-20px);
-    cursor: pointer;
-  }
-
-  @for $index from 1 through 31 {
-    &__day--#{$index}::before {
-      content: "#{$index}";
-    }
-  }
-
-  @each $firstDayName, $numDay in $week {
-    &__start_day--#{$firstDayName} &__day:first-child {
-      margin-left: $numDay * ($squareSide + $border * 2 + $gap);
-    }
-  }
-
-  @for $monthLength from 28 through 31 {
-    &__month_length--#{$monthLength} {
-      .calendar__day:nth-child(n + #{$monthLength + 1}) {
-        display: none;
-      }
-    }
-  }
-}
+@import "./blocks/container.scss";
+@import "./blocks/calendar.scss";
