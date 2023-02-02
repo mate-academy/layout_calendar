@@ -23,20 +23,21 @@
     }
   }
 
+  // Calculating content inside days ↓ ↓ ↓
+
+  @for $day-index from 1 through 31 {
+    & :nth-child(#{$day-index})::before {
+      content: "#{$day-index}";
+    }
+  }
+
   &__day {
     @extend %day-styles;
 
     transition: transform 0.5s, background-color 0.5s;
 
-    @for $day-index from 1 to 32 {
-      &--#{$day-index}::before {
-        content: "#{$day-index}";
-      }
-    }
-
     &:hover {
       cursor: pointer;
-      z-index: 1;
 
       background-color: $day-hover-color;
       transform: translateY(-20%);
