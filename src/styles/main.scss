@@ -1,41 +1,55 @@
-// #region Reset
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  margin: 0;
-}
-// #endregion Reset
+@import "./utils/reset";
+@import "./utils/variables";
+@import "./utils/functions";
+@import "./utils/mixins";
 
 .calendar {
-  padding: 150px 10px 10px;
-
   display: flex;
-  gap: 1px;
   flex-wrap: wrap;
-  width: 727px; // 7 * 100 + 7 * 1 + 2 * 10px
+  gap: 1px;
+  max-width: calendarWidth($size-day);
   margin: 0 auto;
+  padding: 100px 10px 10px;
 
   &__day {
     display: flex;
+    @include square($size-day);
 
-    width: 100px;
-    height: 100px;
-
-    border: 1px solid #000;
-
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
 
-    background-color: lightgray;
+    border: 1px solid #000;
+    background-color: #eee;
 
-    &::after {
-      content: "1";
+    cursor: pointer;
+    transition: background-color, transform;
+    transition-duration: 0.3s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    &::before {
       margin: auto;
+    }
+
+    @for $numOfDay from 1 through 31 {
+      &:nth-child(#{$numOfDay})::before {
+        content: "#{$numOfDay}";
+      }
+    }
+  }
+
+  @each $prop, $value in $start-day {
+    &--start-day--#{$prop} &__day:first-child {
+      margin-left: monthStartDay($size-day, $value);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 }
