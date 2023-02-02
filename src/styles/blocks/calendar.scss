@@ -2,7 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: containerWidth($squareSide, $gap, $border);
+
+  width: containerWidth($squareSide, $gap, $containerPadding);
+
+  margin: 50px auto;
+  padding: $containerPadding;
 
   &__day {
     display: flex;
@@ -32,7 +36,7 @@
 
   @each $firstDayName, $numDay in $week {
     &__start_day--#{$firstDayName} &__day:first-child {
-      margin-left: $numDay * ($squareSide + $border * 2 + $gap);
+      margin-left: ($squareSide + $gap) * $numDay;
     }
   }
 
