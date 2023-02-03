@@ -1,0 +1,39 @@
+$vertical-margin: calc((100vh - 500px) / 2);
+
+.calendar {
+  margin: $vertical-margin auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 706px;
+  height: 500px;
+
+  &__day {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    background-color: $day-color;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: 100px;
+  }
+
+  @for $index-day from 1 through 31 {
+    &__day:nth-child(n + #{$index-day}):before {
+      content: "#{$index-day}";
+    }
+  }
+
+  @each $day, $index in $day-name {
+    &--weekday--#{$day} &__day:first-child {
+      margin-left: 100px * $index + $index;
+    }
+  }
+
+  @for $month-day from 29 through 31 {
+    &--month--lenth-#{$month-day} &__day:nth-child(n + #{$month-day + 1}) {
+      display: none;
+    }
+  }
+}
