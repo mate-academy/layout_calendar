@@ -1,59 +1,16 @@
 @import "./utils/variables";
 @import "./utils/mixins";
+@import "./blocks/container.scss";
+@import "./blocks/calendar.scss";
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
-}
-
-.c-container {
-  display: flex;
-  justify-content: center;
-  padding-top: 70px;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  width: $calendar-width;
-  padding: 10px;
-
-  @for $i from 28 through 31 {
-    &--month-length--#{$i} :nth-child(n + #{$i+1}) {
-      display: none;
-    }
-  }
-  
-  @each $day, $number in $days-of-weeek {
-    &--start-day--#{$day} :first-child {
-      margin-left: #{($cell-size + $gap) * $number};
-    }
-  }
-
-  &__day {
-    @include square($cell-size);
-    background-color: $cell-color;
-    border: $border solid $border-color;
-    text-align: center;
-    line-height: 100px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    transition-duration: 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $cell-color-active;
-      transform: translateY(-20px);
-    }
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
-      }
-    }
-  }
 }
