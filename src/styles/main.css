@@ -1,13 +1,23 @@
-.day {
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 726px;
+  padding: 30px 10px 10px;
+  margin: 0 auto;
+  gap: 1px;
+}
+
+.calendar__day {
   width: 100px;
   height: 100px;
   background-color: #eee;
   border: solid black 1px;
   cursor: pointer;
   transition: background-color 0.5s, transform 0.5s;
+  position: relative;
 }
 
-.day::before {
+.calendar__day::before {
   content: "";
   position: absolute;
   top: 34px;
@@ -16,207 +26,176 @@
   font-size: 30px;
 }
 
-.day:hover {
+.calendar__day:hover {
   background-color: pink;
   transform: translate(0, -20px);
 }
 
-.day:nth-child(n+10)::before {
+.calendar__day:nth-child(n+10)::before {
   left: 33px;
 }
 
-.day_day-1::before {
+.calendar__day:nth-child(n+1):before {
   content: "1";
-  position: relative;
 }
 
-.day_day-2::before {
+.calendar__day:nth-child(n+2):before {
   content: "2";
-  position: relative;
 }
 
-.day_day-3::before {
+.calendar__day:nth-child(n+3):before {
   content: "3";
-  position: relative;
 }
 
-.day_day-4::before {
+.calendar__day:nth-child(n+4):before {
   content: "4";
-  position: relative;
 }
 
-.day_day-5::before {
+.calendar__day:nth-child(n+5):before {
   content: "5";
-  position: relative;
 }
 
-.day_day-6::before {
+.calendar__day:nth-child(n+6):before {
   content: "6";
-  position: relative;
 }
 
-.day_day-7::before {
+.calendar__day:nth-child(n+7):before {
   content: "7";
-  position: relative;
 }
 
-.day_day-8::before {
+.calendar__day:nth-child(n+8):before {
   content: "8";
-  position: relative;
 }
 
-.day_day-9::before {
+.calendar__day:nth-child(n+9):before {
   content: "9";
-  position: relative;
 }
 
-.day_day-10::before {
+.calendar__day:nth-child(n+10):before {
   content: "10";
-  position: relative;
 }
 
-.day_day-11::before {
+.calendar__day:nth-child(n+11):before {
   content: "11";
-  position: relative;
 }
 
-.day_day-12::before {
+.calendar__day:nth-child(n+12):before {
   content: "12";
-  position: relative;
 }
 
-.day_day-13::before {
+.calendar__day:nth-child(n+13):before {
   content: "13";
-  position: relative;
 }
 
-.day_day-14::before {
+.calendar__day:nth-child(n+14):before {
   content: "14";
-  position: relative;
 }
 
-.day_day-15::before {
+.calendar__day:nth-child(n+15):before {
   content: "15";
-  position: relative;
 }
 
-.day_day-16::before {
+.calendar__day:nth-child(n+16):before {
   content: "16";
-  position: relative;
 }
 
-.day_day-17::before {
+.calendar__day:nth-child(n+17):before {
   content: "17";
-  position: relative;
 }
 
-.day_day-18::before {
+.calendar__day:nth-child(n+18):before {
   content: "18";
-  position: relative;
 }
 
-.day_day-19::before {
+.calendar__day:nth-child(n+19):before {
   content: "19";
-  position: relative;
 }
 
-.day_day-20::before {
+.calendar__day:nth-child(n+20):before {
   content: "20";
-  position: relative;
 }
 
-.day_day-21::before {
+.calendar__day:nth-child(n+21):before {
   content: "21";
-  position: relative;
 }
 
-.day_day-22::before {
+.calendar__day:nth-child(n+22):before {
   content: "22";
-  position: relative;
 }
 
-.day_day-23::before {
+.calendar__day:nth-child(n+23):before {
   content: "23";
-  position: relative;
 }
 
-.day_day-24::before {
+.calendar__day:nth-child(n+24):before {
   content: "24";
-  position: relative;
 }
 
-.day_day-25::before {
+.calendar__day:nth-child(n+25):before {
   content: "25";
-  position: relative;
 }
 
-.day_day-26::before {
+.calendar__day:nth-child(n+26):before {
   content: "26";
-  position: relative;
 }
 
-.day_day-27::before {
+.calendar__day:nth-child(n+27):before {
   content: "27";
-  position: relative;
 }
 
-.day_day-28::before {
+.calendar__day:nth-child(n+28):before {
   content: "28";
-  position: relative;
 }
 
-.day_day-29::before {
+.calendar__day:nth-child(n+29):before {
   content: "29";
-  position: relative;
 }
 
-.day_day-30::before {
+.calendar__day:nth-child(n+30):before {
   content: "30";
-  position: relative;
 }
 
-.day_day-31::before {
+.calendar__day:nth-child(n+31):before {
   content: "31";
-  position: relative;
 }
 
-.day_start-day_mon {
-  margin-left: calc(101px * (1 - 1));
+.calendar--start-day--mon .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 0);
 }
 
-.day_start-day_tue {
-  margin-left: calc(101px * (2 - 1));
+.calendar--start-day--tue .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 1);
 }
 
-.day_start-day_wed {
-  margin-left: calc(101px * (3 - 1));
+.calendar--start-day--wed .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 2);
 }
 
-.day_start-day_thu {
-  margin-left: calc(101px * (4 - 1));
+.calendar--start-day--thu .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 3);
 }
 
-.day_start-day_fri {
-  margin-left: calc(101px * (5 - 1));
+.calendar--start-day--fri .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 4);
 }
 
-.day_start-day_sat {
-  margin-left: calc(101px * (6 - 1));
+.calendar--start-day--sat .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 5);
 }
 
-.day_start-day_sun {
-  margin-left: calc(101px * (7 - 1));
+.calendar--start-day--sun .calendar__day:first-child {
+  margin-left: calc((100px + 1px) * 6);
 }
 
-.month-length_28 ~ .day:nth-child(n+29) {
+.calendar--month-length--28 .calendar__day :nth-child(n+29) {
   display: none;
 }
 
-.month-length_29 ~ .day:nth-child(n+30) {
+.calendar--month-length--29 .calendar__day :nth-child(n+30) {
   display: none;
 }
 
-.month-length_30 ~ .day:nth-child(n+31) {
+.calendar--month-length--30 .calendar__day :nth-child(n+31) {
   display: none;
 }
 
@@ -226,15 +205,6 @@
 
 body {
   margin: 0;
-}
-
-main {
-  display: flex;
-  flex-wrap: wrap;
-  width: 726px;
-  padding: 30px 10px 10px;
-  margin: 0 auto;
-  gap: 1px;
 }
 
 /*# sourceMappingURL=main.css.map */
