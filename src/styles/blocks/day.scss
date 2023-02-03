@@ -1,0 +1,23 @@
+.day {
+  width: $calendar-item-width;
+  height: $calendar-item-height;
+
+  background-color: #eee;
+  border: 1px solid black;
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+}
