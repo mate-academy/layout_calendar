@@ -5,7 +5,7 @@
   top: 50%;
   transform: translateY(-50%);
   margin: auto;
-  width: 710px;
+  width: $box-size * $day-in-week + $gap-between-days * ($day-in-week - 1);
   gap: $gap-between-days;
 
   $week-days:
@@ -18,7 +18,7 @@
     "sun" 6 * ($box-size + $gap-between-days);
 
   @each $day, $margin in $week-days {
-    &--day-#{$day} &__day--1 {
+    &--day-#{$day} &__day:first-child {
       margin-left: $margin;
     }
   }
@@ -38,7 +38,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: background-color $transition-time,
+      color $transition-time,
+      transform $transition-time
+    ;
 
     &:hover {
       background-color: pink;
@@ -47,7 +50,7 @@
     }
 
     @for $days from 1 through $month-length {
-      &--#{$days}::before {
+      &:nth-child(#{$days})::before {
         content: "#{$days}";
       }
     }
