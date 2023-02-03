@@ -1,19 +1,19 @@
 .calendar {
-  max-width: calcCalendarWidth($day-width-height, $gap);
   display: flex;
   flex-wrap: wrap;
   padding: $calendar-paddings;
+  max-width: calcCalendarWidth($day-width-height, $gap);
 
   &__day {
+    display: flex;
+    transition: background-color $transition-duration,
+      transform $transition-duration;
+    margin: 0 $gap $gap 0;
+    border: 1px solid $color-day-border;
     @include square($day-width-height);
     background-color: $color-day-bg;
-    border: 1px solid $color-day-border;
-    display: flex;
-    margin: 0 $gap $gap 0;
     cursor: pointer;
     font: $day-number-font-size "Arial", sans-serif;
-    transition: background-color, transform;
-    transition-duration: $transition-duration;
 
     &:hover {
       background-color: #fcbfcb;
