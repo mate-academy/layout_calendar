@@ -1,8 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-
-  margin: 0 auto;
+  
   padding: 30px;
   gap: $calendar-box-gap;
 
@@ -21,7 +20,7 @@
   }
 
   &__day {
-    @extend %square-box;
+    @include box-size;
 
     text-align: center;
     line-height: 100px;
@@ -29,7 +28,7 @@
     border: 1px solid #000;
     background-color: $calendar-box-color;
 
-    transition: transform 0.5s, background-color 0.5s;
+    transition: transform $transition-time, background-color $transition-time;
 
     @for $dayNumber from 1 through $days-count {
       &:nth-child(#{$dayNumber}):before {
