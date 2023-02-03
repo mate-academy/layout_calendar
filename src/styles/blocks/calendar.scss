@@ -2,19 +2,18 @@
   padding: $calendar-padding;
 
   &__container {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: $week-size;
-  gap: $gap-between-days;
-  padding: $calendar-padding;
-  font-size: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $week-size;
+    gap: $gap-between-days;
+    padding: $calendar-padding;
+    font-size: 30px;
 
-  @each $day, $value in $days {
-    &--start-day--#{$day} :nth-child(1) {
-      margin-left: $value * $width-gap-and-cell;
+    @each $day, $value in $days {
+      &--start-day--#{$day} :first-child {
+        margin-left: $value * $width-gap-and-cell;
+      }
     }
-  }
-
   }
 
   @for $index from 28 through 31 {
@@ -24,8 +23,6 @@
       }
     }
   }
-
-
 
   &__day {
     display: flex;
@@ -48,6 +45,5 @@
         content: "#{$index}";
       }
     }
-
   }
 }
