@@ -1,6 +1,6 @@
+@import "./utils/resets";
 @import "./utils/variables";
 @import "./utils/functions";
-@import "./utils/resets";
 
 body {
   line-height: 100px;
@@ -10,15 +10,23 @@ body {
 }
 
 .calendar {
+  $block: &;
+
   display: flex;
   margin: 150px auto;
   flex-wrap: wrap;
   gap: $gap;
   width: width-calculate($day-size, $gap, $border-size);
 
+  @each $theFirstDay, $numDay in $week {
+    &--start-day--#{$theFirstDay} > :first-child {
+      margin-left: $numDay * ($day-size + $border-size);
+    }
+  }
+
   @for $month-length from 28 through 31 {
     &__month_length--#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 1}) {
+      #{$block}__day:nth-child(n + #{$month-length + 1}) {
         display: none;
       }
     }
@@ -31,7 +39,7 @@ body {
     text-align: center;
     background-color: #eee;
     border: $border-size solid black;
-    transition: all 300ms ease-out;
+    transition: transform 300ms ease-out;
 
     @for $i from 1 through $month-length {
       &:nth-child(#{$i})::before {
@@ -43,12 +51,6 @@ body {
       cursor: pointer;
       background-color: #ffc0cb;
       transform: translateY(-20px);
-    }
-
-    @each $theFirstDay, $numDay in $week {
-      &:first-child {
-        margin-left: 2 * ($day-size + $border-size);
-      }
     }
   }
 }
