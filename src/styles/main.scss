@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 @import "./variables";
 
 body {
@@ -6,18 +10,17 @@ body {
   font-size: 30px;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-day-gap;
-  width: 7 * $calendar-day-width + 16px;
+  width: $days-in-raw * $calendar-day-width + 16px;
+
+  &--container {
+    position: absolute;
+    top: 25%;
+    left: 25%;
+  }
 
   &__day {
     box-sizing: border-box;
@@ -25,7 +28,7 @@ body {
     width: $calendar-day-width;
     border: 1px solid black;
     background-color: #eee;
-    transition: transform 0.3s;
+    transition: background-color, transform 0.3s;
 
     &:hover {
       cursor: pointer;
