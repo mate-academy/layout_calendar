@@ -1,22 +1,29 @@
-$vertical-margin: calc((100vh - 500px) / 2);
+$vertical-margin: calc((100vh - #{$max-hight}) / 2);
 
 .calendar {
   margin: $vertical-margin auto;
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  padding: 20px;
   gap: 1px;
-  width: 706px;
-  height: 500px;
+  width: 746px;
+  height: $max-hight;
 
   &__day {
     text-align: center;
-    width: 100px;
-    height: 100px;
+    @include square ($day-size);
     background-color: $day-color;
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     line-height: 100px;
+    transition-duration: 0.7s;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
   }
 
   @for $index-day from 1 through 31 {
@@ -31,7 +38,7 @@ $vertical-margin: calc((100vh - 500px) / 2);
     }
   }
 
-  @for $month-day from 29 through 31 {
+  @for $month-day from 28 through 31 {
     &--month--lenth-#{$month-day} &__day:nth-child(n + #{$month-day + 1}) {
       display: none;
     }
