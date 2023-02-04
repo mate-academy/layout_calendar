@@ -1,0 +1,51 @@
+@use "../utilis/variables" as *; 
+
+.calendar {
+  display: flex;
+  justify-content: flex-start;
+  width: $width-calendar;
+  flex-wrap: wrap;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: $width-day;
+    height: $height-day;
+    background-color: $background-color-day;
+    border: 1px solid black;
+
+    margin-top: $margin-day;
+    margin-right: $margin-day;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      transition: all 0.5s;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+        font-size: 30px;
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $position in $margin {
+      &--start-day-#{$day} {
+        .calendar__day--1 {
+          margin-left: #{$position};
+        }
+      }
+  }
+}
