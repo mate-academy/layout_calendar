@@ -24,6 +24,7 @@ body {
     cursor: pointer;
     text-align: center;
     padding-top: ($block-width - $size-day) / 2;
+    transition-duration: 0.5s;
 
   }
   @for $index from 1 through 31 {
@@ -31,15 +32,6 @@ body {
       content: "#{$index}";
     }
   }
-
-  $days:
-    0 "mon",
-    1 "tue",
-    2 "wed",
-    3 "thu",
-    4 "fri",
-    5 "sat",
-    6 "sun";
 
   @each $order, $day in $days {
     &--start-day--#{$day}>:first-child {
@@ -49,7 +41,6 @@ body {
   &__day:hover {
     background-color: pink;
     transform: translateY(-20px);
-    transition-duration: 0.5s;
   }
 
   @for $number-days from 28 through 31 {
