@@ -24,11 +24,11 @@
     &:hover {
       background-color: pink;
       transform: translate(0, -20px);
-      transition: all 0.5s;
+      transition: 0.5s;
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         content: "#{$index}";
         font-size: 30px;
       }
@@ -42,10 +42,10 @@
   }
 
   @each $day, $position in $margin {
-      &--start-day-#{$day} {
-        .calendar__day--1 {
-          margin-left: #{$position};
-        }
+    &--start-day-#{$day} {
+      .calendar__day--start {
+        margin-left: #{$position};
       }
+    }
   }
 }
