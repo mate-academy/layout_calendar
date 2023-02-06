@@ -26,21 +26,21 @@
 }
 
 @each $name, $start in $days {
-  .calendar__days--#{$name}{
-  @for $i from 1 through $start {
-    .calendar__day:nth-child(#{$i}) {
-      visibility: visible;
-      display: flex;
+  .calendar__days--#{$name} {
+    @for $i from 1 through $start {
+      .calendar__day:nth-child(#{$i}) {
+        visibility: visible;
+        display: flex;
 
-      &::before {
-        content: "#{$i}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: $block-day-heigth / 3;
-        margin: auto;
+        &::before {
+          content: "#{$i}";
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: $block-day-heigth / 3;
+          margin: auto;
+        }
       }
     }
   }
-}
 }
 
 @each $name, $start in $mon {
