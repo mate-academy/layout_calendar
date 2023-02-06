@@ -4,7 +4,7 @@
   width: #{$calendar-width};
   padding: #{$calendar-padding};
   gap: 1px;
-  margin: 50px auto;
+  // margin: 50px auto;
 
   &__day {
     cursor: pointer;
@@ -14,25 +14,25 @@
     border: 1px solid #000;
     background-color: #{$background-numbers};
     transition-duration: 0.5s;
-    transition-property: background-color transform;
-  }
+    transition-property: background-color, transform;
 
-  &__day::before {
-    display: flex;
-    justify-content: center;
-    line-height: 98px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-style: 30px;
-  }
+    &::before {
+      display: flex;
+      justify-content: center;
+      line-height: 98px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
 
-  &__day:hover {
-    background-color: #ffc0cb;
-    transform: translateY(-20px);
-  }
+    &:hover {
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
     }
   }
 
