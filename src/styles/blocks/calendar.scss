@@ -7,26 +7,26 @@
   transform: translateY(25%);
   width: (7 * $cell-size) + 7*$gap;
   
-  &__field {
+  &-field {
     display: flex;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     gap: $gap;
   
   
     $days:
-      'mon' 1,
-      'tue' 2,
-      'wed' 3,
-      'thu' 4,
-      'fri' 5, 
-      'sat' 6,
-      'sun' 7;
+      "mon" 1,
+      "tue" 2,
+      "wed" 3,
+      "thu" 4,
+      "fri" 5, 
+      "sat" 6,
+      "sun" 7;
   
     @each $day, $value in $days {
       &--start-day--#{$day} :first-child {
         margin-left: ($gap + $cell-size) * ($value - 1);
       }
-    } 
+    }
     
     @for $day from 29 through 30 {
       & :nth-child(n + #{$day + 1}) {
