@@ -24,10 +24,8 @@
   width: calcCalendarWidth($gap, $paddings, $daySize);
 
   @for $index from 28 through $monthLength {
-    &--month-length_#{$index} {
-      .calendar__day:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
+    &--month-length_#{$index} > &__day:nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 
