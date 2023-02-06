@@ -1,0 +1,83 @@
+$cell-width: 100px;
+$cell-height: 100px;
+$calendar-padding: 10px;
+$cell-gap: 1px;
+
+
+.page {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+
+  &__calendar {
+    padding: $calendar-padding;
+  }
+}
+
+.calendar {
+  display: flex;
+  align-self: center;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: 7 * $cell-width + 2 * $calendar-padding + 6 * $cell-gap;
+
+  $last-days:
+    '28' '-n+3',
+    '29' '-n+2',
+    '30' '-n+1',
+    '31' 0;
+
+  @each $number-of-day, $last-childs in $last-days {
+    &--month-lenght--#{$number-of-day} .calendar__day:nth-last-child(#{$last-childs}) {
+      display: none;
+    }
+  }
+  &__day {
+    display: flex;
+    position: relative;
+
+    background-color: #eee;
+    border: 1px solid #000;
+
+    width: $cell-width;
+    height: $cell-height;
+
+    transition: 0.5s linear;
+
+    cursor: pointer;
+
+    @for $index from 1 through 31 {
+      &--current-day--#{$index}::before {
+        content:"#{$index}";
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+      }
+    }
+
+    $days:
+      'mon' 0,
+      'tue' $cell-width + $cell-gap,
+      'wed' 2 * $cell-width + 2 * $cell-gap,
+      'thu' 3 * $cell-width + 3 * $cell-gap,
+      'fri' 4 * $cell-width + 4 * $cell-gap,
+      'sat' 5 * $cell-width + 5 * $cell-gap,
+      'sun' 6 * $cell-width + 6 * $cell-gap;
+
+    @each $start-day, $indentation in $days {
+      &--start-day--#{$start-day} {
+        margin-left: $indentation;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      transition: 0.5s linear;
+    }
+  }
+}
