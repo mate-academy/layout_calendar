@@ -1,3 +1,7 @@
-@function container-width($size, $columns, $sides-paddings) {
-  @return $size * $columns + $sides-paddings * 2;
+@function calendarWidth ($celldWidth, $gaps, $daysInRow, $paddings) {
+  @return ($daysInRow * $celldWidth + $gaps * ($daysInRow - 1) + 2 * $paddings);
+}
+
+@function leftMargin ($celldWidth, $gaps, $number) {
+  @return ($celldWidth + $gaps) * $number;
 }

@@ -1,44 +1,36 @@
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: container-width($square-size, 7, $sides-paddings);
-  padding: 10px;
+  width: calendarWidth($cell-size, $gaps, $daysInRow, $x-paddings);
+  gap: $gaps;
+  padding: $y-paddings $x-paddings;
 
-  @each $day, $day-value in $week-days {
-    &--start-day-#{$day} &__day:first-child {
-      margin-left: ($square-size + $square-gap) * $day-value;
-    }
-  }
-
-  @for $amount from 28 through 31 {
-    &--month-length-#{$amount}
-    &__day:nth-child(n + #{$amount + 1}) {
+  @for $number from 28 through 31 {
+    &--month-length-#{$number}
+    &__day:nth-child(n + #{$number + 1}) {
       display: none;
     }
   }
 
-  &__day {
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
+  @each $day, $number in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: leftMargin($cell-size, $gaps, $number);
+    }
+  }
 
-    @include square($square-size);
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
 
     font-size: 30px;
     text-align: center;
-    background-color: #eee;
-    border: 1px solid #000;
-    transition: transform 0.5s;
+
+    border: 1px solid $c-black;
+    background-color: $c-grey;
+
+    transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -47,7 +39,7 @@
     }
 
     @for $day from 1 through 31 {
-      &:nth-child(#{$day}):before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
     }
