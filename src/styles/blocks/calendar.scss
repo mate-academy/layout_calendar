@@ -1,27 +1,29 @@
 .calendar {
-  padding: 100px 0;
   display: flex;
   flex-wrap: wrap;
+
+  padding: 100px 0;
   width: CalcMaxWidth($columns-number, $calendar-day-width, $calendar-gap);
   gap: $calendar-gap;
-  
-  &--container{
-    margin: auto;
-  }
-  
+
   &__day {
-    box-sizing: border-box;
     @include square($size);
-    background-color: #eee;
-    border: 1px solid black;
-    padding: 0 10px;
+
     display: flex;
-    font-size: 30px;
     justify-content: center;
     align-items: center;
+
+    padding: 0 10px;
+    font-size: 30px;
+
+    background-color: #eee;
+    border: 1px solid black;
+
     transition: transform 0.5s;
+    cursor: pointer;
+
     @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before{
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
@@ -29,20 +31,19 @@
 
   &__day:hover {
     transform: translateY(-20px);
-    cursor: pointer;
     background-color: pink;
   }
-  
+
   @for $monthLength from 28 through 31 {
-    &__month_length--#{$monthLength} {
+    &--month-length--#{$monthLength} {
       .calendar__day:nth-child(n + #{$monthLength + 1}) {
         display: none;
       }
     }
   }
-  
+
   @each $day, $number in $days {
-    &--start_day-#{$day} &__day:first-child {
+    &--start-day-#{$day} &__day:first-child {
       margin-left: CalcMarginLeft($size, $calendar-gap, $number);
     }
   }
