@@ -6,14 +6,14 @@
   padding: $y-paddings $x-paddings;
 
   @for $number from 28 through 31 {
-    &--month-length-#{$number}
+    &--month-length--#{$number}
     &__day:nth-child(n + #{$number + 1}) {
       display: none;
     }
   }
 
   @each $day, $number in $days {
-    &--start-day-#{$day} &__day:first-child {
+    &--start-day--#{$day} &__day:first-child {
       margin-left: leftMargin($cell-size, $gaps, $number);
     }
   }
@@ -30,11 +30,13 @@
     border: 1px solid $c-black;
     background-color: $c-grey;
 
-    transition-duration: 0.5s;
+    cursor: pointer;
+
+    transition: background-color $transition-duration,
+      transform $transition-duration;
 
     &:hover {
-      cursor: pointer;
-      background-color: #efdce6;
+      background-color: $c-pink;
       transform: translateY(-20px);
     }
 
