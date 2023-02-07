@@ -1,68 +1,9 @@
-$count-tag:31;
+@import "./utils/_reset";
 
-$start-day:
-"mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
+@import "./utils/_variables";
 
-@mixin square {
-  width: 100px;
-  height: 100px;
-}
+@import "./utils/_mixins";
 
-body {
-  margin: 0;
-}
+@import "./blocks/body";
 
-.body {
-  display: flex;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
-  width: 707px;
-
-  @each $start-day, $count in $start-day {
-    &--start-day--#{$start-day} :first-child {
-      margin-left: $count * 100px + $count;
-    }
-  }
-
-  @for $tag from 28 through $count-tag {
-    &--month-length--#{$tag} :nth-child(n + #{$tag + 1}) {
-      display: none;
-    }
-  }
-
-  &__day {
-    box-sizing: border-box;
-    transition: all 0.5s ease 0s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @for $index from 1 through $count-tag {
-    &__day--#{$index} {
-      @include square;
-      border: 1px solid black;
-      background-color: #eee;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-
-      &::before {
-        content: "#{$index}";
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: pink;
-        transform: translateY(-20px);
-      }
-    }
-  }
-}
+@import "./blocks/calendar";
