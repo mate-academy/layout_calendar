@@ -1,26 +1,23 @@
 .calendar {
+
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $week-size;
+  gap: $gap-between-days;
   padding: $calendar-padding;
+  font-size: $font-size;
 
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: $week-size;
-    gap: $gap-between-days;
-    padding: $calendar-padding;
-    font-size: 30px;
-
-    @each $day, $value in $days {
-      &--start-day--#{$day} :first-child {
-        margin-left: $value * $width-gap-and-cell;
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} {
+      :nth-child(n + #{$index + 1}) {
+        display: none;
       }
     }
   }
 
-  @for $index from 28 through 31 {
-    &__container--month-length--#{$index} {
-      :nth-child(n + #{$index + 1}) {
-        display: none;
-      }
+  @each $day, $value in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: $value * $width-gap-and-cell;
     }
   }
 
@@ -30,12 +27,12 @@
     justify-content: center;
     @include square($day-cell-size);
     border: 1px black solid;
-    background-color: #eee;
+    background-color: $bgc-of-dates;
     transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
-      background-color: rgb(255, 0, 140);
-      color: rgb(255, 255, 255);
+      background-color: $bgc-hovered-dates;
+      color: $hovered-numbers-color;
       cursor: pointer;
       transform: translateY(-20px);
     }
