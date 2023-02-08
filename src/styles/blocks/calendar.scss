@@ -1,52 +1,52 @@
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  display: flex;
+  flex-wrap: wrap;
   margin: auto;
-  width: $box-size * $day-in-week + $gap-between-days * ($day-in-week - 1);
+  width: $width-calendar;
   gap: $gap-between-days;
+  transform: translateY(-50%);
 
   $week-days:
     "mon" 0,
-    "tues" $box-size + $gap-between-days,
-    "wed" 2 * ($box-size + $gap-between-days),
-    "thurs" 3 * ($box-size + $gap-between-days),
-    "fri" 4 * ($box-size + $gap-between-days),
-    "sat" 5 * ($box-size + $gap-between-days),
-    "sun" 6 * ($box-size + $gap-between-days);
+    "tue" $width-day,
+    "wed" 2 * $width-day,
+    "thu" 3 * $width-day,
+    "fri" 4 * $width-day,
+    "sat" 5 * $width-day,
+    "sun" 6 * $width-day;
 
   @each $day, $margin in $week-days {
-    &--day-#{$day} &__day:first-child {
+    &--start-day--#{$day} &__day:first-child {
       margin-left: $margin;
     }
   }
 
   @for $num from 28 through 31 {
-    &--day-month-#{$num}
+    &--month-length--#{$num}
     &__day:nth-child(n + #{$num + 1}) {
       display: none;
     }
   }
 
   &__day {
-    cursor: pointer;
-    @include square($box-size);
-    background-color: $day-color;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include square($box-size);
+    background-color: $day-color;
+    border: 1px solid black;
+    cursor: pointer;
+
     transition: background-color $transition-time,
       color $transition-time,
       transform $transition-time
     ;
 
     &:hover {
-      background-color: pink;
-      color: yellowgreen;
-      transform: translate(0, -20px);
+      background-color: $day-background-color;
+      transform: translateY(-20px);
     }
 
     @for $days from 1 through $month-length {
