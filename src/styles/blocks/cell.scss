@@ -8,6 +8,7 @@
   width: $calendar-width;
   padding: 20px $calendar-paddings;
   gap: $cell-gap;
+  color: $black-color;
 
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +23,6 @@
   @for $index from 1 through 31 {
     :nth-child(#{$index})::before {
       content: "#{$index}";
-      color: #000;
     }
   }
 
@@ -42,12 +42,12 @@
     height: $cell-size;
 
     background-color: $grey-color;
-    border: 1px solid #000;
-    transition: background-color 0.5s ease, transform 0.5 ease;
+    border: 1px solid $black-color;
+    transition: background-color 0.5s ease, transform 0.5s ease;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
-      background-color: pink;
+      background-color: $pink-color;
       transform: translateY(-20px);
     }
   }
