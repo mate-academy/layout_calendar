@@ -1,13 +1,18 @@
+.content {
+  display: flex;
+  justify-content: center;
+
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: getWidth($cell-size, $gap, $padding);
-  margin: 0 auto;
+  width: getWidth($cell-size, $count-of-cells, $gaps-count, $gap, $padding);
   padding: 20px $padding;
 
   @for $index from 28 through 31 {
-    &--days-#{$index} {
+    &--days--#{$index} {
       .calendar__cell:nth-child(n + #{$index + 1}) {
         display: none;
       }
@@ -15,7 +20,7 @@
   }
 
   @each $name, $num in $week {
-    &--day-of-week-#{$name} {
+    &--day-of-week--#{$name} {
       .calendar__cell:first-child {
         margin-left: (($cell-size + $gap) * $num);
       }
@@ -29,7 +34,7 @@
     @include square($cell-size);
 
     cursor: pointer;
-    transition: all 0.5s;
+    transition: transform 0.5s, background 0.5s;
     background: #eee;
     border: 1px solid #000;
 
