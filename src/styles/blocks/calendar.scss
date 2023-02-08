@@ -8,7 +8,7 @@
   font-size: $font-size;
 
   @for $index from 28 through 31 {
-    &--month-length-#{$index} {
+    &--month-length--#{$index} {
       :nth-child(n + #{$index + 1}) {
         display: none;
       }
@@ -16,7 +16,7 @@
   }
 
   @each $day, $value in $days {
-    &--start-day-#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: $value * $width-gap-and-cell;
     }
   }
@@ -28,7 +28,7 @@
     @include square($day-cell-size);
     border: 1px black solid;
     background-color: $bgc-of-dates;
-    transition: background-color 0.5s, transform 0.5s;
+    transition: background-color $duration-for-transformation, transform $duration-for-transformation, color $duration-for-transformation;
 
     &:hover {
       background-color: $bgc-hovered-dates;
