@@ -1,9 +1,8 @@
 .calendar {
-  position: relative;
+  position: absolute;
   top: 50%;
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
   width: $width-calendar;
   gap: $gap-between-days;
   transform: translateY(-50%);
@@ -23,7 +22,7 @@
     }
   }
 
-  @for $num from 28 through 31 {
+  @for $num from $smallest-month-length through $month-length {
     &--month-length--#{$num}
     &__day:nth-child(n + #{$num + 1}) {
       display: none;
@@ -39,10 +38,7 @@
     border: 1px solid black;
     cursor: pointer;
 
-    transition: background-color $transition-time,
-      color $transition-time,
-      transform $transition-time
-    ;
+    transition: background-color $transition-time, transform $transition-time;
 
     &:hover {
       background-color: $day-background-color;
