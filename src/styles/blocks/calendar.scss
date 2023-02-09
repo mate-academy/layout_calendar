@@ -1,0 +1,52 @@
+.content {
+  display: flex;
+  justify-content: center;
+
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: getWidth($cell-size, $count-of-cells, $gaps-count, $gap, $padding);
+  padding: 20px $padding;
+
+  @for $index from $month-min-days through $month-days {
+    &--days--#{$index} {
+      .calendar__cell:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $name, $num in $week {
+    &--day-of-week--#{$name} {
+      .calendar__cell:first-child {
+        margin-left: (($cell-size + $gap) * $num);
+      }
+    }
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($cell-size);
+
+    cursor: pointer;
+    transition: transform 0.5s, background 0.5s;
+    background: #eee;
+    border: 1px solid #000;
+
+    @for $index from 1 through $month-days {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
