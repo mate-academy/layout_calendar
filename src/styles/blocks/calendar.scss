@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
 
-  margin: 0 auto;
   width: ($cell-size * $col-count) + ($gap * ($col-count - 1)) + ($padding * 2);
   gap: $gap;
   padding: 100px $padding;
@@ -14,13 +13,13 @@
   }
 
   @each $day, $index in $days {
-    &__start-day--#{$day} > :first-child {
+    &--start-day--#{$day} > :first-child {
       margin-left: ($cell-size + $gap) * $index;
     }
   }
 
   @for $monthLength from 28 through 31 {
-    &__month-length--#{$monthLength} > :nth-child(n + #{$monthLength + 1}) {
+    &--month-length--#{$monthLength} > :nth-child(n + #{$monthLength + 1}) {
       display: none;
     }
   }
