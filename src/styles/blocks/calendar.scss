@@ -6,7 +6,7 @@
   padding: 30px $padding;
 
   @for $day from 28 through 31 {
-    &--month-length_#{$day} > :nth-child(n + #{$day + 1}) {
+    &--month-length--#{$day} > :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
@@ -21,7 +21,7 @@
 
   @each $week-day,$day-InWeek in $week-days {
     $that: &;
-    &--start-day_#{$week-day} {
+    &--start-day--#{$week-day} {
       #{$that}__day:first-child {
         margin-left: marginLeft($day-InWeek,$cell-size,$cells-gap);
       }
@@ -33,12 +33,12 @@
     align-items: center;
     justify-content: center;
     background-color: #eee;
-    transition: color 0.5s, transform 0.5s;
+    transition: all 0.5s;
     @include square ($cell-size);
     border: 1px solid black;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
