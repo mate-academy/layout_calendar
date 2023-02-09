@@ -1,14 +1,14 @@
+.page {
+  display: flex;
+  justify-content: center;
+}
+
 .calendar {
-  @extend %flex;
-  flex-wrap: wrap;
-  max-width: getDaysWidth($days-block);
-  padding: 50px 0 50px $block-padding-left;
-  margin: 0 auto;
-  gap: 1px;
+  @include calendar;
 
   @each $day, $indexCount in $days {
     &--start-day--#{$day} :first-child {
-      margin-left: ($days-block * $indexCount) + $indexCount;
+      margin-left: ($days-block + $gap) + $indexCount;
     }
   }
 
@@ -19,10 +19,8 @@
   }
 
   &__days {
-    box-sizing: border-box;
-    position: relative;
-    @extend %full-flex-pack;
-    @extend %block-pack;
+    @extend %position-center;
+    @extend %block-size;
     background-color: #ebebeb;
     border: 1px solid #3e3e3e;
     cursor: pointer;

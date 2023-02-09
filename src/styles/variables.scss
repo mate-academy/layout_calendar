@@ -1,19 +1,24 @@
 $days-block: 100px;
-$block-padding-left: 100px;
+$days-padding: 10px;
+$gap: 1px;
 
-%full-flex-pack {
+%position-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-%block-pack {
+%block-size {
   width: $days-block;
   height: $days-block;
 }
 
-%flex {
+@mixin calendar {
   display: flex;
+  flex-wrap: wrap;
+  max-width: getDaysWidth($days-block);
+  padding: 100px;
+  gap: $gap;
 }
 $days:
   "mon" 0,
