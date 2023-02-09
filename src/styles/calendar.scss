@@ -2,8 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $vid;
-  margin: 0 auto;
-  width: ($b_size * 7) + ($vid * 6) + ($padding * 2);
+  width: $calendarW;
   padding: $padding;
 
   @each $day, $index in $days {
@@ -17,22 +16,24 @@
       display: none;
     }
   }
-  &_day {
+
+  &__day {
     @extend %square;
     border: 1px solid black;
     line-height: 100px;
     text-align: center;
+    cursor: pointer;
     background-color: #eee;
-    transition: transform 0.5s ease, background-color 0.5s ease;
+    transition: transform $duration ease, background-color $duration ease;
     @for $Number from 1 through 31 {
       &:nth-child(#{$Number}):before {
         content: "#{$Number}";
       }
-      &:hover {
-        cursor: pointer;
-        background-color: pink;
-        transform: translateY(-20px);
-      }
     }
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
   }
 }
