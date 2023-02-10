@@ -1,58 +1,9 @@
 @import "./utils/variables";
 @import "./utils/mixins";
+@import "./utils/placeholders";
 @import "./utils/functions";
 
 @import "./normalize.scss";
-
-.page {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 30px;
-}
-
-.content {
-  @include centeredContent();
-  margin: 0;
-}
-
-.calendar {
-  @include centeredContent();
-  justify-content: start;
-  align-content: center;
-  flex-wrap: wrap;
-  padding: $paddings;
-  gap: $gap;
-  width: calcCalendarWidth($gap, $paddings, $daySize);
-
-  @for $index from 28 through $monthLength {
-    &--month-length_#{$index} > &__day:nth-child(n + #{$index + 1}) {
-      display: none;
-    }
-  }
-
-  @each $name, $index in $week {
-    &--start-day_#{$name} > &__day:first-child {
-      margin-left: $index * ($gap + $daySize);
-    }
-  }
-
-  &__day {
-    @include square($daySize);
-    @include centeredContent();
-    background-color: #eee;
-    border: 1px solid #000;
-    transition: background-color, transform 0.5s;
-
-    &:hover {
-      transform: translateY(-20px);
-      background-color: pink;
-    }
-
-    @for $index from 1 through $monthLength {
-      &:nth-child(#{$index}) {
-        &::before {
-          content: "#{$index}";
-        }
-      }
-    }
-  }
-}
+@import "./blocks/page.scss";
+@import "./blocks/content.scss";
+@import "./blocks/calendar.scss";
