@@ -5,23 +5,22 @@
   gap: $gap-size;
   width: ($cell-size + $gap-size) * $items-in-a-row ;
 
-  
   @for $index from 28 through $day-count {
     &-month-length--#{$index} {
       & :nth-child(n + #{$index + 1}) {
-      display: none;
-      visibility: hidden;
+        display: none;
+        visibility: hidden;
       }
     }
   }
 
-   @each $name, $number in $days {
-     &-start-day--#{$name} {
-       & :first-child {
-         margin-left: getMargin($number, $cell-size, $gap-size);
-        }
-     }
-   }
+  @each $name, $number in $days {
+    &-start-day--#{$name} {
+      & :first-child {
+        margin-left: getMargin($number, $cell-size, $gap-size);
+      }
+    }
+  }
 
   &__day {
     @include square($cell-size);
@@ -39,16 +38,12 @@
       cursor: pointer;
     }
 
-     @for $index from 1 through $day-count {
-       &:nth-child(#{$index}) {
-         &::before {
-           content: "#{$index}";
-          }
-       }
+    @for $index from 1 through $day-count {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+        }
       }
+    }
   }
 }
-
-
-
-
