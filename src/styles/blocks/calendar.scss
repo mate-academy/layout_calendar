@@ -1,11 +1,8 @@
 
 .calendar {
-
-  padding: 10px;
+  padding: 30px;
   display: flex;
   flex-wrap: wrap;
-  width: $week-size;
-  margin: 0 auto;
   gap: $block-spacing;
 
   @each $day-of-week, $order in $week-days {
@@ -16,12 +13,6 @@
 
   &__day {
 
-    &:nth-child(n + #{$month-lengt + 1}) {
-      display: none;
-    }
-  }
-
-  &__link {
     @include square($block-size);
     position: relative;
     display: flex;
@@ -44,11 +35,19 @@
       right: 0;
       top: 0;
       bottom: 0;
+    }
 
-      @for $day from 1 to $month-lengt + 1 {
-        .calendar__day:nth-child(#{$day}) & {
+    @for $day from 1 to 32 {
+      &:nth-child(#{$day}) {
+        &::before {
           content: "#{$day}";
         }
+      }
+    }
+
+    @for $last_day from 28 to 32 {
+      .calendar--month-length--#{$last-day} &:nth-child(n + #{$last-day + 1}) {
+        display: none;
       }
     }
   }
