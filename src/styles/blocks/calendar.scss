@@ -1,20 +1,19 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   padding-top: 100px;
   gap: $gap;
   width: 7 * $block-size + $gap * 6;
   margin: 0 auto;
 
   @each $day, $number in $days {
-    &--first-day-sun :first-child {
+    &--first-day-#{$day} :first-child {
       margin-left: $number * $block-size + $gap * $number;
     }
   }
 
-  @for $index from 29 through 31 {
-    &--month-length-29 :nth-child(n + #{$index + 1}) {
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
