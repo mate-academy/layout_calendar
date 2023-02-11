@@ -18,71 +18,8 @@ body {
   justify-content: flex-start;
   box-sizing: border-box;
 
-  @for $number from 1 through 30 {
+  @for $number from 1 through 31 {
     &__day:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-mon:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-tue:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-wed:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-thu:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-fri:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-sat:nth-child(#{$number})::before {
-      content: "#{$number}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: #000;
-    }
-  }
-
-  @for $number from 1 through 30 {
-    &__day-start-day-sun:nth-child(#{$number})::before {
       content: "#{$number}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -106,130 +43,24 @@ body {
     }
   }
 
-  &__day-start-day-mon {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
+  $day-name:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
+  @each $day, $index in $day-name {
+    &-start-day-#{$day} {
+      margin-left: 100px * $index + $index;
     }
   }
 
-  &__day-start-day-tue {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  &__day-start-day-wed {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  &__day-start-day-thu {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  &__day-start-day-fri {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  &__day-start-day-sat {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  &__day-start-day-sun {
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 98px;
-    height: 98px;
-
-    transition: color 0.5, transform 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
-  }
-
-  $days:
-    "start-day-mon" 0,
-    "start-day-tue" 99px,
-    "start-day-wed" 199px,
-    "start-day-thu" 299px,
-    "start-day-fri" 399px,
-    "start-day-sat" 499px,
-    "start-day-sun" 599px;
-
-  @each $name, $day in $days {
-    &__day-#{$name} {
-      margin-left: $day;
+  @for $month-day from 28 through 31 {
+    &--month--lenth-#{$month-day} &__day:nth-child(n + #{$month-day + 1}) {
+      display: none;
     }
   }
 }
