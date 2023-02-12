@@ -9,14 +9,6 @@ body {
 }
 
 .calendar {
-  width: 790px;
-  height: 400px;
-  flex-wrap: wrap;
-  display: flex;
-  gap: 1px;
-  align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
 
   @for $number from 1 through 31 {
     &__day:nth-child(#{$number})::before {
@@ -32,8 +24,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 98px;
-    height: 98px;
+    width: 100px;
+    height: 100px;
 
     transition: color 0.5, transform 0.5s;
 
@@ -53,14 +45,27 @@ body {
     "sun" 6;
 
   @each $day, $index in $day-name {
-    &-start-day-#{$day} {
-      margin-left: 100px * $index + $index;
-    }
-  }
 
-  @for $month-day from 28 through 31 {
-    &--month--lenth-#{$month-day} &__day:nth-child(n + #{$month-day + 1}) {
-      display: none;
+    @for $month-day from 28 through 31 {
+      &__#{$day}--month--lenth--#{$month-day}
+      &__day:nth-child(n + #{$month-day + 1}) {
+        display: none;
+      }
+
+      &__#{$day}--month--lenth--#{$month-day}  &__day:first-child {
+        margin-left: 100px * $index + $index;
+      }
+
+      &__#{$day}--month--lenth--#{$month-day} {
+        width: 800px;
+        max-height: 500px;
+        flex-wrap: wrap;
+        display: flex;
+        gap: 1px;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+      }
     }
   }
 }
