@@ -1,16 +1,19 @@
 .calendar {
-  @extend %mainFont;
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+
   width: calendar_size($day-size, $day-in-row, $gap-size, $YPaddings);
   margin: 0 auto;
   padding: 50px $YPaddings 0;
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: $gap-size;
 
-  @each $day-of-week, $day-size in $days-of-week {
-    &--start-day--#{$day-of-week} :first-child {
-      margin-left: $day-size;
+  @each $day, $orderDay in $days-of-week {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($orderDay - 1) * $widthOfBlock;
     }
   }
 
@@ -20,7 +23,7 @@
     }
   }
 
-  &___day {
+  &__day {
     @include square($day-size);
     display: flex;
     justify-content: center;
@@ -28,12 +31,11 @@
 
     background-color: #eee;
     border: 1px solid #000;
-
-    transition: transform 0.5s;
+    cursor: pointer;
+    transition: background-color transform 0.5s;
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
 
