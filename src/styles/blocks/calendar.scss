@@ -1,0 +1,42 @@
+@use "../utils/_variables" as *;
+@use "../utils/_mixins" as *;
+@use "../utils/_functions" as *;
+
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: #{$cell-gap};
+  width: calc(7 * (#{$cell-size}) + 10 * #{$cell-gap});
+
+  &__cell {
+    @include square ($cell-size);
+    background-color: #{$cell-background-color};
+    border: #{$cell-border};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.5s linear;
+    cursor: pointer;
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      color: black;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      transition: all 0.5s linear;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@use "../utils/_variables" as *;
+
+@for $date from 1 through 31 {
+  .calendar__cell--#{$date}::before {
+    content: "#{$date}";
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length--#{$day}
+  :nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
+
+$start-day:
+  "mon" 0,
+  "tue" calc(#{$cell-size} + #{$cell-gap}),
+  "wed" calc(2 * (#{$cell-size} + #{$cell-gap})),
+  "thu" calc(3 * (#{$cell-size} + #{$cell-gap})),
+  "fri" calc(4 * (#{$cell-size} + #{$cell-gap})),
+  "sat" calc(5 * (#{$cell-size} + #{$cell-gap})),
+  "sun" calc(6 * (#{$cell-size} + #{$cell-gap}));
+
+@each $day, $position in $start-day {
+  .calendar__cell--1 {
+    margin-left: $position;
+  }
+}
