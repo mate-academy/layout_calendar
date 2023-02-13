@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://yuliia-vereshko.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://yuliia-vereshko.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -29,7 +29,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
 - On hovering over a cell, the cursor should become pointer.
-- The hovered cell has to become pink
+- The hovered cell has to become pink.
   - (**Optional**) Move it up by `20px` (use `transform`)
   - (**Optional**) both of these properties are to be animated with the duration of half a second.
 
@@ -37,3 +37,4 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 
 ## Here is a preview:
 ![reference image](reference.png).
+
