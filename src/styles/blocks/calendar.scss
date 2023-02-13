@@ -1,0 +1,45 @@
+.calendar {
+  width: $width;
+  display: flex;
+  flex-wrap: wrap;
+  padding: $day-translateY 10px;
+  gap: $day-gap;
+
+  &__day {
+    box-sizing: border-box;
+    @include daySize($day-size);
+    @include flexJustifyItems(center, center);
+
+    border: 1px solid $color-border;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform $day-transition, background-color $day-transition;
+    background-color: $color-background;
+
+    &:hover {
+      transform: translateY(-#{$day-translateY});
+      background-color: $color-background-hover;
+    }
+
+    @for $date from 1 through 31 {
+      &:nth-child(n + #{$date})::before {
+        content: "#{$date}";
+      }
+    }
+  }
+
+  @each $name, $position in $day-name {
+    &--weekday--#{$name} {
+      :first-child {
+        margin-left: $day-size * $position + $position;
+      }
+    }
+  }
+
+  @for $date from 28 through 30 {
+    &--month-lenth--#{$date} &__day:nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
+}
