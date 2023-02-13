@@ -1,7 +1,9 @@
 .calendar {
   display: flex;
-  margin: 0 auto;
-  width: 7 * $square-size + 6 * $square-gap + 2 * $square-paddings;
+  width: $columns
+    * $square-size + ($columns - 1)
+    * $square-gap + 2 * $square-paddings
+  ;
   flex-wrap: wrap;
   gap: $square-gap;
   padding: 30px $square-paddings;
@@ -31,11 +33,11 @@
     background-color: #eee;
     padding: $square-paddings;
     transition: all 0.5s;
+    cursor: pointer;
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
-      transform: translate(0, -20px);
+      transform: translateY(-20px);
     }
 
     @for $day from 1 through 31 {
