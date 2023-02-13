@@ -6,25 +6,28 @@
   width: $calendar-width;
 
   &__square {
-    @include square(98px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    @include square($cell-size);
     border: 1px solid black;
     background-color: #eee;
-    transition: color 0.5s, transform 0.5s;
+
+    cursor: pointer;
+
+    transition: background-color $animation-duration,
+      transform $animation-duration;
 
     @for $index from 1 through $number-of-days {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
       }
     }
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      cursor: pointer;
     }
   }
 
