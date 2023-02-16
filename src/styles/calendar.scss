@@ -4,17 +4,17 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size-cell;
-  max-width: 7 * $width-cell + 6 * $gap-size-cell;
-  padding: 0 10px;
+  max-width: getMaxWidth($width-cell, $gap-size-cell);
+  padding: 20px 10px 0;
   margin: 0 auto;
 
-  @for $index from 1 through $month-length {
+  @for $index from 1 through $month-length-max {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
 
-  @for $index from 28 to 31 {
+  @for $index from $month-length-min to $month-length-max {
     &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
@@ -35,12 +35,12 @@
     width: $width-cell;
     height: $height-cell;
     border: 1px solid #000;
+    cursor: pointer;
+    transition: transform 0.5s;
   }
 
   &__day:hover {
-    cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
-    transition: transform 0.5s;
   }
 }
