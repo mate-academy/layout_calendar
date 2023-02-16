@@ -1,12 +1,13 @@
 .calendar {
   position: relative;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
   display: flex;
   flex-wrap: wrap;
-  gap: $box-gap;
-  padding: 10px;
+  justify-content: center;
   width: 7*$day-size + 6*$box-gap;
+  padding: 10px;
+  gap: $box-gap;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 
   &__cell {
     @include square($day-size);
@@ -14,10 +15,10 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    background-color: #eee;
-    border: 1px solid #000;
-    color: #000;
-    transition: transform 0.5s ease;
+    background-color: $bg-color;
+    border: 1px solid $color-main;
+    color: $color-main;
+    transition: transform $trans-duration ease;
 
     @for $dayNum from 1 through 31 {
       &:nth-child(n + #{$dayNum})::before {
@@ -31,15 +32,6 @@
       transform: translateY(-20px);
     }
   }
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $day, $num in $days {
     &--start-day--#{$day} &__cell:first-child {
