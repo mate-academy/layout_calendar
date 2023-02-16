@@ -1,0 +1,21 @@
+@for $number from 1 through 31 {
+  .calendar__element--#{$number}::before {
+    content: "#{$number}";
+  }
+}
+
+@each $day, $value in $week {
+  .calendar--start-day--#{$day} {
+    .calendar__element--1 {
+      margin-left: $value;
+    }
+  }
+}
+
+@for $last-day from 28 to 31 {
+  .calendar--month-lenght--#{$last-day} {
+    .calendar__element:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
