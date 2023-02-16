@@ -16,6 +16,21 @@
     }
   }
 
+  $first-day-margin:
+    "mon" $mon-margin,
+    "tue" $tue-margin,
+    "wed" $wed-margin,
+    "thu" $thu-margin,
+    "fri" $fri-margin,
+    "sat" $sat-margin,
+    "sun" $sun-margin;
+
+  @each $day, $margin in $first-day-margin {
+    &--start-day_#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
   &__day {
     @include square($square-size);
     border: 1px black solid;
@@ -25,21 +40,6 @@
     text-align: center;
     line-height: $square-size;
     transition: background-color 0.5s, transform 0.5s ease;
-
-    $first-day-margin:
-      "mon" $mon-margin,
-      "tue" $tue-margin,
-      "wed" $wed-margin,
-      "thu" $thu-margin,
-      "fri" $fri-margin,
-      "sat" $sat-margin,
-      "sun" $sun-margin;
-    
-    @each $day, $margin in $first-day-margin {
-      &--start-day_#{$day} {
-        margin-left: $margin;
-      }
-    }
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
