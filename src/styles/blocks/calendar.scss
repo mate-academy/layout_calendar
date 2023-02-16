@@ -1,0 +1,55 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+  width: $calendar-width;
+  margin: 0 auto;
+
+  @for $index from 28 through 30 {
+    &--length_#{$index} {
+      @for $index-2 from 1 through 3 {
+        & .calendar__day:nth-child(#{$index + $index-2}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  $first-day-margin:
+    "mon" $mon-margin,
+    "tue" $tue-margin,
+    "wed" $wed-margin,
+    "thu" $thu-margin,
+    "fri" $fri-margin,
+    "sat" $sat-margin,
+    "sun" $sun-margin;
+
+  @each $day, $margin in $first-day-margin {
+    &--start-day_#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  &__day {
+    @include square($square-size);
+    border: 1px black solid;
+    background-color: #eee;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: $square-size;
+    transition: background-color 0.5s, transform 0.5s ease;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
