@@ -1,0 +1,58 @@
+.calendar {
+  display: flex;
+  gap: $gapBetweenDays;
+  flex-wrap: wrap;
+  width: widthCalendar($widthSquareDay, $gapBetweenDays, $paddingCalendar);
+  padding: $paddingCalendar;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  $name-days: 
+    "mon" 0,
+    "tue" getMarginForTuesday($widthSquareDay, $gapBetweenDays),
+    "wed" (2 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
+    "thu" (3 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
+    "fri" (4 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
+    "sat" (5 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
+    "sun" (6 * getMarginForTuesday($widthSquareDay, $gapBetweenDays));
+
+  @each $name, $margin in $name-days {
+    &--start-day_#{$name} {
+      .calendar__day:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      .calendar__day:nth-child(#{$index}) ~ .calendar__day {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include square($widthSquareDay);
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: background-color $timeTransform, transform $timeTransform;
+      cursor: pointer;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
