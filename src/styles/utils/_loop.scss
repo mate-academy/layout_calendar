@@ -6,10 +6,14 @@
   }
 }
 
+@function getMargin ($width, $gap, $index) {
+  @return ($width + $gap) * ($index - 1);
+}
+
 @each $day, $value in $week {
   .calendar--start-day--#{$day} {
     .calendar__element:first-child {
-      margin-left: $value;
+      margin-left: getMargin($boxes-width, $gap-size, $value);
     }
   }
 }
