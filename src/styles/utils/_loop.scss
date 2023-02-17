@@ -1,12 +1,14 @@
 @for $number from 1 through 31 {
-  .calendar__element--#{$number}::before {
-    content: "#{$number}";
+  .calendar__element:nth-child(#{$number}) {
+    &::before {
+      content: "#{$number}";
+    }
   }
 }
 
 @each $day, $value in $week {
   .calendar--start-day--#{$day} {
-    .calendar__element--1 {
+    .calendar__element:first-child {
       margin-left: $value;
     }
   }
