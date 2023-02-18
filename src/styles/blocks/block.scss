@@ -13,8 +13,14 @@ html {
   margin: 50px;
   padding: 10px;
 
+  @for $i from 28 through 31 {
+    &--month-length_#{$i} div:nth-child(n + #{$i+1}) {
+      display: none;
+    }
+  }
+
   @each $day, $index in $start-day {
-    &__cell--1 {
+    &--start-day_#{$day} .calendar__cell:first-child {
       margin-left: $index * ($sell-size + $gap);
     }
   }
@@ -35,7 +41,7 @@ html {
       align-items: center;
 
       @for $i from 1 through 31 {
-        &--#{$i}::before {
+        &:nth-child(n + #{$i})::before {
           content: "#{$i}";
         }
       }
@@ -45,12 +51,6 @@ html {
         transform: translateY(-20px);
         transition: 0.5s;
       }
-    }
-  }
-
-  @for $i from 29 through 31 {
-    &__cell:nth-child(n + #{$i}) {
-      display: none;
     }
   }
 }
