@@ -2,20 +2,10 @@
   display: flex;
   gap: $gapBetweenDays;
   flex-wrap: wrap;
-  width: widthCalendar($widthSquareDay, $gapBetweenDays, $paddingCalendar);
+  width: getCalendarWidth($widthSquareDay, $gapBetweenDays, $paddingCalendar);
   padding: $paddingCalendar;
-  box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-
-  $name-days: 
-    "mon" 0,
-    "tue" getMarginForTuesday($widthSquareDay, $gapBetweenDays),
-    "wed" (2 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
-    "thu" (3 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
-    "fri" (4 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
-    "sat" (5 * getMarginForTuesday($widthSquareDay, $gapBetweenDays)),
-    "sun" (6 * getMarginForTuesday($widthSquareDay, $gapBetweenDays));
 
   @each $name, $margin in $name-days {
     &--start-day_#{$name} {
@@ -38,14 +28,13 @@
     align-items: center;
     justify-content: center;
     @include square($widthSquareDay);
-    box-sizing: border-box;
     background-color: #eee;
     border: 1px solid #000;
+    transition: background-color $timeTransform, transform $timeTransform;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: background-color $timeTransform, transform $timeTransform;
       cursor: pointer;
     }
 
