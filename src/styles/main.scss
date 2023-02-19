@@ -1,3 +1,83 @@
+* {
+  box-sizing: border-box;
+}
+
+$days-in-month: 31;
+$cell-width: 100px;
+$cell-height: 100px;
+$calendar-field: $cell-width * 7 +7;
+
 body {
+  font-family: "Arial", sans-serif;
   margin: 0;
+}
+
+.calendar {
+  box-sizing: content-box;
+  margin: 50px auto;
+  width: $calendar-field;
+  &__block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+  &__cell {
+    border: 1px solid #000;
+    width: $cell-width;
+    height: $cell-height;
+    transition: all ease 0.5s;
+    display: flex;
+    line-height: $cell-width;
+    justify-content: center;
+    font-size: 30px;
+    
+    &:hover {
+      position: relative;
+      top: -20px;
+      background: pink;
+      color: white;
+      cursor: pointer;
+      transition: all ease 0.5s;
+    }
+  }
+  @for $index from 1 through $days-in-month {
+    &__cell--#{$index} {
+      &::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
+
+$days:
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun";
+
+.start-day {
+  display: flex;
+  gap: 1px;
+  &__day {
+    display: flex;
+    border: 1px solid red;
+    justify-content: center;
+    line-height: $cell-width;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 30px;
+    width: $cell-width;
+    height: $cell-height;
+  }
+
+  @each $day in $days {
+    &__day--#{$day} {
+      &::before {
+        content: "#{$day}";
+      }
+    }
+  }
 }
