@@ -17,29 +17,18 @@
     border: #{$border-size} solid #{$color-black};
     background-color: #{$color-grey};
     cursor: pointer;
+    transition: all 0.5s;
   }
   &__cell:hover {
-    transition: all 0.5s;
     background-color: $color-pink;
     transform: translateY(-20px);
   }
   @for $i from 1 through 31 {
     &__cell:nth-child(#{$i})::before {
       content: "#{$i}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 32px;
-      color: #{$color-black};
-      box-sizing: border-box;
     }
   }
-  $days-of-week:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
+
   @each $day, $index in $days-of-week {
     &--start-day--#{$day} .calendar__cell:first-child {
       margin-left: ($cell-size + $border-size) * $index;
