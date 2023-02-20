@@ -1,3 +1,73 @@
+$baza: 40px;
+
 body {
   margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.calendar__row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 712px;
+  
+}
+
+.calendar__cell {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background-color: grey;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.calendar__cell--1 {
+  margin: 0 0 0 609px;
+}
+
+.calendar__cell--30 {
+  margin: 0 0 0 508px;
+}
+
+.calendar__cell--month-length {
+  opacity: 0;
+}
+
+.calendar__cell:hover {
+  background-color: pink;
+}
+  
+.calendar__cell:active {
+  transition: 0.5s;
+  transform: translateY(-20px);
+}
+@for $i from 1 through 6 {
+  @for $index from 1 through 31 {
+    .calendar__row--#{$i} .calendar__cell--#{$index}::before {
+      position: absolute;
+      content: "#{$index}";
+      width: 20px ;
+      height: 20px;
+      left: $baza;
+      top: $baza;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      color: black;
+      z-index: 100;
+      
+    }
+  }
+}
+
+$days: tue, wed, thu, fri, sat, sum, mon,;
+
+@for $n from 2 through 5 {
+  @each $day in $days {
+    .calendar__row--#{$n} .calendar__cell--start-day--#{$day} {
+      background-color: #bbb;
+    }
+  }
 }
