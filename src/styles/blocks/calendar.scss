@@ -1,61 +1,77 @@
-@import "../utils/reset.scss";
-@import "../utils/varibles.scss";
-@import "../utils/mixins.scss";
-
 body {
   font-family: "Arial", sans-serif;
 }
   
 .calendar {
-  margin: 50px auto 0;
-  width: $cell-size * 7 + 6;
-  &__days {
-    display: flex;
-    gap: 1px;
-    &-day {
-      @include square($cell-size);
-      border: 1px solid red;
-      flex-wrap: wrap;
-      text-align: center;
-      line-height: $cell-size;
-      text-transform: capitalize;
-      font-size: 22px;
-      font-weight: bold;
-      background: #cecccc;
+  border: 1px solid red;
+  margin: 100px auto;
+  width: $cell-size * 7 + 8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  
+  &__days-cell {
+    border: 1px solid black;
+    width: $cell-size;
+    height: $cell-size;
+    background: #eee;
+    text-align: center;
+    font-size: 30px;
+    line-height: $cell-size;
+    transition: all linear 0.5s;
+    cursor: pointer;
+    @for $index from 1 to 31+1 {
+      &:nth-child(#{$index}n) {
+        display: inline-block;
+        &:before {
+          content: "#{$index}";
+        }
+      }
+    }
+
+    &:hover {
+      position: relative;
+      top: -20px;
+      background: pink;
       color: #fff;
     }
-    @each $day in $days {
-      .day-#{$day} {
-        &:before {
-          content: "#{$day}";
+  }
+
+  &--month-length_28 {
+    .calendar__days-cell {
+      @for $index from 29 to 32 {
+        &:nth-child(#{$index}) {
+          display: none;
         }
       }
     }
   }
-  &__cells {
-    display: flex;
-    flex-wrap: wrap;
-    width: $cell-size * 7 + 6;
-    gap: 1px;
-    &-cell {
-      @include square($cell-size);
-      border: 1px solid gray;
-      background: #eee;
-      text-align: center;
-      line-height: $cell-size;
-      font-size: 30px;
-      transition: all linear 0.5s;
-      &:hover {
-        position: relative;
-        top: -20px;
-        cursor: pointer;
-        background: pink;
-        color: #fff;
+
+  &--month-length_29 {
+    .calendar__days-cell {
+      @for $index from 30 to 32 {
+        &:nth-child(#{$index}) {
+          display: none;
+        }
       }
     }
-    @for $index from 1 to $days-in-month+1 {
-      .cell-#{$index}:before {
-        content: "#{$index}";
+  }
+
+  &--month-length_30 {
+    .calendar__days-cell {
+      &:nth-child(31n) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $width in $days {
+    &--start-day_#{$day} {
+      .calendar__days-cell {
+        &:first-child {
+          display: block;
+          margin-left: $cell-size * $width + $width;
+        }
       }
     }
   }
