@@ -11,6 +11,24 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   width: 730px;
+  
+  & :first-child {
+    margin-left: 622px;
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      position: absolute;
+      content: "#{$index}";
+      width: 20px ;
+      height: 20px;
+      left: $baza;
+      top: $baza;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      color: black;
+    }
+  }
 
   &__cell {
     position: relative;
@@ -37,22 +55,13 @@ body {
       display: none;
     }
   }
-}
+  
+  $days: 
+  mon, tue, wed, thu, fri, sat, sum;
 
-.calendar :first-child {
-  margin-left: 622px;
-}
-
-@for $index from 1 through 31 {
-  .calendar :nth-child(#{$index})::before {
-    position: absolute;
-    content: "#{$index}";
-    width: 20px ;
-    height: 20px;
-    left: $baza;
-    top: $baza;
-    font-family: Arial, sans-serif;
-    font-size: 22px;
-    color: black;
+  @each $day in $days {
+    &__cell--start-day--#{$day} {
+      background-color: #bbb;
+    }
   }
 }
