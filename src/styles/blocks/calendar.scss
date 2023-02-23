@@ -1,4 +1,5 @@
 .calendar {
+  min-width: ($cell-size * 7) + ($gap-size * 6) + ($calendar-padding * 2);
   max-width: ($cell-size * 7) + ($gap-size * 6) + ($calendar-padding * 2);
   display: flex;
   align-items: center;
@@ -34,10 +35,11 @@
     @include square;
     background-color: #eee;
     border: 1px solid black;
-    transition: transform 0.5s;
+    cursor: pointer;
+    transition: transform $day-hover-duration,
+      background-color $day-hover-duration;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
