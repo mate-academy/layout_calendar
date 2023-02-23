@@ -37,34 +37,18 @@ body {
     }
   }
 
-  &--month-length_28 {
-    .calendar__days-cell {
-      @for $index from 29 to 32 {
-        &:nth-child(#{$index}) {
-          display: none;
+  @for $index from 28 to 31 {
+    &--month-length_#{$index} {
+      .calendar__days-cell {
+        @for $index_2 from $index+1 to 32 {
+          &:nth-child(#{$index_2}n) {
+            display: none;
+          }
         }
       }
     }
   }
-
-  &--month-length_29 {
-    .calendar__days-cell {
-      @for $index from 30 to 32 {
-        &:nth-child(#{$index}) {
-          display: none;
-        }
-      }
-    }
-  }
-
-  &--month-length_30 {
-    .calendar__days-cell {
-      &:nth-child(31n) {
-        display: none;
-      }
-    }
-  }
-
+  
   @each $day, $width in $days {
     &--start-day_#{$day} {
       .calendar__days-cell {
