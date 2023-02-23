@@ -7,6 +7,7 @@
   width: 711px;
   margin: 0 auto;
   margin-top: 100px;
+
   &__cell {
     position: relative;
     display: flex;
@@ -19,10 +20,12 @@
     cursor: pointer;
     transition: all 0.5s;
   }
+
   &__cell:hover {
     background-color: $color-pink;
     transform: translateY(-20px);
   }
+
   @for $i from 1 through 31 {
     &__cell:nth-child(#{$i})::before {
       content: "#{$i}";
@@ -34,6 +37,7 @@
       margin-left: ($cell-size + $border-size) * $index;
     }
   }
+
   @for $i from 28 through 31 {
     &--month-length-#{$i} .calendar__cell:nth-child(n+#{$i + 1}) {
       display: none;
