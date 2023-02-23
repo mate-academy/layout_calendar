@@ -1,9 +1,13 @@
 $baza: 40px;
+$cell-size: 100px;
 
 body {
   margin: 0;
   padding: 20px;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  color: black;
 }
 
 .calendar {
@@ -12,28 +16,19 @@ body {
   flex-wrap: wrap;
   width: 730px;
   
-  & :first-child {
-    margin-left: 622px;
-  }
-
   @for $index from 1 through 31 {
     & :nth-child(#{$index})::before {
       position: absolute;
       content: "#{$index}";
-      width: 20px ;
-      height: 20px;
       left: $baza;
       top: $baza;
-      font-family: Arial, sans-serif;
-      font-size: 22px;
-      color: black;
     }
   }
 
   &__cell {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: $cell-size;
+    height: $cell-size;
     margin: 1px;
     border: 1px solid black;
     background-color: #eee;
@@ -50,18 +45,24 @@ body {
     }
   }
   
-  @for $i from 1 through 3 {
-    &__cell--month-length--#{(28+$i)} {
+  @for $i from 28 through 31 {
+    &--month-length--#{($i)} .calendar__cell:nth-child(n + #{$i+1}) {
       display: none;
     }
   }
-  
-  $days: 
-  mon, tue, wed, thu, fri, sat, sum;
 
-  @each $day in $days {
-    &__cell--start-day--#{$day} {
-      background-color: #bbb;
+  $days: 
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5, 
+    "sum" 6;
+
+  @each $day, $num in $days {
+    &--start-day--#{$day} .calendar__cell:first-child {
+      margin-left: 622px;
     }
   }
 }
