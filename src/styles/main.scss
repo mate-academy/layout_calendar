@@ -1,9 +1,8 @@
-$baza: 40px;
-$cell-size: 100px;
+@import "variables";
 
 body {
   margin: 0;
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
   font-size: 22px;
@@ -14,7 +13,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 730px;
+  width: $cell-size * 7 + 10px;
   
   @for $index from 1 through 31 {
     & :nth-child(#{$index})::before {
@@ -26,22 +25,20 @@ body {
   }
 
   &__cell {
+    box-sizing: border-box;
     position: relative;
     width: $cell-size;
     height: $cell-size;
-    margin: 1px;
-    border: 1px solid black;
+    margin: 0 $gap $gap 0;
+    border: $gap solid black;
     background-color: #eee;
     cursor: pointer;
-    transition: 0.5s;
+    transition: 0.5s all;
  
     &:hover {
       background-color: pink;
-    }
-
-    &:active {
-      transition: 0.5s;
       transform: translateY(-20px);
+      transition: 0.5s all;
     }
   }
   
@@ -51,18 +48,9 @@ body {
     }
   }
 
-  $days: 
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5, 
-    "sum" 6;
-
   @each $day, $num in $days {
     &--start-day--#{$day} .calendar__cell:first-child {
-      margin-left: 622px;
+      margin-left: $num * $cell-size + $num;
     }
   }
 }
