@@ -1,0 +1,48 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: (($daySize + 2) * 7 + 10px);
+  gap: 1px;
+
+  &__day {
+    height: $daySize;
+    width: $daySize;
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-20px);
+      transition-duration: 500ms;
+      background-color: pink;
+    }
+
+    @for $dayIndex from 1 through 31 {
+      &--#{$dayIndex}::before {
+        content: "#{$dayIndex}";
+      }
+    }
+
+    $weekDays:
+      "calendar--start-day-mon" 0,
+      "calendar--start-day-tue" 1,
+      "calendar--start-day-wed" 2,
+      "calendar--start-day-thu" 3,
+      "calendar--start-day-fri" 4,
+      "calendar--start-day-sat" 5,
+      "calendar--start-day-sun" 6;
+
+    @each $name, $startDay in $weekDays {
+      .#{$name} &:first-child {
+        margin-left: ($daySize + 3) * $startDay;
+      }
+    }
+
+    @for $dayIndex from 28 to 31 {
+      .calendar--month-length-#{$dayIndex} &:nth-child(n + #{$dayIndex + 1}) {
+        display: none;
+      }
+    }
+  }
+}
