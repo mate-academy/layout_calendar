@@ -1,12 +1,4 @@
-$days:
-  "mon" 0,
-  "tue" 101px,
-  "wed" 202px,
-  "thu" 303px,
-  "fri" 404px,
-  "sat" 505px,
-  "sun" 606px;
-$month-length: 28, 29, 30, 31;
+@import "./utils/variables";
 
 * {
   box-sizing: border-box;
@@ -15,19 +7,18 @@ $month-length: 28, 29, 30, 31;
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $calendar-gap;
 
-  padding: 10px;
   margin: 200px auto;
-  max-width: 800px;
+  max-width: $calendar-width;
 
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 100px;
-    height: 100px;
+    width: $cell-size;
+    height: $cell-size;
 
     background-color: #eee;
     border: 1px solid #000;
