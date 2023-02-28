@@ -1,0 +1,18 @@
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $day, $dayNum in $start-day {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $dayNum * ($cell-size + $gap-size);
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
