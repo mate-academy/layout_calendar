@@ -1,6 +1,6 @@
 @for $day from 1 through 31 {
-  .calendar__cell--#{$day}::before {
-    content: '#{$day}';
+  .calendar__cell:nth-child(#{$day})::before {
+    content: "#{$day}";
     font-family: Arial, sans-serif;
     font-size: 30px;
   }
@@ -8,7 +8,7 @@
 
 @each $start-day, $marg  in $day-marg {
   .calendar--start-day--#{$start-day}
-  .calendar__cell:first-child{
+  .calendar__cell:first-child {
     margin-left: $marg;
   }
 }
