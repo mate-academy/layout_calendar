@@ -1,0 +1,25 @@
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $calendarSize;
+  margin: auto;
+  padding: #{$transformSize + $calendarPadding} $calendarPadding;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include cell($cellSize);
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-$transformSize);
+    }
+  }
+}
