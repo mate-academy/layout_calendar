@@ -25,13 +25,13 @@
     }
 
     $weekDays:
-      "calendar--start-day-mon" 0,
-      "calendar--start-day-tue" 1,
-      "calendar--start-day-wed" 2,
-      "calendar--start-day-thu" 3,
-      "calendar--start-day-fri" 4,
-      "calendar--start-day-sat" 5,
-      "calendar--start-day-sun" 6;
+      "calendar--start-day--mon" 0,
+      "calendar--start-day--tue" 1,
+      "calendar--start-day--wed" 2,
+      "calendar--start-day--thu" 3,
+      "calendar--start-day--fri" 4,
+      "calendar--start-day--sat" 5,
+      "calendar--start-day--sun" 6;
 
     @each $name, $startDay in $weekDays {
       .#{$name} &:first-child {
@@ -40,7 +40,7 @@
     }
 
     @for $dayIndex from 28 to 31 {
-      .calendar--month-length-#{$dayIndex} &:nth-child(n + #{$dayIndex + 1}) {
+      .calendar--month-length--#{$dayIndex} &:nth-child(n + #{$dayIndex + 1}) {
         display: none;
       }
     }
