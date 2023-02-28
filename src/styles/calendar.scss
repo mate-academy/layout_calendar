@@ -1,0 +1,32 @@
+@import "./utils/_variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  gap: $cell-gap;
+  width: $calendar-width;
+
+  &__day {
+    background-color: #eee;
+    height: $cell-size;
+    width: $cell-size;
+    line-height: calc(#{$cell-size} - 100%);
+    padding: 10px;
+    border: 1px solid #000;
+    transition: 0.5s;
+    text-align: center;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
