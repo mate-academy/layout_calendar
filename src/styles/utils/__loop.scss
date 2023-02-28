@@ -1,0 +1,21 @@
+@for $day from 1 through 31 {
+  .calendar__cell:nth-child(#{$day})::before {
+    content: "#{$day}";
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $start-day, $marg  in $day-marg {
+  .calendar--start-day--#{$start-day}
+  .calendar__cell:first-child {
+    margin-left: $marg;
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .calendar--month-length--#{$last-day}
+  .calendar__cell:nth-child(n + #{$last-day + 1}) {
+    display: none;
+  }
+}
