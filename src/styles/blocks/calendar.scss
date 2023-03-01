@@ -6,6 +6,24 @@
   margin: 0 auto;
   padding: 20px 0;
 
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+
+  @each $day,$dayNum in $start-day {
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: $dayNum * ($cell-size + $gap-size);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} .calendar__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     position: relative;
     @include square($cell-size);
