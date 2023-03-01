@@ -1,6 +1,5 @@
 .calendar {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 1px;
   width: containerWidth(
@@ -9,28 +8,23 @@
     $cells-per-row,
     $cells-container-padding
   );
+  padding: 50px;
 
   @each $dayname, $daynumber in $days-names {
     &--start-day--#{$dayname} &__day:first-child {
       margin-left: marginForFirstWeekDay($daynumber);
     }
-  }
 
-  @each $dayname, $daynumber in $days-names {
     &--start-day--#{$dayname}
     &__day:nth-child(7n + #{7 - $daynumber + 1}) {
       background-color: #ddd;
     }
-  }
 
-  @each $dayname, $daynumber in $days-names {
     &--start-day--#{$dayname}
     &__day:nth-child(7n + #{7 - $daynumber + 1}):hover {
       background-color: pink;
     }
-  }
 
-  @each $dayname, $daynumber in $days-names {
     &--start-day--#{$dayname}
     &__day:nth-child(7n + #{7 - $daynumber + 1})::before {
       color: maroon;
@@ -53,7 +47,8 @@
     line-height: $cell-height;
     font-size: 30px;
     font-weight: 700;
-    transition: 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
+    cursor: pointer;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number}) {
@@ -66,7 +61,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      cursor: pointer;
     }
   }
 }
