@@ -1,0 +1,41 @@
+.calendar__day {
+  height: $squareSide;
+  width: $squareSide;
+
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 330%;
+  text-align: center;
+
+  background-color: #eee;
+  border: 1px solid black;
+
+  transition-duration: 0.5s;
+
+  @for $date from 1 through 31 {
+    &--#{$date}::before {
+      content: "#{$date}";
+    }
+  }
+
+  $days:
+    "mon" 0,
+    "tue" ($squareSide + 1px),
+    "wed" ($squareSide + 1px) * 2,
+    "thu" ($squareSide + 1px) * 3,
+    "fri" ($squareSide + 1px) * 4,
+    "sat" ($squareSide + 1px) * 5,
+    "sun" ($squareSide + 1px) * 6;
+
+  @each $day, $mar in $days {
+    &-start--#{$day} {
+      margin-left: $mar;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+}
