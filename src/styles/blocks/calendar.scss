@@ -1,0 +1,66 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: containerWidth(
+    $cell-width,
+    $cells-gap,
+    $cells-per-row,
+    $cells-container-padding
+  );
+  padding: 50px;
+
+  @each $dayname, $daynumber in $days-names {
+    &--start-day--#{$dayname} &__day:first-child {
+      margin-left: marginForFirstWeekDay($daynumber);
+    }
+
+    &--start-day--#{$dayname}
+    &__day:nth-child(7n + #{7 - $daynumber + 1}) {
+      background-color: #ddd;
+    }
+
+    &--start-day--#{$dayname}
+    &__day:nth-child(7n + #{7 - $daynumber + 1}):hover {
+      background-color: pink;
+    }
+
+    &--start-day--#{$dayname}
+    &__day:nth-child(7n + #{7 - $daynumber + 1})::before {
+      color: maroon;
+    }
+  }
+
+  @for $date from 28 through 31 {
+    &--month-length--#{$date} &__day:nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    position: relative;
+    width: $cell-width;
+    height: $cell-height;
+    border: 1px solid black;
+    background-color: #eee;
+    text-align: center;
+    line-height: $cell-height;
+    font-size: 30px;
+    font-weight: 700;
+    transition: transform 0.5s, background-color 0.5s;
+    cursor: pointer;
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number}) {
+        &::before {
+          content: "#{$number}";
+        }
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}

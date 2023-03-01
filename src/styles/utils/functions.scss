@@ -1,0 +1,17 @@
+@function containerWidth(
+  $cell-width,
+  $cells-gap,
+  $cells-per-row,
+  $cells-container-padding
+) {
+  @return $cell-width * $cells-per-row + $cells-gap * ($cells-per-row - 1) +
+    $cells-container-padding * 2;
+}
+
+@function marginForFirstWeekDay($day-number) {
+  @return ($day-number - 1) * $cell-width + (($cells-gap * $day-number) - 1);
+}
+
+@function daysTillWeekend($day-number) {
+  @return 7 - $day-number;
+}
