@@ -1,7 +1,6 @@
-@import "../utils/variables";
-@import "../utils/mixins";
-
 .calendar {
+  margin: 0 auto; // this line must be in wrapper
+
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-day-gap;
@@ -15,7 +14,7 @@
   }
 
   @for $day-index from 1 through 31 {
-    &--month-length--#{$day-index}:nth-child(n + #{$day-index+1} ) {
+    &--month-length--#{$day-index} &__day:nth-child(n + #{$day-index+1}) {
       display: none;
     }
   }
@@ -36,7 +35,7 @@
     transition: background-color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(n + #{$index}):before {
         content: "#{$index}";
       }
     }
