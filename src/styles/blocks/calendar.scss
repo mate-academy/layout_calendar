@@ -16,13 +16,31 @@
 
     border: 1px solid #000;
     background-color: #eee;
-    
+
     transition: all 0.5s ease-in-out;
 
     &:hover {
       background-color: #ffbfcb;
       cursor: pointer;
       transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day, $shift in $weekdays {
+    &--start-day--#{$day} :first-child {
+      margin-left: $shift;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 }
