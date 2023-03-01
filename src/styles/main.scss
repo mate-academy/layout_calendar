@@ -1,3 +1,65 @@
-body {
-  margin: 0;
+@import url(./reset.scss);
+
+$cell-size: 100px;
+$cell-gap: $cell-size / 100;
+$column-count: 7;
+$row-count: 5;
+$calendar-width: ($cell-size + $cell-gap) * $column-count;
+$cell__color: #eee;
+$last-day: 28;
+
+$calendar-day:
+  "monday" 0,
+  "tuesday" 1,
+  "wednesday" 2,
+  "thursday" 3,
+  "friday" 4,
+  "saturday" 5,
+  "sunday" 6;
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  flex-wrap: wrap;
+  gap: #{$cell-gap};
+  margin: 100px auto;
+
+  @each $day, $num-of-day in $calendar-day {
+    &__start-day--#{$day} &__day:first-child {
+      margin-left: $num-of-day * (($cell-size + $cell-gap));
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: #{$cell-size};
+    height: #{$cell-size};
+    border: 1px solid black;
+    background-color: $cell__color;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: plum;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &__month-length--#{$last-day}
+    &__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $index from 1 through 31 {
+  .day-#{$index}::before {
+    content: "#{$index}";
+  }
 }
