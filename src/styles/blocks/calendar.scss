@@ -5,43 +5,43 @@
   justify-content: center;
   align-items: center;
 
-  &__wrap {
+  &__wraper {
     display: flex;
     width: $box-size * 7;
     flex-wrap: wrap;
     gap: 1px; 
+  }
   
-    &__day {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #eee;
-      width: $box-size;
-      height: $box-size;
-      border: solid black 1px;
-      box-sizing: border-box;
-      transition: 0.5s ease-in-out;
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    width: $box-size;
+    height: $box-size;
+    border: solid black 1px;
+    box-sizing: border-box;
+    transition: 0.5s ease-in-out;
 
-      &:first-child {
-        margin-left: ($box-size + $gap) * $first-day;
-      }
+    &:first-child {
+      margin-left: ($box-size + $gap) * $first-day;
+    }
 
-      &:hover {
-        cursor: pointer;
-        background-color: rgb(255, 192, 203);
-        transform: translateY(-20px);
-      }
-      
-      @for $number from 1 through 31 {
-        &:nth-child(#{$number})::before {
-          content: "#{$number}";
-          font-size: 30px;
-          font-family: Arial, Helvetica, sans-serif;
-        }
-
+    &:hover {
+      cursor: pointer;
+      background-color: rgb(255, 192, 203);
+      transform: translateY(-20px);
+    }
+    
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
       }
 
     }
-}
+
+  }
 
 }
