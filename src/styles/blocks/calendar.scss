@@ -1,0 +1,40 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $calendar-width;
+
+  @for $cell from 28 through 31 {
+    &--month-length--#{$cell} > :nth-child(n + #{$cell + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $distance in $start-day {
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: $distance;
+    }
+  }
+
+  &__day {
+    @include cell($cell-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $cell from 1 through 31 {
+      &:nth-child(#{$cell})::before {
+        content: "#{$cell}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
