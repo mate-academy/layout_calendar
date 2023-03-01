@@ -15,6 +15,12 @@
     transition: background-color 0.5s, transform 0.5s;
     cursor: pointer;
 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
@@ -26,5 +32,18 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__cell:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $shift in $days {
+  .calendar--start-day--#{$day} .calendar__cell:first-child {
+    margin-left: $shift;
   }
 }
