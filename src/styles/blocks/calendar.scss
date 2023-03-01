@@ -3,7 +3,11 @@
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
-  width: $widthCall;
+  gap: $calendarGapSize;
+  width: $calendarWidth;
+  color: black;
+  font-size: $fontSizeValue;
+  font-family: Arial, sans-serif;
 
   @each $dayName, $mgLeft in $days {
     &--start-day--#{$dayName} {
@@ -13,32 +17,27 @@
     }
   }
 
-  @for $index from 28 through 31 {
+  @for $index from 28 through $monthLength {
     &--month-length--#{$index} {
       $dayIndex: $index + 1;
       & > :nth-child(n + #{$dayIndex}) {
-        opacity: 0;
         display: none;
       }
     }
   }
 
   &__day {
-    background-color: $colorCell;
     box-sizing: border-box;
-    border: 1px solid black;
-    margin: 0.5px;
-    @include square(#{$daySize});
+    @include square(#{$cellSize});
+    background-color: $cellColor;
     text-align: center;
-    line-height: $daySize;
+    line-height: $cellSize;
+    border: 1px solid black;
     transition: color 0.5s, transform 0.5s;
 
     @for $index from 1 through $monthLength {
       &:nth-child(#{$index}):before {
         content: "#{$index}";
-        color: black;
-        font-size: $fontSizeNumber;
-        font-family: Arial, sans-serif;
       }
     }
 
@@ -46,7 +45,6 @@
       cursor: pointer;
       transform: translate(0, -$transformSize);
       background-color: pink;
-      animation-duration: scale(1.2);
     }
   }
 }
