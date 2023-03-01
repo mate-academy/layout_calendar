@@ -1,0 +1,47 @@
+@import "./utils/variables";
+@import "../utils/functions";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $margin;
+  flex-shrink: 1;
+  width: widthContainer($cell-size);
+
+  @for $day from 28 through 31 {
+    &--length-#{$day}>:nth-child(n + #{1+$day}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition-duration: 500ms;
+    transition-property: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-size: $font-size;
+      }
+    }
+
+    @each $day, $position in $start-day {
+      &--#{$day} {
+        margin-left: $position;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
