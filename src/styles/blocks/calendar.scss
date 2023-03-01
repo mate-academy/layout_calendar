@@ -1,4 +1,6 @@
 .calendar {
+  $nameOfParentClass: &;
+
   display: flex;
   flex-wrap: wrap;
   gap: $cellGap;
@@ -11,16 +13,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eee;
     border: 1px solid black;
+    transition: background-color 0.5s, transform 0.5s;
+    cursor: pointer;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    transition: background-color 0.5s, transform 0.5s;
+    background-color: #eee;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+
+    @for $countOfDay from 28 through 31 {
+      #{$nameOfParentClass}--month-length--#{$countOfDay}
+      &:nth-child(n + #{$countOfDay + 1}) {
+        display: none;
+      }
+    }
+
+    @each $currentDay, $valueOfMargin in $daysOfWeek {
+      #{$nameOfParentClass}--start-day--#{$currentDay}
+      &:first-child {
+        margin-left: #{$valueOfMargin}px;
+      }
+    }
 
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-      cursor: pointer;
     }
   }
 }
