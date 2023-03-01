@@ -33,15 +33,15 @@
     }
   }
 
-  @for $namberDay from 1 through 31 {
-    & > :nth-child(#{$namberDay})::before {
-      content: "#{$namberDay}";
+  @for $numberDay from 1 through 31 {
+    & > :nth-child(#{$numberDay})::before {
+      content: "#{$numberDay}";
     }
   }
 
-  @each $day-of-week, $namber-of-week in $days-of-week {
+  @each $day-of-week, $number-of-week in $days-of-week {
     &--start-day--#{$day-of-week} :first-child {
-      margin-left: $namber-of-week * 100px + $namber-of-week;
+      margin-left: $number-of-week * 100px + $number-of-week;
     }
   }
 
@@ -51,9 +51,7 @@
       content: none;
     }
     &--month-length--#{$lengthMonth - 1} > :nth-child(n + #{$lengthMonth}) {
-      background-color: #fff;
-      border: none;
-      transform: none;
+      display: none;
     }
   }
 }
