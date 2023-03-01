@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  @include fontParams($fontSize, $fontFamily, $fontColor);
+}
+
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: 90px 0;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    @include cell($cell-size);
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
