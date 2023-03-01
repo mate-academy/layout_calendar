@@ -1,0 +1,34 @@
+@import "./mixins";
+@import "./variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: $calendar-width;
+
+  &_cell {
+    @include square($cell-size);
+    background-color: $cell-background-color;
+
+    box-sizing: border-box;
+    border: $cell-border;
+    transition: all 0.5s linear;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+      display: flex;
+
+      color: black;
+    }
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      transition: all 0.5s linear;
+      cursor: pointer;
+    }
+  }
+}
