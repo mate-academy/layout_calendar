@@ -2,24 +2,24 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
+  padding-top: 30px;
   width: (($daySize + 2) * 7 + 10px);
   gap: 1px;
 
   &__day {
-    height: $daySize;
-    width: $daySize;
+    @include size($daySize, $daySize);
     border: 1px solid black;
     background-color: #eee;
     cursor: pointer;
+    transition-duration: 500ms;
 
     &:hover {
       transform: translateY(-20px);
-      transition-duration: 500ms;
       background-color: pink;
     }
 
     @for $dayIndex from 1 through 31 {
-      &--#{$dayIndex}::before {
+      &:nth-child(#{$dayIndex}):before {
         content: "#{$dayIndex}";
       }
     }
