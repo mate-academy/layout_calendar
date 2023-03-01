@@ -1,0 +1,20 @@
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}):before {
+    content: "#{$i}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $day, $shift in $days {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $shift;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length--#{$i} .calendar__day:nth-child(n + #{$i+1}) {
+    display: none;
+  }
+}
