@@ -1,0 +1,28 @@
+/* MIXINS */
+
+@mixin square($cell-size) {
+  width: $cell-size;
+  height: $cell-size;
+}
+
+/* LOOPS */
+
+@for $date from 1 through 31 {
+  .calendar_cell:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $date from 28 through 31 {
+  .calendar--month-length--#{$date}
+  .calendar_cell:nth-child(n + #{$date + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $position in $start-day {
+  .calendar--start-day--#{$day}
+  .calendar_cell:first-child {
+    margin-left: $position;
+  }
+}
