@@ -30,3 +30,15 @@
     }
   }
 }
+
+@for $cell from 28 through 31 {
+  .calendar--month-length--#{$cell} :nth-child(n + #{$cell + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $margin in $start-day {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $margin;
+  }
+}
