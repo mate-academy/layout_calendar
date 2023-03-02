@@ -31,3 +31,21 @@
     }
   }
 }
+
+@for $date from 1 through 31 {
+  .calendar__day:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length-#{$lastDay} > :nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
+}
+
+@each $firsDay, $leftMargin in $days {
+  .calendar--start-day-#{$firsDay} > :first-child {
+    margin-left: $leftMargin;
+  }
+}
