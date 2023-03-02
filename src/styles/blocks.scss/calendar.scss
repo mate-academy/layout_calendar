@@ -1,11 +1,12 @@
 .calendar {
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   width: 8 * $cell-size;
   padding: 20px;
   gap: $gap-size;
-  margin: 0 auto;
-
+  margin: auto;
 
   &__day {
     display: flex;
@@ -39,7 +40,7 @@
 }
 
 @each $day, $index in $days {
-  .calendar--start-day--#{$day} {
+  .calendar--start-day_#{$day} {
     .calendar__day:first-child {
       margin-left: ($cell-size * $index) + ($gap-size * $index);
     }
@@ -47,7 +48,7 @@
 }
 
 @for $i from 28 through 31 {
-  .calendar--month-length--#{$i} {
+  .calendar--month-length_#{$i} {
     .calendar__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
