@@ -1,0 +1,58 @@
+@import "./utils/variables";
+@import "./utils/reset";
+@import "./utils/extends";
+@import "./utils/mixins";
+@import "./utils/functions";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-between-days;
+  max-width: $width;
+  padding: 30px 10px;
+  margin: auto;
+
+  @each $day, $value in $days {
+    &--first-day--#{$day} {
+      .calendar__days:nth-child(1) {
+        margin-left: ($square-size * $value) + $value;
+      }
+    }
+  }
+
+  @for $index from 28 through $month-length {
+    &--month-length--#{$index} {
+      .calendar__days:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+
+
+  &__days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    cursor: pointer;
+
+    @include SizeDay($square-size);
+    @extend %font-style;
+
+    transition: transform 0.5s;
+
+    transition-property: transform, background-color;
+
+    @for $index from 1 through $month-length {
+      &:nth-child(n + #{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+}
+}
