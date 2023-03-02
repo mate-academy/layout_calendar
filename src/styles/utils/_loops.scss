@@ -1,0 +1,29 @@
+@for $dayIndex from 1 through 31 {
+  .calendar__day--#{$dayIndex}::before {
+    content: "#{$dayIndex}";
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@for $monthLength from 28 through 31 {
+  .calendar--month-length--#{$monthLength} :nth-child(n+#{$monthLength+1}) {
+    display: none;
+  }
+}
+
+$dayOfWeek:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@each $name, $strDay in $dayOfWeek {
+  .calendar--start-day--#{$name} :first-child {
+    margin-left: $cal-width - ($cell-size*$strDay+2*$padd)-$gap*($strDay - 1);
+  }
+}
