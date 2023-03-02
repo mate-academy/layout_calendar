@@ -12,13 +12,13 @@
     border: 1px solid black;
     justify-content: center;
     align-items: center;
-    transition: 0.5s all;
-  }
+    transition: background-color 0.5s, transform 0.5s ;
 
-  &__block:hover {
-    background-color: pink;
-    cursor: pointer;
-    transform: translateY(-20px);
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
   }
 
   @for $index from 1 through 31 {
@@ -26,7 +26,7 @@
       content: "#{$index}";
     }
   }
-  
+
   @each $day, $col in $days {
     &--start-day--#{$day} {
       .calendar__block:first-child {
