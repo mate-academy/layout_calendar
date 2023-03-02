@@ -1,0 +1,49 @@
+.calendar {
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: $calendarWidth;
+  gap: 1px;
+  padding-top: 50px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    background-color: #eee;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    @include square($cellSize);
+
+    transition-timing-function: linear;
+    transition-property: transform;
+    transition-duration: 0.3s;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    @for $index from 28 through 31 {
+      &:nth-child(#{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $key, $value in $daysOfWeek {
+    &--start-day--#{$key} :first-child {
+      margin-left: $value;
+    }
+  }
+}
