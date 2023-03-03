@@ -7,27 +7,46 @@
   padding: 100px 0;
 
   &__days {
-    transition: color 0.5s, transform 0.5s;
+    transition: color $transitionDuration, transform $transitionDuration;
     position: relative;
 
-    background-color: #eee;
-    border: 1px solid black;
+    background-color: $e-color;
+    border: 1px solid $black-color;
 
     @include cell($squere-size);
 
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+    
+    &::before {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      position: absolute;
+    }
   }
 
-  &__days:hover {
-    transform: translateY(-20px);
-    background-color: pink;
-    cursor: pointer;
+  @for $index from 1 through 31 {
+    .calendar__days:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
   }
-  
-  &__days::before {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    position: absolute;
+
+  @for $lastDay from 28 through 31 {
+    .calendar--month-length-#{$lastDay}
+    .calendar__days:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
   }
+
+  @each $day, $dayN in $days-day {
+    .calendar--start-day-#{$day} 
+    .calendar__days:first-child {
+      margin-left: $dayN;
+    }
+  }  
 }
