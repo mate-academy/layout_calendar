@@ -1,37 +1,35 @@
-@import "../utils/variables";
-@import "../utils/mixins";
-@import "../utils/functions";
-@import "../normalize/normalize.scss";
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
+
   width: 7 * $cell-size + 10 * $cell-gap;
 
   &__cell {
     @include square ($cell-size);
-    background-color: #{$cell-color};
-    border: #{$cell-border};
+
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease;
+
+    transition: transform $transitionDuration ease;
+
+    border: $cell-border;
+
+    background-color: $cell-color;
     cursor: pointer;
 
     &:hover {
-      background-color: palevioletred;
       transform: translate(0, -20px);
+      background-color: $hover-color;
     }
 
     &::before {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: black;
+      color: $c-black;
     }
   }
 }
 
-.calendar.calendar--start-day--wed .easter-egg:hover {
+.calendar--start-day--wed .easter-egg:hover {
   background-image: url(/images/mydudes.jpg);
 }
