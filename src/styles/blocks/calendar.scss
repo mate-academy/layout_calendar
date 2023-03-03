@@ -9,6 +9,14 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: $fontSize;
+
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -42,14 +50,20 @@ body {
       background-color: pink;
       transform: translateY(-20px);
     }
+
+    &:before {
+      content: "";
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: $size;
+      height: $size;
+    }
   }
 
   @for $index from 1 through $days {
-    .calendar__item--#{$index}::before {
+    .calendar__item:nth-child(#{$index}):before {
       content: "#{$index}";
-      position: relative;
-      top: $pos;
-      left: $pos;
     }
   }
 }
