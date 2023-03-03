@@ -1,0 +1,34 @@
+@import "../utils/mixins.scss";
+
+@import "../utils/variables.scss";
+
+.calendar {
+  width: $day__size * 7 + $flex__gap * 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $flex__gap;
+
+  &--position {
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @include square($day__size);
+
+    border: 1px solid #000;
+    background-color: #eee;
+    cursor: pointer;
+    
+    transition: all 0.5s ease-in-out ;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
