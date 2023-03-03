@@ -14,7 +14,7 @@
 
   @each $day, $value in $days {
     &--first-day--#{$day} {
-      .calendar__days:nth-child(1) {
+      .calendar__day:nth-child(1) {
         margin-left: ($square-size * $value) + $value;
       }
     }
@@ -22,15 +22,13 @@
 
   @for $index from 28 through $month-length {
     &--month-length--#{$index} {
-      .calendar__days:nth-child(n + #{$index + 1}) {
+      .calendar__day:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
   }
 
-
-
-  &__days {
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,5 +52,5 @@
       background-color: pink;
       transform: translate(0, -20px);
     }
-}
+  }
 }
