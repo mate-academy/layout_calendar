@@ -1,0 +1,32 @@
+
+@for $index from 1 through $days-count {
+  .calendar :nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@for $index from 28 through $days-count {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+$weekdays:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
+@each $name, $weekday in $weekdays {
+  .calendar--start--#{$name} {
+    .calendar__day:first-child {
+      margin-left: $day-size * ($weekday - 1)
+        + $day-gap * ($weekday - 1)
+        + $day-border * ($weekday);
+    }
+  }
+}
