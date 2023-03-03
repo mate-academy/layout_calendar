@@ -1,35 +1,28 @@
-@use "../utils/_variables" as *;
-@use "../utils/_mixins" as *;
-@use "../utils/_functions" as *;
-@use "../blocks/reset.scss" as *;
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: #{$cell-gap};
+  gap: $cell-gap;
   width: calc(7 * (#{$cell-size}) + 10 * #{$cell-gap});
 
   &__cell {
     @include square ($cell-size);
-    background-color: #{$cell-background-color};
-    border: #{$cell-border};
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    transition: transform 0.5s linear;
+    border: $cell-border;
+    background-color: $cell-background-color;
+    transition: transform $time-transition linear, background-color $time-transition linear;
     cursor: pointer;
 
     &::before {
-      font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
-      color: black;
+      color: $text-color;
     }
 
     &:hover {
-      background-color: pink;
       transform: translate(0, -20px);
-      transition: all 0.5s linear;
+      background-color: $hover-background;
     }
   }
 }
