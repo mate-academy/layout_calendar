@@ -1,0 +1,36 @@
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  gap: $cell-gap;
+  flex-wrap: wrap;
+  &__cell {
+    transition: transform 0.5s;
+    cursor: pointer;
+    @include centeredSquare;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+    border: $cell-border;
+    background-color: $cell-color;
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@each $day, $dayCount in $start-day {
+  .calendar--start-day--#{$day}
+  .calendar__cell:first-child {
+    margin-left: $dayCount * ($cell-gap + $cell-size);
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__cell:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
