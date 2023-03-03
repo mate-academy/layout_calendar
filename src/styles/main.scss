@@ -1,3 +1,44 @@
+@import "./utils/variables";
+@import "./utils/each-loops";
+@import "./utils/for-loops";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  margin: auto;
+  max-width: $calendar-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $cell-size;
+    height: $cell-size;
+
+    background-color: $main-cell-color;
+    border: 1px solid $main-black-color;
+    transition: background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      background-color: $main-pink-color;
+
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
 }
