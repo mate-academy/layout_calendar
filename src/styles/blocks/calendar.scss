@@ -1,40 +1,23 @@
-$blockSize: 100px;
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $blockSize * 7 + 10px;
+  width: setWidth($blockSize,$daysOfWeeks,$marginBetweenBlocks);
 
   &--start-day {
-    $daysOfWeeks: mon, tue, wed, thu, fri, sat, sun;
-    $indexOfWeek: 0;
-
-    @each $day in $daysOfWeeks {
-      &--#{$day} {
-        & :first-child {
-          margin-left: $blockSize * $indexOfWeek + ($indexOfWeek + 1);
-        }
-      }
-      $indexOfWeek: $indexOfWeek + 1;
-    }
+    @include setFirstDayOfWeek;
   }
 
   &--month-length {
-    @for $i from 1 through 31 {
-      &--#{$i} :nth-child(n + #{$i + 1}) {
-        display: none;
-      }
-    }
+    @include hideDaysOfMonth;
   }
 
   &__day {
     position: relative;
 
-    width: $blockSize;
-    height: $blockSize;
+    @include setBlockSize;
 
-    margin-left: 1px;
-    margin-bottom: 1px;
+    margin-left: $marginBetweenBlocks;
+    margin-bottom: $marginBetweenBlocks;
 
     background-color: #eee;
     border: 1px solid black;
@@ -47,8 +30,7 @@ $blockSize: 100px;
           content: "#{$i}";
           position: absolute;
 
-          width: $blockSize;
-          height: $blockSize;
+          @include setBlockSize;
 
           text-align: center;
           line-height: $blockSize;
