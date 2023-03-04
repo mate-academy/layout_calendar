@@ -27,11 +27,9 @@ body {
     transition: cursor, background-color, transform, 0.5s;
   }
 
-  $start-day: ("mon": 1, "tue": 2, "wed": 3, "thu": 4, "fri": 5, "sat": 6, "sun": 7);
-
   @for $i from 1 through $days-of-week {
     &__day:nth-child(#{$i})::before {
-      content: '#{$i}';
+      content: #{$i};
     }
   }
 
@@ -39,11 +37,15 @@ body {
     &__day:nth-child(n + 29) {
       display: none;
     }
-  } @else if $days-of-week == 29 {
+  }
+
+  @else if $days-of-week == 29 {
     &__day:nth-child(n + 30) {
       display: none;
     }
-  } @else if $days-of-week == 30 {
+  }
+
+  @else if $days-of-week == 30 {
     &__day:nth-child(n + 31) {
       display: none;
     }
