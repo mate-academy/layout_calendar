@@ -1,0 +1,35 @@
+@for $i from 1 through 31 {
+  .calendar__date-value:nth-child(#{$i}):before {
+    content: "#{$i}";
+    font-size: 30px;
+    font-family: "Arial", sans-serif;
+  }
+}
+
+$days: (
+  "Monday" 1,
+  "Tuersday" 2,
+  "Wensday" 3,
+  "Thursday" 4,
+  "Friday" 5,
+  "Saterday" 6,
+  "Sunday" 7
+);
+
+// @each $day, $index in $days {
+//   .calendar--start-day-#{$index}::content ;
+
+
+// }
+
+@each $day, $index in $days {
+  .calendar--start-day:nth-child(#{$index})::before {
+    content: "#{$day}";
+  }
+}
+
+@for $i from 31 through 32 {
+  .month-length:nth-child(#{$i})::before {
+    content: " ";
+  }
+}
