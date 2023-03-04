@@ -1,0 +1,47 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: setWidth($blockSize,$daysOfWeeks,$marginBetweenBlocks);
+
+  &--start-day {
+    @include setFirstDayOfWeek;
+  }
+
+  &--month-length {
+    @include hideDaysOfMonth;
+  }
+
+  &__day {
+    position: relative;
+
+    @include setBlockSize;
+
+    margin-left: $marginBetweenBlocks;
+    margin-bottom: $marginBetweenBlocks;
+
+    background-color: #eee;
+    border: 1px solid black;
+    top: 0;
+    transition: color 0.5s, top 0.5s;
+
+    @for $i from 1 through 31 {
+      &--#{$i} {
+        &::before {
+          content: "#{$i}";
+          position: absolute;
+
+          @include setBlockSize;
+
+          text-align: center;
+          line-height: $blockSize;
+        }
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+        top: -20px;
+      }
+    }
+  }
+}

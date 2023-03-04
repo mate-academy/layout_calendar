@@ -1,0 +1,26 @@
+@mixin setFirstDayOfWeek {
+  $indexOfWeek: 0;
+
+  @each $day in $daysOfWeeks {
+    &--#{$day} {
+      & :first-child {
+        margin-left: $blockSize * $indexOfWeek + 
+          ($indexOfWeek + 1) * $marginBetweenBlocks;
+      }
+    }
+    $indexOfWeek: $indexOfWeek + 1;
+  }
+}
+
+@mixin hideDaysOfMonth {
+  @for $i from 1 through 31 {
+    &--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@mixin setBlockSize {
+  width: $blockSize;
+  height: $blockSize;
+}
