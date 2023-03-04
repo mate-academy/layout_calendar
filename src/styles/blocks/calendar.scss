@@ -1,0 +1,30 @@
+.calendar {
+  margin-top: 130px;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  gap: $gap;
+  width: $calendar-width;
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include cell-size($cell-size);
+    background-color: #eee;
+    border: 1px solid black;
+    transition: 0.5s ease-in-out;
+
+    @for $number from 1 through 29 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
