@@ -1,3 +1,47 @@
+$calendar-block-width: 100px;
+$calendar-block-height: 100px;
+$calendar-block-gap: 1px;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: calc($calendar-block-width * 7 + $calendar-block-gap * 10px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__block {
+    box-sizing: border-box;
+    display: flex;
+    height: $calendar-block-height;
+    width: $calendar-block-width;
+    border: 1px solid black;
+    background-color: #eee;
+    font-size: 30px;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  
+  
+    &:hover {
+      display: flex;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: transform 0.5s ;
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
 }
