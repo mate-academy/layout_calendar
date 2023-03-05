@@ -4,15 +4,7 @@
   gap: $calendar-gap;
   width: $calendar-width;
   padding: $calendar-padding;
-
-  $start-day:
-    "mon" 0,
-    "tue" ($cell-size + $calendar-gap),
-    "wed" ($cell-size + $calendar-gap) * 2,
-    "thu" ($cell-size + $calendar-gap) * 3,
-    "fri" ($cell-size + $calendar-gap) * 4,
-    "sat" ($cell-size + $calendar-gap) * 5,
-    "sun" ($cell-size + $calendar-gap) * 6;
+  margin: 0 auto;
 
   @each $day, $margin in $start-day {
     &--start-day--#{$day} &__cell:first-child {
@@ -27,13 +19,17 @@
   }
 
   &__cell {
-    @include square($cell-size);
-    box-sizing: border-box;
-    border: 1px solid black;
-    background-color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+
+    @include square($cell-size);
+
+    border: 1px solid black;
+    background-color: #eee;
+
+    transition: background-color $smoothlyTime, transform $smoothlyTime;
 
     @for $count from 1 through 31 {
       &:nth-child(#{$count})::before {
@@ -45,7 +41,6 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.5s;
     }
   }
 }
