@@ -1,4 +1,4 @@
-$days-of-week: 30;
+$days-of-week: 29;
 
 body {
   margin: 0;
@@ -29,25 +29,27 @@ body {
 
   @for $i from 1 through $days-of-week {
     &__day:nth-child(#{$i})::before {
-      content: #{$i};
+      content: "#{$i}";
     }
   }
 
-  @if $days-of-week == 28 {
-    &__day:nth-child(n + 29) {
-      display: none;
+  @for $i from 28 through $days-of-week {
+    @if $days-of-week == 28 {
+      &__day:nth-child(n + 29) {
+        display: none;
+      }
     }
-  }
 
-  @else if $days-of-week == 29 {
-    &__day:nth-child(n + 30) {
-      display: none;
+    @else if $days-of-week == 29 {
+      &__day:nth-child(n + 30) {
+        display: none;
+      }
     }
-  }
 
-  @else if $days-of-week == 30 {
-    &__day:nth-child(n + 31) {
-      display: none;
+    @else if $days-of-week == 30 {
+      &__day:nth-child(n + 31) {
+        display: none;
+      }
     }
   }
 
