@@ -1,0 +1,25 @@
+.calendar__day {
+  height: $squareSide;
+  width: $squareSide;
+
+  line-height: 330%;
+  text-align: center;
+
+  background-color: $backColor;
+  border: 1px solid black;
+
+  transition: background-color $transitionDuration,
+    transform $transitionDuration;
+
+  @for $date from 1 through 31 {
+    &:nth-child(#{$date}):before {
+      content: "#{$date}";
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+}

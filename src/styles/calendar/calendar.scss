@@ -1,0 +1,31 @@
+.calendar {
+  display: flex;
+
+  margin: 0 auto;
+
+  flex-wrap: wrap;
+  max-width: 726px;
+  padding: 25px 10px;
+  gap: 1px;
+
+  $days:
+    "mon" 0,
+    "tue" ($squareSide + 1px),
+    "wed" ($squareSide + 1px) * 2,
+    "thu" ($squareSide + 1px) * 3,
+    "fri" ($squareSide + 1px) * 4,
+    "sat" ($squareSide + 1px) * 5,
+    "sun" ($squareSide + 1px) * 6;
+
+  @each $day, $mar in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $mar;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
