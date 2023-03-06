@@ -18,20 +18,23 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      box-sizing: border-box;
-      border: 1px solid #000;
-      background-color: #eee;
+      border: 1px solid $c-black;
+      background-color: $c-grey;
       padding: 10px;
       counter-increment: day-counter;
-      transition: transform 0.5s, background-color 0.5s;
+        
+      transition: transform $transitionDuration,
+        background-color $transitionDuration;
+
       &::before {
         position: absolute;
         content: counter(day-counter);
       }
+
       &:hover {
         cursor: pointer;
         @extend %animation;
-        background-color: pink;
+        background-color: $bc-pink;
       }
     }
   }
