@@ -1,34 +1,31 @@
 .calendar {
-  margin: 100px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 100px;
   gap: $calendarGap;
   padding: $calendarPadding;
   width: $calendarMaxWidth;
 
   &__day {
     height: $cellHeight;
-    box-sizing: border-box;
     width: $cellHeight;
     position: relative;
-    border: 1px solid black;
-    background-color: #eee;
+    border: 1px solid $c-black;
+    background-color: $c-white;
+    transition: transform $transitionDuraiton;
 
     &:hover {
-      background-color: pink;
+      background-color: $c-pink;
       transform: translateY(-20px);
-      transition: 0.5s;
     }
     
     &::before {
       display: flex;
       justify-content: center;
-      text-decoration: none;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      color: black;
       line-height: $cellHeight;
+      text-decoration: none;
+      color: $c-black;
     }
   }
 }
