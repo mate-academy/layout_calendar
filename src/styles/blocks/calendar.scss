@@ -1,11 +1,10 @@
 .calendar {
-  width: calendarWidth(100, 1, 10) + px;
+  width: calendarWidth($cell-size, $cell-gap, $calendar-horizontal-paddings);
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
   gap: $cell-gap;
-  
 
   &__cell {
     display: flex;
@@ -15,7 +14,8 @@
     width: $cell-size;
     border: 1px solid black;
     background-color: $cell-color;
-    transition: background-color 0.5s, transform 0.5s ;
+    transition: background-color $transition-duration,
+      transform $transition-duration;
 
     &:hover {
       background-color: pink;
@@ -25,7 +25,7 @@
   }
   
   @for $index from 1 through 31 {
-    &__cell--#{$index}::before {
+    &__cell:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
