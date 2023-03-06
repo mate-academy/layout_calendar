@@ -1,5 +1,6 @@
 .calendar {
   display: flex;
+  gap: $calendar-gap-size;
   flex-wrap: wrap;
   width: $calendarWidth;
   
@@ -25,24 +26,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
-    margin-bottom: 1px;
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
-    border: 1px black solid;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    transition: transform 0.5s;
-
-    &:not(:nth-child(7n)) {
-      margin-right: 1px;
-    }
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-color;
+    border: 1px $black-border solid;
+    transition: transform $transitionDuration;
 
     &:hover {
       cursor: pointer;
       transform: translate(0, -20px);
-      background-color: pink;
+      background-color: $hover-cell-color;
     }
   }
 }
