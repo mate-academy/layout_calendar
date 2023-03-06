@@ -9,17 +9,15 @@
     @include calendar-size;
     display: flex;
     align-items: center;
+    justify-content: center;
     border: 1px solid #000;
     background-color: $calendar-color;
+    @include days-setting;
     transition: color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
-        color: #000;
-        margin: 0 auto;
       }
     }
 
@@ -37,7 +35,7 @@
   }
 
   @for $last-day from 28 through 31 {
-    &--last-day_#{$last-day} .calendar__day:nth-child(n + #{$last-day}) {
+    &--last-day_#{$last-day} .calendar__day:nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
