@@ -15,12 +15,9 @@
     font-family: Arial, sans-serif;
     background-color: #eee;
     border: 1px solid #000;
-    box-sizing: border-box;
     @include square($cellSize);
 
-    transition-timing-function: linear;
-    transition-property: transform;
-    transition-duration: 0.3s;
+    transition: transform $transitionDuration linear;
 
     &:hover {
       background-color: pink;
@@ -33,17 +30,17 @@
         content: "#{$index}";
       }
     }
-
-    @for $index from 28 through 31 {
-      &:nth-child(#{$index + 1}) {
-        display: none;
-      }
-    }
   }
 
   @each $key, $value in $daysOfWeek {
     &--start-day--#{$key} :first-child {
       margin-left: $value;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 }

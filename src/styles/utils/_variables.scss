@@ -1,13 +1,16 @@
 $cellSize: 100px;
-$calendarWidth: ($cellSize * 7) + (1 * 6);
+$cellGap: 1;
+$transitionDuration: 0.3s;
+$calendarWidth: ($cellSize * 7) + ($cellGap * 6);
+$day-margin: $cellSize + $cellGap;
 $daysOfWeek:
   "mon" 0,
-  "tue" $cellSize + 1,
-  "wed" 2 * ($cellSize + 1),
-  "thu" 3 * ($cellSize + 1),
-  "fri" 4 * ($cellSize + 1),
-  "sat" 5 * ($cellSize + 1),
-  "sun" 6 * ($cellSize + 1);
+  "tue" $day-margin,
+  "wed" 2 * $day-margin,
+  "thu" 3 * $day-margin,
+  "fri" 4 * $day-margin,
+  "sat" 5 * $day-margin,
+  "sun" 6 * $day-margin;
 
 @mixin square($cellSize) {
   width: $cellSize;
