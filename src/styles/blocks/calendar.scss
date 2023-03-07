@@ -1,12 +1,12 @@
 .calendar {
-  display: flex;
   position: absolute;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1px;
-  width: 710px;
   top: 50%;
   left: 50%;
+  display: flex;
+  width: 710px;
+  gap: 1px;
+  flex-direction: row;
+  flex-wrap: wrap;
   transform: translate(-50%, -50%);
 
   &__block {
@@ -14,20 +14,18 @@
     display: flex;
     height: $cell-size;
     width: $cell-size;
-    border: 1px solid black;
-    background-color: #eee;
     font-size: 30px;
     color: black;
+    background-color: #eee;
+    border: 1px solid black;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-  
+    transition: transform 0.5s, background-color;
   
     &:hover {
-      display: flex;
       background-color: pink;
       transform: translateY(-20px);
-      transition: transform 0.5s ;
     }
   
     @for $index from 1 through 31 {
