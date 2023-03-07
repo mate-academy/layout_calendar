@@ -28,25 +28,15 @@
       cursor: pointer;
     }
 
-    /*Days in month*/
     @for $index from 28 through 31 {
-      .month-length--#{$index} &:nth-last-child(-n + #{31 - $index}) {
+      .calendar__list--month-length--#{$index}
+      &:nth-last-child(-n + #{31 - $index}) {
         display: none;
       }
     }
 
-    /*Days offset*/
-    $days:
-      "mon" 0,
-      "tue" 1,
-      "wed" 2,
-      "thu" 3,
-      "fri" 4,
-      "sat" 5,
-      "sun" 6;
-
     @each $day, $day-offset in $days {
-      .start-day--#{$day} &:first-child {
+      .calendar__list--start-day--#{$day} &:first-child {
         margin-left: ($cell-size + $gap) * $day-offset;
       }
     }
@@ -69,7 +59,7 @@
     }
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      .calendar__item:nth-child(#{$index}) &::before {
         content: "#{$index}";
       }
     }
