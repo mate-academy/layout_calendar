@@ -1,0 +1,77 @@
+.calendar {
+
+  padding: 50px 10px;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    $containerWidth: calendarContainerWidth($cell-size);
+    width: $containerWidth;
+    margin: 0 auto;
+    gap: 1px;
+    list-style: none;
+  }
+
+  &__item {
+    @include square($cell-size);
+    position: relative;
+    top: 0;
+    display: block;
+    background-color: $color-background;
+    border: 1px solid $color-border;
+    transition: all 0.5s ease;
+
+    &:hover {
+      top: -20px;
+      background-color: $color-background-hover;
+      transition: top 0.5s ease;
+      cursor: pointer;
+    }
+
+    /*Days in month*/
+    @for $index from 28 through 31 {
+      .month-length--#{$index} &:nth-last-child(-n + #{31 - $index}) {
+        display: none;
+      }
+    }
+
+    /*Days offset*/
+    $days:
+      "mon" 0,
+      "tue" 1,
+      "wed" 2,
+      "thu" 3,
+      "fri" 4,
+      "sat" 5,
+      "sun" 6;
+
+    @each $day, $day-offset in $days {
+      .start-day--#{$day} &:first-child {
+        margin-left: ($cell-size + $gap) * $day-offset;
+      }
+    }
+  }
+
+  &__number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: 30px;
+      color: #555;
+      transform: translate(-50%, -50%);
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
