@@ -1,12 +1,13 @@
-$dayWidth: 100px;
-$dayGap: 1px;
-
 body {
   margin: 0;
 }
 
-.page__calendar {
-  margin: 0 auto;
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
 }
 
 .calendar {
@@ -24,15 +25,11 @@ body {
     width: $dayWidth;
     height: $dayWidth;
 
-    box-sizing: border-box;
-    border: 1px solid black;
+    border: 1px solid $c-black;
     background-color: #eee;
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-
     cursor: pointer;
-    transition: transform 0.5s;
+    transition: transform $transition-duration;
   }
 
   &__day:hover {
@@ -41,20 +38,19 @@ body {
   }
 
   @for $day from 1 through 31 {
-    &__day--#{$day}::after {
+    &__day:nth-child(#{$day})::after {
       content: "#{$day}";
-
     }
   }
 
   $week: ("mon": (0),
-  "tue": ($dayWidth + $dayGap),
-  "wed": (2 * $dayWidth + 2 * $dayGap),
-  "thu": (3 * $dayWidth + 3 * $dayGap),
-  "fri": (4 * $dayWidth + 4 * $dayGap),
-  "sat": (5 * $dayWidth + 5 * $dayGap),
-  "san": (6 * $dayWidth + 6 * $dayGap),
-);
+    "tue": ($dayWidth + $dayGap),
+    "wed": (2 * $dayMargin),
+    "thu": (3 * $dayMargin),
+    "fri": (4 * $dayMargin),
+    "sat": (5 * $dayMargin),
+    "san": (6 * $dayMargin),
+  );
 
   @each $dayOfWeek, $width in $week {
     &--start-day--#{$dayOfWeek} > :first-child {
@@ -68,5 +64,4 @@ body {
       display: none;
     }
   }
-
 }
