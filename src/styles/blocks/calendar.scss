@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 30px;
+  gap: 1px;
+  width: 7 * $dayWidth + 6 * $dayGap;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $dayWidth;
+    height: $dayWidth;
+
+    border: 1px solid $c-black;
+    background-color: #eee;
+
+    cursor: pointer;
+    transition: transform $transition-duration;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day})::after {
+      content: "#{$day}";
+    }
+  }
+
+  $week: ("mon": (0),
+    "tue": ($dayWidth + $dayGap),
+    "wed": (2 * $dayMargin),
+    "thu": (3 * $dayMargin),
+    "fri": (4 * $dayMargin),
+    "sat": (5 * $dayMargin),
+    "san": (6 * $dayMargin),
+  );
+
+  @each $dayOfWeek, $width in $week {
+    &--start-day--#{$dayOfWeek} > :first-child {
+      margin-left: $width;
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    $lastDayPlusOne: $lastDay + 1;
+    &--month-length--#{$lastDay} > :nth-child(n + #{$lastDayPlusOne}) {
+      display: none;
+    }
+  }
+}
