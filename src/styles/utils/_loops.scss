@@ -1,0 +1,22 @@
+@for $index from 1 through 31 {
+  .calendar__days:nth-child(#{$index})::before {
+    content: "#{$index}";
+    @extend %days;
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length_#{$index} {
+    .calendar__days:not(:nth-child(-n + #{$index})) {
+      display: none;
+    }
+  }
+}
+
+@each $name, $index in $days-week {
+  .calendar--start-day_#{$name} {
+    .calendar__days:nth-child(1) {
+      margin-left: getMargin($index);
+    }
+  }
+}
