@@ -1,10 +1,12 @@
-.container__item {
-  margin: 100px auto;
-}
-
 .calendar {
   max-width: $calendar-width;
   padding: 0 $calendar-vertical-padding;
+
+  @each $day, $shift in $days-shift {
+    &--start-day--#{$day} li:first-of-type {
+      margin-left: $shift;
+    }
+  }
 
   @for $i from 28 to 31 {
     &--month-length--#{$i} li:nth-of-type(n + #{$i + 1}) {
@@ -16,6 +18,8 @@
     display: flex;
     flex-flow: row wrap;
     gap: $cells-gap;
+    padding: 0;
+    list-style: none;
   }
 
   &__day {
@@ -33,12 +37,6 @@
     @for $date from 1 through $month-length {
       &:nth-child(#{$date}):before {
         content: "#{$date}";
-      }
-    }
-
-    @each $day, $shift in $days-shift {
-      &--start-day--#{$day}:first-of-type {
-        margin-left: $shift;
       }
     }
 
