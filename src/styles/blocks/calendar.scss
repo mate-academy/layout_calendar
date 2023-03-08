@@ -22,26 +22,26 @@
       background-color: $box-hover-color;
       transform: translateY(-20px);
     }
+  }
 
-    @for $index from 1 through 31 {
-      &--day-#{$index}::before {
-        content: "#{$index}";
-      }
+  $days:
+    "mon" 0,
+    "tue" $day-box-size * 1 + 1,
+    "wed" $day-box-size * 2 + 2,
+    "thu" $day-box-size * 3 + 3,
+    "fri" $day-box-size * 4 + 4,
+    "sat" $day-box-size * 5 + 5,
+    "sun" $day-box-size * 6 + 6;
+
+  @each $day, $margin in $days {
+    &--day-#{$day} :first-child {
+      margin-left: #{$margin};
     }
+  }
 
-    $days:
-      "mon" 0,
-      "tue" $day-box-size * 1 + 1,
-      "wed" $day-box-size * 2 + 2,
-      "thu" $day-box-size * 3 + 3,
-      "fri" $day-box-size * 4 + 4,
-      "sat" $day-box-size * 5 + 5,
-      "sun" $day-box-size * 6 + 6;
-
-    @each $day, $margin in $days {
-      &--#{$day} {
-        margin-left: #{$margin};
-      }
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
     }
   }
 
