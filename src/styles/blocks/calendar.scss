@@ -1,0 +1,47 @@
+@use "../utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 30px 10px;
+  width: calc(variables.$day-size * 7.06);
+  &__day {
+    width: variables.$day-size;
+    height: variables.$day-size;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    transition: transform 0.5s, background-color 0.5s;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        color: black;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+
+  @each $day, $margin in variables.$days {
+    &--start-#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &--month-#{$index} {
+      & :nth-child(n + #{$index + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+}
