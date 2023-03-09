@@ -1,6 +1,9 @@
-.calendar {
+.main__calendar {
   margin: auto;
   padding-top: 150px;
+}
+
+.calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -14,11 +17,11 @@
   }
 
   @for $index from 28 through 31 {
-    &--month-length--#{$index}:nth-child(n + #{$index + 1}) {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
-
+    
   &__day {
     display: flex;
     justify-content: center;
@@ -26,14 +29,14 @@
     @include square($cellSize);
     background-color: #eee;
     border: 1px solid #000;
-    transition: transform $duration linear;
-
+    cursor: pointer;
+    transition: background-color 3s, transform 2s;
+  
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
-  
+    
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
