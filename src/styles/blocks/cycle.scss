@@ -7,29 +7,19 @@
 }
 
 $days: (
-  "Monday" 1,
-  "Tuersday" 2,
-  "Wensday" 3,
-  "Thursday" 4,
-  "Friday" 5,
-  "Saterday" 6,
-  "Sunday" 7
+  "Monday": 0,
+  "Tuersday": 1,
+  "Wensday": 2,
+  "Thursday": 3,
+  "Friday": 4,
+  "Saterday": 5,
+  "Sunday": 6
 );
 
-// @each $day, $index in $days {
-//   .calendar--start-day-#{$index}::content ;
-
-
-// }
-
 @each $day, $index in $days {
-  .calendar--start-day:nth-child(#{$index})::before {
-    content: "#{$day}";
-  }
-}
-
-@for $i from 31 through 32 {
-  .month-length:nth-child(#{$i})::before {
-    content: " ";
+  .calendar__start-day--#{$day} {
+    .calendar__date-value:first-child {
+      margin-left: $index * ($box-size + $margin-day);
+    }
   }
 }

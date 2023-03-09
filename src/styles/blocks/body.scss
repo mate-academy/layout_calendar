@@ -1,22 +1,29 @@
-
-
 .value {
   width: $box-size;
   margin-right: $repreat-horisontal;
 }
 
 .calendar {
+  width: 700px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+
   &__day {
     display: flex;
+
   }
 
   &__date {
-    display: grid;
-    grid-template-columns: repeat(7, 0fr);
+    // display: grid;
+    // grid-template-columns: repeat(7, 0fr);
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(7, 1fr);
 
     &-value {
       margin-bottom: 1px;
-      margin-right: $repreat-horisontal;
+      margin-right: 1px;
       box-sizing: border-box;
 
       border: 1px solid $color-black;
@@ -40,16 +47,4 @@
       }
     }
   }
-}
-
-.calendar__date .calendar__date-value:nth-child(7n) {
-  margin-right: 0;
-}
-
-.calendar__date .calendar__date-value:nth-child(7n+1) {
-  margin-left: $repreat-horisontal;
-}
-
-.calendar__day .calendar__start-day:first-child {
-  margin-left: $repreat-horisontal;
 }
