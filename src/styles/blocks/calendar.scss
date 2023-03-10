@@ -20,28 +20,16 @@
     background-color: #eee;
     transition: background-color 0.3s, transform 0.3s;
   }
-
+  
   &__day:hover {
     background-color: $calendar-accent;
     transform: translateY(-20px);
     cursor: pointer;
   }
 
-  &__day::before {
-    font-size: 30px;
-    font-family: Arial, sans-serif;
-    color: black;
-  }
-
-  @for $i from 1 through 31 {
-    &__day:nth-of-type(#{$i})::before {
-      content: "#{$i}";
-}
-  }
-  @for $index from 28 through 31 {
-    .calendar--length--#{$index}
-    &:nth-last-child(-n + #{31 - $index}) {
-      display: none;
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}"
     }
   }
 
@@ -55,9 +43,18 @@
   "sun" 6;
 
 @each $day, $index in $start-day {
-  &--start-day--#{$day} 
+  &--start-day--#{$day} {
   .calendar__day:first-child {
     margin-left: ($index *  $day-size) + ($index * $days-gap);
   }
+}
+}
+
+@for $index from 29 through 31 {
+  &--length--#{$index} {
+  .calendar__day:nth-child(n + #{$index + 1}) {
+  display: none;
+  }
+}
 }
 }
