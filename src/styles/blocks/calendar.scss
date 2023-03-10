@@ -1,0 +1,60 @@
+@import "./utils/variables";
+@import "./blocks/normalize.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: 0 auto;
+  padding: $calendar-padding;
+  max-width: $calendar-width;
+
+  &__day {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  &__day:hover {
+    background-color: $calendar-accent;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}"
+    }
+  }
+
+  $start-day:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $index in $start-day {
+  &--start-day--#{$day} {
+  .calendar__day:first-child {
+    margin-left: ($index *  $day-size) + ($index * $days-gap);
+  }
+}
+}
+
+@for $index from 29 through 31 {
+  &--length--#{$index} {
+  .calendar__day:nth-child(n + #{$index + 1}) {
+  display: none;
+  }
+}
+}
+}
