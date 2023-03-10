@@ -1,0 +1,33 @@
+@for $i from 1 through 31 {
+  .calendar__date-value:nth-child(#{$i}):before {
+    content: "#{$i}";
+    font-size: 30px;
+    font-family: "Arial", sans-serif;
+  }
+}
+
+$days: (
+  "Monday": 0,
+  "Tuesday": 1,
+  "Wednesday": 2,
+  "Thursday": 3,
+  "Friday": 4,
+  "Saturday": 5,
+  "Sunday": 6
+);
+
+@each $day, $index in $days {
+  .calendar__start-day--#{$day} {
+    .calendar__date-value:first-child {
+      margin-left: $index * ($box-size + 2 * $margin-day);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__date-value:nth-last-child(-n + #{31 - $i}) {
+      display: none;
+    }
+  }
+}
