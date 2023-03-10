@@ -8,18 +8,26 @@
 
 $days: (
   "Monday": 0,
-  "Tuersday": 1,
-  "Wensday": 2,
+  "Tuesday": 1,
+  "Wednesday": 2,
   "Thursday": 3,
   "Friday": 4,
-  "Saterday": 5,
+  "Saturday": 5,
   "Sunday": 6
 );
 
 @each $day, $index in $days {
   .calendar__start-day--#{$day} {
     .calendar__date-value:first-child {
-      margin-left: $index * ($box-size + $margin-day);
+      margin-left: $index * ($box-size + 2 * $margin-day);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__date-value:nth-last-child(-n + #{31 - $i}) {
+      display: none;
     }
   }
 }
