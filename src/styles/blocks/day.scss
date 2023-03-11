@@ -8,15 +8,16 @@
   border: 1px solid #000;
   transition: 0.5s;
 
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+  
   &:hover {
     background-color: #ffc0cb;
     transform: translateY(-20px);
     cursor: pointer;
   }
 
-  @for $index from 1 through 31 {
-    &:nth-child(#{$index})::before {
-      content: "#{$index}";
-    }
-  }
 }
