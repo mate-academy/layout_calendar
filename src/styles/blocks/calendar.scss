@@ -26,21 +26,21 @@
       transform: translateY(-20px);
     }
 
-    @for $days from 1 to 32 {
-      &:nth-child(#{$days})::before {
-        content: "#{$days}";
+    @for $day from 1 to 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
       }
     }
   }
 
-  @each $day-num, $number in $week {
-    &--start-day-num--#{$day-num} &__cell:first-child {
-      margin-left: $number * ($cell-size + $gap);
+  @each $start-day, $day in $week {
+    &__start-day--#{$start-day} &__day:first-child {
+      margin-left: $day * ($cell-size + $gap);
     }
   }
 
-  @for $days from 1 through 31 {
-    &--month-length--#{$days} &__cell:nth-child(n + #{$days + 1}) {
+  @for $day from 1 through 31 {
+    &__month-length--#{$day} &__day:nth-child(n + #{$day}) {
       display: none;
     }
   }
