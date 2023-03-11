@@ -1,0 +1,23 @@
+.calendar {
+  width: ($cell-size + $cell-gap) * 7 + 20px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  gap: $cell-gap;
+
+  @each $day, $number in $start-day {
+    &--start-#{$day} :first-child {
+      margin-left: ($cell-size + 1) * $number;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} {
+      .day:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+}
