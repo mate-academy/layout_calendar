@@ -21,7 +21,7 @@
     "sun" 6 * $size + 6px;
 
   @each $day-of-week, $number-of-day in $days-of-week {
-    &--start-day--#{$day-of-week} &__box:nth-child(1) {
+    &--start-day--#{$day-of-week} &__box:first-child {
       margin-left: $number-of-day;
     }
   }
@@ -47,7 +47,7 @@
     }
   
     @for $day from 1 through 31 {
-      &--position--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
     }
