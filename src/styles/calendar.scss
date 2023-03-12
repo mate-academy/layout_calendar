@@ -1,0 +1,31 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $calendar-size;
+  margin: 150px auto;
+  padding: 20px 0;
+  gap: $cell-gap;
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    @include square($cell-size);
+    border: 1px solid $borderColor;
+    background-color: $borderBackgroundColor;
+    cursor: pointer;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+  }
+}
+
+@each $day, $shift in $days {
+  .calendar--start-day--#{$day} .calendar__cell:first-child {
+    margin-left: $shift;
+  }
+}
