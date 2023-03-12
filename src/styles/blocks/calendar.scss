@@ -3,7 +3,11 @@
   flex-wrap: wrap;
   gap: 1px;
   width: $calendar-width;
-  margin: 20px 10px 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 
   @for $days-count from 28 through 31 {
     &--month-length--#{$days-count} &__box:nth-child(n + #{$days-count + 1}) {
@@ -11,24 +15,14 @@
     }
   }
 
-  $days-of-week:
-    "mon" 0 * $size,
-    "tue" 1 * $size + 1px,
-    "wed" 2 * $size + 2px,
-    "thu" 3 * $size + 3px,
-    "fri" 4 * $size + 4px,
-    "sat" 5 * $size + 5px,
-    "sun" 6 * $size + 6px;
-
   @each $day-of-week, $number-of-day in $days-of-week {
     &--start-day--#{$day-of-week} &__box:first-child {
-      margin-left: $number-of-day;
+      margin-left: $number-of-day * ($size + 1);
     }
   }
 
   &__box {
     @include square($size);
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
