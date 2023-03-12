@@ -1,6 +1,3 @@
-@import "./utils/variables";
-@import "../utils/functions";
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -14,19 +11,24 @@
     }
   }
 
+  @each $day, $position in $start-day {
+    &--start-#{$day}>:first-child {
+      margin-left: $position;
+    }
+  }
+
   &__day {
     width: $cell-size;
     height: $cell-size;
 
-    border: 1px solid #000;
-    background-color: #eee;
+    border: 1px solid $blackColor;
+    background-color: $lightGrayColor;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    transition-duration: 500ms;
-    transition-property: transform;
+    transition: transform $transitionDuration;
 
     @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
@@ -35,15 +37,9 @@
       }
     }
 
-    @each $day, $position in $start-day {
-      &--#{$day} {
-        margin-left: $position;
-      }
-    }
-
     &:hover {
       cursor: pointer;
-      background-color: #ffbfcb;
+      background-color: $pinkColor;
       transform: translateY(-20px);
     }
   }
