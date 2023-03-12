@@ -1,0 +1,36 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__wraper {
+    display: flex;
+    gap: $gap;
+    width: $box-size * 7;
+    flex-wrap: wrap;
+  }
+  
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    width: $box-size;
+    height: $box-size;
+    border: solid $c-black 1px;
+    box-sizing: border-box;
+    transition: transform $trans-durration ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $bc-clr;
+      transform: translateY(-20px);
+    }
+    
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+      }
+    }
+  }
+}
