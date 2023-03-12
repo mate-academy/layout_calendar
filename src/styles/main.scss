@@ -1,3 +1,110 @@
-body {
-  margin: 0;
+@import "./variables";
+
+* {
+  box-sizing: border-box;
+}
+
+.month {
+  position: relative;
+  width: $mounth-width;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &--start-day {
+    display: flex;
+  }
+
+  &--month-length {
+    display: flex;
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-width;
+    height: 100px;
+    border: 1px solid black;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    
+  }
+
+  &__day:first-child {
+    margin-left: $day-width * $first-day-position + $first-day-position * $gap;
+  }
+
+  @for $index from 1 through $days {
+    &__day:nth-child(#{$index}):before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      color: #000;
+    }
+  }
+
+  $some-days-monday: 2, 9, 16, 23, 30;
+  $some-days-tuesday: 3, 10, 17, 24, 31;
+  $some-days-wednesday: 4, 11, 18, 25;
+  $some-days-thursday: 5, 12, 19, 26;
+  $some-days-friday: 6, 13, 20, 27;
+  $some-days-saturday: 7, 14, 21, 28;
+  $some-days-sunday: 1, 8, 15, 22, 29;
+
+  @each $day in $some-days-monday {
+    &__day:nth-child(#{$day})--mon {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-tuesday {
+    &__day:nth-child(#{$day})--tue {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-wednesday {
+    &__day:nth-child(#{$day})--wed {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-thursday {
+    &__day:nth-child(#{$day})--thu {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-friday {
+    &__day:nth-child(#{$day})--fri {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-saturday {
+    &__day:nth-child(#{$day})--sat {
+      display: flex;
+    }
+  }
+
+  @each $day in $some-days-sunday {
+    &__day:nth-child(#{$day})--sun {
+      display: flex;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &__day:nth-child(#{$index})--month-length {
+      display: flex;
+    }
+  }
 }
