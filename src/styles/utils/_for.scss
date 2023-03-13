@@ -1,0 +1,14 @@
+@for $idx from 1 through 31 {
+  .calendar__elem:nth-child(#{$idx}):before {
+    content: "#{$idx}";
+    font-size: $font-size;
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length-#{$day} {
+    .calendar__elem:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
