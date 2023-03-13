@@ -19,7 +19,7 @@
     }
 
     @for $i from 1 through 31 {
-      &:nth-child(2n + #{$i}) {
+      &:nth-child(#{$i}) {
         &::before {
           display: block;
           content: "#{$i}";
@@ -29,18 +29,14 @@
   }
 
   @each $day, $number-of-day in $days {
-    &--start-day_#{$day} {
-      .calendar__day:first-child {
-        margin-left: get-margin-size($number-of-day);
-      }
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: get-margin-size($number-of-day);
     }
   }
 
   @for $i from 1 through 31 {
-    &--month-length_#{$i} {
-      .calendar__day:nth-child(n  + #{$i + 1}) {
-        display: none;
-      }
+    &--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 }
