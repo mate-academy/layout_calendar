@@ -1,0 +1,28 @@
+@for $index from 1 through 31 {
+  .calendar-day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+$weekdays:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $weekday, $shift in $weekdays {
+  .calendar-day--start-day_#{$weekday} {
+    margin-left: $shift;
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length_#{$index} {
+    .calendar-day:nth-child(n + #{$index+1}) {
+      display: none;
+    }
+  }
+}
