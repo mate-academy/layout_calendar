@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 @for $index from 1 through 31 {
   .calendar-day:nth-child(#{$index})::before {
     content: "#{$index}";
@@ -6,12 +8,12 @@
 
 $weekdays:
   "mon" 0,
-  "tue" 101px,
-  "wed" 202px,
-  "thu" 303px,
-  "fri" 404px,
-  "sat" 505px,
-  "sun" 606px;
+  "tue" #{$day-margin},
+  "wed" calc(2 * #{$day-margin}),
+  "thu" calc(3 * #{$day-margin}),
+  "fri" calc(4 * #{$day-margin}),
+  "sat" calc(5 * #{$day-margin}),
+  "sun" calc(6 * #{$day-margin});
 
 @each $weekday, $shift in $weekdays {
   .calendar-day--start-day_#{$weekday} {
