@@ -1,33 +1,34 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: end;
   gap: $gap;
-  padding: $padding;
+  padding: 30px 5px;
   width: getWidth($box-size, $number-boxes, $gap, $padding);
+  box-sizing: border-box;
 
   &__box {
     @include box ($box-size);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eee;
+    background-color: $background-color;
     border: 1px solid black;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     font-size: $font-size;
-  }
+    transition: $background-color 0.5s, transform 0.5s;
 
-  &__box:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20px);
-    animation-duration: 0.5s;
-  }
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
 
-  @for $i from 1 through 31 {
-    &__box:nth-child(#{$i})::before {
-      content: "#{$i}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
     }
   }
 
@@ -41,12 +42,12 @@
     "sun" 6;
 
   @each $name, $index in $days {
-    &--start-day--#{$name}>:first-child {
-      margin-left: $box-size * $index + $gap * $index + $padding;
+    &--start-day_#{$name}>:first-child {
+      margin-left: $box-size * $index + $gap * ($index);
     }
   }
   @for $last-day from 28 through 31 {
-    &--month-length--#{$last-day} {
+    &--month-length_#{$last-day} {
       .container__box:nth-child(n + #{$last-day + 1}) {
         display: none;
       }
