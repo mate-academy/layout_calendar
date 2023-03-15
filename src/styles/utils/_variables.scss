@@ -1,0 +1,22 @@
+$calendar-element-width: 100px;
+$font-size: 30px;
+$element-bg-color: #eee;
+$border-width: 1px;
+$calendar-element-size:
+  calculateElementSize($calendar-element-width, $border-width);
+$calender-width: calculateCalendarWidth($calendar-element-width);
+
+$weekday-shift:
+  "mon" 0,
+  "tue" calculateDayShift($calendar-element-width, $border-width),
+  "wed" calculateDayShift($calendar-element-width, $border-width) * 2,
+  "thu" calculateDayShift($calendar-element-width, $border-width) * 3,
+  "fri" calculateDayShift($calendar-element-width, $border-width) * 4,
+  "sat" calculateDayShift($calendar-element-width, $border-width) * 5,
+  "sun" calculateDayShift($calendar-element-width, $border-width) * 6;
+
+$days-of-the-month:
+  "28" 28,
+  "29" 29,
+  "30" 30,
+  "31" 31;
