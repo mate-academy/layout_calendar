@@ -2,12 +2,10 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-$cell-width: 100px;
-$cell-height: 100px;
-$border-size: 1px;
-$gap: 1px;
+@import "variables.scss";
 
 .calendar {
   display: flex;
@@ -15,16 +13,10 @@ $gap: 1px;
   gap: $gap;
   width: 750px;
   position: absolute;
-  
+
   @for $index from 1 through 31 {
     :nth-child(#{$index})::before {
-      display: flex;
-      justify-content: center;
-      height: 100px;
-      line-height: 100px;
       content: "#{$index}";
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
     }
   }
 
@@ -52,10 +44,15 @@ $gap: 1px;
   }
 
   &__day {
+    display: flex;
+    justify-content: center;
     width: #{$cell-width};
     height: #{$cell-height};
     background-color: #eee;
     border: #{$border-size} solid #000;
+    font-size: 30px;
+    height: 100px;
+    line-height: 100px;
     transition-duration: 0.5s;
   }
 
