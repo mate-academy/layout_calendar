@@ -1,0 +1,37 @@
+.calendar {
+  width: $block-size * 7 + $block-gap * 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $block-gap;
+  margin: 30px;
+
+  &__day {
+    border: 1px solid #000;
+    background-color: #eee;
+    height: $block-size;
+    width: $block-size;
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @each $start-day, $margin in $days {
+      &--start-#{$start-day} {
+        margin-left: $margin;
+      }
+    }
+
+    @for $date from 1 through $month-lenght {
+      &--date--#{$date}::after {
+        content: "#{$date}";
+        color: #000;
+        font-size: 30px;
+      }
+    }
+    &:hover {
+      background-color: rgb(253,172,230);
+      transform: translateY(-20px);
+      transition: ease 1s;
+    }
+  }
+}
