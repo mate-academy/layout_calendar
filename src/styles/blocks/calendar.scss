@@ -1,5 +1,3 @@
-@import "../utils/function.scss";
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -14,4 +12,48 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  &-day {
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid #{$c-black};
+    transition: color $transitionDuration, transform $transitionDuration;
+  
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  
+    &::before {
+      font-size: 30px;
+      line-height: 100px;
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+    }
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar-day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $weekday, $shift in $weekdays {
+  .calendar--start-day_#{$weekday} {
+    .calendar-day:first-child {
+      margin-left: $shift;
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length_#{$index} {
+    .calendar-day:nth-child(n + #{$index+1}) {
+      display: none;
+    }
+  }
 }
