@@ -1,0 +1,64 @@
+.calendar {
+  width: $calendarWidth;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    width: $daySize;
+    height: $daySize;
+    background-color: #eee;
+    cursor: pointer;
+    @for $i from 1 through 28 {
+      &--#{$i}::before {
+        content: "#{$i}";
+      }
+    }
+    @for $i from 29 through 31 {
+      &--#{$i}::before {
+        //     content: "#{$i}";
+        @each $days, $number in $extraMonthDays {
+          &--monthLength-#{$days} {
+            .calendar__day--#{$i}::before { 
+              //nie mam dziś pojęcia jak to wyświetlić...
+              content: "#{$days}";
+            }
+          }
+        }
+      }
+    }
+    &:hover {
+      background-color: pink;
+      z-index: 1;
+      animation: 0.5s linear forwards move;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateY(0, 0);
+        transform-origin: bottom left;
+      }
+
+      100% {
+        transform: translateY(-20px);
+        transform-origin: bottom left;
+      }
+    }
+
+    @each $day, $number in $weekdays {
+      &--startDay-#{$day} {
+        margin-left: $daySize *
+          ($number - 1) +
+          (
+            $number - 1
+          );
+      }
+    }
+  }
+}
