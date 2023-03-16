@@ -1,10 +1,10 @@
-@import "./utils/_variables.scss";
+@import "./utils/variables";
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $day-gap;
-  padding: 30px 10px;
+  padding: 30px;
   width: 710px;
 
   &__day {
@@ -15,19 +15,17 @@
     width: $day-size;
     height: $day-size;
     background-color: #eee;
-    box-sizing: border-box;
 
     border: 1px solid black;
 
-    color: black;
-    font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 
-    transition: 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
 
-    @for $day-number from 1 through 31 {
-      &:nth-child(#{$day-number}):before {
-        content: "#{$day-number}";
+    @for $i from 1 through 28 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
       }
     }
 
@@ -35,6 +33,20 @@
       cursor: pointer;
       background-color: pink;
       transform: translate(0, -20px);
+    }
+  }
+
+  @each $day, $gap in $days {
+    &--start-#{$day} > &__day:first-child {
+      margin-left: #{$gap};
+    }
+  }
+
+  @for $n from 1 through 31 {
+    &--mon-#{$n} {
+      & :nth-child(n + #{$n + 1}) {
+        visibility: hidden;
+      }
     }
   }
 }
