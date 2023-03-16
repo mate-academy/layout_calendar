@@ -3,7 +3,6 @@
   width: $calender-width;
   gap: $border-width;
   flex-wrap: wrap;
-  transition: color 0.5s, transform 0.5s;
 
   font-size: $font-size;
   font-family: Arial, Helvetica, sans-serif;
@@ -16,33 +15,33 @@
     padding: 10px;
     width: $calendar-element-size;
     height: $calendar-element-size;
-
     background-color: $element-bg-color;
     border: solid $border-width black;
-  }
+    transition: color 0.5s, transform 0.5s;
 
-  @for $index from 1 through 31 {
-    &__day:nth-child(#{$index})::before {
-      content: "#{$index}";
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
     }
-  }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink;
-    transform: translateY(-20%);
-  }
-
-  @each $weekday, $shift in $weekday-shift {
-    &--start-day-#{$weekday} &__day:first-child {
-      margin-left: $shift;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
-  }
 
-  @each $monthday-string, $monthday-number in $days-of-the-month {
-    &--month-length-#{$monthday-string}
-    &__day:nth-child(n + #{$monthday-number + 1}) {
-      visibility: hidden;
+    @each $weekday, $shift in $weekday-shift {
+      &--start-day-#{$weekday} &:first-child {
+        margin-left: $shift;
+      }
+    }
+
+    @each $monthday-string, $monthday-number in $days-of-the-month {
+      &--month-length-#{$monthday-string}
+      &:nth-child(n + #{$monthday-number + 1}) {
+        visibility: hidden;
+      }
     }
   }
 }
