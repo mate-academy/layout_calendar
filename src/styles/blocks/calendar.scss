@@ -1,0 +1,52 @@
+@function week-width($day-width, $gap-between-days) {
+  @return $day-width * 7 + $gap-between-days * 6 + 20px;
+}
+
+$week-days: mon, tue, wed, thu, fri, sat, sun;
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1px;
+  width: week-width($day-width, $gap-between-days);
+  padding: 110px 10px 0;
+
+  @each $week-day in $week-days {
+    &--start-day-#{$week-day} {
+      .day:first-child {
+        @if $week-day == mon {
+          margin-left: 0;
+        }
+        @if $week-day == tue {
+          margin-left: 102px;
+        }
+        @if $week-day == wed {
+          margin-left: 204px;
+        }
+        @if $week-day == thu {
+          margin-left: 306px;
+        }
+        @if $week-day == fri {
+          margin-left: 408px;
+        }
+        @if $week-day == sat {
+          margin-left: 510px;
+        }
+        @if $week-day == sun {
+          margin-left: 612px;
+        }
+      }
+    }
+
+    @for $i from 28 through 31 {
+     &--month-length-#{$i} {
+       .day:nth-child(n + #{$i}) ~.day {
+         display: none;
+       }
+     }
+   }
+  }
+}
