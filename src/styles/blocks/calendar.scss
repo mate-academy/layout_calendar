@@ -12,7 +12,7 @@
     @include square($cell-size);
     background-color: #eee;
     border: 1px solid #000;
-    transition-duration: 0.5s;
+    transition: all 0.5s;
   
     &:hover {
       cursor: pointer;
@@ -25,20 +25,20 @@
         content: "#{$day}";
       }
     }
+  }
   
-    &--month-length {
-      @for $length-of-month from 28 through 31 {
-        &--#{$length-of-month} :nth-child(n + #{$length-of-month + 1}) {
-          display: none;
-        }
+  &--month-length {
+    @for $length-of-month from 28 through 31 {
+      &--#{$length-of-month} :nth-child(n + #{$length-of-month + 1}) {
+        display: none;
       }
     }
+  }
   
-    &--start-day {
-      @each $day-name, $count in $days-of-week {
-        &--#{$day-name} :first-child {
-          margin-left: $count * ($cell-size + $gap-size);
-        }
+  &--start-day {
+    @each $day-name, $count in $days-of-week {
+      &--#{$day-name} :first-child {
+        margin-left: $count * ($cell-size + $gap-size);
       }
     }
   }
