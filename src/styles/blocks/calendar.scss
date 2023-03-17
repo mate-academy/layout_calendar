@@ -12,7 +12,8 @@
     @include square($cell-size);
     background-color: #eee;
     border: 1px solid #000;
-    transition: all 0.5s;
+    transition: background-color $transition-and-transform-speed,
+      transform $transition-and-transform-speed;
   
     &:hover {
       cursor: pointer;
@@ -26,7 +27,7 @@
       }
     }
   }
-  
+   
   &--month-length {
     @for $length-of-month from 28 through 31 {
       &--#{$length-of-month} :nth-child(n + #{$length-of-month + 1}) {
