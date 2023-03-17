@@ -1,3 +1,72 @@
+$cell-size: 100px;
+$col-count: 7;
+$line-gap: 7px;
+$calendarWidth: $cell-size * $col-count + $line-gap;
+
+@mixin square ($size) {
+  width: $size;
+  height: $size;
+}
+
 body {
   margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
+  gap: 1px;
+  width: $calendarWidth;
+  padding: 30px 10px 10px;
+  margin: 0 auto;
+
+  &__cell {
+    @include square ($cell-size);
+
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: color 0.5s, transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number})::before {
+        content: "#{$number}";
+        display: block;
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        line-height: $cell-size;
+        text-align: center;
+      }
+    }
+  }
+
+  $start-day:
+    "mon" 0 $cell-size 0,
+    "tue" 1 $cell-size 1px,
+    "wed" 2 $cell-size 2px,
+    "thu" 3 $cell-size 3px,
+    "fri" 4 $cell-size 4px,
+    "sat" 5 $cell-size 5px,
+    "sun" 6 $cell-size 6px;
+
+  @each $first-day, $column, $shift, $gap in $start-day {
+    &--start-day--#{$first-day} :first-child {
+      margin-left: $column * $shift + $gap;
+    }
+  }
+  @for $lenght from 28 through 31 {
+    &--month-length--#{$lenght} :nth-child(n + #{$lenght}) {
+      opacity: 0;
+    }
+    &--month-length--#{$lenght} :nth-child(#{$lenght}) {
+      opacity: 1;
+    }
+  }
 }
