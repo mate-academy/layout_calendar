@@ -1,9 +1,13 @@
 .calendar {
-  width: ($size--block * 7) + 10;
+  width: ($size--block * 7)+ 6;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  margin: 0 auto;
+  margin: auto ;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
     width: $size--block;
@@ -14,13 +18,13 @@
     position: relative;
 
     &:hover {
-      transform: translate(0px, -20px);
+      transform: translateY(-20px);
+      background-color: #ff3;
     }
   }
 
   @for $index from 1 through 31 {
     div {
-      display: none;
       &:nth-child(#{$index})::before {
         content: "#{$index}";
         font-size: 30px;
@@ -33,52 +37,20 @@
     }
   }
 
-  &--month-length-28 {
-    @for $index from 1 through 28 {
+  @for $index-day from 28 through 31 {
+    &--month-length-#{$index-day} {
       div {
-        &:nth-child(#{$index}) {
-          display: flex;
+        &:nth-child(n + #{$index-day + 1}) {
+          display: none;
         }
       }
     }
   }
-  
-  &--month-length-29 {
-    @for $index from 1 through 29 {
-      div {
-        &:nth-child(#{$index}) {
-          display: flex;
-        }
-      }
-    }
-  }
-
-  &--month-length-30 {
-    @for $index from 1 through 30 {
-      div {
-        &:nth-child(#{$index}) {
-          display: flex;
-        }
-      }
-    }
-  }
-
-  &--month-length-31 {
-    @for $index from 1 through 31 {
-      div {
-        &:nth-child(#{$index}) {
-          display: flex;
-        }
-      }
-    }
-  }
-
-  
 
   @each $name, $value in $start {
     &--start-day--#{$name} {
       div {
-        &:first-child { 
+        &:first-child {
           margin-left: #{$value};
         }
       }
