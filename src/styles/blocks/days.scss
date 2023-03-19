@@ -1,4 +1,4 @@
-@import '../utils/variables';
+@import "../utils/variables";
 
 .day {
   width: $cell-width;
@@ -9,6 +9,14 @@
   border: 1px solid $border-color;
   background-color: $colors-square;
   transition: 0.5s;
+
+  &--start {
+    @each $day, $number in $day-start {
+      &-#{$day}:first-child {
+        margin-left: ($cell-width + $cell-gap) * $number;
+      }
+    }
+  }
 
   &:hover {
     background-color: $color-square-transform;
