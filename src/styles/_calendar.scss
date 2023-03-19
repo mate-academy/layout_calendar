@@ -3,7 +3,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: $block-gap;
-  margin: 30px;
+  margin: 50px auto;
+  counter-reset: list;
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
 
   &__day {
     border: 1px solid #000;
@@ -16,22 +23,20 @@
     align-items: center;
 
     @each $start-day, $margin in $days {
-      &--start-#{$start-day} {
+      &--start-#{$start-day}:first-child {
         margin-left: $margin;
       }
     }
 
-    @for $date from 1 through $month-lenght {
-      &--date--#{$date}::after {
-        content: "#{$date}";
-        color: #000;
-        font-size: 30px;
-      }
-    }
     &:hover {
       background-color: rgb(253,172,230);
       transform: translateY(-20px);
-      transition: ease 1s;
+      transition: ease 0.5s;
+    }
+
+    &::before {
+      counter-increment: list;
+      content: counter(list) "";
     }
   }
 }
