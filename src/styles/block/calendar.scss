@@ -2,7 +2,7 @@
   width: ($size--block * 7)+ 6;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $margin-right;
   margin: auto ;
   position: absolute;
   left: 50%;
@@ -24,35 +24,27 @@
   }
 
   @for $index from 1 through 31 {
-    div {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-        font-size: 30px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -15px;
-        margin-left: -15px;
-      }
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
   @for $index-day from 28 through 31 {
     &--month-length-#{$index-day} {
-      div {
-        &:nth-child(n + #{$index-day + 1}) {
-          display: none;
-        }
+      & :nth-child(n + #{$index-day + 1}) {
+        display: none;
       }
     }
   }
 
   @each $name, $value in $start {
     &--start-day--#{$name} {
-      div {
-        &:first-child {
-          margin-left: #{$value};
-        }
+      & :first-child {
+        margin-left: #{$value};
       }
     }
   }
