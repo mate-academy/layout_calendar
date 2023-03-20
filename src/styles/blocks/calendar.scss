@@ -7,7 +7,7 @@
 
   &--start-day {
     @each $day, $index in $days {
-      &-#{$day}:first-child {
+      &--#{$day}:first-child {
         margin-left: ($calendar-gap + $square-size) * $index;
       }
     }
@@ -15,7 +15,7 @@
   
   &--month-length {
     @for $number from 28 to $month-days {
-      &-#{$number}.calendar__day:nth-child(-n + #{$month-days - $number}) {
+      &--#{$number}.calendar__day:nth-child(-n + #{$month-days - $number}) {
         display: none;
       }
     }
@@ -29,7 +29,7 @@
   width: $square-size;
   height: $square-size;
   background-color: #eee;
-  border: 1px solid black;
+  border: $border solid black;
   transition-duration: 0.5s;
   cursor: pointer;
   
