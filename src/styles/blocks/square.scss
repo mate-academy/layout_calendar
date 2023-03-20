@@ -1,19 +1,44 @@
 @import "../utils/variables";
 
 .calendar {
-  width: ($cell-width + $cell-gap) * $day-in-week + 20px;
-  padding: 10px;
-  margin-right: $cell-width + 150px;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
-  flex-shrink: 0;
+  width: $calendar-width;
   gap: $cell-gap;
+  margin: auto;
+  padding: $calendar-padding;
 
-  @for $index from 28 through 31 {
-    &--month-length-#{$index} {
-      .day:nth-child(n + #{$index + 1}) {
-        display: none;
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid $border-color;
+    background-color: $colors-square;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: $color-square-transform;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        display: flex;
+        justify-content: center;
+        line-height: $cell-size;
+      }
+    }
+
+    @each $day, $number in $day-start {
+      .calendar--start-day_#{$day} &:first-child {
+        margin-left: $number * $calendar-width + $number * $cell-gap;
+      }
+    }
+
+    @for $index from 28 through 31 {
+      .calendar--month-length_#{index} &:not(::nth-child(-n + #{index})) {
+        opacity: 0;
       }
     }
   }
