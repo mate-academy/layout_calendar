@@ -71,4 +71,4 @@ BAD example:
 on Monday) with invalid modifier values, like `start-day--ghy` or `days--27`.
 11. [STYLES] - Don't be greedy, add some top paddings, so the top row don't go over
 top of the page on hover.
-12. [CODE STYLE] - Remember about styles properties order - ([css order](https://codeguide.academy/html-css.html#css-order))
+12. [CODE STYLE] - Remember about styles properties order - ([css order](https://github.com/necolas/idiomatic-css#declaration-order))
