@@ -1,5 +1,6 @@
 h1 {
-  color: darkblue;
+  color: lightcoral;
+  font-family: "Comic Sans MS", sans-serif;
 }
 
 $days: 31;
@@ -32,7 +33,7 @@ $month-length: 28, 29, 30, 31;
 }
 
 @each $startday, $daynumber in $startdays {
-  .calendar_start_#{$startday} .calendar__day:first-child {
+  .calendar--start-#{$startday} .calendar__day:first-child {
     margin-left: ($daysize + $gapsize) * ($daynumber - 1);
   }
 }
@@ -45,6 +46,12 @@ $month-length: 28, 29, 30, 31;
     font-size: 30px;
     line-height: $daysize;
     text-align: center;
+  }
+}
+
+@for $i from 28 to 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
 
