@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: dayContainerWidthCalc();
+  gap: $day-gap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    flex-basis: $day-size;
+
+    border: $day-border-size solid #000;
+    background-color: #eee;
+
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #ffc0cb;
+    }
+
+    @for $day from 1 through $calendar-max-days {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+        font-size: $font-size;
+        line-height: 1em;
+
+        padding: dayHeightCalc() 0;
+      }
+    }
+  }
+
+  //default max days display
+  & > :nth-child(1n + #{$calendar-max-days + 1}) {
+    display: none;
+  }
+
+  @for $month-lenght from 28 to $calendar-max-days {
+    &--month-lenght--#{$month-lenght} > :nth-child(1n + #{$month-lenght + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $order in $start-day {
+    &--start-day--#{$day} > :first-child {
+      margin-left: colMarginCalc($order);
+    }
+  }
+}
