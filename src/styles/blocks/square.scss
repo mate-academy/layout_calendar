@@ -29,15 +29,17 @@
         line-height: $cell-size;
       }
     }
+  }
 
-    @each $day, $number in $day-start {
-      .calendar--start_#{$day} &:first-child {
-        margin-left: $number * $calendar-width + $cell-gap * $number;
-      }
+  @each $day, $number in $day-start {
+    &--start_#{$day} &__day:first-child {
+      margin-left: $number * $cell-size + $cell-gap * $number;
     }
+  }
 
-    @for $index from 28 through 31 {
-      .calendar--month-length_#{index} &:not(::nth-child(-n + #{index})) {
+  @for $index from 28 through 31 {
+    &--month-length_#{$index} {
+      & :nth-child(n + #{$index + 1}) {
         opacity: 0;
       }
     }
