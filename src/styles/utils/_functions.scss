@@ -1,0 +1,17 @@
+@function setDayMargin($count) {
+  @return ($gap + $day-width) * $count;
+}
+
+@function setCalendarLength($length) {
+  @if($length < 28 or $length > 31) {
+    @return 31;
+  }
+  @return $length;
+}
+
+@function setStartDay($day) {
+  @if($day != $start-day-calendar) {
+    @return "mon";
+  }
+  @return $start-day-calendar;
+}

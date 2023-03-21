@@ -1,0 +1,49 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $day-width * 7 + $gap * 6;
+  gap: $gap;
+
+  &--month-length_#{setCalendarLength($days-calendar)} {
+    @for $index from 1 through setCalendarLength($days-calendar) {
+      :nth-child(#{$index}) {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        background: #eee;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        cursor: pointer;
+        transition: background 0.5s, transform 0.5s;
+
+        &::before {
+          content: "#{$index}";
+        }
+
+        &:hover {
+          background: #ffbfcb;
+          transform: translateY(-20px);
+        }
+      }
+    }
+  }
+
+  $week:
+    "mon" 0,
+    "tue" setDayMargin(1),
+    "wed" setDayMargin(2),
+    "thu" setDayMargin(3),
+    "fri" setDayMargin(4),
+    "sat" setDayMargin(5),
+    "sun" setDayMargin(6);
+
+  @each $day, $margin in $week {
+    @if ($day == setStartDay($day)) {
+      &--start-day_#{setStartDay($day)} :first-child {
+        margin-left: #{$margin};
+      }
+    }
+  }
+}
