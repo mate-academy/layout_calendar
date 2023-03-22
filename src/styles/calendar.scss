@@ -1,0 +1,29 @@
+.main {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: $border-size;
+  width: $calendar-width;
+  height: $calendar-height;
+  padding: 20px 10px 10px;
+
+  @each $day, $number in $start-day {
+    &--start-#{$day} :first-child {
+      margin-left: (($day-size + 3.4 * $border-size) * $number);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
