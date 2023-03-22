@@ -1,0 +1,23 @@
+.day {
+  display: flex;
+  justify-content: center;
+  @include square($day-size);
+  background-color: #eee;
+  border: $border-size black solid;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  transition: 0.5s;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+}
