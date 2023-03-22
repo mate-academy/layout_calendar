@@ -38,10 +38,8 @@
   }
 
   @for $index from 28 through 31 {
-    &--month-length_#{$index} {
-      & :nth-child(n + #{$index + 1}) {
-        opacity: 0;
-      }
+    &--month-length_#{$index} &__day:not(:nth-child(-n + #{$index})) {
+      opacity: 0;
     }
   }
 }
