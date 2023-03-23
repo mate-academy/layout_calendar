@@ -20,18 +20,20 @@
       background-color: #ffc0cb;
     }
 
+    &::before {
+      padding: dayHeightCalc() 0;
+
+      font-size: $font-size;
+      line-height: 1em;
+    }
+
     @for $day from 1 through $calendar-max-days {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
-        font-size: $font-size;
-        line-height: 1em;
-
-        padding: dayHeightCalc() 0;
       }
     }
   }
 
-  //default max days display
   & > :nth-child(1n + #{$calendar-max-days + 1}) {
     display: none;
   }
