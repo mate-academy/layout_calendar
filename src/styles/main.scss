@@ -1,16 +1,4 @@
-$cell-size:100px;
-$gap-size:1px;
-$calendar-pading:10px;
-$width-calendar: ($cell-size*7)+($gap-size*6)+($calendar-pading*2);
-
-$week:
-  "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5
-  "sun" 6;
+@import "./variables.scss";
 
 .container {
   margin: 0;
@@ -27,18 +15,19 @@ $week:
 
   &__day {
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
-    border: 1px solid black;
+    width: $width-day;
+    height: $height-day;
+    background-color: $color-day-cell;
+    border: 1px solid $color-border-cell;
     display: flex;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
     align-items: center;
     justify-content: center;
+    transition-duration: 1s;
 
     &:hover {
-      background-color: pink;
+      background-color: $colorHover-day-cell;
       cursor: pointer;
       transform: translateY(-20px);
     }
