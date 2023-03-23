@@ -2,7 +2,14 @@
   @return $day-width * 7 + $gap-between-days * 6 + 20px;
 }
 
-$week-days: mon, tue, wed, thu, fri, sat, sun;
+$week-days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
 .calendar {
   display: flex;
@@ -14,38 +21,59 @@ $week-days: mon, tue, wed, thu, fri, sat, sun;
   width: week-width($day-width, $gap-between-days);
   padding: 110px 10px 0;
 
-  @each $week-day in $week-days {
-    &--start-day-#{$week-day} {
-      .day:first-child {
-        @if $week-day == mon {
-          margin-left: 0;
-        }
-        @if $week-day == tue {
-          margin-left: 102px;
-        }
-        @if $week-day == wed {
-          margin-left: 204px;
-        }
-        @if $week-day == thu {
-          margin-left: 306px;
-        }
-        @if $week-day == fri {
-          margin-left: 408px;
-        }
-        @if $week-day == sat {
-          margin-left: 510px;
-        }
-        @if $week-day == sun {
-          margin-left: 612px;
-        }
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-width;
+    height: $day-height;
+    background-color: $day-color;
+    border: 1px solid $border-color;
+    transition: transform $transition-duration ease;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        content: "#{$i}";
+        color: $border-color;
+        font-size: $font-size;
+      }
+    }
+
+    @each $start-day, $week-day in $week-days {
+      &--start-day-#{$week-day} &__day:first-child {
+        margin-left: $week-day * ($day-width + $gap-between-days);
       }
     }
 
     @for $i from 28 through 31 {
       &--month-length-#{$i} {
-        .day:nth-child(n + #{$i}) ~.day {
+        &__day:nth-child(n + #{$i}) ~&__day {
           display: none;
         }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-day-color;
+      transition: $transition-duration;
+      transform: translate(0, -20px);
+    }
+  }
+
+  @each $start-day, $week-day in $week-days {
+    &--start-day-#{$week-day} &__day:first-child {
+      margin-left: $week-day * ($day-width + $gap-between-days);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i}) ~.calendar__day {
+        display: none;
       }
     }
   }
