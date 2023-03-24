@@ -4,11 +4,23 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap-shift;
+  margin: 0 auto;
 
   @each $day, $shift in $week {
-    &--start-day_#{$day} {
+    &--start-day-#{$day} {
       .calendar-day:first-child {
         margin-left: $shift;
+      }
+    }
+  }
+
+  @for $i from 28 through $month-length {
+    &--month-length-#{$i} {
+      @for $index from $i through $month-length {
+        .calendar-day:nth-child(#{$index + 1}) {
+          display: none;
+        }
+
       }
     }
   }
@@ -30,12 +42,6 @@
         &::before {
           content: "#{$index}";
         }
-      }
-    }
-
-    @for $index from 29 through $month-length {
-      &:nth-child(#{$index}) {
-        display: block;
       }
     }
 
