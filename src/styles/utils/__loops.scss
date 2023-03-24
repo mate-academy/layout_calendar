@@ -1,0 +1,27 @@
+$week-days :
+  "mon" ($margins-for-week-days) * 0,
+  "tue" ($margins-for-week-days) * 1,
+  "wed" ($margins-for-week-days) * 2,
+  "thu" ($margins-for-week-days) * 3,
+  "fri" ($margins-for-week-days) * 4,
+  "sat" ($margins-for-week-days) * 5,
+  "sun" ($margins-for-week-days) * 6;
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index}
+  .calendar__day:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $padding in $week-days {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $padding;
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
