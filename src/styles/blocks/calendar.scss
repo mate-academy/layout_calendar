@@ -3,14 +3,14 @@
 .calendar {
   display: flex;
   justify-content: center;
-  min-width: calc(#{$day-size} * 7 + #{$gap-between-days} * 14 + 20px);
+  min-width: calc(#{$day-size} * 7 + #{$gap-between-days} * 6 + 20px);
 
   &__month {
     display: flex;
     flex-wrap: wrap;
     gap: $gap-between-days;
     padding: 10px;
-    width: calc(#{$day-size} * 7 + #{$gap-between-days} * 14);
+    width: calc(#{$day-size} * 7 + #{$gap-between-days} * 6);
     list-style: none;
   }
 
@@ -20,6 +20,7 @@
     justify-content: center;
     width: $day-size;
     height: $day-size;
+    box-sizing: border-box;
     border: 1px solid black;
     background-color: #eee;
     font-size: 30px;
@@ -44,7 +45,7 @@
   @each $start-day, $day in $days {
     &--start-day--#{$start-day} {
       .calendar__day:first-child {
-        margin-left: $day-size * $day + $gap-between-days * 2 * $day;
+        margin-left: ($day-size + $gap-between-days) * $day;
       }
     }
   }
