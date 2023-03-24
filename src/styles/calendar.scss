@@ -25,19 +25,19 @@
   }
 
   @for $day-number from 1 through 31 {
-    &__day--#{$day-number}::before {
+    &__day:nth-child(#{$day-number})::before {
       content: "#{$day-number}";
       align-self: center;
     }
   }
 
   @each $day-name, $index in $days-week {
-    &--start-day-#{$day-name} > .calendar__day--1 {
+    &--start-day-#{$day-name} > .calendar__day--first {
       margin-left: getDay($day-size, $gap, $index);
     }
   }
 
-  @for $last-day from 29 through 31 {
+  @for $last-day from 28 through 31 {
     &--month-length-#{$last-day} &__day:nth-child(n + #{$last-day + 1}) {
       display: none;
     }
