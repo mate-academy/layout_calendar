@@ -25,6 +25,7 @@ $week-days:
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     width: $day-width;
     height: $day-height;
     background-color: $day-color;
@@ -39,12 +40,6 @@ $week-days:
         content: "#{$i}";
         color: $border-color;
         font-size: $font-size;
-      }
-    }
-
-    @each $start-day, $week-day in $week-days {
-      &--start-day-#{$week-day} &__day:first-child {
-        margin-left: $week-day * ($day-width + $gap-between-days);
       }
     }
 
@@ -65,7 +60,7 @@ $week-days:
   }
 
   @each $start-day, $week-day in $week-days {
-    &--start-day-#{$week-day} &__day:first-child {
+    &__start-day--#{$start-day} &__day:first-child {
       margin-left: $week-day * ($day-width + $gap-between-days);
     }
   }
