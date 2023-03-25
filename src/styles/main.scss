@@ -1,33 +1,16 @@
-$gap: 1px;
-$day-size: 100px;
-$padding: 10px;
-$days:
-'mon' 0,
-'tue' $day-size + $gap,
-'wed' ($day-size * 2) + ($gap * 2),
-'thu' ($day-size * 3) + ($gap * 3),
-'fri' ($day-size * 4) + ($gap * 4),
-'sat' ($day-size * 5) + ($gap * 5),
-'sun' ($day-size * 6) + ($gap * 6);
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
+@import 'variables';
+@import url('./reset.scss');
 
 .calendar {
   display: flex;
   flex-direction: row;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   gap: $gap;
   padding: $padding;
   width: ($padding * 2) + ($day-size * 7) + ($gap * 6);
 
   @each $day, $left-margin in $days {
-    &--start-day--#{$day} .calendar__day:first-child{
+    &--start-day--#{$day} .calendar__day:first-child {
       margin-left: $left-margin;
     }
   }
@@ -48,24 +31,26 @@ body {
 
     transition: all 0.5;
 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &::before {
+      display: inline-block;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      font-size: 30px;
+      transform: translate(-50%, -50%);
+    }
 
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
       transition: all 0.5s;
-    }
-
-    @for $index from 1 through 31 {
-      &--number-#{$index}::before {
-        content: "#{$index}";
-        display: inline-block;
-        position: relative;
-        top: 50%;
-        left: 50%;
-        font-size: 30px;
-        transform: translate(-50%, -50%);
-      }
     }
   }
 }
