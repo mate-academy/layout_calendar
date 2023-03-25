@@ -1,3 +1,70 @@
+$cellSize: 100px;
+$startDays: (
+  "mon": $cellSize*0,
+  "tue": $cellSize * 1 + 1,
+  "wed": $cellSize * 2 + 2,
+  "thu": $cellSize * 3 + 3,
+  "fri": $cellSize * 4 + 4,
+  "sat": $cellSize * 5 + 5,
+  "sun": $cellSize * 6 + 6
+);
+
+@function calendarWidth() {
+  @return (($cellSize * 7) + 10);
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  width: calendarWidth();
+
+  @each $day, $position in $startDays {
+    &--start-day--#{$day} {
+      .calendar__cell:first-child {
+        margin-left: $position;
+      }
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} {
+      .calendar__cell:nth-child(n + #{$days + 1}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    background: #eee;
+    border: 1px solid #000;
+    height: $cellSize;
+    width: $cellSize;
+    text-align: center;
+    line-height: 100px;
+    transition: background 0.5s, transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
 }
