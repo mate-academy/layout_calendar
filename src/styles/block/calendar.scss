@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $calendar-width;
+  padding: 10px;
+
+  &__day {
+    @include calendar-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    background-color: $calendar-color;
+    @include days-setting;
+    transition: color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $active-color;
+      transform: translate(0, -20px);
+    }
+  }
+}
