@@ -1,3 +1,52 @@
 body {
   margin: 0;
 }
+
+$height-box-day: 100px;
+$width-box-day: 100px;
+
+.calendar {
+  display: flex;
+  flex-flow: wrap;
+  gap: 1px;
+  max-width: calc(7 * (#{$width-box-day} + 3px) );
+  padding: 100px;
+
+  %style-box-day {
+    background-color: #eee;
+    height: #{$height-box-day};
+    width: #{$width-box-day};
+    border: 1px solid #000;
+    line-height: 100px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  @for $index from 1 through 31 {
+    &__item--#{$index}::before {
+      content: "#{$index}";
+      font-size: 30px;
+    }
+  }
+
+  &__item {
+    @extend %style-box-day;
+  }
+
+  &__item:hover {
+    transform: translate(0, -20px);
+    transition: 0.3s;
+    background-color: pink;
+  }
+
+  // $start-day:
+  // 'mon' '1',
+  // 'tue' '2',
+  // 'wed' '3',
+  // 'thu' '4',
+  // 'fri' '5',
+  // 'sat' '6',
+  // 'sun' '7';
+
+  // @each
+}
