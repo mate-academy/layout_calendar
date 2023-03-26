@@ -14,7 +14,8 @@
     width: $daysize;
     background-color: #eee;
     border: 1px solid black;
-    transition: 0.25s;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
 
     @for $i from 1 to $days + 1 {
       &:nth-child(#{$i})::before {
@@ -28,19 +29,17 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: 0.3s;
-      cursor: pointer;
     }
   }
 
   @each $startday, $daynumber in $startdays {
-    &--start-day-#{$startday} .calendar__block:first-child {
+    &--start-day--#{$startday} .calendar__block:first-child {
       margin-left: ($daysize + $gapsize) * ($daynumber - 1);
     }
   }
 
   @for $i from 28 to 31 {
-    &--month-length-#{$i} .calendar__block:nth-child(n + #{$i + 1}) {
+    &--month-length--#{$i} .calendar__block:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
