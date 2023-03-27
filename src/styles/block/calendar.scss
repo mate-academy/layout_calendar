@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     border: 1px solid #000;
-    background-color: $calendar-color;
+    background-color: #eee;
     @include days-setting;
     transition: color 0.5s, transform 0.5s;
 
@@ -25,6 +25,18 @@
       cursor: default;
       background-color: $active-color;
       transform: translate(0, -20px);
+    }
+  }
+
+  @each $day, $number-day in $week-day {
+    &__start-day--#{$day} .calendar__day:first-child {
+      margin-left: ($number-day * $day-width + 1) + $gap;
+    }
+  }
+    
+  @for $last-day from 28 through 31 {
+    &__last-day--#{$last-day} .calendar__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
     }
   }
 }
