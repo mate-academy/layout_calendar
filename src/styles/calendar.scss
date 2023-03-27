@@ -3,7 +3,46 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  
+
+  // @mixin x($y) {
+  //   @for $i from #{$y} through 31 {
+  //     .calendar__day--#{$i} {
+  //       display: none;
+  //     }
+  //     .calendar__day--#{$i}::before {
+  //       content: "";
+  //     }
+  //   }
+  // }
+
+  // &--monthLength-28 {
+  //   @include x(29);
+  // }
+
+  // &--monthLength-29 {
+  //   @include x(30);
+  // }
+
+  // &--monthLength-30 {
+  //   @include x(31);
+  // }
+
+  //to działa fizycznie, ale nie działa w sensie logiki
+  //bo ja wyświetlałam wszystko, a potem czyściłam
+  //a tu jakbym miała wyświetlać
+
+  @for $i from 29 through 31 {
+    .calendar__day--#{$i}::before {
+      content: "#{$i}";
+    }
+  }
+
+  // @for $j from 28 through 31 {
+  //   &--monthLength-#{$j} {
+
+  //   }
+  // }
+
   &--monthLength-28 {
     @for $i from 29 through 31 {
       .calendar__day--#{$i} {
@@ -47,7 +86,8 @@
     height: $daySize;
     background-color: #eee;
     cursor: pointer;
-    @for $i from 1 through 31 {
+    @for $i from 1 through 28 {
+      //no tu zmieniłam z 31 na 28 i dalej nic O_o
       &--#{$i}::before {
         content: "#{$i}";
       }
