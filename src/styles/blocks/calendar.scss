@@ -4,41 +4,37 @@
   @extend %calendar-flex;
   flex-wrap: wrap;
   gap: $gaps;
-  padding: $paddings;
+  padding: 10px;
 
   &__day {
-    background-color: $bg-color-day;
+    background-color: #eee;
+    border: 1px solid #000;
+    @extend %calendar-flex;
+    @include sizes-days($size-calendar-day);
+    @include justify-position($position-justify);
 
     @each $marg-left, $start-day in $days {
-      &--start-day--#{$start-day} {
+      &--start-day--#{$start-day} &:first-child {
         margin-left: $marg-left;
       }
     }
 
-    @for $day from 1 through $min-length-month {
+    @for $day from 1 through $max-month-lenght {
       &:nth-child(#{$day})::before {
         content: ""+$day;
-        @extend %calendar-flex;
-        @extend %color-border-day;
-        @include sizes-days($size-calendar-day);
-        @include justify-position($position-justify);
       }
     }
 
-    @for $day from $min-length-month through $max-length-month {
-      &--month-length--#{$day}:not(:nth-child(n + #{$day+1}))::before {
-        content: ""+$day;
-        @extend %calendar-flex;
-        @extend %color-border-day;
-        @include sizes-days($size-calendar-day);
-        @include justify-position($position-justify);
+    @for $day from $min-month-lenght through $max-month-lenght {
+      &--month-length-#{$day} &:nth-child(n + #{$day+1}) {
+        display: none;
       }
     }
 
     &:hover {
-      background-color: $hover-bg-color;
+      background-color: #ffbfcb;
       position: relative;
-      bottom: $hover-bottom;
+      bottom: 20px;
       cursor: pointer;
     }
   }
