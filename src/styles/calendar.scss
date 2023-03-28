@@ -1,78 +1,13 @@
+.day {
+  width: $daySize;
+  height: $daySize;
+}
+
 .calendar {
   width: $calendarWidth;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-
-  // @mixin x($y) {
-  //   @for $i from #{$y} through 31 {
-  //     .calendar__day--#{$i} {
-  //       display: none;
-  //     }
-  //     .calendar__day--#{$i}::before {
-  //       content: "";
-  //     }
-  //   }
-  // }
-
-  // &--monthLength-28 {
-  //   @include x(29);
-  // }
-
-  // &--monthLength-29 {
-  //   @include x(30);
-  // }
-
-  // &--monthLength-30 {
-  //   @include x(31);
-  // }
-
-  //to działa fizycznie, ale nie działa w sensie logiki
-  //bo ja wyświetlałam wszystko, a potem czyściłam
-  //a tu jakbym miała wyświetlać
-
-  @for $i from 29 through 31 {
-    .calendar__day--#{$i}::before {
-      content: "#{$i}";
-    }
-  }
-
-  // @for $j from 28 through 31 {
-  //   &--monthLength-#{$j} {
-
-  //   }
-  // }
-
-  &--monthLength-28 {
-    @for $i from 29 through 31 {
-      .calendar__day--#{$i} {
-        display: none;
-      }
-      .calendar__day--#{$i}::before {
-        content: "";
-      }
-    }
-  }
-
-  &--monthLength-29 {
-    @for $i from 30 through 31 {
-      .calendar__day--#{$i} {
-        display: none;
-      }
-      .calendar__day--#{$i}::before {
-        content: "";
-      }
-    }
-  }
-
-  &--monthLength-30 {
-    .calendar__day--31 {
-      display: none;
-    }
-    .calendar__day--31::before {
-      content: "";
-    }
-  }
+  gap: $gap;
 
   &__day {
     transition: background-color 0.3s, transform 0.3s;
@@ -86,9 +21,9 @@
     height: $daySize;
     background-color: #eee;
     cursor: pointer;
-    @for $i from 1 through 28 {
-      //no tu zmieniłam z 31 na 28 i dalej nic O_o
-      &--#{$i}::before {
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
@@ -98,11 +33,16 @@
       z-index: 1;
       transform: translateY(-20px);
     }
+  }
+  @each $day, $number in $weekdays {
+    &--startDay-#{$day} &__day:first-child {
+      margin-left: $number * ($daySize + $gap);
+    }
+  }
 
-    @each $day, $number in $weekdays {
-      &--startDay-#{$day} {
-        margin-left: $daySize * ($number - 1) + ($number - 1);
-      }
+  @for $i from 28 through 31 {
+    &--monthLength-#{$i} &__day:nth-child(#{$i}) ~ &__day {
+      display: none;
     }
   }
 }
