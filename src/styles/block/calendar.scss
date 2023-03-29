@@ -1,0 +1,55 @@
+.calendar {
+  min-width: $size-calendar;
+  max-width: $size-calendar;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $calendar-field;
+  margin: 30px 0;
+
+  &__cell {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid black;
+    flex-shrink: 0;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar :nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $name, $day in $days {
+  .calendar--start-day--#{$name} :first-child {
+    margin-left: $day * ($size-element + $gap-size);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+    opacity: 0;
+  }
+}
