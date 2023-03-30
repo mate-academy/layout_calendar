@@ -1,0 +1,21 @@
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  max-width: getWidth($cell-size, $column-count, $cell-gap);
+
+  @each $day, $value in $days {
+    &--start-day_#{$day} {
+      .calendar__day:first-child {
+        margin-left: $cell-size * $value + $value;
+      }
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
+      opacity: 0;
+    }
+  }
+}
