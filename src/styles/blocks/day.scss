@@ -1,0 +1,22 @@
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #eee;
+  border: 1px solid #000;
+  @include square($cell-size);
+
+  &:hover {
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
