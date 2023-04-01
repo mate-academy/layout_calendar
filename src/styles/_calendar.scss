@@ -4,7 +4,7 @@
   gap: 1px;
   margin: 0 auto;
   max-width: calcWidth(7);
-  padding: 10px;
+  padding: s10px;
 
   &__day {
     align-items: center;
@@ -14,7 +14,6 @@
     display: flex;
     justify-content: center;
     height: $block-size;
-    padding: 30px 10px 10px;
     transition: 0.5s;
     width: $block-size;
 
@@ -34,12 +33,6 @@
         content: "#{$i}";
       }
     }
-
-    @each $i, $day in $calendar-days {
-      &--#{$day}:first-child {
-        margin-left: calcMargin($i);
-      }
-    }
   }
 
   @for $i from 28 through 31 {
@@ -47,6 +40,12 @@
       .calendar__day:not(:nth-child(-n + #{$i})) {
         display: none;
       }
+    }
+  }
+
+  @each $i, $day in $calendar-days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: calcMargin($i);
     }
   }
 }
