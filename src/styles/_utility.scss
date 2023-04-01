@@ -1,0 +1,31 @@
+$color-grey: #eee;
+$block-size: 100px;
+$block-gap: 1px;
+$calendar-days: (
+  0: "mon",
+  1: "tue",
+  2: "wed",
+  3: "thu",
+  4: "fri",
+  5: "sat",
+  6: "sun"
+);
+
+@function calcMargin($n) {
+  $res: 0;
+  @if ($n > 0) {
+    $res: $n*$block-size + ($n - 1);
+  }
+
+  @return $res;
+}
+
+@function calcWidth($n) {
+  @return $n*$block-size + ($n - 1) + 20px;
+}
+
+.container {
+  min-height: 100vh;
+  align-items: center;
+  display: flex;
+}
