@@ -1,0 +1,53 @@
+.container__calendar {
+  margin: 50px auto;
+}
+
+.calendar {
+  gap: $cells-gap;
+  max-width: $calendar-max-width;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  &__day {
+    @include square($cell-size);
+
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: rgb(255, 107, 187);
+      transform: translate(0, -20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: "#{$day}";
+      }
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length_#{$last-day}
+    &__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $num in $calendar-day {
+    &--start-day_#{$name} :first-child {
+      margin-left: ($cell-size + $cells-gap) * $num;
+    }
+  }
+}
