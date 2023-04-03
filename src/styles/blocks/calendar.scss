@@ -7,18 +7,16 @@
   padding: $calendarPadding;
 
   &__cell {
+    @include square;
     display: flex;
-    width: $cellSize;
-    height: $cellSize;
     background-color: $cellColor;
     border: 1px solid #000;
     cursor: pointer;
-    transition-duration: 0.5s;
+    transition: all 0.5s;
 
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
-      transition-duration: 0.5s;
     }
 
     @for $i from 1 through 31 {
@@ -27,7 +25,6 @@
         align-self: center;
         margin: auto;
         line-height: 100px;
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
     }
