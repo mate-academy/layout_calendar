@@ -1,41 +1,31 @@
-@import "./_variables/reset";
 @import "./_variables/variables";
+@import "./_variables/reset";
+@import "./_variables/functions";
+
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
 
 .calendar {
   padding: $padding;
-  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   width: 7 * ($size + $gap) - $gap + 2 * $padding;
 
-  @each $day, $i in $days {
-    &__day--#{$day} {
-      margin-left: $i * ($size + $gap);
-    }
-  }
-
   &__day {
     justify-content: center;
     align-items: center;
-    display: none;
+    display: flex;
     width: $size;
     height: $size;
     background-color: $color;
     list-style: none;
     border: $border;
     transition: all 0.5s ease;
-
-    @for $index from 1 through $month-length {
-      @if $index <= $month-length {
-        &:nth-child(#{$index}) {
-          display: flex;
-          &::before {
-            content: "#{$index}";
-          }
-        }
-      }
-    }
 
     &:hover {
       cursor: pointer;
