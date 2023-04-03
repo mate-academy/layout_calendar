@@ -1,0 +1,21 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: $i * ($size + $gap);
+    }
+  }
+}
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+@function calculate-width($size, $gap, $padding) {
+  @return 7 * ($size + $gap) - $gap + 2 * $padding;
+}

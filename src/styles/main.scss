@@ -1,3 +1,38 @@
-body {
-  margin: 0;
+@import "./_variables/variables";
+@import "./_variables/reset";
+@import "./_variables/functions";
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  padding: $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: calculate-width($size, $gap, $padding);
+
+  &__day {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: $size;
+    height: $size;
+    background-color: $color;
+    list-style: none;
+    border: $border;
+    cursor: pointer;
+    transition-property: background-color, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
 }
