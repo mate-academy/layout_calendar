@@ -4,6 +4,7 @@
   gap: $gap;
   max-width: $calendar-width;
   padding: $calendar-padding;
+  margin: 0 auto;
 
   &__day {
     @include square;
@@ -29,13 +30,14 @@
   }
 
   @each $day, $number-day in $week-day {
-    &__start-day--#{$day} .calendar__day:first-child {
+    &--start-day_#{$day} .calendar__day:first-child {
       margin-left: $number-day * ($cell-size + $gap);
     }
   }
 
-  @for $last-day from 28 through 31 {
-    &__last-day--#{$last-day} .calendar__day:nth-child(n + #{$last-day + 1}) {
+  @for $month-length from 28 through 31 {
+    &--month-length_#{$month-length}
+    .calendar__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
