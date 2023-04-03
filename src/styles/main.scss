@@ -4,7 +4,7 @@
 
 .container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   justify-content: center;
   align-items: center;
 }
@@ -14,7 +14,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: 7 * ($size + $gap) - $gap + 2 * $padding;
+  width: calculate-width($size, $gap, $padding);
 
   &__day {
     justify-content: center;
@@ -25,10 +25,12 @@
     background-color: $color;
     list-style: none;
     border: $border;
-    transition: all 0.5s ease;
+    cursor: pointer;
+    transition-property: background-color, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
