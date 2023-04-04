@@ -18,7 +18,7 @@
   }
   
   @each $day,$num , $value in $days {
-    &--start-day--#{$day} {
+    &--start-day-#{$day} {
       .cal__day:nth-child(1) {
         margin-left: ($day-size * $num + $value);
       }
@@ -26,7 +26,7 @@
   }
   
   @for $index from 28 through 31 {
-    &--month-length--#{$index} {
+    &--month-length-#{$index} {
       .cal__day:nth-child(n + #{$index + 1}) {
         display: none;
       }
@@ -38,7 +38,7 @@
   }
   
   @for $index from 1 through 31 {
-    &__day--#{$index}::after {
+    &__day:nth-child(#{$index})::after {
       content: "#{$index}";
     }
   }
