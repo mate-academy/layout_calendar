@@ -1,3 +1,70 @@
+$days-in-month: 31;
+$month-length: 28;
+
 body {
   margin: 0;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.calendar {
+  gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 706px;
+  padding: 10px;
+}
+
+$days-margin:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day, $margin in $days-margin {
+  .calendar_start-day--#{$day} :first-child {
+    margin-left: $margin;
+  }
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+  background: #eee;
+  box-sizing: border-box;
+
+  &:hover {
+    cursor: pointer;
+
+    transform: translateY(-20px);
+    background-color: pink;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+  }
+
+  @for $index from 1 through $days-in-month {
+    &:nth-child(n + #{$index}):before {
+      content: "#{$index}";
+      font-size: 30px;
+    }
+  }
+}
+
+@for $index from $month-length through $days-in-month {
+  .calendar_month-length--#{$index} :nth-child(n + #{$index + 1}) {
+    display: none;
+  }
 }
