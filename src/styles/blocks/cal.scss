@@ -1,0 +1,45 @@
+.cal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: #{$cal-width};
+  position: absolute;
+
+  &__day {
+    height: #{$day-size};
+    width: #{$day-size};
+    background-color: #eee;
+    border: 1px solid black;
+    position: relative;
+    text-align: center;
+    line-height: #{$day-size};
+    cursor: pointer;
+    transition-duration: 350ms;
+  }
+  
+  @each $day,$num , $value in $days {
+    &--start-day--#{$day} {
+      .cal__day:nth-child(1) {
+        margin-left: ($day-size * $num + $value);
+      }
+    }
+  }
+  
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} {
+      .cal__day:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+  &__day:hover {
+    transform: translate3D( #{$transform}, #{$transform}, 0);
+    background-color: aquamarine;
+  }
+  
+  @for $index from 1 through 31 {
+    &__day--#{$index}::after {
+      content: "#{$index}";
+    }
+  }
+}
