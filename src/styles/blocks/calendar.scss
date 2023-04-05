@@ -1,8 +1,8 @@
-.cal {
+.calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  width: #{$cal-width};
+  width: #{$calendar-width};
   position: absolute;
 
   &__day {
@@ -19,7 +19,7 @@
   
   @each $day,$num , $value in $days {
     &--start-day-#{$day} {
-      .cal__day:nth-child(1) {
+      .calendar__day:nth-child(1) {
         margin-left: ($day-size * $num + $value);
       }
     }
@@ -27,13 +27,13 @@
   
   @for $index from 28 through 31 {
     &--month-length-#{$index} {
-      .cal__day:nth-child(n + #{$index + 1}) {
+      .calendar__day:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
   }
   &__day:hover {
-    transform: translate3D( #{$transform}, #{$transform}, 0);
+    transform: translate3D( #{$transform-day-hover}, #{$transform-day-hover}, 0);
     background-color: aquamarine;
   }
   
