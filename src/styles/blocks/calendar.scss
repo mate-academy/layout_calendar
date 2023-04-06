@@ -1,15 +1,13 @@
 .calendar {
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap-cell;
-    margin: 30px auto;
-    padding: $field-padding;
-    width: $width-field;
-    cursor: pointer;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-cell;
+  margin: 30px auto;
+  padding: $field-padding;
+  width: $width-field;
+  cursor: pointer;
 
-  &__cell {
+  &-cell {
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -29,22 +27,27 @@
   }
 
   @for $index from 1 through 31 {
-    &__cell:nth-child(#{$index})::before {
-      content: '#{$index}';
-    }
-  }
-
-  &__month-length {
-    @for $monthDay from 28 through 31 {
-      &__#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
-        display: none;
-      }
+    &-cell:nth-child(#{$index})::before {
+      content: "#{$index}";
     }
   }
 
   @each $name, $number in $weeksDay {
-    &__start-day-#{$name} {
-      margin-left: ($size-cell * ($number - 1)) + ($gap-cell * ($number - 1));
+    &--start-day-#{$name} {
+      .calendar-cell {
+        &:first-child {
+          margin-left: ($size-cell * ($number - 1)) 
+            + ($gap-cell * ($number - 1));
+        }
+      }
+    }
+  }
+
+  &--month-length {
+    @for $monthDay from 28 through 31 {
+      &-#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
+        display: none;
+      }
     }
   }
 }
