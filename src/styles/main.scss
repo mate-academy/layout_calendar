@@ -1,21 +1,30 @@
 @import "./__variables.scss";
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
 }
 
 .calendar {
-  box-sizing: border-box;
   margin: auto;
-  // border: 0.1px solid #000;
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap-reverse;
   justify-content: end;
   width: 710px;
-  // height: 510px;
   gap: 1px;
+
+  &__day {
+    @for $num from $month-lehgth through 1 {
+      &:nth-child(#{$num})::before {
+        content: "#{($num - $month-lehgth -1 )*-1}";
+      }
+    }
+  }
 }
 
 .cell {
@@ -23,7 +32,6 @@ html {
     &:nth-child(#{$num}) {
       content: "#{($num - $month-lehgth -1 )*-1}";
       display: flex;
-      box-sizing: border-box;
       width: 100px;
       height: 100px;
       border: 1px solid #000;
@@ -33,19 +41,11 @@ html {
       font-size: 30px;
     }
   }
-}
 
-.calendar__day {
-  @for $num from $month-lehgth through 1 {
-    &:nth-child(#{$num})::before {
-      content: "#{($num - $month-lehgth -1 )*-1}";
-    }
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: pink;
+    transition-duration: 500ms;
   }
-}
-
-.calendar__day:hover {
-  cursor: pointer;
-  transform: translateY(-20px);
-  background-color: pink;
-  transition-duration: 500ms;
 }
