@@ -1,3 +1,51 @@
-body {
+@import "./__variables.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+}
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
+  justify-content: end;
+  width: 710px;
+  gap: 1px;
+
+  &__day {
+    @for $num from $month-lehgth through 1 {
+      &:nth-child(#{$num})::before {
+        content: "#{($num - $month-lehgth -1 )*-1}";
+      }
+    }
+  }
+}
+
+.cell {
+  @for $num from $month-lehgth through 1 {
+    &:nth-child(#{$num}) {
+      content: "#{($num - $month-lehgth -1 )*-1}";
+      display: flex;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+      background-color: #eee;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: pink;
+    transition-duration: 500ms;
+  }
 }
