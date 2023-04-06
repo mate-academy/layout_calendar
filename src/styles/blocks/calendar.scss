@@ -1,0 +1,50 @@
+.calendar {
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap-cell;
+    margin: 30px auto;
+    padding: $field-padding;
+    width: $width-field;
+    cursor: pointer;
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $size-cell;
+    height: $size-cell;
+    background-color: $bgc-cell;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      background-color: $bgc-cell-hover;
+      transform: translate(0, -20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &__cell:nth-child(#{$index})::before {
+      content: '#{$index}';
+    }
+  }
+
+  &__month-length {
+    @for $monthDay from 28 through 31 {
+      &__#{$monthDay} :nth-child(n + #{$monthDay + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $name, $number in $weeksDay {
+    &__start-day-#{$name} {
+      margin-left: ($size-cell * ($number - 1)) + ($gap-cell * ($number - 1));
+    }
+  }
+}
