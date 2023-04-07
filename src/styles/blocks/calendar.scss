@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: 7 * $cell-size + 20px;
+
+  $days:
+    "mon" 0,
+    "tue" $cell-size + 1px,
+    "wed" 2 * $cell-size + 2px,
+    "thu" 3 * $cell-size + 3px,
+    "fri" 4 * $cell-size + 4px,
+    "sat" 5 * $cell-size + 5px,
+    "sun" 6 * $cell-size + 6px;
+
+  @each $start-day, $start-position in $days {
+    &--start-day--#{$start-day} > &__day:first-child {
+      margin-left: #{$start-position};
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} > &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
