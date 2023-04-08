@@ -1,0 +1,84 @@
+.calendar {
+  margin: 200px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: $gap-size;
+  width: area-size(7);
+  border: 1px solid lightgray;
+  border-radius: $area-border-radius;
+  box-sizing: content-box;
+  padding: 10px;
+  background-color: lightgray;
+  perspective: 500px;
+
+  &__day {
+    @include square($day-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    border-radius: $cell-border-radius;
+    background-color: #eee;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink !important;
+    transform: translateY(-5px);
+    transition: transform 0.5s;
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $font-size-day;
+      color: black;
+    }
+  }
+
+  $start-day:
+    "mon" area-size(0) 6 7,
+    "tue" area-size(1) 5 6,
+    "wed" area-size(2) 4 5,
+    "thu" area-size(3) 3 4,
+    "fri" area-size(4) 2 3,
+    "sat" area-size(5) 1 2,
+    "sun" area-size(6) 7 1;
+
+  @each $name, $margin, $weekend-day-1, $weekend-day-2 in $start-day {
+    &__start-day--#{$name} {
+      .calendar__day:first-child {
+        margin-left: $margin;
+      }
+
+      .calendar__day:nth-child(7n + #{$weekend-day-1}) {
+        background-color: rgb(253, 145, 161);
+      }
+
+      .calendar__day:nth-child(7n + #{$weekend-day-2}) {
+        background-color: rgb(253, 145, 161);
+      }
+    }
+  }
+
+  @for $index from 28 through 30 {
+    &__length--#{$index} {
+      .calendar__day:nth-child(n + #{1 + $index}) {
+        border: none;
+        background-color: lightgray;
+      }
+
+      .calendar__day:nth-child(n + #{1 + $index}):hover {
+        cursor: auto;
+        background-color: lightgray !important;
+        transform: none;
+      }
+
+      .calendar__day:nth-child(n + #{1 + $index})::before {
+        content: "";
+      }
+    }
+  }
+}
