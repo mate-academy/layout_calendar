@@ -22,13 +22,6 @@
     background-color: #eee;
   }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: pink !important;
-    transform: translateY(-5px);
-    transition: transform 0.5s;
-  }
-
   @for $index from 1 through 31 {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
@@ -60,6 +53,13 @@
       .calendar__day:nth-child(7n + #{$weekend-day-2}) {
         background-color: rgb(253, 145, 161);
       }
+
+      .calendar__day:nth-child(n):hover {
+        cursor: pointer;
+        background-color: pink;
+        transform: translateY(-5px);
+        transition: transform 0.5s;
+      }
     }
   }
 
@@ -72,7 +72,7 @@
 
       .calendar__day:nth-child(n + #{1 + $index}):hover {
         cursor: auto;
-        background-color: lightgray !important;
+        background-color: lightgray;
         transform: none;
       }
 
