@@ -1,23 +1,35 @@
 .calendar {
   position: relative;
-  max-width: getWidth($distans-between-cell, $cell-size, $field-padding);
+  max-width: getWidth($distance-between-cell, $cell-size);
+  display: flex;
+  flex-wrap: wrap;
+  gap: $distance-between-cell;
+  padding: 50px;
 
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $distans-between-cell;
-    padding: 50px $field-padding;
-
-    @for $index1 from 28 through 31 {
-      &--mounth-length--#{$index1} :nth-child(n + #{$index1 + 1}) {
-        display: none;
-      }
+  @for $index1 from 28 through 31 {
+    &--mounth-length--#{$index1} :nth-child(n + #{$index1 + 1}) {
+      display: none;
     }
   }
 
+  $days: 
+    "mon" $day-shift * 0,
+    "tue" $day-shift * 1,
+    "wed" $day-shift * 2,
+    "thy" $day-shift * 3,
+    "fri" $day-shift * 4,
+    "sat" $day-shift * 5,
+    "sun" $day-shift * 6;
+    
+  @each $day, $margin in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+  
   &__cell {
     @include square($cell-size);
-
+    position: relative;
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -31,21 +43,6 @@
       &--content-#{$index}::before {
         content: "#{$index}";
         align-self: center;
-      }
-    }
-
-    $days: 
-      "mon" 0,
-      "tue" 101px,
-      "wed" 202px,
-      "thy" 303px,
-      "fri" 404px,
-      "sat" 505px,
-      "sun" 606px;
-
-    @each $day, $margin in $days {
-      &--start-day--#{$day} {
-        margin-left: $margin;
       }
     }
 
