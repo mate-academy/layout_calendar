@@ -20,4 +20,27 @@
       }
     }
   }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    width: $cell-width;
+    height: $cell-width;
+    background-color: #eee;
+    transition: $day-transition;
+  
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }  
 }
