@@ -19,7 +19,7 @@
     }
   }
 
-  @for $i from 1 through $month-length {
+  @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       @include square ($day-size);
       @extend %display-position;
@@ -32,5 +32,11 @@
 @each $day, $number in $start-day {
   .calendar--start-day--#{$day} .calendar__day:first-child {
     margin-left: #{($day-size + $gap-shift) * $number};
+  }
+}
+
+@for $index from 1 through 31 {
+  .calendar--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+    display: none;
   }
 }
