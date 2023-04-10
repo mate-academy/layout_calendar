@@ -1,15 +1,18 @@
 @use "../utils/_variables" as *;
 @use "../utils/_functions" ;
 @use "../utils/_mixins" ;
+@use "../utils/_extends" ;
 
 .calendar {
-  display: flex;
+  @extend %display-flex;
   flex-wrap: wrap;
   gap: $cell-gap;
-  padding: $calendar-padding;
-  max-width: 7 * $cell-size + 2 * $calendar-padding + 6 * $cell-gap;
-  width: 100%;
-  margin: 0 auto;
+  padding: 100px $calendar-top-padding;
+  width: 7 * $cell-size + 2 * $calendar-top-padding + 6 * $cell-gap;
+
+  &--center {
+    margin: 0 auto;
+  }
 
   @each $day-count, $index in $week {
       &--start-day--#{$day-count} {
@@ -40,7 +43,6 @@
     &:hover {
       transform: translateY(-($cell-size * 0.2));
       background-color: #ffbfcb;
-      transition: .5s ease-in-out;
       cursor: pointer;
     }
 
@@ -48,7 +50,7 @@
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        display: flex;
+        @extend %display-flex;
         align-items: center;
         justify-content: center;
         font-size: 30px;
