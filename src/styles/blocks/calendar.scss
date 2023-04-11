@@ -1,53 +1,49 @@
 .calendar {
+  $days-of-the-week:
+    "mon" 6,
+    "tue" 5,
+    "wed" 4,
+    "thu" 3,
+    "fri" 2,
+    "sat" 1,
+    "sun" 0;
+
+  @each $day-of-the-week, $number-of-the-week in $days-of-the-week {
+    &__start-day--#{$day-of-the-week} .calendar__item:nth-child(1) {
+      margin-left: $number-of-the-week * ($cell-size + $date-gap);
+    }
+  }
+
+  @for $date-n from 28 through 31 {
+    &--calendar-length--#{$date-n} .calendar__item:nth-child(n+#{$date-n + 1}) {
+      display: none;
+    }
+  }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
+    gap: $date-gap;
   }
 
   &__item {
-    @include square($cell-size);
-    background-color: $date-color;
-    border: 1px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
+    @include square($cell-size);
+    background-color: $date-color;
+    border: 1px solid #000;
+    border-radius: 5px;
     transition: all 0.5s;
     cursor: pointer;
-
-    &:nth-child(1) {
-      margin-left: 606px;
-    }
 
     &:hover {
       background-color: $date-color-hover;
       transform: translateY(-20px);
     }
-
-    $days-of-the-week:
-      "mon" rgb(255, 94, 0),
-      "tue" rgb(122, 243, 0),
-      "wed" #f35,
-      "thu" #5ad,
-      "fri" #0ed,
-      "sat" rgb(255, 133, 194),
-      "sun" rgb(255, 234, 0);
-
-    @each $day-of-the-week, $color-of-the-week in $days-of-the-week {
-      &--start-day--#{$day-of-the-week} {
-        background-color: #{$color-of-the-week};
-      }
-    }
   }
 
-  @for $avuncular-calendar from 1 + $month-length through 32 {
-    &__item:nth-child(#{$avuncular-calendar}) {
-      display: none;
-    }
-  }
-
-  @for $date from 1 through $month-length {
+  @for $date from 1 through 31 {
     &__item:nth-child(#{$date}) {
       &::before {
         content: "#{$date}";
