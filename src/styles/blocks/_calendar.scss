@@ -2,6 +2,9 @@
   width: ($cell-size + $date-gap) * 7;
   margin: 0 auto;
   padding: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $date-gap;
 
   $days-of-the-week:
     "mon" 0,
@@ -19,16 +22,10 @@
   }
 
   @for $date-length from 28 through 31 {
-    &--calendar-length--#{$date-length} 
+    &--calendar-length--#{$date-length}
     .calendar__item:nth-child(n+#{$date-length + 1}) {
       display: none;
     }
-  }
-
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $date-gap;
   }
 
   &__item {
