@@ -1,12 +1,16 @@
 .calendar {
+  width: ($cell-size + $date-gap) * 7;
+  margin: 0 auto;
+  padding: 40px 0;
+
   $days-of-the-week:
-    "mon" 6,
-    "tue" 5,
-    "wed" 4,
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
     "thu" 3,
-    "fri" 2,
-    "sat" 1,
-    "sun" 0;
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
   @each $day-of-the-week, $number-of-the-week in $days-of-the-week {
     &__start-day--#{$day-of-the-week} .calendar__item:nth-child(1) {
@@ -14,8 +18,9 @@
     }
   }
 
-  @for $date-n from 28 through 31 {
-    &--calendar-length--#{$date-n} .calendar__item:nth-child(n+#{$date-n + 1}) {
+  @for $date-length from 28 through 31 {
+    &--calendar-length--#{$date-length} 
+    .calendar__item:nth-child(n+#{$date-length + 1}) {
       display: none;
     }
   }
