@@ -1,0 +1,60 @@
+
+@import "./variables.scss";
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__month {
+
+    display: flex;
+    flex-wrap: wrap;
+    width: $callendar-width;
+    margin: 20px 10px 0;
+    gap: 1px;
+
+    @each $day, $number in $week {
+      &--start-day--#{$day} {
+        & :first-child {
+          margin-left: (#{($number - 1) * ($cell-size + 1px)});
+        }
+      }
+    }
+
+    @for $day from 28 through 31 {
+      &--length--#{$day} {
+        & :nth-child(n + #{$day + 1}) {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+      }
+    }
+
+    @include square($cell-size);
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+
+      transform: translateY(-20px);
+    }
+  }
+}
