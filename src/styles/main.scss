@@ -1,3 +1,75 @@
-body {
-  margin: 0;
+@import "./normalize.scss";
+@import "./utilis/variables";
+@import "./utilis/mixins";
+@import "./utilis/extends";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: (7 * $cell-size) + (6 * $gap-size);
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    border: 1px solid black;
+
+    @include square($cell-size);
+
+    background-color: #eee;
+    @extend %text;
+
+    transition: transform 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: "#{$i}";
+        }
+      }
+    }
+
+    &:hover {
+      transform: matrix(1, 0, 0, 1, 0, -20);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+
+  &--start-day--tue {
+    .calendar__day:first-child {
+      margin-left: ($cell-size + $gap-size);
+    }
+  }
+
+  &--start-day {
+    @each $day, $number in $days {
+      &--#{$day} {
+        .calendar__day:first-child {
+          margin-left: ($number - 1) * ($cell-size + $gap-size);
+        }
+      }
+    }
+  }
+
+  &--month-length {
+    @for $last-day from 28 through 31 {
+      &--#{$last-day} {
+        .calendar__day:nth-child(n + #{$last-day + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
 }
