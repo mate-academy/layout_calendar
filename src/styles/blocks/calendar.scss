@@ -1,0 +1,54 @@
+@import "./utils/mixins";
+@import "./utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: 7 * $day-size + $gap-size * 6;
+  padding: 10px;
+
+  @for $day from 28 through 30 {
+    &--month-length--#{$day} :nth-child(n+#{$day+1}) {
+      display: none;
+    }
+  }
+
+  $days-of-week: 
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $start-day, $start-day-value in $days-of-week {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: $start-day-value * ($day-size + $gap-size);
+    }
+  }
+}
+
+.calendar__day {
+  @include day-size($day-size);
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  display: flex;
+
+  @for $day-number from 1 through 31 {
+    &:nth-child(#{$day-number}):before {
+ 
+      content: "#{$day-number}";
+      margin: auto;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    animation-duration: $animation-duration;
+    background-color: pink;
+  }
+}
