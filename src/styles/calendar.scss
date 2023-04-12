@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: #{$calendar-padding};
+  width: getWidth(
+    $cell-size,
+    $cell-gap,
+    $calendar-padding);
+  gap: #{$cell-gap};
+
+  @each $weekday-name, $weekday-number in $weekday {
+    &--start-day--#{$weekday-name}
+    &__day:first-child {
+      margin-left: getMargin($cell-size, $cell-gap, $weekday-number);
+    }
+  }
+
+  &__day {
+    @include square($cell-size);
+    position: relative;
+    transition: 0.5s;
+    text-decoration: none;
+    list-style: none;
+     
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: #ffc0cb;
+    }
+  }
+
+  @for $day-number from 1 through 31 {
+    &__day:nth-child(#{$day-number})::before {
+      @extend %number-position;
+      content: "#{$day-number}";
+    };
+  }
+
+  @for $days from 28 through 31 {
+    &__month-length--#{$days -1}
+    &__day:nth-child(n + #{$days}) {
+      display: none;
+    }
+  }
+}
