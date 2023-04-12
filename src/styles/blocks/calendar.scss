@@ -1,0 +1,51 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width-calendar;
+  gap: $gap-between-days;
+
+  $week-days:
+    "mon" 0,
+    "tue" $width-day,
+    "wed" 2 * $width-day,
+    "thu" 3 * $width-day,
+    "fri" 4 * $width-day,
+    "sat" 5 * $width-day,
+    "sun" 6 * $width-day;
+
+  @each $day, $margin in $week-days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $num from $smallest-month-length through $month-length {
+    &--month-length--#{$num}
+    &__day:nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include square($box-size);
+    background-color: $day-color;
+    border: 1px solid black;
+    cursor: pointer;
+
+    transition: background-color $transition-time, transform $transition-time;
+
+    &:hover {
+      background-color: $day-background-color;
+      transform: translateY(-20px);
+    }
+
+    @for $days from 1 through $month-length {
+      &:nth-child(#{$days})::before {
+        content: "#{$days}";
+      }
+    }
+  }
+}
