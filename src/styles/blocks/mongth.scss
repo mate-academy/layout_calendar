@@ -1,0 +1,55 @@
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  width: $days-width;
+  gap: $gap-between-cells;
+  padding: $days-padding;
+
+  &__day {
+    @include square($cell-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px black solid;
+    background-color: #eee;
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::after {
+      content: "#{$index}";
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+    }
+  }
+
+  $start-day:
+    "mon" $start-day-mon,
+    "tue" $start-day-tue,
+    "wed" $start-day-wed,
+    "thu" $start-day-thu,
+    "fri" $start-day-fri,
+    "sat" $start-day-sat,
+    "sun" $start-day-sun;
+
+  @each $day, $value in $start-day {
+    &--start-day_#{$day} .month__day:first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $index from 28 through 30 {
+    &--length-#{$index} .month__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: rgb(246, 169, 200);
+    transform: translateY(-20px);
+  }
+}
