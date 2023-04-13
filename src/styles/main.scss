@@ -1,3 +1,69 @@
+$days-in-month: 31;
+$cell-size: 100px;
+$start-week:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+
 body {
   margin: 0;
+}
+
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 727px;
+  padding: 10px;
+  gap: 1px;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
+  &__cell {
+    display: flex;
+    @include square($cell-size);
+    border: 1px solid #000;
+    align-items: center;
+    justify-content: center;
+    transition-property: background-color, transform;
+    transition-duration: 500ms;
+    background-color: #eee;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $index from 1 through $days-in-month {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @each $day, $value in $start-week {
+    &__start-week--#{$day} :first-child {
+      margin-left: ($cell-size + 1) * ($value - 1);
+    }
+  }
+
+  @for $index from 28 through $days-in-month {
+    &__days-in-month--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
 }
