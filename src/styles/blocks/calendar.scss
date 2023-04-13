@@ -1,0 +1,48 @@
+.calendar {
+  $start-day: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
+
+  @each $weekday, $value in $start-day {
+    &--#{$weekday} .calendar__cell:first-child {
+      margin-left: ($value - 1) * ($cell-size + $gap);
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 10px;
+    gap: 1px;
+    width: $cell-size * $column + ($column - 1) * $gap + 2 * $padding;
+    margin: 0 auto;
+  }
+
+  &__cell {
+    @include square($cell-size);
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+    line-height: $cell-size;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: color 0.5s, transform 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
