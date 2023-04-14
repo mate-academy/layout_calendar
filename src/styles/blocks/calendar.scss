@@ -3,7 +3,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  padding: (2 * $calendar-horizontal-padding) $calendar-horizontal-padding;
+  padding: (2 * $calendar-padding) $calendar-padding;
   box-sizing: border-box;
   min-width: $calendar-width;
   width: $calendar-width;
@@ -24,11 +24,11 @@
     transition: 0.5s;
 
     @for $day from 1 through 31 {
-      &--#{$day} {
+      &:nth-child(#{$day}) {
         &::before {
           position: absolute;
 
-          content: "" + $day;
+          content: "#{$day}";
 
           font-size: 30px;
           font-family: Arial, Helvetica, sans-serif;
@@ -51,7 +51,7 @@
     }
   }
 
-  @for $days-count from 28 to 31 {
+  @for $days-count from 28 through 31 {
     &--month-length--#{$days-count} :nth-child(n + #{$days-count + 1}) {
       display: none;
     }
