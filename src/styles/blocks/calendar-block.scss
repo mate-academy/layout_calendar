@@ -9,30 +9,34 @@
   transform: translate(-50%, -50%);
   gap: 1px;
 
+  &__day {
+    @include size-day-cells;
+    
+    @for $index from 1 through $max-days {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+  }
+
   @each $value in $days-of-mounth {
     &--month-length-#{$value} {
-      .calendar__day:nth-child(-n + #{$value}) {
-        @include size-day-cells;
-
-        @for $index from 1 through $value {
-          &:nth-child(#{$index}):before {
-            content: "#{$index}";
-            font-family: Arial, sans-serif;
-            font-size: 30px;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-          }
-        }
-
-        &:hover {
-          cursor: pointer;
-          background-color: #ffc0cb;
-          transform: translateY(-20px);
-          transition: all 0.5s ease;
-        }
+      .calendar__day:nth-last-child(-n + #{$max-days - $value}) {
+        display: none;
       }
     }
   }
