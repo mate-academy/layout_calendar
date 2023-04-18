@@ -4,7 +4,7 @@
   width: getCalendarWidth($field-size, $field-gap, $calendar-padding);
   gap: $field-gap;
   padding: $calendar-padding;
-  margin: 75px auto;
+  margin: 0 auto;
 
   &__field {
     cursor: pointer;
@@ -34,7 +34,7 @@
     "sun" 6;
 
   @each $name, $index in $days {
-    &--start-day-#{$name}>:first-child {
+    &--start-day--#{$name}>:first-child {
       margin-left: $field-size * $index + $field-gap * ($index);
     }
   }
@@ -46,7 +46,7 @@
   }
 
   @for $length from 28 through 31 {
-    &--month-length-#{$length} .calendar__field:nth-child(n+#{$length+1}) {
+    &--month-length--#{$length} .calendar__field:nth-child(n+#{$length+1}) {
       display: none;
     }
   }
