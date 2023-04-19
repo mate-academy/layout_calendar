@@ -1,0 +1,64 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  width: widthCalendar($width-and-height-for-box, $gap-for-box);
+  gap: $gap-for-box;
+
+  &--margin-top-extra {
+    margin-top: 15px;
+  }
+
+  &__day {
+    width: $width-and-height-for-box;
+    height: $width-and-height-for-box;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 500ms;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $index from 1 through 31 {
+      &--#{$index}::before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  $weak:
+    mon 0,
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
+
+  @each $day, $numDay in $weak {
+    &--start-day-#{$day} > &__day--1 {
+      margin-left: ($width-and-height-for-box * $numDay) +
+        ($gap-for-box * $numDay);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} > &__day:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
