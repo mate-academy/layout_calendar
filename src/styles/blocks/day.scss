@@ -1,0 +1,25 @@
+.day {
+  background-color: #eee;
+  @include square($cell-size);
+  box-sizing: border-box;
+  border: 1px solid black;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+  
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+      color: black;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: pink;
+  }
+}
