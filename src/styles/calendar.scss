@@ -6,28 +6,28 @@
   padding: $padding;
 
   &__day {
-    width: $squareWidth;
-    height: $squareWidth;
+    @include sqare;
+    position: relative;
+
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: $squareWidth;
     background-color: #eee;
     border: 1px solid black;
-    position: relative;
   }
 
   @for $day from 1 through 31 {
     &__day--#{$day}::before {
       content: "#{$day}";
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      line-height: $squareWidth;
     }
   }
 
   @each $day,$value in $days {
     &--start-day--#{$day}>:first-child {
-      margin-left: ($value * $gap) + ($squareWidth * $value);
+      margin-left: ($value * $gap) + ($squareWidth * $value) + $gap * 3;
     }
   }
 
