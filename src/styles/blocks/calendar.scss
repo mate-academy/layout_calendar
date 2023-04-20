@@ -2,17 +2,18 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
+  flex-shrink: 0;
 
-  width: widthCalendar($width-and-height-for-box, $gap-for-box);
-  gap: $gap-for-box;
+  width: widthCalendar($size, $gap);
+  gap: $gap;
 
   &--margin-top-extra {
     margin-top: 15px;
   }
 
   &__day {
-    width: $width-and-height-for-box;
-    height: $width-and-height-for-box;
+    width: $size;
+    height: $size;
     box-sizing: border-box;
     cursor: pointer;
     background-color: #eee;
@@ -51,8 +52,8 @@
 
   @each $day, $numDay in $weak {
     &--start-day-#{$day} > &__day--1 {
-      margin-left: ($width-and-height-for-box * $numDay) +
-        ($gap-for-box * $numDay);
+      margin-left: ($size * $numDay) +
+        ($gap * $numDay);
     }
   }
 
