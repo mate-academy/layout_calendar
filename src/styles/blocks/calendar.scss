@@ -1,19 +1,23 @@
 .calendar {
-  height: 500px;
-  width: 702px;
-  display: flex;
-  flex-wrap: wrap;
   align-content: flex-start;
-  box-sizing: border-box;
   gap: #{$border-size};
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100% - #{$cell-size});
+  width: calc(8 * #{$cell-size});
+  box-sizing: border-box;
 
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    height: calc(100% - #{$cell-size});
-    width: calc(7 * #{$cell-size});
-    box-sizing: border-box;
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n+#{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $index in $day-map {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc(#{$index} * (#{$cell-size} + #{$border-size}));
+    }
   }
 
   &__day {
@@ -47,24 +51,11 @@
     &:first-child {
       margin-left: 600px;
     }
-  }
 
-}
-
-@each $day, $index in $day-map {
-  &--start-day-#{$day} .calendar__day:nth-child(#{$index + 2}) {
-    margin-left: calc(#{$index} * (#{$cell-size} + #{$border-size}));
-  }
-}
-
-@for $i from 28 through 31 {
-  &--month-length-#{$i} .calendar__day:nth-child(n+#{$i + 1}) {
-    display: none;
-  }
-}
-
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 }
