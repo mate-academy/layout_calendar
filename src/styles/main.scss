@@ -21,48 +21,48 @@ $transition-duration: 0.5s;
   box-sizing: border-box;
   gap: #{$border-size};
   margin: 0 auto;
-  // border: #{$border-size} solid;
-}
 
-.calendar__list {
-  display: flex;
-  flex-wrap: wrap;
-  height: calc(100% - #{$cell-size});
-  width: calc(7 * #{$cell-size});
-  box-sizing: border-box;
-}
-
-.calendar__day {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: #{$cell-size};
-  height: #{$cell-size};
-  background-color: #{$gray-color};
-  border: #{$border-size} solid #{$black-color};
-  cursor: pointer;
-  position: relative;
-  box-sizing: border-box;
-
-  &::before {
-    content: "";
-    font-size: #{$font-size};
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100% - #{$cell-size});
+    width: calc(7 * #{$cell-size});
+    box-sizing: border-box;
   }
 
-  &:hover {
-    background-color: #{$pink-color};
-    color: #{$black-color};
-    transform: translateY(-20px);
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: #{$cell-size};
+    height: #{$cell-size};
+    background-color: #{$gray-color};
+    border: #{$border-size} solid #{$black-color};
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+
+    &::before {
+      content: "";
+      font-size: #{$font-size};
+    }
+
+    &:hover {
+      background-color: #{$pink-color};
+      color: #{$black-color};
+      transform: translateY(-20px);
+    }
+
+    &--is-hung {
+      background-color: #{$red-color};
+      color: #{$gray-color};
+    }
+
+    &:first-child {
+      margin-left: 600px;
+    }
   }
 
-  &--is-hung {
-    background-color: #{$red-color};
-    color: #{$gray-color};
-  }
-
-  &:first-child {
-    margin-left: 600px;
-  }
 }
 
 @each $day in mon, tue, wed, thu, fri, sat, sun {
