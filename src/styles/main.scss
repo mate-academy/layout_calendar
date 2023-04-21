@@ -1,3 +1,84 @@
 body {
   margin: 0;
 }
+
+$cell-size: 100px;
+$border-size: 1px;
+$margin: 10px;
+$gray-color: #eee;
+$black-color: #000;
+$red-color: #ff69b4;
+$pink-color: pink;
+$font-size: 30px;
+$transition-duration: 0.5s;
+
+.calendar {
+  height: 500px;
+  width: 702px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  box-sizing: border-box;
+  gap: #{$border-size};
+  margin: 0 auto;
+  // border: #{$border-size} solid;
+}
+
+.calendar__list {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100% - #{$cell-size});
+  width: calc(7 * #{$cell-size});
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: #{$cell-size};
+  height: #{$cell-size};
+  background-color: #{$gray-color};
+  border: #{$border-size} solid #{$black-color};
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+
+  &::before {
+    content: "";
+    font-size: #{$font-size};
+  }
+
+  &:hover {
+    background-color: #{$pink-color};
+    color: #{$black-color};
+    transform: translateY(-20px);
+  }
+
+  &--is-hung {
+    background-color: #{$red-color};
+    color: #{$gray-color};
+  }
+
+  &:first-child {
+    margin-left: 600px;
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  &--start-day-#{$day} .calendar__day:nth-child(#{$day + 1}) {
+    margin-left: calc(#{$day} - 1) * (#{$cell-size} + #{$border-size});
+  }
+}
+
+@for $i from 28 through 31 {
+  &--month-length-#{$i} .calendar__day:nth-child(n+#{$i + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
