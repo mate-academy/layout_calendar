@@ -1,0 +1,25 @@
+.day {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $square-side;
+  height: $square-side;
+  border: 1px solid #000;
+  background-color: #eee;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  cursor: pointer;
+  transition: transform 0.5s, background-color 0.5s;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-$shift-size);
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.calendar {
+  width: 7 * ($square-side + $gap-value) - $gap-value;
+  display: flex;
+  gap: $gap-value;
+  flex-wrap: wrap;
+  padding: $shift-size;
+  margin: 0 auto;
+
+  $week-days:
+    "mon" 1,
+    "tue" 2,
+    "wed" 3,
+    "thu" 4,
+    "fri" 5,
+    "sat" 6,
+    "sun" 7;
+
+  @each $name, $number in $week-days {
+    &--start-day--#{$name} .day:first-child {
+      margin-left: ($number - 1) * ($square-side + $gap-value);
+    }
+  }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} .day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
