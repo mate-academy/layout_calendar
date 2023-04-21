@@ -65,9 +65,19 @@ $transition-duration: 0.5s;
 
 }
 
-@each $day in mon, tue, wed, thu, fri, sat, sun {
-  &--start-day-#{$day} .calendar__day:nth-child(#{$day + 1}) {
-    margin-left: calc(#{$day} - 1) * (#{$cell-size} + #{$border-size});
+$day-map: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+);
+
+@each $day, $index in $day-map {
+  &--start-day-#{$day} .calendar__day:nth-child(#{$index + 2}) {
+    margin-left: calc(#{$index} * (#{$cell-size} + #{$border-size}));
   }
 }
 
