@@ -1,0 +1,20 @@
+.calendar {
+  width: calendar-width();
+  display: flex;
+  gap: $gap-value;
+  flex-wrap: wrap;
+  padding: $shift-size;
+  margin: 0 auto;
+
+  @each $name, $number in $week-days {
+    &--start-day--#{$name} .day:first-child {
+      margin-left: first-day-margin-left($number)
+    }
+  }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} .day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
