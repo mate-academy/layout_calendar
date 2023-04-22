@@ -5,16 +5,17 @@
   margin: 30px auto;
   padding: $padding;
   max-width: setWidth($cell-size, $cell-indent, $days-in-week, $padding);
+  cursor: pointer;
 
   @each $day, $index in $week {
     &--start-day_#{$day} :first-child {
       margin-left: setMargin($cell-size, $cell-indent, $index);
     }
+  }
 
-    @for $index from $month-length through $days-in-month {
-      &--month-length_#{$index} :nth-child(n+#{$index+1}) {
-        display: none;
-      }
+  @for $index from $month-length through $days-in-month {
+    &--month-length_#{$index} :nth-child(n+#{$index+1}) {
+      display: none;
     }
   }
 
@@ -36,7 +37,6 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: rgb(242, 213, 218);
       transform: translateY(-20px);
     }
