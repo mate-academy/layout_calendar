@@ -16,18 +16,23 @@
       display: none;
     }
   }
+
+  &__day::before {
+    box-sizing: border-box;
+    display: inline-block;
+    width: $sell-size;
+    height: $sell-size;
+    text-align: center;
+    line-height: 100px;
+    background-color: $base-color;
+    border: 1px solid black;
+    transition: 0.5s;
+    content: "";
+  }
+
   @for $day from 1 through 31 {
     &__day:nth-child(#{$day})::before {
-      box-sizing: border-box;
       content: "#{$day}";
-      display: inline-block;
-      width: $sell-size;
-      height: $sell-size;
-      text-align: center;
-      line-height: 100px;
-      background-color: $base-color;
-      border: 1px solid black;
-      transition: 0.5s;
     }
   }
 
