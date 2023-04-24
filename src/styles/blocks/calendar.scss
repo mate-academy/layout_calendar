@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: center;
 
+  padding-top: 50px;
+
   &__month {
     display: flex;
     flex-wrap: wrap;
@@ -27,6 +29,12 @@
     }
 
     @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number}) {
+        @if $day-number >= 28 and $day-number <=31 {
+          display: none;
+        }
+      }
+
       &:nth-child(#{$day-number})::after {
         content: "#{$day-number}";
         font-family: Arial, Helvetica, sans-serif;
@@ -39,8 +47,14 @@
   }
 
   @each $day, $margin-left in $start-day {
-    &--start-day-#{$day} &__day:first-child {
+    &--start-day--#{$day} &__day:first-child {
       margin-left: $margin-left;
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} &__day:nth-child(-n + #{$month-length}) {
+      display: block;
     }
   }
 }
