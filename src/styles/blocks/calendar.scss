@@ -1,0 +1,72 @@
+$days-row:7;
+$block-width:100px;
+$block-height:100px;
+$calendar-gap:1px;
+$calendar-padding-x:10px;
+$week-days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3,
+"fri": 4, "sat": 5, "sun": 6);
+
+$calendar-width: $days-row * $block-width + $calendar-gap * ($days-row - 1);
+
+%block-size {
+  width: $block-width;
+  height: $block-height;
+}
+
+@function first-day($day-number) {
+  @return $day-number * ($block-width + $calendar-gap);
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: $calendar-padding-x ;
+  gap: $calendar-gap;
+  width: $calendar-width;
+  $block-name: &;
+
+  &__day {
+    position: relative;
+    @extend %block-size;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &::before {
+      position: absolute;
+      @extend %block-size;
+      color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
+
+    @each $name, $number in $week-days {
+      #{$block-name}--start-day--#{$name} &:nth-child(1) {
+        margin-left: first-day($number);
+      }
+    }
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number}):before {
+        content: "#{$day-number}";
+      }
+    }
+
+    @for $day-number from 28 through 31 {
+      #{$block-name}--month-length--#{$day-number}
+      &:nth-child(n+#{$day-number+1}) {
+        display: none;
+      }
+    }
+  }
+}
