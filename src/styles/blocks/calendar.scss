@@ -5,6 +5,7 @@
   width: dynamicMaxWidth($day-width, $gap, $days-in-row, $calendar-padding);
   padding: $calendar-padding;
   padding-top: 40px;
+  margin: 0 auto;
 
   &__day {
     display: flex;
@@ -13,7 +14,7 @@
     background-color: #eee;
     @include cell-dimensions($day-width);
     border: 1px solid black;
-    transition: 0.5s;
+    transition-duration: 0.5s;
   }
 
   &__day:hover {
@@ -29,13 +30,15 @@
   }
 
   @each $day, $margin in $days-of-the-week {
-    &__day-start-day--#{$day} {
-      margin-left: $margin;
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: $margin;
+      }
     }
   }
 
   @for $number from 28 through 31 {
-    &-month-length--#{$number} {
+    &--month-length--#{$number} {
       .calendar__day:nth-child(n + #{$number + 1}) {
         visibility: hidden;
       }
