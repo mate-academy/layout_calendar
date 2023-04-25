@@ -18,6 +18,7 @@ body {
 }
 
 .calendar {
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: $size-gap;
@@ -38,7 +39,7 @@ $weekDays:
 
 @each $number, $day in $weekDays {
   .calendar--start-day--#{$day} {
-    .calendar__day--1 {
+    .calendar__day:first-child {
       margin-left: $calendar-width - $size-square * $number
         - $calendar-padding * 2 - $number + 1;
     }
@@ -46,7 +47,7 @@ $weekDays:
 }
 
 @for $number from 1 through 31 {
-  .calendar__day--#{$number} {
+  .calendar__day:nth-child(#{$number}) {
     @include square($size-square);
     background-color: #eee;
     border: 1px solid #000;
