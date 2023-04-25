@@ -1,3 +1,77 @@
+$size-square: 100px;
+$size-gap: 1px;
+$calendar-padding: 10px;
+$calendar-width: $size-square * 7 + $size-gap * 6 + $calendar-padding * 2;
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $size-gap;
+  padding: $calendar-padding;
+  padding-top: 30px;
+  width: $calendar-width;
+  transition: color 0.5s, transform 0.5s;
+}
+
+$weekDays:
+  1 "mon",
+  2 "tue",
+  3 "wed",
+  4 "thu",
+  5 "fri",
+  6 "sat",
+  7 "sun";
+
+@each $number, $day in $weekDays {
+  .calendar--start-day--#{$day} {
+    .calendar__day--1 {
+      margin-left: $calendar-width - $size-square * $number
+        - $calendar-padding * 2 - $number + 1;
+    }
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__day--#{$number} {
+    @include square($size-square);
+    background-color: #eee;
+    border: 1px solid #000;
+
+    &::before {
+      content: "#{$number}";
+      font-size: 30px;
+      line-height: $size-square;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length--#{$lastDay} {
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
+  }
 }
