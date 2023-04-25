@@ -1,0 +1,67 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendarGap;
+  padding: $calendarMainPadding;
+  padding-top: 25px;
+
+  max-width: calendarSize($squareSize, $calendarMainPadding, $calendarGap);
+
+  &__date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $squareSize;
+    height: $squareSize;
+
+    cursor: pointer;
+    background-color: $dateColor;
+    border: 1px solid $dateBorderColor;
+
+    transition: 0.5s;
+
+    &:hover {
+      background-color: pink;
+
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-family: $calendarFont;
+        font-size: 30px;
+      };
+    }
+  }
+  $weekdays:
+    "mon" 0,
+    "tue"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - 6 * $squareSize - 2 * $calendarMainPadding - 5 * $calendarGap,
+    "wed"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - 5 * $squareSize - 2 * $calendarMainPadding - 4 * $calendarGap,
+    "thu"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - 4 * $squareSize - 2 * $calendarMainPadding - 3 * $calendarGap,
+    "fri"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - 3 * $squareSize - 2 * $calendarMainPadding - 2 * $calendarGap,
+    "sat"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - 2 * $squareSize - 2 * $calendarMainPadding - $calendarGap,
+    "sun"
+    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
+    - $squareSize - 2 * $calendarMainPadding;
+  @each $weekday, $marginSize in $weekdays {
+    &--start-day-#{$weekday} :first-child {
+      margin-left: $marginSize;
+    }
+  }
+  @for $endday from 28 through 31 {
+    &--month-length-#{$endday} &__date:nth-child(n + #{$endday + 1}) {
+      display: none;
+    }
+  }
+}
