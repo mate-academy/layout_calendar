@@ -7,7 +7,7 @@
   padding-top: $translate-height;
 
   @each $day-name, $margin in $start-days {
-    &--start-day-#{$day-name} {
+    &--start-day--#{$day-name} {
       .calendar__day:first-child {
         margin-left: $margin;
       }
@@ -15,7 +15,7 @@
   }
 
   @each $month in $month-length {
-    &--month-length-#{$month} {
+    &--month-length--#{$month} {
       .calendar__day:nth-child(n + #{$month + 1}) {
         display: none;
       }
@@ -33,7 +33,7 @@
     transition: transform 0.5s , background-color 0.5s ;
 
     @for $day from 1 through 31 {
-      &--day-#{$day}::before {
+      &:nth-child(#{$day}):before {
         content: "#{$day}";
         position: absolute;
         top: 50%;
