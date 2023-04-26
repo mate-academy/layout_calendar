@@ -18,7 +18,7 @@
     background-color: $dateColor;
     border: 1px solid $dateBorderColor;
 
-    transition: 0.5s;
+    transition: background-color  0.5s, transform 0.5s;
 
     &:hover {
       background-color: pink;
@@ -34,6 +34,7 @@
       };
     }
   }
+
   $weekdays:
     "mon" 0,
     "tue"
@@ -54,11 +55,13 @@
     "sun"
     calendarSize($squareSize, $calendarMainPadding, $calendarGap)
     - $squareSize - 2 * $calendarMainPadding;
+
   @each $weekday, $marginSize in $weekdays {
     &--start-day-#{$weekday} :first-child {
       margin-left: $marginSize;
     }
   }
+
   @for $endday from 28 through 31 {
     &--month-length-#{$endday} &__date:nth-child(n + #{$endday + 1}) {
       display: none;
