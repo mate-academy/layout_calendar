@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   gap: $square-gap;
 
-  width: getCalendarWidth($square-size, $square-gap, $square-padding);
+  width: getCalendarWidth();
 
   @each $day, $value in $week-days {
     &--start-day--#{$day} &__square:first-child {
@@ -29,8 +29,14 @@
 
   &__square {
     display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+    font-size: 30px;
+
     @include square;
-    border: 1px solid black;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
@@ -38,14 +44,10 @@
       }
     }
 
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-    font-size: 30px;
     background-color: #eee;
-
+    border: 1px solid black;
     cursor: pointer;
+
     transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
