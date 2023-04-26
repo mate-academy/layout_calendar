@@ -1,0 +1,94 @@
+// @import url("../utils/reset.css");
+// @import url("../utils/normalize.css");
+// @import url("../utils/variables.scss");
+// @import url("../utils/mixin.scss");
+
+$cell-border-size: 100px;
+$calendar-width: $cell-border-size*7 +10px;
+$gap: 1px;
+$days:
+  "mon" 0,
+  "tue" ($cell-border-size + $gap),
+  "wed" ($cell-border-size + $gap) * 2,
+  "thu" ($cell-border-size + $gap) * 3,
+  "fri" ($cell-border-size + $gap) * 4,
+  "sat" ($cell-border-size + $gap) * 5,
+  "sun" ($cell-border-size + $gap) * 6;
+
+@mixin cell($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $calendar-width;
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n+#{$i + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  @each $day, $margin in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: $margin;
+
+    }
+  }
+
+  &__cell {
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    @include cell($cell-border-size);
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translate(0,-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
+  }
+
+}
+
+//коментарі потрібні, щоб коли вирішиться проблема зі змінними
+//легше було розкидати це все по потрібним файлам
+
+// .calendar__cell:hover {
+//   background-color: pink;
+//   cursor: pointer;
+//   transform: translate(0,-20px);
+// }
+
+// @for $index from 1 through 31 {
+//   .calendar__cell:nth-child(#{$index})::before{
+//     content: "#{$index}";
+//   }
+//  }
+
+// @each $day, $margin in $days {
+//   .calendar--start-day-#{$day} :first-child {
+//     margin-left: $margin;
+
+//   }
+// }
+
+// @for $i from 28 through 31 {
+//   .calendar--month-length-#{$i} :nth-child(n+#{$i + 1}){
+//     visibility: hidden;
+//   }
+//  }
