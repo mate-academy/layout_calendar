@@ -1,11 +1,11 @@
 .container {
-  height: 100vh;
   display: flex;
+  height: 100vh;
+  padding: $square-padding;
 
   justify-content: center;
   align-items: center;
 
-  padding: $square-padding;
 }
 
 .calendar {
@@ -13,7 +13,7 @@
   flex-wrap: wrap;
   gap: $square-gap;
 
-  width: $square-size * 7 + $square-gap * 4 + $square-padding * 4;
+  width: getCalendarWidth($square-size, $square-gap, $square-padding);
 
   @each $day, $value in $week-days {
     &--start-day--#{$day} &__square:first-child {
