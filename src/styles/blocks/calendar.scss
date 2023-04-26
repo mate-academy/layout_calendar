@@ -1,0 +1,51 @@
+@import "./utils/variables";
+@import "./utils/mixins";
+
+.calendar {
+  $root: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $rows-count * $cell-size + 10px;
+  padding-top: 30px;
+  padding-left: 30px;
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} > &__day--1 {
+      margin-left: (($rows-count - $index) * $cell-size)
+        + (($rows-count - $index)  * $gap);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} {
+      @for $i from $index through 31 {
+        #{$root}__day--#{$i + 1} {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @for $index from 1 through $number-of-days {
+    &__day--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  &__day {
+    @include squre($cell-size);
+
+    display: flex;
+    justify-content: center;
+    line-height: 100px;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+}
