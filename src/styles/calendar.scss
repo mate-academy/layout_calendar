@@ -1,0 +1,30 @@
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 760px;
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 100px;
+
+  &__day {
+    @include square(#{$day-size});
+    background-color: $cal-collor-gray;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: #ffc0cb;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
+  }
+}
