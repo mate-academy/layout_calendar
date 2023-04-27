@@ -37,28 +37,16 @@
 
   $weekdays:
     "mon" 0,
-    "tue"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - 6 * $squareSize - 2 * $calendarMainPadding - 5 * $calendarGap,
-    "wed"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - 5 * $squareSize - 2 * $calendarMainPadding - 4 * $calendarGap,
-    "thu"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - 4 * $squareSize - 2 * $calendarMainPadding - 3 * $calendarGap,
-    "fri"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - 3 * $squareSize - 2 * $calendarMainPadding - 2 * $calendarGap,
-    "sat"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - 2 * $squareSize - 2 * $calendarMainPadding - $calendarGap,
-    "sun"
-    calendarSize($squareSize, $calendarMainPadding, $calendarGap)
-    - $squareSize - 2 * $calendarMainPadding;
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
 
-  @each $weekday, $marginSize in $weekdays {
+  @each $weekday, $dayIndex in $weekdays {
     &--start-day-#{$weekday} :first-child {
-      margin-left: $marginSize;
+      margin-left: $dayIndex * $oneDayMargin;
     }
   }
 
