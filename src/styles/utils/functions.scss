@@ -1,0 +1,14 @@
+@import "./variables.scss";
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} :nth-child(n+#{$i + 1}) {
+    visibility: hidden;
+  }
+}
+
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: $each-cell-margin * $i;
+
+  }
+}
