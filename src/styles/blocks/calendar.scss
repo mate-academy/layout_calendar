@@ -12,7 +12,7 @@
   padding-left: 30px;
 
   @each $day, $index in $days {
-    &--start-day-#{$day} > &__day--1 {
+    &--start-day-#{$day} > &__day:first-child {
       margin-left: (($rows-count - $index) * $cell-size)
         + (($rows-count - $index)  * $gap);
     }
@@ -21,7 +21,7 @@
   @for $index from 28 through 31 {
     &--month-length-#{$index} {
       @for $i from $index through 31 {
-        #{$root}__day--#{$i + 1} {
+        #{$root}__day:nth-child(#{$i + 1}) {
           display: none;
         }
       }
@@ -29,7 +29,7 @@
   }
 
   @for $index from 1 through $number-of-days {
-    &__day--#{$index}::before {
+    &__day:nth-child(#{$index})::before {
       content: "#{$index}";
     }
   }
