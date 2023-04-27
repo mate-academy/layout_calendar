@@ -15,21 +15,10 @@
     }
   }
 
-  @for $index from 28 through 31 {
-    &--month-length--#{$index} {
-      @for $hoverIndex from $index + 1 through 32 {
-        &__day:nth-child(#{$hoverIndex}) {
-          display: none;
-        }
-      }
-    }
-  }
-
   &__day {
     background-color: #eee;
     display: flex;
     position: relative;
-
     @include square($cell-size);
 
     border: 1px solid black;
@@ -41,13 +30,18 @@
       transform: translateY(-20px);
     }
 
-    @for $index from 1 through 31 {
+    @for $index from 1 through $days-in-month {
       &:nth-child(#{$index})::before {
-        margin: auto;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
+        @include fonts ();
         content: "#{$index}";
       }
     }
   }
+
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} &__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
 }
