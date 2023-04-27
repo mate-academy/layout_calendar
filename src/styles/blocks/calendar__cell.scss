@@ -1,0 +1,31 @@
+.calendar__cell {
+  @include get-cell-size;
+
+  background-color: $background-color;
+  border: 1px solid $border-text-color;
+  color: $border-text-color;
+  font-size: 30px;
+  font-family: $main-font;
+  text-align: center;
+  line-height: $cell-side;
+
+  transition: background-color 0.5s, transform 0.5s;
+
+  &:nth-child(20) {
+    background-image: url(\images\July20.jpg);
+    background-size: cover;
+  }
+
+  &:hover {
+    background-color: #fe46a5;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+}

@@ -1,0 +1,33 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: get-calendar-width($cell-side);
+  gap: $gap-size;
+  padding: $calendar-padding;
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i - 1} {
+      .calendar__cell:nth-child(n + #{+ $i}) {
+        display: none;
+      }
+    }
+  }
+
+  $calendar__cells-of-the-week:
+    1 mon,
+    2 tue,
+    3 wed,
+    4 thu,
+    5 fri,
+    6 sat,
+    7 sun;
+
+  @each $number, $calendar__cell in $calendar__cells-of-the-week {
+    &--start-day-#{$calendar__cell} {
+      .calendar__cell:first-child {
+        margin-left: ($number - 1) * $cell-side + ($number - 1) * $gap-size;
+      }
+    }
+  }
+}
