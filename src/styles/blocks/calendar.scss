@@ -1,0 +1,55 @@
+@import "../utils/_variables.scss";
+@import "../utils/_mixins.scss";
+
+.calendar {
+  margin: 0 auto;
+  padding: 40px 0;
+  max-width: $calendar_width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $days_block_gap;
+
+  &__day {
+    @include square($block_side);
+    background-color: $day_block-color;
+    text-align: center;
+    line-height: $block_side;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number}):before {
+        content: "#{$day-number}";
+      }
+    }
+  }
+
+  $week:
+    "mon" 0,
+    "tue" $block_side + $days_block_gap,
+    "wed" ($block_side + $days_block_gap) * 2,
+    "thu" ($block_side + $days_block_gap) * 3,
+    "fri" ($block_side + $days_block_gap) * 4,
+    "sat" ($block_side + $days_block_gap) * 5,
+    "sun" ($block_side + $days_block_gap) * 6;
+
+  @each $weekday, $margin in $week {
+    &--start-day--#{$weekday} > .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  &--month-length {
+    @for $days from $days_in_month + 1 through 32 {
+      .calendar__day:nth-child(#{$days}) {
+        display: none;
+      }
+    }
+  }
+}
