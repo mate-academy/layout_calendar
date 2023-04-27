@@ -2,9 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   margin: 0;
-  padding: 10px;
+  padding: $calendar-padding;
+  padding-top: $calendar-top-padding;
   gap: $gap;
-  width: size($days-cell-size, $gap);
+  width: size($days-cell-size, $gap, $calendar-padding);
 
   &__day {
     display: flex;
@@ -16,7 +17,7 @@
 
     width: $days-cell-size;
     height: $days-cell-size;
-    background-color: #eee;
+    background-color: $cell-color;
     border: 1px solid black;
 
     transition: transform 0.5s, background-color 0.5s;
@@ -27,19 +28,21 @@
       transform: translate(0, -20px);
     }
 
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
     @for $i from 1 through 31 {
       &--#{$i}::before {
         content: "#{$i}";
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
   }
 
   @each $day, $day-num in $days {
     &__start-day--#{$day} &__day--1 {
-      margin-left: ($days-cell-size * ($day-num - 1)) + ($gap * ($day-num - 1));
+      margin-left: (($days-cell-size + $gap) * $day-num );
     }
   }
 
