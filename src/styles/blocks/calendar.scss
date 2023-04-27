@@ -1,0 +1,38 @@
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+
+  &__month {
+    display: flex;
+    padding: 60px $side-padding;
+    max-width: getMaxWidth($square-side, $gap-size, $side-padding);
+    gap: $gap-size;
+
+    text-decoration: none;
+    flex-wrap: wrap;
+  }
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    @include square($square-side);
+    visibility: hidden;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: black;
+
+    background-color: #eee;
+    border: 1px solid black;
+
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      position: relative;
+      background-color: pink;
+
+      transform: translate(0, -20px);
+      cursor: pointer;
+    }
+  }
+}
