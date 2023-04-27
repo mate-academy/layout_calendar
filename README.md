@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://thienlaoo.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://thienlaoo.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -15,7 +15,7 @@ ___
 ## Task
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
-- Create a markup for the calendar block with 31 days inside
+- Create a markup for the calendar blockwith 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
   - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
