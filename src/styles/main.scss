@@ -34,22 +34,26 @@ $month_length:(28,29,30,31);
       visibility: hidden;
     }
   }
-}
-
-.calendar_block {
-  @include calendar_block_cell();
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-  text-align: center;
-  @each $day, $number in $days {
-    &--start-day--#{$day} {
-      margin-left: ($cell_width + $gap)*$number;
+  &_block {
+    @include calendar_block_cell();
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+    @each $day, $number in $days {
+      &--start-day--#{$day} {
+        margin-left: ($cell_width + $gap)*$number;
+      }
     }
   }
 }
+
+
 
 .calendar_block:hover {
   cursor: pointer;
   background-color: pink;
   transform: translateY(-20px);
 }
+
+
