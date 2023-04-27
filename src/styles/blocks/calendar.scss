@@ -1,8 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  min-width: $calendar-min-width;
-  max-width: $calendar-max-width;
+  width: $calendar-width;
   gap: $calendar-gap;
   padding: $calendar-padding;
 
@@ -17,15 +16,15 @@
     text-align: center;
 
     @for $i from 1 through $max-month-days {
-      &--#{$i}::before {
+      &:nth-child(#{$i}):before {
         content: "#{$i}";
       }
 
-      &--#{$i} {
+      & {
         transition: all 0.5s;
       }
 
-      &--#{$i}:hover {
+      &:hover {
         cursor: pointer;
         background: pink;
         transform: translateY($transform-Y-calendar-cell);
@@ -35,8 +34,9 @@
   }
 
   @each  $name, $day in $week-day {
-    &--start-day-#{$name} > &__cell--1:first-child {
+    &--start-day-#{$name} > &__cell:first-child {
       margin-left: ($cell-size + $calendar-gap) * $day;
+
     }
   }
 
