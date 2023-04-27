@@ -3,8 +3,7 @@
 
   display: flex;
   flex-wrap: wrap;
-  row-gap: $cells-gap;
-  column-gap: $cells-gap;
+  gap: $cells-gap;
 
   padding: $calendar-padding;
   width: calendar-widht($cell-size, $cells-gap, $calendar-padding);
@@ -31,7 +30,7 @@
     transition: color 0.5s, transform 0.5s;
 
     @for $index from 1 through 31 {
-      &--#{$index}::before {
+      &:nth-child(#{$index})::before {
         position: absolute;
         left: 50%;
         top: 50%;
