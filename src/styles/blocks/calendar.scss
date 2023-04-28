@@ -1,15 +1,11 @@
 @import "../utils/variables.scss";
 @import "../utils/mixins.scss";
+@import "../utils/extends.scss";
 
-%day-style {
-  background-color: #eee;
-  border: 1px solid black;
-}
-
-%display-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@for $month-length from 28 through 31 {
+  .calendar--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
+    display: block;
+  }
 }
 
 .calendar {
@@ -21,7 +17,7 @@
   padding: $calendar-day-padding-y $calendar-day-padding-x;
 
   @each $day, $number in $days-of-week {
-    &--start-day-#{$day} :nth-child(1) {
+    &--start-day--#{$day} :nth-child(1) {
       margin-left: $number * $calendar-day-width + $number;
     }
   }
@@ -39,19 +35,13 @@
     }
 
     @for $days-number from 1 through 31 {
-      &--#{$days-number}::before {
+      &:nth-child(#{$days-number}):before {
         content: "#{$days-number}";
         font-family: Arial, sans-serif;
         font-size: 30px;
         height: 100%;
         @extend %display-center;
       }
-    }
-  }
-
-  @for $month-length from 28 through 31 {
-    &--month-length-#{$month-length} :nth-child(-n + #{$month-length}) {
-      display: block;
     }
   }
 }
