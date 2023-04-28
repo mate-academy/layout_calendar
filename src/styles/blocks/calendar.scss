@@ -5,12 +5,12 @@
   gap: $gap-size;
   padding: $padding-size;
 
-  @each $day in $days {
+  @each $day, $order in $days {
     &--start-day--#{$day} &__day:first-child {
       margin-left: calendar-width() -
-        $day-size -
+        $day-size * $order -
         ($padding-size * 2) -
-        ($gap-size * 2);
+        ($gap-size * 7);
     }
   }
 
