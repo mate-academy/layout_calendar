@@ -7,15 +7,6 @@
   font-family: Arial, sans-serif;
   font-size: 30px;
 
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-
   @each $day, $number in $days {
     &--start-day--#{$day} &__day:first-child {
       margin-left: getShift($number, $calendar-day-size, $calendar-gap);
@@ -27,7 +18,7 @@
       display: none;
     }
   }
-  
+
   &__day {
     @include square($calendar-day-size);
     margin-bottom: $calendar-gap;
