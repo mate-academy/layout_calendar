@@ -1,0 +1,56 @@
+@import "./utils/variables.scss";
+@import "./utils/mixins.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding-top: 60px;
+  margin: 0 auto;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    width: $day-width;
+    height: $day-hight;
+
+    background-color: #eee;
+    border: solid 1px black;
+
+    cursor: pointer;
+
+    @include text-decoration;
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
+        content: "#{$day-number}";
+      }
+    }
+
+    &:hover {
+      background-color: rgb(237, 129, 192);
+      transition: 0.5s;
+      transform: translateY(-20px);
+    }
+
+  }
+
+  @each $day-name, $start-col  in $day-start {
+    &--start-day--#{$day-name} > .calendar__day:first-child {
+      margin-left: $start-col;
+    }
+  }
+
+  @for $month-end from 28 through 31 {
+    &--length-month--#{$month-end} > :nth-child(#{$month-end + 1}),
+    &--length-month--#{$month-end} > :nth-child(#{$month-end + 2}),
+    &--length-month--#{$month-end} > :nth-child(#{$month-end + 3}) {
+      visibility: hidden;
+    }
+  }
+}
