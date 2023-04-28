@@ -1,15 +1,11 @@
 .calendar {
-  box-sizing: border-box;
+  display: flex;
+  padding: $calendar-padding-y $calendar-padding-x;
+  max-width: getMaxWidth($square-side, $gap-size, $calendar-padding-x);
+  gap: $gap-size;
 
-  &__month {
-    display: flex;
-    padding: $calendar-padding-y $calendar-padding-x;
-    max-width: getMaxWidth($square-side, $gap-size, $calendar-padding-x);
-    gap: $gap-size;
-
-    text-decoration: none;
-    flex-wrap: wrap;
-  }
+  text-decoration: none;
+  flex-wrap: wrap;
 
   &__day {
     display: none;
@@ -33,27 +29,27 @@
       cursor: pointer;
     }
 
-    $day-of-week:
-      "mon" 0,
-      "tue" 1,
-      "wed" 2,
-      "thu" 3,
-      "fri" 4,
-      "sat" 5,
-      "sun" 6;
-
-    @each $day, $count in $day-of-week {
-      &--start-day--#{$day} {
-        margin-left: ($count * ($square-side + $gap-size));
-      }
-    }
-
     @for $count from 1 through 31 {
       &:nth-child(#{$count})::before {
         content: "#{$count}";
 
         margin: auto;
       }
+    }
+  }
+
+  $day-of-week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $count in $day-of-week {
+    &--start-day--#{$day} > &__day:first-child {
+      margin-left: ($count * ($square-side + $gap-size));
     }
   }
 
