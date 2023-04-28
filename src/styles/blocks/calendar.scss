@@ -34,14 +34,14 @@
     }
 
     @for $i from 1 through 31 {
-      &--#{$i}::before {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
   }
 
   @each $day, $day-num in $days {
-    &__start-day--#{$day} &__day--1 {
+    &__start-day--#{$day} &__day:first-child {
       margin-left: (($days-cell-size + $gap) * $day-num );
     }
   }
