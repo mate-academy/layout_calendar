@@ -1,0 +1,42 @@
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  width: getWidthCalendar($cell-side, $number-of-date, $paddings, $gap);
+  padding: $paddings;
+  gap: $gap;
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} &__date:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $DayofWeek, $DayofWeekNum in $days {
+    &--start-day-#{$DayofWeek} &__date:first-child {
+      margin-left: getFirstBlockPadding($cell-side, $DayofWeekNum, $gap);
+    }
+  }
+
+  &__date {
+    @include calendar-cell($cell-side);
+    transition: ease 0.5s;
+
+    &:hover {
+      background-color: $backgroung-color-hover;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        color: $border-and-font-color;
+        display: flex;
+        justify-content: center;
+        line-height: $cell-side;
+      }
+    }
+  }
+}
