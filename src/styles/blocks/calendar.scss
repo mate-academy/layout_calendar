@@ -6,6 +6,14 @@
   gap: $gap;
   margin: 25vh auto;
 
+  @each $month in $month-lengths {
+    &--month-length--#{$month} {
+      .calendar__day:nth-child(n + #{$month + 1}) {
+        display: none;
+      }
+    }
+  }
+
   &__day {
     @each $day, $index in $days-week {
       &--first__day-#{$day} {
@@ -13,11 +21,11 @@
       }
     }
 
-    &:nth-child(n + #{$month-length + 1}) {
+    &:nth-child(n + #{$month-days + 1}) {
       display: none;
     }
 
-    @for $index from 1 through $month-length {
+    @for $index from 1 through $month-days {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
         font-size: 30px;
