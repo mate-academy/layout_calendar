@@ -17,18 +17,17 @@ $month_length:(28,29,30,31);
   border: 1px solid black;
 }
 
-@for $i from 1 through 31 {
-  .calendar_block:nth-child(#{$i})::before {
-    content: "#{$i}";
-  }
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   max-width: 800px;
   padding: 10px;
+  @for $i from 1 through 31 {
+    &_block:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
   @for $month_length from 28 through 31 {
     &--month-length--#{$month_length} &_block:nth-child(#{$month_length+1}) {
       visibility: hidden;
@@ -40,20 +39,15 @@ $month_length:(28,29,30,31);
     font-size: 30px;
     text-align: center;
     line-height: 100px;
-    @each $day, $number in $days {
-      &--start-day--#{$day} {
-        margin-left: ($cell_width + $gap)*$number;
-      }
+  }
+  @each $day, $number in $days {
+    &--start-day--#{$day} &_block:nth-child(1) {
+      margin-left: ($cell_width + $gap)*$number;
     }
   }
+  &_block:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 }
-
-
-
-.calendar_block:hover {
-  cursor: pointer;
-  background-color: pink;
-  transform: translateY(-20px);
-}
-
-
