@@ -1,0 +1,47 @@
+@import "./utils/variables.scss";
+@import "./utils/_mixin.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  margin: auto ;
+  padding: 50px $calendar-padding;
+  width: ($cell-size * 7) + ($gap-size * 6) + ($calendar-padding * 2);
+
+  @each $day, $index in $days-of-the-week {
+    &--start--day--#{$day} :first-child {
+      margin-left: getDay($index);
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    display: flex;
+    position: relative;
+    @include square($cell-size);
+
+    border: 1px solid black;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $index from 1 through $days-in-month {
+      &:nth-child(#{$index})::before {
+        @include fonts ();
+        content: "#{$index}";
+      }
+    }
+  }
+
+  @for $date from 28 through 31 {
+    &--month-length--#{$date} &__day:nth-child(n + #{$date + 1}) {
+      visibility: hidden;
+    }
+  }
+
+}
