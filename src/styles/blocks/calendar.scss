@@ -1,11 +1,13 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: 0;
-  padding: $calendar-padding;
-  padding-top: $calendar-top-padding;
+  padding: $calendar-top-padding $calendar-padding $calendar-padding;
   gap: $gap;
-  width: size($days-cell-size, $gap, $calendar-padding);
+  width: calendarWidth($days-cell-size, $gap, $calendar-padding);
+
+  &--margin {
+    margin: 0;
+  }
 
   &__day {
     display: flex;
@@ -15,8 +17,7 @@
 
     list-style: none;
 
-    width: $days-cell-size;
-    height: $days-cell-size;
+    @include cell-size;
     background-color: $cell-color;
     border: 1px solid black;
 
