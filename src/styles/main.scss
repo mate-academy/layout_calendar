@@ -1,41 +1,9 @@
-$size: 100px;
-
-@mixin square($size) {
-  height: $size;
-  width: $size;
-}
+@import "calendar";
 
 body {
   margin: 0;
-  height: 100px;
+  height: 100vh;
   display: flex;
   justify-content: center;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  width: 700px;
-
-  &__day {
-    box-sizing: border-box;
-    @include square($size);
-    border: 1px solid black;
-    background-color: gray;
-    text-align: center;
-
-    @for $index from 1 through 31 {
-      &:nth-of-type(#{$index}):before {
-        font-family: Arial, serif;
-        font-size: 30px;
-        content: "#{$index}";
-      }
-    }
-
-    &:before {
-      display: flex;
-      line-height: $size;
-      justify-content: center;
-    }
-  }
+  align-items: center;
 }
