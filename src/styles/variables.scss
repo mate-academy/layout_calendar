@@ -11,26 +11,4 @@ $calendar-width: $box-size * 7 + 7 * $gap;
 $days: mon, tue, wed, thu, fri, sat, sun;
 $month-days: 31;
 $month-lengths: 28, 29, 30, 31;
-
-@each $month in $month-lengths {
-  .calendar--month-length--#{$month} .calendar__box:nth-child(n+#{$month+1}) {
-    display: none;
-  }
-}
-
-
-
-@each $day in $days {
-  $i: index($days, $day) - 1;
-
-  .calendar--start-day--#{$day} .calendar__box:first-child {
-  margin-left: $box-width * $i;
-  }
-  }
-
-
-@for $i from 1 through $month-days {
-.calendar__box:nth-child(#{$i}):before {
-content: "#{$i}";
-}
-}
+$transition-smooth: transform 0.5s;
