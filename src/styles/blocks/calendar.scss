@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+
 }
 
 .calendar {
@@ -15,6 +16,12 @@
   @for $index from 28 through 31 {
     &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       display: none;
+    }
+  }
+
+  @each $day, $i in $week {
+    &--start-day--#{$day} &__days:first-child {
+      margin-left: ($cellSize + $gapBetweenDayds) * $i;
     }
   }
 
@@ -31,14 +38,6 @@
         height: $cellSize;
         background-color: $backgroundColorForDays;
         cursor: pointer;
-      }
-    }
-  }
-
-  @each $name, $day in $start-day {
-    &--start-day--#{$name} {
-      .days:first-child {
-        margin-left: $day;
       }
     }
   }
