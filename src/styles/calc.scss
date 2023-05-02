@@ -1,0 +1,19 @@
+@each $month in $month-lengths {
+  .calendar--month-length--#{$month} .calendar__box:nth-child(n+#{$month+1}) {
+    display: none;
+  }
+}
+
+@each $day in $days {
+  $i: index($days, $day) - 1;
+
+  .calendar--start-day--#{$day} .calendar__box:first-child {
+    margin-left: $box-width * $i;
+  }
+}
+
+@for $i from 1 through $month-days {
+  .calendar__box:nth-child(#{$i}):before {
+    content: "#{$i}";
+  }
+}
