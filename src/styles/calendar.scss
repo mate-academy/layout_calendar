@@ -11,7 +11,7 @@ $calendar-width: calc(7 * #{$size} + 6 * #{$gap});
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  gap: 1px;
+  gap: $gap;
 
   $day-of-week:
     "mon" 0,
@@ -23,14 +23,14 @@ $calendar-width: calc(7 * #{$size} + 6 * #{$gap});
     "sun" 6;
 
   @each $name, $day in $day-of-week {
-    .calendar--start-day_#{$name} &:first-child {
-      margin-left: 0;
+    &--start-day_#{$name} &__day:first-child {
+      margin-left: ($size + $gap) * $day;
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length_#{$index} {
-      margin: 0;
+    &--month-length_#{$index} &__day:nth-of-type(n + #{$index + 1}) {
+      display: none;
     }
   }
 
