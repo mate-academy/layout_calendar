@@ -1,41 +1,42 @@
-@import "../utils/variables.scss";
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $gap;
 
-  margin: 25vh auto;
-
-  &__day {
-    @each $day, $index in $days-week {
-      &--first__day-#{$day} {
-        margin-left: $index * $day-of-the-week;
-      }
+  @each $day, $index in $days-week {
+    &--#{$day} > :first-child {
+      margin-left: $index * $day-of-the-week;
     }
+  }
 
-    &:nth-child(n + #{$month-length + 1}) {
+  @for $index from 28 through 31 {
+    &--#{$index} > :nth-child(n + #{$index + 1}) {
       display: none;
     }
+  }
 
-    @for $index from 1 through $month-length {
+  &__day {
+    @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
       }
     }
 
-    cursor: pointer;
-    background-color: #eee;
-    box-sizing: border-box;
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-
     display: flex;
     justify-content: center;
     align-items: center;
+
+    width: 100px;
+    height: 100px;
+
+    background-color: #eee;
+    border: 1px solid black;
+
     transition-duration: 0.5s;
+
+    cursor: pointer;
+    box-sizing: border-box;
 
     &:hover {
       transform: translate(0, -20px);
