@@ -29,8 +29,11 @@
 
     @include cell($cell-size);
 
+    cursor: pointer;
     background-color: $cell-color;
     border: 1px solid $border-color;
+
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(n+#{$i})::after() {
@@ -39,11 +42,8 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: $cell-focus-color;
       transform: translateY(-20px);
-      transition: 500ms;
-      // transition: transform 500ms;
     }
   }
 }
