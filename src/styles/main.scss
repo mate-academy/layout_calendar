@@ -13,24 +13,18 @@ html {
 body {
   margin: 0;
   width: 100%;
+  padding-left: 25%;
 }
 
 .calendar {
   display: flex;
-  flex-direction: column;
+  align-content: center;
   gap: $cellGap;
   padding: $padd;
   max-width: $weekWidth;
-  justify-content: center;
-  margin-left: 25%;
-  margin-top: 10%;
-}
-
-.week {
-  display: flex;
-  flex-direction: row;
-  gap: $cellGap;
+  margin: 10% auto;
   flex-wrap: wrap;
+  flex-direction: row;
 
   &__days {
     @include square($size);
@@ -40,20 +34,14 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    transition: transform 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
+    display: flex;
   }
 
   &__days:hover {
     background-color: pink;
     cursor: pointer;
     transform: translateY(-20px);
-  }
-
-  &__days::before {
-    content: "";
-    position: absolute;
-    top: 4vh;
-    left: 3vw;
   }
 
   @for $index from 1 through $days-in-month {
@@ -64,14 +52,14 @@ body {
 }
 
 @each $day, $number in $days-of-week {
-  .week--start-day--#{$day}:first-child {
+  .calendar--start-day--#{$day}:first-child {
     margin-left: ($size + $cellGap) * $number;
   }
 }
 
 @for $last-day from 28 through 31 {
-  .week--month-length--#{$last-day} 
-  .week__days:nth-child(n + #{$last-day + 1}) {
+  .calendar--month-length--#{$last-day} 
+  .calendar__days:nth-child(n + #{$last-day + 1}) {
     display: none;
   }
 }
