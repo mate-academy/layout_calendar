@@ -1,0 +1,34 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 30px 10px;
+  flex-wrap: wrap;
+  width: getWidth($width-cell, $cell-amount-row, $base-gap);
+  gap: 1px;
+
+  &--position {
+    margin: auto;
+  }
+
+  $start-day:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $marg-ratio in $start-day {
+    &-start-day--#{$day} .day:first-child {
+      margin-left: $first-day-margin * $marg-ratio;
+    }
+  }
+
+  @for $dayCount from $day-amount through 31 {
+    &--month-length .day:nth-child(#{$dayCount + 1}) {
+      display: none;
+    }
+  }
+}
