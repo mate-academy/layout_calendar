@@ -32,7 +32,14 @@
 
     @each $day, $index in $days {
       &-start--#{$day} &-day:first-child {
-        margin-left: $cell-size * ($index - 1) + $between-col-gap * ($index - 1);
+        margin-left: $cell-size * ($index - 1) +
+          $between-col-gap * ($index - 1);
+      }
+    }
+
+    @for $index from 28 through $amount-days {
+      &-days--month-length--#{$index} &-day:nth-child(n + #{$index + 1}) {
+        display: none;
       }
     }
   }
@@ -43,6 +50,12 @@
     height: $cell-size;
     border: 1px solid #000;
     position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: pink;
+    }
 
     @for $index from 1 through $amount-days {
       &:nth-child(#{$index})::before {
