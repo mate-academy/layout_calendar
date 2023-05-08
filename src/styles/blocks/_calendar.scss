@@ -1,0 +1,99 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  margin: auto;
+  cursor: url(../cursor.png) 30 30, auto;
+
+  &__cat {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 68px;
+    margin-left: -75px;
+    transform: rotate(-364deg);
+    cursor: url(../images/cat-paw-cursor.png) 10 10, auto;
+  }
+
+  &__cell {
+    @extend %flex-center;
+    position: relative;
+    height: $cell-height;
+    width: $cell-width;
+    background: $bgr-calendar-cell;
+    border: $border-cell solid black;
+    border-radius: 5%;
+    transition-duration: 0.5s;
+    z-index: 2;
+
+    @for $i from 0 to 33 {
+      &:nth-child(#{$i}):hover {
+        @include random-bgr();
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      box-shadow: 1px 29px 18px 3px #000;
+      border-radius: 5px;
+    }
+
+    @for $index from 1 through 32 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index - 1}";
+        color: $font-color;
+        font-size: $font-cell;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+  }
+
+  @each $day, $order in $days-of-week {
+    &--start-day_#{$day} {
+      .calendar__cell:nth-child(2) {
+        margin-left: ($cell-width + 1) * $order;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length_#{$i}> &__cell:nth-child(n+#{$i+2}) {
+      display: none;
+    }
+  }
+
+  &__week {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+    font-family: fantasy;
+    font-size: $font-week-day;
+    height: $height-week-day;
+  }
+
+  &__week-day {
+    @extend %flex-center;
+    width: $cell-width;
+    color: $font-color;
+    background-color: $bgr-week-cell;
+    border: 1px solid black;
+    flex-grow: 1;
+    border-radius: 5%;
+    z-index: 1;
+    transition-duration: 0.2s;
+
+    &:hover {
+      animation-iteration-count: infinite;
+      box-shadow: 0 5px 6px 1px #837878;
+      transform: translateY(-1px);
+    }
+  }
+
+  @each $day in $days-of-week-display {
+    &_#{$day}::before {
+      content: "#{$day}";
+      text-transform: capitalize;
+    }
+  }
+}
