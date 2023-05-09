@@ -1,17 +1,83 @@
 .calendar {
-  max-width: $max-size;
+  max-width: 710px;
   margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 
-  &__month-title {
-    font-size: 48px;
-    line-height: 63px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: #000;
-    background-color: #f85a5a;
-    border: $border-size;
+  &__day {
+    background-color: $bg-color-silver;
+    transition: color 0.5s, transform 0.5s;
+    margin-right: $margin-shift;
+    margin-top: $margin-shift;
+    &:hover {
+      background-color: $bg-color-pink;
+      transform: scale(1.2);
+    }
   }
 
+  @for $index from 1 through 31 {
+    &--month-length--#{$index} &__day:nth-child(-n + #{$index}) {
+      width: $cell-size;
+      height: $cell-size;
+      border: $frame;
+
+    }
+
+    @for $number from 1 through $index {
+      &--month-length--#{$index} &__day:nth-child(#{$number})::before {
+        content: "#{$number}";
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+      }
+    }
+  }
+
+  @each $day in $days {
+    &--start-day--#{$day} {
+      @if $day == mon {
+        .calendar__day:first-child {
+          margin-left: 0;
+
+        }
+      }
+      @else if $day == tue {
+        .calendar__day:first-child {
+          margin-left: $base-shift;
+
+        }
+      }
+      @else if $day == wed {
+        .calendar__day:first-child {
+          margin-left: $base-shift * 2;
+
+        }
+      }
+      @else if $day == thu {
+        .calendar__day:first-child {
+          margin-left: $base-shift * 3;
+
+        }
+      }
+      @else if $day == fri {
+        .calendar__day:first-child {
+          margin-left: $base-shift * 4;
+
+        }
+
+      }
+      @else if $day == sat {
+        .calendar__day:first-child {
+          margin-left: $base-shift * 5;
+        }
+      }
+      @else if $day == sun {
+        .calendar__day:first-child {
+          margin-left: $base-shift * 6;
+        }
+      }
+    }
+  }
 }
