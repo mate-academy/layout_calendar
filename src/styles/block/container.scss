@@ -1,37 +1,6 @@
 .container {
-  @include centered-main-container;
-}
-
-.calendar {
-  @include set-days-container-properties;
-
-  @each $day,$value in $days {
-    &--start-day--#{$day}  &__day:nth-child(1) {
-      margin-left: ($cell-width * $value) + ($cell-gap * $value);
-    }
-  }
-
-  @for $amount-days from 28 through 31 {
-    &--month-length--#{$amount-days}
-    &__day:nth-child(n + #{$amount-days + 1}) {
-      display: none;
-    }
-
-    &__day {
-      @include set-cell-properties;
-      transition: transform 0.5s;
-
-      @for $num from 1 through 31 {
-        &:nth-child(#{$num})::before {
-          content: "#{$num}";
-        }
-
-        &:hover {
-          background-color: pink;
-          transform: translateY(-20px);
-          cursor: pointer;
-        }
-      }
-    }
-  }
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
