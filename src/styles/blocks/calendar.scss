@@ -1,5 +1,5 @@
 .calendar {
-  width: $cell-size * 7 + ($margin-calendar * 2);
+  width: calendarSize($cell-size, $margin-calendar);
   margin: 0 $margin-calendar;
 
   &__head {
@@ -14,13 +14,14 @@
     width: $cell-size;
     height: $cell-size;
     border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     @each $day, $index in $days {
       &:nth-child(#{$index})::after {
         content: "#{$day}";
         position: absolute;
-        top: 32px;
-        left: 25px;
       }
     }
   }
@@ -45,6 +46,9 @@
   }
 
   &__number-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: #eee;
     width: $cell-size;
     height: $cell-size;
@@ -61,8 +65,6 @@
       &:nth-child(#{$index})::before {
         position: absolute;
         content: "#{$index}";
-        left: $cell-gap;
-        top: $cell-gap;
       }
     }
   }
