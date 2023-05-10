@@ -5,6 +5,7 @@
   width: $col-count * $cell-size + $calendar-padding;
 
   &__day {
+    display: block;
     @include square($cell-size);
     box-sizing: border-box;
     border: 1px solid #000;
@@ -38,9 +39,22 @@
   }
 
   @for $day-number from 28 through 31 {
-    &--month-length--#{$day-number}
-    &__day:nth-child(n + #{$day-number + 1}) {
-      display: none;
+    @if ($days-count == 28) {
+      .calendar__day--29, .calendar__day--30, .calendar__day--31 {
+        display: none;
+      }
+    }
+
+    @if ($days-count == 29) {
+      .calendar__day--30, .calendar__day--31 {
+        display: none;
+      }
+    }
+
+    @if ($days-count == 30) {
+      .calendar__day--31 {
+        display: none;
+      }
     }
   }
 }
