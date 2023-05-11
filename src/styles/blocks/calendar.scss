@@ -38,7 +38,13 @@
     }
   }
 
-  @for $day-number from 28 through 31 {
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$days-count} {
+      .calendar__day:nth-child(#{$days-count + 1}) ~ .calendar__day {
+        display: none;
+      }
+    }
+
     @if ($days-count == 28) {
       .calendar__day--29, .calendar__day--30, .calendar__day--31 {
         display: none;
