@@ -1,67 +1,55 @@
+@import "./utils/variables";
+@import "./utils/functions";
+
 body {
   margin: 0;
 }
 
-$size: 100px;
-$shift: 10px;
-$gap-shift: 1px;
-$shift-border: 1px;
-$number-size: 0.3 * $size;
-$base-shift: (
-  $size - $number-size) /2;
-$day-name: (
-  "mon": 1,
-  "tue": 2,
-  "wed": 3,
-  "thu": 4,
-  "fri": 5,
-  "sat": 6,
-  "sun": 7
-);
-
-@function getWidth ($size, $shift, $small-shift) {
-  @return ($size * 7)+($shift + $gap-shift)+($shift-border*14);
-}
-
 .calendar {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-shift;
+  padding: $shift;
+  width: getWidth(100px, 10px, 1px);
 
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap-shift;
-    padding: $shift;
-    width: getWidth(100px, 10px, 1px);
-
-    &:hover {
-      cursor: pointer;
+  @for $index from 28 through 31 {
+    &--month-length--#{$index}
+    &__day:nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 
-  &__cell {
-    display: flex;
-    flex-wrap: wrap;
-    width: $size;
-    height: $size;
-    border: $shift-border solid black;
-    background-color: #eee;
-
-    &--shift {
-      margin-left: 615px;
+  @each $day,
+    $index in $day-name {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($size + $gap-shift + $shift + ($shift-border*12)) * $index;
     }
   }
 
   @for $index from 1 through 31 {
-    :nth-child(#{$index}) {
-      ::before {
-        content: "#{$index}";
-      }
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
     }
   }
 
   &__day {
-    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: $size;
+    height: $size;
+    border: $shift-border solid black;
+    background-color: #eee;
     font-family: Arial, sans-serif;
-    font-size: $number-size;
+    font-size: 30px;
+    transition: transform 350ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
   }
 }
