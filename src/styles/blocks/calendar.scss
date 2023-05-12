@@ -9,12 +9,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  @each $day,
-    $index in $day-of-week {
-      &-start-day--#{$day}>:first-child {
-        margin-left: ($index - 1) * ($day-block-size + 1);
-      }
+  @each $day, $index in $day-of-week {
+    &-start-day--#{$day}>:first-child {
+      margin-left: ($index - 1) * ($day-block-size + 1);
     }
+  }
+
   @for $index from 28 through 31 {
     &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
       opacity: 0;
@@ -29,19 +29,19 @@
     font-size: 30px;
     font-family: Arial, sans-serif;
     border: 1px solid black;
-    background: #eee;
+    background-color: #eee;
     transition: background-color 0.5s, transform 0.5s;
     cursor: pointer;
 
-  @for $index from 1 through 31 {
-    &:nth-child(#{$index})::before {
-      content: "#{$index}";
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
     }
-  }
 
-  &:hover {
-    background-color: lightcoral;
-    transform: translateY(-20px);
+    &:hover {
+      background-color: lightcoral;
+      transform: translateY(-20px);
     }
   }
 }
