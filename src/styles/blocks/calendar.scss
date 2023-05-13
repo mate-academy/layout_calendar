@@ -1,0 +1,33 @@
+.calendar {
+  display: flex;
+  align-content: center;
+  gap: $cellGap;
+  padding: $padd;
+  width: $weekWidth;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+  &__days {
+    @include square($size);
+    border: 1px solid black;
+    background-color: $calendColor;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 0.5s, background-color 0.5s;
+    display: flex;
+  }
+  
+  &__days:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+  
+  @for $index from 1 through $days-in-month {
+    &__days:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+}
