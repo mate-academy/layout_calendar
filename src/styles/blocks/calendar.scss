@@ -1,11 +1,15 @@
 .calendar {
   width: getWidth($day-size, $number-columns, $gap-shift, $day-padding);
-  margin: 0 auto;
   padding: $day-padding;
   gap: $gap-shift;
   display: flex;
   flex-wrap: wrap;
   counter-reset: num-div;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @for $index from 28 through 31 {
     &--month-length--#{$index} {
@@ -32,8 +36,6 @@
 
     border: 1px solid #000;
     background-color: #eee;
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 30px;
     counter-increment: num-div;
 
     @for $day from 1 through 31 {
