@@ -1,0 +1,59 @@
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $row-width;
+  padding: $standart-padding;
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__day:nth-child(n+#{$i+1}) {
+      display: none;
+    }
+  }
+
+  $days:
+    "mon" calc(#{$base-gap} ),
+    "tue" calc(#{$square-size} + (#{$base-gap} + #{$border-size})),
+    "wed" calc(#{$square-size} * 2 + (#{$base-gap} + #{$border-size}) * 2),
+    "thu" calc(#{$square-size} * 3 + (#{$base-gap} + #{$border-size}) * 3),
+    "fri" calc(#{$square-size} * 4 + (#{$base-gap} + #{$border-size}) * 4),
+    "sat" calc(#{$square-size} * 5 + (#{$base-gap} + #{$border-size}) * 5),
+    "sun" calc(#{$square-size} * 6 + (#{$base-gap} + #{$border-size}) * 6);
+
+  @each $name, $col in $days {
+    &--start-day-#{$name} &__day--1 {
+      margin-left: $col;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day--#{$i} {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  .calendar__day {
+    background-color: $main-color;
+    height: $square-size;
+    width: $square-size;
+    border: 1px black solid;
+    text-align: center;
+
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        position: relative;
+        top: 30%;
+        content: "#{$i}";
+      }
+    }
+  }
+
+  .calendar__day:hover {
+    cursor: pointer;
+    animation-name: animation;
+    animation-duration: 0.5s;
+  }
+}
