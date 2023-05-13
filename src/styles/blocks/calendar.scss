@@ -5,6 +5,21 @@
   width: $with-calendar;
   padding: $paddings-calendar;
 
+  $shift-first-day-month: 
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $weekday, $count in $shift-first-day-month {
+    &--start-day--#{$weekday} :first-child {
+      margin-left: ($size-cell + $gap-cell) * $count;
+    }
+  }
+
   &:hover {
     padding-top: 30px;
   }
@@ -19,33 +34,18 @@
 
     &:hover {
       background: pink;
-      transform: translate(0, -20px);
-    }
-
-    $shift-first-day-month: 
-      "mon" 0,
-      "tue" 1,
-      "wed" 2,
-      "thu" 3,
-      "fri" 4,
-      "sat" 5,
-      "sun" 6;
-
-    @each $weekday, $count in $shift-first-day-month {
-      &--start-day--#{$weekday} {
-        margin-left: ($size-cell + $gap-cell) * $count;
-      }
+      transform: translate(0, $shift-cell-up);
     }
 
     @for $i from 1 through $length-month {
-      &--number--#{$i} {
+      &:nth-child(#{$i}) {
         width: $size-cell;
         height: $size-cell;
+      }
 
-        &::after {
-          content: "#{$i}";
-          font-size: $font-size;
-        }
+      &::after {
+        content: "#{$i}";
+        font-size: $font-size;
       }
     }
   }
