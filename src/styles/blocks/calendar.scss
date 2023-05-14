@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap-cell;
-  width: $with-calendar;
+  width: $width-calendar;
   padding: $paddings-calendar;
 
   $shift-first-day-month: 
@@ -20,6 +20,45 @@
     }
   }
 
+  @for $i from 1 through 31 {
+    @if $i >= 28 and $i <= 31 {
+      &--length-month--#{$i} :nth-child(n):nth-child(-n + #{$i}) {
+        @include cell-format;
+
+        @for $n from 1 through $i {
+          &:nth-of-type(#{$n})::after {
+            content: "#{$n}";
+            font-size: $font-size;
+          }
+
+          &:nth-of-type(#{$n}):hover {
+            background: pink;
+            transform: translate(0, $shift-cell-up);
+          }
+        }
+      }
+    
+    }
+    
+    @else {
+      &--length-month--#{$i} :nth-child(n) {
+        @include cell-format;
+      }
+
+      @for $n from 1 through 31 {
+        &--length-month--#{$i} :nth-of-type(#{$n})::after {
+          content: "#{$n}";
+          font-size: $font-size;
+        }
+
+        & :nth-of-type(#{$n}):hover {
+          background: pink;
+          transform: translate(0, $shift-cell-up);
+        }
+      }
+    }
+  }
+
   &:hover {
     padding-top: 30px;
   }
@@ -28,25 +67,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid $border-color-cell;
-    background-color: $background-color-cell;
-    transition: color 0.5s, transform 0.5s;
-
-    &:hover {
-      background: pink;
-      transform: translate(0, $shift-cell-up);
-    }
-
-    @for $i from 1 through $length-month {
-      &:nth-child(#{$i}) {
-        width: $size-cell;
-        height: $size-cell;
-      }
-
-      &::after {
-        content: "#{$i}";
-        font-size: $font-size;
-      }
-    }
   }
 }
