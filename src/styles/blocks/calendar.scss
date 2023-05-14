@@ -13,15 +13,6 @@
     }
   }
 
-  $days:
-    "mon" calc(#{$base-gap} ),
-    "tue" calc(#{$square-size} + (#{$base-gap} + #{$border-size})),
-    "wed" calc(#{$square-size} * 2 + (#{$base-gap} + #{$border-size}) * 2),
-    "thu" calc(#{$square-size} * 3 + (#{$base-gap} + #{$border-size}) * 3),
-    "fri" calc(#{$square-size} * 4 + (#{$base-gap} + #{$border-size}) * 4),
-    "sat" calc(#{$square-size} * 5 + (#{$base-gap} + #{$border-size}) * 5),
-    "sun" calc(#{$square-size} * 6 + (#{$base-gap} + #{$border-size}) * 6);
-
   @each $name, $col in $days {
     &--start-day-#{$name} &__day--1 {
       margin-left: $col;
@@ -41,6 +32,7 @@
     width: $square-size;
     border: 1px black solid;
     text-align: center;
+    transition-duration: 500ms;
 
     @for $i from 1 through 31 {
       &--#{$i}::before {
@@ -53,7 +45,7 @@
 
   .calendar__day:hover {
     cursor: pointer;
-    animation-name: animation;
-    animation-duration: 0.5s;
+    background-color: pink;
+    transform: translateY(-20px);
   }
 }
