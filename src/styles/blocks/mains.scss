@@ -9,6 +9,18 @@
 
   width: $calendarMaxWidth;
 
+  @each $day in $days {
+    &--start-day-#{$day} > .calendar__day:first-child {
+      margin-left: $startDayShift;
+    }
+  }
+
+  @for $lastDay from 28 to 32 {
+    &--month-lenght-#{$lastDay} .calendar__day:nth-last-child(-n + 2) {
+      display: none;
+    }
+  }
+
   &__day {
     display: flex;
     align-items: center;
@@ -23,26 +35,14 @@
     &:hover {
       cursor: pointer;
       background-color: pink;
-      transform: translate(0px, -20px,);
+      transform: translate(0, -20px);
       transition: 0.5s;
     }
 
     @for $i from 1 to 32 {
       &--#{$i}::before {
         display: inline-block;
-        content: '#{$i}';
-      }
-    }
-
-    @each $day in $days {
-      &--start-day-#{$day}:first-child {
-        margin-left: $startDayShift;
-      }
-    }
-
-    @for $lastDay from 28 to 32 {
-      &--month-lenght-#{$lastDay}:nth-last-child(-n + 2) {
-        visibility: hidden;
+        content: "#{$i}";
       }
     }
   }
