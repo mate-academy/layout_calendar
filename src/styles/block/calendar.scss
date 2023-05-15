@@ -1,9 +1,11 @@
 .calendar {
-  box-sizing: border-box;
-  padding: $calendar-padding;
   display: flex;
   gap: $calendar-gap;
   flex-wrap: wrap;
+  margin: auto;
+
+  box-sizing: border-box;
+  padding: $calendar-padding;
   width: $calendar-width;
   font-family: Arial, Helvetica, sans-serif;
 
@@ -31,23 +33,18 @@
     text-align: center;
     line-height: $calendar-day-width;
     font-size: 30px;
+    transition: 0.5s;
 
     @for $i from 1 through 32 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
-    @keyframes move {
-      to {
-        background-color: pink;
-        transform: translateY(-20px);
-      }
-    }
 
     &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
       cursor: pointer;
-      animation: move;
-      animation-duration: 0.5s;
     }
   }
 
