@@ -1,0 +1,65 @@
+.calendar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(var(--cell-size) * 7 + 6px + 20px);
+
+  --cell-size: 100px;
+  --number-size: calc(0.3 * var(--cell-size));
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: var(--cell-size);
+    width: var(--cell-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.5s, transform 0.5s;
+
+    &::before {
+      content: "";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: var(--number-size);
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+$weekdays: mon, tue, wed, thu, fri, sat, sun;
+$monthDuration: 28, 29, 30, 31;
+
+@for $cellCount from 1 through 31 {
+  .calendar__cell:nth-child(#{$cellCount})::before {
+    content: "#{$cellCount}";
+  }
+}
+
+@each $day in $weekdays {
+  $dayCount: index($weekdays, $day);
+
+  .calendar__field--first-#{$day} .calendar__cell:first-child {
+    margin-left: calc(6 * var(--cell-size) + 6 * 1px);
+  }
+}
+
+@for $i from 1 through length($monthDuration) {
+  $visibleDays: nth($monthDuration, $i);
+  .calendar__field--month-duration-#{$visibleDays}
+  .calendar__cell:nth-child(n + #{$visibleDays + 1}) {
+    display: none;
+  }
+}
