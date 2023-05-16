@@ -1,0 +1,29 @@
+.calendar {
+  display: flex;
+  padding: 10px;
+  justify-content: start;
+  flex-wrap: wrap;
+
+  &__day {
+    @include square($boxSize);
+    background-color: $backColor;
+    border: 1px solid black;
+    margin: 1px 1px 0 0;
+    transition: transform 500ms, background-color 500ms;
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(0, $shiftBox);
+      background-color: $backColorHov;
+    }
+
+    &::after {
+      @include square($boxSize);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $fontSize;
+    }
+  }
+}
