@@ -1,0 +1,38 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  @include square($day-size-desktop);
+  background-color: #eee;
+  border: 1px solid black;
+  transition: transform 0.5s, background-color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $number from 1 through $days-count {
+    &:nth-child(#{$number})::before {
+      content: "#{$number}";
+      display: block;
+    }
+  }
+
+  @media screen and (max-width:768px) {
+    @include square($day-size-tablet);
+    font-size: 20px;
+  }
+
+  @media screen and (max-width:414px) {
+    @include square($day-size-mobile);
+    font-size: 10px;
+
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+}
