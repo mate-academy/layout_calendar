@@ -14,6 +14,12 @@
       margin-left: $startDayShift;
     }
   }
+  
+  @each $day, $num in $days {
+    &--start-day-#{$day} > .calendar__day:nth-child(-n + #{$num - 1}) {
+      display: none;
+    }
+  }
 
   @for $lastDay from 28 through 31 {
     &--month-lenght--#{$lastDay}>&__day:nth-child(n + #{$lastDay + 1}) {
