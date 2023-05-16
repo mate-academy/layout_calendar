@@ -1,0 +1,21 @@
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $calendar__day--width;
+  height: $calendar__day--height;
+  font-size: $calendar__day--font-size;
+  transition: color 0.5s, transform 0.5s;
+  background-color: #eee;
+  border: 1px solid #000;
+  @for $i from 1 to 32 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
