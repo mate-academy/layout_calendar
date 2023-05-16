@@ -1,0 +1,47 @@
+@import "../utils/mixins";
+@import "../utils/colors";
+@import "../utils/variables";
+@import "../utils/global";
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+  width: $calendar-width;
+  margin: $calendar-margin-top auto;
+  padding: 0 $calendar-padding;
+  gap: $calendar-gap;
+
+  &__day {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    @include square($day-size);
+    background-color: $days-color;
+    border: $calendar-border solid $font-color;
+    cursor: pointer;
+    transition: all $calendar__day-transition ease 0s;
+  }
+
+  &__day:hover {
+    background-color: $day-hover-color;
+    transform: translateY($calendar__day-transform);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $num in $week {
+    &--start-day--#{$name} &__day:first-child {
+      margin-left: $first-day-margin;
+    }
+  }
+}
