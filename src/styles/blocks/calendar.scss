@@ -1,0 +1,46 @@
+.calendar {
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid #000;
+  transition: 0.5s;
+  @include blockSize;
+
+  &:hover {
+    background-color: #ffc0cb;
+    transform: translate(0, -20px);
+    cursor: pointer;
+  }
+
+  $days:
+    "mon" 0,
+    "tue" $block-gap-size,
+    "wed" calc(2 * #{$block-gap-size}),
+    "thu" calc(3 * #{$block-gap-size}),
+    "fri" calc(4 * #{$block-gap-size}),
+    "sat" calc(5 * #{$block-gap-size}),
+    "sun" calc(6 * #{$block-gap-size});
+
+  @each $name, $column in $days {
+    &--start-day--#{$name} {
+      margin-left: $column;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index}:nth-child(#{$index}) {
+      visibility: hidden;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &--#{$day}::before {
+      display: flex;
+      justify-content: center;
+      line-height: $block-side-size;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      content: "#{$day}";
+    }
+  }
+}
