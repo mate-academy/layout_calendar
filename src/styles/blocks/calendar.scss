@@ -1,0 +1,55 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+  gap: $gap;
+  box-sizing: border-box;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  // add margin-left for the first day of month
+  @each $name, $margin-left in $week {
+    &--start-day--#{$name} &__day:first-child {
+      margin-left: $margin-left;
+    }
+  }
+
+  // delete unnecessary days
+  @for $ind from 28 to 31 {
+    &--month-length--#{$ind} &__day:nth-child(n + #{$ind + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+
+    &::before {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    // add day index in cells
+    @for $ind from 1 through 31 {
+      &:nth-child(#{$ind})::before {
+        content: "#{$ind}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
