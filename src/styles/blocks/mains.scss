@@ -9,14 +9,14 @@
 
   width: $calendarMaxWidth;
 
-  @each $day in $days {
-    &--start-day-#{$day} > .calendar__day:first-child {
+  @each $day, $num in $days {
+    &--start-day-#{$day} > .calendar__day:nth-child(#{$num}) {
       margin-left: $startDayShift;
     }
   }
 
-  @for $lastDay from 28 to 32 {
-    &--month-lenght-#{$lastDay} .calendar__day:nth-last-child(-n + 2) {
+  @for $lastDay from 28 through 31 {
+    &--month-lenght--#{$lastDay}>&__day:nth-child(n + #{$lastDay + 1}) {
       display: none;
     }
   }
@@ -40,7 +40,7 @@
       transform: translate(0, -20px);
     }
 
-    @for $index from 1 to 31 {
+    @for $index from 1 through 31 {
       &:nth-child(#{$index}):before {
         display: inline-block;
         content: "#{$index}";
