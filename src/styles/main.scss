@@ -1,3 +1,74 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Arial", sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  $col-count: 7;
+  $col-width: 100px;
+  $col-gap: 1px;
+  $field-padding: 10px;
+
+  .calendar {
+    display: flex;
+    flex-wrap: wrap;
+    width: ($col-count * $col-width) + ($field-padding * 2);
+    gap: $col-gap;
+    margin-top: 50px;
+
+    $weekdays:
+      "mon" 0,
+      "tue" 1,
+      "wed" 2,
+      "thu" 3,
+      "fri" 4,
+      "sat" 5,
+      "sun" 6;
+
+    @each $weekday,
+      $value in $weekdays {
+      &--start-day-#{$weekday} :first-child {
+        margin-left: ($value * $col-width) + ($value * $col-gap);
+      }
+    }
+
+    @for $month-length from 28 to 31 {
+      &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+
+    &__cell {
+      background-color: #eee;
+      width: $col-width;
+      height: $col-width;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      transition-property: all;
+      transition-duration: 0.5s;
+
+      &:hover {
+        background-color: pink;
+        transform: translateY(-20px);
+      }
+    }
+    @for $index from 1 through 31 {
+      &__cell:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
 }
