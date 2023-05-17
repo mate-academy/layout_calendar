@@ -10,14 +10,8 @@
   width: $calendarMaxWidth;
 
   @each $day, $num in $days {
-    &--start-day-#{$day} > .calendar__day:nth-child(#{$num}) {
-      margin-left: $startDayShift;
-    }
-  }
-  
-  @each $day, $num in $days {
-    &--start-day-#{$day} > .calendar__day:nth-child(-n + #{$num - 1}) {
-      display: none;
+    &--start-day-#{$day} > .calendar__day:first-child {
+      margin-left: $daysWidth * $num + $gapForDays * $num;
     }
   }
 
@@ -47,7 +41,7 @@
     }
 
     @for $index from 1 through 31 {
-      &:nth-child(#{$index}):before {
+      &:nth-child(#{$index }):before {
         display: inline-block;
         content: "#{$index}";
       }
