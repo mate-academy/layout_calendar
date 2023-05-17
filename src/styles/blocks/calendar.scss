@@ -8,12 +8,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: $gap;
-    width: calendarWidth($square-size, $elements-in-rows,
+    width: calendarCellSize($square-size, $elements-in-rows,
     $gap, $container-padding);
 
     @for $day from 28 through 31 {
-      &--month-length--#{$day} :nth-child(n+#{$day + 1}) {
-        display: none;
+      &--month-length-#{$day} {
+        .calendar__day:nth-child(n + #{$day + 1}) {
+          display: none;
+        }
       }
     }
   }
@@ -32,7 +34,7 @@
       }
     }
 
-    @include square($square-size);
+    @include calendarCellSize($square-size);
 
     @for $day from 1 through 31 {
       &--#{$day}::before {
