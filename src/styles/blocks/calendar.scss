@@ -1,10 +1,7 @@
 .calendar {
-  position: absolute;
-  top: 25%;
-  left: 25%;
-
   display: flex;
   flex-wrap: wrap;
+  margin: 10% auto;
   @extend %calendar-settings;
 
   $mounths:
@@ -29,22 +26,21 @@
   }
 
   &__day {
+    cursor: pointer;
     width: $number-size;
     height: $block-height;
+    padding: 30px;
     @extend %settings-blok-structure;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number}) {
         &::before {
-          color: black;
-          line-height: 100px;
           content: "#{$number}";
         }
       }
     }
 
     &:hover {
-      cursor: pointer;
       background-color: #edb4b4;
       transform: translate(0,-25%);
       transition: 0.5s;
