@@ -1,0 +1,50 @@
+.calendar {
+  position: relative;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendarGapSize;
+  width: $calendarWidth;
+  color: black;
+  font-size: $fontSizeValue;
+  font-family: Arial, sans-serif;
+
+  @each $dayName, $mgLeft in $days {
+    &--start-day--#{$dayName} {
+      & > :first-child {
+        margin-left: $mgLeft;
+      }
+    }
+  }
+
+  @for $index from 28 through $monthLength {
+    &--month-length--#{$index} {
+      $dayIndex: $index + 1;
+      & > :nth-child(n + #{$dayIndex}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    @include square(#{$cellSize});
+    background-color: $cellColor;
+    text-align: center;
+    line-height: $cellSize;
+    border: 1px solid black;
+    transition: color 0.5s, transform 0.5s;
+
+    @for $index from 1 through $monthLength {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -$transformSize);
+      background-color: pink;
+    }
+  }
+}
