@@ -1,0 +1,126 @@
+.page {
+
+  &__content {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+  }
+
+  &__title {
+    display: block;
+    margin-bottom: 20px;
+    background-color: rgb(255, 192, 203);
+    padding: 10px 0;
+  }
+
+  &__btn-lbl {
+    display: inline-block;
+    width: 80px;
+    padding: 20px 0;
+    text-align: center;
+    background-color: rgb(255, 192, 203);
+    border-radius: 15px;
+    &:hover {
+      color: $hover-accent;
+      font-weight: 900;
+      cursor: pointer;
+    }
+  }
+
+  &__cell {
+    @include square ($cell-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    position: relative;
+
+    @for $ind from 2 through 32 {
+      &:nth-child(n + #{$ind}) {
+        &::before {
+          content: "#{$ind - 1}";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+    }
+
+    &:nth-child(1) {
+      width: 0;
+      opacity: 0;
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      transition: background-color 0.7s ease-out, transform 0.5s ease-out;
+    }
+
+  }
+
+  &__btn-inp {
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    $month-shifts: "ja"  6, "fe"  2, "mar"  2, "ap"  5,
+      "ma"  0, "jun"  3, "jul"  5,
+      "au"  1, "se"  4, "oc"  6, "no"  2, "de"  4;
+
+    @each $month, $shift in $month-shifts {
+      &--month--#{$month} {
+        &:checked ~ {
+          & .page__numbers-block {
+            & .page__cell {
+              &:nth-child(1) {
+                width: $shift * $cell-size + ($shift - 1) * $gap;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &__numbers-block {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      width: calendarWidth($cell-size,$col-quantity,$gap);
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      gap: $gap;
+    }
+
+    &--month--ma {
+      &:checked ~ {
+        & .page__numbers-block {
+          & .page__cell {
+            &:nth-child(1) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    $excludes: "fe"  30, "ap"  32, "jun" 32, "se" 32, "no" 32;
+
+    @each $month, $exc in $excludes {
+      &--month--#{$month} {
+        &:checked ~ {
+          & .page__numbers-block {
+            & .page__cell {
+              &:nth-child(n + #{$exc}) {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
