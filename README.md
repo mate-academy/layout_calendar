@@ -28,10 +28,14 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - You can just add correct `margin-left` for the first day
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
-- On hovering over a cell, the cursor should become pointer.
+
+On hovering over a cell:
+- cursor should become pointer
 - The hovered cell has to become pink
-  - (**Optional**) Move it up by `20px` (use `transform`)
-  - (**Optional**) both of these properties are to be animated with the duration of half a second.
+
+## If you already know Trans
+- Move the hovered cell up by `20px` (use `transform`)
+- All changes should be animated with the duration of 0.5s
 
 --> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
 
