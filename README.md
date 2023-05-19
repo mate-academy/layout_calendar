@@ -33,7 +33,7 @@ On hovering over a cell:
 - cursor should become pointer
 - The hovered cell has to become pink
 
-## If you already know Trans
+## If you already know Transition and Transform
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
