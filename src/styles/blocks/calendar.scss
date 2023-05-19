@@ -1,17 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: 10% auto;
   @extend %calendar-settings;
-
-  $mounths:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $name, $index in $mounths {
     &--first-day--#{$name}>:first-child {
@@ -20,16 +10,18 @@
   }
 
   @for $last-day from 28 through 31 {
-    &--mounth--lenght-#{$last-day}>:nth-child(n+#{$last-day + 1}) {
+    &--mounth--length-#{$last-day}>:nth-child(n+#{$last-day + 1}) {
       display: none;
     }
   }
 
   &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     width: $number-size;
     height: $block-height;
-    padding: 30px;
     @extend %settings-blok-structure;
 
     @for $number from 1 through 31 {
