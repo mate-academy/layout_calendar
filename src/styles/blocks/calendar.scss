@@ -1,0 +1,68 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-cell;
+  width: $width-calendar;
+  padding: $paddings-calendar;
+  padding-top: $paddings-top-calendar;
+
+  $shift-first-day-month: 
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $weekday, $count in $shift-first-day-month {
+    &--start-day--#{$weekday} :first-child {
+      margin-left: ($size-cell + $gap-cell) * $count;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    @if $i >= 28 and $i <= 31 {
+      &--length-month--#{$i} :nth-child(n):nth-child(-n + #{$i}) {
+        @include cell-format;
+
+        @for $n from 1 through $i {
+          &:nth-of-type(#{$n})::after {
+            content: "#{$n}";
+            font-size: $font-size;
+          }
+
+          &:nth-of-type(#{$n}):hover {
+            background: pink;
+            transform: translate(0, $shift-cell-up);
+          }
+        }
+      }
+    
+    }
+    
+    @else {
+      &--length-month--#{$i} :nth-child(n) {
+        @include cell-format;
+      }
+
+      @for $n from 1 through 31 {
+        &--length-month--#{$i} :nth-of-type(#{$n})::after {
+          content: "#{$n}";
+          font-size: $font-size;
+        }
+
+        & :nth-of-type(#{$n}):hover {
+          background: pink;
+          transform: translate(0, $shift-cell-up);
+        }
+      }
+    }
+  }
+  
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
