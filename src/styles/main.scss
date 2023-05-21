@@ -11,6 +11,8 @@ body {
 .field {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -20,10 +22,6 @@ body {
   border: 1px solid #000;
   padding: 10px;
   gap: 1px;
-
-  & :first-child {
-    margin-left: $cell-size * 6 + 6px;
-  }
 
   &__day {
     display: flex;
@@ -58,17 +56,17 @@ body {
 }
 
 $days:
-  "mon",
-  "tue",
-  "wed",
-  "thu",
-  "fri",
-  "sat",
-  "sun";
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
 
-@each $day in $days {
-  .calendar--start-day--#{$day} :nth-child(1)::before {
-    content: "#{$day}\20";
-    white-space: pre;
+@each $day, $col in $days {
+  .calendar--start-day--#{$day} :first-child {
+
+    margin-left: $cell-size * $col + $col * 1px;
   }
 }
