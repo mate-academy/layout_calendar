@@ -1,5 +1,5 @@
-$calendar-item-length: 100px;
-$calendar-length: ($calendar-item-length * 7 + 20);
+@import "variables.scss";
+@import "calendar.scss";
 
 body {
   margin: 0;
@@ -9,50 +9,4 @@ body {
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-}
-
-.calendar {
-  max-width: #{$calendar-length};
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1px;
-  flex-wrap: wrap;
-  &__item {
-    box-sizing: border-box;
-    width: $calendar-item-length;
-    height: $calendar-item-length;
-    border: 1px solid black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #eee;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-  }
-}
-
-$weekdays: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-
-@for $i from 1 through 31 {
-  .calendar__item:nth-child(#{$i})::before {
-    content: "#{$i}";
-  }
-}
-
-@each $weekday, $cell in $weekdays {
-  .calendar__item--#{$weekday} {
-    margin-left: ($cell * $calendar-item-length + $cell);
-  }
-}
-
-@for $i from 28 through 31 {
-  .calendar--mounth-length-#{$i} .calendar__item:nth-child(n + #{$i + 1}) {
-    display: none;
-  }
 }
