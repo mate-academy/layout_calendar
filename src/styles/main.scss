@@ -38,7 +38,7 @@ body {
   }
 
   &__day:hover {
-    background-color: #964545;
+    background-color: #ffc0cb;
     cursor: pointer;
   }
 }
@@ -46,6 +46,12 @@ body {
 @for $day from 1 through 31 {
   .calendar :nth-child(n + #{$day})::after {
     content: "#{$day}" ;
+  }
+}
+
+@for $day from 28 to 31 {
+  .calendar--month-length--#{$day} :not(:nth-child(-n + #{$day})) {
+    display: none;
   }
 }
 
