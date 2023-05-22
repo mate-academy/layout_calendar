@@ -1,0 +1,56 @@
+.calendar {
+  @include pos-center;
+  transform: translate(-50%, 50px);
+
+  &__month {
+    width: $calendar-row-width;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__number {
+    margin: $day-margin;
+    width: $size-day;
+    height: $size-day;
+    display: inline-block;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: all 0.7s;
+    position: relative;
+
+    &::before {
+      content: "";
+      @include pos-center;
+      transform: translate(-50%, -50%);
+      color: #000;
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      border-radius: 4px;
+      font-size: 20px;
+      z-index: 1;
+    }
+
+    &:nth-child(n + 29) {
+      display: none;
+    }
+
+    $weekdays:
+      "mon" --start_day,
+      "tue",
+      "wed",
+      "thu",
+      "fri",
+      "sat",
+      "sun";
+
+    @each $weekday, $start in $weekdays {
+      &--#{$weekday}#{$start} {
+        margin-left: $day-margin;
+      }
+    }
+  }
+}
