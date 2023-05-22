@@ -1,0 +1,45 @@
+@import "./utils/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * (100px + 1px) + 20px);
+  gap: $cell-gap;
+  padding: $cell-padding;
+
+  &__day {
+    display: flex;
+    height: $cell-height;
+    width: $cell-width;
+    background-color: $cell-background;
+    border: $cell-border solid $border-color;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    @for $i from 1 through $day-count {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+  @each $day, $i in $week-days {
+    &--start-day-#{$day} {
+      :first-child {
+        margin-left: ($i * $cell-width) + $i * 2;
+      }
+    }
+  }
+  @for $length from 28 through $day-count {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
