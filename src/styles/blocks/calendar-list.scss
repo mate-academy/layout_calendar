@@ -1,0 +1,77 @@
+@import "../utils/variables";
+@import "../utils/mixins";
+
+@for $index from 1 through 31 {
+  .calendar-list__item--#{$index}::before {
+  @include content;
+  content: "#{$index}";
+  }
+}
+
+.calendar-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: $listPadding;
+  width: $listWidth;
+  gap: $gap;
+
+  
+  &--month-length-28 {
+    @for $index from 29 through 31 {
+      .calendar-list__item--#{$index} {
+        @include empty-item;
+      }
+    }
+    @for $index from 29 through 31 {
+      .calendar-list__item--#{$index}::before {
+        content: '';
+      }
+    }
+  }
+
+  &--month-length-29 {
+    @for $index from 30 through 31 {
+      .calendar-list__item--#{$index} {
+        @include empty-item;
+      }
+    }
+    @for $index from 30 through 31 {
+      .calendar-list__item--#{$index}::before {
+        content: '';
+      }
+    }
+  }
+
+  &--month-length-30 {
+      .calendar-list__item--31 {
+        @include empty-item;
+    }
+      .calendar-list__item--31::before {
+        content: '';
+    }
+  }
+
+  &__item {
+    background-color: #808080;
+    transition: background-color 0.5s, transform 0.5s;
+    @include list-item();
+
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+
+   
+    @each $name, $margin in $margins {
+      &--start-day-#{$name} {
+        margin-left: $margin;
+      }
+    }
+  }
+}
+
+
+  
