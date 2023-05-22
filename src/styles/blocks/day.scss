@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $block-day-width * 7 + 15;
+  margin: 20px auto;
+
+  &__day {
+    margin: 1px;
+  }
+}
+
+.day {
+  width: $block-day-width;
+  height: $block-day-heigth;
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: none;
+
+  &:hover {
+    background-color: hsl(271, 95%, 74%);
+    transform: translate(0, -20%);
+    transition-duration: 0.5s;
+  }
+}
+
+@each $name, $start in $days {
+  .calendar__days--#{$name} {
+    @for $i from 1 through $start {
+      .calendar__day:nth-child(#{$i}) {
+        visibility: visible;
+        display: flex;
+
+        &::before {
+          content: "#{$i}";
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: $block-day-heigth / 3;
+          margin: auto;
+        }
+      }
+    }
+  }
+}
+
+@each $name, $start in $mon {
+  .calendar__start-day--#{$name} .calendar__day:first-child {
+    margin-left: ($block-day-width + 2) * $start + 1;
+  }
+}
