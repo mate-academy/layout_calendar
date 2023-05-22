@@ -1,0 +1,63 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calendarWidth($cell-size,$col-quantity,$gap,$side-padding);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  gap: $gap;
+  padding: $side-padding;
+
+  &__cell {
+    @include square ($cell-size);
+    border: 1px solid #000;
+    background-color: #eee;
+    position: relative;
+    cursor: pointer;
+
+    @for $ind from 1 through 31 {
+      &:nth-child(n + #{$ind}) {
+        &::before {
+          content: "#{$ind}";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%,-50%);
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      transition: background-color 0.5s ease-out, transform 0.5s ease-out;
+    }
+  }
+
+  $day-shifts: "mon"  0, "tue"  1, "wed"  2, "thu"  3,
+    "fri"  4, "sat"  5, "sun"  6;
+
+  @each $day, $shift in $day-shifts {
+    &--start-day--#{$day} {
+      .calendar__cell {
+        &:nth-child(1) {
+          margin-left: $shift * $cell-size + $shift * $gap;
+        }
+      }
+    }
+  }
+
+  @for $ind from 1 through 31 {
+
+    &--month-length--#{$ind} {
+      .calendar__cell {
+        &:nth-child(n + #{$ind + 1}) {
+          display: none;
+        }
+      }
+    }
+
+  }
+
+}
