@@ -1,0 +1,44 @@
+.calendar {
+  margin: auto;
+  display: flex;
+  padding: #{$padding};
+  flex-wrap: wrap;
+  align-items: center;
+  width: #{$width--main};
+  gap: #{$gap--value};
+
+  &__cell {
+    background-color: #eee;
+    box-sizing: border-box;
+    height: #{$height--box};
+    width: #{$width--box};
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+  @each $weekday, $cell in $number {
+    &--start-day-#{$weekday} &__cell:first-child {
+      margin-left: ($cell * $width--box)  + $cell;
+    }
+  }
+}
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i}
+  .calendar__cell:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through $count--days {
+  .calendar__cell:nth-child(#{$i})::before {
+    content: "#{$i}";
+    color: black;
+  }
+}
