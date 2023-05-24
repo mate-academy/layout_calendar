@@ -8,22 +8,23 @@
   gap: #{$gap--value};
 
   &__cell {
-    background-color: #eee;
+    cursor: pointer;
+    background-color:#{$color--background};
     box-sizing: border-box;
     height: #{$height--box};
     width: #{$width--box};
-    border: 1px solid #000;
+    border: 1px solid #{$color--border};
     display: flex;
     justify-content: center;
     align-items: center;
+    transition-duration: 0.5s;
 
     &:hover {
-      background-color: pink;
+      background-color: #{$color--hover};
       transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
   }
-  @each $weekday, $cell in $number {
+  @each $weekday, $cell in $start-day-mapping {
     &--start-day-#{$weekday} &__cell:first-child {
       margin-left: ($cell * $width--box)  + $cell;
     }
@@ -36,9 +37,9 @@
   }
 }
 
-@for $i from 1 through $count--days {
+@for $i from 1 through $days--count {
   .calendar__cell:nth-child(#{$i})::before {
     content: "#{$i}";
-    color: black;
+    color: #{$color--text};
   }
 }
