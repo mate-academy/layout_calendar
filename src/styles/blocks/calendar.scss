@@ -1,14 +1,24 @@
+.body {
+  // center calendar
+  &__calendar {
+    margin: 0 auto;
+
+  }
+}
+
 .calendar {
   display: flex;
+  // justify-content: center;
   flex-wrap: wrap;
-  gap: $cells-gap;
+  gap: $day-cells-gap;
 
-  margin: 0 auto;
-  padding: ($calendar-padding + $translate-length) $calendar-padding;
+  padding-block: ($calendar-padding + $hovered-cell-translate-length);
+  padding-inline: $calendar-padding;
+
   max-width: getMaxWidth(
-    $cell-size,
+    $day-cell-size,
     $cells-per-line,
-    $cells-gap,
+    $day-cells-gap,
     $calendar-padding
   );
 
@@ -22,15 +32,15 @@
     "sun" 6;
 
   @each $day, $pozition in $week {
-    &--start-day--#{$day} {
+    &--start-day_#{$day} {
       & :first-child {
-        margin-left: $pozition * ($cell-size + $cells-gap);
+        margin-left: $pozition * ($day-cell-size + $day-cells-gap);
       }
     }
   }
 
-  @for $month-length from 28 to 31 {
-    &--month-length--#{$month-length} {
+  @for $month-length from 28 through 31 {
+    &--month-length_#{$month-length} {
       & :nth-child(n + #{$month-length + 1}) {
         display: none;
       }
@@ -42,7 +52,7 @@
     justify-content: center;
     align-items: center;
 
-    @include square($cell-size);
+    @include square($day-cell-size);
     border: 1px solid #000;
     background-color: #eee;
     transition: background-color 0.5s, transform 0.5s;
@@ -58,7 +68,7 @@
     &:hover {
       cursor: pointer;
       background-color: pink;
-      transform: translateY(-$translate-length);
+      transform: translateY(-$hovered-cell-translate-length);
     }
   }
 }
