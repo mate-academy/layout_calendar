@@ -1,0 +1,54 @@
+.block {
+  width: $width;
+  margin: 0 auto;
+
+  .calendar {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+  }
+
+  .calendar__day {
+    cursor: pointer;
+    background-color: #eee;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+
+    &::before {
+      font-size: 30px;
+      line-height: $cell-size;
+      display: block;
+      text-align: center;
+    }
+  }
+}
+
+@each $day, $index in $weekDays {
+  .calendar--start-#{$day} {
+    .calendar__day:first-child {
+      margin-left: (($cell-size + $gap) * $index);
+    }
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: "#{$number}";
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
