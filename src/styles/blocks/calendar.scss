@@ -1,0 +1,60 @@
+@import "../utils/reset.css";
+@import "../utils/normalize.css";
+@import "../utils/variables";
+@import "../utils/mixins";
+
+.calendar {
+  $root: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: ($cell-size * 7) + ($calendar-padding * 2) + ($cell-gap * 7 - 1);
+  padding: $calendar-padding;
+  gap: $cell-gap;
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include cell-square($cell-size);
+
+    border: 1px solid black;
+    background-color: $cell-background;
+    transition: transform 0.5s, background-color 0.5s;
+
+    &:hover {
+      background-color: $cell-background-hover;
+      cursor: pointer;
+      transform: translate(0, -20px);
+    }
+
+    @for $date-num from 1 through 31 {
+      &:nth-child(#{$date-num})::before {
+        content: "#{$date-num}";
+      }
+    }
+
+    @for $days-in-month from 28 through 31 {
+      #{$root}--month-length--#{$days-in-month}
+      &:nth-child(n + #{$days-in-month + 1}) {
+        display: none;
+      }
+    }
+
+    $days:
+      "mon" 0,
+      "tue" ($cell-size + $cell-gap),
+      "wed" ($cell-size + $cell-gap) * 2,
+      "thu" ($cell-size + $cell-gap) * 3,
+      "fri" ($cell-size + $cell-gap) * 4,
+      "sat" ($cell-size + $cell-gap) * 5,
+      "sun" ($cell-size + $cell-gap) * 6;
+
+    @each $day, $margin-left in $days {
+      #{$root}--start-day--#{$day} &:first-child {
+        margin-left: #{$margin-left};
+      }
+    }
+  }
+}
