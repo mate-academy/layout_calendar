@@ -1,3 +1,36 @@
 body {
   margin: 0;
 }
+
+@import "./blocks.scss";
+@import "./variables.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@for $i from 1 through 31 {
+  .calendar__block--#{$i}::before {
+    content: "#{$i}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $day, $col in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__block:first-child {
+      margin-left: ($day-size * $col)+$col*1px;
+    }
+  }
+}
+
+@each $length in 28,29,30,31 {
+  .calendar--month-length-#{$length} {
+    .calendar__block:nth-child(n+#{$length + 1}) {
+      display: none;
+    }
+  }
+}
