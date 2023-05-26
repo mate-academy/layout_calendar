@@ -14,6 +14,18 @@
   gap: $dayGap;
   padding: $calendar-padding;
 
+  @each $day, $index in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: (($day-cell-width + $dayGap) * $index);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     @include daySize ($day-cell-width);
     display: flex;
@@ -37,20 +49,8 @@
   }
 }
 
-@for $index from 1 through $day-count {
+@for $index from 1 through 31 {
   .calendar__day:nth-child(n + #{$index})::before {
     content: "#{$index}";
-  }
-}
-
-@each $day, $index in $days {
-  .start-day-#{$index} .calendar__day:first-child {
-    margin-left: (($day-cell-width + $dayGap) * $index);
-  }
-}
-
-@for $index from 28 through 31 {
-  .month-length-#{$index} .calendar__day:nth-child(n + #{$index} + 1) {
-    display: none;
   }
 }
