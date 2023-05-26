@@ -25,12 +25,8 @@
       transform: translateY(-20px);
     }
 
-    &:first-child {
-      // margin-left: $shiftForDay * 6;
-    }
-
     @for $value from 1 through $totalDays {
-      &--#{$value}::after {
+      &:nth-child(#{$value}):after {
         content: "#{$value}";
         display: block;
         line-height: $dayBlockSize;
