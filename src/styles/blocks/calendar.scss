@@ -1,0 +1,62 @@
+.wraper {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gapSize;
+  width: calendarWidth($sellSize, $gapSize, $calendarPadding);
+  padding: 0 $calendarPadding;
+
+  &__day {
+    display: none;
+    width: $sellSize;
+    height: $sellSize;
+    font-size: 30px;
+    text-align: center;
+    line-height: $sellSize;
+    border: solid black 1px;
+    background-color: #eee;
+    transition-duration: 0.5s ;
+
+    &:hover {
+      transform: translate(0, -20px) ;
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    &::before {
+      content: "#{$i}";
+    }
+  }
+}
+
+$days:
+  "ondey",
+  "tuesday" calc(#{$sellSize} + #{$gapSize}),
+  "wednesday" calc((#{$sellSize} + #{$gapSize}) * 2),
+  "thursday" calc((#{$sellSize} + #{$gapSize}) * 3),
+  "friday" calc((#{$sellSize} + #{$gapSize}) * 4),
+  "saturday" calc((#{$sellSize} + #{$gapSize}) * 5),
+  "sunday" calc((#{$sellSize} + #{$gapSize}) * 6);
+@each $day, $startSellIndentation in $days {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: $startSellIndentation;
+    }
+  }
+}
+
+@for $monthLength from 1 through 31 {
+  .calendar--month-length--#{$monthLength} {
+    .calendar__day:nth-child(-n + #{$monthLength}) {
+      display: block;
+    }
+  }
+}
