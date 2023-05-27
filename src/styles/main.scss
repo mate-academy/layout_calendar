@@ -1,3 +1,63 @@
-body {
-  margin: 0;
+$cell-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$number-font: arial;
+$number-size: 30px;
+$animation-duration: 0.5s;
+$starting-day-index: 1;
+$month-length: 31;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  width: calc(7 * #{$cell-size} + 20px);
+
+  @for $i from 1 through $month-length {
+    .calendar__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+}
+
+.calendar__day {
+  position: relative;
+  width: $cell-size;
+  height: $cell-size;
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  cursor: pointer;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: $number-font;
+    font-size: $number-size;
+    color: $border-color;
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: transform $animation-duration;
+  }
+}
+
+@for $i from 1 through 7 {
+  .calendar--start-#{$i} {
+    .calendar__day:nth-child(#{$i}n + #{$starting-day-index}) {
+      margin-left: 0;
+    }
+  }
+}
+
+@for $i from $month-length + 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    display: none;
+  }
 }
