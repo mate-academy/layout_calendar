@@ -11,9 +11,9 @@ body {
   align-items: center;
 }
 
-@for $i from 1 through 31 {
-  .calendar__block--#{$i}::before {
-    content: "#{$i}";
+@for $day from 1 through 31 {
+  .calendar :nth-child(n + #{$day})::before {
+    content: "#{$day}" ;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
   }
@@ -21,7 +21,7 @@ body {
 
 @each $day, $col in $days {
   .calendar--start-day-#{$day} {
-    .calendar__block:first-child {
+    .calendar__day:first-child {
       margin-left: ($day-size * $col)+$col*1px;
     }
   }
@@ -29,7 +29,7 @@ body {
 
 @each $length in 28,29,30,31 {
   .calendar--month-length-#{$length} {
-    .calendar__block:nth-child(n+#{$length + 1}) {
+    .calendar__day:nth-child(n+#{$length + 1}) {
       display: none;
     }
   }
