@@ -11,7 +11,6 @@
   padding: 0 $calendarPadding;
 
   &__day {
-    display: none;
     width: $sellSize;
     height: $sellSize;
     font-size: 30px;
@@ -45,6 +44,7 @@ $days:
   "friday" calc((#{$sellSize} + #{$gapSize}) * 4),
   "saturday" calc((#{$sellSize} + #{$gapSize}) * 5),
   "sunday" calc((#{$sellSize} + #{$gapSize}) * 6);
+
 @each $day, $startSellIndentation in $days {
   .calendar--start-day--#{$day} {
     .calendar__day:first-child {
@@ -53,10 +53,11 @@ $days:
   }
 }
 
-@for $monthLength from 1 through 31 {
+@for $monthLength from 28 through 31 {
+  $nthChild: $monthLength + 1;
   .calendar--month-length--#{$monthLength} {
-    .calendar__day:nth-child(-n + #{$monthLength}) {
-      display: block;
+    .calendar__day:nth-child(n + #{$nthChild}) {
+      display: none;
     }
   }
 }
