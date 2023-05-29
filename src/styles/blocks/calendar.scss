@@ -37,18 +37,18 @@
 }
 
 $days:
-  "ondey",
-  "tuesday" calc(#{$sellSize} + #{$gapSize}),
-  "wednesday" calc((#{$sellSize} + #{$gapSize}) * 2),
-  "thursday" calc((#{$sellSize} + #{$gapSize}) * 3),
-  "friday" calc((#{$sellSize} + #{$gapSize}) * 4),
-  "saturday" calc((#{$sellSize} + #{$gapSize}) * 5),
-  "sunday" calc((#{$sellSize} + #{$gapSize}) * 6);
+  "mondey" 0,
+  "tuesday" 1,
+  "wednesday" 2,
+  "thursday" 3,
+  "friday" 4,
+  "saturday" 5,
+  "sunday" 6;
 
-@each $day, $startSellIndentation in $days {
+@each $day, $index in $days {
   .calendar--start-day--#{$day} {
     .calendar__day:first-child {
-      margin-left: $startSellIndentation;
+      margin-left: calc((#{$sellSize} + #{$gapSize}) * #{$index});
     }
   }
 }
