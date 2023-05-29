@@ -1,0 +1,27 @@
+.day {
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: $day-border;
+  transition: $transition-time;
+  @include square($day-size);
+  height: $day-size;
+  width: $day-size;
+
+  background-color: $day-color;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  @for $index from 1 through 31 {
+    &:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
+  }
+}
