@@ -1,14 +1,14 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $totalSize + $totalGap + 10px;
-  padding: 10px;
+  gap: $DayGap;
+  width: $TotalSize + $TotalGap + 10px;
 
   $days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
 
   @each $day, $number in $days {
     &--start-day--#{$day} .calendar__day:first-child {
-      margin-left: ($number * ($daySize + $dayGap)) + 3 * $dayGap;
+      margin-left: ($number * ($DaySize + $DayGap)) + $DayGap;
     }
   }
 
@@ -23,15 +23,13 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: $daySize;
-    width: $daySize;
+    height: $DaySize;
+    width: $DaySize;
     font-family: $BodyFont;
-    size: $daySize;
-    gap: $dayGap;
     background-color: #eee;
     border: 1px solid black;
     color: black;
-    transition: all 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
 
     &:hover {
       cursor: pointer;
