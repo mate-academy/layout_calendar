@@ -7,30 +7,34 @@
   gap: 1px;
   padding: $calendar-padding;
 
-  @for $days from 1 through 31 {
-    &__day-#{$days} {
-      border: 1px solid $color-day-border;
-      background-color: $color-day-background;
-      width: $day-width;
-      height: $day-height;
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      transition: 0.5s;
-    }
+  &__day {
+    border: 1px solid $color-black;
+    background-color: $color-grey;
+    width: $day-width;
+    height: $day-height;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    transition: transform 0.5s;
+  }
 
-    &__day-#{$days}:hover {
-      background-color: pink;
-      cursor: pointer;
-      transform: translateY(-20px);
+  &__day:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+
+  @for $daysInMonth from 28 through 31 {
+    &--month-length--#{$daysInMonth} &__day:nth-child(n + #{$daysInMonth + 1}) {
+      display: none;
     }
   }
 
-  @for $days from 1 through 31 {
-    &__day-#{$days}::before {
-      content: "#{$days}";
+  @for $dayNumber from 1 through 31 {
+    &__day:nth-child(n + #{$dayNumber}):before {
+      content: "#{$dayNumber}";
     }
   }
 
@@ -44,7 +48,7 @@
     "sun" 7;
 
   @each $dayName, $dayNumber in $days {
-    &__day-1--start-day-#{$dayName} {
+    &--start-day--#{$dayName} &__day:first-child {
       margin-left: ($dayNumber - 1) * $day-width + ($dayNumber - 1);
     }
   }
