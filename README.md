@@ -1,12 +1,9 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-<<<<<<< HEAD
+
 - [DEMO LINK](https://ilona-borkovska.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://ilona-borkovska.github.io/layout_calendar/report/html_report/)
-=======
-- [DEMO LINK](https://Ilona1697.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://Ilona1697.github.io/layout_calendar/report/html_report/)
->>>>>>> 755d8da9508733f03bd0cd12a1db36acb062c80e
+
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
