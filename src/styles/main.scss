@@ -1,5 +1,8 @@
+$body-color: #000; // Define a variable for body color
+
 body {
   margin: 0;
+  color: $body-color; // Apply the body color variable
 }
 
 .container {
@@ -20,21 +23,17 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 10px;
-  cursor: pointer;
 
   .calendar__day {
     box-sizing: border-box;
     border: 1px solid #000;
     background-color: #aaa;
     transition: transform 500ms;
+    cursor: pointer;
 
     &:hover {
       transform: translateY(-20px);
       background-color: #faa;
-    }
-
-    &:first-child {
-      margin-left: 0;
     }
 
     @for $day from 1 through 31 {
@@ -47,6 +46,12 @@ body {
           height: 100px;
           width: 100px;
         }
+      }
+    }
+
+    @for $length from 28 through 31 {
+      &.length-#{$length} {
+        grid-column-end: span #{$length};
       }
     }
   }
