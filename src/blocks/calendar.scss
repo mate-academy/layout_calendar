@@ -2,13 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  padding: 10px;
 
   &__day {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
     height: $day-size;
     width: $day-size;
     border: 1px solid #000;
@@ -28,7 +27,7 @@
     }
   }
   @for $num from 28 through 31 {
-    &--month--length-#{$num} {
+    &--month-length--#{$num} {
       .calendar__day:nth-child(n + #{$num + 1}) {
         display: none;
       }
@@ -36,9 +35,9 @@
   }
 
   @each $name, $num in $days {
-    &--start--day--#{$name} {
+    &--start-day--#{$name} {
       .calendar__day:first-child {
-        margin-left: ($num - 1) * $day-size + 3px;
+        margin-left: ($num) * $day-size + 3px;
       }
     }
   }
