@@ -1,3 +1,5 @@
+@import "./utils/mixins";
+
 .calendar {
   @include align-self;
   display: flex;
@@ -7,21 +9,20 @@
   flex-wrap: wrap;
 
   &__day {
+    position: relative;
     width: $cell-size;
     height: $cell-size;
-    position: relative;
+    box-sizing: border-box;
     transition: all 0.5s;
     border: 1px solid #000;
-    box-sizing: border-box;
     background-color: #eee;
+    font-size: 30px;
     cursor: pointer;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::after {
         @include align-self;
         content: "#{$i}";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
       }
     }
 
@@ -33,7 +34,7 @@
 
   @for $dayNumber from 28 through 31 {
     &--month-length--#{$dayNumber} {
-      .calendar__day:nth-child(n + #{$dayNumber - 1}) {
+      .calendar__day:not(:nth-child(-n + #{$dayNumber})) {
         visibility: hidden;
       }
     }
@@ -42,7 +43,7 @@
   @each $day, $number in $days {
     &--start-day--#{$day} {
       .calendar__day:first-child {
-        margin-left: ($cell-size + $gap) * (7 - $number);
+        margin-left: ($cell-size + $gap) * ($number - 1);
       }
     }
   }
