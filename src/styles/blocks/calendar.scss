@@ -24,7 +24,6 @@
       &:nth-child(#{$num}):before {
         content: "#{$num}";
         display: block;
-        font-family: Arial, sans-serif;
         font-size: 30px;
         text-align: center;
         line-height: $cellSize;
@@ -35,7 +34,7 @@
   @each $weekday, $num in $weekdays  {
     &--start-day--#{$weekday} {
       .calendar__day:first-child {
-        margin-left: $cellSize * $num;
+        margin-left: ($cellSize + $cellGap) * $num;
       }
     }
   }
@@ -44,7 +43,6 @@
     &--month--length--#{$num} {
       .calendar__day:nth-child(n + #{$num + 1}) {
         opacity: 0;
-        cursor:default;
       }
     }
   }
