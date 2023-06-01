@@ -18,10 +18,10 @@
       cursor: pointer;
       transform: translateY(-20px);
     }
-  }
-  @for $day from 1 through 31 {
-    &__day--#{$day}::before {
-      content: "#{$day}";
+    @for $day from 1 through 31 {
+      &:nth-child(n + #{$day}):before {
+        content: "#{$day}";
+      }
     }
   }
 
@@ -32,7 +32,6 @@
       }
     }
   }
-
   &--month-lenth {
     @for $lenght from 28 to 31 {
       &--#{$lenght} :nth-child(n + #{$lenght + 1}) {
