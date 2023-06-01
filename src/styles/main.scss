@@ -1,65 +1,14 @@
 @import "./variables";
+@import "./calendar";
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.calendar {
-  max-width: ($day-width * 7) + ($gap * 6);
+.page {
   display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-
-  &__day {
-    font-size: 30px;
-    box-sizing: border-box;
-    display: flex;
-    flex-basis: 100% / (7 + 1);
-    justify-content: center;
-    align-items: center;
-    min-width: $day-width;
-    height: 100px;
-    background-color: #eee;
-    border: 1px solid #000;
-    opacity: 1;
-    cursor: pointer;
-    transition: all 0.5s;
-
-    &:hover {
-      background-color: #ffc0cb;
-      transform: translateY(-20px);
-    }
-
-    @for $num from 1 through 31 {
-      &:nth-child(#{$num})::before {
-        content: "#{$num}";
-      }
-    }
-  }
-
-  @each $day, $number in $days {
-    &--start-day--#{$day} {
-      .calendar__day:first-child {
-        margin-left: ($day-width + $gap) * $number;
-      }
-    }
-  }
-
-  @for $length from 28 through 31 {
-    &--month-length--#{$length} {
-      .calendar__day:nth-child(n + #{$length + 1}) {
-        height: 0;
-        border: none;
-
-        &::before {
-          content: "";
-        }
-      }
-    }
-  }
-}
-
-.calendar--padding {
-  padding: 30px 10px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
