@@ -1,3 +1,48 @@
+@import "./blocks/variables";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: $calendar-width;
+  margin: $padding auto;
+
+  & :first-child {
+    margin-left: $margin-left;
+  }
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    padding: $padding;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+  
+    @for $num from 1 through 31 {
+      &--#{$num}::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: flex;
+        transform: translate(-50%, -50%);
+        content: "#{$num}";
+      }
+    }
+  
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
 }
