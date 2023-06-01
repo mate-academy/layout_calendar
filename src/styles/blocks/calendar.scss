@@ -19,8 +19,6 @@
   }
 
   &__item {
-    position: relative;
-
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
@@ -31,21 +29,23 @@
     cursor: pointer;
     transition: all 0.5s ease-in-out;
 
-    @for $day-number from 1 through 31 {
-      &--#{$day-number}::before {
-        position: absolute;
-        content: "#{$day-number}";
-
-        width: 100%;
-        
-        line-height: $day-size;
-        text-align: center;
-      }
-    }
-
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
+    }
+  }
+
+  @for $day-number from 1 through 31 {
+    &--month-length--#{$day-number} {
+      @for $number from 1 through $day-number {
+        & :nth-child(n + #{$number})::before {
+          content: "#{$number}";
+        }
+      }
+      width: 100%;
+
+      line-height: $day-size;
+      text-align: center;
     }
   }
 }
