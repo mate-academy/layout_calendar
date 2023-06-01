@@ -32,7 +32,8 @@
   }
 }
 
-$week-days: "mon" 0,
+$week-days:
+  "mon" 0,
   "tue" 1,
   "wed" 2,
   "thu" 3,
@@ -42,15 +43,15 @@ $week-days: "mon" 0,
 
 @each $day,
   $number in $week-days {
-  .calendar--start-day--#{$day} {
-    .calendar__day:first-child {
+  &--start-day--#{$day} {
+    &__day:first-child {
       margin-left: ($cell-size + $gap) * $number;
     }
   }
 }
 
 @for $day from 28 through 31 {
-  .calendar--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+  &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
     display: none;
   }
 }
