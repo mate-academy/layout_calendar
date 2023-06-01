@@ -14,9 +14,11 @@
     background-color: $day-color;
     margin-right: 1px;
     cursor: pointer;
+    transition: ease 500ms;
 
     &:hover {
       background-color: $hover-color;
+      transform: translateY(-20px);
     }
 
     @for $item from 1 through 31 {
@@ -38,7 +40,7 @@
   @each $name, $num in $days {
     &--start-day--#{$name} {
       .calendar__day:first-child {
-        margin-left: ($num) * $day-size + 3px;
+        margin-left: ($num) * $day-size + 1px;
       }
     }
   }
