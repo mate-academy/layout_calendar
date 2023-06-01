@@ -1,9 +1,9 @@
 .calendar {
-  width: 7.1 * $box-width;
-  height: 5.1 * $box-height;
+  width: 7 * $box-width + 6px;
 
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: 1px;
 
   padding: 10px;
@@ -29,7 +29,6 @@
   }
 
   &__box {
-    position: relative;
     box-sizing: border-box;
 
     height: $box-height;
@@ -38,24 +37,18 @@
     background-color: #eee;
     border: 1px solid black;
     text-align: center;
+    cursor: pointer;
+    line-height: 100px;
 
     transition-duration: 0.5s;
 
     @for $box from 1 through $box-col {
       &:nth-child(#{$box})::before {
         content: "#{$box}";
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
       }
     }
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
 
       transform: translateY(-20px);
