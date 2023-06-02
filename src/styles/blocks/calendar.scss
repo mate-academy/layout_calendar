@@ -1,5 +1,5 @@
 @for $i from 1 through 31 {
-  .day-#{$i}::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
@@ -7,7 +7,7 @@
 }
 
 @for $num from 28 through 31 {
-  .calendar--month-#{$num} {
+  .calendar--month--#{$num} {
     .calendar__day:nth-child(n + #{$num + 1}) {
       display: none;
     }
@@ -15,7 +15,7 @@
 }
 
 @each $day, $num in $week {
-  .calendar--start-#{$day} {
+  .calendar--start--#{$day} {
     .calendar__day:first-child {
       margin-left: ($gap + $day-size) * $num;
     }
@@ -48,7 +48,7 @@ body {
     height: $day-size;
     background-color: #eee;
     border: 1px solid #000;
-    transition: transform 0.5s;
+    transition: 0.5s;
 
     &:hover {
       cursor: pointer;
