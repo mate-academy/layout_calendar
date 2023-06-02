@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 707px;
+  gap: $gap;
+
+  @each $day, $distance in $start-day {
+    &.calendar--startday-#{$day} .calendar__element:first-child {
+      margin-left: $block-size * $distance + $distance;
+    }
+  }
+
+  @for $hiden from 28 through 30 {
+    &.calendar--duration-#{$hiden}
+    .calendar__element:nth-child(n + #{$hiden+1}) {
+      display: none;
+    }
+  }
+
+  &__element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $block-size;
+    height: $block-size;
+    padding: 10px;
+    background-color: $background;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      background: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through $days-count {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+  }
+
+}
