@@ -11,10 +11,12 @@
     }
   }
 
-  @for $day-number from 28 through 31 {
+  @for $day-number from 1 through 31 {
     &--month-length--#{$day-number}
     :nth-child(n + #{$day-number + 1}) {
-      display: none;
+      @if $day-number > 27 {
+        display: none;
+      }
     }
   }
 
@@ -37,12 +39,22 @@
 
   @for $day-number from 1 through 31 {
     &--month-length--#{$day-number} {
-      @for $number from 1 through $day-number {
-        & :nth-child(n + #{$number})::before {
-          content: "#{$number}";
+      @if $day-number > 27 {
+        @for $number from 1 through $day-number {
+          & :nth-child(n + #{$number})::before {
+            content: "#{$number}";
+          }
         }
       }
-      
+
+      @else {
+        @for $number from 1 through 31 {
+          & :nth-child(n + #{$number})::before {
+            content: "#{$number}";
+          }
+        }
+      }
+
       line-height: $day-size;
       text-align: center;
     }
