@@ -12,13 +12,28 @@ body {
   width: $calendar-width;
   margin: $padding auto;
 
-  & :first-child {
-    margin-left: $margin-left;
+  @each $name, $value in $days {
+    &--start-day--#{$name} {
+      .calendar__day:first-child {
+        margin-left: $cell-size * ($value - 1) + ($value - 1) * $gap-size;
+      }
+    }
+  }
+
+  @for $value from 28 through 31 {
+    &--month-length--#{$value} {
+      .calendar__day:nth-child(-n + #{$value}) {
+        opacity: 1;
+      }
+    }
   }
 
   &__day {
-    position: relative;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
     padding: $padding;
     width: $cell-size;
     height: $cell-size;
@@ -31,11 +46,6 @@ body {
   
     @for $num from 1 through 31 {
       &--#{$num}::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        display: flex;
-        transform: translate(-50%, -50%);
         content: "#{$num}";
       }
     }
