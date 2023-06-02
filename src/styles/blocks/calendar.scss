@@ -1,19 +1,15 @@
 .calendar {
-  /* Positioning */
   position: relative;
 
-  /* Display & Box Model */
   display: flex;
   margin-inline: auto;
   padding: 30px 10px 10px;
   width: $calendar-width;
   flex-wrap: wrap;
 
-  /* Other */
   gap: $gap;
 
   &__day {
-    /* Display & Box Model */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,9 +18,10 @@
     height: $day-size;
     border: 1px solid #000;
 
-    /* Other */
     background-color: #eee;
     transition: transform 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
 
     &:hover {
       cursor: pointer;
@@ -35,7 +32,7 @@
 
   &--month {
     @for $num from 28 through 31 {
-      &-#{$num} {
+      &--#{$num} {
         .calendar__day:nth-child(n + #{$num + 1}) {
           display: none;
         }
@@ -45,7 +42,7 @@
 
   &--start {
     @each $day, $num in $week {
-      &-#{$day} {
+      &--#{$day} {
         .calendar__day:first-child {
           margin-left: ($day-size + $gap) * $num;
         }
@@ -57,7 +54,5 @@
 @for $i from 1 through 31 {
   .day-#{$i}::before {
     content: "#{$i}";
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
   }
 }
