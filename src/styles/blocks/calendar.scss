@@ -10,19 +10,6 @@
   flex-wrap: wrap;
   gap: $gap;
 
-  @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length}
-    &__day:nth-child(n + #{$month-length + 1}) {
-      display: none;
-    }
-  }
-
-  @each $day, $num in $days {
-    &--start-day--#{$day} :first-child {
-      margin-left: ($cell-size + $gap) * ($num - 1);
-    }
-  }
-
   &__day {
     box-sizing: border-box;
     width: $cell-size;
@@ -39,15 +26,28 @@
     transition: transform 0.5s ease, background-color 0.5s ease;
     cursor: pointer;
 
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
     @for $num from 1 through 31 {
       &:nth-child(#{$num})::before {
         content: "#{$num}";
       }
     }
+  }
 
-    &:hover {
-      transform: translateY(-20px);
-      background-color: pink;
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length}
+    &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $num in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($cell-size + $gap) * ($num - 1);
     }
   }
 }
