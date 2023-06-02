@@ -1,3 +1,64 @@
+$standart-month: 31;
+
+$month-length: 28;
+$calendar-day-width: 100px;
+
+$calendar-day-height: $calendar-day-width;
+$calendar-width: $calendar-day-width * 7 + 20px;
+$month-length-count: $standart-month - $month-length;
+
+$week: (
+  "mon": 0,
+  "tue": 1 * $calendar-day-width +1px,
+  "wed": 2 * $calendar-day-width +2px,
+  "thu": 3 * $calendar-day-width +3px,
+  "fri": 4 * $calendar-day-width +4px,
+  "sat": 5 * $calendar-day-width +5px,
+  "sun": 6 * $calendar-day-width +6px);
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  padding: 0 10px;
+  width: $calendar-width;
+  flex-wrap: wrap;
+
+  &__day {
+    box-sizing: border-box;
+    width: $calendar-day-width;
+    height: $calendar-day-height;
+    border: 1px solid black;
+    background-color: #eee;
+    text-align: center;
+    line-height: $calendar-day-height;
+    font-size: 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    &:nth-last-child(-n + #{$month-length-count}) {
+      display: none;
+    }
+
+    @for $i from 1 through $month-length {
+      &:nth-child(-#{$month-length}n + #{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}
+
+@each $day, $space in $week {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: $space;
+    }
+  }
 }
