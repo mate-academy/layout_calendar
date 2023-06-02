@@ -1,3 +1,69 @@
+$week: (
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6,
+  "sun": 7
+);
+
+$month-length-modifiers: (
+  28,
+  29,
+  30,
+  31
+);
+
+$day-width: 100px;
+$day-height: 100px;
+$gap: 1px;
+$padding: 10px;
+$background-color-day: #eee;
+$background-color-day-active:pink;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  max-width: (7 * $day-width) + (6 * $gap) + (2 * $padding);
+
+  &__day {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+
+    width: $day-width;
+    height: $day-height;
+    line-height: $day-width;
+
+    background-color: $background-color-day;
+    border: 1px solid black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: $background-color-day-active;
+      transform: translateY(-20px);
+    }
+
+    @each $day, $column in $week {
+      .calendar__day--#{$day} {
+        margin-left: ($column - 1) * ($day-width + $gap);
+      }
+    }
+  }
 }
