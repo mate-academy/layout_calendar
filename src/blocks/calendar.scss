@@ -24,8 +24,6 @@
     @for $item from 1 through 31 {
       &:nth-child(#{$item}):before {
         content: "#{$item}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
       }
     }
   }
@@ -40,7 +38,7 @@
   @each $name, $num in $days {
     &--start-day--#{$name} {
       .calendar__day:first-child {
-        margin-left: ($num) * $day-size + 1px;
+        margin-left: ($day-size + 1px) * $num;
       }
     }
   }
