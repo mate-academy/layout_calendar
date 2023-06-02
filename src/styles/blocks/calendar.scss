@@ -6,16 +6,31 @@
   padding: 30px 10px;
   margin: auto;
 
-  @each $daysCount in $month-length {
-    &--month-length--#{$daysCount} {
-      @for $dayCount from 1 through $daysCount {
-        .calendar__day:nth-child(#{$dayCount}) {
-          display: block;
-          &::before {
-            content: "#{$dayCount}";
-          }
-        }
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid gray;
+    font-size: 30px;
+    display: block;
+    transition-duration: 1000ms;
+    cursor: pointer;
+
+    @for $days from 1 through 31 {
+      &:nth-child(#{$days}):before {
+        content: "#{$days}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
     }
   }
 
@@ -27,29 +42,11 @@
     }
   }
 
-  &__day {
-    position: relative;
-    width: $cell-size;
-    height: $cell-size;
-    box-sizing: border-box;
-    background-color: #eee;
-    border: 1px solid gray;
-    font-size: $cell-size / 4;
-    display: none;
-    transition-duration: 1000ms;
-    cursor: pointer;
-
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-      transform: translateY(-20px);
-      background-color: pink;
+  @for $days from 28 through 31 {
+    &--month-length--#{$days} {
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        opacity: 0;
+      }
     }
   }
 }
-
