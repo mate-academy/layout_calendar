@@ -1,26 +1,29 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  position: relative;
-  max-width: 708px;
-  margin: 40px auto;
-  padding: 10px;
+  gap: $calendar-column-gap;
+  max-width: width(
+    $calendar-cell-size,
+    $calendar-column-gap,
+    $calendar-padding
+  );
+  padding: $calendar-padding;
 
   &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    text-align: center;
 
-    display: block;
-    width: $block-size;
-    height: $block-size;
-    line-height: $block-size;
+    width: $calendar-cell-size;
+    height: $calendar-cell-size;
 
     background-color: #eee;
     border: 1px black solid;
 
     transition-duration: 0.5s;
+    transition-property: transform;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i}):before {
@@ -36,16 +39,16 @@
   }
 
   @for $hide from 28 through 31 {
-    &--month-length--#{$hide}
+    &--month-length-#{$hide}
     .calendar__cell:nth-child(n + #{$hide + 1}) {
       display: none;
     }
   }
 
   @each $day, $distance in $week {
-    &--start-day--#{$day}
+    &--start-day-#{$day}
     .calendar__cell:first-child {
-      margin-left: $block-size * $distance + $distance;
+      margin-left: $calendar-cell-size * $distance + $distance;
     }
   }
 }
