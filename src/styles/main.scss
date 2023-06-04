@@ -1,3 +1,37 @@
-body {
-  margin: 0;
+$dayColor: #eee;
+$daySize : 100px;
+$font: arial;
+$fontSize: 30px;
+$borderSize: 1px;
+$hoverColor: #ffb5b5;
+
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $col in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: $daySize * $col + $col;
+  }
 }
+
+@for $day from 1 through 31 {
+  .calendar :nth-child(n + #{$day})::after {
+    content: "#{$day}";
+  }
+
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-end-#{$day} .calendar__day:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+
+}
+
+@import "./calendar.scss";
