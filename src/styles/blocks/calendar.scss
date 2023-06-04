@@ -1,16 +1,15 @@
 .calendar {
   list-style: none;
-  width: ($sizeSquare * 7 + 10px);
+  width: (($sizeSquare + $borderWeight * 2) * 7 + 10px);
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
 
   &__number {
-    box-sizing: border-box;
     width: $sizeSquare;
     height: $sizeSquare;
     background-color: #eee;
-    border: 1px solid black;
+    border: $borderWeight solid black;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -34,7 +33,7 @@
 @each $start-day, $number-column in $start-days {
   .calendar--start-day--#{$start-day} {
     .calendar__number:nth-child(1) {
-      margin-left: ($number-column * $sizeSquare + $number-column);
+      margin-left: ($number-column * ($sizeSquare + $borderWeight * 2) + $number-column);
     }
   }
 }
