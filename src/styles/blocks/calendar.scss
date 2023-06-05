@@ -5,13 +5,13 @@
   gap: $gap;
 
   @each $day, $distance in $start-day {
-    &.calendar--startday-#{$day} .calendar__element:first-child {
+    &.calendar--startday--#{$day} .calendar__element:first-child {
       margin-left: $block-size * $distance + $distance;
     }
   }
 
   @for $hiden from 28 through 30 {
-    &.calendar--duration-#{$hiden}
+    &.calendar--duration--#{$hiden}
     .calendar__element:nth-child(n + #{$hiden + 1}) {
       display: none;
     }
@@ -28,11 +28,13 @@
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
+    transition: transform 0.5s ease-in-out;
 
     &:hover {
       background: pink;
       cursor: pointer;
       transform: translateY(-20px);
+      transition-duration: 0.5s;
     }
 
     @for $i from 1 through $days-count {
