@@ -1,3 +1,61 @@
+$color-grey: #eee;
+$color-black: #000;
+$color-pink: #ff64c6;
+
+$cell-size: 100px;
+$border-width: 1px;
+$font-size: 30px;
+$padding: 10px;
+$gap: 1px;
+
+$weekdays: mon, tue, wed, thu, fri, sat, sun;
+$month-lengths: 28, 29, 30, 31;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  padding: $padding;
+  max-width: 8 * $cell-size + 2 * $padding + 6 * $border-width;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__day {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    margin: $gap;
+    line-height: $cell-size;
+    font-size: $font-size;
+    background-color: $color-grey;
+    cursor: pointer;
+    border: $border-width solid $color-black;
+    
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: "#{$i}";
+        }
+      }
+    }
+    @each $weekday in $weekdays {
+      &:nth-child(1) {
+        margin-left: 6 * $cell-size + 2 * $padding + 5 * $border-width ;
+      }
+    }
+
+    &:hover {
+      background-color: $color-pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+  }
 }
