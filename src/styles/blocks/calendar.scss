@@ -34,16 +34,16 @@
 
   $WeekDays:
     mon 0,
-    tue $width-gap,
-    wed $width-gap * 2,
-    thu $width-gap * 3,
-    fri $width-gap * 4,
-    sat $width-gap * 5,
-    sun $width-gap * 6;
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
 
-  @each $nameDay, $marginLeft in $WeekDays {
+  @each $nameDay, $index in $WeekDays {
     &--start-day--#{$nameDay} :first-child {
-      margin-left: $marginLeft;
+      margin-left: $index * $width-gap;
     }
   }
 
