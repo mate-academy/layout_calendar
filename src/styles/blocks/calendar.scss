@@ -9,6 +9,12 @@
 
   gap: $gap;
 
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
   &__day {
     display: flex;
     align-items: center;
@@ -48,11 +54,5 @@
         }
       }
     }
-  }
-}
-
-@for $i from 1 through 31 {
-  .day-#{$i}::before {
-    content: "#{$i}";
   }
 }
