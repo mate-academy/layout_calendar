@@ -1,0 +1,58 @@
+$ceil-width: 100px;
+$ceil-height: 100px;
+$days-in-month: 31;
+$padding: 10px;
+$gap: 1px;
+$start-days: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 50px ;
+  gap: $gap;
+  width: ($ceil-width * 7) + $padding;
+  background-color: #e9c6b4;
+
+  &__number {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $ceil-width;
+    height: $ceil-height;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
+
+    @for $i from 1 through $days-in-month {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        color: #000;
+        font-size: 30px;
+      }
+    }
+  }
+
+  @each $start-day, $column in $start-days {
+    &--start-day-#{$start-day} {
+      &:first-child {
+      margin-left: ($ceil-width + $gap) * $column;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      &:not(:nth-child(-n + #{$i})) {
+      opacity: 0;
+      }
+    }
+  }
+}
