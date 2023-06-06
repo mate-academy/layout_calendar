@@ -1,0 +1,56 @@
+@import "../utils/variebles";
+
+body {
+  display: flex;
+  height: $height-container;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: ($width-day * 7) + ($between-gap * 6);
+  margin: auto;
+
+  .day {
+    position: relative;
+    top: 0;
+    transition: top 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $height-day;
+    width: $width-day;
+    border: 1px solid $color-black;
+    background-color: $color-grey;
+    cursor: pointer;
+
+    @each $index, $name in $weekday {
+      @if $index == 2 {
+        &:first-child {
+          margin-left: $shift-day * ($index - 1);
+        }
+      }
+    }
+
+    &:active {
+      background-color: pink;
+      top: -20px;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .day:nth-child(#{$i})::before {
+      content: "#{$i}";
+      font-size: 30px;
+    }
+  }
+
+  @for $i from 31 to 30 {
+    .day:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+
+}
