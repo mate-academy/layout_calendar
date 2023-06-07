@@ -20,12 +20,17 @@
     background-color: #eee;
     font-family: "Arial", "Roboto", sans-serif;
     font-size: 30px;
+    transition: transform 0.5s;
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
 
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition: transform 0.5s;
     }
   }
 
@@ -38,9 +43,6 @@
   @for $n from 1 through 31 {
     &__day:nth-child(#{$n})::before {
       content: "#{$n}";
-      position: absolute;
-      font-family: "Arial", "Roboto", sans-serif;
-      font-size: 30px;
     }
   }
 
