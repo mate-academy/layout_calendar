@@ -14,9 +14,6 @@ body {
   margin: auto;
 
   .day {
-    position: relative;
-    top: 0;
-    transition: top 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,16 +24,21 @@ body {
     cursor: pointer;
 
     @each $index, $name in $weekday {
-      @if $index == 2 {
+      @if $name == "wen" {
         &:first-child {
           margin-left: $shift-day * ($index - 1);
         }
       }
     }
+    &:hover {
+      position: relative;
+      top: 0;
+      transition: top 0.5s ease;
+      background-color: pink;
+    }
 
     &:active {
-      background-color: pink;
-      top: -20px;
+      transform: translate(0, -20px);
     }
   }
 
@@ -47,10 +49,9 @@ body {
     }
   }
 
-  @for $i from 31 to 30 {
-    .day:nth-child(#{$i}) {
+  @for $i from 1 through 2 {
+    .day--last:nth-last-child(#{$i}) {
       display: none;
     }
   }
-
 }
