@@ -1,0 +1,39 @@
+.calendar {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  width: 726px;
+  padding: 10px;
+  gap: 1px;
+  margin: 0 auto;
+  background-color: #a0ff00;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid black;
+    width: $calendar__day--width;
+    height: $calendar__day--height;
+    transition: color 0.5s, transform 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      color: aquamarine;
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}
