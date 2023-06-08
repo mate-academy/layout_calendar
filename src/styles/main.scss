@@ -1,3 +1,48 @@
+$cell-size: 100px;
+
 body {
   margin: 0;
+  background-color: darkslategray;
+}
+
+.calendar {
+  margin: auto;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  width: 720px;
+  gap: 1px;
+
+  &__cell {
+    display: flex;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid;
+    transition-duration: 0.5s;
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  
+    @for $daysCount from 1 through 30 {
+      &:nth-child(#{$daysCount})::before {
+        content: "#{$daysCount}";
+      }
+    }
+  }
+
+  $weekDays: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
+  
+  @each $dayName, $weekDay in $weekDays {
+    &--start-#{$dayName} &__cell:first-child {
+      margin-left: $weekDay*$cell-size+3px*$weekDay;
+    }
+  }
+  @for $index from 28 through 31 {
+    &--days-#{$index} &__cell:not(:nth-child(-n + #{$index})) {
+      opacity: 0;
+    }
+  }
 }
