@@ -3,13 +3,11 @@ $col-count: 7;
 $gap-size: 1px;
 $padding-size: 10px;
 
-body {
-  margin: 0;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  justify-content: start;
+  align-items: center;
   gap: $gap-size;
   width: $col-count * ($cell-size + $gap-size);
   padding: $padding-size;
@@ -57,7 +55,7 @@ body {
     }
   }
 
-  @for $length from 28 through 30 {
+  @for $length from 28 through 31 {
     &--month-length--#{$length} > .calendar__day:nth-child(n+#{$length+1}) {
       display: none;
     }
