@@ -24,7 +24,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - Use properly named variables to make all the calculations more clear./
 - Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values/
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers/
-  - The month should start at the correct column (Monday is the 1st, Friday is the 5th)/
+  - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
   - You can just add correct `margin-left` for the first day/
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)/
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))/
