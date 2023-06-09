@@ -2,11 +2,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
-  width: ($columns * $day_size) + ($gap-size * ($columns - 1)) + 20px;
+  width: ($columns * $day-cell-size) + ($gap-size * ($columns - 1)) + 20px;
   padding: 10px;
 
-  @for $daysnumber from $mindays through $maxdays {
-    &--month-length--#{$daysnumber} :nth-child(n + #{$daysnumber+1}) {
+  @for $daysnumber from $minDays through $maxDays {
+    &--month-length-#{$daysnumber} :nth-child(n + #{$daysnumber+1}) {
       display: none;
     }
   }
@@ -21,20 +21,21 @@
     "sun" 7;
 
   @each $day, $numb in $days-of-week {
-    &--start-day--#{$day} :first-child {
-      margin-left: (($numb - 1) * $day_size) + ($gap-size * $numb - 1);
+    &--start-day-#{$day} :first-child {
+      margin-left: (($numb - 1) * $day-cell-size) + ($gap-size * $numb - 1);
     }
   }
 
-  &__days {
+  &__day {
     position: relative;
-    height: $day-size;
-    width: $day-size;
+    height: $day-cell-size;
+    width: $day-cell-size;
     background-color: $day-color;
     border: 1px solid black;
     transition-duration: 0.5s;
 
     &:hover {
+      cursor: pointer;
       background-color: $hovered-day-color;
       transform: translateY(-20px);
     }
