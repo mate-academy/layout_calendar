@@ -3,22 +3,14 @@
 
 @import "./blocks/reset.scss";
 
-// $week: 
-// 'mon',
-// 'tue',
-// 'wed',
-// 'thu',
-// 'fri',
-// 'sat',
-// 'sun';
-
-$days: 0 "mon",
-  1px "tue",
-  2px "wed",
-  3px "thu",
-  4px "fri",
-  5px "sat",
-  6px "sun";
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sut" 5,
+  "sun" 6;
 
 .calendar {
   display: flex;
@@ -28,17 +20,19 @@ $days: 0 "mon",
   margin: 0 auto;
   box-sizing: border-box;
 
-  @each $i, $day in $days {
-    &--start-day--#{$day} {
-      .calendar__day:nth-child(1) {
-        margin-left: $i * 100 + $i;
+  &--month-length {
+    @for $day from 28 through 31 {
+      &--#{$day}>:nth-child(n + #{$day + 1}) {
+        display: none;
       }
     }
   }
 
-  @for $day from 28 through 31 {
-    &--month-length-#{$day} :nth-child(n + #{$day+ 1}) {
-      display: none;
+  &--start-day {
+    @each $startDay, $startDayNum in $days {
+      &--#{$startDay}>:first-child {
+        margin-left: ($shift + 2) * $startDayNum;
+      }
     }
   }
 
@@ -64,11 +58,9 @@ $days: 0 "mon",
       font-family: $font;
     }
   
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
-        font-size: $mainFontSize;
-        font-family: $font;
+    @for $index from 1 through 31 {
+      &:nth-child(n + #{$index})::before {
+        content: "#{$index}";
       }
     }
   }
