@@ -3,15 +3,6 @@
 
 @import "./blocks/reset.scss";
 
-$days:
-  "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sut" 5,
-  "sun" 6;
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -22,7 +13,7 @@ $days:
 
   &--month-length {
     @for $day from 28 through 31 {
-      &--#{$day}>:nth-child(n + #{$day + 1}) {
+      &-#{$day}>:nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
@@ -30,7 +21,7 @@ $days:
 
   &--start-day {
     @each $startDay, $startDayNum in $days {
-      &--#{$startDay}>:first-child {
+      &-#{$startDay}>:first-child {
         margin-left: ($shift + 2) * $startDayNum;
       }
     }
