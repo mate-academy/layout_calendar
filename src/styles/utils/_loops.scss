@@ -1,0 +1,21 @@
+@for $num-of-days from 28 through 30 {
+  @for $i from ($num-of-days + 1) through 31 {
+    .calendar--month-length--#{$num-of-days} .calendar__day:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
+
+$start-day:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sun" 6;
+
+@each $day-name, $day-number in $start-day {
+  .calendar--start-day--#{$day-name} .calendar__day:first-child {
+    margin-left: ($calendar__day--width + $gap-size) * $day-number;
+  }
+}
