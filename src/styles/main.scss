@@ -1,12 +1,4 @@
-$week: (
-  "mon": 1,
-  "tue": 2,
-  "wed": 3,
-  "thu": 4,
-  "fri": 5,
-  "sat": 6,
-  "sun": 7
-);
+$week: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
 
 $month-length-modifiers: (
   28,
@@ -22,7 +14,6 @@ $padding: 10px;
 $background-color-day: #eee;
 $background-color-day-active:pink;
 
-
 .calendar {
   position: relative;
   display: flex;
@@ -32,9 +23,9 @@ $background-color-day-active:pink;
   padding: $padding;
   max-width: (7 * $day-width) + (6 * $gap) + (2 * $padding);
 
-  @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 1}) {
+  @for $hide from 28 through 31 {
+    &--month-length--#{$hide} {
+      .calendar__day:nth-child(n + #{$hide + 1}) {
         visibility: hidden;
       }
     }
@@ -45,6 +36,7 @@ $background-color-day-active:pink;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     text-align: center;
+    display: block;
 
     width: $day-width;
     height: $day-height;
@@ -65,11 +57,12 @@ $background-color-day-active:pink;
       background-color: $background-color-day-active;
       transform: translateY(-20px);
     }
+  }
 
-    @each $day, $column in $week {
-      .calendar__day--#{$day} {
-        margin-left: ($column - 1) * ($day-width + $gap);
-      }
+  @each $day, $distance in $week {
+    &--start-day--#{$day}
+    .calendar__day:first-child {
+      margin-left: $day-width * $distance + $distance;
     }
   }
 }
