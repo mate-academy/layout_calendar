@@ -6,9 +6,15 @@
   width: ($columns * $cell-size) + ($gap-size * ($columns - 1)) + 20px;
   padding: 10px;
 
+  @for $daysnumber from $mindays through $maxdays {
+    &--month-length-#{$daysnumber} :nth-child(n + #{$daysnumber+1}) {
+      display: none;
+    }
+  }
+
   @each $day, $num in $weekDays {
     &--start-day-#{$day} :first-child {
-      margin-left: ($cell-size + $gap-size) * 6;
+      margin-left: ($cell-size + $gap-size) * $num;
     }
   }
 
