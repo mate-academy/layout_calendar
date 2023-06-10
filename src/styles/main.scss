@@ -1,12 +1,9 @@
-$cell-size: 100px;
-$col-count: 7;
-$gap-size: 1px;
-$padding-size: 10px;
+@import './variables.scss';
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   gap: $gap-size;
   width: $col-count * ($cell-size + $gap-size);
@@ -39,15 +36,6 @@ $padding-size: 10px;
     transform: translateY(-20px);
     transition-duration: 0.5s;
   }
-
-  $weekdays:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $day, $number in $weekdays {
     &--start-day--#{$day} > .calendar__day:first-child {
