@@ -15,13 +15,13 @@
   padding: 10px;
 
   @each $day, $index in $day-of-the-week {
-    &--start-day--#{$day}:first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: ($cell-size + $cell-indent) * $index;
     }
   }
 
   @for $last-day from 28 through 31 {
-    &--month-length--#{$last-day}:nth-child(n + #{$last-day}) {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day + 1}) {
       display: none;
     }
   }
