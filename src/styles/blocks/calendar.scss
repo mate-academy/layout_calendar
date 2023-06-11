@@ -5,7 +5,7 @@
   padding: $calendar-padding;
   width: calendarWidth($size-day, $gap, $calendar-padding);
 
-  &__cells {
+  &__cell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,13 +24,13 @@
   }
 
   @for $i from 1 through 31 {
-    &__cells:nth-child(#{$i})::before {
+    &__cell:nth-child(#{$i})::before {
       content: "#{$i}";
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length--#{$i} &__cells:nth-child(n+ #{$i+1}) {
+    &--month-length--#{$i} &__cell:nth-child(n+ #{$i+1}) {
       display: none;
     }
   }
