@@ -1,0 +1,51 @@
+@import "./variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 7 * ($gap + $day-width);
+  padding: 20px 10px 10px;
+  margin: 0 auto;
+  gap: $gap;
+
+  &__day {
+    box-sizing: border-box;
+    border: 1px solid #000;
+    height: $day-height;
+    width: $day-width;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+
+  @each $number, $day in $days {
+    &--start-day-#{$day} :first-child{
+        margin-left: ($number - 1) * ($gap + $day-width);
+      }
+    }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+        opacity: 0;
+        pointer-events: none;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index}) {
+      &:before {
+        content: "#{$index}";
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+}
