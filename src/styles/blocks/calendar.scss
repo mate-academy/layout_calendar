@@ -1,0 +1,51 @@
+.calendar {
+  margin-inline: auto;
+  padding: 10px;
+  height: 100vh;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: $gap;
+
+  width: $cell-size * 7 + $gap * 6;
+
+  &__cell {
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $cell-size;
+    height: $cell-size;
+
+    border: 1px solid $border-color;
+    background-color: $background-color;
+    cursor: pointer;
+
+    @for $i from 1 through $max-month-lengths {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    @include hover(transform, $hovered-transform, $background-color-hover);
+  }
+
+  /* create month-lengths modifier */
+
+  @for $month-lengths from $min-month-lengths through $max-month-lengths {
+    &--month-length--#{$month-lengths} :nth-child(n + #{$month-lengths + 1 }) {
+      display: none;
+    }
+  }
+
+  /* create start-day modifier */
+
+  @each $day, $index in $week-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($cell-size + $gap) * ($index - 1);
+    }
+  }
+}
