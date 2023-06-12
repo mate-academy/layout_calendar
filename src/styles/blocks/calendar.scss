@@ -1,7 +1,6 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   max-width: $max-width;
   padding: 20px 10px;
   gap: 1px;
@@ -19,11 +18,12 @@
     font-size: 30px;
     line-height: $standart-size;
     text-align: center;
+    cursor: pointer;
 
-    transition-duration: 0.5s;
+    transition: transform 0.5s,
+      background-image 0.5s;
 
     &:hover {
-      cursor: pointer;
       transform: translateY(-20px);
       background-image: linear-gradient(to bottom,
       rgba(127, 86, 92, 0.5), pink, rgb(141, 89, 97, 0.5));
@@ -37,13 +37,13 @@
   }
 
   @each $day, $column in $week {
-    &--start--day--#{$day} .calendar__day:first-child {
+    &--start-day--#{$day} .calendar__day:first-child {
       margin-left: $standart-size * $column + $column;
     }
   }
 
   @for $month-length from 28 through 31 {
-    &--month--length--#{$month-length}
+    &--month-length--#{$month-length}
     .calendar__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
