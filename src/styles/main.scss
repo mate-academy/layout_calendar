@@ -6,7 +6,7 @@ $padding: 10px;
 $gap: 1px;
 $animation-duration: 0.5s;
 
-body{
+body {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,11 +49,10 @@ body{
 $weekdays: mon, tue, wed, thu, fri, sat, sun;
 
 @each $day in $weekdays {
-  .calendar--start-#{$day} {
-    margin-left: calc(6 * #{$cell-size} + 5 * #{$gap} + #{$padding});
+  .calendar--start-#{$day} .calendar__day:first-child {
+    margin-left: calc(6 * #{$cell-size} + 6 * #{$gap} + #{$padding});
   }
 }
-
 
 @for $length from 28 through 31 {
   .calendar--month-length-#{$length} {
