@@ -8,7 +8,6 @@
   flex-wrap: wrap;
   gap: $gap;
   width: calendarWidth($colCount, $itemPadding, $itemWidth, $gap);
-  margin: 0 auto;
   box-sizing: border-box;
 
   &--month-length {
@@ -22,7 +21,7 @@
   &--start-day {
     @each $startDay, $startDayNum in $days {
       &-#{$startDay}>:first-child {
-        margin-left: ($shift + 2) * $startDayNum;
+        margin-left: ($shift + $gap) * $startDayNum;
       }
     }
   }
