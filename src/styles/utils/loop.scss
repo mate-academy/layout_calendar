@@ -1,0 +1,18 @@
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: "#{$day}";
+  }
+}
+
+@each $day, $column in $weekdays {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $cell-size;
+  }
+}
+
+@for $month-length from 28 through 31 {
+  .calendar--month-length-#{$month-length}
+    .calendar__day:nth-child(n + #{$month-length + 1}) {
+    display: none;
+  }
+}
