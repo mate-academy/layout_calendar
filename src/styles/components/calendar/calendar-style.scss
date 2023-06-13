@@ -3,27 +3,30 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: auto;
-  gap: $days-gap;
+  margin: $calendar-margin;
+  gap: $calendar-days-gap;
   width: $calendar-width;
   padding: $calendar-padding;
 
   &__day {
     box-sizing: border-box;
-    border: $days-border;
-    background-color: $days-background;
-    width: $day-size;
-    height: $day-size;
+    border: $calendar-days-border;
+    cursor: pointer;
+    background-color: $calendar-days-background;
+    width: $calendar-day-size;
+    height: $calendar-day-size;
     text-align: center;
-    font-size: $days-font-size;
-    line-height: $day-size;
-    transition-duration: 0.5s;
+    font-size: $calendar-days-font-size;
+    line-height: $calendar-day-size;
+    transition:
+      background-color $calendar-days-transition-duration,
+      transform $calendar-days-transition-duration,
+      font-weight $calendar-days-transition-duration;
 
     &:hover {
-      cursor: pointer;
-      background-color: $days-background-hover;
-      transform: translateY(-20px);
-      font-weight: bold;
+      background-color: $calendar-days-background-hover;
+      transform: $calendar-days-hover-transform;
+      font-weight: $calendar-days-on-hover-fw;
     }
 
     @for $day from 1 through 31 {
@@ -42,10 +45,10 @@
     }
   }
 
-  @each $start-day, $num-start-day in $start-day {
+  @each $start-day, $num-start-day in $calendar-start-days {
     &--start-day-#{$start-day}
     &__day:first-child {
-      margin-left: $day-size-with-gap * $num-start-day;
+      margin-left: $calendar-day-size-with-gap * $num-start-day;
     }
   }
 }
