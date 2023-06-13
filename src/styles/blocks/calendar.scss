@@ -3,20 +3,22 @@
   flex-wrap: wrap;
   max-width: $max-width;
   padding: 20px 10px;
+  margin: auto;
   gap: 1px;
+  transition: all 0.5s;
 
   &__day {
     display: block;
     box-sizing: border-box;
-    height: $standart-size;
-    width: $standart-size;
+    height: $standard-size;
+    width: $standard-size;
     border: 1px solid #000;
     background-image: linear-gradient(to bottom,
     rgba(156, 154, 154, 0.7), #fff, rgb(156, 156, 156, 0.9));
 
-    font-style: arial, sans-serif;
+    font-family: arial, sans-serif;
     font-size: 30px;
-    line-height: $standart-size;
+    line-height: $standard-size;
     text-align: center;
     cursor: pointer;
 
@@ -27,6 +29,7 @@
       transform: translateY(-20px);
       background-image: linear-gradient(to bottom,
       rgba(127, 86, 92, 0.5), pink, rgb(141, 89, 97, 0.5));
+      transition: all 0.5s;
     }
   }
 
@@ -37,13 +40,13 @@
   }
 
   @each $day, $column in $week {
-    &--start-day--#{$day} .calendar__day:first-child {
-      margin-left: $standart-size * $column + $column;
+    &__start-day--#{$day} .calendar__day:first-child {
+      margin-left: $standard-size * $column + $column;
     }
   }
 
   @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length}
+    &__month-length--#{$month-length}
     .calendar__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
