@@ -1,0 +1,57 @@
+@import "../utils/variebles";
+
+body {
+  display: flex;
+  height: $height-container;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: ($width-day * 7) + ($between-gap * 6);
+  margin: auto;
+
+  @each $index, $name in $weekday {
+    &--start-day--#{$name} .day:first-child {
+      margin-left: $shift-day * ($index - 1);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &--last-day--#{$i} .day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $height-day;
+    width: $width-day;
+    border: 1px solid $color-black;
+    background-color: $color-grey;
+    cursor: pointer;
+
+    &:hover {
+      position: relative;
+      top: 0;
+      transition: top 0.5s ease,
+        transform 0.5s ease;
+      background-color: pink;
+    }
+
+    &:active {
+      transform: translate(0, -20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+      }
+    }
+  }
+}
