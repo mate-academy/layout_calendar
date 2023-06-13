@@ -3,19 +3,19 @@
 .calendar {
   width: 727px;
   display: flex;
-  gap: 1px;
+  gap: $calendar-cell-gap;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 20px;
 
   &--start-day {
     $start-days:
-      "mon" 0 * $day-width,
-      "tue" 1 * $day-width,
-      "wed" 2 * $day-width,
-      "thu" 3 * $day-width,
-      "fri" 4 * $day-width,
-      "sat" 5 * $day-width,
-      "sun" 6 * $day-width;
+      "mon" 0 * ($calendar-cell-width + $calendar-cell-gap),
+      "tue" 1 * ($calendar-cell-width + $calendar-cell-gap),
+      "wed" 2 * ($calendar-cell-width + $calendar-cell-gap),
+      "thu" 3 * ($calendar-cell-width + $calendar-cell-gap),
+      "fri" 4 * ($calendar-cell-width + $calendar-cell-gap),
+      "sat" 5 * ($calendar-cell-width + $calendar-cell-gap),
+      "sun" 6 * ($calendar-cell-width + $calendar-cell-gap);
 
     @each $day, $start-day in $start-days {
       &--#{$day} {
@@ -27,18 +27,18 @@
   &__day {
     background-color: grey;
     box-sizing: border-box;
-    height: $day-height;
-    width: 100px;
+    height: $calendar-cell-height;
+    width: $calendar-cell-width;
     text-align: center;
     font-size: 30px;
-    line-height: $day-height;
+    line-height: $calendar-cell-height;
     border: solid 1px black;
 
     &:hover {
       background-color: pink;
       cursor: pointer;
       position: relative;
-      bottom: 10px;
+      bottom: 20px;
     }
   }
 }
@@ -46,5 +46,11 @@
 @for $index from 28 through 31 {
   .calendar--month-length--#{$index} div:nth-child(n + #{$index + 1}) {
     visibility: hidden;
+  }
+}
+
+@for $index from 1 through 31 {
+  div:nth-child(#{$index})::before {
+    content: "#{$index}";
   }
 }
