@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: $gapBetweenCell;
   padding: 10px;
-  width: $cellSize * 7 + $gapBetweenCell * 6;
+  width: $width;
 
   &__day {
     display: flex;
@@ -12,14 +12,13 @@
 
     height: $cellSize;
     width: $cellSize;
-    box-sizing: border-box;
     border: 1px solid #000;
     background-color: #eee;
-
-    transition: transform 0.5s;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    // transition: transform 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
@@ -32,8 +31,8 @@
     }
   }
 
-  @for $hiddenDays from 28 through $monthLength {
-    &--month-length--#{$hiddenDays} :nth-child(n + #{$hiddenDays + 1}) {
+  @for $hiddenDays from 1 through $monthLength {
+    &--month-length--#{$hiddenDays} &__day:nth-child(n + #{$hiddenDays + 1}) {
       display: none;
     }
   }
