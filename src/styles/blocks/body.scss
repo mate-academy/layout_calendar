@@ -6,12 +6,24 @@ body {
   font-family: Arial, sans-serif;
 }
 
-.container {
+.calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   width: ($width-day * 7) + ($between-gap * 6);
   margin: auto;
+
+  @each $index, $name in $weekday {
+    &--start-day--#{$name} .day:first-child {
+      margin-left: $shift-day * ($index - 1);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &--last-day--#{$i} .day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 
   .day {
     display: flex;
@@ -23,35 +35,23 @@ body {
     background-color: $color-grey;
     cursor: pointer;
 
-    @each $index, $name in $weekday {
-      @if $name == "wen" {
-        &:first-child {
-          margin-left: $shift-day * ($index - 1);
-        }
-      }
-    }
     &:hover {
       position: relative;
       top: 0;
-      transition: top 0.5s ease;
+      transition: top 0.5s ease,
+        transform 0.5s ease;
       background-color: pink;
     }
 
     &:active {
       transform: translate(0, -20px);
     }
-  }
 
-  @for $i from 1 through 31 {
-    .day:nth-child(#{$i})::before {
-      content: "#{$i}";
-      font-size: 30px;
-    }
-  }
-
-  @for $i from 1 through 2 {
-    .day--last:nth-last-child(#{$i}) {
-      display: none;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+      }
     }
   }
 }
