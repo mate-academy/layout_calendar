@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -5,7 +9,6 @@ body {
 }
 
 .calendar {
-  box-sizing: border-box;
   gap: 1px;
   width: 726px;
   display: flex;
@@ -21,10 +24,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-
-    &:first-child {
-      margin-left: 606px;
-    }
+    transition: 500ms;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day}) {
@@ -34,11 +34,31 @@ body {
       }
     }
 
-    transition: 500ms;
     &:hover {
       background-color: pink;
       cursor: pointer;
       transform: translateY(-20px);
     }
+
+    $start-day-values:
+      mon 6px,
+      tue 106px,
+      wed 206px,
+      thu 306px,
+      fri 406px,
+      sat 506px,
+      sun 606px;
+
+    @each $day, $value in $start-day-values {
+      .start-day--#{$day} :first-child {
+        margin-left: 100px;
+      }
+    }
   }
-}
+
+  @for $calendar-length from 28 through 31 {
+    .calendar-length--#{$calendar-length} {
+      display: none;
+    }
+  }
+} 
