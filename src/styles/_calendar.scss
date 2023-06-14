@@ -3,12 +3,22 @@
   flex-wrap: wrap;
   gap: 1px;
   width: 7 * $square_side + 2 * $calendar_side_padding + 6 * $gap;
+  margin: 0 auto;
   padding: 30px $calendar_side_padding;
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
+      }
+    }
+  }
+
+  @each $name,
+    $day in $start-day {
+    &--start-day--#{$name} {
+      .calendar__day:first-child {
+        margin-left: $day * 101px;
       }
     }
   }
