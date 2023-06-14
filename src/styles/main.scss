@@ -1,3 +1,27 @@
 body {
   margin: 0;
 }
+
+.calendar {
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+@for $block from 1 through 30 {
+  .calendar__day:nth-child(#{$block})::before {
+    content: "#{$block}";
+  }
+}
+
+@for $block from 1 through 30 {
+  .calendar__day {
+    display: inline-block;
+    gap: 1;
+    background-color: #eee;
+    color: #eee;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+  }
+}
