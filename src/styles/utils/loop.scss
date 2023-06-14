@@ -5,14 +5,15 @@
 }
 
 @each $day, $column in $weekdays {
-  .calendar--start-day--#{$day} .calendar__day:first-child {
-    margin-left: $cell-size - $column;
+  .calendar--start-day--#{$day} :nth-child(1) {
+    margin-left: ($cell-size + $gap) * $column;
   }
 }
 
 @for $month-length from 28 through 31 {
-  .calendar--month-length-#{$month-length}
+  .calendar--month-length-#{$month-length} {
     .calendar__day:nth-child(n + #{$month-length + 1}) {
-    display: none;
+      display: none;
+    }
   }
 }
