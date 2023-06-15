@@ -29,7 +29,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: $calendarMaxWidth;
-  margin: 100px;
+  margin: auto;
   padding: $calendarPadding;
 
   gap: $calendarGap;
@@ -55,23 +55,23 @@ body {
       color: $c-black;
     }
   }
-}
 
-@for $index from 1 through 31 {
-  .calendar__day:nth-child(#{$index})::before {
-    content: "#{$index}"
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}"
+    }
   }
-}
 
-@for $day from 28 through 31 {
-  .calendar--month-length--#{$day} :nth-child(n + #{$day + 1}) {
-    display: none;
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
   }
-}
 
-@each $day, $shift in $daysInWeek {
-  .calendar--start-day--#{$day}
-  .calendar__day:first-child {
-    margin-left: $shift;
+  @each $day, $shift in $daysInWeek {
+    &--start-day--#{$day}
+    &__day:first-child {
+      margin-left: $shift;
+    }
   }
 }
