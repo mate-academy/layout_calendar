@@ -3,26 +3,38 @@ body {
 }
 
 .calendar {
-  max-width: 100%;
+  gap: 1px;
+  width: 750px;
+  margin: 0 auto;
+  flex-wrap: wrap;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
-@for $block from 1 through 30 {
+.calendar__day {
+  background-color: #eee;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+@for $block from 1 through 31 {
   .calendar__day:nth-child(#{$block})::before {
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
     content: "#{$block}";
   }
 }
 
-@for $block from 1 through 30 {
-  .calendar__day {
-    display: inline-block;
-    gap: 1;
-    background-color: #eee;
-    color: #eee;
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-  }
-}
+// @for $block from 1 through 31 {
+//   .calendar__day {
+//     background-color: #eee;
+//     color: #eee;
+//     width: 100px;
+//     height: 100px;
+//     border: 1px solid black;
+//   }
+// }
