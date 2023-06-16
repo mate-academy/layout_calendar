@@ -1,9 +1,12 @@
+$cell-size: 100px;
+$gap: 1px;
+
 body {
   margin: 0;
 }
 
 .calendar {
-  gap: 1px;
+  gap: $gap;
   width: 750px;
   margin: 0 auto;
   flex-wrap: wrap;
@@ -32,9 +35,9 @@ body {
 
 $days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
 
-@each $start-day in $days {
-  .calendar--start-day--#{$start-day} .calendar__day:first-child {
-    margin-left: 101px;
+@each $day, $value in $days {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: ($cell-size + $gap) * $value;
   }
 }
 
