@@ -39,26 +39,27 @@ body {
       cursor: pointer;
       transform: translateY(-20px);
     }
-
-    $start-day-values:
-      mon 6px,
-      tue 106px,
-      wed 206px,
-      thu 306px,
-      fri 406px,
-      sat 506px,
-      sun 606px;
-
-    @each $day, $value in $start-day-values {
-      .start-day--#{$day} :first-child {
-        margin-left: 100px;
-      }
-    }
   }
+}
 
-  @for $calendar-length from 28 through 31 {
-    .calendar-length--#{$calendar-length} {
-      display: none;
-    }
+$start-day-values:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day, $value in $start-day-values {
+  .calendar--start-day--#{$day} .calendar__day:first-child {
+    margin-left: $value;
   }
-} 
+}
+
+@for $calendar-length from 28 through 31 {
+  .calendar.calendar-length--#{$calendar-length}
+  .calendar__day:nth-child(n + #{$calendar-length + 1}) {
+    display: none;
+  }
+}
