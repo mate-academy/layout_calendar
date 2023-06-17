@@ -1,3 +1,54 @@
-body {
-  margin: 0;
+@import "./variables.scss";
+@import "./reset.scss";
+@import "./functions.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: widthCalendar($cell-width, $cell-gap, $cell-padding, 7);
+  gap: $cell-gap;
+  padding: $cell-padding;
+
+  $start-days:
+    mon 1,
+    tue 2,
+    wed 3,
+    thu 4,
+    fri 5,
+    sat 6,
+    sun 7;
+    @each $day, $column in  $start-days{
+      &--start-day--#{$day} :first-child {
+        margin-left: startDayShift($cell-width, $cell-gap, $column)};
+      }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i+1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $cell-width;
+    height: $cell-heidth;
+    border: 1px solid #000;
+    background-color: #eee;
+    font: 30px Arial;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-of-type(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
 }
