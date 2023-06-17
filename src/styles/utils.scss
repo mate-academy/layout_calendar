@@ -1,0 +1,21 @@
+@for $days from 1 through $days-in-month {
+  .day:nth-child(#{$days})::before {
+    content: "#{$days}";
+
+    display: block;
+    box-sizing: border-box;
+    height: $box-size;
+    width: $box-size;
+    border: $gap-between-boxes solid #000;
+  }
+}
+
+@each $day-of-week, $margin-left in $start-day {
+  .start-day--#{$day-of-week} {
+    .day:first-child {
+      margin-left: $margin-left;
+    }
+  }
+}
+
+
