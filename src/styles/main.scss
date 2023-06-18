@@ -1,3 +1,13 @@
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+);
+
 $body-color: #000;
 
 body {
@@ -36,6 +46,12 @@ body {
       background-color: #faa;
     }
 
+    @for $length from 28 through 31 {
+      .calendar.length-#{$length} {
+        grid-column-end: span #{$length};
+      }
+    }
+
     @for $day from 1 through 31 {
       &:nth-child(#{$day}) {
         &::before {
@@ -49,31 +65,16 @@ body {
       }
     }
 
-    &.mon {
-      grid-column-start: 1;
-    }
-    &.tue {
-      grid-column-start: 2;
-    }
-    &.wed {
-      grid-column-start: 3;
-    }
-    &.thu {
-      grid-column-start: 4;
-    }
-    &.fri {
-      grid-column-start: 5;
-    }
-    &.sat {
-      grid-column-start: 6;
-    }
-    &.sun {
-      grid-column-start: 7;
-    }
 
     @for $length from 28 through 31 {
       &.length-#{$length} {
-        grid-column-end: span #{$length};
+        grid-template-columns: repeat(#{$length}, 1fr);
+
+        @for $day from 1 through $length {
+          .calendar__day:nth-child(#{$day})::before {
+            content: "#{$day}"; 
+          }
+        }
       }
     }
   }
