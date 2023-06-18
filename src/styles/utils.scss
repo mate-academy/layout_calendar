@@ -1,0 +1,29 @@
+@for $days from 1 through 31 {
+  .calendar__day:nth-child(#{$days})::before {
+    content: "#{$days}";
+
+    display: block;
+    box-sizing: border-box;
+    height: $box-size;
+    width: $box-size;
+    border: $gap-between-boxes solid #000;
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .calendar--month-length--#{$last-day} {
+    @for $last-day from $last-day through 31 {
+      .calendar__day:nth-child(#{$last-day+1})::before {
+        display: none;
+      }
+    }
+  }
+}
+
+@each $day-of-week, $margin-left in $start-day {
+  .calendar--start-day--#{$day-of-week} {
+    .calendar__day:first-child {
+      margin-left: $margin-left;
+    }
+  }
+}
