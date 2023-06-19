@@ -15,7 +15,7 @@ body {
 
 .calendar {
   gap: $gap;
-  width: 750px;
+  width: ($cell-size * 7) + ($gap * 6) + 10px;
   margin: 0 auto;
   flex-wrap: wrap;
   display: flex;
@@ -55,9 +55,9 @@ body {
     }
   }
 
-  @for $lenght from 28 through 31 {
-    .calendar—month-length-#{$lenght} &__day:nth-child(n + #{$lenght + 1}) {
-      content: #{$lenght};
+  @for $length from 28 through 31 {
+    .calendar—month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 }
