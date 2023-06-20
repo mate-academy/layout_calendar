@@ -42,13 +42,13 @@ body {
 
   @each $modifier in $start-day-week {
     &--start-#{$modifier} &__day:first-child {
-      margin-left: ($daySize + 2px) * index($start-day-week, $modifier);
+      margin-left: ($daySize + 3px) * index($start-day-week, $modifier) - 1;
     }
   }
 
   @for $index from 28 through $month-length {
     &--month-length-#{$index}
-    &__day:nth-child(n + #{$index}) {
+    &__day:nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
