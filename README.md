@@ -3,8 +3,6 @@ Replace `<your_account>` with your Github username and copy the links to Pull Re
 - [DEMO LINK](https://oshapkun.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://oshapkun.github.io/layout_calendar/report/html_report/)
 
-___
-> Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
