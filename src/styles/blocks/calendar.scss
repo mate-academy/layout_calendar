@@ -1,11 +1,11 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $calendar-gap;
-  padding: $calendar-padding;
-  // Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
-  max-width: ($day-size + $calendar-gap + 2) * $calendar-columns + 10;
+  justify-content: center;
   margin: 0 auto;
+  padding-top: 20px;
+  gap: $calendar-gap;
+  max-width: ($day-size + $calendar-gap) * 7 + 20px;
 
   &__day {
     width: $day-size;
@@ -17,7 +17,7 @@
     font-family: $font-family;
     font-size: $font-size;
     cursor: pointer;
-    transition: transform $animation-duration;
+    transition: all $animation-duration;
 
     &::before {
       content: "";
@@ -27,27 +27,27 @@
       background-color: green;
       transform: $hovered-cell-transform;
     }
-
-    @for $count from 1 through 31 {
-      &:nth-child(#{$count})::before {
-        content: "#{$count}";
-      }
-    }
-
   }
 
-  @each $count, $column in $days {
-    &__start-day--#{$count} .calendar__day:first-child {
-      margin-left: $day-size * $column + $column;
+  @for $count from 1 through 31 {
+    .calendar__day:nth-child(#{$count})::before {
+      content: "#{$count}";
+    }
+  }
+
+  @each $day, $column in $start-day-map {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: (($day-size + $calendar-gap) * $column);
+      }
     }
   }
 
   @for $count from 28 through 31 {
-    &--month-length-#{$count} &__day:nth-child(n+#{$count + 1}) {
-      display: none;
+    &--month-length-#{$count} {
+      .calendar__day:nth-child(n+#{$count + 1}) {
+        display: none;
+      }
     }
   }
-
 }
-
-
