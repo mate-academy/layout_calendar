@@ -1,15 +1,14 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  margin: 0 auto;
-  padding-top: 20px;
+  margin: 40px auto;
   gap: $calendar-gap;
-  max-width: ($day-size + $calendar-gap) * 7 + 20px;
+  max-width: ($day-size * 7) + ($calendar-gap * 7 - 1);
 
   &__day {
     width: $day-size;
     height: $day-size;
+    box-sizing: border-box;
     border: 1px solid black;
     background-color: $background-color;
     text-align: center;
@@ -34,20 +33,20 @@
       content: "#{$count}";
     }
   }
+}
 
-  @each $day, $column in $start-day-map {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: (($day-size + $calendar-gap) * $column);
-      }
+@each $day, $start in $start-day-map {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($start - 1) * ($day-size+ 1px);
     }
   }
+}
 
-  @for $count from 28 through 31 {
-    &--month-length-#{$count} {
-      .calendar__day:nth-child(n+#{$count + 1}) {
-        display: none;
-      }
+@for $day from 28 through 31 {
+  .calendar--month-length--#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 }
