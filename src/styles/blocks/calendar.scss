@@ -19,7 +19,6 @@
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: "#{$day}";
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
     }
@@ -31,13 +30,13 @@
   }
 
   @each $dayOfTheWeek,$count in $daysOfTheWeek {
-    &--start-day--#{$dayOfTheWeek} &__day:first-child {
+    &__start-day--#{$dayOfTheWeek} &__day:first-child {
       margin-left: startDayMargin($count);
     }
   }
 
   @for $day from 28 through 31 {
-    &--month-length--#{$day} &__day:nth-child(n + #{$day + 1}) {
+    &__month-length--#{$day} &__day:nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
