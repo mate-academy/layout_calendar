@@ -7,7 +7,8 @@
   width: $calendar-width;
   gap: $gap;
 
-  @each $num, $day in $week {
+  @each $num,
+  $day in $week {
     &--start-day--#{$day} :first-child {
       margin-left: ($num - 1)*($cell-size+$gap);
     }
@@ -22,13 +23,15 @@
   &__cell {
     @include cellSize($cell-size);
 
-    border: 1px solid black;
-    background: #eee;
+    border: 1px solid $borderColor;
+    background: $cellColor;
     font-size: 30px;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: transform 0.5s ease-in-out;
 
     @for $i from 1 through $totalDays {
       &:nth-child(#{$i})::before {
@@ -37,10 +40,9 @@
     }
 
     &:hover {
-      background: pink;
+      background: $hoverColor;
       cursor: pointer;
       transform: translateY(-20px);
-      transition: transform 0.5s;
     }
   }
 }
