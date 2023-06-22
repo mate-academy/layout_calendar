@@ -1,0 +1,46 @@
+@import "../utils/variables";
+@import "../utils/mixin.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $gap;
+
+  @each $num, $day in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($num - 1)*($cell-size+$gap);
+    }
+  }
+
+  @for $i from 28 through $totalDays {
+    &--month-length--#{$i} :nth-child(n + #{$i+1}) {
+      visibility: hidden;
+    }
+  }
+
+  &__cell {
+    @include cellSize($cell-size);
+
+    border: 1px solid black;
+    background: #eee;
+    font-size: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 1 through $totalDays {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: transform 0.5s;
+    }
+  }
+}
