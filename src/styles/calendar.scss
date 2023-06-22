@@ -6,6 +6,7 @@
   padding: 10px;
   gap: 1px;
   max-width: $row;
+
   &__day {
     @include center;
     background-color: #000;
@@ -14,13 +15,14 @@
     height: $dayHeight;
     border: 1px solid #000;
     transition: transform 0.5s;
+
     &:hover {
       cursor:pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
   }
-  @for $day from 1 to 32 {
+  @for $day from 1 through 31 {
     &__day:nth-child(#{$day}):before {
       content: '#{$day}';
       font-family: 'Arial';
@@ -33,7 +35,7 @@
       margin-left: $index * ($dayWidth +1);
     }
   }
-  
+
   @for $day from 1 to 31 {
     &--months-length--#{$day} > :nth-child(n + #{$day + 1}){
       visibility: hidden;
