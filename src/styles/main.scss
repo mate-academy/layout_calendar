@@ -40,9 +40,9 @@ body {
     }
   }
 
-  @each $modifier in $start-day-week {
-    &--start-#{$modifier} &__day:first-child {
-      margin-left: ($daySize + 3px) * index($start-day-week, $modifier) - 1;
+  @each $number, $day in $start-day-week {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($daySize + $dayGap) * ($number - 1);
     }
   }
 
@@ -53,4 +53,3 @@ body {
     }
   }
 }
-   
