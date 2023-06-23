@@ -1,0 +1,71 @@
+.calendar {
+  width: calendarSize($cell-size, $margin-calendar);
+  margin: 0 $margin-calendar;
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $between-col-gap;
+  }
+
+  &__day-name {
+    position: relative;
+    background-color: yellowgreen;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @each $day, $index in $days {
+      &:nth-child(#{$index})::after {
+        content: "#{$day}";
+        position: absolute;
+      }
+    }
+  }
+
+  &__number {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $between-col-gap;
+
+    @each $day, $index in $days {
+      &-start--#{$day} &-day:first-child {
+        margin-left: $cell-size * ($index - 1) +
+          $between-col-gap * ($index - 1);
+      }
+    }
+
+    @for $index from 28 through $amount-days {
+      &-days--month-length--#{$index} &-day:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__number-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid #000;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: pink;
+    }
+
+    @for $index from 1 through $amount-days {
+      &:nth-child(#{$index})::before {
+        position: absolute;
+        content: "#{$index}";
+      }
+    }
+  }
+}
