@@ -1,44 +1,13 @@
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
 }
 
 * {
   box-sizing: border-box;
-}
-
-.calendar {
-  font-family: Arial, Helvetica, sans-serif;
-
-  @each $day in $weekDays {
-    &--start-day-#{$day}:first-child {
-      margin-left: $day-side*7-$day-side;
-    }
-  }
-
-  &__day {
-    height: $day-side;
-    width: $day-side;
-    border-color: #eee;
-    border: 1px solid black;
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
-      }
-    }
-  }
-
-  &__container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1px;
-    width: $day-side * 7 + 10px;
-   }
 }
 
 
