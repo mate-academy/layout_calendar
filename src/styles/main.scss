@@ -1,3 +1,63 @@
+$sell-size: 100px;
+$gap: 1px;
+$day-padding: 10px;
+
+$month-start-day: 1 mon, 2 tue, 3 wed, 4 thu, 5 fri, 6 sat, 7 sun;
+
+html {
+  font-family: "Arial";
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+}
+
+@function width($width, $day-padding) {
+  @return $gap + ($width * 7) + 2 * $day-padding;
+}
+
+.calendar {
+  width: width($sell-size, $day-padding);
+  padding-top: 20px;
+  display: flex;
+  margin: 35px auto;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $sell-size;
+    height: $sell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    transition-duration: 0.5s;
+  }
+
+  &-day:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &-day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  @each $number, $day in $month-start-day {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($sell-size + 3px) * ($number - 1);
+    }
+  }
+
+  @for $index from 29 through 31 {
+    &--month-length-#{$index}
+    &-day:nth-child( n + #{$index + 1}) {
+      display: none;
+    }
+  }
 }
