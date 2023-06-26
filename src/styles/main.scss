@@ -8,9 +8,9 @@ body {
   margin: auto;
   display: flex;
   flex-wrap: wrap;
-  width: $cell-size * 7+20;
-  gap: 1px;
-  padding: 10px;
+  width: ($cell-size * $col-count) + $padding * 3;
+  gap: $gap;
+  padding: $padding;
 
   &__day {
     display: flex;
@@ -21,6 +21,7 @@ body {
 
     @for $daysCount from 1 through 31 {
       &:nth-child(#{$daysCount})::before {
+        font-family: Arial, Helvetica, sans-serif;
         margin: auto;
         content: "#{$daysCount}";
       }
@@ -34,10 +35,10 @@ body {
     background-color: pink;
   }
 
-  @each $week-day, $position, $margin in $start-day {
+  @each $week-day, $position in $start-day {
     &--start-day--#{$week-day} {
       .calendar__day:first-child {
-        margin-left: $cell-size * $position + $margin;
+        margin-left: $cell-size * $position + $position;
       }
     }
   }
