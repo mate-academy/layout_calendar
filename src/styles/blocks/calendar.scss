@@ -1,21 +1,21 @@
 .calendar {
   position: relative;
   width: 7 * $item-size+7px;
-  border: 1px solid #000;
+  padding-top: 20px;
 
-    display: flex;
-    gap: 1px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
 
-    $dayNames: mon 0, tue 101px, wen 202px, thu 303px, fri 404px, sut 505px, sun 606px;
+  $dayNames: mon 0, tue 101px, wen 202px, thu 303px, fri 404px, sut 505px, sun 606px;
 
-    @each $dayName, $length in $dayNames {
-      &--start-day--#{$dayName} {
-        .calendar__item:first-child {
-          margin-left: $length;
-        }
+  @each $dayName, $length in $dayNames {
+    &--start-day--#{$dayName} {
+      .calendar__item:first-child {
+        margin-left: $length;
       }
     }
+  }
 
   &__item {
     position: relative;
@@ -36,15 +36,10 @@
         color: #000;
         font-size: 30px;
         font-family: Arial, Helvetica, sans-serif;
-
       }
      }
     }
 
-    &:hover {
-      cursor: pointer;
-      background-color: #ffc0cb;
-      transform: translateY(-20px);
-    }
+    @include hover (transform,translateY(-20px)) ;
   }
 }
