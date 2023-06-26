@@ -1,0 +1,28 @@
+.calendar {
+  width: &$week-size * $day-size;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 100px 10px;
+  gap: 1px;
+
+$weekdays:
+"mon" 1,
+"tue" 2,
+"wed" 3,
+"thu" 4,
+"fri" 5,
+"sat" 6,
+"sun" 7;
+
+@each $day, $col in $weekdays {
+  &--start-day--#{$day} :first-child {
+    margin-left: $day-size * ($col - 1) + (($col - 1) * 1px);
+   }
+  }
+
+@each $day in 28, 29, 30, 31 {
+  &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+    display: none;
+    }
+  }
+}
