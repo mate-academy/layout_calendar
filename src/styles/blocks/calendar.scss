@@ -1,0 +1,35 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+
+  width: 7 * $cell-size + 10 * $cell-gap;
+
+  &__cell {
+    @include square ($cell-size);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform $transitionDuration ease;
+
+    border: $cell-border;
+
+    background-color: $cell-color;
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: $hover-color;
+    }
+
+    &::before {
+      color: $c-black;
+    }
+  }
+}
+
+.calendar--start-day--wed .easter-egg:hover {
+  background-image: url(/images/mydudes.jpg);
+}

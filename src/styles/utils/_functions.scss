@@ -1,0 +1,18 @@
+@for $date from 1 through 31 {
+  .calendar__cell:nth-child(#{$date})::before {
+    content: "#{$date}";
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length--#{$day}
+  :nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $distance in $start-day {
+  .calendar--start-day--#{$day} .calendar__cell:first-child {
+    margin-left: $distance;
+  }
+}
