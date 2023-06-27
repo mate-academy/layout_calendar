@@ -1,0 +1,35 @@
+.calendar {
+  gap: $gap;
+  width: ($cell-size * 7) + ($gap * 6) + 10px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+
+  &__day {
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    transition-duration: 500ms;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition-duration: 500ms;
+    }
+  }
+
+  @for $block from 1 through 31 {
+    &__day:nth-child(#{$block})::before {
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 100px;
+      font-size: 30px;
+      content: "#{$block}";
+      display: inline-flex;
+    }
+  }
+}
