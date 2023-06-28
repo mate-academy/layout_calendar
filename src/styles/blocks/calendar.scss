@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: row wrap;
   gap: $gap;
-  width: $calender-width;
+  width: $calendar-width;
   margin: 0 auto;
   padding: 30px $calendar-padding;
 
@@ -10,10 +10,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    @include square($day-size);
+    @include square ($day-size);
     background-color: $day-background-color;
     border: 1px solid black;
-    transition: all 0.5s ;
+    transition: background-color, transform 0.5s ;
 
     &:hover {
       cursor: pointer;
@@ -28,9 +28,9 @@
     }
   }
 
-  @for $month from 28 through 31 {
-    &--month-lenght-#{$month} {
-      .calendar__day:nth-last-child(n + #{$month + 1}) {
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
     }
