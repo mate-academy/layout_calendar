@@ -1,45 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .calendar {
   position: relative;
   width: 7 * $item-size+7px;
   padding-top: 20px;
 
   display: flex;
-  gap: 1px;
+  gap: $gap-length;
   flex-wrap: wrap;
 
-  $dayNames: mon 0, tue 101px, wen 202px, thu 303px, fri 404px, sut 505px, sun 606px;
+  $dayNames: mon 0, tue ($item-size+$gap-length), wen 2*($item-size+$gap-length), thu 3*($item-size+$gap-length), fri 4*($item-size+$gap-length), sut 5*($item-size+$gap-length), sun 6*($item-size+$gap-length);
 
-  @each $dayName, $length in $dayNames {
+  @each $dayName, $shift in $dayNames {
     &--start-day--#{$dayName} {
       .calendar__item:first-child {
-        margin-left: $length;
+        margin-left: $shift;
       }
     }
   }
 
+
   &__item {
     position: relative;
-    box-sizing: border-box;
-
     width: $item-size;
     height: $item-size;
     background-color: $item-color;
     border: 1px solid #000;
+    display: none;
 
     @for $day from 1 through 31 {
-     &:nth-child(#{$day}) {
-      &::before {
-        position: absolute;
-        top: ($item-size - 30px) / 2;
-        right:($item-size - 30px) / 2;
-        content: '#{$day}';
-        color: #000;
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
+      &:nth-child(#{$day}) {
+        &::before {
+          position: absolute;
+          top: ($item-size - 30px) / 2;
+          right:($item-size - 30px) / 2;
+          content: '#{$day}';
+          color: #000;
+          font-size: 30px;
+        }
       }
-     }
     }
 
     @include hover (transform,translateY(-20px)) ;
   }
+
+
+  @for $numberOfdays from 28 through 31 {
+    &--month-length--#{$numberOfdays}{
+
+      @for $dayOfmonth from 1 through $numberOfdays {
+       .calendar__item:nth-child(#{$dayOfmonth}) {
+        display: block;
+       }
+      }
+
+    }
+  }
 }
+
