@@ -1,0 +1,47 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  margin: 100px auto;
+  padding: $calendar-padding;
+  max-width: $calendar-width;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  line-height: $cell-size;
+
+  &__day {
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $cell-color;
+    cursor: pointer;
+
+    transition: transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  $week: 1 mon, 2 tue, 3 wed, 4 thu, 5 fri, 6 say, 7 sun;
+
+  @each $number, $day in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($cell-size + $gap-size) * ($number - 1);
+    }
+  }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
