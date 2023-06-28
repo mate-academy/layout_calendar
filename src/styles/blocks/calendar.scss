@@ -13,6 +13,7 @@
     border: 1px solid $cell-color-border;
 
     @include hoverEffect;
+    @include dayNumbers;
   }
 
   @each $day, $position in $days {
@@ -22,25 +23,8 @@
   }
 
   @for $number from $min-days-number through $max-days-number {
-
     &--month-length-#{$number} &__day:not(:nth-child(-n + #{$number})) {
       display: none;
-    }
-
-    &--month-length-#{$number} &__day {
-      @for $i from 1 through $number {
-        &:nth-child(#{$i}) {
-          &::before {
-            content: "#{$i}";
-            font-size: $font-size;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: $cell-size;
-            height: $cell-size;
-          }
-        }
-      }
     }
   }
 }
