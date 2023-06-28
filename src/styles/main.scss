@@ -1,4 +1,3 @@
-
 @import "./variables.scss";
 
 body {
@@ -6,17 +5,26 @@ body {
 }
 
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: calc(#{$day-width} * #{$day-count} + #{$calendar-padding});
 
-  padding-top: $calendar-padding;
-  gap: 1px;
-  margin: 0 auto;
+  &__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $day-width * $day-count + $calendar-padding;
+    padding-top: $calendar-padding;
+    gap: 1px;
+    margin: 0 auto;
+  }
 
   &__day {
-
     background-color: $main-color;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: $day-color-hover;
+      cursor: pointer;
+
+      transform: translateY(-20px);
+    }
 
     @for $num from 1 through 31 {
       &--month-length--#{$num}::before {
@@ -38,30 +46,16 @@ body {
       }
     }
 
-    $week: mon, tue, wed, thu, fri, sat, sun;
-
-    @each $day in $week {
-      &--start-day--#{$day} {
-        width: $day-width;
-        height: $day-height;
-      }
-    }
-
-    &:first-child {
-      margin-left: $day-width + 1;
-    }
-
     &:last-child {
       background-color: $day-color-hover;
     }
 
-    transition-duration: 0.5s;
+    $week: mon, tue, wed, thu, fri, sat, sun;
 
-    &:hover {
-      background-color: $day-color-hover;
-      cursor: pointer;
-
-      transform: translateY(-20px);
+    @each $day in $week {
+      &--start-day--#{$day} {
+        margin-left: ($day-width + 1px) * (index($week, $day) - 1);
+      }
     }
   }
 }
