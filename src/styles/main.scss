@@ -4,29 +4,37 @@ body {
   margin: 0;
 }
 
-.calendar {
+.main {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
 
-  &__wrap {
+.calendar {
     display: flex;
-
     flex-wrap: wrap;
     max-width: $day-width * $day-count + $calendar-padding;
     padding: $calendar-padding;
     gap: 1px;
 
-    &--month-length{
+    &--month-length {
       @for $days-in-month from 28 through 31 {
         &--#{$days-in-month} > :nth-last-child(-n + #{31 - $days-in-month}) {
           display: none;
         }
       }
     }
-  }
 
+    $week: mon, tue, wed, thu, fri, sat, sun;
+
+    @each $day in $week {
+      &--start-day--#{$day} {
+        & div:first-child {
+        margin-left: ($day-width + 1px) * (index($week, $day) - 1);
+        }
+      }
+    }
   &__day {
     background-color: $main-color;
     transition-duration: 0.5s;
@@ -57,15 +65,5 @@ body {
         height: $day-height;
       }
     }
-
-    $week: mon, tue, wed, thu, fri, sat, sun;
-
-    @each $day in $week {
-      &--start-day--#{$day} {
-        margin-left: ($day-width + 1px) * (index($week, $day) - 1);
-      }
-    }
-
-
   }
 }
