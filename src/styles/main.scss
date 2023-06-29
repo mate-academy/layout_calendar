@@ -17,6 +17,14 @@ body {
     max-width: $day-width * $day-count + $calendar-padding;
     padding: $calendar-padding;
     gap: 1px;
+
+    &--month-length{
+      @for $days-in-month from 28 through 31 {
+        &--#{$days-in-month} > :nth-last-child(-n + #{31 - $days-in-month}) {
+          display: none;
+        }
+      }
+    }
   }
 
   &__day {
@@ -31,7 +39,7 @@ body {
     }
 
     @for $num from 1 through 31 {
-      &--month-length--#{$num}::before {
+      &:nth-child(#{$num})::before {
         content: "#{$num}";
         color: #000;
 
@@ -57,5 +65,7 @@ body {
         margin-left: ($day-width + 1px) * (index($week, $day) - 1);
       }
     }
+
+
   }
 }
