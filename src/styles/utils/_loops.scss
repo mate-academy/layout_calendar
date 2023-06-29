@@ -1,0 +1,30 @@
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index} {
+    .calendar__day:nth-child(n+#{$index+1}) {
+      display: none;
+    }
+  }
+}
+
+$days:
+  "mon" 0,
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $day, $margin-value in $days {
+  .calendar--day-one--#{$day} {
+    .calendar__day:first-child {
+      margin-left: $margin-value;
+    }
+  }
+}
