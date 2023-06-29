@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px auto;
+  width: getCalendarWidth($cell-size, $cell-count, $calendar-padding, $gap);
+  gap: $gap;
+
+  &__day {
+    @include square($cell-size);
+
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    line-height: 100px;
+    background-color: #eee;
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffc0cb;
+      transition-duration: 0.5s;
+    }
+  }
+}
