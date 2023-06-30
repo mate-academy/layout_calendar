@@ -1,3 +1,99 @@
-body {
+$day-bg: #eee;
+$day-size: 100px;
+$day-font: arial, sans-serif;
+$day-font-size: 30px;
+$border-color: #000;
+$border-width: 1px;
+$gap: 1px;
+$calendar-columns: 7;
+$padding: 10px;
+$start-day: (
+  "monday": 0,
+  "tuesday": 1,
+  "wednesday": 2,
+  "thursday": 3,
+  "friday": 4,
+  "saturday": 5,
+  "sunday": 6
+);
+
+* {
   margin: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  height: auto;
+  width: calc((2 * #{$padding}) 
+  + (#{$calendar-columns} 
+  * #{$day-size}) 
+  + (#{$calendar-columns}
+  - 1) * #{$gap});
+  display: flex;
+  flex-wrap: wrap;
+  padding: $padding;
+  gap: $gap;
+}
+
+.day {
+  transition: 0.3s;
+  width: $day-size;
+  height: $day-size;
+  border: $border-width solid $border-color;
+  background-color: $day-bg;
+  position: relative;
+  box-sizing: border-box;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: $day-font;
+    font-size: $day-font-size;
+  }
+}
+
+.day-first {
+  margin-bottom: $gap;
+  grid-column: span 7;
+}
+
+@for $day from 1 through 31 {
+  .day:nth-child(#{$day})::before {
+    content: "#{$day}";
+    color: #000;
+  }
+}
+
+@each $day, $ident in $start-day {
+  .calendar--start-day-#{$day} .day:first-child {
+    margin-left: calc((#{$ident} 
+    * (#{$day-size} 
+    + #{$gap})) 
+    + ((#{$calendar-columns} - 1) 
+    * (#{$day-size} + #{$gap})));
+  }
+}
+
+@for $k from 28 through 31 {
+  .calendar--month-length-#{$k} {
+    .day:nth-child(n + #{$k}) {
+      display: none;
+    }
+  }
 }
