@@ -1,65 +1,10 @@
-$day-size: 100px;
-$calendar-padding: 10px;
-$calendar-gap: 1px;
-$text-size: 30px;
-$days-of-weeck: 1 mon, 2 tue, 3  wed, 4 thu, 5 fri, 6 sat, 7  sun;
+@import "blocks/calendar.scss";
 
 body {
   margin: 0;
 }
 
-.calendar {
-  display: flex;
-  width: (7 * $day-size) + ($calendar-padding * 2) + (6 * $calendar-gap);
-  box-sizing: border-box;
-  gap: $calendar-gap;
-  padding: $calendar-padding;
-  flex-wrap: wrap;
-
-  &__day {
-    background-color: #eee;
-    height: $day-size;
-    width: $day-size;
-    border: 1px solid;
-    box-sizing: border-box;
-    cursor: pointer;
-
-    &:hover {
-      transition-duration: 0.5s;
-      background-color: pink;
-      position: relative;
-      transform: translateY(-20px);
-    }
-  }
-
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
-      display: block;
-      width: 100%;
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: $text-size;
-      line-height: $text-size;
-
-      text-align: center;
-      margin-top: $day-size/2 - $text-size/2;
-    }
-  }
-
-  @each $n, $d in $days-of-weeck {
-    &--start-day--#{$d} :first-child {
-      margin-left: ($n - 1) * 100px + ($n - 1);
-    }
-  }
-
-  @for $i from 28 through 31 {
-    &--month-length--#{$i} {
-      @for $i2 from $i through 31 {
-        .calendar__day:nth-child(#{$i2 + 1}) {
-          display: none;
-        }
-      }
-    }
-  }
+h1 {
+  text-align: center;
 }
+
