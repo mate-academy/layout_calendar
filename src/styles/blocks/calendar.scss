@@ -1,10 +1,12 @@
 .calendar {
-  width: 706px;
+  width: $width-square*7 + $gap*6;
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   align-items: center;
+
+  margin: 50px auto;
 
   &__cell {
     box-sizing: border-box;
@@ -26,7 +28,7 @@
     }
 
     @for $numberOfDay from 1 through 31 {
-      &--#{$numberOfDay}::before {
+      &:nth-child(#{$numberOfDay}):before {
         content: "#{$numberOfDay}";
       }
     }
@@ -36,7 +38,7 @@
 @each $day, $ident in $start-day {
   .calendar--start-day--#{$day} {
     & :first-child {
-        margin-left: #{$ident}px;
+        margin-left: $ident;
       }
     }
   }
