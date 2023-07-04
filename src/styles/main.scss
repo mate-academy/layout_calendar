@@ -13,15 +13,11 @@ $body-color: #000;
 body {
   margin: 0;
   color: $body-color;
-}
-
-.container {
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-  height: 100vh;
 }
 
 .calendar {
@@ -31,10 +27,26 @@ body {
   grid-template-columns: repeat(7, 1fr);
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: flex-start;
-  padding: 10px;
+  align-items: center;
+  margin: 10px;
+  width: 726px;
+  font-size: 30px;
 
-  .calendar__day {
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+       display: none;
+     }
+   }
+
+   @each $day, $value in $days {
+    &--start-day--#{$day} {
+      div:nth-child(#{$value + 1}) {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__day {
     box-sizing: border-box;
     border: 1px solid #000;
     background-color: #aaa;
@@ -46,11 +58,6 @@ body {
       background-color: #faa;
     }
 
-    @for $length from 28 through 31 {
-      .calendar.length-#{$length} {
-        grid-column-end: span #{$length};
-      }
-    }
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day}) {
@@ -61,19 +68,6 @@ body {
           align-items: center;
           height: 100px;
           width: 100px;
-        }
-      }
-    }
-
-    @for $length from 28 through 31 {
-      &.length-#{$length} {
-        grid-template-columns: repeat(#{$length}, 1fr);
-
-        @for $day from 1 through $length {
-          .calendar__day:nth-child(#{$day})::before {
-            content: "#{$day}";
-          }
-          
         }
       }
     }
