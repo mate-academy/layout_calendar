@@ -14,7 +14,6 @@ $days: (
 
 $body-color: #000;
 
-
 body {
   margin: 0;
   color: $body-color;
@@ -27,9 +26,10 @@ body {
 
 .calendar {
   gap: 1px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   
+
   width: 706px;
   font-size: 30px;
 
@@ -41,8 +41,8 @@ body {
 
   @each $day, $value in $days {
     &--start-day--#{$day} :first-child {
-        margin-left: (100px + 1px) * $value;
-      }
+      margin-left: (100px + 1px) * $value;
+    }
   }
 
   &__day {
