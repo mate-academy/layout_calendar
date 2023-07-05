@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 $days: (
   mon: 0,
   tue: 1,
@@ -10,6 +14,7 @@ $days: (
 
 $body-color: #000;
 
+
 body {
   margin: 0;
   color: $body-color;
@@ -21,43 +26,37 @@ body {
 }
 
 .calendar {
-  box-sizing: border-box;
   gap: 1px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 10px;
-  width: 726px;
+  
+  width: 706px;
   font-size: 30px;
 
   @for $day from 28 through 31 {
     &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
-       display: none;
-     }
-   }
-
-   @each $day, $value in $days {
-    &--start-day--#{$day} {
-      div:nth-child(#{$value + 1}) {
-        margin-left: 0;
-      }
+      display: none;
     }
   }
 
+  @each $day, $value in $days {
+    &--start-day--#{$day} :first-child {
+        margin-left: (100px + 1px) * $value;
+      }
+  }
+
   &__day {
-    box-sizing: border-box;
     border: 1px solid #000;
     background-color: #aaa;
     transition: transform 500ms;
     cursor: pointer;
+    height: 100px;
+    width: 100px;
 
     &:hover {
       transform: translateY(-20px);
       background-color: #faa;
     }
-
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day}) {
