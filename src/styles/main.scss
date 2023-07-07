@@ -1,3 +1,80 @@
+
+/* #region root */
+$cellsize: 100px;
+$cellgap : 1px;
+
+$days: (6: "-mon", 5: "-tue", 4: "-wed", 3: "-thu", 2: "-fri", 1: "-sat", 0: "-sun");
+
+@each  $n,$day in  $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: ($n * $cellsize)+($n * $cellgap );
+
+  }
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+/* #endregion */
+
+/* #region calendar */
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: auto;
+
+  width: ($cellsize * 7) + 6px;
+  padding: 10px;
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+}
+
+
+@for $i from 1 through 31 {
+  .calendar__cell-#{$i} {
+    box-sizing: border-box;
+    background-color: #eee;
+    border: black solid 1px;
+    width: $cellsize;
+    height: $cellsize;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendar__cell-#{$i}:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translate(0, -20px);
+    transition-duration: 0.5s;
+  }
+
+  .calendar__cell-#{$i}:not(:hover) {
+    transform: translate(0, 0);
+    transition-duration: 1s;
+  }
+
+}
+
+@for $i from 1 through 31 {
+  .calendar__cell-#{$i}::before {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    content: "#{$i}" ;
+    padding: auto;
+  }
+}
+
+/* #endregion */
