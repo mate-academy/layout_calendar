@@ -1,3 +1,90 @@
-body {
+@import "./abstracts/vars";
+@import "./abstracts/mixins";
+@import "./abstracts/functions";
+
+*,
+*::before,
+*::after {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../images/mesh-179.png");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calendarWidth($day-size, $day-gap, $calendar-pdg);
+
+  gap: $day-gap;
+  padding: $calendar-pdg;
+  border: 1px solid #000;
+
+  &__day {
+    @include daySize($day-size);
+    background-color: $day-bg-clr;
+    border: 1px solid $day-bdr-clr;
+    font-size: $font-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s cubic-bezier(0.17, 0.84, 0.44, 1);
+    cursor: pointer;
+
+    &:hover {
+      background-color: $day-hvr-clr;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+$days: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+  }
+}
+
+@each $day, $index in $days {
+  $dayIndex: map-get($days, $day);
+  .calendar--start-day-#{$dayIndex} {
+    .calendar__day {
+      &:first-child {
+        margin-left: #{$index}px;
+      }
+    }
+  }
+}
+
+@for $j from 28 through 31 {
+  .calendar--month-length-#{$j} {
+    & :nth-child(n+#{$j + 1}) {
+      display: none;
+    }
+  }
 }
