@@ -1,4 +1,4 @@
-@import 'utilits/variables.scss';
+@import "utilits/variables.scss";
 
 body {
   margin: 0;
@@ -9,6 +9,7 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   width: $calendarWidth;
   padding: $paddingSize;
   gap: $gapSize;
@@ -16,7 +17,7 @@ body {
 
   &__day {
     width: $cellSize;
-    height: $cellSize;
+    height: 100px;
     border: $borderSize solid black;
     background-color: #eee;
     position: relative;
@@ -28,34 +29,26 @@ body {
       transform: translateY(-20px);
     }
 
-    &--month-length {
-      @for $length from $minMonthDays through $maxMonthDays {
-        &--#{$length} :nth-child(n + #{$length + 1}) {
-          display: none;
+    @for $day from 1 through $maxMonthDays {
+      &:nth-child(#{$day}) {
+        &::before {
+          content: "#{$day}";
         }
       }
     }
+  }
 
-    &::before {
-      content: '';
-      font-family: Arial;
-      font-size: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
+  @each $day, $n in $startDays {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: $n * $cellSize + $n * $gapSize;
     }
   }
 
-  @for $day from 1 through 31 {
-    .calendar__day:nth-child(#{$day})::before {
-      content: '#{$day}';
-    }
-  }
-
-  @each $day in $startDays {
-    &--start-#{$day} .calendar__day:first-child:nth-child(#{$columns}n+1) {
-      margin-left: $cellSize + $gapSize;
+  &--month-length {
+    @for $length from $minMonthDays through $maxMonthDays {
+      &--#{$length} :nth-child(n + #{$length + 1}) {
+        display: none;
+      }
     }
   }
 }
