@@ -1,3 +1,66 @@
-body {
-  margin: 0;
+$month-length: 30;
+//powyżej wpisz długość miesiąca//
+$size: 100px;
+$gap: 1px;
+$padding: 10px;
+$days:
+  // odkomentuj pierwszy dzień miesiąca
+
+  // "mon" 0,
+  // "tue" 1,
+  // "wed" 2,
+  // "thu" 3,
+  "fri" 4,
+  // "sat" 5,
+  // "sun" 6,
+;
+
+@each $name, $index in $days {
+  .cal__day:first-child {
+    margin-left: $size * $index;
+  }
+}
+
+.cal {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($size + $gap) * 7 + $padding * 2;
+  gap: $gap;
+  padding: $padding;
+  margin: 0 auto;
+
+  &__day {
+    gap: $gap;
+    cursor: pointer;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: black;
+    background-color: grey;
+    width: $size - 1px;
+    height: $size - 1px;
+    border: 1px solid black;
+    margin: 0;
+    transition: 0.5s;
+  }
+
+  &__day:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
+
+@for $i from 1 through 31 {
+  .cal__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    margin: auto;
+  }
+}
+
+@for $length from $month-length through 31 {
+  .cal__day:nth-child(#{$length + 1}) {
+    display: none;
+  }
 }
