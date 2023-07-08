@@ -31,10 +31,24 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: calendarWidth($day-size, $day-gap, $calendar-pdg);
-
   gap: $day-gap;
   padding: $calendar-pdg;
-  border: 1px solid #000;
+
+  $days:
+  "tue" 101px,
+  "wed" 202px,
+  "thu" 303px,
+  "fri" 404px,
+  "sat" 505px,
+  "sun" 606px;
+
+@each $name, $size in $days {
+  &--start-day-#{$name} {
+    .calendar__day:nth-child(1) {
+      margin-left: $size;
+    }
+  }
+}
 
   &__day {
     @include daySize($day-size);
@@ -54,36 +68,15 @@ body {
   }
 }
 
-$days: (
-  "mon": 0,
-  "tue": 1,
-  "wed": 2,
-  "thu": 3,
-  "fri": 4,
-  "sat": 5,
-  "sun": 6
-);
-
 @for $index from 1 through 31 {
   .calendar__day:nth-child(#{$index})::before {
     content: "#{$index}";
   }
 }
 
-@each $day, $index in $days {
-  $dayIndex: map-get($days, $day);
-  .calendar--start-day-#{$dayIndex} {
-    .calendar__day {
-      &:first-child {
-        margin-left: #{$index}px;
-      }
-    }
-  }
-}
-
 @for $j from 28 through 31 {
   .calendar--month-length-#{$j} {
-    & :nth-child(n+#{$j + 1}) {
+    & :nth-child(n+#{$j + 2}) {
       display: none;
     }
   }
