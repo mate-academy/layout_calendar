@@ -1,9 +1,8 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $cellSize * 7 + $cellGap * 6;
+  width: $cellSize * $cellInRow + $cellGap * ($cellInRow - 1);
   gap: $cellGap;
-  padding: 10px;
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
@@ -22,7 +21,7 @@
   &__day {
     box-sizing: border-box;
     display: flex;
-    background-color: #eee;
+    background-color: $cellBackground;
     font-size: 30px;
     width: $cellSize;
     height: $cellSize;
