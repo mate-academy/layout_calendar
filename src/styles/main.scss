@@ -1,3 +1,63 @@
+@import "./mixins.scss";
+@import "./functions.scss";
+
+$cell-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$font-family: arial;
+$font-size: 30px;
+$padding: 10px;
+$gap: 1px;
+$body-width: 800px;
+$days: mon, tue, wed, thu, fri, sat, sun;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  width: calc(7 * (#{$cell-size} + 2 * #{$gap} + 2 * #{$padding}));
+  padding: $padding;
+  gap: $gap;
+
+  &__day {
+    @include cell;
+
+    &::before {
+      content: "";
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-10px);
+    }
+  }
+  .calendar__day {
+    font-size: $font-size;
+    font-family: $font-family;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        @extend .calendar__day;
+        .calendar--month-length-28 &:nth-child(n + 29),
+        .calendar--month-length-29 &:nth-child(n + 30),
+        .calendar--month-length-30 &:nth-child(n + 31) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.calendar__day:first-child {
+  margin-left: calc(7 * #{$cell-size} + #{$padding} - 3 * #{$gap});
 }
