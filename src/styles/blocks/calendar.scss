@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $paddingCal;
+  gap: $gap;
+  max-width: $calendarSize;
+
+  @each $num, $day in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: $num * ($cellSize + $gap);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      :nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
