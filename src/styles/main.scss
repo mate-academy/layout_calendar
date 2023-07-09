@@ -1,3 +1,67 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 0;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 48vw;
+  justify-content: center;
+  align-items: center;
+}
+
+$day-color: #eee;
+$day-wh: 100px;
+$maxday-for-row: 7;
+$day-indent-collection: mon 606px, tue 505px, wed 404px, thu 303px,
+  fri 202px, sat 101px, sun 0;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: $maxday-for-row * 100px + 27px;
+  padding: 0 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    width: $day-wh;
+    height: $day-wh;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @each $start-day, $indent in $day-indent-collection {
+      .calendar--start-day--#{$start-day} &:first-child {
+        margin-left: $indent;
+      }
+    }
+
+    @for $day-count from 1 through 31 {
+      &:nth-child(#{$day-count})::before {
+        content: "#{$day-count}";
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    @for $last-day from 28 through 31 {
+      .calendar--month-length--#{$last-day}
+      &:nth-last-child(-n + #{31 - $last-day}) {
+        display: none;
+      }
+    }
+  }
 }
