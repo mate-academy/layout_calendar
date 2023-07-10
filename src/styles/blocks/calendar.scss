@@ -4,7 +4,7 @@
   gap: $gap-cell;
   margin: 0 auto;
   width: $width-square;
-  height: $hight-square;
+  
 
   &__day {
     width: $width-cell;
@@ -26,14 +26,14 @@
   }
 
   @for $n from 1 through 31 {
-    .calendar__day:nth-child(#{$n}):before {
+    &__day:nth-child(#{$n}):before {
       content: "#{$n}"
     }
   }
 
   @each $day, $column in $week {
     &--start-day--#{$day} &__day:first-child {
-      margin-left: ($width-cell + $gap-cell) * ($column - 1);
+      margin-left: ($width-cell + $gap-cell) * ($column - 1)
     }
   }
 
