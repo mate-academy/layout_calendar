@@ -7,31 +7,22 @@
   margin: 0 auto;
 
   &__field {
-    cursor: pointer;
     @include square($field-size);
-    background-color: $background-color;
-    box-sizing: border-box;
-    border: 1px solid $border-color;
-    font-size: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s;
+    cursor: pointer;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    font-size: 30px;
+    box-sizing: border-box;
+    transition: transform 0.5s, background-color 0.5s;
   }
 
   &__field:hover {
     background-color: $hover-color;
     transform: translateY(-20px);
   }
-
-  $days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $name, $index in $days {
     &--start-day--#{$name}>:first-child {
