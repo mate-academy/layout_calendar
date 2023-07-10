@@ -1,19 +1,9 @@
-$grey: #eee;
-$squere-side: 100px;
-$calendar-gap: 1px;
-$calendar-day-border: 1px;
-$calendar-day-space: $squere-side + $calendar-gap;
-$calendar-padding: 10px;
-$calendar-widht: ($squere-side + $calendar-gap) * 7;
-
 .calendar {
   width: $calendar-widht;
-  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
   padding: $calendar-padding;
-  padding-top: $calendar-padding * 3;
 
   $days: (
     0 "mon",
@@ -49,13 +39,13 @@ $calendar-widht: ($squere-side + $calendar-gap) * 7;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
   }
 
   @for $index from 1 through 31 {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
-      font-family: Arial, sans-serif;
-      font-size: 30px;
     }
   }
 
