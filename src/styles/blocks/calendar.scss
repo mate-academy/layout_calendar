@@ -1,0 +1,29 @@
+.calendar {
+  width: $calendar-width;
+  height:$calendar-height;
+  padding: $calendar-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @for $i from 28 through 31 {
+    &--month-length_#{$i} > calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  $start-day:
+    'mon' 0,
+    'tue' 1,
+    'wed' 2,
+    'thu' 3,
+    'fri' 4,
+    'sat' 5,
+    'sun' 6;
+
+  @each $day, $n in $start-day {
+    &--#{$day} > .calendar__day:first-child {
+      margin-left: ($calendar-day-width + $calendar-gap) * $n;
+    }
+  }
+}
