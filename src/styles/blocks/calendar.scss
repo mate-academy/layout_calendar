@@ -1,8 +1,8 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $cellSize * $cellInRow + $cellGap * ($cellInRow - 1);
-  gap: $cellGap;
+  width: $cell-size * $cell-in-row + $cell-gap * ($cell-in-row - 1);
+  gap: $cell-gap;
 
   @for $i from 28 through 31 {
     &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
@@ -10,25 +10,24 @@
     }
   }
 
-  $days: (0: "mon", 1: "tue", 2: "wed", 3: "thu", 4: "fri", 5: "sat", 6: "sun");
-
   @each $dayNumber, $day in $days {
     &--start-day--#{$day} :first-child {
-      margin-left: $dayNumber * ($cellSize + $cellGap);
+      margin-left: $dayNumber * ($cell-size + $cell-gap);
     }
   }
 
   &__day {
+    cursor: pointer;
     box-sizing: border-box;
     display: flex;
-    background-color: $cellBackground;
-    font-size: 30px;
-    width: $cellSize;
-    height: $cellSize;
     justify-content: center;
     align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    font-size: 30px;
+    background-color: $color-gray-accent;
     border: 1px solid black;
-    transition: all 0.5s, transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -37,8 +36,7 @@
     }
 
     &:hover {
-      cursor: pointer;
-      background-color: pink;
+      background-color: $color-pink-accent;
       transform: translateY(-20px);
     }
   }
