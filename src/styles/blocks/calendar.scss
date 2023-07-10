@@ -30,9 +30,12 @@
     transition: all 0.5s;
 
     &:hover {
-    transform: translate(#{$animation-day-transorm-w} , #{$animation-day-transorm-h});
-    background-color: pink;
-    cursor: pointer;
+      transform: translate(
+        #{$animation-day-transorm-w},
+        #{$animation-day-transorm-h}
+      );
+      background-color: pink;
+      cursor: pointer;
     }
 
     @for $i from 1 through 31 {
@@ -47,10 +50,10 @@
       }
     }
 
-    @each $days in $month-length{
-        .calendar--days--#{$days} > &:nth-child(n + #{$days + 1}) {
-          display: none;
-        }
+    @each $days in $month-length {
+      .calendar--days--#{$days} > &:nth-child(n + #{$days + 1}) {
+        display: none;
+      }
     }
   }
 }
