@@ -1,0 +1,13 @@
+@each $number, $day in $name_days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: calc(#{$number} * #{$field-width});
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-lenght-#{$i} {
+    &:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
