@@ -1,0 +1,56 @@
+@import "../utils/variables";
+
+.calendar {
+  /* Display Flex & Box Model */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: #{$day-gap};
+  width: #{$calendar-width};
+  height: auto;
+  padding: #{$calendar-padding};
+  padding-top: #{$calendar-padding-top};
+
+  /* for testing bg */
+  // background-color: beige;
+
+  &__day {
+    /* Display& Box Model */
+    box-sizing: border-box;
+    width: #{$day-size};
+    height: #{$day-size};
+    border: 1px solid black;
+    background-color: #{$bg-color-day};
+
+    /* Font */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: #{$font-size-day};
+
+    /* Animation */
+    transition: all 0.5s;
+
+    &:hover {
+    transform: translate(#{$animation-day-transorm-w} , #{$animation-day-transorm-h});
+    background-color: pink;
+    cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        content: "#{$i}";
+      }
+    }
+
+    @each $name-day, $day in $start-day {
+      .calendar--start-day--#{$name-day} > &:first-child {
+        margin-left: calc(#{$day-size} * (#{$day} - 1) + (#{$day}px - 1px));
+      }
+    }
+
+    @each $days in $month-length{
+        .calendar--days--#{$days} > &:nth-child(n + #{$days + 1}) {
+          display: none;
+        }
+    }
+  }
+}
