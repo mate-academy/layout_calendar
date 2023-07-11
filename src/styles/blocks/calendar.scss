@@ -1,10 +1,8 @@
 .calendar {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
   width: calc(#{$days-count} * #{$day-size} + #{$gapCount} * #{$calendar-gap});
-  margin: 20px auto;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
 
@@ -26,10 +24,13 @@
       transform: translateY(-20px);
     }
 
-    &::before {
-      content: counter(day);
+    @for $i from 1 through 31 {
+      &:nth-child(n + #{$i}) {
+        &::before {
+          content: "#{$i}";
+        }
+      }
     }
-
   }
 
   @each $i, $day in $startDay {
