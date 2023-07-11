@@ -1,11 +1,14 @@
 .calendar {
+  width: $day-cell-size * $calendar-week-days-number + $calendar-gap * ($calendar-week-days-number - 1);
+  min-width: $day-cell-size * $calendar-week-days-number + $calendar-gap * ($calendar-week-days-number - 1);
+  padding: $calendar-padding;
+
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
 
   &__day {
     position: relative;
-
 
     display: flex;
     justify-content: center;
@@ -20,7 +23,6 @@
 
     cursor: pointer;
     transition-duration: 0.5s;
-
 
     @for $day from 1 through $calendar-max-days-number {
       &--#{$day}::before {
