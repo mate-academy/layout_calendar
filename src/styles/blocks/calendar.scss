@@ -13,24 +13,16 @@
   @for $lastDay from 28 through 31 {
     &--month-length--#{$lastDay}
     :nth-child(n + #{$lastDay+1}) {
-    visibility: hidden;
-  }
+      visibility: hidden;
+    }
   }
 
-$week:
-mon 1,
-tue 2,
-wed 3,
-thu 4,
-fri 5,
-sat 6,
-sun 7;
-@each $day, $number in $week {
-  &--start-day--#{$day}
-  :first-child {
-    margin-left: $cell-size * ($number - 1) + ($number - 1) * $shift;
+  @each $day, $number in $week {
+    &--start-day--#{$day}
+    :first-child {
+      margin-left: $cell-size * ($number - 1) + ($number - 1) * $shift;
+    }
   }
-}
 
   &__day {
     height: $cell-size;
@@ -38,7 +30,6 @@ sun 7;
     border: 1px solid #000;
     box-sizing: border-box;
     background-color: $main-color;
-    position: relative;
 
     display: flex;
     align-items: center;
@@ -47,18 +38,15 @@ sun 7;
     z-index: 0;
 
     @for $monthDay from 1 through 31 {
-      &--#{$monthDay}::before {
-        content: '#{$monthDay}';
+      &:nth-child(#{$monthDay})::before {
+        content: "#{$monthDay}";
         font-size: 30px;
-        position: absolute;
       }
     }
 
     &:hover {
-      cursor: pointer;
-      background-color: 	#ffc0cb;
+      background-color: #ffc0cb;
       transform: translate(0, -20px);
-      z-index: 1;
     }
   }
 }
