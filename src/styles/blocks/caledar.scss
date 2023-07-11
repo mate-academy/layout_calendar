@@ -5,17 +5,8 @@
   gap: $calendar-gap;
   padding: $calendar-padding;
 
-  $days: (
-    0 "mon",
-    1 "tue",
-    2 "wed",
-    3 "thu",
-    4 "fri",
-    5 "sat",
-    6 "sun"
-  );
-
-  @each $number, $day in $days {
+  @each $number,
+  $day in $days {
     &--start-day-#{$day} :first-child {
       margin-left: $number * $calendar-day-space;
     }
@@ -41,19 +32,17 @@
     transition: 0.5s;
     font-family: Arial, sans-serif;
     font-size: 30px;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
   }
 
   @for $index from 1 through 31 {
     &__day:nth-child(#{$index})::before {
       content: "#{$index}";
-    }
-  }
-
-  @for $index from 1 through 31 {
-    &__day:nth-child(#{$index}):hover {
-      background-color: pink;
-      cursor: pointer;
-      transform: translateY(-20px);
     }
   }
 }
