@@ -1,17 +1,19 @@
+@import "./variables";
+
+@each $day, $i in $days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: ($i * $box-size) +  ($i * $gap);
+  }
+}
+
 @for $i from 1 through 31 {
-  .calendar__day--#{$i}::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
   }
 }
 
-@each $day, $margin in $day-margins {
-  .calendar--start-day--#{$day} .calendar__days :first-child {
-    margin-left: $margin;
-  }
-}
-
 @for $i from 28 through 31 {
-  .calendar--month-length--#{$i} :nth-child(n+#{$i + 1}) {
+  .calendar--month-length--#{$i} .calendar__day:nth-child(n+#{$i+1}) {
     display: none;
   }
 }
