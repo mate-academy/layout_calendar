@@ -4,45 +4,36 @@
   flex-wrap: wrap;
   padding: 10px;
   gap: $daysGap;
-  width: calc(7*100px + 7*1px);
+  width: 7 * $dimensions + (6 * $daysGap);
 
   &__day {
     box-sizing: border-box;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #eee;
     width: $dimensions;
     height: $dimensions;
     text-align: center;
     line-height: $dimensions;
     border: 1px solid black;
-    transition: transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
   }
 
-  @for $day from 1 through 31 {
-    &__day--#{$day}::before {
-      content: '#{$day}';
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
     }
   }
 
-  $days: (
-    "mon": 0,
-    "tue": calc(1*#{$dimensions} + 1*#{$daysGap}),
-    "wed": calc(2*#{$dimensions} + 2*#{$daysGap}),
-    "thu": calc(3*#{$dimensions} + 3*#{$daysGap}),
-    "fri": calc(4*#{$dimensions} + 4*#{$daysGap}),
-    "sat": calc(5*#{$dimensions} + 5*#{$daysGap}),
-    "sun": calc(6*#{$dimensions} + 6*#{$daysGap})
-    );
-  @each $startingDay, $position in $days {
-    &--start-day_#{$startingDay} .calendar__day:first-child {
-      margin-left: $position;
+  @each $dayNumber, $day in $days {
+    &--start-day_#{$day} .calendar__day:first-child {
+      margin-left: $dayNumber * ($dimensions + $daysGap);
     }
   }
 
