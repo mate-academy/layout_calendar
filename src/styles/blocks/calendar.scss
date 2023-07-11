@@ -8,25 +8,23 @@
   gap: $calendar-gap;
 
   &__day {
-    position: relative;
+    box-sizing: border-box;
+    width: $day-cell-size;
+    height: $day-cell-size;
+
+    border: 1px solid #000;
+    background-color: #eee;
+    visibility: visible;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    box-sizing: border-box;
-    width: $day-cell-size;
-    height: $day-cell-size;
-    border: 1px solid #000;
-    background-color: #eee;
-    visibility: visible;
-
     cursor: pointer;
     transition-duration: 0.5s;
 
     @for $day from 1 through $calendar-max-days-number {
-      &--#{$day}::before {
-        position: absolute;
+      &:nth-of-type(#{$day})::before {
         content: '#{$day}';
       }
     }
