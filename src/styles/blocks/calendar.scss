@@ -3,16 +3,20 @@
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $calendar-gap;
-  align-items: center;
-  padding: $calendar-padding;
-  margin:0 auto;
-  padding-top: 100px;
 
   &__field {
     @include field($size);
+    box-sizing: border-box;
+    border: $field-border solid black;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.5s;
+    transition-property: transform;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY($field-translate-Y);
     }
@@ -23,15 +27,6 @@
       }
     }
   }
-
-  $start-day:
-    'mon' 0,
-    'tue' 1,
-    'wed' 2,
-    'thu' 3,
-    'fri' 4,
-    'sat' 5,
-    'sun' 6;
 
   @each $day,$i in $start-day {
     &__start-day--#{$day} > :first-child {
