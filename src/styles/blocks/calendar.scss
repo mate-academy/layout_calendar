@@ -16,6 +16,9 @@
 
   &__day {
     /* Display& Box Model */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
     width: #{$day-size};
     height: #{$day-size};
@@ -27,33 +30,33 @@
     font-size: #{$font-size-day};
 
     /* Animation */
-    transition: all 0.5s;
+    transition: background-color, transform 0.5s;
 
     &:hover {
       transform: translate(
         #{$animation-day-transorm-w},
         #{$animation-day-transorm-h}
       );
-      background-color: pink;
+      background-color: #{$bg-color-day-change};
       cursor: pointer;
     }
 
     @for $i from 1 through 31 {
-      &:nth-child(#{$i}):before {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
+  }
 
-    @each $name-day, $day in $start-day {
-      .calendar--start-day--#{$name-day} > &:first-child {
-        margin-left: calc(#{$day-size} * (#{$day} - 1) + (#{$day}px - 1px));
-      }
+  @each $name-day, $day in $start-day {
+    &--start-day--#{$name-day} > &__day:first-child {
+      margin-left: calc(#{$day-size} * (#{$day} - 1) + (#{$day}px - 1px));
     }
+  }
 
-    @each $days in $month-length {
-      .calendar--days--#{$days} > &:nth-child(n + #{$days + 1}) {
-        display: none;
-      }
+  @each $days in $month-length {
+    &--days--#{$days} > &__day:nth-child(n + #{$days + 1}) {
+      display: none;
     }
   }
 }
