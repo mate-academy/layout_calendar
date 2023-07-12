@@ -1,19 +1,27 @@
-$month-length: 30;
-//powyżej wpisz długość miesiąca//
+$month-length:
+28,
+29,
+30,
+31,
+;
 $size: 100px;
 $gap: 1px;
 $padding: 10px;
 $days:
-  // odkomentuj pierwszy dzień miesiąca
-
-  // "mon" 0,
-  // "tue" 1,
-  // "wed" 2,
-  // "thu" 3,
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
   "fri" 4,
-  // "sat" 5,
-  // "sun" 6,
+  "sat" 5,
+  "sun" 6,
 ;
+
+@each $length in $month-length {
+  .cal__day:nth-child(#{$length + 1}) {
+    display: none;
+  }
+}
 
 @each $name, $index in $days {
   .cal__day:first-child {
@@ -29,6 +37,13 @@ $days:
   padding: $padding;
   margin: 0 auto;
 
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+      margin: auto;
+    }
+  }
+
   &__day {
     gap: $gap;
     cursor: pointer;
@@ -38,29 +53,16 @@ $days:
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     color: black;
-    background-color: grey;
+    background-color: #eee;
     width: $size - 1px;
     height: $size - 1px;
     border: 1px solid black;
     margin: 0;
-    transition: 0.5s;
+    transition: all 0.5s;
   }
 
   &__day:hover {
     background-color: pink;
     transform: translateY(-20px);
-  }
-}
-
-@for $i from 1 through 31 {
-  .cal__day:nth-child(#{$i})::before {
-    content: "#{$i}";
-    margin: auto;
-  }
-}
-
-@for $length from $month-length through 31 {
-  .cal__day:nth-child(#{$length + 1}) {
-    display: none;
   }
 }
