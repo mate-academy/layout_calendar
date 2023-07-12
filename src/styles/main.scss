@@ -1,34 +1,16 @@
-// Colors
-$gray: #eee;
-$pink: #ff69b4;
-$black: #000;
+@import "variables";
+@import "calendar";
 
-// Sizes
-$cell-size: 100px;
-$border-size: 1px;
-$font-size: 30px;
-$padding-size: 10px;
-
-// Calculation variables
-$calendar-width: (7 * $cell-size) + (8 * $border-size) + (2 * $padding-size);
-$column-count: 7;
-
-// Mixins
-@mixin hover-styles {
-  cursor: pointer;
-  background-color: $pink;
+body {
+  display: flex;
+  justify-content: center;
 }
 
-// Modifier classes
-$start-days: (
-  "mon" 0,
-  "tue" 1 * ($cell-size + ($border-size * 2)) + 1px,
-  "wed" 2 * ($cell-size + $border-size * 2) + 2px,
-  "thu" 3 * ($cell-size + $border-size) + 6px,
-  "fri" 4 * ($cell-size + $border-size) + 8px,
-  "sat" 5 * ($cell-size + $border-size * 2) + 5px,
-  "sun" 6 * ($cell-size + $border-size * 2) + 5px
-);
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
 @each $day, $margin in $start-days {
   .calendar--start-day--#{$day} {
     .calendar__day:first-child {
@@ -42,41 +24,6 @@ $start-days: (
   .calendar--month-length--#{$i} {
     .calendar__day:nth-child(n+#{$i + 1}) {
       display: none;
-    }
-  }
-}
-
-// Styles
-.calendar {
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $border-size;
-  padding: $padding-size;
-  max-width: $calendar-width;
-
-  &__day {
-    width: $cell-size;
-    height: $cell-size;
-    border: $border-size solid $black;
-    background-color: $gray;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: $font-size;
-    text-align: center;
-    position: relative;
-
-    &::before {
-      content: "";
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-      @include hover-styles;
     }
   }
 }
