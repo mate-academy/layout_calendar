@@ -41,10 +41,6 @@ body {
         content: "#{$n}";
       }
     }
-
-    &:first-child {
-      margin-left: ($calendar-width - $day-size + $gap - 5px);
-    }
   }
 }
 
@@ -53,5 +49,11 @@ body {
     .calendar__day:nth-child(n + #{$k + 1}) {
       display: none;
     }
+  }
+}
+
+@each $day, $ident in $start-day {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $ident * ($day-size + $gap);
   }
 }
