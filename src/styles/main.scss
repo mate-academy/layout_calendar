@@ -41,10 +41,8 @@
   }
 
   @each $day, $indent in $start-day {
-    &--start-day-#{$day} &__date {
-      &:first-child {
-        margin-left: ($calendar-size * 6 + $calendar-gap * 6) * $indent;
-      }
+    &--start-day-#{$day} > .calendar__date:first-child {
+        margin-left: ($calendar-size + $calendar-gap) * ($indent - 1);
     }
   }
 
