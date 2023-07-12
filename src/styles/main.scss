@@ -1,4 +1,4 @@
-$calendar-day:100px;
+@import "./variables";
 
 body {
   margin: 0;
@@ -14,11 +14,10 @@ body {
 
 .calendar {
   display: flex;
-  width: 706px;
-  min-width: 706px;
+  width: (7 * $calendar-day) + (6 * $gap);
   padding: 10px;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap;
 
   &__day {
     display: flex;
@@ -29,7 +28,11 @@ body {
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
-    transition: all 0.5s;
+
+    transition-duration: 0.5s;
+    transition-timing-function: ease ;
+    transition-delay: 0s;
+    transition-property: transform(y);
 
     &:hover {
       cursor: pointer;
@@ -37,14 +40,6 @@ body {
       transform: translateY(-20px);
     }
   }
-
-  $days:
-    "tue" 101px,
-    "wed" 202px,
-    "thu" 303px,
-    "fri" 404px,
-    "sat" 505px,
-    "sun" 606px;
 
   @each $day, $margin in $days {
     &--start-day-#{$day} {
