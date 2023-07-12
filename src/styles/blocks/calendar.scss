@@ -35,16 +35,16 @@ body {
       background-color: $day-clr-hover;
       cursor: pointer;
     }
-  }
 
-  @for $n from 1 through 31 {
-    &__day:nth-child(#{$n}):after {
-      content: "#{$n}";
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n}):after {
+        content: "#{$n}";
+      }
     }
-  }
 
-  &__day:first-child {
-    margin-left: ($calendar-width - $day-size + $gap - 5px);
+    &:first-child {
+      margin-left: ($calendar-width - $day-size + $gap - 5px);
+    }
   }
 }
 
