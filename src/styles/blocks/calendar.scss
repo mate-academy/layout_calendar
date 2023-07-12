@@ -17,14 +17,16 @@ body {
   flex-wrap: wrap;
   gap: 1px;
 
-  &__fields {
+  &__field {
     @include field-size($field-width);
     background-color: #eee;
     border: $border-field solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s;
+    transition-duration: 0.5s;
+    transition-delay: 0.5s;
+    transition-timing-function: ease-in-out;
     font-family: Arial, Helvetica, sans-serif;
     font-size: #{$font-size};
 
@@ -32,13 +34,12 @@ body {
       &:nth-child(#{$index}) {
         &::before {
           content: "#{$index}";
-
         }
 
         &:hover {
           cursor: pointer;
           background-color: pink;
-          transform: translateY(-5px);
+          transform: translateY(-20px);
         }
       }
     }
