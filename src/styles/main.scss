@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .main {
   display: flex;
   justify-content: center;
@@ -10,28 +12,29 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
   margin: auto;
-  width: 721px;
-  padding: 10px;
-  gap: 1px;
+  width: $calendar-width;
+  gap: $gaps;
 
   &__field {
     background-color: #eee;
     height: 100px;
     width: 100px;
     border: solid black 1px;
-    font-size: 30px;
+    font-size: $default-font;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s;
+    transition: transform 0.5s;
   }
 
   &__field:hover {
     transform: translate(0, -20px);
     background-color: pink;
-    cursor: pointer;
   }
+
+  cursor: pointer;
 
   @for $day-number from 1 through 31 {
     &__field:nth-child(#{$day-number})::before {
