@@ -4,7 +4,6 @@
   display: flex;
   flex-wrap: wrap;
   width: $calendar-size;
-  padding: 10px;
   gap: $gap-size;
   font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
@@ -18,10 +17,10 @@
     box-sizing: border-box;
     text-align: center;
     line-height: $box-size;
-    transition: transform 0.5s, background-color pink;
+    transition: transform 0.5s;
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
       }
     }
