@@ -26,10 +26,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition-duration: 0.5s;
-    transition-delay: 0.5s;
-    transition-timing-function: ease-in-out;
-    transition-property: all;
+    transition: transform 0.5s;
     font-size: #{$font-size};
 
     @for $index from 1 through 31 {
@@ -37,13 +34,13 @@ body {
         &::before {
           content: "#{$index}";
         }
-
-        &:hover {
-          cursor: pointer;
-          background-color: pink;
-          transform: translateY(-20px);
-        }
       }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
   }
 }
