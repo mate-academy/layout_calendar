@@ -1,3 +1,8 @@
+@import url(_variables.scss);
+
+$field--background-color: #eee;
+$field--hover-color: pink;
+
 body {
   margin: 0;
 }
@@ -20,7 +25,7 @@ body {
   gap: 1px;
 
   &__field {
-    background-color: #eee;
+    background-color: $field--background-color;
     height: 100px;
     width: 100px;
     border: solid black 1px;
@@ -28,12 +33,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: all 0.5s;
+    transition: transform 0.5s;
   }
 
   &__field:hover {
     transform: translate(0, -20px);
-    background-color: pink;
+    background-color: $field--hover-color;
     cursor: pointer;
   }
 
@@ -44,13 +49,11 @@ body {
   }
 
   @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length}
+    &--month-length-28-#{$month-length}
     .calendar__field:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
-
-  $start-day: "mon" 0,"tue" 1,"wed" 2,"thu" 3,"fri" 4,"sat" 5,"sun" 6;
 
   @each $name, $day-number in $start-day {
     &--start-day-#{$name} > :first-child {
