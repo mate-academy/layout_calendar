@@ -4,6 +4,13 @@
   width: $max-width;
   gap: 1px;
 
+  @for $length from 28 through 31 {
+    &--month-length-#{$length}
+    &__date:nth-last-of-type(-n + #{31 - $length}) {
+      display: none;
+    }
+  }
+
   &__date {
     box-sizing: border-box;
     height: 100px;
@@ -26,20 +33,12 @@
       transform: translate(0, -20px);
       cursor: pointer;
     }
-  }
-
-  @each $day, $colum in $week {
-    &--start-day-#{$day} {
-      &:first-child {
-        margin-left: ($size-block + $blocks-gap)*($colum - 1);
+    @each $day, $colum in $week {
+      &--start-day-#{$day} {
+        &:first-child {
+          margin-left: ($size-block + $blocks-gap)*($colum - 1);
+        }
       }
-    }
-  }
-
-  @for $length from 28 through 31 {
-    &--month-length-#{$length}
-    &__date:nth-last-of-type(-n + #{31 - $length}) {
-      display: none;
     }
   }
 }
