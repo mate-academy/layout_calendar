@@ -1,0 +1,26 @@
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: $gap;
+
+  padding: $padding;
+  width: ($padding*2)+($sellSize*7)+($gap*6);
+
+  &--start-day {
+    @each $startDayName, $startDayNum in $startDayVaues {
+      &--#{$startDayName}>:first-child {
+        margin-left: ($sellSize+$gap)*$startDayNum;
+      }
+    }
+  }
+
+  &--month-length {
+    @for $i from 28 through 31 {
+      &--#{$i}>:nth-child(n + #{$i+1}) {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import "../utils/variables.scss";
+
+.calendar__day {
+  display: flex;
+  box-sizing: border-box;
+  background-color: #eee;
+  height: $sellSize;
+  width: $sellSize;
+  border: 1px solid black;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: pink;
+    transition: all 0.3s;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child( n + #{$i})::before {
+      content: "#{$i}";
+    }
+  }
+}
