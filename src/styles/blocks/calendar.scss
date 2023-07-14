@@ -1,12 +1,3 @@
-body {
-  margin: 0;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -34,22 +25,20 @@ body {
     height: $daySize;
     width: $daySize;
     border: 1px solid black;
-    background-color: #eee;
+    background-color: $color;
+    margin-left: $current-day;
+    cursor: pointer;
     transition: background-color 0.5s, transform 0.5s;
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    align-items: center;
-    justify-content: center;
+    @include flex-centering;
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
 
     @for $day from 1 through 31 {
-      &:nth-child(#{$day})::before {
+      &:nth-child(#{$day})::after {
         content: "#{$day}";
       }
     }
