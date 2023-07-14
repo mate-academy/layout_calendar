@@ -1,0 +1,86 @@
+@import "mixins";
+
+/* #start region Variable */
+$sans-serif: "Helvetica Neue", "Arial", sans-serif;
+$squareBox: 100px;
+$black: #000;
+$border: 1px solid $black;
+
+$size-gap: 1px;
+$paddingCalendar: 10px;
+$days:
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
+$dayInWeek: 7;
+$monthLength: 31;
+/* #end region*/
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh;
+  @include centerFlex;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+
+  padding: $paddingCalendar;
+  gap: $size-gap;
+  max-width: ($paddingCalendar * 2) +
+    ($squareBox * $dayInWeek) +
+    ($dayInWeek * $size-gap - $size-gap);
+
+  &--start-day {
+    @each $name, $index in $days {
+      &--#{$name} > :first-child {
+        margin-left: ($squareBox + $size-gap) * ($index - 1);
+      }
+    }
+  }
+
+  &--month-length {
+    @for $i from 28 through $monthLength {
+      &--#{$i} > :nth-child(n + #{$i +1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @include centerFlex;
+
+    width: $squareBox;
+    height: $squareBox;
+    border: $border;
+
+    transition: all 0.5s;
+    background-color: #eee;
+
+    @for $i from 1 through $monthLength {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:before {
+      font-family: $sans-serif;
+      font-size: 30px;
+      line-height: calc(#{$squareBox} - (1px * 2));
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cbff;
+      transform: translateY(-20px);
+    }
+  }
+}
