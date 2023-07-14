@@ -11,6 +11,14 @@
     }
   }
 
+  @each $day, $colum in $week {
+    &--start-day-#{$day} {
+      :first-child {
+        margin-left: ($size-block + $blocks-gap)*($colum - 1);
+      }
+    }
+  }
+
   &__date {
     box-sizing: border-box;
     height: 100px;
@@ -33,12 +41,6 @@
       transform: translate(0, -20px);
       cursor: pointer;
     }
-    @each $day, $colum in $week {
-      &--start-day-#{$day} {
-        &:first-child {
-          margin-left: ($size-block + $blocks-gap)*($colum - 1);
-        }
-      }
-    }
+    
   }
 }
