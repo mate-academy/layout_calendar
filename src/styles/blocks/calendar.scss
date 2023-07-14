@@ -1,0 +1,46 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__field {
+    width: $field-width;
+    height: $field-width;
+    background-color: #eee;
+    border: $border-field solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+    font-size: #{$font-size};
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}) {
+        &::before {
+          content: "#{$index}";
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
