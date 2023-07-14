@@ -1,0 +1,32 @@
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: $columns * $width100px + ($columns - 1) * 1px;
+  gap: $gap;
+  padding: 10px;
+}
+
+.calendar__days {
+  box-sizing: border-box;
+  text-align: center;
+  line-height: $height100px;
+  background-color: #eee;
+  border: 1px solid #000;
+  width: $width100px;
+  height: $height100px;
+
+  transition: transform 500ms;
+
+  &::before {
+    content: " ";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+
+  &:hover {
+    background-color: #ffc0cb;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}

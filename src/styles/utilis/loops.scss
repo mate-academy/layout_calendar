@@ -1,0 +1,22 @@
+@import "utilis/variables.scss";
+
+@each $day, $value in $start-day-values {
+  .calendar--start-day-#{$day} {
+    .calendar__days:first-child {
+      margin-left: calc((#{$value} - 1) * (#{$width100px} + 1px));
+    }
+  }
+}
+
+@each $length in $month-length-values {
+  .calendar--month-length-#{$length}
+  .calendar__days:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__days:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
