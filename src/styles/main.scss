@@ -1,3 +1,35 @@
+@import "variables";
+@import "calendar";
+
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+@each $day, $margin in $start-days {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+}
+
+// Modifier classes for month length
+@for $i from 28 through 31 {
+  .calendar--month-length--#{$i} {
+    .calendar__day:nth-child(n+#{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
 }
