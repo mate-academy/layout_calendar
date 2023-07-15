@@ -1,0 +1,65 @@
+@import "variable";
+@import "mixins";
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh;
+  @include centerFlex;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+
+  padding: $paddingCalendar;
+  gap: $size-gap;
+  max-width: $sizeCalendar;
+
+  &--start-day {
+    @each $name, $index in $days {
+      &--#{$name} > :first-child {
+        margin-left: ($squareBox + $size-gap) * ($index - 1);
+      }
+    }
+  }
+
+  &--month-length {
+    @for $i from 28 through $monthLength {
+      &--#{$i} > :nth-child(n + #{$i +1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    @include centerFlex;
+
+    width: $squareBox;
+    height: $squareBox;
+    border: $border;
+
+    transition: all 0.5s;
+    background-color: #eee;
+
+    @for $i from 1 through $monthLength {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:before {
+      font-family: "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+      font-size: 30px;
+      line-height: calc(#{$squareBox} - (1px * 2));
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cbff;
+      transform: translateY(-20px);
+    }
+  }
+}
