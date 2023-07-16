@@ -1,3 +1,78 @@
+$cellSize: 100px;
+$borderColor: #000;
+$backgroundColor: #eee;
+$textColor: #000;
+$hover: pink;
+$numberFont: "Arial";
+$numberSize: 30px;
+$gap: 1px;
+$padding: 10px;
+$daysInMonth: 31;
+$calendarWidth: calc(7 * #{$cellSize} + 8 * #{$gap} + 2 * #{$padding});
+$monthLength: 28, 29, 30, 31;
+$startDay: (
+  "mon": 0,
+  "tue": $cellSize + $gap,
+  "wed": 2*($cellSize + $gap),
+  "thu": 3*($cellSize + $gap),
+  "fri": 4*($cellSize + $gap),
+  "sat": 5*($cellSize + $gap),
+  "sun": 6*($cellSize + $gap)
+);
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendarWidth;
+
+  &__day {
+    position: relative;
+    width: $cellSize;
+    height: $cellSize;
+    background-color: $backgroundColor;
+    border: 1px solid $borderColor;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color, transform 0.5s ease-in-out;
+
+    &:hover {
+      background-color: $hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through $daysInMonth {
+    & :nth-child(#{$i})::before {
+      content: "#{$i}";
+      font-family: $numberFont;
+      font-size: $numberSize;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @each $day, $margin in $startDay {
+    &--start-day-#{$day} :first-child {
+      margin-left: #{$margin};
+    }
+  }
+
+  @each $length in $monthLength {
+    &--month-length-#{$length} :not(:nth-child(-n + #{$length})) {
+      display: none;
+    }
+  }
 }
