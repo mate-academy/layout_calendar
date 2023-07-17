@@ -1,12 +1,15 @@
 $day-start: (
-  "mon": 0,
-  "tue": 101px,
-  "wed": 202px,
-  "thu": 303px,
-  "fri": 404px,
-  "sat": 505px,
-  "sun": 606px
+  0: "mon",
+  1: "tue",
+  2: "wed",
+  3: "thu",
+  4: "fri",
+  5: "sat",
+  6: "sun",
 );
+
+$day-margin: 100;
+$day-border: 1px;
 
 * {
   box-sizing: border-box;
@@ -29,9 +32,9 @@ body {
   width: 707px;
   gap: 1px;
 
-  @each $name, $space in $day-start {
-    &--start-day-#{$name} > .calendar__item:first-child {
-      margin-left: $space;
+  @each $number, $day in $day-start {
+    &--start-day-#{$day} > .calendar__item:first-child {
+      margin-left: (($day-margin + $day-border) * $number);
     }
   }
 
