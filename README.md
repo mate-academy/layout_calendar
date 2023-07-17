@@ -1,6 +1,6 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://kabaktechh.github.io/layout_calendar/)
+- [DEMO LINK](https://kabaktech.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://kabaktech.github.io/layout_calendar/report/html_report/)
 
 ___
