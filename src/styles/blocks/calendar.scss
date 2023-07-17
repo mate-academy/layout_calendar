@@ -1,24 +1,34 @@
-@for $day-number from 1 through 31 {
-  .calendar :nth-child(#{$day-number})::before {
-    content: "#{$day-number}";
-  }
-}
-
-@for $last-day from 28 through 31 {
-  .calendar--month-length--#{$last-day} :nth-child(n + #{$last-day+ 1}) {
-    visibility: hidden;
-  }
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
-  max-width: 710px;
+  max-width: 726px;
   margin: 0 auto;
   margin-top: 100px;
+  padding: 10px;
+
+  @each $start-day, $position-day in $weekdays {
+    &--start-day--#{$start-day} :first-child {
+      margin-left: ($position-day * ($cell-width + $cell-gap));
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day+ 1}) {
+      visibility: hidden;
+    }
+  }
+
+  @for $day-number from 1 through 31 {
+    & :nth-child(#{$day-number})::before {
+      content: "#{$day-number}";
+    }
+  }
 
   &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: $cell-width;
     height: $cell-height;
     border: 1px solid $black-color;
@@ -31,15 +41,11 @@
 
     &:hover {
       transform: translateY(-20px);
-      
-      cursor: pointer;
-      background-color: #ffc0cb;
-    }
-  }
 
-  @each $start-day, $position-day in $weekdays {
-    .calendar__day--#{$start-day}:first-child {
-      margin-left: ($position-day * ($cell-width + $cell-gap));
+      background-color: #ffc0cb;
+      cursor: pointer;
     }
   }
 }
+
+
