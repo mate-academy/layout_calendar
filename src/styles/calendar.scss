@@ -1,0 +1,52 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  padding: $calendar-padding;
+  width: ($day-size + $calendar-gap) * 7 - $calendar-gap;
+
+  @each $weekday, $weekday-count in $weekdays {
+    &--start-day--#{$weekday} > &__day:first-child {
+      margin-left: ($day-size + $calendar-gap) * $weekday-count;
+    }
+  }
+
+  // i can’t use 'hidden' as a default value in calendar__day
+  // it won’t work as in description
+  @for $m-length from 28 through 31 {
+    &--month-length--#{$m-length}
+    > &__day:nth-child(n + #{$m-length}):not(:nth-child(#{$m-length})) {
+      visibility: hidden;
+    }
+  }
+
+  &__day {
+    display: block;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+
+    background-color: $grey;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+
+    transition: all 0.5s;
+
+    @for $day-count from 1 through 31 {
+      &:nth-child(#{$day-count})::before {
+        content: "#{$day-count}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
