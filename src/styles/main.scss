@@ -1,3 +1,62 @@
+$ceil-width: 100px;
+$ceit-height: 100px;
+$days: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6,
+);
+$month-length: 28, 29, 30, 31;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  max-width: $ceil-width * 7 + 14px;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    width: $ceil-width;
+    height: $ceit-height;
+    font-size: 30px;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+  // Display numbers in day blocks.
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i}):before {
+      content: "#{$i}";
+    }
+  }
+  // Set the margin to increase day's block width
+  // to make other elements go to next line if there is no space.
+  @each $day, $n in $days {
+    &--start-day--#{$day} > &__day:first-child {
+      margin-left: $ceil-width * $n + $n;
+    }
+  }
+
+  // Get the {i}th div-element and selects next block
+  // to it and set its display to none.
+  // i value depends on the month length
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} > &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
