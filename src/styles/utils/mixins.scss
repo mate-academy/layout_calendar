@@ -1,0 +1,23 @@
+@mixin hoverEffect {
+  transition-duration: $transition-duration;
+  &:hover {
+    background-color: $cell-color-secondary;
+    transform: translateY(-20px);
+  }
+}
+
+@mixin dayNumbers {
+  @for $i from 1 through $max-days-number {
+    &:nth-child(#{$i}) {
+      &::before {
+        content: "#{$i}";
+        font-size: $font-size;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $cell-size;
+        height: $cell-size;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.calendar {
+  $days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, san 6;
+  display: flex;
+  flex-wrap: wrap;
+  width: $cell-size * 7;
+
+  &__day {
+    display: block;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $cell-color-primary;
+    border: 1px solid $cell-color-border;
+
+    @include hoverEffect;
+    @include dayNumbers;
+  }
+
+  @each $day, $position in $days {
+    &--start-day-#{$day} &__day:first-of-type {
+      margin-left: $cell-size * $position;
+    }
+  }
+
+  @for $number from $min-days-number through $max-days-number {
+    &--month-length-#{$number} &__day:not(:nth-child(-n + #{$number})) {
+      display: none;
+    }
+  }
+}
