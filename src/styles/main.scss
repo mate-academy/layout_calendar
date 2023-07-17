@@ -12,7 +12,6 @@
 
 html,
 body {
-  overflow-x: hidden;
   height: 100vh;
 }
 
@@ -30,25 +29,16 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calendarWidth($day-size, $day-gap, $calendar-pdg);
+  width: calendarWidth($day-size, $day-gap);
   gap: $day-gap;
-  padding: $calendar-pdg;
 
-  $days:
-  "tue" 101px,
-  "wed" 202px,
-  "thu" 303px,
-  "fri" 404px,
-  "sat" 505px,
-  "sun" 606px;
-
-@each $name, $size in $days {
-  &--start-day-#{$name} {
-    .calendar__day:nth-child(1) {
-      margin-left: $size;
+  @each $name, $day-size in $days {
+    &--start-day-#{$name} {
+      .calendar__day:nth-child(1) {
+        margin-left: $day-size * 101px;
+      }
     }
   }
-}
 
   &__day {
     @include daySize($day-size);
@@ -66,18 +56,22 @@ body {
       transform: translateY(-20px);
     }
   }
-}
 
-@for $index from 1 through 31 {
-  .calendar__day:nth-child(#{$index})::before {
-    content: "#{$index}";
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+    }
   }
-}
 
-@for $j from 28 through 31 {
-  .calendar--month-length-#{$j} {
-    & :nth-child(n+#{$j + 2}) {
-      display: none;
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 }
+
+
+
+
