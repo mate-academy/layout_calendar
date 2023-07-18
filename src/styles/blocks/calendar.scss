@@ -1,0 +1,63 @@
+.wraper {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gapSize;
+  width: calendarWidth($sellSize, $gapSize, $calendarPadding);
+  padding: 0 $calendarPadding;
+
+  &__day {
+    width: $sellSize;
+    height: $sellSize;
+    font-size: 30px;
+    text-align: center;
+    line-height: $sellSize;
+    border: solid black 1px;
+    background-color: #eee;
+    transition-duration: 0.5s ;
+
+    &:hover {
+      transform: translate(0, -20px) ;
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    &::before {
+      content: "#{$i}";
+    }
+  }
+}
+
+$days:
+  "mondey" 0,
+  "tuesday" 1,
+  "wednesday" 2,
+  "thursday" 3,
+  "friday" 4,
+  "saturday" 5,
+  "sunday" 6;
+
+@each $day, $index in $days {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc((#{$sellSize} + #{$gapSize}) * #{$index});
+    }
+  }
+}
+
+@for $monthLength from 28 through 31 {
+  $nthChild: $monthLength + 1;
+  .calendar--month-length--#{$monthLength} {
+    .calendar__day:nth-child(n + #{$nthChild}) {
+      display: none;
+    }
+  }
+}
