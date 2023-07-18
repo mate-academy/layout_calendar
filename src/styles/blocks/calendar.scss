@@ -1,11 +1,3 @@
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -16,14 +8,14 @@
   padding: 10px;
 
   @each $num, $day in $days {
-    &--start-day--#{$day} :first-child {
+    &--start-day--#{$day}:first-child {
       margin-left: $num * ($daySize + $gap);
     }
   }
 
   @for $day from 28 through 31 {
     &--month-length--#{$day} {
-      :nth-child(n + #{$day + 1}) {
+      calendar__day:nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
@@ -55,7 +47,7 @@
 
     @for $day from 28 through 31 {
       &--month-length--#{$day} {
-        &:nth-child(n + #{$day + 1}) {
+        calendar__day:nth-child(n + #{$day + 1}) {
           display: none;
         }
       }
