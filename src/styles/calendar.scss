@@ -13,38 +13,36 @@
     }
   }
 
-  @for $length from 28 through 31 {
-    &--month-length--#{$length} {
-      .calendar__day:nth-child(n + #{$length + 1}) {
-        display: none;
-      }
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__day:nth-last-of-type(-n + #{31 - $i}) {
+      display: none;
     }
   }
+}
 
-  &__day {
-    background-color: $background-color;
-    max-width: $cell-size;
-    width: 100%;
-    height: $cell-size;
-    box-sizing: border-box;
-    display: flex;
-    font-size: $font-size;
-    font-family: $font;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid $border-color;
-    transition: background-color 0.5s, transform 0.5s ease-in-out;
-    cursor: pointer;
+.calendar__day {
+  background-color: $background-color;
+  max-width: $cell-size;
+  width: 100%;
+  height: $cell-size;
+  box-sizing: border-box;
+  display: flex;
+  font-size: $font-size;
+  font-family: $font;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $border-color;
+  transition: background-color 0.5s, transform 0.5s ease-in-out;
+  cursor: pointer;
 
-    &:hover {
-      background-color: $background-color--hover;
-      transform: translateY(-20px);
-    }
+  &:hover {
+    background-color: $background-color--hover;
+    transform: translateY(-20px);
+  }
 
-    @for $day from 1 through 31 {
-      &:nth-child(#{$day})::before {
-        content: "#{$day}";
-      }
+  @for $day from 1 through 31 {
+    &:nth-child(#{$day})::before {
+      content: "#{$day}";
     }
   }
 }
