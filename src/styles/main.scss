@@ -24,7 +24,7 @@ body {
     width: $daySize;
     border: 1px solid #000;
     background-color: #eee;
-    transition: all transform 0.5s;
+    transition: color 0.5s, transform 0.5s;
     font-size: 30px;
   }
 
@@ -41,13 +41,13 @@ body {
   }
 
   @each $number, $day in $start-day-week {
-    &--start-day-#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: ($daySize + $dayGap) * ($number - 1);
     }
   }
 
   @for $index from 28 through $month-length {
-    &--month-length-#{$index}
+    &--month-length--#{$index}
     &__day:nth-child(n + #{$index + 1}) {
       display: none;
     }
