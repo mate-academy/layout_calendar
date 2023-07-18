@@ -1,0 +1,35 @@
+.calendar {
+  margin: 0 auto;
+  width: $cell-width * 7 + (6 * $gap);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: $gap;
+  padding-top: 50px;
+
+  &__cell {
+    position: relative;
+    width: 98px;
+    height: 98px;
+    color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+
+    &::before {
+      content: "";
+      color: #000;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+  }
+}
