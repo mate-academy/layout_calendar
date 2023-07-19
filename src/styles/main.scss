@@ -20,15 +20,18 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
+
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  box-sizing: border-box;
+
   width: $calendar-width;
   padding: $calendar-padding;
 
   &__day {
     box-sizing: border-box;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -36,14 +39,22 @@ body {
 
     width: $square-side;
     height: $square-side;
-    border: 1px solid black;
+    border: 1px solid #000;
     background-color: #eee;
+
+    transition: 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffc0cb;
+    }
+
   }
 
   @each $day, $number in $days-names {
