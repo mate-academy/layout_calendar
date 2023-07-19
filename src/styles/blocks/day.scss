@@ -1,0 +1,31 @@
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  height: $day-size;
+  width: $day-size;
+  border: 1px solid black;
+  box-sizing: border-box;
+  font-size: 30px;
+  transition-duration: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $date from 1 through 31 {
+    &--#{$date}::before {
+      content: "#{$date}";
+    }
+  }
+
+  $week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+  @each $day, $num in $week {
+    &--start-day--#{$day} {
+      margin-left: ($day-size + $gap) * $num;
+    }
+  }
+}

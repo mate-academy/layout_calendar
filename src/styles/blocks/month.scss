@@ -1,0 +1,12 @@
+.month {
+  display: flex;
+  gap: $gap;
+  max-width: 7 * $day-size + 10px;
+  flex-wrap: wrap;
+
+  @for $length from 28 through 31 {
+    &-length--#{$length} :not(:nth-child(-n + #{$length})) {
+      visibility: hidden;
+    }
+  }
+}
