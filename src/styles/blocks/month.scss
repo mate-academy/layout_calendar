@@ -1,0 +1,25 @@
+.month {
+  display: flex;
+  gap: $gap;
+  max-width: 7 * $day-size + 10px;
+  flex-wrap: wrap;
+
+  @for $date from 1 through 31 {
+    & :nth-child(n + #{$date})::before {
+      content: "#{$date}";
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--length--#{$length} :not(:nth-child(-n + #{$length})) {
+      visibility: hidden;
+    }
+  }
+
+  $week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+  @each $day, $num in $week {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($day-size + $gap) * $num;
+    }
+  }
+}
