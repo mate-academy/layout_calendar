@@ -1,9 +1,11 @@
+@import "../utils/variables";
+
 .day {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: $size-day;
-  height: $size-day;
+  width: $cell-size;
+  height: $cell-size;
   background-color: #eee;
   box-sizing: border-box;
   border: 1px solid black;
@@ -15,9 +17,9 @@
     background-color: mistyrose;
   }
 
-  @for $i from 1 through 31 {
-    &:nth-child(#{$i})::before {
-      content: "#{$i}";
+  @for $day from 1 through 31 {
+    &:nth-child(#{$day})::before {
+      content: "#{$day}";
       font-size: 30px;
     }
   }

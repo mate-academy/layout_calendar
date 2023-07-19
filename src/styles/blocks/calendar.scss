@@ -1,7 +1,9 @@
+@import "../utils/variables";
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: (7 * $size-day) + 2 * $padding-month;
+  width: $calendar-width;
   gap: $gap-month;
   margin: 50px auto;
 
@@ -13,8 +15,8 @@
     }
   }
 
-  @each $day, $margin, $count in $days  {
-    &__start-day--#{$day} > :first-child {
+  @each $dayWeek, $margin, $count in $days  {
+    &__start-day--#{$dayWeek} > :first-child {
       margin-left: $margin + $gap-month * $count;
     }
   }
