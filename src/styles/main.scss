@@ -41,18 +41,18 @@ body {
   }
 }
 
-$days-of-week: (
-  mon: 0 ,
-  tue: 1 ,
-  wed: 2 ,
-  thu: 3 ,
-  fri: 4 ,
-  sat: 5 ,
-  sun: 6 ,
-);
+@for $i from 28 through 31 {
+  .calendar__month-length--#{$i} {
+    .calendar__day:nth-child( n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
 
-@each $day, $i in $days-of-week {
-  .month .day:nth-child(#{$i}) {
-    margin-left: $i + 20px;
+$start-of-the-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
+
+@each $day, $i in $start-of-the-week {
+  .calendar__start-day--#{$day} :first-child {
+    margin-left: (102px) * ($i - 1);
   }
 }
