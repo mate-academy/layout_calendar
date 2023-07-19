@@ -1,3 +1,58 @@
-body {
-  margin: 0;
+@import "./variables.scss";
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 9px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto;
+  width: $calendar-width;
+  gap: $gaps;
+  padding: $default-padding;
+
+  &__field {
+    background-color: #eee;
+    height: $field-size;
+    width: $field-size;
+    border: solid black 1px;
+    font-size: $default-font;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+  }
+
+  &__field:hover {
+    transform: translate(0, -20px);
+    background-color: pink;
+  }
+
+  cursor: pointer;
+
+  @for $day-number from 1 through 31 {
+    &__field:nth-child(#{$day-number})::before {
+      content: "#{$day-number}";
+    }
+  }
+
+  @for $month-lenght from 28 through 31 {
+    &--month-length--#{$month-lenght}
+    .calendar__field:nth-child(n + #{$month-lenght + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $day-number in $start-day {
+    &--start-day-#{$name} > :first-child {
+      margin-left: 100px * $day-number + 1px * ($day-number);
+    }
+  }
 }
