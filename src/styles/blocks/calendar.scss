@@ -1,19 +1,42 @@
 .calendar {
-  margin: 0 auto;
-  width: $cell-width * 7 + (6 * $gap);
+  width: $cell-width * $max-cells-per-row + $gap-sum;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-end;
   gap: $gap;
   padding-top: 50px;
 
+  @each $day, $number in $days {
+    &--start-day-#{$day} {
+      .calendar__cell:first-child {
+        margin-left: ($cell-width * $number + $gap * $number);
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__cell:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @mixin square($size) {
+    width: $size;
+    height: $size;
+  }
+
   &__cell {
     position: relative;
-    width: 98px;
-    height: 98px;
+    @include square($cell-size);
     color: #eee;
     border: 1px solid #000;
     transition: transform 0.5s;
+
+    &:nth-child(23),
+    &:nth-child(30) {
+      margin: 0;
+    }
 
     &::before {
       content: "";
