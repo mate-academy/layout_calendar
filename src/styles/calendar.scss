@@ -1,0 +1,50 @@
+$square-size: 100px;
+$day-of-week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+.calendar {
+  width: 710px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+
+  &__day {
+    background-color: #eee;
+    width: $square-size;
+    height: $square-size;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $number from 1 through 31 {
+    & :nth-child(#{$number})::before {
+      content: "#{$number}";
+    }
+  }
+
+  @each $start-day, $i in $day-of-week {
+    &--start-day--#{$start-day} :nth-child(1) {
+      margin-left: #{$i*101}px;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day}
+    :nth-child(n+#{$last-day+1}):nth-child(-n+31) {
+      display: none;
+    }
+  }
+}
