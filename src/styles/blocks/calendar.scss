@@ -1,0 +1,25 @@
+.calendar {
+  width: 7 * $block-size + 6 * $gap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name, $day in $week {
+    &--start-day--#{$name} :nth-child(1) {
+      margin-left: $day;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    transform: translateY(-20px);
+    background-color: #ffbfcb;
+    transition-duration: 0.5s;
+  }
+}
