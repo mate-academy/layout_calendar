@@ -33,9 +33,10 @@
     border: 1px solid #000;
     transition: transform 0.5s;
 
-    &:nth-child(23),
-    &:nth-child(30) {
-      margin: 0;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
     }
 
     &::before {
