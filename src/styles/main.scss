@@ -1,3 +1,60 @@
+$daysOfWeek: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+$sizeCellDay: 100px;
+$sizeGap: 1px;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  width: calc((#{$sizeCellDay} * 7) + (#{$sizeGap} * (7 - 1)));
+  padding: 10px;
+  margin: 0 auto;
+
+  flex-wrap: wrap;
+  gap: $sizeGap;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    width: $sizeCellDay;
+    height: $sizeCellDay;
+    border: 1px solid black;
+
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $dayOfMonth from 1 through 31 {
+      &:nth-child(#{$dayOfMonth}) {
+        &::before {
+          content: "#{$dayOfMonth}";
+          font-family: "Arial", sans-serif;
+          font-size: 30px;
+        }
+      }
+    }
+  }
+
+  @each $dayOfWeek, $numberDayOfWeek in $daysOfWeek {
+    &--start-day-#{$dayOfWeek} :first-child {
+      margin-left: calc((#{$sizeCellDay} + #{$sizeGap}) * #{$numberDayOfWeek});
+    }
+  }
+
+  @for $lastDayOfMonth from 28 through 31 {
+    &--month-length-#{$lastDayOfMonth} :nth-child(n + #{$lastDayOfMonth + 1}) {
+      display: none;
+    }
+  }
 }
