@@ -1,14 +1,15 @@
-$days-of-week: 29;
+@use "./variables" as val;
 
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
-  position: fixed;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
+  position: fixed;
   width: 780px;
   top: 50%;
   left: 50%;
@@ -19,37 +20,23 @@ body {
     width: 100px;
     height: 100px;
     border: 1px solid black;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: cursor, background-color, transform, 0.5s;
   }
+ 
 
-  @for $i from 1 through $days-of-week {
-    &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+  @for $numb-day from 1 through val.$quantity-days {
+    &__day:nth-child(#{$numb-day})::before {
+      content: "#{$numb-day}";
     }
   }
 
-  @for $i from 28 through $days-of-week {
-    @if $days-of-week == 28 {
-      &__day:nth-child(n + 29) {
-        display: none;
-      }
-    }
-
-    @else if $days-of-week == 29 {
-      &__day:nth-child(n + 30) {
-        display: none;
-      }
-    }
-
-    @else if $days-of-week == 30 {
-      &__day:nth-child(n + 31) {
-        display: none;
-      }
+  @for $day from (val.$quantity-days + 1) through 32 {
+    &__day:nth-child(#{$day}) {
+      display: none;
     }
   }
 
@@ -57,5 +44,13 @@ body {
     cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
+  }
+  
+  @each $day, $shift in val.$days-of-week {
+    @if $day == val.$start-day {
+      .start-day {
+        margin-left: $shift;
+      }
+    }
   }
 }
