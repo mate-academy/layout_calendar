@@ -1,3 +1,74 @@
-body {
+@import "./utils/variables";
+@import "./utils/mixins";
+
+@function size($cell-Size, $gap-Param) {
+  @return 7 * $cell-Size + 6 * $gap-Param;
+}
+
+@function startDayMargin($cell-Size, $gap-Param, $num) {
+  @return (7 - $num) * $cell-Size + (7 - $num) * $gap-Param;
+}
+
+.body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  width: size($cellSize, $gapParam);
+  padding: 10px;
+  gap: $gapParam;
+
+  &__day {
+    @include square($cellSize);
+    margin: 0;
+    padding: 0;
+    border: $borderParams;
+    box-sizing: border-box;
+    position: relative;
+    background-color: $mainBgColor;
+    list-style: none;
+    transition: all 0.5s ease-in;
+
+    &::before {
+      display: block;
+      text-align: center;
+      line-height: $cellSize;
+      @include fontStyles($fontFamilyParam, $fontSizeParam);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffc0cb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $day from 1 through $daysCount {
+    & :nth-child(#{$day}) {
+      &::before {
+        content: "#{$day}";
+      }
+    }
+
+    &-month-length--#{$day} {
+      & :not(:nth-child(-n + #{$day})) {
+        display: none;
+      }
+    }
+  }
+
+  @each $name, $startDay in $startDays {
+    &-start-days--#{$name} {
+      & :first-child {
+        margin-left: startDayMargin($cellSize, $gapParam, $startDay);
+      }
+    }
+  }
 }
