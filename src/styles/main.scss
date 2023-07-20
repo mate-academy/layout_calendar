@@ -1,3 +1,68 @@
-body {
+$box-size: 100px;
+$spaces: 1px;
+$full-width: 720px;
+$box-color: #eee;
+$choosed-color: #fbbbcb;
+$days-of-weak:
+  mon 0,
+  tue 1,
+  wed 2,
+  thu 3,
+  fri 4,
+  sat 5,
+  sun 6;
+
+.cover {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.bodi {
   margin: 0;
+}
+
+.calendar {
+  padding: 20px 10px;
+  width: $full-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spaces;
+
+  &__day {
+    width: $box-size;
+    height: $box-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: $box-color;
+    border: 1px solid #000;
+    transition: background-color 500ms, transform 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $choosed-color;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}) {
+        &::before {
+          content: "#{$day}";
+        }
+      }
+    }
+  }
+
+  @each $day, $number in $days-of-weak {
+    &--start-day--#{$day} > :first-child {
+      margin-left: calc((#{$box-size + $spaces}) * #{$number});
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} > :not(:nth-child(-n+#{$month-length})) {
+      display: none;
+    }
+  }
 }
