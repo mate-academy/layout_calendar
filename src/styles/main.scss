@@ -1,3 +1,72 @@
+@import "../util/variable.scss";
+
+html {
+  font-family: "Arial", sans-serif;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  gap: $calendar-gap;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  width: $container-width;
+
+  @each $day, $number in $start-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: calc((#{$calendar-size + $calendar-gap}) * #{$number});
+    }
+  }
+
+  @for $i from 28 through $count-length {
+    &--month-length--#{$i} :nth-child(n + #{$i}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $calendar-size;
+    height: $calendar-size;
+    background-color: $calendar-color;
+    border: 1px solid $calendar-border-color;
+    font-size: $calendar-size-number;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: background-color 500ms, transform 500ms;
+
+    &:hover {
+      background-color: $active-color;
+      cursor: pointer;
+      font-size: $font-size;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through $count-length {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
 }
