@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 html {
   font-family: Arial;
   font-size: 30px;
@@ -13,7 +15,7 @@ body {
   gap: 1px;
   width: 750px;
   padding-top: 20px;
-  margin: 35px auto;
+  margin: 50px auto;
 }
 
 .calendar__day {
@@ -49,10 +51,8 @@ body {
   }
 }
 
-$start-of-the-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
-
 @each $day, $i in $start-of-the-week {
   .calendar__start-day--#{$day} :first-child {
-    margin-left: (102px) * ($i - 1);
+    margin-left: (100px + 3px) * ($i - 1);
   }
 }
