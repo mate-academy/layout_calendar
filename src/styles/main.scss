@@ -1,3 +1,58 @@
+$day-width: 100px;
+$day-height: 100px;
+$start-days: (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7);
+$month-length: 28, 29, 30, 31;
+$gap-size: 1px;
+
+@mixin day-size {
+  width: $day-width;
+  height: $day-height;
+}
+
 body {
   margin: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: 20px 10px;
+  max-width: calc(7 * #{$day-width} + 20px);
+  
+  &__day {
+    @include day-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: background-color 0.5s, transform 0.5s;
+
+    @for $day-num from 1 through 31 {
+      &:nth-child(#{$day-num})::before {
+        content: "#{$day-num}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+  
+  @each $day, $value in $start-days {
+    &--start-day--#{$day} {
+      margin-left: calc((#{day-width} + #{gap-size}) * #{$value});
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} > :not(:nth-child(-n+#{$month-length})) {
+      display: none;
+    }
+  }
 }
