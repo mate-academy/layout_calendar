@@ -14,12 +14,11 @@
   position: relative;
   display: flex;
   align-items: center;
-  margin-inline: auto;
+  margin: 0 auto;
   padding: 10px;
   flex-wrap: wrap;
   width: 740px;
   gap: $gap-between-days;
-  box-sizing: border-box;
 
   &__day {
     display: flex;
@@ -49,6 +48,7 @@
   @for $length from 28 through 31 {
     &--month-length--#{$length} :not(:nth-child(-n + #{$length})) {
       opacity: 0;
+      pointer-events: none;
     }
   }
 }
