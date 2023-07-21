@@ -8,14 +8,6 @@
   margin: 0 auto;
   width: $calendar-width;
 
-  &.start-day {
-    @each $day, $index in $start-day-value {
-      &-#{$day} {
-        margin-left: ($box-size + $gap) * $index;
-      }
-    }
-  }
-
   &__day {
     display: flex;
     justify-content: center;
@@ -36,6 +28,12 @@
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: "#{$number}";
+      }
+    }
+
+    @each $day, $index in $start-day-value {
+      &.start-day-#{$day} {
+        margin-left: ($box-size + $gap) * $index;
       }
     }
   }
