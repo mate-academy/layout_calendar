@@ -2,9 +2,8 @@
   display: flex;
   flex-wrap: wrap;
 
-  max-width: calc(#{$columns} * (#{$daySize}
-  + #{$borderWidth} * 2 + #{$gap}) + #{$padding} * 2);
-  
+  max-width: $columns * ($daySize + $borderWidth * 2 + $gap) + $padding * 2;
+
   margin: 0 auto;
   padding: #{$padding};
   gap: #{$gap};
@@ -35,9 +34,10 @@
     position: absolute;
   }
 
-  @each $day, $startDays in $startDays {
-    &--start-#{$day} {
-      margin-left: calc(100% - #{$startDays});;
+  @each $day in $startDays {
+    $index: index($startDays, $day);
+    &__day--start-#{$day} {
+      margin-left: $index * ($daySize + $borderWidth * 2 + $gap);
     }
   }
 
