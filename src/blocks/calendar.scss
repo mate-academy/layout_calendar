@@ -5,8 +5,12 @@
   gap: $gap;
 
   padding: $calendar-padding;
-  margin: 0 auto;
   width: $calendar-width;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
     display: flex;
@@ -30,11 +34,11 @@
         content: "#{$number}";
       }
     }
+  }
 
-    @each $day, $index in $start-day-value {
-      &.start-day-#{$day} {
-        margin-left: ($box-size + $gap) * $index;
-      }
+  @each $day, $index in $start-day-value {
+    &--start-day-#{$day} > :first-child {
+      margin-left: ($box-size + $gap) * $index;
     }
   }
 
