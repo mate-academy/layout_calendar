@@ -14,7 +14,7 @@ body {
   height: 100vh;
   padding: $padding;
   margin: 0 auto;
-  width: ($day-box-size + $gap-between-boxes) * $columns + ($padding * 2);
+  width: $calendar-width;
   list-style: none;
 
   display: flex;
@@ -35,10 +35,12 @@ body {
 
     cursor: pointer;
     transition: all 0.5s;
+
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
     }
+
     @for $numberOfDay from 1 through 31 {
       &:nth-child(#{$numberOfDay})::before {
         content: "#{$numberOfDay}";
