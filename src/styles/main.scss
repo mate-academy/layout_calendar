@@ -3,21 +3,23 @@
 @import "./normalise";
 
 .month {
-  padding: 10px;
   width: 7*$cell-size + $cell-size/10*2 + 6px;
   display: flex;
   flex-wrap: wrap;
   gap: $free-spase;
+  padding: 10px;
 
   &__day {
     width: $cell-size;
     height: $cell-size;
-    border: 1px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid #000;
     background-color: $primdry-color;
     font-size: $num-of-day-size;
+    transition-duration: 500ms;
+    cursor: pointer;
 
     @for $date from 1 through 31 {
       &:nth-child(#{$date}) {
@@ -28,10 +30,8 @@
     }
 
     &:hover {
-      cursor: pointer;
       background-color: $hover-color;
       transform: translateY(-20%);
-      transition-duration: 500ms;
     }
   }
 
