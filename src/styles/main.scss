@@ -1,3 +1,50 @@
-body {
-  margin: 0;
+@import "./variables.scss";
+@import "./reset";
+@import "./normalise";
+
+.month {
+  width: 7*$cell-size + $cell-size/10*2 + 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $free-spase;
+  padding: 10px;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #000;
+    background-color: $primdry-color;
+    font-size: $num-of-day-size;
+    transition-duration: 500ms;
+    cursor: pointer;
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date}) {
+        &::before {
+          content: "#{$date}";
+        }
+      }
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-20%);
+    }
+  }
+
+  @for $num from 28 through 31 {
+    &--lenght--#{$num}> :nth-child(n+#{$num+1}) {
+      display: none;
+    }
+  }
+
+  @each $day,
+    $mult in $day-of-week {
+    &--start--#{$day}> :first-child {
+      margin-left: ($cell-size+ $free-spase) * $mult;
+    }
+  }
 }
