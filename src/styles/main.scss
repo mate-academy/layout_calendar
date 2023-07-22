@@ -1,55 +1,6 @@
-@import "./variables.scss";
+@import "./utils/reset";
+@import "./utils/variables";
+@import "./utils/normalize";
 
-.container {
-  margin: 0;
-  padding-top: 100px;
-  display: flex;
-  justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-}
-
-.calendar {
-  width: $calendar-width;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
-  box-sizing: border-box;
-
-  @each $week-day, $index in $week-days {
-    &--start-day--#{$week-day} > :first-child {
-      margin-left: ($cell-size + $gap) * $index;
-    }
-  }
-
-  @for $last-day from 28 to 31 {
-    &--month-length--#{$last-day} > :nth-last-child(-n + #{31 - $last-day}) {
-      display: none;
-    }
-  }
-
-  &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: $cell-size;
-    height: $cell-size;
-    box-sizing: border-box;
-    background-color: #eee;
-    border: 1px solid black;
-    transition: transform 0.5s ease-in-out;
-
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
-    @for $day from 1 through 31 {
-      &:nth-child(#{$day})::before {
-        content: "#{$day}";
-      }
-    }
-  }
-}
+@import "./blocks/container";
+@import "./blocks/calendar";
