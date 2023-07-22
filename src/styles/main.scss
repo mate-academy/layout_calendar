@@ -2,8 +2,8 @@
 $cellSize: 100px;
 $gap: 1px;
 $calendarSize: calc(#{$cellSize} * 7 + #{$gap} * 6);
-$monthLength: 28, 29, 30, 31;
-$startDay: (
+$monthLengths: 28, 29, 30, 31;
+$startDays: (
   "mon": 0,
   "tue": ($cellSize + $gap),
   "wed": 2 * ($cellSize + $gap),
@@ -23,7 +23,7 @@ body {
 .calendar {
   display: flex;
   justify-content: flex-start;
-  // align-items: ;
+  list-style: none;
   align-content: center;
   flex-wrap: wrap;
   gap: $gap;
@@ -56,13 +56,13 @@ body {
     }
   }
 
-  @each $length in $monthLength {
+  @each $length in $monthLengths {
     &--month-length--#{$length} :not(:nth-child(-n + #{$length})) {
       display: none;
     }
   }
 
-  @each $day, $margin in $startDay {
+  @each $day, $margin in $startDays {
     &--start-day--#{$day} :first-child {
       margin-left: #{$margin};
     }
