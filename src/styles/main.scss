@@ -1,3 +1,69 @@
+@mixin centring {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+$month-length: 31;
+$cell_size: 100px;
+$shift: 1px;
+
 body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
   margin: 0;
+  @include centring;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($shift + $cell_size) * 7;
+  gap: $shift;
+
+  &__cell {
+    width: $cell_size;
+    height: $cell_size;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    background-color: #eee;
+    border: solid black 1px;
+    box-sizing: border-box;
+
+    &:hover {
+      transform: translateY(-20px);
+    }
+
+    //create list of start-day values
+    $days: (
+      "mon": 0,
+      "tue": 1,
+      "wed": 2,
+      "thu": 3,
+      "fri": 4,
+      "sat": 5,
+      "sun": 6
+    );
+
+    @each $day, $value in $days {
+      .calendar--start--day--#{$day} > &:first-child {
+        margin-left: $value * 101px;
+      }
+    }
+  }
+}
+
+//put numbers inside of cells
+@for $i from 1 through $month-length {
+  .calendar__cell:nth-child(#{$i})::before {
+    content: "#{$i}";
+    @include centring;
+    height: $cell_size;
+  }
+}
+
+//hide empty cells
+.calendar__cell:nth-last-child(-n + #{31 - $month-length}) {
+  display: none;
 }
