@@ -10,6 +10,12 @@
   width: calendarWidth($sellSize ,$gapSize ,$callendarPadding);
   padding: 0 $callendarPadding;
 
+  @each $day, $index in $days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: calc((#{$sellSize} + #{$gapSize}) * #{$index});
+    }
+  }
+
   &__day {
     width: $sellSize;
     height: $sellSize;
@@ -25,38 +31,20 @@
       background-color: pink;
       cursor: pointer;
     }
-  }
-}
 
-@for $n from 1 through 31 {
-  .calendar__day:nth-child(#{$n}) {
-    &::before {
-      content: "#{$n}";
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n}) {
+        &::before {
+          content: "#{$n}";
+        }
+      }
     }
   }
-}
 
-$days:
-  "monday" 1,
-  "tuesday" 2,
-  "wednesday" 3,
-  "thursday" 4,
-  "friday" 5,
-  "saturday" 6,
-  "sunday" 7;
-
-@each $day, $index in $days {
-  .calendar--start-day--#{$day} {
-    .calendar__day:first-child {
-      margin-left: calc((#{$sellSize} + #{$gapSize}) * #{$index});
-    }
-  }
-}
-
-@for $monthLength from 28 through 31 {
-  $nthChild: $monthLength + 1;
-  .calendar--month-length--#{$monthLength} {
-    .calendar__day:nth-child(n + #{$nthChild}) {
+  @for $monthLength from 28 through 31 {
+    $nthChild: $monthLength + 1;
+    &--month-length--#{$monthLength}
+    &__day:nth-child(n + #{$nthChild}) {
       display: none;
     }
   }
