@@ -1,3 +1,60 @@
+@import "./utils/variable";
+@import "./utils/mixin";
+@import "./utils/_reset";
+
+html {
+  font-family: "Arial", sans-serif;
+}
+
 body {
-  margin: 0;
+  @include with-centered-content;
+}
+
+.container {
+  @include with-centered-content;
+}
+
+.calendar {
+  display: flex;
+  gap: $day-space-gap;
+  flex-wrap: wrap;
+  padding: 20px 10px;
+  width: $container-width;
+
+  &__day {
+    @include with-centered-content;
+
+    width: $day-size;
+    height: $day-size;
+    background-color: $calendar-color;
+    border: 1px solid $day-border-color;
+    font-size: $day-size-number;
+    box-sizing: border-box;
+    transition: background-color 500ms, transform 500ms;
+
+    &:hover {
+      background-color: $active-color;
+      cursor: pointer;
+      font-size: $font-size;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+  }
+
+  @each $day, $number in $start-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: calc((#{$day-size + $day-space-gap}) * #{$number});
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} :not(:nth-child(-n + #{$month-length})) {
+      background-color: $last-day-color;
+    }
+  }
 }
