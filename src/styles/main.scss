@@ -1,15 +1,8 @@
+@import "./variables.scss";
+
 body {
   margin: 0;
 }
-
-$day-size: 100px;
-$border-width: 1px;
-$font-size: 30px;
-$font-family: arial, sans-serif;
-$padding: 10px;
-$columns: 7;
-$calendar-width: ($columns * $day-size)
-  + ($border-width * ($columns - 1)) + ($padding * 2);
 
 .days {
   display: flex;
@@ -17,6 +10,8 @@ $calendar-width: ($columns * $day-size)
   gap: $border-width;
   margin: 40px;
   width: $calendar-width;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
 
   &__day {
     display: flex;
@@ -38,12 +33,9 @@ $calendar-width: ($columns * $day-size)
   @for $dayOfMonth from 1 through 31 {
     .days__day:nth-child(#{$dayOfMonth})::before {
       content: "#{$dayOfMonth}";
-      font-family: Arial, sans-serif;
-      font-size: $font-size;
     }
   }
 
-  $weekdays: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
   @each $day, $number in $weekdays {
     &--start-day-#{$day} :first-child {
       margin-left: calc((#{$day-size} + #{$border-width * 3}) * #{$number});
