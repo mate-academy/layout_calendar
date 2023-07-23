@@ -1,12 +1,12 @@
 @import "./utils/variables";
 @import "./utils/mixins";
 
-@function size($cell-Size, $gap-Param) {
-  @return 7 * $cell-Size + 6 * $gap-Param;
+@function getCalendarWidth($row-Count, $cell-Size, $gap-Count, $gap-Param) {
+  @return $row-Count * $cell-Size + $gap-Count * $gap-Param;
 }
 
-@function startDayMargin($cell-Size, $gap-Param, $num) {
-  @return (7 - $num) * $cell-Size + (7 - $num) * $gap-Param;
+@function getStartDayMargin($cell-Size, $gap-Param, $day-Num) {
+  @return $day-Num * $cell-Size + $day-Num * $gap-Param;
 }
 
 .body {
@@ -21,12 +21,12 @@
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
-  width: size($cellSize, $gapParam);
+  width: getCalendarWidth(7, $cellSize, 6, $gapParam);
   padding: 10px;
   gap: $gapParam;
 
   &__day {
-    @include square($cellSize);
+    @include squareSidesParams($cellSize);
     margin: 0;
     padding: 0;
     border: $borderParams;
@@ -34,7 +34,7 @@
     position: relative;
     background-color: $mainBgColor;
     list-style: none;
-    transition: all 0.5s ease-in;
+    transition: all 0.2s ease-in;
 
     &::before {
       display: block;
@@ -67,7 +67,7 @@
   @each $name, $startDay in $startDays {
     &-start-days--#{$name} {
       & :first-child {
-        margin-left: startDayMargin($cellSize, $gapParam, $startDay);
+        margin-left: getStartDayMargin($cellSize, $gapParam, $startDay);
       }
     }
   }
