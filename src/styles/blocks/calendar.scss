@@ -1,0 +1,56 @@
+body {
+  height: 100vh;
+  @include content-center;
+  font-family: $font-family;
+}
+
+.calendar {
+  width: #{$calendar-width};
+  padding: 10px;
+  &__headers {
+    display: flex;
+    gap: 1px;
+  }
+  &__header {
+    @include content-center;
+    padding: 10px;
+    width: $size + 3;
+    text-transform: uppercase;
+    height: $size / 2;
+    @each $day in $week-days {
+      &--#{$day}::before {
+        content: "#{$day}";
+      }
+    }
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: 100%;
+  }
+  &__item {
+    @include content-center;
+    width: $size;
+    height: $size;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: #fcb9c4;
+      transform: translateY(-20px);
+    }
+    &:first-child {
+      margin-left: 620px;
+    }
+    &::before {
+      font-size: 30px;
+    }
+    @for $i from 1 through $month-length {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}
