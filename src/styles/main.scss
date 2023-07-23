@@ -1,3 +1,9 @@
+$square-side: 100px;
+$calendar-padding: 10px;
+$calendar-gap: 1px;
+$calendar-width: ($square-side * 7)
+  + ($calendar-padding * 2) + ($calendar-gap * 6);
+
 $start-day: (
   mon 0,
   tue 101px,
@@ -7,11 +13,6 @@ $start-day: (
   sat 505px,
   sun 606px
 );
-
-@mixin squareSize($sizeOfdays) {
-  width: $sizeOfdays;
-  height: $sizeOfdays;
-}
 
 %positionCenter {
   display: flex;
@@ -25,16 +26,18 @@ body {
 
 .page {
   @extend %positionCenter;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .calendar {
-  min-width: 720px;
-  width: 720px;
+  box-sizing: border-box;
   display: flex;
-  gap: 1px;
+  flex-shrink: 0;
   flex-wrap: wrap;
+  gap: $calendar-gap;
   list-style: none;
+  width: $calendar-width;
+  padding: $calendar-padding;
 
   @each $day, $margin-left in $start-day {
     &--start-day-#{$day} {
@@ -46,7 +49,8 @@ body {
 
   &__day {
     @extend %positionCenter;
-    @include squareSize(100px);
+    height: $square-side;
+    width: $square-side;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #eee;
     font-size: 30px;
