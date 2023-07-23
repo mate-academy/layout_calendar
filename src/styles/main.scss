@@ -1,22 +1,8 @@
-@mixin cell-propertis ($cell-width, $cell-height, $bg-color) {
-  width: $cell-width;
-  height: $cell-height;
-  background-color: $bg-color;
-}
-
-$space-size: 1px;
-$color-hover: pink;
-$start-day:
-  mon 1,
-  tue 2,
-  wed 3,
-  thu 4,
-  fri 5,
-  sat 6,
-  sun 7;
+@import "variables";
 
 html {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
 body {
@@ -27,23 +13,23 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $space-size;
-  width: 720px;
+  width: $calendar-size;
+  padding: $calendar-padding;
   margin: 0 auto;
-  padding: 10px;
 
   &__day {
     @include cell-propertis(100px, 100px, #eee);
-    border: $space-size solid black;
+    border: 1px solid black;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 500ms;
+    transition: background-color 0.5s, transform 0.5s;
+    cursor: pointer;
   }
 
   &__day:hover {
     background-color: $color-hover;
-    cursor: pointer;
     transform: translateY(-20px);
   }
 }
@@ -51,13 +37,12 @@ body {
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
-    font-size: 30px;
   }
 }
 
 @each $week-day, $number in $start-day {
   .calendar--start-day-#{$week-day} >:first-child {
-    margin-left: 100px * ($number - 1) + ($number - 1) * $space-size;
+    margin-left: $cell-size * ($number - 1) + ($number - 1) * $space-size;
   }
 }
 
