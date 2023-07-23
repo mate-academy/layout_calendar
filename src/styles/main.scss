@@ -1,9 +1,4 @@
-$color-hover: #e3b2b2;
-$cell-width: 100px;
-$cell-height: 100px;
-$padding-calendar: 10px;
-$cell-gap: 1px;
-$week-days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+@import "utils/variable.scss";
 
 body {
   margin: 0;
@@ -13,20 +8,21 @@ body {
 
 .calendar {
   display: flex;
+  box-sizing: border-box;
   flex-wrap: wrap;
   padding: #{$padding-calendar};
-  width: (7 * $cell-width) + $padding-calendar * 2 + $cell-gap * 6;
+  width: $calendar-width;
   gap: $cell-gap;
 
   @for $month-length from 28 through 31 {
-    &--#{month-length}:nth-child(-n + 28) {
+    &--month-length-#{$month-length} :not(:nth-child(-n + #{$month-length})) {
       display: none;
     }
   }
 
-  @each $start-day, $num in $week-days {
-    &--#{$start-day} {
-      margin-left: $padding-calendar + $num * ($cell-gap + $cell-width);
+  @each $start-day, $num-day in $week-days {
+    &--start-day-#{$start-day} :first-child {
+      margin-left: $num-day * ($cell-gap + $cell-width);
     }
   }
 
@@ -50,6 +46,7 @@ body {
     &:hover {
       transform: translateY(-20px);
       background-color: $color-hover;
+      cursor: pointer;
     }
   }
 }
