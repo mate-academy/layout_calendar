@@ -1,13 +1,6 @@
 @import "./utils/variables";
 @import "./utils/mixins";
-
-@function getCalendarWidth($row-Count, $cell-Size, $gap-Count, $gap-Param) {
-  @return $row-Count * $cell-Size + $gap-Count * $gap-Param;
-}
-
-@function getStartDayMargin($cell-Size, $gap-Param, $day-Num) {
-  @return $day-Num * $cell-Size + $day-Num * $gap-Param;
-}
+@import "./components/calendar";
 
 .body {
   margin: 0;
@@ -15,60 +8,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.calendar {
-  display: flex;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-  width: getCalendarWidth(7, $cellSize, 6, $gapParam);
-  padding: 10px;
-  gap: $gapParam;
-
-  &__day {
-    @include squareSidesParams($cellSize);
-    margin: 0;
-    padding: 0;
-    border: $borderParams;
-    box-sizing: border-box;
-    position: relative;
-    background-color: $mainBgColor;
-    list-style: none;
-    transition: all 0.2s ease-in;
-
-    &::before {
-      display: block;
-      text-align: center;
-      line-height: $cellSize;
-      @include fontStyles($fontFamilyParam, $fontSizeParam);
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: #ffc0cb;
-      transform: translateY(-20px);
-    }
-  }
-
-  @for $day from 1 through $daysCount {
-    & :nth-child(#{$day}) {
-      &::before {
-        content: "#{$day}";
-      }
-    }
-
-    &-month-length--#{$day} {
-      & :not(:nth-child(-n + #{$day})) {
-        display: none;
-      }
-    }
-  }
-
-  @each $name, $startDay in $startDays {
-    &-start-days--#{$name} {
-      & :first-child {
-        margin-left: getStartDayMargin($cellSize, $gapParam, $startDay);
-      }
-    }
-  }
 }
