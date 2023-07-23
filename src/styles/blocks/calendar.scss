@@ -1,0 +1,55 @@
+.calendar {
+  padding: 20px;
+  $root: &;
+
+  &__content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: $cell-size * 7 + 7;
+    margin: 0 auto;
+  }
+  &__day {
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    line-height: $cell-size;
+    background-color: #eee;
+    transition: transform 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbccc;
+    }
+  }
+  //calendar--start-days--sat calendar--monght-length--29
+  @each $month-length in $month-lengths {
+    &--monght-length--#{$month-length} {
+      @for $i from $month-length +1 to 32 {
+        #{$root}__day:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+
+      @for $i from 1 to $month-length +1 {
+        #{$root}__day:nth-child(#{$i})::before {
+          content: "#{$i}";
+        }
+      }
+    }
+  }
+
+  @each $start-day, $day-number in $days {
+    //calendar--start-days--sat
+    &--start-days#{$start-day} {
+      #{$root}__day:first-child {
+        margin-left: ($day-number - 1) *$cell-size + $day-number - 1;
+      }
+    }
+  }
+}
