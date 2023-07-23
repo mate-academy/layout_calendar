@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
 }
@@ -18,7 +22,6 @@ body {
 .calendar {
   width: $calendar-width;
   display: flex;
-
   flex-wrap: wrap;
   gap: $calendar-gap;
 
@@ -26,18 +29,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $cell-color;
     width: $cell-size;
     height: $cell-size;
-    border: 1px solid #333;
     font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    transition: 0.5s;
+    border: 1px solid #333;
+    background-color: $cell-color;
+    transition:color 0.5s, transform 0.5s;
+    cursor: pointer;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      cursor: pointer;
     }
 
     @for $day from 1 through 31 {
