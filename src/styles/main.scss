@@ -1,4 +1,9 @@
 @import "variables";
+@import "mixins";
+
+* {
+  box-sizing: border-box;
+}
 
 html {
   font-family: Arial, Helvetica, sans-serif;
@@ -18,7 +23,7 @@ body {
   margin: 0 auto;
 
   &__day {
-    @include cell-propertis(100px, 100px, #eee);
+    @include cell-properties(100px, 100px, #eee);
     border: 1px solid black;
     box-sizing: border-box;
     display: flex;
@@ -32,22 +37,22 @@ body {
     background-color: $color-hover;
     transform: translateY(-20px);
   }
-}
 
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
   }
-}
 
-@each $week-day, $number in $start-day {
-  .calendar--start-day-#{$week-day} >:first-child {
-    margin-left: $cell-size * ($number - 1) + ($number - 1) * $space-size;
+  @each $week-day, $number in $start-day {
+    &--start-day-#{$week-day} >:first-child {
+      margin-left: $cell-size * ($number - 1) + ($number - 1) * $space-size;
+    }
   }
-}
 
-@for $n from 28 through 31 {
-  .calendar--month-length-#{$n} >:nth-child(n + #{$n + 1}) {
-    visibility: hidden;
+  @for $n from 28 through 31 {
+    &--month-length-#{$n} >:nth-child(n + #{$n + 1}) {
+      visibility: hidden;
+    }
   }
 }
