@@ -1,19 +1,11 @@
-$cell-side: 100px;
-$cell-sideAndGap: $cell-side + 1;
-$weekDays: ("mon", "tue", "wed", "thu", "fri", "sat", "sun");
-
 .calendar {
-  &__list {
-    display: flex;
-    gap: 1px;
-    padding: 10px;
-    margin: 0;
-    box-sizing: border-box;
-    list-style: none;
-    flex-wrap: wrap;
-    width: $cell-side * 7 + 20px + 6px;
-
-  }
+  display: flex;
+  gap: 1px;
+  padding: 10px;
+  box-sizing: border-box;
+  list-style: none;
+  flex-wrap: wrap;
+  width: $cell-side * 7 + 20px + 6px;
 
   &__day {
     display: flex;
@@ -32,16 +24,16 @@ $weekDays: ("mon", "tue", "wed", "thu", "fri", "sat", "sun");
     }
   }
 
-  $counter: 0;
+  $daysCounter: 0;
   @each $day in $weekDays {
-    &__start-day--#{$day} * > :first-child {
-      margin-left: $cell-sideAndGap * $counter;
-      $counter: $counter + 1;
+    &__start-day--#{$day} :first-child {
+      margin-left: $cell-side-and-gap * $daysCounter;
+      $daysCounter: $daysCounter + 1;
     }
   }
 
   @for $day from 1 through 31 {
-    &__list :nth-child(n + #{$day}):before {
+    & :nth-child(n + #{$day}):before {
       content: "#{$day}";
       font-size: 30px;
       color: #000;
@@ -49,7 +41,7 @@ $weekDays: ("mon", "tue", "wed", "thu", "fri", "sat", "sun");
   }
 
   @for $days from 28 through 31 {
-    &__month-length--#{$days} * > :nth-child(n + #{$days + 1}) {
+    &__month-length--#{$days} :nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
