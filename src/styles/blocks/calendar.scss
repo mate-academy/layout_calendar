@@ -23,9 +23,10 @@ body {
 
     &:hover {
       transform: translateY(-20px);
+      background-color: #ffc0cb;
     }
 
-    //create list of start-day values
+    //list of start-day values
     $days: (
       "mon": 0,
       "tue": 1,
@@ -44,7 +45,7 @@ body {
   }
 }
 
-//put numbers inside of cells
+//numbers inside of cells
 @for $i from 1 through $month-length {
   .calendar__cell:nth-child(#{$i})::before {
     content: "#{$i}";
@@ -53,8 +54,8 @@ body {
   }
 }
 
-//changing month length
-@for $i from $month-length - 3 through $month-length {
+//Changing month length
+@for $i from 28 through $month-length {
   .calendar--month--length--#{$i} > .calendar__cell:nth-child(n + #{$i + 1}) {
     display: none;
   }
