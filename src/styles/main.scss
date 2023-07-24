@@ -1,13 +1,18 @@
 $daySize: 98px;
-$dayOfWeek: mon, tue, wed, thu, fri, sat, sun;
-$monthLenghts: 28, 29, 30, 31;
+$dayOfWeek: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+$monthLengths: 28, 29, 30, 31;
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: 707px;
+  width: 708px;
   gap: 1px;
   padding: 10px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
     position: relative;
@@ -39,14 +44,15 @@ $monthLenghts: 28, 29, 30, 31;
     }
   }
 
-  @each $day in $dayOfWeek {
+  @each $day, $dayNumber in $dayOfWeek {
     &--start-#{$day} {
-      $index: index($dayOfWeek, $day);
-      margin-left: ($index - 1) * 101px;
+      .calendar__day:nth-child(1) {
+        margin-left: 101px * $dayNumber;
+      }
     }
   }
 
-  @each $length in $monthLenghts {
+  @each $length in $monthLengths {
     &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
