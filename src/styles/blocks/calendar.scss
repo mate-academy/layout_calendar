@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: widthCalendar($cell-size, $dayGap, $padding);
+  max-width: getWidthCalendar($cell-size, $dayGap, $padding);
   padding: 30px $padding;
   gap: $dayGap;
 
@@ -13,8 +13,8 @@
     height: $cell-size;
     background-color: $cell-color;
     border: 1px solid $border-color;
-    transition: transform 0.5s,
-      background-color 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
+  
     cursor: pointer;
 
     &:hover {
@@ -34,7 +34,7 @@
   @each $day, $num in $weekDays {
     &--start-#{$day} {
       .calendar__day:first-child {
-        margin-left: firstDayShift($num, $shift);
+        margin-left: getFirstDayShift($num, $shift);
       }
     }
   }
