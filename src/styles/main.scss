@@ -1,12 +1,17 @@
 @import "./utils/variables.scss";
-@import "./utils/reset.scss";
+@import "./utils/normalize.scss";
+
+.container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $gap;
-  margin: 20px auto;
   padding: $table-paddings;
 
   $days:
@@ -19,7 +24,7 @@
     sun 7;
 
   @each $day, $day-number in $days {
-    &--start-day-#{$day} {
+    &--start-day--#{$day} {
       :first-child {
         margin-left: (($day-number - 1) * $cell-size)
           + ($gap * ($day-number - 1));
@@ -28,7 +33,7 @@
   }
 
   @for $month-end from 28 through 31 {
-    &--month-length-#{$month-end} {
+    &--month-length--#{$month-end} {
       :nth-child(n + #{$month-end}) {
         display: none;
       }
@@ -43,7 +48,7 @@
     justify-content: center;
     align-items: center;
     background-color: $cell-color;
-    transition-duration: 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
@@ -56,7 +61,7 @@
 
     &:hover {
       cursor: pointer;
-      background: $cells-background;
+      background-color: $cells-background;
 
       transform: translateY(-20px);
     }
