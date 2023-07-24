@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
@@ -43,16 +43,17 @@ body {
     list-style: none;
     transition-duration: 0.5s;
 
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #e89c9c;
+    }
+
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
         font-size: 30px;
       }
-    }
-    &:hover {
-      cursor: pointer;
-      transform: translateY(-20px);
-      background-color: #e89c9c;
     }
   }
 }
