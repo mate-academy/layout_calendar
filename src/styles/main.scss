@@ -36,24 +36,24 @@ body {
       }
     }
 
-    @each $day-name, $num in $week {
-      &--#{$day-name} {
-        content: "#{$num}";
-      }
-    }
-
-    @for $month-length from 28 through 31 {
-      &--month-length-#{$month-length} {
-        display: none;
-      }
-    }
-
     &:hover {
       background-color: pink;
       cursor: pointer;
 
       transform: translateY(-20px);
       transition-duration: 0.5s;
+    }
+  }
+
+  @each $day-name, $num in $week {
+    &--start-day--#{$day-name} >:first-child {
+      margin-left: $num * ($side + $box-gap);
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} >:not(:nth-child(-n + #{$month-length})) {
+      display: none;
     }
   }
 }
