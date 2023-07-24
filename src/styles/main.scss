@@ -8,22 +8,19 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  margin: 0;
-}
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
   height: 100vh;
 }
 
 .calendar {
-  width: $calendar-width;
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
+  width: $calendar-width;
 
   &__item {
     display: flex;
@@ -31,10 +28,11 @@ body {
     align-items: center;
     width: $cell-size;
     height: $cell-size;
-    font-size: 30px;
     border: 1px solid #333;
+
+    font-size: 30px;
     background-color: $cell-color;
-    transition:color 0.5s, transform 0.5s;
+    transition: color 0.5s, transform 0.5s;
     cursor: pointer;
 
     &:hover {
@@ -49,8 +47,8 @@ body {
         }
       }
     }
-
   }
+  
   @each $day, $number in $start-days {
     &--start-day--#{$day} > :first-child {
       margin-left: calc((#{$cell-size + $calendar-gap}) * #{$number});
