@@ -24,20 +24,18 @@ body {
   }
 
   &__day {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    text-align: center;
     width: $day-width;
     height: $day-height;
     background-color: $main-color;
     box-sizing: border-box;
     border: 1px solid black;
+    transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
 
     @for $number from 1 through 31 {
@@ -45,14 +43,14 @@ body {
         content: "#{$number}";
         font-family: $main-font-family;
         font-size: $main-font-size;
-        text-align: center;
+        line-height: $day-height;
       }
     }
   }
 
   @each $name, $index in $start-days {
-    .start-day-#{$name} {
-      margin-left: (-1+#{$index})*($day-width+$gap);
+    &--start-day-#{$name} :first-child {
+      margin-left: (($index)-1)*($day-width+$gap);
     }
   }
 }
