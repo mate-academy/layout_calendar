@@ -1,18 +1,4 @@
-$square-side: 100px;
-$calendar-padding: 10px;
-$calendar-gap: 1px;
-$calendar-width: ($square-side * 7)
-  + ($calendar-padding * 2) + ($calendar-gap * 6);
-
-$start-day: (
-  mon 0,
-  tue 101px,
-  wed 202px,
-  thu 303px,
-  fri 404px,
-  sat 505px,
-  sun 606px
-);
+@import "variables.scss";
 
 %positionCenter {
   display: flex;
@@ -40,10 +26,8 @@ body {
   padding: $calendar-padding;
 
   @each $day, $margin-left in $start-day {
-    &--start-day-#{$day} {
-      .calendar__day--1 {
-        margin-left: $margin-left;
-      }
+    &--start-day-#{$day} :first-child {
+      margin-left: $margin-left;
     }
   }
 
@@ -65,7 +49,7 @@ body {
     }
 
     @for $i from 1 through 31 {
-      &--#{$i}::before {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
