@@ -1,0 +1,51 @@
+@import "variables";
+
+&__ceil {
+  display: flex;
+  box-sizing: border-box;
+  width: $ceil-size;
+  height: $ceil-size;
+  border: 1px solid $ceil-border;
+
+  background-color: $ceil-background;
+  font-family: $ceil-font-family-arial;
+  font-size: $ceil-font-size;
+  text-align: center;
+  align-items: center;
+
+  @for $ceil from 1 through $days-in-month {
+    &--#{$ceil} {
+      position: relative;
+      transition: transform $ceil-transition-duration linear,
+        background-color $ceil-transition-duration linear;
+      &::before {
+        width: 100%;
+        content: "#{$ceil}";
+      }
+
+      &:hover {
+        transform: translateY($ceil-translate-y);
+        background-color: $ceil-background-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// @for $ceil from 1 through $days-in-month {
+//   .ceil--#{$ceil} {
+//     position: relative;
+//     transition: transform $ceil-transition-duration linear,
+//       background-color $ceil-transition-duration linear;
+//     &::before {
+//       width: 100%;
+//       content: "#{$ceil}";
+//     }
+
+//     &:hover {
+//       transform: translateY($ceil-translate-y);
+//       background-color: $ceil-background-hover;
+//       cursor: pointer;
+//     }
+//   }
+// }

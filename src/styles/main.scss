@@ -1,3 +1,33 @@
+@import "variables";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($calendar-width * $ceil-size + $calendar-width);
+  height: ($calendar-height * $ceil-size + $calendar-height);
+  gap: 1px;
+  margin: 200px auto 0;
+
+  align-items: start;
+  @import "ceil";
+
+  @each $day_of_week, $margin in $days_of_week {
+    &__start-day--#{$day_of_week} {
+      .calendar__ceil:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @each $month-length, $value in $month-lengths {
+    &__month-length--#{$month-length} {
+      .calendar__ceil:nth-last-child(-n + #{$value}) {
+        display: none;
+      }
+    }
+  }
 }
