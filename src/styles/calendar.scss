@@ -1,8 +1,9 @@
 $square-size: 100px;
 $day-of-week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+$width-calendar: 728px; //$square-size * 7 + 1(gap) * 8 + 10(padding) * 2
 
 .calendar {
-  width: 710px;
+  width: $width-calendar;
   border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
@@ -13,14 +14,12 @@ $day-of-week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
     background-color: #eee;
     width: $square-size;
     height: $square-size;
-    box-sizing: border-box;
     border: 1px solid #000;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition-duration: 0.5s;
+    transition-property: all;
+    transition-duration: 0.3s;
 
     &:hover {
       cursor: pointer;
