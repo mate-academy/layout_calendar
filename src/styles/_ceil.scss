@@ -1,0 +1,33 @@
+@import "variables";
+
+&__day {
+  display: flex;
+  box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  border: 1px solid $day-border;
+
+  background-color: $day-background;
+  font-family: $day-font-family-arial;
+  font-size: $day-font-size;
+  text-align: center;
+  align-items: center;
+
+  @for $day from 1 through $days-in-month {
+    &:nth-child(#{$day}) {
+      position: relative;
+      transition: transform $day-transition-duration linear,
+        background-color $day-transition-duration linear;
+      &::before {
+        width: 100%;
+        content: "#{$day}";
+      }
+
+      &:hover {
+        transform: translateY($day-translate-y);
+        background-color: $day-background-hover;
+        cursor: pointer;
+      }
+    }
+  }
+}
