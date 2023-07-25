@@ -25,21 +25,20 @@
       }
     }
 
-    @for $last-day from 28 through 31 {
-      &--month-length--#{$last-day} > :not(:nth-child(-n + #{$last-day})) {
-        display: none;
-      }
-    }
-
-    @each $start-day, $number in $start-days {
-      &--start-day--#{$start-day} > :first-child {
-        margin-left: ($boxSize + $gapSize) * $number;
-      }
-    }
-
     &:hover {
       background-color: $boxBgColorOnHover;
       transform: translateY(-20px);
+    }
+  }
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} > :not(:nth-child(-n + #{$last-day})) {
+      display: none;
+    }
+  }
+
+  @each $start-day, $number in $start-days {
+    &--start-day--#{$start-day} > :first-child {
+      margin-left: ($boxSize + $gapSize) * $number;
     }
   }
 }
