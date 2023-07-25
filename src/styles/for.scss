@@ -1,0 +1,13 @@
+@for $i from 1 through 31 {
+  .day:nth-child(#{$i}):before {
+    content: "#{$i}";
+  }
+}
+
+@for $month-length from 28 through 31 {
+  .calendar--month-length--#{$month-length} {
+    .day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
