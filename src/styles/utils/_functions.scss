@@ -1,0 +1,51 @@
+// Determine if year is leap
+
+@function isLeapYear($year) {
+  @each $y in $leapYears {
+
+    @if $y == $year {
+      @return true;
+    }
+  }
+
+  @return false;
+}
+
+// Get days in month including additional day in leap year
+
+@function daysInMonth($month, $year) {
+  @each $i, $count in $daysCount {
+
+    @if $i == $month {
+      $days: $count + if(isLeapYear($year) and $i == 2, 1, 0);
+
+      @return $days;
+    }
+  }
+}
+
+// Found position of first day of week
+
+@function firstDayOfWeekInMonth($curMonth, $curYear) {
+  $dayOfWeek: $startDayOfWeek;
+
+  @for $year from $startYear through $curYear {
+    $lastMonth: if($startYear == $curYear, $curMonth, 12);
+
+    @for $month from 1 through 12 {
+
+      @if $year == $curYear and $month == $curMonth {
+        @return $dayOfWeek;
+      }
+
+      $days: daysInMonth($month, $year);
+
+      @for $day from 1 through $days {
+        $dayOfWeek: $dayOfWeek + 1;
+        $dayOfWeek: if($dayOfWeek <= 7, $dayOfWeek, 1);
+      }
+    }
+  }
+
+  @return $dayOfWeek;
+}

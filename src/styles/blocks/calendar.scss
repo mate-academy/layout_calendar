@@ -1,0 +1,102 @@
+.calendar {
+  text-align: center;
+
+  &__set-label {
+    padding-right: 10px;
+
+    cursor: pointer;
+  }
+
+  &__set-month,
+  &__set-year {
+    display: none;
+
+    &:checked + .calendar__set-label {
+      font-weight: bold;
+      color: red;
+    }
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    margin: 0 auto;
+    padding: 30px 10px 10px;
+
+    width: 706px;
+  }
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+
+    background-color: #eee;
+    border: 1px solid #000;
+    opacity: 0;
+    visibility: hidden;
+
+    cursor: pointer;
+
+    transition: background-color 0.5s, transform 0.5s, opacity 0.5s;
+
+    &::after {
+      content: "";
+
+      font-size: 30px;
+      line-height: 98px;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Calendar grid generator for all month and years
+  @for $year from $startYear through $endYear {
+    $y: $year - $startYear + 1;
+
+    @for $month from 1 through 12 {
+      $startDayIndex: firstDayOfWeekInMonth($month, $year);
+      $daysInMonth: daysInMonth($month, $year);
+      $currentDate: 1;
+      $isStarted: false;
+      $isFinished: false;
+
+      @for $i from 1 through 42 {
+        $opacity: 0;
+        $visibility: hidden;
+        $content: "";
+
+        @if not $isStarted and not $isFinished and $i == $startDayIndex {
+          $isStarted: true;
+        }
+
+        @if $isStarted and not $isFinished {
+          $opacity: 1;
+          $visibility: visible;
+          $content: "#{$currentDate}";
+
+          $currentDate: $currentDate + 1;
+
+          @if $currentDate > $daysInMonth {
+            $isFinished: true;
+          }
+        }
+
+        &__set-month:nth-of-type(#{$month}):checked ~
+        &__set-year:nth-of-type(#{12 + $y}):checked ~
+        &__grid > &__day:nth-child(#{$i}) {
+          opacity: $opacity;
+          visibility: $visibility;
+
+          &::after {
+            content: $content;
+          }
+        }
+      }
+    }
+  }
+}
