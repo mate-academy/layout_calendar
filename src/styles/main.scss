@@ -1,7 +1,8 @@
-$daysOfWeek: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+@import "./utils/variables";
 
-$sizeCellDay: 100px;
-$sizeGap: 1px;
+* {
+  box-sizing: border-box;
+}
 
 .page {
   &__body {
@@ -10,6 +11,8 @@ $sizeGap: 1px;
 }
 
 .body {
+  font-family: "Arial", sans-serif;
+
   &__calendar {
     margin: 0 auto;
   }
@@ -18,14 +21,13 @@ $sizeGap: 1px;
 .calendar {
   display: flex;
   width: calc((#{$sizeCellDay} * 7) + (#{$sizeGap} * (7 - 1)));
-  padding: 10px;
+  padding-top: 10px;
 
   flex-wrap: wrap;
   gap: $sizeGap;
 
   &__day {
     display: flex;
-    box-sizing: border-box;
     width: $sizeCellDay;
     height: $sizeCellDay;
     border: 1px solid black;
@@ -46,7 +48,6 @@ $sizeGap: 1px;
       &:nth-child(#{$dayOfMonth}) {
         &::before {
           content: "#{$dayOfMonth}";
-          font-family: "Arial", sans-serif;
           font-size: 30px;
         }
       }
