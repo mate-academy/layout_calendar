@@ -1,6 +1,5 @@
 .calendar {
-  box-sizing: border-box;
-  width: calc(#{$boxSize} * 7 + #{$gapSize} * 6 + 20px);
+  width: $calendarWidth;
   padding: 20px 10px 10px;
   display: flex;
   gap: $gapSize;
@@ -8,6 +7,7 @@
   margin: 0 auto;
 
   &__day {
+    box-sizing: border-box;
     width: $boxSize;
     height: $boxSize;
     border: 1px solid black;
@@ -25,10 +25,15 @@
       }
     }
 
-    @for $month-length from 28 through 31 {
-      &--month-length--#{month-length}
-      :not(:nth-child(-n + #{$month-length})) {
+    @for $last-day from 28 through 31 {
+      &--month-length--#{$last-day} > :not(:nth-child(-n + #{$last-day})) {
         display: none;
+      }
+    }
+
+    @each $start-day, $number in $start-days {
+      &--start-day--#{$start-day} > :first-child {
+        margin-left: ($boxSize + $gapSize) * $number;
       }
     }
 
@@ -36,11 +41,5 @@
       background-color: $boxBgColorOnHover;
       transform: translateY(-20px);
     }
-  }
-}
-
-@each $number, $day-of-week in $start-days {
-  .calendar--start-day--#{day-of-week} :first-child {
-    margin-left: ($boxSize + $gapSize) * $number;
   }
 }
