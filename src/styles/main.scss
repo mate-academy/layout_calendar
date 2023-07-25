@@ -1,48 +1,8 @@
-@import './variables.scss';
+@import "./variables.scss";
+@import "./calendar.scss";
 
 body {
   margin: 0 auto;
   font-family: $font-family;
   font-size: $font-size;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  width: $cell-size;
-  gap: $gap-size;
-
-  &__day {
-    height: $height;
-    width: $width;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #eee;
-    border: 1px solid #000;
-    box-sizing: border-box;
-
-    &:hover {
-      background-color: pink;
-      cursor: pointer;
-    }
-
-    @for $number from 1 through 29 {
-      &:nth-child(#{$number})::before {
-        content: "#{$number}";
-      }
-    }
-
-    @each $day, $number in $week {
-      &--start-day--#{$day} :first-child {
-        margin-left: calc((#{$cell-size + $gap-size}) * #{$number});
-      }
-    }
-
-    @for $number from 28 through 31 {
-      &:nth-child(#{$number})::before {
-        content: "#{$number}";
-      }
-    }
-  }
 }
