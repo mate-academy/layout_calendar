@@ -1,51 +1,33 @@
 @import "variables";
 
-&__ceil {
+&__day {
   display: flex;
   box-sizing: border-box;
-  width: $ceil-size;
-  height: $ceil-size;
-  border: 1px solid $ceil-border;
+  width: $day-size;
+  height: $day-size;
+  border: 1px solid $day-border;
 
-  background-color: $ceil-background;
-  font-family: $ceil-font-family-arial;
-  font-size: $ceil-font-size;
+  background-color: $day-background;
+  font-family: $day-font-family-arial;
+  font-size: $day-font-size;
   text-align: center;
   align-items: center;
 
-  @for $ceil from 1 through $days-in-month {
-    &--#{$ceil} {
+  @for $day from 1 through $days-in-month {
+    &:nth-child(#{$day}) {
       position: relative;
-      transition: transform $ceil-transition-duration linear,
-        background-color $ceil-transition-duration linear;
+      transition: transform $day-transition-duration linear,
+        background-color $day-transition-duration linear;
       &::before {
         width: 100%;
-        content: "#{$ceil}";
+        content: "#{$day}";
       }
 
       &:hover {
-        transform: translateY($ceil-translate-y);
-        background-color: $ceil-background-hover;
+        transform: translateY($day-translate-y);
+        background-color: $day-background-hover;
         cursor: pointer;
       }
     }
   }
 }
-
-// @for $ceil from 1 through $days-in-month {
-//   .ceil--#{$ceil} {
-//     position: relative;
-//     transition: transform $ceil-transition-duration linear,
-//       background-color $ceil-transition-duration linear;
-//     &::before {
-//       width: 100%;
-//       content: "#{$ceil}";
-//     }
-
-//     &:hover {
-//       transform: translateY($ceil-translate-y);
-//       background-color: $ceil-background-hover;
-//       cursor: pointer;
-//     }
-//   }
-// }
