@@ -7,9 +7,10 @@
 
   @each $day, $number in $week {
     &--start-day--#{$day} :first-child {
-      margin-left: ($width + $gap-size) * 6;
+      margin-left: ($width + $gap-size) * $number;
     }
   }
+
 
   @for $last--day from 28 through 31 {
     &--month-length--#{$last--day} > :not(:nth-child(-n + #{$last--day})) {
@@ -26,11 +27,11 @@
     background-color: #eee;
     border: 1px solid #000;
     box-sizing: border-box;
+    cursor: pointer;
     transition: transform 0.5s;
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
 
