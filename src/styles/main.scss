@@ -1,30 +1,18 @@
-$gap-size: 1px;
-$ceil-width: 100px;
-$ceit-height: 100px;
-$days: (
-  "mon": 0,
-  "tue": 1,
-  "wed": 2,
-  "thu": 3,
-  "fri": 4,
-  "sat": 5,
-  "sun": 6,
-);
+@import "./variables";
 
-$month-length: 28, 29, 30, 31;
-
-html {
+body {
+  display: flex;
+  justify-content: center;
   font-size: 30px;
   margin: 0;
   padding: 0;
 }
 
 .calendar {
-  margin: 0 auto;
-  box-sizing: border-box;
   display: flex;
-  gap: $gap-size;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: $gap-size;
   width: $ceil-width * 7 + $gap-size * 6 + 20px;
   padding: 20px 10px 10px;
 
@@ -38,7 +26,7 @@ html {
     width: $ceil-width;
     height: $ceit-height;
     font-size: 30px;
-    transition: all 0.5s;
+    transition: transform 0.5s;
 
     @for $i from 1 through 29 {
       &:nth-child(#{$i})::before {
@@ -47,6 +35,7 @@ html {
     }
 
     &:hover {
+      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
