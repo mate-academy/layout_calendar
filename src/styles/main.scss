@@ -1,5 +1,7 @@
 @import "./utils/variables";
 
+@import "./blocks/calendar";
+
 * {
   box-sizing: border-box;
 }
@@ -15,54 +17,5 @@
 
   &__calendar {
     margin: 0 auto;
-  }
-}
-
-.calendar {
-  display: flex;
-  width: calc((#{$sizeCellDay} * 7) + (#{$sizeGap} * (7 - 1)));
-  padding-top: 10px;
-
-  flex-wrap: wrap;
-  gap: $sizeGap;
-
-  &__day {
-    display: flex;
-    width: $sizeCellDay;
-    height: $sizeCellDay;
-    border: 1px solid black;
-
-    justify-content: center;
-    align-items: center;
-
-    background-color: #eee;
-    font-size: 30px;
-    cursor: pointer;
-    transition: background-color 0.5s, transform 0.5s;
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
-    @for $dayOfMonth from 1 through 31 {
-      &:nth-child(#{$dayOfMonth}) {
-        &::before {
-          content: "#{$dayOfMonth}";
-        }
-      }
-    }
-  }
-
-  @each $dayOfWeek, $numberDayOfWeek in $daysOfWeek {
-    &--start-day-#{$dayOfWeek} :first-child {
-      margin-left: calc((#{$sizeCellDay} + #{$sizeGap}) * #{$numberDayOfWeek});
-    }
-  }
-
-  @for $lastDayOfMonth from 28 through 31 {
-    &--month-length-#{$lastDayOfMonth} :nth-child(n + #{$lastDayOfMonth + 1}) {
-      display: none;
-    }
   }
 }
