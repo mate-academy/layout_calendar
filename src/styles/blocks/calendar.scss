@@ -4,14 +4,17 @@
   gap: $calendarGap;
   max-width: $calendarSize;
 
+  // używana do iterowania przez listę dni tygodnia i
+  // ustawiania odpowiedniego marginesu dla pierwszego dnia miesiąca
   @each $name, $dayNr in $days {
-    &--start-day-#{$name} &__day:first-child {
+    &--start-day-#{$name} .calendar__day:first-child {
       margin-left: ($daySize + $calendarGap) * ($dayNr - 1);
     }
   }
 
+  // używana do ukrywania niepotrzebnych dni w krótszych miesiącach
   @for $i from 28 through 31 {
-    &--month-length-#{$i} &__day:nth-last-of-type(-n + #{31 - $i}) {
+    &--month-length-#{$i} .calendar__day:nth-last-child(-n + #{31 - $i}) {
       display: none;
     }
   }
@@ -26,6 +29,7 @@
     background-color: $calendarBg;
     transition: background-color 0.5s ease-in, transform 0.5s ease-in;
 
+    // używana do dodawania numerów dni do poszczególnych komórek kalendarza
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
