@@ -1,3 +1,48 @@
+$calendar__day-width:98px;
+
 body {
   margin: 0;
+  padding: 0;
+
+  --grey: #eee;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $calendar__day-width * 7 + 6px + 5px;
+  padding: 10px;
+  margin: auto;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--grey);
+    width: $calendar__day-width;
+    height: 98px;
+    border: 1px solid black;
+
+    &::before {
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      line-height: 50px;
+
+      @for $i from 1 to 32 {
+        content: "#{$i}";
+      }
+    }
+  }
+
+  @each $calendar__day in mon, tue, wed, thu, fri, sat, sun {
+    .start-day-#{$calendar__day} {
+      .day {
+        &:nth-child(n+#{$i}) {
+          margin-left: ( ($calendar__day-width + 2px) * ($i - 1) );
+        }
+      }
+    }
+  }
 }
