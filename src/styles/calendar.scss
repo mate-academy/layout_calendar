@@ -1,14 +1,10 @@
-$square-size: 100px;
-$day-of-week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-$width-calendar: 728px; //$square-size * 7 + 1(gap) * 8 + 10(padding) * 2
-
 .calendar {
   width: $width-calendar;
   border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  padding: 10px;
+  gap: $gap-day;
+  padding: $padding-calendar;
 
   &__day {
     background-color: #eee;
@@ -18,7 +14,7 @@ $width-calendar: 728px; //$square-size * 7 + 1(gap) * 8 + 10(padding) * 2
     display: flex;
     justify-content: center;
     align-items: center;
-    transition-property: all;
+    transition-property: background-color, transform;
     transition-duration: 0.3s;
 
     &:hover {
@@ -36,7 +32,7 @@ $width-calendar: 728px; //$square-size * 7 + 1(gap) * 8 + 10(padding) * 2
 
   @each $start-day, $i in $day-of-week {
     &--start-day--#{$start-day} :nth-child(1) {
-      margin-left: #{$i*101}px;
+      margin-left: #{$i*$margin-left};
     }
   }
 
