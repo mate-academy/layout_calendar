@@ -35,25 +35,31 @@
     }
   }
 
+  @each $start-day in $week-days {
+    &--start-day--#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: $calendar-width - $square-side;
+      }
+    }
+  }
+
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
       content: "#{$i}";
     }
   }
   
-  @each $start-day, $switch in $week-days {
-    &--start-day--#{$start-day} {
-      .calendar__day:first-child {
-        margin-left: calc(#{$calendar-width} - #{$square-side} * (6 - $switch) - #{$gap} * $switch);
-      }
+  @for $i from 32 through 38 {
+    .calendar__day:nth-child(#{$i}) {
+      display: none;
     }
   }
-
+  
   @for $month-length from 28 through 31 {
     &--month-length--#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 1}) {
+      .calendar__day:nth-child(n + #{$month-length + 2}) {
         display: none;
       }
     }
-  }  
+  }
 }
