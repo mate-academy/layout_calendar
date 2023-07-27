@@ -12,7 +12,6 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: $gap-size;
   width: $ceil-width * 7 + $gap-size * 6 + 20px;
   padding: 20px 10px 10px;
@@ -29,7 +28,7 @@ body {
     transition: transform 0.5s;
     cursor: pointer;
 
-    @for $i from 1 through 29 {
+    @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
@@ -41,14 +40,14 @@ body {
     }
   }
 
-  @each $day, $n in $days {
-    &--start-day--#{$day} > &__cell:first-child {
-      margin-left: ($ceil-width + $gap-size) * $n;
+  @each $number, $day in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($ceil-width + $gap-size) * $number;
     }
   }
 
-  @for $i from 28 through 31 {
-    &--month-length--#{$i} :not(:nth-child(-n + #{$i})) {
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} :not(:nth-child(-n + #{$month-length})) {
       display: none;
     }
   }
