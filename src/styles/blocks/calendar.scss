@@ -1,13 +1,9 @@
 .calendar {
-  padding: 20px;
-
-  &__content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    width: $cell-size * 7 + 7;
-    margin: 0 auto;
-  }
+  padding-top: 20px;
+  display: flex;
+  width: $cell-size * 7 + 7;
+  flex-wrap: wrap;
+  gap: 1px;
 
   &__day {
     width: $cell-size;
@@ -16,8 +12,7 @@
     text-align: center;
     line-height: $cell-size;
     background-color: #eee;
-
-    transition: background-color, transform 0.5s, 0.5s;
+    transition: background-color 0.5s, transform, 0.5s;
     cursor: pointer;
 
     @for $i from 1 through 31 {
@@ -38,6 +33,15 @@
         .calendar__day:nth-child(#{$i}) {
           display: none;
         }
+      }
+    }
+  }
+
+  @each $start-day,
+    $day-number in $days {
+    &--start-day--#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: ($day-number - 1) *$cell-size + $day-number - 1;
       }
     }
   }
