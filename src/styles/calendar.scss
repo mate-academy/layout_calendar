@@ -1,13 +1,16 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: 4% auto;
   width: $calendar-width;
   gap: $gap-size;
 
+  &__wrap {
+    margin: 4% auto;
+  }
+
   @each $day, $number in $week {
     &--start-day--#{$day} :first-child {
-      margin-left: ($width + $gap-size) * $number;
+      margin-left: ($cell-width + $gap-size) * $number;
     }
   }
 
@@ -19,8 +22,8 @@
   }
 
   &__day {
-    height: $height;
-    width: $width;
+    height: $cell-height;
+    width: $cell-width;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +31,7 @@
     border: 1px solid #000;
     box-sizing: border-box;
     cursor: pointer;
-    transition: transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       background-color: pink;
