@@ -39,6 +39,11 @@
     .calendar__day:nth-child(#{$i})::before {
       content: "#{$i}";
     }
+    .calendar--month-length--28 .calendar__day:nth-child(n + 29),
+    .calendar--month-length--29 .calendar__day:nth-child(n + 30),
+    .calendar--month-length--30 .calendar__day:nth-child(n + 31) {
+      display: none;
+    }
   }
   
   @for $month-length from 28 through 31 {
