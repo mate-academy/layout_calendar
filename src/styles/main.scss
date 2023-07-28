@@ -1,21 +1,20 @@
 @import "src/styles/variables/variables.scss";
 
-@mixin calendar-center {
-  margin: auto;
-}
-
 body {
   margin: 0;
   --grey: #eee;
 }
 
 .calendar {
-  @include calendar-center();
   display: flex;
   flex-wrap: wrap;
   gap: $gap-day;
   width: ($day-width + $gap-day) * 7;
   padding: 50px 10px;
+
+  &--center {
+    margin: auto;
+  }
 
   &__day {
     align-items: center;
@@ -50,7 +49,8 @@ body {
 }
 
 @for $length from 28 through 31 {
-  .calendar--month-length-#{$length} .calendar__day:nth-child(n+#{$length + 1}) {
+  .calendar--month-length-#{$length}
+  .calendar__day:nth-child(n+#{$length + 1}) {
     display: none;
   }
 }
