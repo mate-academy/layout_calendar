@@ -4,7 +4,7 @@
   gap: $gapValue;
   padding: 10px;
   width: calc((7 * #{$side}) + (#{$gapValue} * 6));
-
+  margin: 0 auto;
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: "#{$i}";
@@ -28,8 +28,6 @@
       transform: translateY(-20px);
     }
   }
-
-  $days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
   @each $day, $value in $days {
     &--start-day--#{$day} :first-child {
