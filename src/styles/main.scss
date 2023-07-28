@@ -28,7 +28,6 @@
   }
 
   @for $number from 1 through 31 {
-
     &__day:nth-child(#{$number}):before {
       content: "#{$number}";
     }
@@ -36,13 +35,13 @@
 
   @each $day, $num in $days-of-week {
     &--start-day--#{$day} :first-child {
-      margin-left: $num * ($side+ $gap-value);
+      margin-left: $num * ($side + $gap-value);
     }
   }
 
-  @for $month-length from 28 through 31 {
+  @for $month-length from 31 through 31 {
     &--month-length--#{$month-length} > :not(:nth-child(-n+#{$month-length})) {
-      visibility: hidden;
+      visibility: visible;
     }
   }
 }
