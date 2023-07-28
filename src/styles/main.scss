@@ -1,21 +1,21 @@
-@import 'variables/variables';
+@import "src/styles/variables/variables.scss";
+
+@mixin calendar-center {
+  margin: auto;
+}
+
 body {
   margin: 0;
   --grey: #eee;
 }
 
-@function calculate-margin-left($day) {
-  @return (index($days, $day) - 1) * $day-width
-    + 1px *(index($days, $day) - 1);
-}
-
 .calendar {
+  @include calendar-center();
   display: flex;
   flex-wrap: wrap;
   gap: $gap-day;
   width: ($day-width + $gap-day) * 7;
-  padding: 10px;
-  margin: auto;
+  padding: 50px 10px;
 
   &__day {
     align-items: center;
@@ -25,8 +25,14 @@ body {
     width: $day-width;
     height: 100px;
     border: 1px solid black;
-    transition: all 0.5s;
-    display: none;
+    transition: transform 0.5s, background-color 0.5s;
+    display: flex;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: pink;
+    }
 
     &::before {
       font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -43,20 +49,15 @@ body {
   }
 }
 
-@each $day in $days {
-  .calendar__day--#{$day} {
-    margin-left: calculate-margin-left(#{$day});
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n+#{$length + 1}) {
+    display: none;
   }
 }
 
-@for $length from 1 through $days-in-month {
-  .calendar__day:nth-child(#{$length}) {
-    display: flex;
+@each $day in $day-start-days {
+  $day-index: index($day-start-days, $day);
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($day-index - 1) * ($day-width + $gap-day);
   }
-}
-
-.calendar__day:hover {
-  transform: translateY(-20px);
-  cursor: pointer;
-  background-color: pink;
 }
