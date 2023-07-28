@@ -1,1 +1,70 @@
-@import "../styles/calendar.scss";
+$cell-size: 100px;
+$border-width: 1px;
+$font-size: 30px;
+$font-family: arial;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$calendar-width: ($cell-size + $border-width + $gap) * $columns + 2 * $padding;
+$days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+$days-count: 31;
+
+@for $i from 1 through $days-count {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+@each $day, $num in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size + $border-width + $gap) * $num;
+    }
+  }
+}
+
+@for $i from 28 through $days-count {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1} ) {
+      display: none;
+    }
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+  margin: 0 auto;
+  background-color: #fff;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-width solid #000;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &::before {
+      font-family: $font-family;
+      font-size: $font-size;
+      content: "";
+      color: #000;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: transform 0.5s;
+    }
+  }
+}
