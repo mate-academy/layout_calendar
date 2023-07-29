@@ -1,3 +1,23 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    height: 100%;
+  }
+}
+
+@each $start-day, $switch in $week-days {
+  .calendar.calendar--start-day--#{$start-day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$square-side} * #{$switch} + #{$gap} * #{$switch});
+    }
+  }
+}
+
 .calendar-container {
   display: flex;
   justify-content: center;
@@ -21,11 +41,11 @@
     font-size: 30px;
     text-align: center;
     justify-content: center;
-    padding-top: 35px;
     transition: background-color 0.5s, transform 0.5s;
+    display: flex;
 
     &:first-child {
-      margin-left: calc(#{$calendar-width} - #{$square-side});
+      margin-left: calc(#{$square-side} + #{$gap});
     }
 
     &:hover {
@@ -35,31 +55,9 @@
     }
   }
 
-  @each $start-day in $week-days {
-    &--start-day--#{$start-day} {
-      .calendar__day:first-child {
-        margin-left: $calendar-width - $square-side;
-      }
-    }
-  }
-
-  @for $i from 1 through 31 {
-    .calendar__day:nth-child(#{$i})::before {
-      content: "#{$i}";
-    }
-  }
-  
-  @for $i from 32 through 38 {
+  @for $i from 32 through 37 {
     .calendar__day:nth-child(#{$i}) {
       display: none;
-    }
-  }
-  
-  @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 2}) {
-        display: none;
-      }
     }
   }
 }
