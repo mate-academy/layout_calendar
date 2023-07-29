@@ -1,0 +1,38 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $week-days * $day-size + ($week-days - 1)* $day-gap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+
+  @each $month-length in 28, 29, 30, 31 {
+    &--month-length-#{$month-length} {
+      @for $dayCount from 1 through $month-length {
+        :nth-child(#{$dayCount})::before {
+          content: "#{$dayCount}";
+        }
+      }
+
+      :nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  $week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $day in $week {
+    &--start-day-#{$name} {
+      :first-child {
+        margin-left: $day * $day-size + ($day - 1) * $day-gap;
+      }
+    }
+  }
+}
