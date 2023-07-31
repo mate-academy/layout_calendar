@@ -1,27 +1,12 @@
-$squaresize: 100px;
-$padding: 10px;
-$numbersize: 30px;
-$columns: 8;
-$daycolor: #eee;
-$daycolor-hover: pink;
-$month-length: 28;
-$gap: 1px;
-$start-day: (mon : 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
-$tocenter: 5 * $squaresize;
+@import "./vars.scss";
 
 body {
   margin: 0;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @each $day, $val in $start-day {
   .calendar__#{$day} {
-    .calendar__day-1 {
+    .calendar__day:first-of-type {
       margin-left: ($squaresize + $gap) * $val;
     }
     display: flex;
@@ -30,44 +15,15 @@ body {
     flex-wrap: wrap;
     gap: $gap;
     padding: $padding;
-    @for $i from 1 through $month-length {
-      &__day-#{$i} {
-        display: flex;
-        justify-content: space-between;
-        width: $squaresize;
-        height: $squaresize;
-        box-sizing: border-box;
-        border: 1px solid black;
-        background-color: $daycolor;
-        &:hover {
-          cursor: pointer;
-          background-color: $daycolor-hover;
-          transition: 500ms;
-          transform: translateY(-20px);
-        }
-        &::before {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: $numbersize;
-          content: "#{$i}";
-          color: black;
-          margin: ($squaresize  - $numbersize - 4px) / 2;
-          margin-left: auto;
-          margin-right: auto;
-        }
-      }
-    }
   }
 }
 
 .calendar {
   display: flex;
-  width: $squaresize * $columns + $gap * $columns;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
+  justify-content: center;
+  align-items: center;
   @for $i from 1 through $month-length {
-    &__day-#{$i} {
+    &__day:nth-child(#{$i}) {
       display: flex;
       justify-content: space-between;
       width: $squaresize;
@@ -75,10 +31,10 @@ body {
       box-sizing: border-box;
       border: 1px solid black;
       background-color: $daycolor;
+      transition: 500ms;
       &:hover {
         cursor: pointer;
         background-color: $daycolor-hover;
-        transition: 500ms;
         transform: translateY(-20px);
       }
       &::before {
