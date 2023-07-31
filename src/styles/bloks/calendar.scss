@@ -34,18 +34,16 @@
     }
   }
 
-  @each $dayOfweek, $cellNumber in $daysOfweek {
-    &--start-day--#{$dayOfweek} :nth-child(1) {
+  @each $dayOfweek, $cell-number in $daysOfweek {
+    &--start-day--#{$dayOfweek}
+    &__day:first-child {
       margin-left: ($cell-size + $gap-size) * $cell-number;
     }
   }
 
   @for $day from 28 through 31 {
-    &--month-lenth--#{$day} :nth-child(n + #{$day + 1}){
+    &--month-lenth--#{$day} :nth-child(n + #{$day + 1}) {
       visibility: hidden;
     }
   }
 }
-
-
-
