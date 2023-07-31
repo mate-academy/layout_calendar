@@ -1,0 +1,80 @@
+//VARIABLES:
+@import "../variables";
+
+@mixin square($size) {
+  height: $size;
+  width: $size;
+}
+
+//CALENDAR BLOCK:
+.calendar {
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap-size;
+
+    width: $calendar-width;
+    padding-top: 40px;
+
+    @for $i from 28 through 31 {
+      &--month-length--#{$i} {
+        & :nth-child(1n + #{$i+1}) {
+          display: none;
+        }
+      }
+    }
+
+    @each $day, $margin in $days {
+      &--start-day--#{$day} {
+        & :first-child {
+          margin-left: $margin;
+        }
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+
+    //For alternative Alignment method:
+    //position: relative;
+
+    //Main Alignment Method:
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @include square($day-size);
+    border: 1px solid black;
+    background-color: $cell-bg;
+
+    /* stylelint-disable */
+    transition:
+      color $transition-duration,
+      background-color $transition-duration,
+      transform $transition-duration;
+    /* stylelint-enable */
+
+    @for $i from 1 through 31 {
+      &--day--#{$i} {
+        &::after {
+          content: "#{$i}";
+
+          //ALTERNATIVE WAY OF ALIGNMENT:
+          //position: absolute;
+          //width: 100%;
+          //text-align: center;
+          //top: 50%;
+          //transform: translateY(-50%);
+        }
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-bg;
+      transform: translateY(-20px);
+    }
+  }
+}
