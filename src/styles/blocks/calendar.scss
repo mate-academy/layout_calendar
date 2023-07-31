@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    transition: 0.5s;
+    transition: background-color, transform, 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -31,13 +31,13 @@
   }
 
   @each $day, $num in $start-days {
-    &--start-#{$day} > :first-child {
+    &--start-day--#{$day} > :first-child {
       margin-left: calc((#{$side + $gap}) * #{$num});
     }
   }
 
   @for $month-length from 28 through 31 {
-    &--month-length-#{$month-length} > :nth-child(n + #{$month-length + 1}) {
+    &--month-length--#{$month-length} > :nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
