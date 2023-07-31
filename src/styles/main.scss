@@ -1,3 +1,10 @@
+@import "./utils/variables.scss";
+
+.page {
+  position: relative;
+  height: 100vh;
+}
+
 .calendar {
   border: 1px solid black;
 
@@ -8,6 +15,11 @@
   gap: 1px;
   padding: 10px;
 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   &__days {
     position: relative;
     box-sizing: border-box;
@@ -17,12 +29,13 @@
     border: 1px solid black;
 
     cursor: pointer;
-    transition: 500ms;
-  }
+    transition-duration: 500ms;
+    transition-property: background-color, transform;
 
-  &__days:hover {
-    background-color: pink;
-    transform: translateY(-20px);
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
   }
 
   &__days::before {
@@ -43,11 +56,6 @@
     }
   }
 }
-
-$days: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
-$n: 1, 2, 3, 4, 5, 6, 7;
-$ceil-width: 100px;
-$gap-size: 1px;
 
 @each $day, $n in $days {
   &--start-day--#{$day} > &__days:first-child {
