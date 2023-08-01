@@ -3,3 +3,14 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin createItems($length) {
+  @for $i from 1 through $length {
+    .calendar__item:nth-child(#{$i}) {
+      display: flex;
+      &::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}

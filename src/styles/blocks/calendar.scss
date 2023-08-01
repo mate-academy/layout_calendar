@@ -25,6 +25,7 @@ body {
   }
   &__item {
     @include content-center;
+    display: none;
     width: $size;
     height: $size;
     background-color: #eee;
@@ -47,12 +48,17 @@ body {
     &--start-day--sun .calendar__item:first-child {
       margin-left: 620px;
     }
+    &--month-length--28 {
+      @include createItems(28);
+    }
+    &--month-length--29 {
+      @include createItems(29);
+    }
+    &--month-length--30 {
+      @include createItems(30);
+    }
     &--month-length--31 {
-      @for $i from 1 through $month-length {
-        .calendar__item:nth-child(#{$i})::before {
-          content: "#{$i}";
-        }
-      }
+      @include createItems(31);
     }
   }
 }
