@@ -1,24 +1,15 @@
 @import "./utils/variables.scss";
 
-.page {
-  position: relative;
-  height: 100vh;
-}
-
 .calendar {
   border: 1px solid black;
 
-  height: 505px;
+  min-height: 505px;
   width: 707px;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   padding: 10px;
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto;
 
   &__days {
     position: relative;
@@ -58,7 +49,7 @@
 
   @each $day, $n in $days {
     &--start-day--#{$day} > .calendar__days:first-child {
-      margin-left: (($ceil-width + $gap-size) * $n);
+      margin-left: (($ceil-width + $gap-size) * $n - ($ceil-width + $gap-size));
     }
   }
 
