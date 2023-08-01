@@ -38,7 +38,7 @@
   }
 
   @for $i from 1 through 31 {
-    .calendar__days:nth-child(#{$i}) {
+    &__days:nth-child(#{$i}) {
       &::before {
         content: "#{$i}";
         font-family: Arial, Helvetica, sans-serif;
@@ -48,7 +48,7 @@
   }
 
   @each $day, $n in $days {
-    &--start-day--#{$day} > .calendar__days:first-child {
+    &--start-day--#{$day} > &__days:first-child {
       margin-left: (($ceil-width + $gap-size) * $n - ($ceil-width + $gap-size));
     }
   }
