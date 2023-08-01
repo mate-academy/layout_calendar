@@ -1,0 +1,64 @@
+body {
+  height: 100vh;
+  @include content-center;
+  font-family: $font-family;
+}
+
+.calendar {
+  width: #{$calendar-width};
+  padding: 10px;
+  &__headers {
+    display: flex;
+    gap: 1px;
+  }
+  &__header {
+    @include content-center;
+    padding: 10px;
+    width: $size + 3;
+    text-transform: uppercase;
+    height: $size / 2;
+    @each $day in $week-days {
+      &--#{$day}::before {
+        content: "#{$day}";
+      }
+    }
+  }
+  &__item {
+    @include content-center;
+    display: none;
+    width: $size;
+    height: $size;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: #fcb9c4;
+      transform: translateY(-20px);
+    }
+    &::before {
+      font-size: 30px;
+    }
+  }
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: 100%;
+    &--start-day--sun .calendar__item:first-child {
+      margin-left: 620px;
+    }
+    &--month-length--28 {
+      @include createItems(28);
+    }
+    &--month-length--29 {
+      @include createItems(29);
+    }
+    &--month-length--30 {
+      @include createItems(30);
+    }
+    &--month-length--31 {
+      @include createItems(31);
+    }
+  }
+}
