@@ -19,7 +19,7 @@
     background-color: $color-bg;
     box-sizing: border-box;
     cursor: pointer;
-    
+
     transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
@@ -40,10 +40,9 @@
     }
   }
 
-  @for $month-lenght from 28 through 31 {
-    &--month-lenght--#{$month-lenght} >
-    :not(:nth-child(-n + #{$month-lenght})) {
-      visibility: hidden;
+  @for $number from 28 to 31 {
+    &--month-length-#{$number} :nth-child(n + #{$number+1}) {
+      display: none;
     }
   }
 }
