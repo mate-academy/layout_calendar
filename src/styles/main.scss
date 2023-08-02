@@ -5,21 +5,23 @@ body {
 $calendar-color:#eee;
 $cell-size: 100px;
 $columb: 7 ;
-$font-size:30px;
-$cell-gap:1px;
+$font-size: 30px;
+$cell-gap: 1px;
 $calendar-width: $columb * $cell-size + 6 * $cell-gap + 2 * 10px;
+
+* {
+  box-sizing: border-box;
+}
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   width: $calendar-width;
-  margin: auto;
   gap: $cell-gap;
-  padding: 35px 0;
+  padding: 10px;
+  margin: auto;
 
   &__day {
-    box-sizing: border-box;
     height: $cell-size;
     width: $cell-size;
     border: 1px solid black;
@@ -40,29 +42,31 @@ $calendar-width: $columb * $cell-size + 6 * $cell-gap + 2 * 10px;
   }
 }
 
-@for $i from 1 through 29 {
+$days:
+  "mon" 0,
+  "tue" 1,
+  "wed" 2,
+  "thu" 3,
+  "fri" 4,
+  "sat" 5,
+  "sun" 6;
+
+@each $day, $columb in $days {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size + $cell-gap) * $columb;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: "#{$i}";
   }
 }
 
-@for $index from 28 through 31 {
-  .calendar--month-length--:nth-child(#{$index}) ::before {
-    content: "#{$index}";
-  }
-}
-
-$days:
-  "mon" 1,
-  "tue" 2,
-  "wed" 3,
-  "thu" 4,
-  "fri" 5,
-  "sat" 6,
-  "sun" 7;
-
-@each $day, $columb in $days {
-  .calendar--start-day--#{$day} :first-child {
-    margin-left: ($cell-size + $cell-gap)*6;
+@for $i from 28 through 31 {
+  .calendar--month-lenght--#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
