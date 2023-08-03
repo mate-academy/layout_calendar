@@ -27,7 +27,7 @@
   }
 
   @for $i from 29 through 31 {
-    &-month-length--#{$i} :nth-child(n + #{$i + 1}) {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
@@ -35,23 +35,12 @@
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
       content: "#{$i}";
     }
   }
 
-  $start-day-margin: (
-    0 "mon",
-    1 "tue",
-    2 "wed",
-    3 "thu",
-    4 "fri",
-    5 "sat",
-    6 "sun",
-  );
-
   @each $number,$day in $start-day-margin {
-    &-start-day--#{$day} :first-child {
+    &--start-day--#{$day} :first-child {
       margin-left: (($calendar-gap + $day-squere-side) * $number);
     }
   }
