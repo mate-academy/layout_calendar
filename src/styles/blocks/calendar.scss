@@ -37,15 +37,18 @@
       transform $hover-transition-duration ease 0s;
 
     @for $i from 1 through 31 {
-      &--#{$i} {
+      &:nth-child(#{$i}) {
         &::before {
           content: "#{$i}";
-          font-family: Arial, Helvetica, sans-serif;
-          text-align: center;
-          font-size: 30px;
-          color: #000;
         }
       }
+    }
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+      font-size: 30px;
+      color: #000;
     }
 
     &:hover {
