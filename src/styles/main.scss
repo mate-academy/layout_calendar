@@ -4,10 +4,10 @@ $day-bckgrd-color:#eee;
 $day-border-width: 1px;
 $days-of-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
 $calendar-columns: 7;
-$calendar-column-gap: 1px;
+$calendar-gap: 1px;
 $calendar-padding: 10px;
 $calendar-width: ($day-cell-size * $calendar-columns)
-  + ($calendar-column-gap * $calendar-columns)
+  + ($calendar-gap * $calendar-columns)
   + ($calendar-padding * 2);
 
 * {
@@ -28,12 +28,12 @@ $calendar-width: ($day-cell-size * $calendar-columns)
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  gap: $calendar-gap;
   width: $calendar-width;
   padding: $calendar-padding;
 
   &__day {
     position: relative;
-    margin: $day-margin;
     width: $day-cell-size;
     border: $day-border-width solid black;
     background-color: $day-bckgrd-color;
@@ -62,8 +62,7 @@ $calendar-width: ($day-cell-size * $calendar-columns)
   @each $day, $i in $days-of-week {
     &--start-day-#{$day} &__day:first-child {
       margin-left: calc(
-        #{$day-margin}
-        + (#{$i} - 1) * (#{$day-cell-size} + #{$calendar-column-gap})
+        (#{$i} - 1) * (#{$day-cell-size} + #{$calendar-gap})
       );
     }
   }
