@@ -1,8 +1,8 @@
 .calendar {
 
   @each $day, $val in $start-day {
-    &__#{$day} {
-      .calendar-day:first-of-type {
+    &--#{$day} {
+      .calendar__day:first-of-type {
         margin-left: ($squaresize + $gap) * $val;
       }
       display: flex;
@@ -15,16 +15,16 @@
   }
 
   @each $enddate in $month-length {
-    &-#{$enddate} {
+    &--#{$enddate} {
       @for $i from $enddate + 1 to 32 {
-        .calendar-day:nth-child(#{$i}) {
+        .calendar__day:nth-child(#{$i}) {
           visibility: hidden;
         }
       }
     }
   }
 
-  &-day {
+  &__day {
     display: flex;
     justify-content: space-between;
     width: $squaresize;
@@ -49,7 +49,7 @@
   }
 
   @for $i from 1 through 31 {
-    &-day:nth-child(#{$i}) {
+    &__day:nth-child(#{$i}) {
       &::before {
         content: "#{$i}";
       }
