@@ -1,7 +1,7 @@
 .calendar {
 
   @each $day, $val in $start-day {
-    &_#{$day} {
+    &__#{$day} {
       .calendar-day:first-of-type {
         margin-left: ($squaresize + $gap) * $val;
       }
@@ -11,6 +11,16 @@
       flex-wrap: wrap;
       gap: $gap;
       padding: $padding;
+    }
+  }
+
+  @each $enddate in $month-length {
+    &-#{$enddate} {
+      @for $i from $enddate + 1 to 32 {
+        .calendar-day:nth-child(#{$i}) {
+          visibility: hidden;
+        }
+      }
     }
   }
 
@@ -38,7 +48,7 @@
     }
   }
 
-  @for $i from 1 through $month-length {
+  @for $i from 1 through 31 {
     &-day:nth-child(#{$i}) {
       &::before {
         content: "#{$i}";
