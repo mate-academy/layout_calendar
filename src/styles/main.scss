@@ -1,5 +1,4 @@
-$day-size: 100px;
-$gap: 1px;
+@import "variables.scss";
 
 body {
   margin: 0;
@@ -18,8 +17,8 @@ body {
   &__item {
     position: relative;
     box-sizing: border-box;
-    background-color: #eee;
-    border: 1px solid #000;
+    background-color: $gray;
+    border: 1px solid $black;
     width: $day-size;
     height: $day-size;
     cursor: pointer;
@@ -27,14 +26,14 @@ body {
 
     &:hover {
       transform: translateY(-20px);
-      background-color: pink;
+      background-color: $pink;
     }
 
     @for $number-of-days from 1 through 31 {
-      &--day-#{$number-of-days}::before {
+      &:nth-child(n + #{$number-of-days})::before {
         content: "#{$number-of-days}";
         font-size: 30px;
-        color: #000;
+        color: $black;
         font-family: Arial, Helvetica, sans-serif;
         position: absolute;
         z-index: 1;
@@ -44,16 +43,13 @@ body {
       }
     }
 
-    $start-days: mon 0, tue $day-size + $gap, wed 2 * ($day-size + $gap),
-      thu 3 * ($day-size + $gap), fri 4 * ($day-size + $gap),
-      sat 5 * ($day-size + $gap), sun 6 * ($day-size + $gap);
-
     @each $start-day, $margin in $start-days {
       &--start-day-#{$start-day} {
         margin-left: $margin;
       }
     }
   }
+
   @for $day from 28 through 31 {
     .month--length-#{$day} &__item:nth-child(n + #{$day + 1}) {
       display: none;
