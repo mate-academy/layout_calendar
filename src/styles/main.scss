@@ -1,3 +1,48 @@
+
+@for $day-number from 1 through 31 {
+  .calendar__day-#{$day-number}::before {
+    content: "#{1*$day-number}";
+  }
+}
+
+// @for $month-length from 28 through 31 {
+//   .calendar__day-#{$month-length} {
+//       .calendar__day:nth-child(#{$month-length + 1}) {
+//         display: none;
+//       }
+//   }
+// }
+
 body {
   margin: 0;
+  padding: 20px;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  gap: 1px;
+  padding: 10px;
+  width: 770px;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  list-style: none;
+  cursor: pointer;
+  background-color: #eee;
+  transition: 500ms;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__day:hover {
+  transform: translate(0, -20px);
+  background-color: pink;
 }
