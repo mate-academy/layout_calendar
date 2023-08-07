@@ -1,3 +1,62 @@
+$day-size: 100px;
+$gap: 1px;
+
 body {
   margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.month {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  max-width: $day-size * 7 + 10px;
+  padding: 40px 10px;
+
+  &__item {
+    position: relative;
+    box-sizing: border-box;
+    background-color: #eee;
+    border: 1px solid #000;
+    width: $day-size;
+    height: $day-size;
+    cursor: pointer;
+    transition: transform 0.2s linear, background-color 0.2s linear;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $number-of-days from 1 through 31 {
+      &--day-#{$number-of-days}::before {
+        content: "#{$number-of-days}";
+        font-size: 30px;
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    $start-days: mon 0, tue $day-size + $gap, wed 2 * ($day-size + $gap),
+      thu 3 * ($day-size + $gap), fri 4 * ($day-size + $gap),
+      sat 5 * ($day-size + $gap), sun 6 * ($day-size + $gap);
+
+    @each $start-day, $margin in $start-days {
+      &--start-day-#{$start-day} {
+        margin-left: $margin;
+      }
+    }
+  }
+  @for $day from 28 through 31 {
+    .month--length-#{$day} &__item:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
 }
