@@ -1,0 +1,51 @@
+@import "./variable.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  margin: auto;
+  padding: $padding;
+  margin-top: $padding;
+  width: 7 * $cell-size +6 * $gap +2 * $padding;
+
+  &__cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: $border-size solid $border;
+    background-color: $card-color;
+    width: $cell-size;
+    height: $cell-size;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+  &__cell:hover {
+    transform: translateY(-20px);
+    transition: all 0.5s;
+    cursor: pointer;
+    background-color: $hover-color;
+  }
+}
+
+@each $day,$margin in $week {
+  .calendar--start-day-#{$day} {
+    .calendar__cell:first-child {
+      margin-left: $margin;
+    }
+  }
+}
+
+@for $day from 28 to 31 {
+  .calendar--month-length--#{$day} .calendar__cell:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__cell:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+}
