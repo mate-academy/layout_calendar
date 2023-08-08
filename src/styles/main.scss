@@ -1,6 +1,6 @@
 $day-cell-size: 100px;
 $day-margin: 0.5px;
-$day-bckgrd-color:#eee;
+$day-bckgrd-color: #eee;
 $day-border-width: 1px;
 $days-of-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
 $calendar-columns: 7;
@@ -18,19 +18,32 @@ $calendar-width: ($day-cell-size * $calendar-columns)
   font-size: 30px;
 }
 
-.container {
+.calendar {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-}
 
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $calendar-gap;
-  width: $calendar-width;
-  padding: $calendar-padding;
+  &__item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $calendar-gap;
+    width: $calendar-width;
+    min-width: $calendar-width;
+    padding: $calendar-padding;
+
+    @each $day, $i in $days-of-week {
+      &--start-day-#{$day}>:first-child {
+        margin-left: calc((#{$i} - 1) * (#{$day-cell-size} + #{$calendar-gap}));
+      }
+    }
+
+    @for $day from 28 through 31 {
+      &--month-length-#{$day}>:nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
 
   &__day {
     position: relative;
@@ -51,25 +64,11 @@ $calendar-width: ($day-cell-size * $calendar-columns)
       align-items: center;
       line-height: calc(#{$day-cell-size} - (#{$day-border-width} * 2));
     }
-  }
 
-  @for $day from 1 through 31 {
-    &__day:nth-child(#{$day})::before {
-      content: "#{$day}";
-    }
-  }
-
-  @each $day, $i in $days-of-week {
-    &--start-day-#{$day} &__day:first-child {
-      margin-left: calc(
-        (#{$i} - 1) * (#{$day-cell-size} + #{$calendar-gap})
-      );
-    }
-  }
-
-  @for $day from 28 through 31 {
-    &--month-length-#{$day} &__day:nth-child(n + #{$day + 1}) {
-      display: none;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
     }
   }
 }
