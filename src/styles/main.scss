@@ -1,10 +1,10 @@
 $days: mon, tue, wed, thu, fri, sat, sun;
-$cell-width: 100px;
+$cell-size: 100px;
 $cell-gap: 1px;
 $calendar-padding: 10px;
 
 @for $day-number from 1 through 31 {
-  .calendar__day-#{$day-number}::before {
+  .calendar__day:nth-child(#{$day-number})::before {
     content: "#{1*$day-number}";
   }
 }
@@ -21,14 +21,14 @@ body {
 
   gap: $cell-gap;
   padding: $calendar-padding;
-  width: calc(7 * #{$cell-width} + 6 * #{$cell-gap} + 2 * #{$calendar-padding});
+  width: calc(7 * #{$cell-size} + 6 * #{$cell-gap} + 2 * #{$calendar-padding});
 }
 
 .calendar__day {
   box-sizing: border-box;
   border: 1px solid #000;
-  width: $cell-width;
-  height: 100px;
+  width: $cell-size;
+  height: $cell-size;
   list-style: none;
   cursor: pointer;
   background-color: #eee;
