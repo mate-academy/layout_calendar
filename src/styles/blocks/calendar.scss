@@ -1,47 +1,48 @@
 .calendar {
   display: flex;
+  gap: $gap;
+  border: $border;
+  width: calc((#{$side} * 7) + (#{$gap} * 6));
   flex-wrap: wrap;
-  gap: $cell-gap;
-  max-width: $content-width + $padding-container*2;
-  margin: 0 auto;
-  padding: 50px 10px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  margin-top: 10px;
 
   &__day {
-    width: $cell-width;
-    height: $cell-height;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $cell-color;
-    border: 1px solid $border-color;
-    transition: all 0.5s;
+    height: 100px;
+    width: 100px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    cursor: pointer;
+    transition: transform 1s;
 
     &:hover {
       background-color: pink;
-      cursor: pointer;
       transform: translateY(-20px);
     }
+  }
 
-    @for $index from 1 through $day-count {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
-      }
+  @for $number from 1 through 31 {
+    &__day:nth-child(#{$number}):before {
+      content: "#{$number}";
     }
   }
 
-  @for $index from 28 through $day-count {
-    &--month-length-#{$index} {
-      &__day:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
+  @each $name, $day in $start-day {
+    &--start-day-#{$name} :first-child {
+      margin-left: ($day - 1 )* ($side + $gap);
     }
   }
 
-  @each $day, $index in $week-days {
-    &--start-day-#{$day} {
-      &__day:first-child {
-        margin-left: ($index * $cell-width) + $index;
-      }
+  @for $month-length from 28 through 31 {
+    &--length-month--#{$month-length}
+    > :not(:nth-child(-n + #{$month-length})) {
+      visibility: hidden;
     }
   }
 }
