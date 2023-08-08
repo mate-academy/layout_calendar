@@ -2,6 +2,7 @@ $day-cell-size: 100px;
 $day-margin: 0.5px;
 $day-bckgrd-color: #eee;
 $day-border-width: 1px;
+$day-line-height: calc(#{$day-cell-size} - (#{$day-border-width} * 2));
 $days-of-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7;
 $calendar-columns: 7;
 $calendar-gap: 1px;
@@ -11,37 +12,38 @@ $calendar-width: ($day-cell-size * $calendar-columns)
   + ($calendar-padding * 2);
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  font-size: 30px;
 }
 
-.calendar {
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
 
-  &__item {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $calendar-gap;
-    width: $calendar-width;
-    min-width: $calendar-width;
-    padding: $calendar-padding;
+.calendar {
 
-    @each $day, $i in $days-of-week {
-      &--start-day-#{$day}>:first-child {
-        margin-left: calc((#{$i} - 1) * (#{$day-cell-size} + #{$calendar-gap}));
-      }
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  @each $day, $i in $days-of-week {
+    &--start-day--#{$day}>:first-child {
+      margin-left: calc((#{$i} - 1) * (#{$day-cell-size} + #{$calendar-gap}));
     }
+  }
 
-    @for $day from 28 through 31 {
-      &--month-length-#{$day}>:nth-child(n + #{$day + 1}) {
-        display: none;
-      }
+  @for $day from 28 through 31 {
+    &--month-length--#{$day}>:nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 
@@ -50,7 +52,9 @@ $calendar-width: ($day-cell-size * $calendar-columns)
     width: $day-cell-size;
     border: $day-border-width solid black;
     background-color: $day-bckgrd-color;
-    transition: all 0.5s;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition: background-color 0.5s, transform 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -62,7 +66,7 @@ $calendar-width: ($day-cell-size * $calendar-columns)
       display: flex;
       justify-content: center;
       align-items: center;
-      line-height: calc(#{$day-cell-size} - (#{$day-border-width} * 2));
+      line-height: $day-line-height;
     }
 
     @for $day from 1 through 31 {
