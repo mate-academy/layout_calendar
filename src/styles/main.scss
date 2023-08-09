@@ -1,21 +1,4 @@
 @import "variables.scss";
+
 @import "body.scss";
 @import "calendar.scss";
-
-@for $day-number from 1 through 31 {
-  .calendar__day:nth-child(#{$day-number})::before {
-    content: "#{1*$day-number}";
-  }
-}
-
-@for $length from 28 through 31 {
-  .calendar--month-length--#{$length} :nth-child(n + #{$length + 1}) {
-    display: none;
-  }
-}
-
-@each $day, $indent in $week {
-  .calendar--start-day--#{$day} :first-child {
-    margin-left: $indent;
-  }
-}
