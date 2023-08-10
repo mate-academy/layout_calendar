@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  @extend %calendar-settings;
+
+  @each $name, $index in $mounths {
+    &--first-day--#{$name}>:first-child {
+      margin-left: $index * ($block-width + 1);
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--mounth--length-#{$last-day}>:nth-child(n+#{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: $number-size;
+    height: $block-height;
+    @extend %settings-blok-structure;
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number}) {
+        &::before {
+          content: "#{$number}";
+        }
+      }
+    }
+
+    &:hover {
+      background-color: #edb4b4;
+      transform: translate(0,-25%);
+      transition: 0.5s;
+    }
+  }
+}
