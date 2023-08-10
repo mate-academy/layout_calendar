@@ -1,3 +1,60 @@
+$cell-size: 100px;
+$cell-background: #eee;
+$start-day: 6;
+$month-length: 29;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  max-width: ($cell-size + 1) * 7;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px auto 0;
+  gap: 1px;
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    position: relative;
+    text-align: center;
+    transition: color 0.5s, transform 0.5s;
+    cursor: pointer;
+
+    &:first-child {
+      margin-left: ($start-day * $cell-size) + ($start-day);
+    }
+
+    &:nth-child(-n+#{$month-length}) {
+      border: 1px solid #000;
+      background-color: $cell-background;
+    }
+
+    @for $num from 1 through $month-length {
+      &:nth-child(#{$num})::before {
+        content: "#{$num}";
+      }
+    }
+
+    &::before {
+      position: absolute;
+      font-size: 30px;
+      line-height: 30px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+  }
 }
