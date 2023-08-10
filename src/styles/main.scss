@@ -1,5 +1,7 @@
 body {
-  margin: 50px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 $cell-size: 100px;
@@ -16,12 +18,15 @@ $day-name: (
 
 .calendar {
   display: flex;
+  position: center;
   flex-wrap: wrap;
   width: ($cell-size+$gap)*7;
   box-sizing: border-box;
   gap: $gap;
+  margin-top: 20px;
 
   &__day {
+    display: flex;
     box-sizing: border-box;
     height: $cell-size;
     width: $cell-size;
@@ -31,15 +36,17 @@ $day-name: (
     font-size: 30px;
     cursor: pointer;
     transition: background-color, transform 0.5s;
-  }
+    justify-content: center;
+    align-items: center;
 
-  &__day:hover {
-    background-color: rgb(250, 5, 250);
-    transform: translateY(-20px);
-  }
+    &:hover {
+      background-color: rgb(237, 128, 252);
+      transform: translateY(-20px);
+    }
 
-  &::before {
-    display: block;
+    &::before {
+      display: block;
+    }
   }
 
   @for $day from 1 through 31 {
@@ -56,7 +63,7 @@ $day-name: (
 
   @for $month-length from 28 through 31 {
     &--month-length--#{$month-length} > :not(:nth-child(-n+#{$month-length})) {
-      visibility: hidden;
+      display: none;
     }
   }
 }
