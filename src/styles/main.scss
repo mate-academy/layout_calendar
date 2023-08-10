@@ -21,11 +21,11 @@ body {
 
   @each $name, $num in $start-day {
     &--start-day-#{$name} > .calendar__cell:first-child {
-      margin-left: ($num * $cell-size) + 1;
+      margin-left: $num * ($cell-size + 1);
     }
   }
   @for $day from 28 through 31 {
-    &--month-length-#{$day} :nth-child(n + #{$day +1}) {
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
