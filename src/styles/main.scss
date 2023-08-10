@@ -1,3 +1,58 @@
+$cell-size:100px;
+$week-day: "mon" 1, "tue" 2, "wed" 3, "thu" 4, "fri" 5, "sat" 6, "sun" 7;
+
 body {
   margin: 0;
 }
+
+.calendar {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+
+  width: 720px;
+  gap: 1px;
+
+
+  &_day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $cell-size;
+    height: $cell-size;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0,-20px);
+    }
+
+    @for $dayCount from 1 through 31 {
+      &:nth-child(#{$dayCount})::before {
+        content: "#{$dayCount}";
+      }
+    }
+  }
+
+    @each $dayName, $weekDay in $week-day {
+      &--start-#{$dayName} &_day:first-child {
+        margin-left: $weekDay*$cell-size+3px*$weekDay;
+      }
+    }
+
+    @for $index from 28 through 31 {
+      &--days-#{$index} &_day:not(:nth-child(-n + #{$index})) {
+        opacity: 0;
+      }
+    }
+  }
+
