@@ -1,7 +1,6 @@
 $cell-size: 100px;
 $cell-background: #eee;
-$start-day: 6;
-$month-length: 29;
+$start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 * {
   box-sizing: border-box;
@@ -20,6 +19,17 @@ body {
   margin: 20px auto 0;
   gap: 1px;
 
+  @each $name, $num in $start-day {
+    &--start-day-#{$name} > .calendar__cell:first-child {
+      margin-left: ($num * $cell-size) + 1;
+    }
+  }
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} :nth-child(n + #{$day +1}) {
+      display: none;
+    }
+  }
+
   &__cell {
     width: $cell-size;
     height: $cell-size;
@@ -27,23 +37,16 @@ body {
     text-align: center;
     transition: color 0.5s, transform 0.5s;
     cursor: pointer;
+    border: 1px solid #000;
+    background-color: $cell-background;
 
-    &:first-child {
-      margin-left: ($start-day * $cell-size) + ($start-day);
-    }
-
-    &:nth-child(-n+#{$month-length}) {
-      border: 1px solid #000;
-      background-color: $cell-background;
-    }
-
-    @for $num from 1 through $month-length {
+    @for $num from 1 through 31 {
       &:nth-child(#{$num})::before {
         content: "#{$num}";
       }
     }
 
-    &::before {
+    &:before {
       position: absolute;
       font-size: 30px;
       line-height: 30px;
@@ -56,5 +59,7 @@ body {
       transform: translateY(-20px);
       background-color: #ffbfcb;
     }
+
   }
+
 }
