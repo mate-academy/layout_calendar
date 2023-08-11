@@ -9,8 +9,6 @@
     margin: auto;
   }
 
-  $week: ("mon": 7, "tue": 6, "wed": 5, "thu": 4, "fri": 3, "sat": 2, "sun": 1);
-
   @each $weekDay, $numberWeekDay in $week {
     &--start-day--#{$weekDay} :first-child {
       margin-left: ($cell-width + $gap) * ($numberWeekDay - 1);
@@ -18,8 +16,6 @@
   }
 
   &--month-length {
-    $daysOptions: 28, 29, 30, 31;
-
     @each $daysAmount in $daysOptions {
       @for $day from 1 through $daysAmount {
         &--#{$daysAmount}>:nth-child(n + #{$day})::before {
