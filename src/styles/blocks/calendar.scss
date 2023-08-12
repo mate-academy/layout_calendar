@@ -18,6 +18,12 @@ body {
 
   flex-wrap: wrap;
 
+  @each $weekDay, $numWeekDay in $daysOfTheWeek {
+    &--start-day--#{$weekDay} .day:first-child {
+      margin-left: ($squareSize + $gap) * ($numWeekDay - 1);
+    }
+  }
+
   @each $amountOfDays in $possibleAmountsOfDays {
     @for $numberOfDay from 1 through $amountOfDays {
       &--month-length--#{$amountOfDays}
