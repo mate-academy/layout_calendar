@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  position: absolute;
+  top: 1;
+  bottom: 1;
+  left: 1;
+  right: 1;
+  max-width: ($squareSize + $gap) * 7;
+  gap: $gap;
+
+  flex-wrap: wrap;
+
+  @each $amountOfDays in $possibleAmountsOfDays {
+    @for $numberOfDay from 1 through $amountOfDays {
+      &--month-length--#{$amountOfDays}
+      .day:nth-child(#{$numberOfDay})::before {
+        content: "#{$numberOfDay}";
+      }
+    }
+  }
+}

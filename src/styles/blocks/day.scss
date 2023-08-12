@@ -1,0 +1,29 @@
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  background-color: #eee;
+  height: $squareSize;
+  width: $squareSize;
+  box-sizing: border-box;
+  border: 1px solid black;
+
+  transition: transform 0.5s, background-color 0.5s;
+
+  cursor: pointer;
+
+  @each $weekDay, $numWeekDay in $daysOfTheWeek {
+    &--start-day--#{$weekDay}:first-child {
+      margin-left: ($squareSize + $gap) * ($numWeekDay - 1);
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    transform: translate(0, -20px);
+  }
+}
