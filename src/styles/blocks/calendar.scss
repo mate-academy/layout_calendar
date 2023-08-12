@@ -9,7 +9,6 @@ h1 {
   flex-wrap: wrap;
   gap: 1px;
 
-
   &__cell {
     box-sizing: border-box;
     width: $cell-size;
@@ -32,15 +31,15 @@ h1 {
   }
 
   @for $date from 1 through 31 {
-      &__cell:nth-child(#{$date})::before {
+    &__cell:nth-child(#{$date})::before {
       content: "#{$date}";
-      }
+    }
   }
 
   @each $name, $margin-day in $date {
-  &--start-day-#{$name} :first-child {
-    margin-left: $margin-day;
-  }
+    &--start-day-#{$name} :first-child {
+      margin-left: $margin-day;
+    }
   }
 
   @for $amount-day from 28 through 31 {
@@ -49,4 +48,3 @@ h1 {
     }
   }
 }
-
