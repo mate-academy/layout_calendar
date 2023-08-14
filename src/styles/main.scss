@@ -1,3 +1,71 @@
 body {
   margin: 0;
+  box-sizing: border-box;
+}
+
+$grey: #eee;
+$pink: #ff69b4;
+$element-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$padding: 10px;
+$font-size: 30px;
+
+$total-width: 7 * ($element-size + $border-width) + 2 * $padding;
+$week-days: mon, tue, wed, thu, fri, sat, sun;
+$month-length-modifiers: 28, 29, 30, 31;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $total-width;
+
+  &__day {
+    width: $element-size;
+    height: $element-size;
+    border: $border-width solid black;
+    background-color: $grey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $font-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &::before {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: $pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $day from 1 through 31 {
+    .calendar__day:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
+  @each $day in $week-days {
+    &--start-#{$day} {
+      margin-left: ($element-size + $gap) * index($week-days, $day);
+    }
+  }
+
+  @each $modifier in $month-length-modifiers {
+    &:nth-child(#{$modifier}) {
+      .calendar__day:nth-child(n + #{$modifier + 1}) {
+        display: none;
+      }
+    }
+  }
 }
