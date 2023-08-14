@@ -1,7 +1,6 @@
 .calendar {
   width: $cell-width;
-  margin: 0 auto;
-  margin-top: 50px;
+  margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
@@ -19,24 +18,27 @@
           content: "#{$day}";
         }
       }
+      @for $num from $count+1 through 32 {
+        &--#{$count} > :nth-child(#{$num}) {
+          display: none;
+        }
+      }
     }
   }
 
   &__day {
-
     display: flex;
     align-items: center;
     justify-content: center;
     width: $cell-size;
     height: $cell-size;
-    background-color: #eee;
-    border: 1px dashed black;
+    background-color: $clr--bg;
+    border: 1px dashed $clr--main;
     cursor: pointer;
-    transition-duration: 0.5s, 0.5s;
-    transition-property: transform, background-color;
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
-      background-color: pink;
+      background-color: $clr--secondary;
       transform: translateY(-20px);
     }
   }
