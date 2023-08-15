@@ -41,13 +41,13 @@
 
   @each $margin, $index in $start-day {
     &--name-of-the-day-#{$margin} :first-child {
-      margin-left: calc((#{$index} - 1)
-      * (#{$cellSize} + #{$gap}));
+      margin-left: ($index - 1)
+        * ($cellSize + $gap);
     }
   }
 
-  @for $lastdays from 28 through 31 {
-    &--#{$lastdays}>:nth-child(n + #{$lastdays + 1}) {
+  @for $day-of-month from 28 through 30 {
+    &--month-length--#{$day-of-month} :nth-child(n + #{$day-of-month + 1}) {
       display: none;
     }
   }
