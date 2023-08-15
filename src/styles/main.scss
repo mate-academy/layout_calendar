@@ -1,3 +1,59 @@
+$default-box-size: 100px;
+$default-box-background-color: #eee;
+
+@mixin onHover() {
+  transition: transform, 0.5s;
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+  font-weight: bold;
+  color: ghostwhite;
+}
+
 body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $default-box-size * 7 + 20;
+  margin: auto;
+  margin-top: 200px;
+  position: relative;
+
+  &__day {
+    width: $default-box-size;
+    height: $default-box-size;
+    background-color: $default-box-background-color;
+    border: 1px solid #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      @include onHover();
+    }
+  }
+
+  &__day-first {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 1px;
+  }
+
+  @for $i from 1 through 31 {
+    & :nth-child(#{$i})::before {
+      content: '#{$i}';
+      position: absolute;
+      display: block;
+      font-size: 20px;
+    }
+  }
 }
