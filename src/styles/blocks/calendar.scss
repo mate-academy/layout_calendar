@@ -5,30 +5,32 @@
   gap: $gap;
 
   @for $days from 28 through 31 {
-    &--month-length-#{$days} &__day:nth-child(n + #{$days + 1}) {
+    &--month-length--#{$days} :nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
 
-  @each $day in $weekday-names {
-    &--start-day-#{$day} :first-child {
-      margin-left: (index($weekday-names, $day) - 1) * ($daySize + $padding * 2 + $border * 2) + $gap * (index($weekday-names, $day) - 1);
+  @each $day in $dayNames {
+    $daysBefore: index($dayNames, $day) - 1;
+    &--start-day--#{$day} :first-child {
+      margin-left: $daysBefore * ($daySize + $gap);
     }
   }
 
   &__day {
+    box-sizing: border-box;
     height: $daySize;
     width: $daySize;
     padding: 10px;
     border: 1px solid black;
     background-color: #eee;
     text-align: center;
-    line-height: 100px;
+    line-height: 90px;
+    transition: background-color, transform 0.5s;
 
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-      transition: all 0.5s;
     }
 
     @for $i from 1 through 31 {
