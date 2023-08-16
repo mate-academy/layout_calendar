@@ -4,9 +4,10 @@
   gap: 1px;
 
   max-width: $maxWidth;
-  padding: 10px;
+  padding: 0 10 10px;
+  padding-top: 30px;
 
-  * {
+  &__day {
     @include flexBlock;
     align-items: center;
 
@@ -18,11 +19,19 @@
     border: 1px solid black;
 
     font-size: 30px;
-  }
+    transition: transform 0.5s ease-out;
 
-  @for $a from 1 through 31 {
-    & :nth-child(#{$a})::before {
-      content: "#{$a}";
+    &:hover {
+      background-color: $hoverColor;
+      transform: translateY(-20px);
+      cursor: pointer;
+      transition: transform 0.5s ease, background-color 0.5s linear;
+    }
+
+    @for $a from 1 through 31 {
+      &:nth-child(#{$a})::before {
+        content: "#{$a}";
+      }
     }
   }
 
@@ -39,12 +48,5 @@
       }
     }
   }
-
-  & > :hover {
-    background-color: $hoverColor;
-    transform: translateY(-20px);
-    cursor: pointer;
-    transition: transform 0.5s, background-color 0.5s linear;
-  }
-
+  
 }
