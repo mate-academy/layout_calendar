@@ -4,6 +4,16 @@
   }
 }
 
+@each $day, $day-index in $day-map {
+  &--start-day-#{$day} {
+    .calendar__day {
+      &:nth-child(#{$day-index}n + 1) {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
 @for $i from 28 through 31 {
   &.calendar--month-length-#{$i} {
     .calendar__day:nth-child(n + #{$i + 1}) {
