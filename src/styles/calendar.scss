@@ -10,14 +10,10 @@ $days: ("mon",
 .calendar {
   display: flex;
   justify-content: center;
-
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    width: (7 * $day-size) + 10px;
-    padding: 20px 10px;
-  }
+  flex-wrap: wrap;
+  gap: 1px;
+  width: (7 * $day-size) + 10px;
+  padding: 20px 10px;
 
   &__day {
     display: flex;
@@ -28,7 +24,7 @@ $days: ("mon",
     border: 1px solid black;
     box-sizing: border-box;
     background-color: #eee;
-    transition: clor 0.5s, transform 0.5s;
+    transition: background-color 0.5s, transform 0.5s;
 
     &::before {
       content: "";
@@ -41,20 +37,20 @@ $days: ("mon",
       background-color: pink;
       transform: translateY(-20px);
     }
-  }
-}
 
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
-}
 
-@for $i from 0 to length($days) {
-  $day: (nth($days, $i+1));
-  .calendar--start-day--#{$day} {
-    .calendar__day:first-child {
-      margin-left: calc(#{$i} * 101px);
+  @for $i from 0 to length($days) {
+    $day: (nth($days, $i+1));
+    &--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc(#{$i} * 101px);
+      }
     }
   }
 }
