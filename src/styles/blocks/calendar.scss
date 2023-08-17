@@ -1,0 +1,55 @@
+.calendar {
+  &__field {
+    width: $cell-width;
+    margin: 100px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $cell-gap;
+
+    @each $day-of-week, $number in $days-of-week {
+      &--first-day--#{$day-of-week} :first-child {
+        margin-left: ($number - 1) * ($cell-size + $cell-gap);
+      }
+    }
+
+    &--month-length {
+      @each $length in $month-length {
+        @for $day from 1 through $length {
+          &--#{$length} > :nth-child(#{$day})::before {
+            content: "#{$day}";
+          }
+        }
+      }
+      @for $remove from 28 through 31 {
+        &--#{$remove} > :nth-child(n+#{$remove + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $cell-size;
+    width: $cell-size;
+    padding: 10px;
+    border: 1px solid black;
+    background-color: $color-cell;
+    cursor: pointer;
+
+    transition: $transition-cell;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $color-cell-hover;
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+          content: "#{$day}";
+      }
+    }
+  }
+}
