@@ -4,28 +4,26 @@
   gap: 1px;
 
   max-width: $maxWidth;
-  padding: 0 10 10px;
-  padding-top: 30px;
+  padding: 30px 10px 10px;
 
   &__day {
     @include flexBlock;
     align-items: center;
 
-    width: $blockWidth;
-    height: $blockHeight;
+    width: $blockSeize;
+    height: $blockSeize;
     box-sizing: border-box;
 
     background-color: $blockColor;
     border: 1px solid black;
 
     font-size: 30px;
-    transition: transform 0.5s ease-out;
+    transition: transform 0.5s ease-in-out, background-color 0.5s linear;
 
     &:hover {
       background-color: $hoverColor;
       transform: translateY(-20px);
       cursor: pointer;
-      transition: transform 0.5s ease, background-color 0.5s linear;
     }
 
     @for $a from 1 through 31 {
@@ -37,7 +35,7 @@
 
   @each $day, $number in $days {
     &--start-day--#{$day} :first-child {
-      margin-left: $number * 101px;
+      margin-left: $number * $itemSize;
     }
   }
 
@@ -48,5 +46,5 @@
       }
     }
   }
-  
+
 }
