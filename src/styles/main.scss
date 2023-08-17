@@ -10,6 +10,18 @@ body {
   gap: 1px;
   max-width: 708px;
   margin-top: 20px;
+  @for $i from 28 through 31 {
+    &--month-lenght--#{$i} :nth-child(n + #{$i + 1}) {
+      background-color: #fff;
+      border-color: #fff;
+      color: #fff;
+      &:hover {
+        transform: translateY(0);
+        background-color: #fff;
+        color: #fff;
+      }
+    }
+  }
 }
 
 .day {
@@ -26,42 +38,18 @@ body {
     transform: translateY(-20px);
     background-color: palevioletred;
   }
-}
-
-@for $i from 1 through 31 {
-  .day:nth-child(#{$i}) {
-    &::before {
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
       content: "#{$i}";
     }
   }
 }
-$days:
-  mon 0,
-  tue 101px,
-  wed 202px,
-  thi 303px,
-  fry 404px,
-  sat 505px,
-  sun 606px;
+
+@import "../styles/variables.scss";
 @each $day, $margin in $days {
   .calendar--start-day-#{$day} {
-    .day--1 {
+    .day:first-child {
       margin-left: $margin;
-    }
-  }
-}
-
-@for $i from 28 through 31 {
-  .calendar--month-lenght--#{$i} {
-    .day:nth-child(n+#{$i}) {
-      background-color: #fff;
-      border-color: #fff;
-      &::before {
-        content: "";
-      }
-      &:hover {
-        transform: translateY(0);
-      }
     }
   }
 }
