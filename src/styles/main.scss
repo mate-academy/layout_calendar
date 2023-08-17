@@ -3,7 +3,7 @@ body {
 }
 
 .calendar {
-  width:710px;
+  width: 710px;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -13,12 +13,11 @@ body {
   &__cell {
     height: 100px;
     width: 100px;
-    background-color:#eee;
+    background-color: #eee;
     border: 1px solid black;
     box-sizing: border-box;
     transition: 0.5s;
     position: relative;
-
 
     &:hover {
       transform: translateY(-20px);
@@ -39,18 +38,17 @@ body {
     }
   }
 
-@for $i from 28 through 31 {
-  &_month-length-#{$i} >:nth-child(n + #{$i +1}){
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} >:nth-child(n + #{$i +1}) {
       display: none;
     }
   }
 
-$days: 'mon' 0,'tue'1,'wed'2,'thu'3,'fri'4,'sat'5,'sund'6;
+  $days:"mon" 1,"tue" 2,"wed" 3,"thu" 4,"fri" 5,"sun" 6,"sat" 7;
 
-@each $name, $index in $days {
-  &_start-day-#{$name}>:first-child {
-    margin-left: $index * (100px + 1);
+  @each $name, $index in $days {
+    &--start-day-#{$name}>:first-child {
+      margin-left: $index * (100px + 1);
+    }
   }
 }
-}
-
