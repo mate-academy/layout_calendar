@@ -1,6 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  box-sizing: border-box;
 }
 
 .container {
@@ -20,13 +23,13 @@ $font-size: 30px;
 
 $total-width: 7 * ($element-size + $border-width) + 2 * $padding;
 $week-days:
-  "sun" 1,
-  "mon" 2,
-  "tue" 3,
-  "wed" 4,
-  "thu" 5,
-  "fri" 6,
-  "sat" 7;
+  "mon" 1,
+  "tue" 2,
+  "wed" 3,
+  "thu" 4,
+  "fri" 5,
+  "sat" 6,
+  "sun" 7;
 $month-length-modifiers: 28, 29, 30, 31;
 
 .calendar {
@@ -70,7 +73,7 @@ $month-length-modifiers: 28, 29, 30, 31;
   }
 
   @each $day, $index in $week-days {
-    &--start--day--#{$day}.calendar__day:first-child {
+    &--start-day-#{$day} .calendar__day:first-child {
       margin-left: ($element-size + $gap) * ($index - 1);
     }
   }
