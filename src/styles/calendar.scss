@@ -1,15 +1,9 @@
-$day-size: 100px;
-$days: ("mon",
-"tue",
-"wed",
-"thu",
-"fri",
-"sat",
-"sun");
+@import "./variables.scss";
 
 .calendar {
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-wrap: wrap;
   gap: 1px;
   width: (7 * $day-size) + 10px;
@@ -45,11 +39,18 @@ $days: ("mon",
     }
   }
 
-  @for $i from 0 to length($days) {
-    $day: (nth($days, $i+1));
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} {
+      .calendar__day:nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day,$i in $days {
     &--start-day--#{$day} {
       .calendar__day:first-child {
-        margin-left: calc(#{$i} * 101px);
+        margin-left: calc(#{$i} * (#{$day-size} + 1px));
       }
     }
   }
