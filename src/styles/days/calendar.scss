@@ -1,11 +1,12 @@
 @import "./variables/variables.scss";
 
+$max-width: ($day-size + $border-width + $padding) * $calendar-width + 2 * $padding;
+
 .calendar {
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  max-width: ($day-size + $border-width + $padding)
-    * $calendar-width + 2 * $padding;
+  max-width: $max-width;
   padding-top: 21px;
   gap: $border-width;
 
@@ -18,35 +19,34 @@
     border: $border-width solid #000;
     justify-content: center;
     align-items: center;
-  }
 
-  &__day:hover {
-    background-color: pink;
-    transform: translateY(-20px);
-    cursor: pointer;
-  }
-}
-
-@for $day from 1 through 31 {
-  .calendar :nth-child(n + #{$day})::before {
-    content: "#{$day}" ;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-  }
-}
-
-@each $day, $col in $days {
-  .calendar--start-day-#{$day} {
-    .calendar__day:first-child {
-      margin-left: ($day-size * $col) + $col * 1px;
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
     }
   }
-}
 
-@each $length in 28,29,30,31 {
-  .calendar--month-length-#{$length} {
-    .calendar__day:nth-child(n+#{$length + 1}) {
-      display: none;
+  @for $day from 1 through 31 {
+    :nth-child(n + #{$day})::before {
+      content: "#{$day}" ;
+      font-size: 30px;
+    }
+  }
+
+  @each $day, $col in $days {
+    &--start-day-#{$day} {
+      &__day:first-child {
+        margin-left: ($day-size * $col) + $col * 1px;
+      }
+    }
+  }
+
+  @each $length in 28, 29, 30, 31 {
+    &--month-length-#{$length} {
+      &__day:nth-child(n+#{$length + 1}) {
+        display: none;
+      }
     }
   }
 }
