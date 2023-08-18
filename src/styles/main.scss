@@ -3,6 +3,13 @@ body {
   box-sizing: border-box;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh
+}
+
 $grey: #eee;
 $pink: #ff69b4;
 $element-size: 100px;
@@ -12,8 +19,16 @@ $padding: 10px;
 $font-size: 30px;
 
 $total-width: 7 * ($element-size + $border-width) + 2 * $padding;
-$week-days: mon, tue, wed, thu, fri, sat, sun;
+$week-days:
+  "sun" 1,
+  "mon" 2,
+  "tue" 3,
+  "wed" 4,
+  "thu" 5,
+  "fri" 6,
+  "sat" 7;
 $month-length-modifiers: 28, 29, 30, 31;
+
 
 .calendar {
   display: flex;
@@ -55,14 +70,14 @@ $month-length-modifiers: 28, 29, 30, 31;
     }
   }
 
-  @each $day in $week-days {
-    &--start-#{$day} {
-      margin-left: ($element-size + $gap) * index($week-days, $day);
+  @each $day, $index in $week-days {
+    &--start--day--#{$day}.calendar__day:first-child  {
+      margin-left: ($element-size + $gap) * ($index - 1);
     }
   }
 
   @each $modifier in $month-length-modifiers {
-    &:nth-child(#{$modifier}) {
+    &--month-length-#{$modifier} {
       .calendar__day:nth-child(n + #{$modifier + 1}) {
         display: none;
       }
