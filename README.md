@@ -1,6 +1,6 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://liiasav.github.io/layout_calendar/)
+- [DEMO LINK](gi)
 - [TEST REPORT LINK](https://liiasav.github.io/layout_calendar/report/html_report/)
 
 ___
