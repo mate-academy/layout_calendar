@@ -1,4 +1,4 @@
-$calendarFont: arial;
+$calendarFont: arial, sans-serif;
 $fontSize: 30px;
 $daySize: 100px;
 $dayGap: 1px;
@@ -13,6 +13,8 @@ body {
   width: $totalSize + $totalGap + 10px;
   display: flex;
   flex-wrap: wrap;
+  margin: auto;
+
 
   &__day {
     display: flex;
@@ -21,12 +23,12 @@ body {
     height: $daySize;
     width: $daySize;
     gap: $dayGap;
+    cursor: pointer;
     border: 1px solid #000;
     background-color: #eee;
-    transition-duration: 0.5s;
+    transition: 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
@@ -44,13 +46,13 @@ body {
   $days: mon, tue, wed, thu, fri, sat, sun;
 
   @each $day in $days {
-    &__start-day--#{$day} .calendar__day:first-child {
+    &--start-day--#{$day} .calendar__day:first-child {
       margin-left: ($daySize + $dayGap) * 6.06;
     }
   }
 
   @for $last-days from 28 through 31 {
-    &__month-length--#{$last-days} {
+    &--month-length--#{$last-days} {
       .calendar__day:nth-child(n + #{$last-days + 1}) {
         display: none;
       }
