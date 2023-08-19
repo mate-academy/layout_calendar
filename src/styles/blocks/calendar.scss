@@ -1,0 +1,29 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $default-box-size * 7 + 20;
+  margin: auto;
+  margin-top: 20vh;
+  position: relative;
+
+  @include defineStartDay();
+  @include defineMonthLength();
+
+  &__day {
+    width: $default-box-size;
+    height: $default-box-size;
+    background-color: $default-box-background-color;
+    border: 1px solid #000;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      @include onHover();
+    }
+  }
+
+  @include fillDaysNums();
+}
