@@ -1,7 +1,6 @@
 .calendar {
   width: 7 * ($size + $gap);
 
-  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
 
@@ -17,8 +16,16 @@
     }
   }
 
+  @each $name, $num in $start-day {
+    &--start-day--#{$name} {
+      .calendar__day:first-child {
+        margin-left: ($num - 1) * ($size + $gap);
+      }
+    }
+  }
+
   @for $i from $start-date through $end-date {
-    &__day-#{$i} {
+    &__day {
       display: flex;
       box-sizing: border-box;
       height: #{$size};
@@ -34,14 +41,8 @@
 
       transition: background-color 500ms, transform 500ms;
 
-      &::before {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
-      }
-
-      @each $name, $num in $start-day {
-        &--start-day--#{$name} {
-          margin-left: ($num - 1) * ($size + $gap);
-        }
       }
 
       &:hover {
