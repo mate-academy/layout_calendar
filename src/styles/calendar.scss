@@ -1,0 +1,52 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  position: relative;
+  max-width: 708px;
+  margin: 40px auto;
+  padding: 10px;
+
+  &__cell {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+
+    box-sizing: border-box;
+    display: block;
+    width: $block-size;
+    height: $block-size;
+    line-height: $block-size;
+
+    background-color: #eee;
+    border: 1px black solid;
+
+    transition-duration: 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $hide from 28 through 31 {
+    &--month-length--#{$hide}
+    .calendar__cell:nth-child(n + #{$hide + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $distance in $week {
+    &--start-day--#{$day}
+    .calendar__cell:first-child {
+      margin-left: $block-size * $distance + $distance;
+    }
+  }
+}
