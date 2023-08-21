@@ -1,0 +1,45 @@
+/* stylelint-disable rule-empty-line-before */
+/* stylelint-disable max-line-length */
+/* stylelint-disable selector-list-comma-newline-after */
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar, .calendar--start-sun, .calendar--start-sat, .calendar--start-fri, .calendar--start-thu, .calendar--start-wed, .calendar--start-tue, .calendar--start-mon {
+  display: flex;
+  flex-wrap: wrap;
+  width: 734px;
+  padding: 10px;
+  gap: 1px;
+  background-color: white;
+  cursor: default;
+}
+.calendar__cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.calendar__cell::before {
+  content: counter(day);
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.calendar__cell:hover {
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+  transition: transform 0.5s ease;
+}
+.calendar__cell:nth-child(n+1) {
+  counter-increment: day;
+}/*# sourceMappingURL=main.css.map */

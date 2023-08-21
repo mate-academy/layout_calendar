@@ -1,3 +1,64 @@
-body {
-  margin: 0;
+$cell-size: 100px;
+$border-color: black;
+$border-width: 1px;
+$number-size: 30px;
+$gap: 1px;
+$padding: 10px;
+$days-in-week: 7;
+$animation-duration: 0.5s;
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($cell-size + $border-width + $gap) * $days-in-week + 2 * $padding;
+  padding: $padding;
+  gap: $gap;
+  background-color: white;
+  cursor: default;
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-width solid $border-color;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &::before {
+      content: counter(day);
+      font-family: Arial, sans-serif;
+      font-size: $number-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: transform $animation-duration ease;
+    }
+  }
+
+  @each $day in $start-days {
+    &--start-#{$day} {
+      @extend .calendar;
+      @extend .calendar--start-#{$day};
+    }
+  }
+}
+
+.calendar__cell:nth-child(n + 1) {
+  counter-increment: day;
+
 }
