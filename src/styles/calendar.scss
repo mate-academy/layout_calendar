@@ -11,7 +11,7 @@
     height: $day-size;
     width: $day-size;
 
-    background-color: #eee;
+    background-color: $background-color-day;
     border: $border-size solid black;
 
     display: flex;
@@ -36,8 +36,8 @@
 
   @each $day-number, $day-name in $days-of-week {
     &--start-day--#{$day-name} {
-      & > :first-child {
-        margin-left: $day-number * ($day-size + $gap);
+      & :first-child {
+        margin-left: ($day-number - 1) * ($day-size + $gap);
       }
     }
   }
