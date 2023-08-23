@@ -1,0 +1,49 @@
+@import "../utils/variables";
+@import "../utils/functions";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $calendar-width;
+  padding: $calendar-padding;
+
+  &--month-length {
+    @for $month-length from 28 through $month-length {
+      &--#{$month-length}>:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    @each $startDayName, $startDayNumer in $daysData {
+      &--#{$startDayName}>:first-child {
+        margin-left: getStartDayMarginLeft($startDayNumer, $gap, $day-size);
+      }
+    }
+  }
+
+  &__day {
+    line-height: $day-size;
+    text-align: center;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border-features;
+    background-color: $day-background-color;
+    box-sizing: border-box;
+
+    @for $dayNumber from 1 through $month-length {
+      &:nth-child(n + #{$dayNumber})::before {
+        content: "#{$dayNumber}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-day-background-color;
+      transform: translateY($hover-offset--vertical-distance);
+      transition: transform $hover-transition-reaction;
+    }
+  }
+}
