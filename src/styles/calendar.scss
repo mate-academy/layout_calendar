@@ -1,5 +1,11 @@
-@import "../utils/variables";
-@import "../utils/functions";
+@import "variables";
+@import "functions";
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $font-size;
+  margin: 0;
+}
 
 .calendar {
   display: flex;
@@ -30,8 +36,9 @@
     width: $day-size;
     height: $day-size;
     border: $day-border-features;
-    background-color: $day-background-color;
+    background-color: $color-background-day;
     box-sizing: border-box;
+    list-style-type: none;
 
     @for $dayNumber from 1 through $month-length {
       &:nth-child(n + #{$dayNumber})::before {
@@ -41,7 +48,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: $hover-day-background-color;
+      background-color:$color-day-background-hover;
       transform: translateY($hover-offset--vertical-distance);
       transition: transform $hover-transition-reaction;
     }
