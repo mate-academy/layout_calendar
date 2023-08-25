@@ -38,16 +38,27 @@
 
 }
 
-$days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
+$days: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
 
 @each $d, $n in $days {
-  .start-day--#{$d} :first-child {
-    margin-left: calc(#{$day-block-size} * #{$n} + #{$calendar-gap-size} * #{$n});
+  .calendar--start-day-#{$d} :first-child {
+    margin-left: calc(
+      #{$day-block-size} * #{$n} +
+      #{$calendar-gap-size} * #{$n}
+    );
   }
 }
 
 @for $i from $min-days through $max-days {
-  .month-length--#{$i} :nth-child(-n+#{$i}) {
+  .calendar--month-length-#{$i} :nth-child(-n+#{$i}) {
     display: block;
   }
 }
