@@ -3,44 +3,51 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: $font-size;
+  font-size: 30px;
   margin: 0;
+  display: flex;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  max-width: $calendar-width;
-  padding: $calendar-padding;
+  max-width: $calendarWidth;
+  margin: auto;
+  padding: $calendarPadding;
 
-  &--month-length {
-    @for $month-length from 28 through $month-length {
-      &--#{$month-length}>:nth-child(n + #{$month-length + 1}) {
+  &--monthLength {
+    @for $monthLength from 28 through $monthLength {
+      &--#{$monthLength}>:nth-child(n + #{$monthLength + 1}) {
         display: none;
       }
     }
   }
 
   &--start-day {
-    @each $startDayName, $startDayNumer in $daysData {
+    @each $startDayName, $startDayNumber in $daysData {
       &--#{$startDayName}>:first-child {
-        margin-left: getStartDayMarginLeft($startDayNumer, $gap, $day-size);
+        margin-left: getStartMargin($startDayNumber, $gap, $daySize);
       }
     }
   }
 
   &__day {
-    line-height: $day-size;
+    line-height: $daySize;
     text-align: center;
-    width: $day-size;
-    height: $day-size;
-    border: $day-border-features;
-    background-color: $color-background-day;
-    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: #eee;
     list-style-type: none;
+    transition: transform 0.5s;
 
-    @for $dayNumber from 1 through $month-length {
+    @for $dayNumber from 1 through $monthLength {
       &:nth-child(n + #{$dayNumber})::before {
         content: "#{$dayNumber}";
       }
@@ -48,9 +55,8 @@ body {
 
     &:hover {
       cursor: pointer;
-      background-color:$color-day-background-hover;
-      transform: translateY($hover-offset--vertical-distance);
-      transition: transform $hover-transition-reaction;
+      background-color: pink;
+      transform: translateY(-20px);
     }
   }
 }
