@@ -1,3 +1,72 @@
+@import "./utils/varibles.scss";
+
+$start-days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
+
 body {
   margin: 0;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.section {
+  margin: 0 auto;
+  width: $calendar-width;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: left;
+  gap: $days-gap;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $day-block-size;
+    height: $day-block-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: all 0.5s linear;
+    color: black;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day-name, $day-number in $start-days {
+    &__start-day--#{$day-name} {
+      .calendar__day:first-child {
+        margin-left: #{($calendr-day-position * $day-number) + $day-number};
+      }
+    }
+  }
+
+  @for $days from 0 through 31 {
+    &__day--#{$days}::after {
+      content: "#{$days}";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  @for $countDays from 28 through 31 {
+    &__month-length--#{$countDays} {
+      .calendar__day {
+        &:nth-child(n + #{$countDays + 1 }) {
+          display: none;
+        }
+      }
+    }
+  }
 }
