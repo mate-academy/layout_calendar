@@ -17,35 +17,34 @@ body {
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap:1px
+    gap: 1px;
   }
+}
 
-  &__day {
-    box-sizing: border-box;
-   display: inline-block;
-   flex-shrink: 0;
-   width: 100px;
-   height: 100px;
-   background-color: #eee;
-   border: 1px solid #000;
-   font-size: 30px;
-   text-align: center;
-   line-height: 100px;
-   cursor: pointer;
-   transition: transform 0.5s;
+.month__day {
+  box-sizing: border-box;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  border: 1px solid #000;
+  font-size: 30px;
+  text-align: center;
+  line-height: 100px;
+  cursor: pointer;
+  transition: transform 0.5s;
 
-   &:hover {
+  &:hover {
     background-color: #ffc0cb;
-    transform:translateY(-20px);
-   }
+    transform: translateY(-20px);
   }
 
   @for $numb from 1 through 31 {
-   &__day:nth-child(#{$numb}):before{
-     content: '#{$numb}';
-   }
+    &:nth-child(#{$numb}):before {
+      content: "#{$numb}";
+    }
   }
-
 }
 
 $start-days: (
@@ -59,14 +58,13 @@ $start-days: (
 );
 
 @each $name, $value in $start-days {
-  .celendar--start-day-#{$name} .celendar__day:first-child {
+  .celendar--start-day-#{$name} .month__day:first-child {
     margin-left: ($day-size + $gap) * $value;
   }
 }
 
 @for $i from 28 through 31 {
-  .celendar--month-length-#{$i} .celendar__day:nth-child(n + #{$i + 1}) {
+  .celendar--month-length-#{$i} .month__day:nth-child(n + #{$i + 1}) {
     display: none;
   }
 }
-
