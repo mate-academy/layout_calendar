@@ -1,52 +1,49 @@
 .calendar {
   display: flex;
-  align-content: center;
+  gap: 1px;
+  padding: 10px;
+  box-sizing: border-box;
+  list-style: none;
   flex-wrap: wrap;
-  padding-inline: 10px;
-  gap: $gap-width-between-cells;
   width: 707px;
-  height: 100vh;
 
   &__day {
     display: flex;
-    box-sizing: border-box;
-    height: $cell-side-size;
-    width: $cell-side-size;
+    justify-content: center;
+    align-items: center;
     background-color: #eee;
-    border: 1px solid black;
-    transition-duration: 0.5s;
-
-    @for $num-day from 1 through 31 {
-      &--#{$num-day}::before {
-        content: "#{$num-day}";
-        display: block;
-        margin: auto;
-        font-size: 30px;
-      }
-    }
+    width: $cell-side;
+    height: $cell-side;
+    border: solid 1px #000;
+    box-sizing: border-box;
+    transition: transform, background-color, 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
-      transition: all;
-      transition-duration: 0.5s;
-      transform: translate( 0, -20px);
+      transform: translateY(-20px);
     }
   }
 
-  @each $w-day, $start-position-of-w-day in $weekdays {
-    &--start-day--#{$w-day} {
-      .calendar__day:first-child {
-        margin-left: $start-position-of-w-day;
-      }
+  $daysCounter: 0;
+  @each $day in $weekDays {
+    &__start-day--#{$day} :first-child {
+      margin-left: $cell-side-and-gap * $daysCounter;
+      $daysCounter: $daysCounter + 1;
     }
   }
 
-  @for $month-leng from 28 through 31 {
-    &--month-length--#{$month-leng} {
-      .calendar__day:nth-child(n + #{$month-leng + 1}) {
-        display: none;
-      }
+  @for $day from 1 through 31 {
+    & :nth-child(n + #{$day}):before {
+      content: "#{$day}";
+      font-size: 30px;
+      color: #000;
     }
   }
+
+  @for $days from 28 through 31 {
+    &__month-length--#{$days} :nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+
 }
