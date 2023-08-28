@@ -1,3 +1,66 @@
+$cell-size: 100px;
+$calendar-gap: 1px;
+$calendar-width: 7 * ($cell-size + $calendar-gap);
+$days-in-month: 31;
+
 body {
   margin: 0;
+  padding-top: 50px;
+}
+
+.calendar {
+  margin: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $calendar-width;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+
+    opacity: 0;
+    transition: all 0.5s ease 0.3s;
+
+    @for $dayNum from 1 through $days-in-month {
+      &:nth-child(#{$dayNum})::before {
+        content: "#{$dayNum}";
+        margin: auto;
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  $weekDays:
+    mon 0,
+    tue ($calendar-width - 6 * ($cell-size + $calendar-gap)),
+    wed ($calendar-width - 5 * ($cell-size + $calendar-gap)),
+    thu ($calendar-width - 4 * ($cell-size + $calendar-gap)),
+    fri ($calendar-width - 3 * ($cell-size + $calendar-gap)),
+    sat ($calendar-width - 2 * ($cell-size + $calendar-gap)),
+    sun ($calendar-width - ($cell-size + $calendar-gap));
+
+  @each $weekDay, $margin in $weekDays {
+    &--start-day--#{$weekDay} &__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $day from 1 through $days-in-month {
+    &--month-length--#{$days-in-month} &__day:nth-child(#{$day}) {
+      opacity: 1;
+    }
+  }
 }
