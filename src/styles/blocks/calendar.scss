@@ -6,12 +6,6 @@
   margin: 0 auto;
   max-width: 707px;
 
-  @each $day in mon, tue, wed, thu, fri, sat, sun {
-    &__start-#{$day} {
-      margin-left: 0;
-    }
-  }
-
   &__date {
     position: relative;
     box-sizing: border-box;
@@ -40,6 +34,22 @@
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
+    }
+
+    $start-days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
+
+    @each $day, $value in $start-days {
+      &--start-day-#{$day} {
+        margin-left: calc((100px + 1px) * #{$value});
+      }
+    }
+  }
+}
+
+@for $month-length from 28 through 31 {
+  .calendar--month-length-#{$month-length} {
+    .calendar__date:nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 }
