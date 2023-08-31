@@ -39,28 +39,28 @@ body {
       }
     }
   }
+  &__day {
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    transition-duration: 0.5s;
 
-  @for $day from 1 to 32 {
-    &__day-#{$day} {
-      background-color: #eee;
-      width: $day-size;
-      height: $day-size;
-      border: 1px solid black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 30px;
-      transition-duration: 0.5s;
-
-      &::before {
-        content: "#{$day}";
-      }
-
-      &:hover {
-        cursor: pointer;
-        background-color: pink;
-        transform: translate(0, -20px);
+    @for $day-num from 1 to 32 {
+      &:nth-child(#{$day-num})::before {
+        content: "#{$day-num}";
       }
     }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
   }
+
 }
