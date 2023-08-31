@@ -1,0 +1,37 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  width: $calendar-width;
+  min-width: 800px;
+
+  &__day {
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $side;
+    height: $side;
+    border: 1px solid black;
+    color: #000;
+
+    @include hover(transform, translateY(-20px));
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+  }
+  .calendar__day:first-child {
+    margin-left: calc((7 - 1) * #{$side + $gap});
+  }
+
+  &__days {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
