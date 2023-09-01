@@ -1,8 +1,4 @@
-$dayCellColor: #eee;
-$dayCellBorderColor: #000;
-$dayCellColorHover:pink;
-$dayCellSize: 100px;
-$dayGapBeetween: 1px;
+@import "./variables.scss";
 
 body {
   margin: 0;
@@ -22,15 +18,6 @@ body {
   flex-wrap: wrap;
   gap: $dayGapBeetween;
   width: $dayCellSize * 7 + 10px;
-
-  $daysOfWeek:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
 
   @each $day, $murginsNumber in $daysOfWeek {
     &--start-day--#{$day} &__day:first-child {
@@ -65,7 +52,7 @@ body {
     }
 
     @for $dayNumber from 1 through 31 {
-      &--#{$dayNumber}::before {
+      &:nth-child(#{$dayNumber})::before {
         content: "#{$dayNumber}";
         font-size: 30px;
         font-family: arial, helvetica, sans-serif;
