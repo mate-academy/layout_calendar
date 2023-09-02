@@ -1,3 +1,12 @@
+$dayBoxH: 100px;
+$dayBoxW: 110px;
+$boxRow: 7;
+$calendarPadding:10px;
+$calendarBorder:2px;
+$dayBoxBorder:1px ;
+$boxGap:1px;
+$lastDay: 31;
+$days: mon, tue, wed, thu, fri, sat, sun;
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -9,28 +18,27 @@ body {
 }
 
 .calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $boxGap;
+  padding: $calendarPadding;
   margin-top: 5%;
   box-sizing: border-box;
-  border: 2px solid black;
-  width: 730px;
+  // border: $calendarBorder solid black;
+  width: $dayBoxW * $boxRow + $calendarPadding
+    * 2 + $dayBoxBorder+ $boxGap * $boxRow
+  ;
 
   &__box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    padding: 10px;
-
-  }
-
-  &__day {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #eee;
-    border: 1px solid black;
-    height: 100px;
-    width: 100px;
+    border: $dayBoxBorder solid black;
+    height: $dayBoxH;
+    width: $dayBoxW;
+    align-content: flex-start;
 
     &:hover {
       cursor: pointer;
@@ -45,8 +53,23 @@ body {
 
       }
     }
+
+    @each $day in $days {
+      &--start-day-#{$day} {
+        margin-left: auto 0;
+      }
+    }
+
+    @for $number from $lastDay+1 through 32 {
+      &--month-length-#{$number} {
+        opacity: 0.5;
+        &:hover {
+          cursor: auto;
+          background-color: #eee;
+          transition: 0.5s;
+          transform: translateY(0);
+        }
+      }
+    }
   }
-
-  $days: mon, tue, wed, thu, fri, sat, sun;
-
 }
