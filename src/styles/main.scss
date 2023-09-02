@@ -19,7 +19,7 @@
   justify-content: center;
 }
 
-.calendar>* {
+.calendar > * {
   width: #{$cell-size};
   height: #{$cell-size};
   border: #{$border-width} solid black;
@@ -33,20 +33,21 @@
 
 /* Day Modifiers */
 @each $day in mon,
-tue,
-wed,
-thu,
-fri,
-sat,
-sun {
-  .start-day--#{$day} {
-    margin-left: calc((#{$cell-size} + #{$border-width} + 2 * #{$cell-padding}) * index($day, mon, tue, wed, thu, fri, sat, sun) - 1);
+  tue,
+  wed,
+  thu,
+  fri,
+  sat,
+  sun {
+  .calendar__start-day--#{$day} {
+    margin-left: calc((#{$cell-size} + #{$border-width} + 2 * #{$cell-padding})
+    * index($day, mon, tue, wed, thu, fri, sat, sun) - 1);
   }
 }
 
 /* Month Length Modifiers */
 @for $i from 28 through 31 {
-  .month-length--#{$i} {
+  .calendar__month-length--#{$i} {
     &:nth-child(n + #{$i + 1}) {
       display: none;
     }
@@ -54,6 +55,6 @@ sun {
 }
 
 /* Hover Effect */
-.calendar>*:hover {
+.calendar > *:hover {
   background-color: #{$cell-hover-color};
 }
