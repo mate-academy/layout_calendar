@@ -1,16 +1,18 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  padding: $calendar-padding;
   font-size: 30px;
   font-family: Arial, Helvetica, sans-serif;
   width: $calendar-width;
-  min-width: 800px;
+  margin: auto;
+  margin-top: 100px;
 
   &__day {
     background-color: #eee;
@@ -30,13 +32,16 @@
       }
     }
   }
-  .calendar__day:first-child {
-    margin-left: calc((7 - 1) * #{$side + $gap});
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} .calendar__day:nth-child(n+#{$length + 1}) {
+      display: none;
+    }
   }
 
-  &__days {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
+  @each $weekDay, $margin in $weekDays {
+    &--start--day-#{$weekDay} &__day:first-child {
+      margin-left: $calendar-width - $margin * ($side + $gap);
+    }
   }
 }
