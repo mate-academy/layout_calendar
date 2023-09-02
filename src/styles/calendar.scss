@@ -8,29 +8,36 @@
   gap: 1px;
   width: calc(#{$days-in-week} * #{$cell-size}
   + (#{$days-in-week} - 1) * #{$border-width} + 2 * #{$cell-padding});
-}
 
-// Calendar Cells
-.calendar__day {
-  width: #{$cell-size};
-  height: #{$cell-size};
-  border: #{$border-width} solid black;
-  background-color: #{$cell-background};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  cursor: pointer;
-  font-size: #{$cell-font-size};
-  font-family: #{$num-font-family};
-  transition: transform #{$animation-duration} ease-in-out;
 
-  @for $dayNumber from 1 through 31 {
-    &:nth-child(#{$dayNumber})::before {
-      content: "#{$dayNumber}";
-      font-size: 30px;
-      font-family: arial, helvetica, sans-serif;
+  // Calendar Cells
+  &__day {
+    width: #{$cell-size};
+    height: #{$cell-size};
+    border: #{$border-width} solid black;
+    background-color: #{$cell-background};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    font-size: #{$cell-font-size};
+    font-family: #{$num-font-family};
+    transition: transform #{$animation-duration} ease-in-out;
+
+    @for $dayNumber from 1 through 31 {
+      &:nth-child(#{$dayNumber})::before {
+        content: "#{$dayNumber}";
+        font-size: 30px;
+        font-family: arial, helvetica, sans-serif;
+      }
     }
+  }
+
+  // Hover Effect
+  &__day:hover {
+    background-color: #{$cell-hover-color};
+    transform: translateY(-20px);
   }
 }
 
@@ -88,10 +95,4 @@
       display: none;
     }
   }
-}
-
-// Hover Effect
-.calendar__day:hover {
-  background-color: #{$cell-hover-color};
-  transform: translateY(-20px);
 }
