@@ -23,6 +23,7 @@
   cursor: pointer;
   font-size: #{$cell-font-size};
   font-family: #{$num-font-family};
+  transition: transform #{$animation-duration} ease-in-out;
 }
 
 // Day Modifiers
@@ -33,40 +34,40 @@
   fri,
   sat,
   sun {
-  .calendar__start-day--#{$day} {
+  .start-day--#{$day} {
     .calendar__day {
-      &:nth-child(1) {
+      &:nth-child(#{$days-in-week}n + 1) {
         margin-left: 0;
       }
 
-      &:nth-child(2) {
-        margin-left: calc(#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding});
+      &:nth-child(#{$days-in-week}n + 2) {
+        margin-left: calc(#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding});
       }
 
-      &:nth-child(3) {
-        margin-left: calc(2 * (#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$days-in-week}n + 3) {
+        margin-left: calc(2 * (#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding}));
       }
 
-      &:nth-child(4) {
-        margin-left: calc(3 * (#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$days-in-week}n + 4) {
+        margin-left: calc(3 * (#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding}));
       }
 
-      &:nth-child(5) {
-        margin-left: calc(4 * (#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$days-in-week}n + 5) {
+        margin-left: calc(4 * (#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding}));
       }
 
-      &:nth-child(6) {
-        margin-left: calc(5 * (#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$days-in-week}n + 6) {
+        margin-left: calc(5 * (#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding}));
       }
 
-      &:nth-child(7) {
-        margin-left: calc(6 * (#{$cell-size}
-        + #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$days-in-week}n + 7) {
+        margin-left: calc(6 * (#{$cell-size} +
+        #{$border-width} + 2 * #{$cell-padding}));
       }
     }
   }
@@ -84,4 +85,17 @@
 // Hover Effect
 .calendar__day:hover {
   background-color: #{$cell-hover-color};
+  transform: translateY(-20px);
+}
+
+.calendar {
+  .calendar__day {
+    @for $dayNumber from 1 through 31 {
+      &:nth-child(#{$dayNumber})::before {
+        content: "#{$dayNumber}";
+        font-size: 30px;
+        font-family: arial, helvetica, sans-serif;
+      }
+    }
+  }
 }
