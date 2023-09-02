@@ -24,6 +24,14 @@
   font-size: #{$cell-font-size};
   font-family: #{$num-font-family};
   transition: transform #{$animation-duration} ease-in-out;
+
+  @for $dayNumber from 1 through 31 {
+    &:nth-child(#{$dayNumber})::before {
+      content: "#{$dayNumber}";
+      font-size: 30px;
+      font-family: arial, helvetica, sans-serif;
+    }
+  }
 }
 
 // Day Modifiers
@@ -86,16 +94,4 @@
 .calendar__day:hover {
   background-color: #{$cell-hover-color};
   transform: translateY(-20px);
-}
-
-.calendar {
-  .calendar__day {
-    @for $dayNumber from 1 through 31 {
-      &:nth-child(#{$dayNumber})::before {
-        content: "#{$dayNumber}";
-        font-size: 30px;
-        font-family: arial, helvetica, sans-serif;
-      }
-    }
-  }
 }
