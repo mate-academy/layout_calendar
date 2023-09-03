@@ -34,17 +34,16 @@
   }
 
   @each $day, $number in $days {
-    .calendar--start-day-#{$day} :first-child {
-      margin-left: calc(
-        #{$cell-size} * #{$number} +
-        1px * #{$number}
-      );
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $number * ($cell-size + 1px);
     }
   }
 
   @for $i from 28 through 31 {
-    .calendar--month-length-#{$i} :nth-child(-n+#{$i}) {
-      display: block;
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 
