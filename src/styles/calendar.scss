@@ -10,15 +10,17 @@
     * 2 + $dayBoxBorder *3 + $boxGap * $boxRow
   ;
 
-  @for $day from $monthLenght+1 through 32 {
-    & :nth-child(#{$day}) {
-      display: none;
+  @for $lastDay from 29 through 31 {
+    &--month-length-#{$lastDay - 1} {
+      & :nth-child(n + #{$lastDay}) {
+        display: none;
+      }
     }
   }
 
-  @each $day in $days {
-    &--start-day-#{$day} {
-      margin-left: 0;
+  @each $number, $day in $days {
+    &--start-day-#{$day} :nth-child(#{$number}) {
+      margin-left: 85.7%;
     }
   }
 
