@@ -3,13 +3,14 @@
   flex-wrap: wrap;
   border: 1px solid black;
   width: ($cell-size + $gap-size) * 7;
+  min-width: ($cell-size + $gap-size) * 7;
   gap: $gap-size;
   padding: 25px;
 
   &--start-day {
     @each $name, $margin-left in $days {
-      &--#{$name} {
-        .calendar__cell--1 {
+      &-#{$name} {
+        .calendar__cell:first-child {
           margin-left: (($margin-left - 1) * ($cell-size + $gap-size));
         }
       }
@@ -18,7 +19,7 @@
 
   &--month-length {
     @for $length from 28 to 31 {
-      &--#{$length} {
+      &-#{$length} {
         .calendar__cell:nth-child(n + #{$length + 1}) {
           display: none;
         }
@@ -35,7 +36,7 @@
     justify-content: center;
     background-color: $cell-color;
     box-sizing: border-box;
-    transition: transform 0.5s;
+    transition: transform $transform-time;
 
     &:hover {
       cursor: pointer;
@@ -45,7 +46,7 @@
     }
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
+      &:nth-child(#{$day}):before {
         content: "#{$day}";
       }
     }
