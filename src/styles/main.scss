@@ -42,13 +42,13 @@ body {
 }
 
 @each $weekDay, $margin in $weekDays {
-  &--start-day--#{$weekDay} &__day:first-child {
-    margin-left: $calendar-width - $margin * ($cell-size + $gap);
+  &--start--day-#{$weekDay} :first-child {
+    margin-left: $margin * ($cell-size + $gap);
   }
 }
 
-@for $day from 28 through 31 {
-  &--month-length--#{$day} &__day:nth-child(n + #{$day + 1}) {
-    opacity: 0;
+@for $dayNum from 28 through 32 {
+  &--month-length--#{$dayNum} :nth-child(n + #{$dayNum + 1}) {
+    display: none;
   }
 }
