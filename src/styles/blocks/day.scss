@@ -1,0 +1,30 @@
+.day {
+  @include flex-center;
+  box-sizing: border-box;
+  border: 1px solid $day-border-color;
+  height: $day-size;
+  width: $day-size;
+  background-color: $day-bg-color;
+
+  $days:
+    "mon" 0,
+    "tue" $day-size * 1 + $gap * 1,
+    "wed" $day-size * 2 + $gap * 2,
+    "thu" $day-size * 3 + $gap * 3,
+    "fri" $day-size * 4 + $gap * 4,
+    "sut" $day-size * 5 + $gap * 5,
+    "sun" $day-size * 6 + $gap * 6;
+
+  @each $day, $margine in $days {
+    &--start--#{$day} {
+      margin-left: $margine;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &--#{$day}::before {
+      content: "#{$day}";
+      font-size: 30px;
+    }
+  }
+}

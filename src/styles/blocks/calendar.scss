@@ -1,0 +1,22 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+
+  &__day {
+    transition: all 500ms linear;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $day-bg-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &__month--length--#{$length} > :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
