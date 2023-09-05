@@ -1,0 +1,33 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $cell-size * 7 + 10px;
+  gap: $calendar-gap;
+
+  &__day {
+    background-color: #eee;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    &:first-child {
+      margin-left: ($cell-size + $calendar-gap) * 6;
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
