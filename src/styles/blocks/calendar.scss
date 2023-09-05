@@ -26,4 +26,17 @@
       display: none;
     }
   }
+
+  @each $day, $margin-size in $days {
+    &__start-day#{$day} {
+      margin-left: $margin-size;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+      font-size: 30px;
+    }
+  }
 }
