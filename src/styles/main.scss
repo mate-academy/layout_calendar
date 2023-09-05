@@ -7,25 +7,3 @@ body {
   margin: 0;
   margin-top: 25px;
 }
-
-@for $colum from 1 through 31 {
-  .calendar__day:nth-child(#{$colum})::before {
-    content: "#{$colum}";
-  }
-}
-
-@each $day, $number in $days {
-  .calendar--start-day--#{$day} :first-child {
-    margin-left: (($day-size + $gap) * $number);
-  }
-}
-
-@for $colum from 28 through 31 {
-  .calendar--month-length--#{$colum} {
-    @for $i from ($colum + 1) through 32 {
-      .calendar__day:nth-child(#{$i}) {
-        display: none;
-      }
-    }
-  }
-}
