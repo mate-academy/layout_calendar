@@ -7,8 +7,7 @@
   box-sizing: border-box;
   border: $calendarBorder solid black;
   width: $dayBoxW * $boxRow + $calendarPadding
-    * 2 + $dayBoxBorder *3 + $boxGap * $boxRow
-  ;
+    * 2 + $dayBoxBorder *3 + $boxGap * $boxRow + $calendarBorder * 2;
 
   @for $lastDay from 29 through 31 {
     &--month-length-#{$lastDay - 1} {
@@ -19,8 +18,8 @@
   }
 
   @each $number, $day in $days {
-    &--start-day-#{$day} :nth-child(#{$number}) {
-      margin-left: #{$number}px;
+    &--start-day-#{$day} :first-child {
+      margin-left: $number * ($dayBoxW + $boxGap);
     }
   }
 
