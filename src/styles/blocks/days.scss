@@ -1,0 +1,14 @@
+.day {
+  @each $day, $margin-size in $days {
+    &__start--#{$day} {
+      margin-left: $margin-size;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &--#{$day}::before {
+      content: "#{$day}";
+      font-size: 30px;
+    }
+  }
+}
