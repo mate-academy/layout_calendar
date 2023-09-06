@@ -39,16 +39,16 @@ body {
       transform: translateY(-20px);
     }
   }
-}
 
-@each $weekDay, $margin in $weekDays {
-  &--start--day-#{$weekDay} :first-child {
-    margin-left: $margin * ($cell-size + $gap);
+  @each $weekDay, $margin in $weekDays {
+    &--start-day--#{$weekDay} :first-child {
+      margin-left: $margin * ($cell-size + $gap);
+    }
   }
-}
 
-@for $dayNum from 28 through 32 {
-  &--month-length--#{$dayNum} :nth-child(n + #{$dayNum + 1}) {
-    display: none;
+  @for $dayNum from 28 to 32 {
+    &--month-length--#{$dayNum} :nth-child(n + #{$dayNum  + 1}) {
+      display: none;
+    }
   }
 }
