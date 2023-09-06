@@ -4,6 +4,18 @@
   width: $cell-size * 7 + 10px;
   gap: $calendar-gap;
 
+  @for $show-day from 28 through 31 {
+    &--month-length-#{$show-day} &__day:nth-child(n + #{$show-day + 1}) {
+      display: none;
+    }
+  }
+
+  @each $start-day, $margin in $weekdays {
+    &--start-day-#{$start-day} &__day:first-child {
+      margin-left: ($cell-size + $calendar-gap) * $margin;
+    }
+  }
+
   &__day {
     background-color: #eee;
     height: $cell-size;
@@ -14,10 +26,6 @@
     align-items: center;
     cursor: pointer;
     transition: transform 0.5s;
-
-    &:first-child {
-      margin-left: ($cell-size + $calendar-gap) * 6;
-    }
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
