@@ -18,12 +18,9 @@
     text-align: center;
     transition: transform 0.5s;
 
-    @for $i from 1 to 32 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
-        line-height: $calendar__item-size;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
       }
     }
 
@@ -42,9 +39,9 @@
     }
   }
 
-  @for $d from 28 to 32 {
-    &--month-length--#{$d} :not(:nth-child(-n+#{$d})) {
-      visibility: hidden;
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :not(:nth-child(-n+#{$day})) {
+      display: none;
     }
   }
 }
