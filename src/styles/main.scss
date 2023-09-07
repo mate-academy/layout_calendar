@@ -1,3 +1,58 @@
+@import "variables.scss";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  padding: 10px;
+
+  width: 7 * $cell-size + 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @for $month-length from 28 through 31 {
+    &--#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $distance in $start-day {
+    &--start-day--#{$day} {
+      margin-left: $distance * ($cell-size + 1);
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid $content-color;
+    background-color: $main-color;
+
+    cursor: pointer;
+    transition: 500ms;
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $number-size;
+      color: $content-color;
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number}):before {
+        content: "#{$number}";
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $hover-color;
+    }
+  }
 }
