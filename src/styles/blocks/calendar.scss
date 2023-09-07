@@ -1,0 +1,34 @@
+$weekDays:
+  mon 0,
+  tue 101px,
+  wed 202px,
+  thu 303px,
+  fri 404px,
+  sat 505px,
+  sun 606px;
+
+.calendar {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 100px;
+  width: 710px;
+  gap: 1px;
+
+  &--month-length {
+    @for $day from 28 through 30 {
+      &--#{$day} > .cell:nth-child(n+#{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    @each $day, $cell in $weekDays {
+      &--#{$day} > .cell:first-child {
+        margin-left: $cell;
+      }
+    }
+  }
+}
