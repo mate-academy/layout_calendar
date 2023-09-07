@@ -3,17 +3,17 @@
   flex-wrap: wrap;
   gap: $gap;
   width: calc((#{$cell-size} * #{$columns}) +
-  (#{$padding} * 2) + (#{$gap} * #{$columns}));
-  padding: $padding;
+  (#{$padding-horizontal} * 2) + (#{$gap} * #{$columns}));
+  padding: $padding-vertical $padding-horizontal;
 
   @each $day , $value in $days {
-    &--start-#{$day} &__day:nth-child(1) {
+    &--start--#{$day} &__day:nth-child(1) {
       margin-left: $cell-size * $value + ($gap * $value);
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+    &--month-length--#{$i} &__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
