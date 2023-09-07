@@ -37,14 +37,14 @@ $week-day:
     background-color: #eee;
     border: 1px solid black;
 
-    transition: transform 1s, background-color 1s;
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
 
       transform: translateY($transform-shift);
-      transition: transform 1s, background-color 1s;
+      transition: transform 0.5s, background-color 0.5s;
     }
 
     @for $day-number from 1 through 31 {
@@ -54,7 +54,7 @@ $week-day:
     }
   }
 
-  &--first-day {
+  &--start-day {
     @each $day, $days-before in $week-day {
       &--#{$day} :first-child {
         margin-left: ($cell-width + $cell-gap) * $days-before;
@@ -62,7 +62,7 @@ $week-day:
     }
   }
 
-  &--month--duration {
+  &--days {
     @for $duration from 28 to 31 {
       &--#{$duration} .calendar__cell:nth-child(n + #{$duration + 1}) {
         display: none;
