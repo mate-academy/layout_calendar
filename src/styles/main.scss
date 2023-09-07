@@ -1,3 +1,74 @@
 body {
   margin: 0;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * 100px + 10px * 2);
+  margin: 0 auto;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+  }
+
+  &__month-length--28 & {
+    @for $i from 1 through 28 {
+      &__day:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+  &__month-length--29 & {
+    @for $i from 1 through 29 {
+      &__day:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+  &__month-length--30 & {
+    @for $i from 1 through 30 {
+      &__day:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+  &__month-length--31 & {
+    @for $i from 1 through 31 {
+      &__day:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+
+  &__start-day--mon .calendar__day:nth-child(1) {
+    margin-left: 0;
+  }
+  &__start-day--tue .calendar__day:nth-child(1) {
+    margin-left: 100px;
+  }
+  &__start-day--wed .calendar__day:nth-child(1) {
+    margin-left: 200px;
+  }
+  &__start-day--thu .calendar__day:nth-child(1) {
+    margin-left: 300px;
+  }
+  &__start-day--fri .calendar__day:nth-child(1) {
+    margin-left: 400px;
+  }
+  &__start-day--sat .calendar__day:nth-child(1) {
+    margin-left: 500px;
+  }
+  &__start-day--sun .calendar__day:nth-child(1) {
+    margin-left: 600px;
+  }
+}
