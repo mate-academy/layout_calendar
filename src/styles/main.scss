@@ -1,2 +1,65 @@
-@import "blocks/calendar";
-@import "blocks/cell.scss"
+$blockSize: 100px;
+$weekDays:
+  mon 0,
+  tue 101px,
+  wed 202px,
+  thu 303px,
+  fri 404px,
+  sat 505px,
+  sun 606px;
+
+.calendar {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 100px;
+  width: 710px;
+  gap: 1px;
+
+  &--month-length {
+    @for $day from 28 through 30 {
+      &--#{$day} .calendar__cell:nth-child(n+#{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    @each $day, $cell in $weekDays {
+      &--#{$day} .calendar__cell:first-child {
+        margin-left: $cell;
+      }
+    }
+  }
+
+  &__cell {
+    display: block;
+    box-sizing: border-box;
+    text-align: center;
+
+    width: $blockSize;
+    height: $blockSize;
+    line-height: $blockSize;
+
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: "#{$i}";
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 30px;
+        }
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
