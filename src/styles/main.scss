@@ -2,7 +2,7 @@ $cell-size: 100px;
 $number-size: 30px;
 $main-color: #eee;
 $content-color: #000;
-$hover-color: #c3596b;
+$hover-color: pink;
 
 body {
   margin: 0;
@@ -11,7 +11,7 @@ body {
 .calendar {
   padding: 10px;
 
-  width: 7 * $cell-size + 7px;
+  width: 7 * $cell-size + 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
@@ -22,7 +22,14 @@ body {
     }
   }
 
-  $start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+  $start-day:
+    mon 0,
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
 
   &__cell {
     box-sizing: border-box;
@@ -34,7 +41,6 @@ body {
 
     border: 1px solid $content-color;
     background-color: $main-color;
-    cursor: pointer;
 
     &::before {
       font-family: Arial, Helvetica, sans-serif;
@@ -58,6 +64,7 @@ body {
       transition: 500ms;
       transform: translateY(-20px);
       background-color: $hover-color;
+      cursor: pointer;
     }
   }
 }
