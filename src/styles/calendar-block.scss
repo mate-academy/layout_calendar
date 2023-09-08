@@ -1,34 +1,60 @@
-$font-color: #616070;
-$background-color:#f3f3f3;
 $border-color: #000;
 $day-color:#eee;
-$day-active-color: #fa83d0;
+$day-active-color: #ecb9da;
 $font-size: 30px;
 $day-cell: 100px;
 $cell-gap: 1px;
 $default-padding: 10px;
 $calendar-width: 706px;
-$month-length: 28;
-$month-start-day: 2;
+$date-position: ($day-cell - $font-size) / 2;
+$weekdays: mon, tue, wed, thu, fri, sat, sun;
 
 .calendar {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid $border-color;
-  border-radius: 5px;
+  width: $calendar-width;
   padding: $default-padding;
+  gap: $cell-gap;
+  display: flex;
+  flex-wrap: wrap;
 
-  &__week {
-    display: flex;
-    justify-content: space-around;
-    list-style-type: none;
-    width: $calendar-width;
-    padding: $default-padding;
+  &__day {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    width: $day-cell;
+    height: $day-cell;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    background-color: $day-color;
+    transition: transform 500ms;
+    cursor: pointer;
+
+    &::before {
+      counter-increment: day-number;
+      content: counter(day-number);
+      position: absolute;
+      top: $date-position;
+      left: $date-position;
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $day-active-color;
+    }
   }
 
-  &__days {
-    display: flex;
+  &--start-day {
+    @each $day in $weekdays {
+      &--#{$day} li:nth-child(1) {
+        margin-left: ($day-cell + $cell-gap) * (index($weekdays , $day) - 1);
+      }
+    }
+  }
+
+  &--month-length {
+    @for $length from 28 through 31 {
+      &--#{$length} li:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
   }
 }
