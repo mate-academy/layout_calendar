@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: $calendar-gap;
+  max-width: 7 * $cell-size + 26px;
+
+  @each $day, $number in $days {
+    &.calendar__start-day-#{$day} {
+      .cell:first-child {
+        margin-left: ($cell-size + $calendar-gap + 1) * $number - ($cell-size + $calendar-gap * 2);
+      }
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar .cell:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+  .calendar__month-length-#{$i} .cell:nth-child(n + #{$i + 1}) {
+      display: none;
+  }
+}
+
+
