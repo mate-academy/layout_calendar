@@ -7,6 +7,7 @@ body {
 .calendar {
   margin: auto;
   display: flex;
+  padding-top: 40px;
   padding-inline: $padding-size;
   width: $container-width;
   flex-wrap: wrap;
@@ -37,7 +38,9 @@ body {
     height: $cell-size;
     background-color: $cell-color;
     border: 1px solid black;
+    cursor: pointer;
     visibility: hidden;
+    transition: background-color 0.5s, transform 0.5s;
 
     &::before {
       display: block;
@@ -54,11 +57,8 @@ body {
     }
 
     &:hover {
-      transform: translateY(-20px);
-      transition: 0.5s;
       background-color: pink;
-      cursor: pointer;
-
+      transform: translateY(-20px);
     }
   }
 }
