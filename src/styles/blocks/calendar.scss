@@ -1,16 +1,14 @@
 .calendar {
   width: (7 * $day-measure) + 6 * $gap-size;
   padding: 10px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
 
-  &__container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap-size;
-
-    @for $i from 28 through 31 {
-      &--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-        display: none;
-      }
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 
@@ -31,7 +29,7 @@
     }
 
     @for $n from 1 through 31 {
-      &--#{$n}::before {
+      &:nth-child(#{$n})::before {
         content: "#{$n}";
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
