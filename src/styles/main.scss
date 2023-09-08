@@ -7,7 +7,7 @@ $background-clr: #eee;
 $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
 
 .calendar {
-  width: calc(#{$size} * 7 + #{$padding-calendar} * 2 + #{$gap-day} * 6);
+  width: 726px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -39,17 +39,17 @@ $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
     }
   }
 
-  @for $i from 1 through $days {
-    & :nth-child(#{$i})::before {
-      content: "#{$i}";
+  @for $index from 1 through $days {
+    & :nth-child(#{$index})::before {
+      content: "#{$index}";
       font-size: $font-sz;
       font-family: Arial, Helvetica, sans-serif;
     }
   }
 
   &--month-length {
-    @for $num from 28 through 31 {
-      &--#{$num} :nth-child(n + #{$num + 1}) {
+    @for $numDay from 28 through 31 {
+      &--#{$numDay} :nth-child(n + #{$numDay + 1}) {
         display: none;
       }
     }
