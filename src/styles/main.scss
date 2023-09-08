@@ -1,3 +1,81 @@
-body {
+$cell-size: 100px;
+$gap-size: 1px;
+$padding: 10px;
+$sheet-with: $cell-size * 7 + $gap-size * 6;
+
+$days-in-week: mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7,;
+$days-in-month: 28, 29, 30, 31;
+
+$number-font: "Arial", sans-serif;
+$number-font-size: ($cell-size * 0.3);
+$number-font-position: ($cell-size - $number-font-size) / 2;
+
+* {
   margin: 0;
+  padding: 0;
+  animation-duration: 10s;
+}
+
+.calendar {
+  padding: $padding;
+
+  &__start-day-wed,
+  &__month-length-29 {
+    display: none;
+  }
+
+  @each $name, $num in $days-in-week {
+    &__start-day-#{$name} {
+      ~ .calendar__sheet > :first-child {
+        margin-left: $cell-size * ($num - 1) + $gap-size * ($num - 1);
+      }
+    }
+  }
+
+  @for $n from 28 to 32 {
+    &__month-length-#{$n} {
+      ~ .calendar__sheet > :not(:nth-child(-n + #{$n})) {
+        display: none;
+      }
+    }
+  }
+
+  &__sheet {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: $sheet-with;
+    gap: $gap-size;
+
+    &-cell {
+      position: relative;
+      display: flex;
+      justify-content: space-around;
+      box-sizing: border-box;
+      height: $cell-size;
+      width: $cell-size;
+      background-color: #eee;
+      border: 1px solid #000;
+      color: #000;
+
+      font-family: $number-font;
+      font-size: $number-font-size;
+
+      &:hover {
+        cursor: pointer;
+        background-color: pink;
+        transform: translate(0, -20px);
+        transition: transform 0.5s;
+      }
+    }
+
+    @for $i from 1 to 32 {
+      &>:nth-child(#{$i})::before {
+        content: "#{$i}";
+        position: absolute;
+        top: $number-font-position;
+        display: block;
+        height: $number-font-size;
+      }
+    }
+  }
 }
