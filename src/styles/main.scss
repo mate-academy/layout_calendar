@@ -1,21 +1,22 @@
 $blockSize: 100px;
+$gapSize: 1px;
 $weekDays:
   mon 0,
-  tue 101px,
-  wed 202px,
-  thu 303px,
-  fri 404px,
-  sat 505px,
-  sun 606px;
+  tue 1,
+  wed 2,
+  thu 3,
+  fri 4,
+  sat 5,
+  sun 6;
 
 .calendar {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
 
-  padding: 100px;
-  width: 710px;
-  gap: 1px;
+  padding: $blockSize;
+  width: (7 * $blockSize) + ($gapSize * 6);
+  gap: $gapSize;
 
   &--month-length {
     @for $day from 28 through 30 {
@@ -26,9 +27,9 @@ $weekDays:
   }
 
   &--start-day {
-    @each $day, $cell in $weekDays {
+    @each $day, $position in $weekDays {
       &--#{$day} .calendar__cell:first-child {
-        margin-left: $cell;
+        margin-left: $position * ($blockSize + $gapSize);
       }
     }
   }
