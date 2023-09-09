@@ -1,15 +1,19 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $cell-width * 7 + $gap * 6;
+  width: $cell-width * $days-in-line + ($gap * $days-in-line - 1);
   padding: 30px $set-padding 0;
   gap: $gap;
 
+  @for $i from 1 through 31 {
+    & :nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
   @each $day, $number in $days {
     &--start-day--#{$day} :nth-child(-n + 1) {
-      margin-left: calc(
-        (#{$gap } * (#{$number} - 1)) + (#{$cell-width} * (#{$number} - 1))
-      );
+      margin-left: ($gap * ($number - 1) + ($cell-width * ($number - 1)));
     }
   }
 
@@ -29,17 +33,11 @@
     cursor: pointer;
     border: 1px solid $color-black;
     background-color: $border-color;
-    transition: all 0.5s ease-in;
+    transition: transform 0.5s ease-in;
 
     &:hover {
       transform: translateY(-20px);
       background-color: $color-hover;
-    }
-
-    @for $i from 1 through 31 {
-      &--#{$i}::before {
-        content: "#{$i}";
-      }
     }
   }
 }
