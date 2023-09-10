@@ -1,3 +1,65 @@
 body {
   margin: 0;
 }
+
+$column-size: 120px;
+$gap-size: 1px;
+$month-length: 28;
+$starts-day:
+            0 'mon', 1 'tue'
+            2 'wed', 3 'thu',
+            4 'fri', 5 'sat',
+            6 'sun';
+$s: 2, 5, 8;
+
+
+.calendar {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: #{$column-size * 7};
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $column-size;
+    height: $column-size;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      background-color: aquamarine;
+      transition-property: transform background-color;
+      transition-duration: 0.5s;
+      transform: translateY(-20px);
+    }
+  }
+
+  // day modifier
+  @each $val, $day in $starts-day {
+    &--day-#{$day} > &__offset {
+      width: #{($column-size + $gap-size) * ($val) - $gap-size};
+    }
+  }
+
+  // length modifier
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} > &__day:nth-child(n + #{$i + 2}) {
+      border: 0;
+      background-color: #fff;
+      color: #fff;
+      pointer-events: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .day--#{$i}::before {
+    content: '#{$i}';
+  }
+}
