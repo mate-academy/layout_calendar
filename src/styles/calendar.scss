@@ -1,27 +1,50 @@
 .calendar {
-  display: flex;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  gap: $calendar-gap;
-  max-width: 7 * $cell-size + 26px;
+  padding: 10px;
 
-  @each $day, $number in $days {
-    &.calendar__start-day-#{$day} {
-      .cell:first-child {
-        margin-left: ($cell-size + $calendar-gap + 1) * $number - ($cell-size + $calendar-gap * 2);
+  &__container {
+    display: flex;
+    gap: $gap;
+    flex-wrap: wrap;
+    list-style: none;
+    padding-left: 0;
+    width: (7 * $square-size) + 6 * $gap;
+
+    @for $day from 1 through 31 {
+      & :nth-child(n + #{$day}):before {
+        content: "#{$day}";
+        font-size: $day-font-size;
+        font-family: $day-font;
+      }
+    }
+
+    @for $i from 29 through 31 {
+      &--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $square-size;
+    height: $square-size;
+    background-color: $day-color;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    transition: background-color, transform 0.5s;
+
+    &:hover {
+      background-color: #ffc0cb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    @each $day, $num in $days-of-week {
+      &--start-day--#{$day} {
+        margin-left: calcMargin($square-size, $gap, $num);
       }
     }
   }
 }
-
-@for $i from 1 through 31 {
-  .calendar .cell:nth-child(#{$i})::before {
-    content: "#{$i}";
-  }
-  .calendar__month-length-#{$i} .cell:nth-child(n + #{$i + 1}) {
-      display: none;
-  }
-}
-
-
