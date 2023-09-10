@@ -6,12 +6,10 @@ $column-size: 120px;
 $gap-size: 1px;
 $month-length: 28;
 $starts-day:
-            0 'mon', 1 'tue'
-            2 'wed', 3 'thu',
-            4 'fri', 5 'sat',
-            6 'sun';
-$s: 2, 5, 8;
-
+  0 "mon", 1 "tue"
+  2 "wed", 3 "thu",
+  4 "fri", 5 "sat",
+  6 "sun";
 
 .calendar {
   padding: 10px;
@@ -31,6 +29,12 @@ $s: 2, 5, 8;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
+
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        content: "#{$i}";
+      }
+    }
 
     &:hover {
       background-color: pink;
@@ -55,11 +59,5 @@ $s: 2, 5, 8;
       color: #fff;
       pointer-events: none;
     }
-  }
-}
-
-@for $i from 1 through 31 {
-  .day--#{$i}::before {
-    content: '#{$i}';
   }
 }
