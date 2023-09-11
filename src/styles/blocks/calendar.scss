@@ -1,32 +1,27 @@
 .calendar {
-  box-sizing: border-box;
   width: $cell-width * 7 + $cell-gap * 6;
   max-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
   margin: 0 auto;
-  align-items: center;
 
   &__cell {
+    // cells shift without border-box here
     box-sizing: border-box;
     width: $cell-width;
     height: $cell-height;
-    padding: 10px;
-
     display: flex;
     justify-content: center;
+    // numbers in cells shifts without align-items here
     align-items: center;
-
     background-color: #eee;
     border: 1px solid black;
-
     transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
-
       transform: translateY($transform-shift);
     }
 
@@ -38,16 +33,16 @@
   }
 
   &--start-day {
-    @each $day, $days-before in $week-day {
+    @each $day, $multiplier in $week-day {
       &--#{$day} :first-child {
-        margin-left: ($cell-width + $cell-gap) * $days-before;
+        margin-left: ($cell-width + $cell-gap) * $multiplier;
       }
     }
   }
 
   &--days {
-    @for $duration from 28 to 31 {
-      &--#{$duration} .calendar__cell:nth-child(n + #{$duration + 1}) {
+    @for $day from 28 to 31 {
+      &--#{$day} .calendar__cell:nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
