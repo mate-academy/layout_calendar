@@ -45,7 +45,7 @@ GOOD example:
 ```scss
 .box {
   color: gray;
-  transition: color 0.5s, transform 0.5s;
+  transition: color $transitionDuration, transform $transitionDuration;
 
   &:hover {
     color: aquamarine;
@@ -62,7 +62,7 @@ BAD example:
   &:hover {
     color: aquamarine;
     transform: scale(1.2);
-    transition: 0.5s;
+    transition: $transitionDuration;
   }
 }
 ```
