@@ -1,17 +1,3 @@
-$cell-width: 100px;
-$cell-height: $cell-width;
-$month-days: 31;
-$cell-gap: 1px;
-$transform-shift: -20px;
-$week-day:
-  "mon" 0,
-  "tue" 1,
-  "wed" 2,
-  "thu" 3,
-  "fri" 4,
-  "sat" 5,
-  "sun" 6;
-
 .calendar {
   box-sizing: border-box;
   width: $cell-width * 7 + $cell-gap * 6;
@@ -21,8 +7,6 @@ $week-day:
   gap: $cell-gap;
   margin: 0 auto;
   align-items: center;
-  vertical-align: middle;
-  align-self: center;
 
   &__cell {
     box-sizing: border-box;
@@ -37,14 +21,13 @@ $week-day:
     background-color: #eee;
     border: 1px solid black;
 
-    transition: transform 0.5s, background-color 0.5s;
+    transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
 
       transform: translateY($transform-shift);
-      transition: transform 0.5s, background-color 0.5s;
     }
 
     @for $day-number from 1 through 31 {
