@@ -11,9 +11,11 @@ $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: $gap-day;
+  gap: 1px;
   padding: $padding-calendar;
   margin: 35px auto;
+  font-size: $font-sz;
+  font-family: Arial, Helvetica, sans-serif;
 
   &__day {
     width: $size;
@@ -24,6 +26,8 @@ $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
     font-weight: 700;
     line-height: $size;
     transition: all 500ms;
+    display: block;
+    box-sizing: border-box;
     cursor: pointer;
     &:hover {
       transform: translateY(-20px);
@@ -34,7 +38,7 @@ $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
   &--start-day {
     @each $name, $margin in $day__names {
       &--#{$name} :first-child {
-        margin-left: $margin * $size + $gap-day * $margin + 1.6 * $margin;
+        margin-left: $margin * ($size + $gap-day);
       }
     }
   }
@@ -42,8 +46,6 @@ $day__names: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
   @for $index from 1 through $days {
     & :nth-child(#{$index})::before {
       content: "#{$index}";
-      font-size: $font-sz;
-      font-family: Arial, Helvetica, sans-serif;
     }
   }
 
