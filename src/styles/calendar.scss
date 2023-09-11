@@ -1,7 +1,3 @@
-@import "./variables.scss";
-@import "./reset.scss";
-
-// Calendar Container
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -9,13 +5,11 @@
   width: calc(#{$days-in-week} * #{$cell-size}
   + (#{$days-in-week} - 1) * #{$border-width} + 2 * #{$cell-padding});
 
-
-  // Calendar Cells
   &__day {
     width: #{$cell-size};
     height: #{$cell-size};
     border: #{$border-width} solid black;
-    background-color: #{$cell-background};
+    background-color: #{$white};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -28,20 +22,16 @@
     @for $dayNumber from 1 through 31 {
       &:nth-child(#{$dayNumber})::before {
         content: "#{$dayNumber}";
-        font-size: 30px;
-        font-family: arial, helvetica, sans-serif;
       }
     }
   }
 
-  // Hover Effect
   &__day:hover {
-    background-color: #{$cell-hover-color};
+    background-color: #{$pink};
     transform: translateY(-20px);
   }
 }
 
-// Day Modifiers
 @each $day in mon,
   tue,
   wed,
@@ -88,7 +78,6 @@
   }
 }
 
-// Month Length Modifiers
 @for $i from 28 through 31 {
   .calendar__month-length--#{$i} {
     .calendar__day:nth-child(n + #{$i + 1}) {
