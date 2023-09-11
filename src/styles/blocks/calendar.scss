@@ -14,19 +14,18 @@
     height: $cell-size;
     background-color: #eee;
     border: 1px solid #000;
-    box-sizing: border-box;
 
     &:hover {
       transform: translateY(-20px);
       background-color: pink;
       cursor: pointer;
     }
+  }
 
-    @for $cell-number from 1 through 31 {
-      &--#{$cell-number}::before {
-        content: "#{$cell-number}";
-        font-size: 30px;
-      }
+  @for $cell-count from 1 through 31 {
+    & :nth-child(#{$cell-count})::before {
+      content: "#{$cell-count}";
+      font-size: 30px;
     }
   }
 
