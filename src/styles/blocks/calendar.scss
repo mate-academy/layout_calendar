@@ -1,0 +1,55 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($cell-size + $border-width + $gap) * $days-in-week + 2 * $padding;
+  padding: $padding;
+  gap: $gap;
+  background-color: $white__bg-color;
+  cursor: default;
+
+  @each $day, $order in $start-days {
+    &--start-#{$day} > :first-child {
+      margin-left: $order * ($cell-size + $border-width * 2 + $gap);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__cell:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-width solid $border-color;
+    background-color: $cell__color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &:nth-child(n + 1) {
+      counter-increment: day;
+    }
+
+    &::before {
+      content: counter(day);
+      font-family: Arial, sans-serif;
+      font-size: $number-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover__color;
+      transform: translateY(-20px);
+      transition: transform $animation-duration ease;
+    }
+  }
+}
