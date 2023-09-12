@@ -1,4 +1,4 @@
-$gap : 101px;
+@import "variables";
 
 body {
   margin: 0;
@@ -6,11 +6,11 @@ body {
 
 .calendar {
   display: flex;
-  padding: 10px;
-  margin: auto;
-  gap: 1px;
-  width: 726px;
   flex-wrap: wrap;
+  margin: auto;
+  width: 726px;
+  padding: 10px;
+  gap: 1px;
 
   &__day {
     display: flex;
@@ -41,15 +41,6 @@ body {
   }
 }
 
-$start-days:
-  mon 0,
-  tue 1,
-  wed 2,
-  thu 3,
-  fri 4,
-  sat 5,
-  sun 6;
-
 @each $day,$index in $start-days {
   .calendar--start-#{$day} {
     .calendar__day--1 {
@@ -60,6 +51,6 @@ $start-days:
 
 @for $j from 28 through 31 {
   .calendar--month-#{$j} :nth-child(n+#{$j+1}) {
-    visibility: hidden;
+    display: none;
   }
 }
