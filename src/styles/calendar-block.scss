@@ -1,14 +1,3 @@
-$border-color: #000;
-$day-color:#eee;
-$day-active-color: #ecb9da;
-$font-size: 30px;
-$day-cell: 100px;
-$cell-gap: 1px;
-$default-padding: 10px;
-$calendar-width: 706px;
-$date-position: ($day-cell - $font-size) / 2;
-$weekdays: mon, tue, wed, thu, fri, sat, sun;
-
 .calendar {
   width: $calendar-width;
   padding: $default-padding;
@@ -25,15 +14,18 @@ $weekdays: mon, tue, wed, thu, fri, sat, sun;
     border: 1px solid $border-color;
     border-radius: 5px;
     background-color: $day-color;
-    transition: transform 500ms;
+    transition: transform 500ms, background-color 500ms;
     cursor: pointer;
 
     &::before {
       counter-increment: day-number;
       content: counter(day-number);
       position: absolute;
-      top: $date-position;
-      left: $date-position;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
     }
 
     &:hover {
