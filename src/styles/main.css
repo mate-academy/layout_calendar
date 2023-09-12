@@ -1,0 +1,84 @@
+/* stylelint-disable no-descending-specificity */
+/* stylelint-disable rule-empty-line-before */
+.main-container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 734px;
+  padding: 10px;
+  gap: 1px;
+  background-color: white;
+  cursor: default;
+}
+.calendar--month-length-28 .calendar__cell:nth-child(n+29) {
+  display: none;
+}
+.calendar--month-length-29 .calendar__cell:nth-child(n+30) {
+  display: none;
+}
+.calendar--month-length-30 .calendar__cell:nth-child(n+31) {
+  display: none;
+}
+.calendar--month-length-31 .calendar__cell:nth-child(n+32) {
+  display: none;
+}
+.calendar__cell {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.calendar__cell:nth-child(n+1) {
+  counter-increment: day;
+}
+.calendar__cell::before {
+  content: counter(day);
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.calendar__cell:hover {
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+  transition: transform 0.5s ease;
+}
+
+.calendar--start-mon > :first-child {
+  margin-left: 0;
+}
+
+.calendar--start-tue > :first-child {
+  margin-left: 103px;
+}
+
+.calendar--start-wed > :first-child {
+  margin-left: 205px;
+}
+
+.calendar--start-thu > :first-child {
+  margin-left: 308px;
+}
+
+.calendar--start-fri > :first-child {
+  margin-left: 410px;
+}
+
+.calendar--start-sat > :first-child {
+  margin-left: 513px;
+}
+
+.calendar--start-sun > :first-child {
+  margin-left: 615px;
+}/*# sourceMappingURL=main.css.map */
