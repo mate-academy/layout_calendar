@@ -1,0 +1,58 @@
+.main {
+  padding: $padding;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-sheet {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $sheet-with;
+  gap: $gap-size;
+
+  @each $name, $num in $days-in-week {
+    &--start-#{$name} {
+      & > :first-child {
+        margin-left: $cell-size * ($num - 1) + $gap-size * ($num - 1);
+      }
+    }
+  }
+
+  @for $num from 28 through 31 {
+    // num - number of each day in month
+    &--month-#{$num} {
+      & > :not(:nth-child(-n + #{$num})) {
+        display: none;
+      }
+    }
+  }
+
+  &__cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    color: #000;
+    font-family: $number-font;
+    font-size: $number-font-size;
+    transition: $transitionDuration linear;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+  }
+
+  @for $num from 1 through 31 {
+    // num - number of each day in month
+    & > :nth-child(#{$num})::before {
+      content: "#{$num}";
+    }
+  }
+}

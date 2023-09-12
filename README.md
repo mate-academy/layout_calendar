@@ -1,7 +1,7 @@
 # Calendar
 Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://ayogoharo.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://ayogoharo.github.io/layout_calendar/report/html_report/)
 
 ___
 > Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -35,7 +35,7 @@ On hovering over a cell:
 
 ## If you already know Transition and Transform
 - Move the hovered cell up by `20px` (use `transform`)
-- All changes should be animated with the duration of 0.5s
+- All changes should be animated with the duration of $transitionDuration
 
 --> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
 
