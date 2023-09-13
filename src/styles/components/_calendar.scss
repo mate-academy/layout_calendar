@@ -1,25 +1,23 @@
 .calendar {
   display: flex;
   width: ($day-size * $week-long) + ($cell-gap * ($week-long - 1));
-  padding: 10px;
   gap: $cell-gap;
   flex-wrap: wrap;
   list-style: none;
 
-  @each $day, $day-num in $week-days {
+  @each $day, $index in $week-days {
     &--day-start--#{$day}>:first-child {
-      margin-left: ($day-size + $cell-gap) * $day-num;
+      margin-left: ($day-size + $cell-gap) * $index;
     }
   }
 
-  @for $day from $min-month-long through $num-days {
-    &--month-length--#{$day}>:NOT(:nth-child(-n+#{$day})) {
+  @for $day from 28 through $num-days {
+    &--month-length--#{$day}>:NOT(:nth-child(-n + #{$day})) {
       display: none;
     }
   }
 
   &__cell {
-    box-sizing: border-box;
     width: $day-size;
     height: $day-size;
     cursor: pointer;
@@ -32,9 +30,9 @@
       transform: translateY(-20px);
     }
 
-    @for $i from 1 through $num-days {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
+    @for $day from 1 through $num-days {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
         display: block;
         text-align: center;
         line-height: $day-size;
