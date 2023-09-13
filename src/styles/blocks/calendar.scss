@@ -21,6 +21,12 @@
         display: none;
       }
     }
+
+    @each $day, $num in $days-of-week {
+      &--start-day--#{$day} :first-child {
+        margin-left: calculateDayMargin($square-size, $gap, $num);
+      }
+    }
   }
 
   &__day {
@@ -38,12 +44,6 @@
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-    }
-
-    @each $day, $num in $days-of-week {
-      &--start-day--#{$day} {
-        margin-left: calculateDayMargin($square-size, $gap, $num);
-      }
     }
   }
 }
