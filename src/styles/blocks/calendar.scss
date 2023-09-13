@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   margin: 50px auto;
-  gap: 1px;
+  gap: $cell-gap;
   width: ($cell-size * $cell-rows) + ($cell-rows * $cell-gap);
 
   &__cell {
@@ -12,7 +12,7 @@
     transition: 0.5s;
     width: $cell-size;
     height: $cell-size;
-    background-color: #eee;
+    background-color: $cell-color;
     border: 1px solid #000;
 
     &:hover {
@@ -25,7 +25,6 @@
   @for $cell-count from 1 through 31 {
     & :nth-child(#{$cell-count})::before {
       content: "#{$cell-count}";
-      font-size: 30px;
     }
   }
 
