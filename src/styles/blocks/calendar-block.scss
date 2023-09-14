@@ -1,9 +1,11 @@
 .calendar {
-  padding: $calendar-padding;
+  margin: 0;
+  width: $max-width;
+  padding-inline: $calendar-padding;
   gap: $gap-size;
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  justify-content: eve;
 
   @each $day, $mod in $week-days {
     &--start-day--#{$day} :first-child {
@@ -13,7 +15,7 @@
 
   @for $last-day from 28 through 31 {
     &--month-length--#{$last-day} :nth-child(#{$last-day + 1} + n) {
-      opacity: 0;
+      display: none;
     }
   }
 
@@ -21,11 +23,11 @@
     height: $inner-cell-dimension;
     width: $inner-cell-dimension;
     background-color: $cell-beckground-color;
-    border: 1px solid $border-color;
+    border: $border-width solid $border-color;
     position: relative;
     flex-shrink: 0;
-    opacity: 1;
     transition: transform $transformation-time;
+    transition-property: background-color;
 
     &:hover {
       cursor: pointer;
