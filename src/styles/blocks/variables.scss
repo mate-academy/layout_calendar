@@ -1,0 +1,32 @@
+$block-width: 98px;
+$block-heigth: 98px;
+$entire-block: 100px;
+$gap: 1px;
+
+$start--day: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7
+);
+
+@each $day, $day-num in $start--day {
+  .calendar--start-day-#{$day} &:first-child {
+    margin-left: ($entire-block + $gap) * ($day-num - 1);
+  }
+}
+
+
+@for $current-day from 28 through 31 {
+  .calendar--month-length-#{$current-day} :nth-child(n + #{$current-day + 1}) {
+    display: none;
+  }
+}
+
+@mixin setBlockDimensions($height, $width) {
+  height: $height;
+  width: $width;
+}
