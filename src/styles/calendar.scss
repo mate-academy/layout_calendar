@@ -32,47 +32,21 @@
   }
 }
 
-@each $day in mon,
-  tue,
-  wed,
-  thu,
-  fri,
-  sat,
-  sun {
+$days: (
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6,
+  "sun": 7
+);
+
+@each $day, $index in $days {
   .start-day--#{$day} {
     .calendar__day {
-      &:nth-child(#{$days-in-week}n + 1) {
-        margin-left: 0;
-      }
-
-      &:nth-child(#{$days-in-week}n + 2) {
-        margin-left: calc(#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding});
-      }
-
-      &:nth-child(#{$days-in-week}n + 3) {
-        margin-left: calc(2 * (#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding}));
-      }
-
-      &:nth-child(#{$days-in-week}n + 4) {
-        margin-left: calc(3 * (#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding}));
-      }
-
-      &:nth-child(#{$days-in-week}n + 5) {
-        margin-left: calc(4 * (#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding}));
-      }
-
-      &:nth-child(#{$days-in-week}n + 6) {
-        margin-left: calc(5 * (#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding}));
-      }
-
-      &:nth-child(#{$days-in-week}n + 7) {
-        margin-left: calc(6 * (#{$cell-size} +
-        #{$border-width} + 2 * #{$cell-padding}));
+      &:nth-child(#{$index}n) {
+        margin-left: calc(#{$index - 1} * (#{$cell-size} + #{$border-width} + 2 * #{$cell-padding}));
       }
     }
   }
