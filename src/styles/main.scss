@@ -1,6 +1,5 @@
 $item-size: 100px;
 $block-height: 100px;
-$total-items: 31; //set the total days
 $gap: 1px;
 $start-days: (
   mon: 0,
@@ -12,13 +11,19 @@ $start-days: (
   sun: 6
 );
 
+@each $start-day, $start-day-index in $start-days {
+  .calendar-block--start--day--#{$start-day} .calendar-block__day:first-child {
+    margin-left: ($item-size + $gap) * $start-day-index;
+  }
+}
+
 body {
   display: flex;
   margin: 30px;
   justify-content: center;
 }
 
-.block {
+.calendar-block {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
@@ -26,13 +31,7 @@ body {
   width: ($item-size + $gap) * 7;
 
   &__day {
-    @each $day, $margin-left in $start-days {
-      &.start-day-#{$day} {
-        margin-left: ($margin-left * ($item-size + $gap));
-      }
-    }
-
-    @for $i from 1 through $total-items {
+    @for $i from 1 through 31 {
       &:nth-child(#{$i}) {
         width: $item-size;
         height: $item-size;
@@ -62,4 +61,10 @@ body {
     }
   }
 
+  @for $length from 28 through 31 {
+    &--month--length--#{$length}
+    .calendar-block__day:nth-child(n+#{$length + 1}) {
+      display: none;
+    }
+  }
 }
