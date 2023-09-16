@@ -1,3 +1,79 @@
+// Define variables
+$cell-size: 100px;
+$border-width: 1px;
+$font-size: 30px;
+$border-color: #000;
+$background-color: #eee;
+$padding: 10px;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: calc(7 * #{$cell-size} + 10 * 2px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.calendar__day {
+  position: relative;
+  width: #{$cell-size};
+  height: #{$cell-size};
+  border: #{$border-width} solid #{$border-color};
+  background-color: #{$background-color};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-size: #{$font-size};
+  cursor: pointer;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    animation-name: move;
+    animation-duration: 500ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes move {
+    from {
+      bottom: 0;
+    }
+    to {
+      bottom: calc(1 / 5 * #{$cell-size});
+    }
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  &--start-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$cell-size}
+      * index(#{$day}, mon, tue, wed, thu, fri, sat, sun));
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  &--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
