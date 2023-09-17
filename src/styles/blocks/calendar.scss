@@ -5,7 +5,7 @@
   padding: $padding;
   max-width: calc(7 * (#{$cell-size} + #{$border-width} + #{$gap} + #{$padding}));
 
-  &.start-day-mon {
+  &--start-day-mon {
     .calendar__cell:nth-child(1) {
       margin-right: calc((6 * #{$cell-size}) + (6 * #{$border-width}) + (6 * #{$gap}) + (2 * #{$padding}));
       width: #{$cell-size};
@@ -13,25 +13,25 @@
     }
   }
 
-  &.month-length-28 {
+  &--month-length-28 {
     @include generate-calendar-cells(28);
   }
 
-  &.month-length-29 {
+  &--month-length-29 {
     @include generate-calendar-cells(29);
   }
 
-  &.month-length-30 {
+  &--month-length-30 {
     @include generate-calendar-cells(30);
   }
 
-  &.month-length-31 {
+  &--month-length-31 {
     @include generate-calendar-cells(31);
   }
 
   $start-days: mon, tue, wed, thu, fri, sat, sun;
   @each $day in $start-days {
-    &.start-day-#{$day} {
+    &--start-day-#{$day} {
       .calendar__cell {
         $day-index: index($day, $start-days);
         &:nth-child(n + #{if($day-index != null, $day-index + 1, 0)}) {
