@@ -13,20 +13,16 @@
     }
   }
 
-  &--month-length-28 {
-    @include generate-calendar-cells(28);
-  }
+  @for $dayWeek from 28 through 31 {
+    $monthLength: $dayWeek;
 
-  &--month-length-29 {
-    @include generate-calendar-cells(29);
-  }
+    &--month-length-#{$monthLength} {
+      @include generate-calendar-cells($monthLength);
 
-  &--month-length-30 {
-    @include generate-calendar-cells(30);
-  }
-
-  &--month-length-31 {
-    @include generate-calendar-cells(31);
+      .calendar__day:nth-child(n + #{$monthLength + 1}) {
+        display: none;
+      }
+    }
   }
 
   $start-days: mon, tue, wed, thu, fri, sat, sun;
