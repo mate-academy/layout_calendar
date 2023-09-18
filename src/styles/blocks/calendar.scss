@@ -1,9 +1,9 @@
 .calendar {
-  gap: $gap;
-  width: $sell-size * 7 + $padding;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  gap: $gap;
+  width: $sell-size * 7 + $padding;
 
   @for $i from 28 through 31 {
     &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
@@ -12,15 +12,14 @@
   }
 
   &__day {
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
+    height: $sell-size;
+    width: $sell-size;
     border: 1px solid #000;
     background-color: #eee;
-
+    box-sizing: border-box;
     transition: transform 500ms;
 
     @for $index from 1 through 31 {
