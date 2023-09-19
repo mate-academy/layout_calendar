@@ -5,6 +5,14 @@
   padding-top: 50px;
   width: (7 * $day-width) + ($box-padding * 2);
 
+  $days: $days-of-week;
+
+  @each $day, $margin in $days {
+    &--start-day--#{$day} :first-child {
+      margin-left: #{$margin}px;
+    }
+  }
+
   &__day {
     width: $day-width;
     height: $day-height;
@@ -24,14 +32,6 @@
         &::before {
           content: "#{$i}";
         }
-      }
-    }
-
-    $days: $days-of-week;
-
-    @each $day, $margin in $days {
-      &--start-day--#{$day} {
-        margin-left: #{$margin}px;
       }
     }
   }
