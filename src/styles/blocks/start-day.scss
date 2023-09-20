@@ -1,5 +1,6 @@
-@each $day in $days {
-  .calendar--start-day--#{$day} {
-    margin-left: $margin-left-first-day;
-  }
+@each $day, $margin in $days {
+  .calendar--start-day--#{$day}
+  &:first-child {
+    margin-left: $margin * ($cell-size + $gap + 1.6 * $border-width);
+  };
 }
