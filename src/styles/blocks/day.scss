@@ -1,0 +1,22 @@
+.day {
+  text-align: center;
+  line-height: $cell-height;
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: $cell-height;
+  width: $cell-width;
+  background-color: #eee;
+  transition: transform 0.5s;
+
+  @for $i from 1 through 31 {
+    &--#{$i}::before {
+      content: "#{$i}";
+    }
+  }
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}
