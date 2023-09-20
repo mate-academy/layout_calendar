@@ -2,9 +2,9 @@
 @import "../utils/mixins";
 
 @for $index from 1 through 31 {
-  .calendar-list__item--#{$index}::before {
-  @include content;
-  content: "#{$index}";
+  .calendar-list__item:nth-child(#{$index})::before {
+    @include content;
+    content: "#{$index}";
   }
 }
 
@@ -17,38 +17,17 @@
   gap: $gap;
 
   
-  &--month-length-28 {
-    @for $index from 29 through 31 {
-      .calendar-list__item--#{$index} {
-        @include empty-item;
+  @for $length from 28 through 31 {
+    &--month-length--#{$length} {
+      @for $index from $length + 1 through 31 {
+        .calendar-list__item--#{$index} {
+          @include empty-item;
+          display: none;
+        }
+        .calendar-list__item--#{$index}::before {
+          content: '';
+        }
       }
-    }
-    @for $index from 29 through 31 {
-      .calendar-list__item--#{$index}::before {
-        content: '';
-      }
-    }
-  }
-
-  &--month-length-29 {
-    @for $index from 30 through 31 {
-      .calendar-list__item--#{$index} {
-        @include empty-item;
-      }
-    }
-    @for $index from 30 through 31 {
-      .calendar-list__item--#{$index}::before {
-        content: '';
-      }
-    }
-  }
-
-  &--month-length-30 {
-      .calendar-list__item--31 {
-        @include empty-item;
-    }
-      .calendar-list__item--31::before {
-        content: '';
     }
   }
 
