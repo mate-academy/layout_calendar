@@ -1,4 +1,5 @@
 $cell-size: 100px;
+$index: 0;
 
 body {
   margin: 0;
@@ -31,12 +32,13 @@ body {
   transition: 500ms;
 
   &:first-child {
-    margin-left: 76.9%;
+    margin-left: 76.8%;
   }
 
   &:hover {
     transform: translateY(-20px);
     background-color: pink;
+    cursor: pointer;
   }
 }
 
@@ -44,5 +46,21 @@ body {
   .day:nth-child(#{$i})::before {
     content: "#{$i}" ;
 
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  .calendar__day--#{$day} .day:first-child {
+    margin-left: $index * $cell-size;
+  }
+}
+
+@for $i from 28 through 31 {
+  .day:nth-child(#{$i}) {
+    display: none;
+  }
+
+  .calendar__day.month-length-#{$i} .day:nth-child(-n + #{$i}) {
+    display: block;
   }
 }
