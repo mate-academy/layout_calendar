@@ -1,0 +1,27 @@
+@for $number from 1 through 31 {
+  .calendar__element:nth-child(#{$number}) {
+    &::before {
+      content: "#{$number}";
+    }
+  }
+}
+
+@function getMargin ($width, $gap, $index) {
+  @return ($width + $gap) * ($index - 1);
+}
+
+@each $day, $value in $week {
+  .calendar--start-day--#{$day} {
+    .calendar__element:first-child {
+      margin-left: getMargin($boxes-width, $gap-size, $value);
+    }
+  }
+}
+
+@for $last-day from 28 to 31 {
+  .calendar--month-lenght--#{$last-day} {
+    .calendar__element:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
