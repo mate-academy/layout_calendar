@@ -1,0 +1,48 @@
+@import "./utils/variables";
+
+.calendar {
+  margin: 50px auto;
+  flex-wrap: wrap;
+  justify-self: center;
+  @include flex-center;
+  width: $calendar-width;
+  gap: $gap;
+
+
+  &__day {
+    @include flex-center;
+    justify-content: center;
+    background-color: #eee;
+    width: $sell-size;
+    height: $sell-size;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 30px;
+    transition: 0.5s;
+  }
+
+  @for $day from 1 through $month-length {
+    &__day:nth-child(#{$day})::before{
+      content: "#{$day}";
+    }
+  }
+
+  @each $key, $val in $start-day {
+    &--start-day--#{$key} .calendar__day:nth-child(1) {
+        margin-left: $sell-size * $val + $gap * $val;
+    }
+  }
+
+  @for $day from 1 through $month-length {
+    &--month-length--#{$day} &__day:nth-child(n + #{$day + 1}){
+      display: none;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
+
