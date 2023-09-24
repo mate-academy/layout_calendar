@@ -1,5 +1,4 @@
-$cell-size: 100px;
-$index: 0;
+@import "variables";
 
 body {
   margin: 0;
@@ -32,8 +31,9 @@ body {
   transition: 500ms;
 
   &:first-child {
-    margin-left: 76.8%;
+    margin-left: 76.1%;
   }
+
 
   &:hover {
     transform: translateY(-20px);
@@ -45,22 +45,20 @@ body {
 @for $i from 1 through 31 {
   .day:nth-child(#{$i})::before {
     content: "#{$i}" ;
-
   }
 }
 
-@each $day in mon, tue, wed, thu, fri, sat, sun {
-  .calendar__day--#{$day} .day:first-child {
-    margin-left: $index * $cell-size;
+@each $day, $numOfDay in $days {
+  &--start-day--#{$day} :first-child {
+    margin-left: ($numOfDay * $cell-size) + ($cell-size * $numOfDay);
   }
 }
 
 @for $i from 28 through 31 {
-  .day:nth-child(#{$i}) {
+  $off-days: 31 - $i;
+
+  &--month-length--#{$i} :nth-last-child(-n + #{$off-days}) {
     display: none;
   }
-
-  .calendar__day.month-length-#{$i} .day:nth-child(-n + #{$i}) {
-    display: block;
-  }
 }
+
