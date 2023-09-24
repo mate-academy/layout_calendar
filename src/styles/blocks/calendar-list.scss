@@ -1,13 +1,6 @@
 @import "../utils/variables";
 @import "../utils/mixins";
 
-@for $index from 1 through 31 {
-  .calendar-list__item:nth-child(#{$index})::before {
-    @include content;
-    content: "#{$index}";
-  }
-}
-
 .calendar-list {
   list-style: none;
   display: flex;
@@ -17,16 +10,10 @@
   gap: $gap;
 
   
-  @for $length from 28 through 31 {
-    &--month-length--#{$length} {
-      @for $index from $length + 1 through 31 {
-        .calendar-list__item--#{$index} {
-          @include empty-item;
-          display: none;
-        }
-        .calendar-list__item--#{$index}::before {
-          content: '';
-        }
+  @for $nthDay from 28 through 31 {
+    &--month-length--#{$nthDay} {
+      .calendar-list__item:nth-child(n + #{$nthDay + 1}) {
+        display: none;
       }
     }
   }
@@ -36,6 +23,12 @@
     transition: background-color 0.5s, transform 0.5s;
     @include list-item();
 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        @include content;
+        content: "#{$index}";
+      }
+    }
 
     &:hover {
       cursor: pointer;
