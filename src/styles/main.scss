@@ -1,3 +1,85 @@
+$font-family: arial, helvetica, sans-serif;
+$border-width: 1px;
+$border-size: 850px;
+$border-color: #000;
+$day-size: 100px;
+$day-gap: 1px;
+$animation-duration: 0.5s;
+
+$days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+$month-lengths: (28, 29, 30, 31);
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($day-size + $day-gap) * 7;
+  margin: auto;
+  padding: 10px;
+  gap: $day-gap;
+  border: #{$border-width} solid $border-color;
+  font-size: 30px;
+
+  $days: 31;
+  $month-lengths: 28, 29, 30, 31;
+
+  @for $i from 1 through $days {
+    .calendar__day:nth-child(#{$i}):not(.calendar--month-length-#{$i})::before {
+      content: "#{$i}";
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @each $month-length in $month-lengths {
+    .calendar--month-length-#{$month-length} {
+      &:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  position: relative;
+  background: #eee;
+  cursor: pointer;
+  transition: cursor $animation-duration;
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition: background-color $animation-duration,
+      transform $animation-duration;
+  }
+
+  &::before {
+    content: attr(data-day);
+  }
+
+  &:nth-child(7n + 1) {
+    margin-left: 0;
+  }
 }
