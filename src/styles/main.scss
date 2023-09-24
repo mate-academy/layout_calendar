@@ -1,3 +1,98 @@
+$days: mon, tue, wed, thu, fri, sat, sun;
+$width-of-date: 100px;
+$height-of-date: 100px;
+
+$dayMargins: (
+  mon: 0,
+  tue: 101px,
+  wed: 202px,
+  thu: 303px,
+  fri: 404px,
+  sat: 505px,
+  sun: 606px
+);
+
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day-1 {
+      margin-left: map-get($dayMargins, $day);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    @for $j from 1 through $i + 1 {
+      .calendar__day-#{$j} {
+        display: flex;
+      }
+    }
+    @for $j from $i + 1 through 32 {
+      .calendar__day-#{$j} {
+        display: none;
+      }
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    top: 0;
+    left: 0;
+  }
+
+  50% {
+    top: 10px;
+  }
+
+  100% {
+    top: 20px;
+  }
+}
+
 body {
   margin: 0;
+}
+
+h1 {
+  margin-left: 10px;
+}
+
+.calendar {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1px;
+  padding: 10px;
+  max-width: calc(7 * #{$width-of-date} + 10px);
+  min-width: $width-of-date;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day-#{$i} {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    height: $height-of-date;
+    width: $width-of-date;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: color 0.5s, transform 0.5s;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    &:before {
+      content: "#{$i}";
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
 }
