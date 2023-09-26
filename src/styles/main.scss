@@ -5,31 +5,21 @@ $border-color: #000;
 $day-size: 100px;
 $day-gap: 1px;
 $animation-duration: 0.5s;
-
-$days: (
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
-  sun: 7,
-);
-
+$days: 31;
 $month-lengths: (28, 29, 30, 31);
 
 body {
   margin: 0;
+  padding: 0;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: ($day-size + $day-gap) * 7;
-  margin: auto;
+  margin: 0 auto;
   padding: 10px;
   gap: $day-gap;
-  border: #{$border-width} solid $border-color;
   font-size: 30px;
 
   @for $i from 1 through $days {
@@ -61,6 +51,7 @@ body {
   font-size: 30px;
   position: relative;
   background: #eee;
+  border: #{$border-width} solid $border-color;
   cursor: pointer;
   transition: cursor $animation-duration;
 
@@ -81,5 +72,7 @@ body {
   }
 }
 
-$days: 31;
-$month-lengths: 28, 29, 30, 31;
+.calendar__day-1 {
+  flex: 1 0 100%;
+  margin-left: 0;
+}
