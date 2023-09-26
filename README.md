@@ -37,7 +37,5 @@ On hovering over a cell:
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
---> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
-
 ## Here is a preview:
 ![reference image](reference.png).
