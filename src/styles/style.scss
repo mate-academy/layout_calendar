@@ -5,6 +5,17 @@
   width: $w-calendar;
   margin: 0 auto;
 
+  @each $day-of-week, $day-num in $days {
+    &--start-day-#{$day-of-week} &__day:first-child {
+      margin-left: #{$day-num * ($day-size + $gap)};
+    }
+  }
+
+  @for $day from 28 through $month-length {
+    &--month-length-#{$day} &__day:nth-child(n+#{$day+1}) {
+      display: none;
+    }
+  }
 }
 
 .calendar__day {
