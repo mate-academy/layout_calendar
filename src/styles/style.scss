@@ -2,7 +2,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  width: $w-calendar;
   margin: 0 auto;
+
 }
 
 .calendar__day {
@@ -11,9 +13,19 @@
   align-items: center;
   position: relative;
   box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  margin-right: $gap;
+  margin-bottom: $gap;
+  background-color: $day-color;
   border: 1px solid #000;
   cursor: pointer;
   transition: all 0.5s ease;
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY($transform-y);
+  }
 
   @for $day from 1 through $month-length {
     &:nth-child(#{$day})::before {
