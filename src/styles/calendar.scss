@@ -5,28 +5,6 @@
   flex-wrap: wrap;
   width: $calendar-width;
 
-  @each $day, $number in $days {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: ($day-size * $number + $gap *$number + $padding);
-      }
-    }
-  }
-
-  @for $date from 1 through 31 {
-    .calendar__day:nth-child(#{$date})::before {
-      content: "#{$date}";
-      margin: auto;
-      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-      font-size: 30px;
-    }
-  }
-
-  @mixin square ($size) {
-    width: $size;
-    height: $size;
-  }
-
   &__day {
     @include square($day-size);
     display: flex;
@@ -40,6 +18,29 @@
       transform: translateY(-20px);
       cursor: pointer;
       background-color: pink;
+    }
+  }
+
+  @for $date from 1 through 31 {
+    &__day:nth-child(#{$date})::before {
+      content: "#{$date}";
+      margin: auto;
+    }
+  }
+
+  @each $day, $number in $days {
+    &--start-day-#{$day} {
+      &__day:first-child {
+        margin-left: ($day-size * $number + $gap *$number + $padding);
+      }
+    }
+  }
+
+  @for $month-day-count from 28 through 31 {
+    &--month-length--#{$month-day-count} {
+      &__day:nth-child(n + #{$month-day-count + 1}) {
+        display: none;
+      }
     }
   }
 }
