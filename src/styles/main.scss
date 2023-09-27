@@ -1,8 +1,10 @@
+$month-length: 31;
 $day-size: 100px;
 $day-color: #eee;
 $hover-color: pink;
 $transform-y: -20px;
-$w-calendar: 7 * ($day-size ) + 20;
+$gap: 1px;
+$w-calendar: 7 * ($day-size + $gap) + 20;
 
 body {
   margin: 0;
@@ -14,7 +16,6 @@ li {
   margin: 0;
   padding: 0;
   list-style: none;
-
 }
 
 .calendar {
@@ -22,9 +23,17 @@ li {
   flex-wrap: wrap;
   width: $w-calendar;
   margin: 0 auto;
+
+  $days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+  @each $day-of-week, $day-num in $days {
+    &--start-day-#{$day-of-week} &__day:first-child {
+      margin-left: #{$day-num * ($day-size + $gap)};
+    }
+  }
 }
 
-.day-of-week {
+.calendar__day {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,8 +41,8 @@ li {
   box-sizing: border-box;
   width: $day-size;
   height: $day-size;
-  margin-right: 1px;
-  margin-bottom: 1px;
+  margin-right: $gap;
+  margin-bottom: $gap;
   background-color: $day-color;
   border: 1px solid #000;
   cursor: pointer;
@@ -44,10 +53,8 @@ li {
     transform: translateY($transform-y);
   }
 
-  $days: mon, tue, wed, thu, fri, sat, sun;
-
-  @for $day from 1 through 31 {
-    &--#{$day}::before {
+  @for $day from 1 through $month-length {
+    &:nth-child(#{$day})::before {
       content: "#{$day}";
       display: block;
       position: absolute;
@@ -55,15 +62,10 @@ li {
     }
   }
 
-  // @for $day-of-week from 28 through 31 {
+  @for $day from 28 through $month-length {
+    &:nth-child(#{$day}) {
+      background-color: red;
+    }
+  }
 
-  // }
-
-  // @each $a in $days {
-
-  // }
-}
-
-.day-of-week--1 {
-  margin-left: 404px;
 }
