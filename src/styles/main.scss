@@ -1,3 +1,59 @@
+@import "./utils/variables";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  position: absolute;
+  margin: 0;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  flex-wrap: wrap;
+  width: 708px;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    border: 1px solid #000;
+
+    background-color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $num from 1 through 31 {
+      &:nth-child(#{$num})::before {
+        content: "#{$num}";
+      }
+    }
+  }
+
+  @each $day, $measure in $weekDays {
+    &--start-day-#{$day} :first-child {
+      margin-left: $measure;
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
 }
