@@ -1,7 +1,4 @@
-$size: 100px;
-$gap: 1px;
-$calendar_padding: 10px;
-$calendar_size: $size * 7 + $calendar_padding * 2;
+@import "./variables";
 
 @mixin square($size) {
   height: $size;
@@ -27,22 +24,22 @@ body {
   padding: 10px;
 
   $days: (
-    "tue": 0,
-    "wed": 1,
-    "thu": 2,
-    "fri": 3,
-    "sat": 4,
-    "sun": 5,
-    "mon": 6,
+    "mon": 0,
+    "tue": 1,
+    "wed": 2,
+    "thu": 3,
+    "fri": 4,
+    "sat": 5,
+    "sun": 6,
   );
 
   @each $day, $index in $days {
     &--start-day-#{$day} :first-child {
-      margin-left: $size * $index + $gap * $index;
+      margin-left: ($size + $gap) * $index;
     }
   }
 
-  &_day {
+  &__day {
     @include square($size);
     display: flex;
     justify-content: center;
@@ -51,10 +48,11 @@ body {
     gap: $gap;
     border: 1px solid black;
     background-color: #eee;
+    transition-duration: 0.5s;
 
     &:hover {
       transform: translateY(-20px);
-      transition-duration: 0.5s;
+
       background-color: pink;
       cursor: pointer;
     }
@@ -64,7 +62,7 @@ body {
 }
 
 @for $day from 1 through 31 {
-  .calendar_day:nth-child(#{$day})::before {
+  .calendar__day:nth-child(#{$day})::before {
     content: "#{$day}";
   }
 }
