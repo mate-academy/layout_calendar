@@ -7,3 +7,36 @@ $transform-y: -20px;
 $gap: 1px;
 $w-calendar: 7 * ($day-size + $gap) + 20;
 /* #endregion */
+
+/* #region variable-properties */
+.calendar {
+  width: $w-calendar;
+
+  $days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+  @each $day-of-week, $day-num in $days {
+    &--start-day-#{$day-of-week} &__day:first-child {
+      margin-left: #{$day-num * ($day-size + $gap)};
+    }
+  }
+
+  @for $day from 28 through $month-length {
+    &--month-length-#{$day} &__day:nth-child(n+#{$day+1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  margin-right: $gap;
+  margin-bottom: $gap;
+  background-color: $day-color;
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY($transform-y);
+  }
+}
+/* #endregion */
