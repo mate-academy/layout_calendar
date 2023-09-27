@@ -1,0 +1,56 @@
+.calendar {
+  /*styles for calendar */
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  width: ($day-block-size + $calentar-gap) * $columns;
+  gap: $calentar-gap;
+  @include centralize;
+
+  /*styles for day cell*/
+  &__day {
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: $day-block-size;
+    height: $day-block-size;
+    line-height: $day-block-size;
+    text-align: center;
+    background-color: #eee;
+    cursor: pointer;
+
+    /*styles for hover behaviour*/
+    &:hover {
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+      background-color: pink;
+    }
+  }
+
+  /*content fill for all days in month*/
+  @for $i from 1 through 31 {
+    div:nth-child(1n + #{$i}) {
+      &::before {
+        content: "#{$i}";
+      }
+    }
+  }
+
+  /*create styles for modifier by day count in month*/
+  /*class: calendar--month-length--xx*/
+  @for $i from 28 to 31 {
+    $day-count: 31 - $i;
+    &--month-length--#{$i} :nth-last-child(-n + #{$day-count}) {
+      display: none;
+    }
+  }
+
+  /*create styles for modifier by start day*/
+  /*class: calendar--start-day--xxx*/
+  @each $day-number, $day-name in $days-of-week {
+    &--start-day--#{$day-name} {
+      & > :first-child {
+        margin-left: $day-number * ($day-block-size + $calentar-gap);
+      }
+    }
+  }
+}
