@@ -1,0 +1,40 @@
+@import "./variables.scss";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 10px;
+  gap: $gap;
+  width: ($number-of-days - 1) * ($day-size + $gap) + $day-size;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    height: $day-size;
+    width: $day-size;
+    border: 1px solid #000;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: #ffc0cb;
+    }
+
+    @for $day-num from 1 through $days {
+      &:nth-child(#{$day-num})::before {
+        content: "#{$day-num}";
+      }
+    }
+  }
+
+  @each $day, $margin in $days-of-week {
+    --start-day--#{$day}
+    :first-child {
+      margin-left: #{$margin};
+    }
+  }
+}
