@@ -1,11 +1,21 @@
 $font-family: arial, helvetica, sans-serif;
 $border-width: 1px;
-$border-size: 850px;
-$border-color: #000;
 $day-size: 100px;
 $day-gap: 1px;
 $animation-duration: 0.5s;
 $days: 31;
+$border-color: #000;
+
+$days-map: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6,
+);
+
 $month-lengths: (28, 29, 30, 31);
 
 body {
@@ -16,7 +26,7 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: ($day-size + $day-gap) * 8;
+  width: ($day-size + $day-gap) * 7;
   margin: 0 auto;
   padding: 10px;
   gap: $day-gap;
@@ -34,10 +44,8 @@ body {
   }
 
   @each $month-length in $month-lengths {
-    .calendar--month-length-#{$month-length} {
-      &:nth-child(n + #{$month-length + 1}) {
-        display: none;
-      }
+    .calendar--month-length--#{$month-length} &:first-child {
+      margin-left: 0;
     }
   }
 }
@@ -70,9 +78,4 @@ body {
   &:nth-child(7n + 1) {
     margin-left: 0;
   }
-}
-
-.calendar__day-1 {
-  flex: 1 0 100%;
-  margin-left: 0;
 }
