@@ -12,17 +12,16 @@ html {
 }
 
 .calendar {
-  width: $width-calendar;
+  max-width: $max-width-calendar;
   display: flex;
   box-sizing: border-box;
   flex-wrap: wrap;
   gap: $gap;
-  padding: $calendar-padding;
 
   &__day {
     height: $square-size;
     width: $square-size;
-    border: 1px solid black;
+    border: $border-width solid black;
     background-color: #eee;
     display: flex;
     justify-content: center;
@@ -40,15 +39,14 @@ html {
     }
   }
 
-  @each $index, $margin in $start-day {
-    &--name-of-the-day-#{$margin} :first-child {
-      margin-left: calc(($index - 1)
-      * ($square-size + $gap));
+  @each $day, $number in $start-day {
+    &-start-day-#{$day} :first-child {
+      margin-left: ($number - 1) * $overall-day-size;
     }
   }
 
   @for $lastdays from 28 through 31 {
-    &--#{$lastdays}>:nth-child(n + #{$lastdays + 1}) {
+    &--#{$lastdays}:nth-child(n + #{$lastdays + 1}) {
       display: none;
     }
   }
