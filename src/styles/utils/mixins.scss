@@ -1,0 +1,43 @@
+@mixin onHover() {
+  transition: transform, 0.5s;
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+  font-weight: bold;
+  color: ghostwhite;
+}
+
+@mixin defineStartDay() {
+  @each $day, $num in $start-days {
+    &-start-day--#{$day} {
+      & :first-child {
+        @if $num > 0 {
+          margin-left: ($default-box-size * $num) + $num * 3;
+        }
+      }
+    }
+  }
+}
+
+@mixin defineMonthLength() {
+  @each $length in $month-length {
+    &-month-length--#{$length} {
+      @for $i from $length to 32 {
+        & :nth-child(#{$i + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@mixin fillDaysNums() {
+  @for $i from 1 through 31 {
+    & :nth-child(#{$i})::before {
+      content: "#{$i}";
+      position: absolute;
+      display: block;
+      font-size: 20px;
+    }
+  }
+}
