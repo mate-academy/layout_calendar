@@ -1,0 +1,31 @@
+.calendar__main {
+  display: flex;
+
+  gap: $dayBlockGap;
+  flex-wrap: wrap;
+
+  width: ($dayBlockSize + $dayBlockGap) * $daysInWeek + $MonthPaddings * 2;
+  height: ($dayBlockSize + $dayBlockGap) * $weekRowInMonth + $MonthPaddings * 2;
+
+  padding: $MonthPaddings;
+
+  @for $day from 1 through 31 {
+    .calendar__day:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
+  @each $weekDay, $dayValue in $weekDays {
+    &--start-day_#{$weekDay} .calendar__day:first-child {
+      margin-left: ($dayBlockSize + $dayBlockGap) * $dayValue;
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--length_#{$lastDay} {
+      .calendar__day:nth-child(n + #{$lastDay + 1}) {
+        display: none;
+      }
+    }
+  }
+}
