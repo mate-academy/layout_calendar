@@ -1,0 +1,63 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    height: 100%;
+  }
+}
+
+@each $start-day, $switch in $week-days {
+  .calendar.calendar--start-day--#{$start-day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$square-side} * #{$switch} + #{$gap} * #{$switch});
+    }
+  }
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  max-width: $calendar-width;
+
+  &__day {
+    width: $square-side;
+    height: $square-side;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    justify-content: center;
+    transition: background-color 0.5s, transform 0.5s;
+    display: flex;
+
+    &:first-child {
+      margin-left: calc(#{$square-side} + #{$gap});
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 32 through 37 {
+    .calendar__day:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
