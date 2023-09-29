@@ -13,13 +13,13 @@ body {
 }
 
 .calendar {
-  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   max-width: $max-width-calendar;
   gap: $gap;
 
   &__day {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,13 +43,13 @@ body {
   }
 
   @each $day-of-weak, $day-num in $start-day {
-    &--start-day-#{$day-of-weak} {
-      margin-left: #{($day-num - 1) * $day-size};
+    &--start-day-#{$day-of-weak} :first-child {
+      margin-left: $day-num * ($square-size + $gap);
     }
   }
 
   @for $day from 28 through 31 {
-    &--month-length-#{$day} &__day:nth-child(n+#{$day+1}) {
+    &--month-length-#{$day} :nth-child(1n + #{$day + 1}) {
       display: none;
     }
   }
