@@ -24,17 +24,23 @@
       background-color: #ffc0cb;
     }
 
-    @for $day-num from 1 through $days {
-      &:nth-child(#{$day-num})::before {
-        content: "#{$day-num}";
+    @for $day from 1 through $days {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
       }
     }
   }
 
-  @each $day, $margin in $days-of-week {
-    --start-day--#{$day}
-    :first-child {
-      margin-left: #{$margin};
+  @each $day, $numOfDay in $days-of-week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $numOfDay * $day-size + $gap * $numOfDay;
+    }
+  }
+
+  @for $i from 28 through 30 {
+    &--month-length--#{$i} :nth-child(n +
+  #{$i + 1}) {
+      display: none;
     }
   }
 }
