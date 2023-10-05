@@ -6,13 +6,14 @@
   width: $calendar-width;
 
   &__day {
-    @include square($day-size);
+    @include square($full-day-size);
     display: flex;
     flex-wrap: wrap;
-    box-sizing: content-box;
     background-color: #eee;
     border: 1px black solid;
     transition-duration: 0.5s;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       transform: translateY(-20px);
@@ -24,7 +25,6 @@
   @for $date from 1 through 31 {
     &__day:nth-child(#{$date})::before {
       content: "#{$date}";
-      margin: auto;
     }
   }
 
@@ -40,7 +40,7 @@
 @each $day, $number in $days {
   .calendar--start-day--#{$day} {
     .calendar__day:first-child {
-      margin-left: $full-day-size * $number;
+      margin-left: $full-day-size * $number + $gap * $number;
     }
   }
 }
