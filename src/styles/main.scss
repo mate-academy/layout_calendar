@@ -1,21 +1,22 @@
 $days: mon, tue, wed, thu, fri, sat, sun;
 $width-of-date: 100px;
 $height-of-date: 100px;
+$first-date-margin: 101px;
 
 $dayMargins: (
   mon: 0,
-  tue: 101px,
-  wed: 202px,
-  thu: 303px,
-  fri: 404px,
-  sat: 505px,
-  sun: 606px
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
 );
 
 @each $day in $days {
   .calendar--start-day-#{$day} {
     .calendar__day-1 {
-      margin-left: map-get($dayMargins, $day);
+      margin-left: map-get($dayMargins, $day) * $first-date-margin;
     }
   }
 }
@@ -23,7 +24,7 @@ $dayMargins: (
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
     @for $j from 1 through $i + 1 {
-      .calendar__day-#{$j} {
+      .calendar__day {
         display: flex;
       }
     }
@@ -35,26 +36,11 @@ $dayMargins: (
   }
 }
 
-@keyframes move {
-  0% {
-    top: 0;
-    left: 0;
-  }
-
-  50% {
-    top: 10px;
-  }
-
-  100% {
-    top: 20px;
-  }
-}
-
 body {
   margin: 0;
 }
 
-h1 {
+#date {
   margin-left: 10px;
 }
 
@@ -62,7 +48,6 @@ h1 {
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   gap: 1px;
   padding: 10px;
   max-width: calc(7 * #{$width-of-date} + 10px);
@@ -71,7 +56,6 @@ h1 {
 
 @for $i from 1 through 31 {
   .calendar__day-#{$i} {
-
     display: flex;
     justify-content: center;
     align-items: center;
