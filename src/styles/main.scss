@@ -1,3 +1,74 @@
+@import "variables.scss";
+
+$dayMargins: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+);
+
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: map-get($dayMargins, $day) * $first-date-margin;
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    @for $j from $i + 1 through 31 {
+      .calendar__day:nth-child(#{$j}) {
+        display: none;
+      }
+    }
+  }
+}
+
 body {
   margin: 0;
+}
+
+#date {
+  margin-left: 10px;
+}
+
+.calendar {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  max-width: calc(7 * #{$width-of-date} + 10px);
+  min-width: $width-of-date;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    height: $height-of-date;
+    width: $width-of-date;
+    background-color: $date-background-color;
+    border: 1px solid black;
+    transition: color 0.5s, transform 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: $date-hover-color;
+      cursor: pointer;
+    }
+  }
 }
