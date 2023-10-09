@@ -1,7 +1,4 @@
-$days: mon, tue, wed, thu, fri, sat, sun;
-$width-of-date: 100px;
-$height-of-date: 100px;
-$first-date-margin: 101px;
+@import "variables.scss";
 
 $dayMargins: (
   mon: 0,
@@ -15,7 +12,7 @@ $dayMargins: (
 
 @each $day in $days {
   .calendar--start-day-#{$day} {
-    .calendar__day-1 {
+    .calendar__day:first-child {
       margin-left: map-get($dayMargins, $day) * $first-date-margin;
     }
   }
@@ -23,13 +20,8 @@ $dayMargins: (
 
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
-    @for $j from 1 through $i + 1 {
-      .calendar__day {
-        display: flex;
-      }
-    }
-    @for $j from $i + 1 through 32 {
-      .calendar__day-#{$j} {
+    @for $j from $i + 1 through 31 {
+      .calendar__day:nth-child(#{$j}) {
         display: none;
       }
     }
@@ -52,10 +44,8 @@ body {
   padding: 10px;
   max-width: calc(7 * #{$width-of-date} + 10px);
   min-width: $width-of-date;
-}
 
-@for $i from 1 through 31 {
-  .calendar__day-#{$i} {
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,20 +53,22 @@ body {
     box-sizing: border-box;
     height: $height-of-date;
     width: $width-of-date;
-    background-color: #eee;
+    background-color: $date-background-color;
     border: 1px solid black;
     transition: color 0.5s, transform 0.5s;
 
-    &:hover {
-      transform: translate(0, -20px);
-      background-color: pink;
-      cursor: pointer;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
     }
 
-    &:before {
-      content: "#{$i}";
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: $date-hover-color;
+      cursor: pointer;
     }
   }
 }
