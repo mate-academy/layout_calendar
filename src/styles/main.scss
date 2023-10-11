@@ -1,3 +1,66 @@
-@import "./calendar.scss";
+@import "variables";
 
-@import "./variables.scss";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  width: 710px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  height: min-content;
+
+  &__day {
+    width: $day_cell;
+    height: $day_cell;
+    background-color: $day_background;
+    border: 1px solid $border_black;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: $background_pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+    }
+  }
+}
+
+@each $day, $margin in $start_day {
+  .calendar--start-day-#{$day} {
+    > .calendar__day:first-child {
+      margin-left: $margin;
+      counter-reset: day-counter;
+    }
+
+    > .calendar__day::before {
+      content: counter(day-counter);
+      counter-increment: day-counter;
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    > div {
+      &:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
