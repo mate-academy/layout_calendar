@@ -1,0 +1,50 @@
+.calendar {
+  min-width: $dim-calendar-width;
+  max-width: $dim-calendar-width;
+  padding: $dim-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $dim-gap;
+  background-color: #fff;
+
+  // changing the first element left margin based on the start-day--$ modifier
+  @each $weekDay, $index in $weekDays {
+    &--start-day_#{$weekDay} :first-child {
+      margin-left: $index * ($dim-day-size + $dim-gap);
+    }
+  }
+
+  // changing the length of the calendar based on the month-length--$ modifier
+  @for $i from 28 through 31 {
+    &--month-length_#{$i} :nth-child(#{$i}) ~ * {
+      display: none;
+    }
+  }
+
+  // adding calendar__day element
+  &__day {
+    @extend %flex-center;
+    width: $dim-day-size;
+    height: $dim-day-size;
+    border: 1px solid $color-black;
+    background-color: #eee;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    // adding text to calendar__day elements
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: " #{$i}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        color: $color-black;
+      }
+    }
+
+    // transforming elements on hover
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
