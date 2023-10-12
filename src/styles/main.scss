@@ -16,7 +16,6 @@ body {
   gap: 1px;
   width: 726px;
   padding: 10px;
-  transition: transform 0.5s;
 
   &__day {
     display: flex;
@@ -26,14 +25,7 @@ body {
     width: 100px;
     background-color: #eee;
     border: 1px solid black;
-
-    @for $row from 1 through 31 {
-      &-#{$row}::before {
-        content: "#{$row}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-      }
-    }
+    transition: all 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -41,15 +33,23 @@ body {
       transform: translate(0, -20px);
     }
 
-    @each $name, $start-day in $start-days {
-      &--#{$name} {
-        margin-left: $start-day;
+    @for $row from 1 through 31 {
+      &:nth-child(#{$row})::before {
+        content: "#{$row}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
       }
     }
   }
 
-  @for $month-length from 29 through 32 {
-    &--#{$month-length} :nth-child(n + #{$month-length}) {
+  @each $day, $number in $start-day {
+    &--start-day-#{$day} :first-child {
+      margin-left: $number * (101px);
+    }
+  }
+
+  @for $month-days from 28 through 31 {
+    &--month-lenght-#{$month-days} :nth-child(n + #{$month-days + 1}) {
       display: none;
     }
   }
