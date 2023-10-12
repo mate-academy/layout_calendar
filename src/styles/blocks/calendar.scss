@@ -1,0 +1,41 @@
+@use "../utils/functions" as *;
+@use "../utils/variables" as *;
+@use "../utils/placeholders";
+
+.calendar {
+  @extend %center;
+  height: 100vh;
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 750px;
+
+    &-block {
+      @extend %center;
+      box-sizing: border-box;
+      width: $calendar-block-square;
+      height: $calendar-block-square;
+      background-color: $calendar-block-color;
+      border: 1px solid #000;
+      transition: 0.5s ease;
+
+      &:hover {
+        transform: translateY(-20px);
+        background-color: #ffc0cb;
+      }
+
+      @for $i from 1 through $calendar-lenght {
+        &:nth-child(#{$i})::before {
+          content: "#{$i}";
+        }
+      }
+
+      @each $day, $margin in $start-day {
+        &--#{$day} {
+          margin-left: getMargin($margin);
+        }
+      }
+    }
+  }
+}
