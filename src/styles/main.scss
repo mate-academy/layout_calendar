@@ -1,3 +1,57 @@
+$height: 100px;
+$width: 100px;
+$padding: 10px;
+$gap: 1px;
+
 body {
   margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: #{$gap};
+  padding: #{$padding};
+  width: $width * 7 + $gap * 6;
+
+  &__day {
+    height: #{$height};
+    width: #{$width};
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: relative;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transition: transform 0.5s;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $date from 0 through 31 {
+    & > :nth-child(n+#{$date})::before {
+      content: "#{$date}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  $dayOfWeek: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+  @each $startDay, $numberWeek in $dayOfWeek {
+    &--start-day-#{$startDay} > :nth-child(1) {
+      margin-left: ($width+$gap)*$numberWeek;
+    }
+  }
 }
