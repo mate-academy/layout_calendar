@@ -5,6 +5,20 @@
   padding: 10px;
   width: $cols-number * $cell-size + $gap * ($cols-number - 1);
 
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(#{$i}) ~ * {
+      display: none;
+    }
+  }
+
+  &--start-day {
+    @each $week-day, $shift in $week-days {
+      &--#{$week-day} :first-child {
+        margin-left: ($cell-size + $gap) * $shift;
+      }
+    }
+  }
+
   &__day {
     box-sizing: border-box;
     display: flex;
@@ -23,24 +37,10 @@
       }
     }
 
-    &--start-day {
-      @each $week-day, $shift in $week-days {
-        &--#{$week-day} {
-          margin-left: ($cell-size + $gap) * $shift;
-        }
-      }
-    }
-
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
-    }
-  }
-
-  @for $i from 28 through 31 {
-    &--month-length--#{$i} :nth-child(#{$i}) ~ * {
-      display: none;
     }
   }
 }
