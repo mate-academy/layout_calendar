@@ -1,7 +1,4 @@
-$height: 100px;
-$width: 100px;
-$padding: 10px;
-$gap: 1px;
+@import "variables.scss";
 
 body {
   margin: 0;
@@ -36,7 +33,7 @@ body {
   }
 
   @for $date from 0 through 31 {
-    & > :nth-child(n+#{$date})::before {
+    :nth-child(n+#{$date})::before {
       content: "#{$date}";
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -47,15 +44,13 @@ body {
     }
   }
 
-  $dayOfWeek: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-
   @each $startDay, $numberWeek in $dayOfWeek {
     &--start-day-#{$startDay} > :nth-child(1) {
       margin-left: ($width+$gap)*$numberWeek;
     }
   }
 
-  @for $monthLenght from 28 through 31 {
+  @for $monthLength from 28 through 31 {
     &--month-length-#{$monthLenght} > :nth-child(n + #{$monthLenght+1}) {
       display: none;
     }
