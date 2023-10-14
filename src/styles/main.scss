@@ -1,3 +1,50 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+  gap: $cell-gap;
+
+  &__cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $calendar-cell-width;
+    height: $calendar-cell-height;
+
+    background-color: $cell-bg-color;
+    border: $cell-border;
+    color: $cell-text-color;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $cell-font-size;
+
+    @include hover(transform, translateY(-20px));
+
+    @for $cell from 1 through 31 {
+      &:nth-child(#{$cell})::before {
+        content: "#{$cell}";
+      }
+    }
+  }
+
+  @each $day, $i in $days {
+    &--start--day--#{$day} :first-child {
+      margin-left: ($i - 1) * ($calendar-cell-width + $cell-gap);
+    }
+  }
 }
