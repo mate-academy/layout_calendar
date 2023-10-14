@@ -1,0 +1,49 @@
+@use "../utils/mixins";
+@use "../utils/extance";
+@use "../blokcs/main";
+@use "../utils/variables" as *;
+
+.calendar {
+  display: flex;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+  padding: $base-padding;
+  width: $base-calendar-width;
+  flex-wrap: wrap;
+  gap: $base-gap;
+
+  &__day {
+    background-color: #eee;
+    @include mixins.square($base-size);
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    transition: 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+@for $index from 1 through 31 {
+  .calendar__day--#{$index}::before {
+    content: "#{$index}";
+  }
+}
+
+@each $name, $day in $week-days {
+  .calendar-week-starts--#{$name}>:first-child {
+    margin-left: $day * $base-first-day-shift;
+  }
+}
+@each $amount in 28, 29, 30 {
+  .calendar-lenght--#{$amount}>:nth-child(n+#{1+ $amount}) {
+    display: none;
+  }
+}
