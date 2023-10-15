@@ -6,14 +6,14 @@
   width: $cols-number * $cell-size + $gap * ($cols-number - 1);
 
   @for $i from 28 through 31 {
-    &--month-length--#{$i} :nth-child(#{$i}) ~ * {
+    &--month-length-#{$i} :nth-child(#{$i}) ~ * {
       display: none;
     }
   }
 
   &--start-day {
     @each $week-day, $shift in $week-days {
-      &--#{$week-day} :first-child {
+      &-#{$week-day} :first-child {
         margin-left: ($cell-size + $gap) * $shift;
       }
     }
@@ -26,8 +26,8 @@
     align-items: center;
     height: $cell-size;
     width: $cell-size;
-    background-color: #eee;
-    border: 1px solid black;
+    background-color: $color-bc-gray;
+    border: 1px solid $color-main-black;
 
     transition: all 0.5s;
 
@@ -39,7 +39,7 @@
 
     &:hover {
       cursor: pointer;
-      background-color: pink;
+      background-color: $color-active-pink;
       transform: translateY(-20px);
     }
   }
