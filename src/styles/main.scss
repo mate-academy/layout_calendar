@@ -1,39 +1,84 @@
-body {
-  margin: 0;
+// $one-day: "sun";
+// $month-length: 30;
+
+// $hidden-after: $month-length + 1;
+// $white-before: calc(#{$first-day} - 1);
+// $first-blind: $first-day - 1;
+$size-day: 98px;
+$border: 1px;
+$gap: 1px;
+$column: 7;
+$days: (28, 29, 30, 31);
+$calendar-width: ($size-day + $border * 2 + $gap * 2) * $column;
+$start-day: ("mon": 1, "tue": 2, "wed": 3, "thu": 4,
+"fri": 5, "sat": 6, "sun": 7);
+$length: (28, 29, 30, 31);
+
+//ukryj odpowiednią ilość dni, jeżeli miesiac ma mniej niz 31dni
+@each $i in $days {
+  @for $j from 28 through 31 {
+    $day: calc(31 - $j);
+    .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
+      visibility: hidden;
+      position: absolute;
+    }
+  }
 }
 
-img {
-  width: 50%;
+//dodaj liczby dni miesiaca do każdej "kafelki"
+@each $l in $length {
+  @for $m from 1 through $l {
+    .calendar--month-length-#{$l} .calendar__day:nth-child(#{$m}) p::after {
+      content: "#{$m}";
+    }
+  }
+}
+
+//Odsun element konkretnego dnia miesiaca (np. środa od 3 elementu).
+@each $day, $number in $start-day {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($number - 1) * ($size-day + 2 * $border + 2 * $gap);
+  }
+}
+
+// .calendar--month-length-28 .calendar__day:nth-child(n + 1) {
+//   content: "1";
+// }
+
+body {
+  margin: auto;
+}
+
+p {
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 .calendar {
+  margin: auto;
   display: flex;
-  flex-direction: row;
+  gap: $gap;
+  padding: 10px;
+  max-width: $calendar-width;
+  flex-direction: rows;
   flex-wrap: wrap;
-  width: 780px;
-  height: 610px;
+  cursor: pointer;
+
+  &__day {
+    background-color: #eee;
+    border: $border solid black;
+    width: #{$size-day};
+    height: #{$size-day};
+    margin: 0 1px 1px 0;
+    top: 0;
+    position: relative;
+    transition: top 0.5s;
+  }
 }
 
-.calendar__day {
-  background-color: #eee;
-  border: 1px solid black;
-  width: 98px;
-  height: 98px;
-  margin: 0 1px 1px 0;
-}
-
-.calendar .calendar__day:nth-child(n+7):nth-child(-n+37) {
+//zmian po najechaniu
+.calendar .calendar__day:hover {
+  top: -20px;
   background-color: pink;
-}
-
-.calendar .calendar__day:nth-child(n+1):nth-child(-n+6) {
-  background-color: white;
-  border: 1px solid white;
-}
-// .calendar__week-day::after {
-//   content: "1";
-// }
-.calendar .calendar__day:nth-child(n+37):nth-child(-n+42) {
-  background-color: white;
-  border: 1px solid white;
 }
