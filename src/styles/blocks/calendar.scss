@@ -1,0 +1,52 @@
+@import "../partials/variables.scss";
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background-color: #fff;
+  width: $calendar-size;
+  padding: 1px;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+    gap: 1px;
+    transition: all 0.5s;
+    background-color: $day-color;
+    text-align: center;
+    font-family: $font;
+    font-size: $font-size;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $day-size;
+        width: $day-size;
+        content: "#{$i}";
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $number in $days {
+    &__start--day-#{$day} :first-child {
+      margin-left: $number * ($day-size + 1px);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar__month-length--#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
