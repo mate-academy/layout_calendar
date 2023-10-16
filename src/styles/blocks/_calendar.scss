@@ -30,9 +30,15 @@
     }
   }
 
+  @for $index from 28 through 31 {
+    &__month--length-#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
   @each $day, $index in $days-col {
     &__start--day-#{$day} :first-child {
-      margin-left: $index * ($day-size + $day-gap) - $day-size - $day-gap;
+      margin-left: $index * ($day-size + $day-gap);
     }
   }
 }
