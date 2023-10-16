@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+}
+
+.calendar {
+  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  counter-reset: day;
+}
+
+.calendar__day {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-color: #eee;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  counter-increment: day;
+  padding: 0 10px;
+  transform: translateY(0);
+  transition: transform 0.5s;
+  text-align: center;
+  justify-content: center;
+}
+
+.calendar__day::before {
+  content: counter(day);
+  line-height: 100px;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: pink;
+  transform: translateY(-20px);
+}
+
+.calendar__day:nth-child(n+30) {
+  display: none;
+}
+
+.calendar__day:first-child {
+  margin-left: calc(100px * (2 - 1));
+}
+
+/*# sourceMappingURL=style.css.map */
