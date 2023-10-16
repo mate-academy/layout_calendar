@@ -1,8 +1,5 @@
 # Calendar
 
-> Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
-
-## Task
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
@@ -24,10 +21,12 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 On hovering over a cell:
 - cursor should become pointer
 - The hovered cell has to become pink
-
-## If you already know Transition and Transform
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
+
+> Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
+
+![reference image](reference.png).
 
 ## Checklist
 
@@ -43,6 +42,3 @@ reflects in changing calendar layout
 - [ ] Each day has no modifiers, only class (eg. calendar__day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
-
-## Here is a preview:
-![reference image](reference.png).
