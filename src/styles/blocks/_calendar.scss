@@ -1,0 +1,62 @@
+@import "../utils/variables";
+
+@for $i from 1 through $month-length {
+  $day-number: (($i + $start-day) % 7); // Use modulo to repeat every 7 days
+  $day-name: map-get($day, $day-number);
+
+  $numbers: map-merge($numbers, ($i: $day-name));
+}
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 720px;
+  padding: 10px;
+  gap: 1px;
+
+  &__day {
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-wrap: normal;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  &--month-length {
+    // made 32 here, so that month can have MAX 31 days
+    @for $i from ($month-length + 1) through 32 {
+      .calendar__day:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day--first {
+    margin-left: 103px * $start-day;
+  }
+}
+
+@each $entry in $numbers {
+  $number: nth($entry, 1);
+  $day: nth($entry, 2);
+
+  .calendar__day:nth-child(#{$number}) {
+
+    &::before {
+      content: "#{$day} \a #{$number}";
+      align-content: center;
+    }
+
+  }
+}
