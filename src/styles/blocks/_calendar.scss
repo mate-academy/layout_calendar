@@ -1,0 +1,42 @@
+.calendar {
+  width: calc(7 * ($day-square));
+  display: flex;
+  flex-wrap: wrap;
+  counter-reset: day;
+
+  &__day {
+    width: $day-square;
+    height: $day-square;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: #eee;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    counter-increment: day;
+    padding: 0 $day-padding;
+    transform: translateY(0);
+    transition: transform 0.5s;
+
+    &::before {
+      content: counter(day);
+      text-align: center;
+      justify-content: center;
+      line-height: 100px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(n + #{$number-of-days + 1}) {
+      display: none;
+    }
+
+    &:first-child {
+      margin-left: calc(#{$day-square} * (#{$day-offset} - 1));
+    }
+  }
+
+}
