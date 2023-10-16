@@ -15,10 +15,31 @@
     justify-content: center;
     align-items: center;
 
+    &:hover {
+      cursor: pointer;
+      background-color: lightpink;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+
     @for $index from 1 through $month-length {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
+        font-family: Arial, sans-serif;
+        font-size: $num-size;
       }
     }
   }
+    @each $day, $margin in $days-margin {
+      &--start-day_#{$day} {
+        :first-child {
+          margin-left: #{$margin};
+        }
+      }
+    }
+    @for $index from 28 through $month-length {
+      &--month-length_#{$index} &__day:nth-child(n+#{$index + 1}) {
+        visibility: hidden;
+      }
+    }
 }
