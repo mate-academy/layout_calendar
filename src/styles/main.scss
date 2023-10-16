@@ -1,9 +1,3 @@
-// $one-day: "sun";
-// $month-length: 30;
-
-// $hidden-after: $month-length + 1;
-// $white-before: calc(#{$first-day} - 1);
-// $first-blind: $first-day - 1;
 $size-day: 98px;
 $border: 1px;
 $gap: 1px;
@@ -15,13 +9,11 @@ $start-day: ("mon": 1, "tue": 2, "wed": 3, "thu": 4,
 $length: (28, 29, 30, 31);
 
 //ukryj odpowiednią ilość dni, jeżeli miesiac ma mniej niz 31dni
-@each $i in $days {
-  @for $j from 28 through 31 {
-    $day: calc(31 - $j);
-    .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
-      visibility: hidden;
-      position: absolute;
-    }
+@for $j from 28 through 31 {
+  $day: calc(31 - $j);
+  .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
+    visibility: hidden;
+    position: absolute;
   }
 }
 
@@ -41,12 +33,9 @@ $length: (28, 29, 30, 31);
   }
 }
 
-// .calendar--month-length-28 .calendar__day:nth-child(n + 1) {
-//   content: "1";
-// }
-
 body {
   margin: auto;
+  height: 100vh;
 }
 
 p {
@@ -58,9 +47,11 @@ p {
 .calendar {
   margin: auto;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: $gap;
   padding: 10px;
-  max-width: $calendar-width;
+  width: $calendar-width;
   flex-direction: rows;
   flex-wrap: wrap;
   cursor: pointer;
@@ -73,7 +64,7 @@ p {
     margin: 0 1px 1px 0;
     top: 0;
     position: relative;
-    transition: top 0.5s;
+    transition: all 0.5s;
   }
 }
 
