@@ -14,6 +14,10 @@
   width: 720px;
   padding: 10px;
   gap: 1px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
     background-color: #eee;
@@ -49,12 +53,13 @@
 
 @each $entry in $numbers {
   $number: nth($entry, 1);
-  $day: nth($entry, 2);
+  // $day: nth($entry, 2);
+  // i'll leave that, if i ever want to add name of day to calendar ;)
 
   .calendar__day:nth-child(#{$number}) {
 
     &::before {
-      content: "#{$day} \a #{$number}";
+      content: "#{$number}";
       align-content: center;
     }
 
