@@ -39,15 +39,14 @@
   }
 }
 
-@each $day in mon, tue, wed, thu, fri, sat, sun {
-  $index: index($day, mon tue wed thu fri sat sun);
-  .calendar--start-#{$day} .calendar__day {
-    margin-left: if($index != null, $cell-size * $index + $gap * $index, 0);
+@for $i from 28 through 31 {
+  .calendar--month-lenght-#{$i} .calendar__day:nth-child(n+#{$i + 1}) {
+    display: none;
   }
 }
 
-@for $i from 28 through 31 {
-  .calendar--month-length-#{$i} .calendar__day:nth-child(n+#{$i + 1}) {
-    display: none;
+@each $day, $index in $week-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($index) * ($cell-size + 2 * $border-width + $gap);
   }
 }
