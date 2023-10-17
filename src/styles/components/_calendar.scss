@@ -1,0 +1,50 @@
+@import "../base/base";
+@import "../abstracts/variables";
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width;
+  gap: $gap;
+  padding: $padding;
+
+  @for $i from 1 through 31 {
+    &__day-#{$i} {
+      background-color: $cell-color;
+      width: $cell-dimensions;
+      height: $cell-dimensions;
+      box-sizing: border-box;
+      border: 1px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    &__day-#{$i}:hover {
+      background-color: pink;
+      transform: $cell-animation;
+      animation-duration: 0.5s;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day-#{$i}::after {
+      content: "#{$i}";
+      font-size: $font;
+    }
+  }
+
+  // dodanie margin-left w zależności od wybranego dnia tygodnia
+  @each $day, $i in mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6 {
+    &--start-#{$day} > div:first-child {
+      margin-left: calc(#{$cell-dimensions + $gap} * #{$i});
+    }
+  }
+
+  // modyfikacja długości miesiąca
+  @for $i from 28 through 31 {
+    &--month-#{$i} > div:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
