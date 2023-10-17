@@ -1,10 +1,15 @@
 .calendar {
-  width: calc(7 * ($day-square));
+  width: calc(7 * ($day-square + 1px));
   display: flex;
   flex-wrap: wrap;
   counter-reset: day;
+  gap: 1px;
+  padding: 10px;
+
+
 
   &__day {
+    display: none;
     width: $day-square;
     height: $day-square;
     border: 1px solid black;
@@ -18,11 +23,18 @@
     transition: transform 0.5s;
     text-align: center;
     justify-content: center;
+    line-height: $day-square;
 
-    &::before {
-      content: counter(day);
 
-      line-height: 100px;
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        content: '#{$i}';
+      }
+
+    // &::before {
+    //   content: counter(day);
+
+
     }
 
     &:hover {
@@ -35,9 +47,23 @@
       display: none;
     }
 
-    &:first-child {
-      margin-left: calc(#{$day-square} * (#{$day-offset} - 1));
-    }
+    // &:first-child {
+    //   margin-left: calc(#{$day-square} * (#{$day-offset} - 1) + 1px);
+    // }
+    @each $day, $index in $days-of-week {
+      @if $day == $start-day {
+        &--start-day {
+          margin-left: calc((#{index($days-of-week, $day) - 1} ) * 101px);
+        }
+      }
+
   }
+}
 
 }
+@for $i from 1 through $number-of-days {
+  .calendar__day--#{$i} {
+    display: block;
+  }
+}
+
