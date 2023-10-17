@@ -1,3 +1,64 @@
+$squaredimensions: 100px;
+$squarecolor: #eee;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 40%;
+  padding: 10px;
+  gap: 1px;
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day, $number in $days {
+    &--start-#{$day} &__square:first-child {
+      margin-left: calc(101px * #{$number});
+    }
+  }
+
+  @for $monthdays from 28 to 31 {
+    &--month-#{$monthdays} &__square:nth-child(n + #{$monthdays + 1}) {
+      display: none;
+    }
+  }
+
+  &__square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: $squaredimensions;
+    width: $squaredimensions;
+    background-color: $squarecolor;
+    border: 1px solid black;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transition-duration: 0.5s;
+      transform: translateY(-20px);
+    }
+
+  }
+
+  @for $numbers from 1 to 32 {
+    &__square:nth-child(#{$numbers})::before {
+      content: "#{$numbers}";
+      color: black;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+  }
 }
