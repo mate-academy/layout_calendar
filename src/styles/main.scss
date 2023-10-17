@@ -5,10 +5,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: #{$gap};
-  max-width: $calendar-width;
+  width: $calendar-width;
 }
 
 .calendar__day {
+  box-sizing: border-box;
   width: #{$cell-size};
   height: #{$cell-size};
   background-color: #eee;
@@ -47,6 +48,6 @@
 
 @each $day, $index in $week-days {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: ($index) * ($cell-size + 2 * $border-width + $gap);
+    margin-left: ($index) * ($cell-size + $gap);
   }
 }
