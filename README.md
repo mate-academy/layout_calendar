@@ -1,4 +1,10 @@
 # Calendar
+<<<<<<< HEAD
+Replace `<your_account>` with your Github username and copy the links to Pull Request description:
+- [DEMO LINK](https://RadoslawBielski.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://RadoslawBielski.github.io/layout_calendar/report/html_report/)
+=======
+>>>>>>> 0960fc4e6732a6e3c61da2252fbdb07df52634e0
 
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
