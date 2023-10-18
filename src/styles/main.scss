@@ -1,3 +1,84 @@
+$month-length: 28, 29, 30, 31;
+$start-day: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+
+$main-indent: 10px;
+$gap: 1;
+$base-size: 100px;
+$columns: 7;
+
+@function size($block-size, $indent, $gap, $col) {
+  $sum: 0;
+
+  $sum: ($block-size * $col) + ($indent * 2) + ($gap * $col);
+
+  @return $sum;
+}
+
+@function firstDayIndent($week, $size, $gap) {
+  $result: 0;
+
+  $result: ($week * $size) + ($week * $gap);
+
+  @return $result;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap * 1px;
+  flex-wrap: wrap;
+  width: size($base-size, $main-indent, $gap, $columns);
+  padding: $main-indent;
+
+  @each $day-name, $week-num in $start-day {
+    &--start-day-#{$day-name} {
+      & :first-child {
+        margin-left: firstDayIndent($week-num, $base-size, $gap);
+      }
+    }
+  }
+
+  @each $last-days in $month-length {
+    &--month-length-#{$last-days} {
+      @for $day from 1 through $last-days {
+        & :nth-child(#{$day}) {
+          background: #eee;
+          border: 1px solid #000;
+          width: $base-size;
+          height: $base-size;
+          box-sizing: border-box;
+
+          &::before {
+            content: "#{$day}";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+
+  &__day {
+    &:hover {
+      background: #f5becb;
+      transform: translateY(-20px);
+      transition: transform 0.5s ease-out;
+      cursor: pointer;
+    }
+  }
 }
