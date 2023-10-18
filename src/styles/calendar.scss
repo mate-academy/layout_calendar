@@ -1,5 +1,5 @@
 .calendar {
-  width: 730px;
+  width: $calendar-width;
   border: 2px solid black;
   padding: 30px 10px;
 
@@ -9,33 +9,33 @@
   gap: 1px;
 
   @each $day-name, $day in $start-days {
-    &--start-day-#{$day-name} {
+    &--start-day--#{$day-name} {
       .calendar__day:nth-child(1) {
-        margin-left: 100px * $day + $day;
+        margin-left: $cell-width * $day + $day;
       }
     }
   }
 
   @for $day from 28 to $month-length + 1 {
-    &--start-day-#{$day} {
+    &--days--#{$day} {
       @for $day-num from 1 to $day + 1 {
-        .calendar__day:nth-child(#{$day-num}) {
-          display: block;
-
-          &::after {
-            content: "#{$day-num}";
-          }
+        .calendar__day:nth-child(#{$day-num})::after {
+          content: "#{$day-num}";
         }
+      }
+
+      .calendar__day:nth-child(n + #{$day + 1}) {
+        display: none;
       }
     }
   }
 
   &__day {
-    width: 100px;
-    height: 100px;
+    width: $cell-width;
+    height: $cell-height;
     border: 1px solid black;
 
-    display: none;
+    display: block;
     position: relative;
 
     font-weight: bold;
@@ -43,7 +43,8 @@
 
     background-color: #eee;
 
-    transition: all 0.5s;
+    transition-property: background-color, transform;
+    transition-duration: $transition-duration;
 
     &:hover {
       cursor: pointer;
@@ -57,7 +58,8 @@
 
       width: 100%;
       text-align: center;
-      top: 35%;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }
