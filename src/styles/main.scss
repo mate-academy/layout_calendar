@@ -15,17 +15,13 @@ $base-size: 100px;
 $columns: 7;
 
 @function size($block-size, $indent, $gap, $col) {
-  $sum: 0;
-
-  $sum: ($block-size * $col) + ($indent * 2) + ($gap * $col);
+  $sum: $col * ($block-size + $gap ) + ($indent * 2);
 
   @return $sum;
 }
 
 @function firstDayIndent($week, $size, $gap) {
-  $result: 0;
-
-  $result: ($week * $size) + ($week * $gap);
+  $result: $week * ($size + $gap);
 
   @return $result;
 }
