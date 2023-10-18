@@ -1,9 +1,8 @@
 @import "../utils/variables";
 
 @for $i from 1 through $month-length {
-  $day-number: (($i + $start-day) % 7); // Use modulo to repeat every 7 days
-  $day-name: map-get($day, $day-number);
-
+  $day-number: (($i) % 7); // Use modulo to repeat every 7 days
+  $day-name: map-get($days, $day-number);
   $numbers: map-merge($numbers, ($i: $day-name));
 }
 
@@ -37,18 +36,19 @@
     }
   }
 
-  &--month-length {
-    // made 32 here, so that month can have MAX 31 days
-    @for $i from ($month-length + 1) through 32 {
-      .calendar__day:nth-child(#{$i}) {
-        display: none;
-      }
+  @each $day, $i in $days {
+    &__start-day-#{$day} :first-child {
+      margin-left: $i * 103px;
+    }
+
+  }
+
+  @for $i from 28 through 31 {
+    &__month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 
-  &__day--first {
-    margin-left: 103px * $start-day;
-  }
 }
 
 @each $entry in $numbers {
@@ -65,3 +65,4 @@
 
   }
 }
+
