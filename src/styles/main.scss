@@ -1,3 +1,65 @@
+$cell-position: 50px;
+$cell-size: 100px;
+$cell-padding: 10px;
+$month-length: 28, 29, 30, 31;
+$start-day: "mon", "tue", "wed", "thu", "fri", "sat", "sun";
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  position: relative;
+
+  &__cells {
+    box-sizing: border-box;
+    display: flex;
+    max-width: ($cell-size + $cell-padding) * 7;
+    flex-wrap: wrap;
+    gap: 1px;
+
+    @for $day from 28 through 31 {
+      &--last-months-day--#{$day} :nth-child(n + #{$day}) {
+        display: none;
+      }
+    }
+  }
+
+  &__cell {
+    box-sizing: border-box;
+    display: flex;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    transition: transform 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
+        content: "#{$day-number}";
+      }
+    }
+
+    @each $day in $start-day {
+      &__cell--day-of-week--#{$day} {
+        margin-left: index($start-day, $day) * ($cell-size + $cell-padding);
+      }
+    }
+  }
 }
