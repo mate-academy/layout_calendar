@@ -1,12 +1,17 @@
-$days-of-week: mon, tue, wed, thu, fri, sat, sun;
-$start-day: fri;
-$start-day-index: index($days-of-week, $start-day);
+$days: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+$month-lengths: 28, 29, 30, 31;
 $cell-border-width: 1px;
 $cell-size: 100px - ($cell-border-width * 2);
 $cell-font-size: 30px;
 $cell-padding: 10px;
-$month-length: 31;
-
 $calendar-width: 7 * $cell-size + (6 * $cell-border-width + 2 * $cell-padding);
 
 .calendar {
@@ -18,6 +23,22 @@ $calendar-width: 7 * $cell-size + (6 * $cell-border-width + 2 * $cell-padding);
   flex-wrap: wrap;
   gap: $cell-border-width;
 
+  @each $day_week, $num_week in $days {
+    &__start-day--#{$day_week} &__day:first-child {
+      margin-left: $num_week * ($cell-size + 3 * $cell-border-width);
+    }
+  }
+
+  @each $length in $month-lengths {
+    &__month-length--#{$length} {
+      @for $i from $length through 31 {
+        .calendar__day:nth-child(#{$i + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
   &__day {
     width: $cell-size;
     height: $cell-size;
@@ -26,11 +47,11 @@ $calendar-width: 7 * $cell-size + (6 * $cell-border-width + 2 * $cell-padding);
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: pink;
-      transition: transform 0.5s;
       transform: translateY(-20px);
     }
   }
@@ -40,15 +61,5 @@ $calendar-width: 7 * $cell-size + (6 * $cell-border-width + 2 * $cell-padding);
       content: "#{$i}";
       font-size: $cell-font-size;
     }
-  }
-
-  @for $i from ceil($month-length) + 1 through 32 {
-    .calendar__day:nth-child(#{$i}) {
-      display: none;
-    }
-  }
-
-  .calendar__day--1 {
-    margin-left: ($start-day-index - 1) * ($cell-size + 3 * $cell-border-width);
   }
 }
