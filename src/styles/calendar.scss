@@ -15,7 +15,7 @@
     border: 1px solid #404040;
     background-color: #eee;
 
-    transition: all 0.5s;
+    transition: transform background-color 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -23,22 +23,25 @@
       transform: translateY(-20px);
     }
 
+    &:before {
+      font-size: 30px;
+    }
+
     @for $i from 1 through $monthLength {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
-        font-size: 30px;
       }
     }
   }
 
   @each $day, $num in $weekdays {
-    &-start-day-#{$day} :first-child {
+    &--start-day-#{$day} :first-child {
       margin-left: ($num - 1) * ($cellsGap + $sizeOfSell);
     }
   }
 
   @for $i from 1 through 31 {
-    &-month-length-#{$i} :nth-child(n + #{$i + 1}) {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
