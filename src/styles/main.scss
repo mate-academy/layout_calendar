@@ -1,6 +1,7 @@
 $cell-position: 50px;
 $cell-size: 100px;
 $cell-padding: 10px;
+$cell-gap: 1px;
 $month-length: 28, 29, 30, 31;
 $start-day: "mon", "tue", "wed", "thu", "fri", "sat", "sun";
 
@@ -23,7 +24,7 @@ body {
     gap: 1px;
 
     @for $day from 28 through 31 {
-      &--last-months-day--#{$day} :nth-child(n + #{$day}) {
+      &--last-months-day--#{$day} :nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
@@ -57,8 +58,8 @@ body {
     }
 
     @each $day in $start-day {
-      &__cell--day-of-week--#{$day} {
-        margin-left: index($start-day, $day) * ($cell-size + $cell-padding);
+      &__cell--start-day--#{$day} {
+        margin-left: index($start-day, $day) * ($cell-size + $cell-gap);
       }
     }
   }
