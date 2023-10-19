@@ -4,7 +4,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
-- Create a markup for the calendar block with 31 days inside -->
+- Create a markup for the calendar block with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
   - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
