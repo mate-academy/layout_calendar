@@ -1,0 +1,27 @@
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  .calendar--start-day-#{$day} {
+    .day {
+      margin-left: if($day == mon, 0,
+      if($day == tue, $cell-size,
+      if($day == wed, $cell-size * 2,
+      if($day == thu, $cell-size * 3,
+      if($day == fri, $cell-size * 4,
+      if($day == sat, $cell-size * 5,
+      $cell-size * 6))))));
+    }
+  }
+}
+
+@each $length in 28, 29, 30, 31 {
+  .calendar--month-length-#{$length} {
+    .day:nth-child(n+#{$length}) {
+      display: none;
+    }
+  }
+}
