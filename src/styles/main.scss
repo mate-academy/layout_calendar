@@ -1,30 +1,5 @@
-$month-length: 28, 29, 30, 31;
-$start-day: (
-  "mon": 0,
-  "tue": 1,
-  "wed": 2,
-  "thu": 3,
-  "fri": 4,
-  "sat": 5,
-  "sun": 6
-);
-
-$main-indent: 10px;
-$gap: 1;
-$base-size: 100px;
-$columns: 7;
-
-@function size($block-size, $indent, $gap, $col) {
-  $sum: $col * ($block-size + $gap ) + ($indent * 2);
-
-  @return $sum;
-}
-
-@function firstDayIndent($week, $size, $gap) {
-  $result: $week * ($size + $gap);
-
-  @return $result;
-}
+@import "util/variables";
+@import "util/functions";
 
 body {
   margin: 0;
@@ -34,13 +9,14 @@ body {
   display: flex;
   gap: $gap * 1px;
   flex-wrap: wrap;
-  width: size($base-size, $main-indent, $gap, $columns);
+  width: getSize($base-size, $main-indent, $gap, $columns);
   padding: $main-indent;
+  margin: 0 auto;
 
   @each $day-name, $week-num in $start-day {
     &--start-day-#{$day-name} {
       & :first-child {
-        margin-left: firstDayIndent($week-num, $base-size, $gap);
+        margin-left: getFirstDayIndent($week-num, $base-size, $gap);
       }
     }
   }
