@@ -11,19 +11,21 @@ body {
 }
 
 .calendar {
-  margin: 0 auto;
   display: flex;
   width: $week-width;
+  margin: 20px auto 0;
   flex-wrap: wrap;
   flex-direction: row;
   gap: $gap-size;
   padding: 10px;
+
   &__day {
     box-sizing: border-box;
     background-color: $card-color;
     width: $card-size;
     height: $card-size;
     border: 1px solid black;
+
     &:hover {
       animation: move 0.5s forwards;
       cursor: pointer;
@@ -46,12 +48,13 @@ body {
 
 @each $weekday, $column-px in $weekdays {
   .calendar__day--start-day_#{$weekday} {
-    margin-left: $column-px;
+    margin-left: 0;
   }
 }
 
-@for $i from 28 through 31 {
-  .calendar__day--month-length_#{$i} .calendar__day:nth-last-child(-n + #{$i}) {
+@for $day from 28 to 31 {
+  &--month-#{$day} &__item:nth-child(n + #{$day + 1}) {
     display: none;
+    justify-content: center;
   }
 }
