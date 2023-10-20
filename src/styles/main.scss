@@ -37,7 +37,7 @@ body {
   }
 
   @for $i from 28 through 31 {
-    &--month-length-#{$i} :nth-child(+ n + #{$i + 1}) {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
@@ -50,6 +50,17 @@ body {
 
     transition: 500ms;
 
+    &::before {
+      left: 50%;
+      top: 50%;
+
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+      position: absolute;
+
+      transform: translate(-50%, -50%);
+    }
+
     @for $day from 1 through 31 {
       &:nth-child(#{$day}):hover {
         background-color: purple;
@@ -60,14 +71,6 @@ body {
 
       &:nth-child(#{$day})::before {
         content: "#{$day}";
-        left: 50%;
-        top: 50%;
-
-        font-size: 30px;
-        font-family: Arial, Helvetica, sans-serif;
-        position: absolute;
-
-        transform: translate(-50%, -50%);
       }
     }
   }
