@@ -1,13 +1,13 @@
-$weekdays: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-
 .calendar {
   display: flex;
   max-width: 730px;
-  margin: 10px;
+  padding: 10px;
   flex-wrap: wrap;
   gap: 1px;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
 
-  @each $day-name, $day in $weekdays {
+  @each $day-name, $day in mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6 {
     &--start-day--#{$day-name} {
       .calendar__day:nth-child(1) {
         margin-left: 100px * $day + $day;
