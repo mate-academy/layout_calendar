@@ -33,20 +33,18 @@
 
     transition: transform 0.5s;
     cursor: pointer;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: "#{$i}";
+        }
+      }
+    }
   }
 
   &__day:hover {
     background-color: pink;
     transform: translateY(-20px);
-  }
-
-  .calendary__day {
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i}) {
-        p::before {
-          content: "#{$i}";
-        }
-      }
-    }
   }
 }
