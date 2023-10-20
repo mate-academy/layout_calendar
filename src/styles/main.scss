@@ -1,3 +1,57 @@
+@import 'inits/variables.scss';
+
 body {
   margin: 0;
+}
+
+@keyframes move {
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  width: $week-width;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: $gap-size;
+  padding: 10px;
+  &__day {
+    box-sizing: border-box;
+    background-color: $card-color;
+    width: $card-size;
+    height: $card-size;
+    border: 1px solid black;
+    &:hover {
+      animation: move 0.5s forwards;
+      cursor: pointer;
+      background-color: pink;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $card-size;
+  }
+}
+
+@each $weekday, $column-px in $weekdays {
+  .calendar__day--start-day_#{$weekday} {
+    margin-left: $column-px;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar__day--month-length_#{$i} .calendar__day:nth-last-child(-n + #{$i}) {
+    display: none;
+  }
 }
