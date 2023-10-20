@@ -1,62 +1,67 @@
-@import 'normalized.scss';
-@import 'variables.scss';
-@import 'mixin.scss';
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  min-width: $calendar-width;
+* {
+  box-sizing: border-box;
 }
 
-.calendar {
-  display: flex;
-  // justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 10px;
-  width: $calendar-width;
-  gap: 1px;
+html {
+  font-family: Arial, sans-serif;
+}
 
-  &__days {
+@import "variables.scss";
+@import "mixins.scss";
+
+.calendar {
+  padding: 30px;
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    gap: 1px;
+    width: $days-number * $square-side + ($days-number - 1) * $gap;
+  }
+
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $width;
-    height: $height;
-    background-color: $color;
 
-    transition-duration: 500ms;
+    @include day-square ($square-side);
 
-    @for $day-name from 1 through 31 {
-      &:nth-child(#{$day-name})::before {
-        content: "#{$day-name}";
-        font-family: "Arial", sans-serif;
-        font-size: 30px;
-        color: #000;
-      }
-    }
+    background-color: $bg-color;
 
+    font-size: 30px;
 
-    @each $day, $num in $calendar-days {
-      &--start--day--#{$day}:first-child {
-        margin-left: ($num - 1) * ($width + 1);
-      }
-    }
+    border: 1px solid $border-color;
 
+    transition: transform $transition-duration ease,
+    background-color $transition-duration ease;
 
-    @for $day-name from 28 through 31 {
-      &--month--length--#{$day-name}:nth-child(n + #{$day-name + 1}) {
-        display: none;
+    @for $i from 1 through 31 {
+      &--#{$i}::before {
+        content: "#{$i}";
       }
     }
 
     &:hover {
-      cursor: pointer;
-      background-color: pink;
+      background-color: $hover-bg-color;
       transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+
+  @each $day, $margin in $days {
+    &__container--start-day--#{$day}
+    &__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &__container--month-length--#{$i}
+    &__day:nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 }
+
 
