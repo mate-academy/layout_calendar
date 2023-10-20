@@ -1,3 +1,62 @@
+@import 'normalized.scss';
+@import 'variables.scss';
+@import 'mixin.scss';
+
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-width: $calendar-width;
 }
+
+.calendar {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: $calendar-width;
+  gap: 1px;
+
+  &__days {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $width;
+    height: $height;
+    background-color: $color;
+
+    transition-duration: 500ms;
+
+    @for $day-name from 1 through 31 {
+      &:nth-child(#{$day-name})::before {
+        content: "#{$day-name}";
+        font-family: "Arial", sans-serif;
+        font-size: 30px;
+        color: #000;
+      }
+    }
+
+
+    @each $day, $num in $calendar-days {
+      &--start--day--#{$day}:first-child {
+        margin-left: ($num - 1) * ($width + 1);
+      }
+    }
+
+
+    @for $day-name from 28 through 31 {
+      &--month--length--#{$day-name}:nth-child(n + #{$day-name + 1}) {
+        display: none;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
