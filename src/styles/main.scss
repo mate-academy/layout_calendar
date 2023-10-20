@@ -12,6 +12,15 @@ html {
     font-size: 30px; /* Poprawa rozmiaru czcionki dla dni */
     font-family: "Arial", sans-serif;
   }
+  
+  @for $dayNumber from 1 through 31 {
+    &:nth-child(#{$dayNumber}):before {
+      content: "#{$dayNumber}";
+      font-size: 30px;
+      font-family: "Arial", sans-serif;
+    }
+  }
+
 }
 
 .calendar {
@@ -37,7 +46,8 @@ html {
     transition: 0.5s;
   }
 
-  &:hover .calendar__day { /* Poprawa efektu hover dla wszystkich dni */
+
+    &:hover .calendar__day { /* Poprawa efektu hover dla wszystkich dni */
     background-color: pink;
     transform: translateY(-20px);
   }
