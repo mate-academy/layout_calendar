@@ -2,12 +2,8 @@
   box-sizing: border-box;
 }
 
-$n-of-days: 7;
-$pading-size: 10px;
-$cell-size: 100px;
-$gap: 1px;
-$days: ("mon": 0, "tue": 1, "wen": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
-$days-value: $cell-size + $gap;
+@import "blocks/variables.scss";
+@import "blocks/mixin.scss";
 
 .body {
   margin: 0;
@@ -35,14 +31,13 @@ $days-value: $cell-size + $gap;
     transition: transform 500ms, background-color 500ms;
   }
 
+  &__day:nth-child(n)::after {
+    @include calendarNumber;
+  }
+
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::after {
       content: "#{$i}";
-      box-sizing: border-box;
-      display: inline-block;
-      position: absolute;
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
     }
   }
 
@@ -59,9 +54,6 @@ $days-value: $cell-size + $gap;
   }
 
   &__day:hover {
-    cursor: pointer;
-    background-color: #ffc0cb;
-    transform: translateY(-20px);
+    @include hoverEffect;
   }
-
 }
