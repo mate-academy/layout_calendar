@@ -8,25 +8,21 @@ body {
 }
 
 html {
-        &:nth-child(#{$dayNumber}):before {
-        content: "#{$dayNumber}";
-        font-size: 30px;
-        font-family: "Arial", sans-serif;
+  .calendar__day:before {
+    font-size: 30px; /* Poprawa rozmiaru czcionki dla dni */
+    font-family: "Arial", sans-serif;
   }
 }
 
 .calendar {
-      font-family: "Arial", sans-serif;
-      display: flex;
-      justify-content: flex-start;
-      list-style: none;
-      align-content: center;
-      flex-wrap: wrap;
-      gap: $gap;
-      width: $calendarSize;
-      padding: 10px;
-    }
-  }
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  align-content: center;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendarSize;
+  padding: 10px;
 
   &__day {
     display: flex;
@@ -39,18 +35,11 @@ html {
     box-sizing: border-box;
     cursor: pointer;
     transition: 0.5s;
+  }
 
-    @for $dayNumber from 1 through 31 {
-      &:nth-child(#{$dayNumber}):before {
-        content: "#{$dayNumber}";
-        font-size: 30px;
-      }
-    }
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-    }
+  &:hover .calendar__day { /* Poprawa efektu hover dla wszystkich dni */
+    background-color: pink;
+    transform: translateY(-20px);
   }
 
   @each $length in $monthLengths {
