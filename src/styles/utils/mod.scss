@@ -6,21 +6,21 @@
 
 @each $day in mon, tue, wed, thu, fri, sat, sun {
   .calendar--start-day-#{$day} {
-    .day {
+    .calendar__day:first-child {
       margin-left: if($day == mon, 0,
-      if($day == tue, $cell-size,
-      if($day == wed, $cell-size * 2,
-      if($day == thu, $cell-size * 3,
-      if($day == fri, $cell-size * 4,
-      if($day == sat, $cell-size * 5,
-      $cell-size * 6))))));
+      if($day == tue, $cell-size + ($border-width * 1),
+      if($day == wed, ($cell-size * 2) + ($border-width * 2),
+      if($day == thu, ($cell-size * 3) + ($border-width * 3),
+      if($day == fri, ($cell-size * 4) + ($border-width * 4),
+      if($day == sat, $cell-size * 5 + ($border-width * 5),
+      $cell-size * 6 + ($border-width * 6)))))));
     }
   }
 }
 
 @each $length in 28, 29, 30, 31 {
   .calendar--month-length-#{$length} {
-    .day:nth-child(n+#{$length}) {
+    .calendar__day:nth-child(n+#{$length + 1}) {
       display: none;
     }
   }
