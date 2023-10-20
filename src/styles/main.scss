@@ -1,3 +1,59 @@
-body {
+* {
+  box-sizing: border-box;
+}
+
+@import "blocks/variables.scss";
+@import "blocks/mixin.scss";
+
+.body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding-inline: $pading-size;
+  width: $days-value * $n-of-days - $gap + ($pading-size * 2);
+
+  &__day {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    transition: transform 500ms, background-color 500ms;
+  }
+
+  &__day:nth-child(n)::after {
+    @include calendarNumber;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::after {
+      content: "#{$i}";
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &--month-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $value in $days {
+    &--start-#{$day} &__day:first-child {
+      margin-left: calc(#{$days-value} * #{$value});
+    }
+  }
+
+  &__day:hover {
+    @include hoverEffect;
+  }
 }
