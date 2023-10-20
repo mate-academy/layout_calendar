@@ -4,23 +4,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  transition: 0.2s ease-in-out;
 
-  // adding correct margin-left to needed ceil of day
   @each $day, $dayNum in $daysWeek {
-    &--start-day-#{$day} {
-      .calendar__day:nth-child(1) {
-        margin-left: $ceil-width * $dayNum + $dayNum;
-      }
+    &--start-day-#{$day} :nth-child(1) {
+      margin-left: $ceil-width * $dayNum + $dayNum;
     }
   }
 
-  // disable ceils below count of day in month
   @for $day from 1 through $daysCount {
-    &--month-length-#{$day} {
-      .calendar__day:nth-child(n + #{$day + 1}) {
-        display: none;
-      }
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 
@@ -30,9 +23,10 @@
     justify-content: center;
     align-items: center;
     background-color: #fff;
+    border: 1px solid black;
     font-size: 31px;
     font-family: Arial, sans-serif;
-    transition: background-color, transform 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, transform 0.5s ease-in-out;
 
     &:hover {
       cursor: pointer;
@@ -40,12 +34,10 @@
       transform: translateY(-20px);
     }
         
-    // adding number of day in to ceils
     @for $day from 1 through $daysCount {
       &:nth-child(#{$day}):before {
         content: "#{$day}";
       }
     }
- 
   }
 }
