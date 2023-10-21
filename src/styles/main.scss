@@ -4,20 +4,12 @@ body {
   margin: 0;
 }
 
-@keyframes move {
-  100% {
-    transform: translateY(-20px);
-  }
-}
-
 .calendar {
   display: flex;
   width: $week-width;
+  gap: $gap-size;
   margin: 20px auto 0;
   flex-wrap: wrap;
-  flex-direction: row;
-  gap: $gap-size;
-  padding: 10px;
 
   &__day {
     box-sizing: border-box;
@@ -32,6 +24,10 @@ body {
       background-color: pink;
     }
   }
+}
+
+.calendar--start-day-sun .calendar__day:first-child {
+  margin-left: 606px;
 }
 
 @for $i from 1 through 31 {
@@ -55,6 +51,11 @@ body {
 @for $day from 28 to 31 {
   &--month-length-#{$day} &__item:nth-child(n + #{$day + 1}) {
     display: none;
-    justify-content: center;
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translateY(-20px);
   }
 }
