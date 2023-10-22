@@ -1,14 +1,23 @@
-$card-color: #eee;
-$card-size: 100px;
-$padding-cal: 10px;
-$gap-size: 1px;
-$week-width: calc(7 * #{$card-size} + 6 * #{$gap-size});
+$day-height: 100px;
+$day-width: 100px;
+$day-font-size: 30px;
+$day-bg-color: #eee;
+$day-hovered-color: pink;
+$day-border-width: 1px;
+$day-border-color: black;
+$day-hovered-shift: 20px;
 
-$weekdays:
-  "mon" calc(#{$card-size + #{$gap-size}}),
-  "tue" calc(2 * (#{$card-size + #{$gap-size}})),
-  "wed" calc(3 * (#{$card-size + #{$gap-size}})),
-  "thu" calc(4 * (#{$card-size + #{$gap-size}})),
-  "fri" calc(5 * (#{$card-size + #{$gap-size}})),
-  "sat" calc(6 * (#{$card-size + #{$gap-size}})),
-  "sun" calc(7 * (#{$card-size + #{$gap-size}}));
+$calendar-gap: 1px;
+$calendar-paddings: 10px;
+$calendar-width:
+  (7 * $day-width) + (2 * $calendar-paddings) + (6 * $calendar-gap);
+
+$day-of-week: (
+  mon: ($day-width + $calendar-gap) * 0,
+  tue: ($day-width + $calendar-gap) * 1,
+  wed: ($day-width + $calendar-gap) * 2,
+  thu: ($day-width + $calendar-gap) * 3,
+  fri: ($day-width + $calendar-gap) * 4,
+  sat: ($day-width + $calendar-gap) * 5,
+  sun: ($day-width + $calendar-gap) * 6
+);
