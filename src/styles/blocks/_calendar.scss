@@ -1,13 +1,19 @@
 .calendar {
-  width: calc(7 * ($day-square + 1px));
+  width: 7 * ($day-square + 1px);
   display: flex;
   flex-wrap: wrap;
   counter-reset: day;
   gap: 1px;
   padding: 10px;
 
+  @each $day, $index in $days-of-week {
+    &-start-day--#{$day} :first-child {
+      margin-left: $index * ($day-square + 1);
+
+    }
+  }
+
   &__day {
-    display: none;
     width: $day-square;
     height: $day-square;
     border: 1px solid black;
@@ -23,36 +29,22 @@
     justify-content: center;
     line-height: $day-square;
 
-    @for $i from 1 through 31 {
-      &--#{$i}::before {
-        content: "#{$i}";
-      }
-
-    }
-
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
 
-    &:nth-child(n + #{$number-of-days + 1}) {
-      display: none;
-    }
-
-    @each $day, $index in $days-of-week {
-      @if $day == $start-day {
-        &--start-day {
-          margin-left: calc((#{index($days-of-week, $day) - 1} ) * 101px);
-        }
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
       }
-
     }
   }
 
-}
-@for $i from 1 through $number-of-days {
-  .calendar__day--#{$i} {
-    display: block;
+  @for $i from 28 through 31 {
+    &-month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
   }
 }
