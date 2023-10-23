@@ -1,3 +1,77 @@
+@import './utils/variables.scss';
+
+$daySize: 100px;
+$border: 1px solid black;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$calendarWidth: ($daySize * $columns) + ($gap * ($columns - 1)) + ($padding * 2);
+$background-color: #eee;
+$animation-duration: 0.5s;
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendarWidth;
+  padding: $padding;
+}
+
+.calendar__day {
+  height: $daySize;
+  width: $daySize;
+  border: $border;
+  background-color: $background-color;
+  text-align: center;
+  line-height: $daySize;
+  position: relative;
+  margin-right: $gap;
+  margin-bottom: $gap;
+}
+
+.calendar__day:nth-child(1) {
+  margin-left: 618px;
+}
+
+.calendar__day::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  .start-day-#{$day} .calendar__day-#{$day} {
+    margin-left: 0;
+  }
+}
+
+@for $i from 28 through 31 {
+  .month-length-#{$i} .calendar__day:nth-child(n+#{$i}) {
+    display: none;
+  }
+}
+
+.calendar__day:hover {
+  background-color: pink;
+  cursor: pointer;
+  transform: translateY(-20px);
+  transition: $animation-duration;
 }
