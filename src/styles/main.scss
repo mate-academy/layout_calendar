@@ -1,21 +1,8 @@
+@import "./variables.scss";
+
 * {
   box-sizing: border-box;
 }
-
-$days: (
-  "mon": 0,
-  "tue": 1,
-  "wed": 2,
-  "thu": 3,
-  "fri": 4,
-  "sat": 5,
-  "sun": 6
-);
-
-$day-size: 100px;
-$gap-size: 1px;
-$week-size: 7;
-$calendar-size: $week-size * ($day-size + $gap-size);
 
 html {
   font-family: Arial, sans-serif;
@@ -24,6 +11,10 @@ html {
 
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @for $i from 1 through 31 {
@@ -49,7 +40,6 @@ body {
   flex-wrap: wrap;
   gap: $gap-size;
   width: $calendar-size;
-  margin: 0 auto;
 }
 
 .calendar__card {
