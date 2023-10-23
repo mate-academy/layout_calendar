@@ -4,8 +4,8 @@
   }
 }
 
-@each $day in mon, tue, wed, thu, fri, sat, sun {
-  .calendar--start-day-#{$day} {
+@each $day in $daysStart {
+  .calendar--start-day--#{$day} {
     .calendar__day:first-child {
       margin-left: if($day == mon, 0,
       if($day == tue, $cell-size + 1,
@@ -18,8 +18,8 @@
   }
 }
 
-@each $length in 28, 29, 30, 31 {
-  .calendar--month-length-#{$length} {
+@for $length from 28 through 31 {
+  .calendar--month-length--#{$length} {
     .calendar__day:nth-child(n+#{$length + 1}) {
       display: none;
     }
