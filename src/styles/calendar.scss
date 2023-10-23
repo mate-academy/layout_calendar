@@ -4,6 +4,7 @@
   align-items: center;
   flex-basis: $cell-size;
   height: $cell-size;
+  width: $cell-size;
   border: $pixel solid black;
   box-sizing: border-box;
   background-color: #eee;
@@ -11,7 +12,7 @@
   color: black;
 }
 
-.calendar{
+.calendar {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
@@ -19,23 +20,28 @@
   border: $pixel solid black;
   padding: $cell-padding;
 
-  &__day{
-    @include calendar-cell;
-    transition: transform 0.5s ease-in-out;
-
-    &:hover {
-      background-color: pink;
-      cursor: pointer;
-      transform: translateY(-20px);
-    }
+  &__day {
+    height: $cell-size;
+    width: $cell-size;
   }
 
   @each $day-name, $day-index in $days {
+
     @each $month-size in $month-sizes {
-      .calendar--start-day-#{$day-name}.calendar--month-length-#{$month-size} > &__day{
+      &--start-day-#{$day-name}.calendar--month-length-#{$month-size} > &__day {
+
         @for $i from $day-index through $month-size + $day-index - 1 {
           &--#{$i} {
             @include calendar-cell;
+          }
+          &:nth-child(#{$i}) {
+            @include calendar-cell;
+            transition: transform 0.5s ease-in-out;
+            &:hover {
+              background-color: pink;
+              cursor: pointer;
+              transform: translateY(-20px);
+            }
           }
           &:nth-child(#{$i})::before {
             content: "#{$i - $day-index + 1}";
