@@ -6,6 +6,12 @@
   gap: $gap;
   padding: $padding;
 
+  @each $day, $order in $days {
+    &--start-day--#{$day} &__day:first-child {
+      margin-left: ($cellSize + $gap) * $order;
+    }
+  }
+
   &__day {
     display: flex;
     background-color: #eee;
@@ -14,7 +20,7 @@
     height: $cellSize;
     justify-content: center;
     align-items: center;
-    transition: 0.5s;
+    transition: background-color, transform, 0.5s;
   }
 
   &__day::before {
@@ -37,21 +43,5 @@
     cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
-  }
-}
-
-$days: (
-  "mon": 0,
-  "tue": 1,
-  "wed": 2,
-  "thu": 3,
-  "fri": 4,
-  "sat": 5,
-  "sun": 6,
-  );
-
-@each $day, $order in $days {
-  .calendar--start-day--#{$day} .calendar__day:first-child {
-    margin-left: ($cellSize + $gap) * $order;
   }
 }
