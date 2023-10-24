@@ -4,6 +4,7 @@ $font-size: 30px;
 $gap: 1px;
 $padding: 10px;
 $days-in-week: 7;
+$margin-left: $day-size + $gap;
 $max-width: ($day-size * $days-in-week) + ($gap * $days-in-week - 1);
 $start-days: mon, tue, wed, thu, fri, sat, sun;
 $month-lengths: 28, 29, 30, 31;
@@ -20,7 +21,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: $max-width;
+  min-width: $max-width;
+  max-width: $max-width;
 
   &__day {
     box-sizing: border-box;
@@ -53,8 +55,8 @@ body {
 
   @each $day in $start-days {
     &--start-day-#{$day} &__day {
-      &:first-child {
-        margin-left: #{index($start-days, $day) * ($day-size + $gap)};
+      &:nth-child(1) {
+        margin-left: #{index($start-days, $day) * $margin-left - $margin-left};
       }
     }
   }
