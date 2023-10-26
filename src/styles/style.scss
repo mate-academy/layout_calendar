@@ -12,21 +12,17 @@ body {
 
 .calendar {
   box-sizing: content-box;
+  position: absolute;
+  left: 0;
+  right: 0;
   margin: 0 auto;
+  top: 50%;
+  transform: translate(0, -50%);
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   width: #{$--height-width-day * 7 + 6}px;
   padding: 10px;
-
-  $dayWeeks:
-    mon 0,
-    tue 1,
-    wed 2,
-    thu 3,
-    fri 4,
-    sat 5,
-    sun 6;
 
   @each $day, $value in $dayWeeks {
     &--start-day--#{$day} &__day:first-child {
@@ -34,9 +30,9 @@ body {
     }
   }
 
-  @each $day, $value in $dayWeeks {
-    &--start-day--#{$day} &__day:first-child {
-      margin-left: #{$value * $--height-width-day + $value}px;
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} &__day:nth-child(n+#{$i+1}) {
+      display: none;
     }
   }
 
