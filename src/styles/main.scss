@@ -1,3 +1,71 @@
+$paddingCalendar: 10px;
+$gapFeature: 1px;
+$sideOfSquare: 100px;
+$widthOfCalendar: (
+  7 * $sideOfSquare) + (6 * $gapFeature) + (2 * $paddingCalendar
+);
+$marginFromLeftSide: (
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $widthOfCalendar;
+  gap: 1px;
+  padding: 10px;
+
+  @for $item from 1 through 31 {
+    &__day:nth-child(#{$item}) {
+      display: none;
+      position: relative;
+      box-sizing: border-box;
+      width: $sideOfSquare;
+      height: $sideOfSquare;
+      border: 1px solid black;
+      background-color: #eee;
+      font-size: 30px;
+      bottom: 0;
+      transition: all 0.5s;
+      transition-timing-function: cubic-bezier(0, 0.48, 0.31, 0.93);
+      &::before {
+        content: "#{$item}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    bottom: 20px;
+  }
+
+  @each $item, $left in $marginFromLeftSide {
+    &--start-day--#{$item} :first-child {
+      margin-left: calc(#{$left} * 101px);
+    }
+  }
+
+  @for $item from 28 through 31 {
+    &--month-length--#{$item} {
+      & :nth-child(-n + #{$item}) {
+        display: block;
+      }
+    }
+  }
 }
