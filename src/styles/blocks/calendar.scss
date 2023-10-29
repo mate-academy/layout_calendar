@@ -22,14 +22,17 @@
     border: $borderWidth solid black;
     transition-duration: $animationDuration;
 
+    &::before {
+      display: flex;
+      justify-content: space-around;
+      align-content: space-between;
+      font-size: $dayFontSize;
+      margin-top: 35px;
+    }
+
     @for $dayNumber from 1 through 31 {
       &:nth-child(#{$dayNumber})::before {
         content: "#{$dayNumber}";
-        display: flex;
-        justify-content: space-around;
-        align-content: space-between;
-        font-size: $dayFontSize;
-        margin-top: 35px;
       }
     }
 
