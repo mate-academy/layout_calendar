@@ -33,20 +33,21 @@ body {
   width: $widthOfCalendar;
   padding: 10px;
 
+  &__day {
+    position: relative;
+    display: block;
+    transition: all 0.5s;
+    transition-timing-function: cubic-bezier(0, 0.48, 0.31, 0.93);
+    box-sizing: border-box;
+    width: $sideOfSquare;
+    height: $sideOfSquare;
+    border: 1px solid black;
+    background-color: #eee;
+    font-size: 30px;
+  }
+
   @for $item from 1 through 31 {
     &__day:nth-child(#{$item}) {
-      position: relative;
-      bottom: 0;
-      display: none;
-      transition: all 0.5s;
-      transition-timing-function: cubic-bezier(0, 0.48, 0.31, 0.93);
-      box-sizing: border-box;
-      width: $sideOfSquare;
-      height: $sideOfSquare;
-      border: 1px solid black;
-      background-color: #eee;
-      font-size: 30px;
-
       &::before {
         content: "#{$item}";
         position: absolute;
@@ -58,7 +59,7 @@ body {
   }
 
   &__day:hover {
-    bottom: 20px;
+    transform: translateY(-20px);
     cursor: pointer;
     background-color: pink;
   }
@@ -71,8 +72,8 @@ body {
 
   @for $item from 28 through 31 {
     &--month-length--#{$item} {
-      & :nth-child(-n + #{$item}) {
-        display: block;
+      & :nth-child(n + #{$item + 1}) {
+        display: none;
       }
     }
   }
