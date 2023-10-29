@@ -1,19 +1,21 @@
 @import "./variables";
 @import "./normalize";
 
+body {
+  display: flex;
+  width: 706px;
+  margin: 0 auto;
+  align-items: center;
+  height: 100vh;
+}
+
 .calendar {
-  margin: 10px;
+  font-family: "Arial", sans-serif;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  max-width: 700px;
-  font-family: "Arial", sans-serif;
-
-  &__days {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $cell-gap;
-  }
+  gap: $cell-gap;
 
   &__day {
     width: $cell-size;
@@ -34,8 +36,6 @@
       transform: translateY(-20px);
     }
   }
-
-  $days: (mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7);
 
   @each $day in $days {
     $day-name: nth($day, 1);
