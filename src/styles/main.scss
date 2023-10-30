@@ -1,6 +1,10 @@
 @import "./variables";
 @import "./normalize";
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-family: "Arial", sans-serif;
 }
@@ -24,7 +28,6 @@ body {
     width: $cell-size;
     height: $cell-size;
     background-color: #eee;
-    box-sizing: border-box;
     border: $border-width solid #000;
     display: flex;
     align-items: center;
@@ -50,7 +53,7 @@ body {
     }
   }
 
-  @for $day from 1 through 31 {
+  @for $day from 28 through 31 {
     .calendar--month-length-#{$day} &__day:nth-child(n+#{$day + 1}) {
       display: none;
     }
