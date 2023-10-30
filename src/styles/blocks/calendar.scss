@@ -1,0 +1,21 @@
+.calendar {
+  display: flex;
+  gap: $square-gap;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  max-width: 7*$square-size + 2*$calendar-padding + 6*$square-gap;
+
+  @each $day, $number in $days {
+    &--start-day--#{$day} {
+      .day--1 {
+        margin-left: $number * $square-size + $number * $square-gap;
+      }
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} :nth-child(n + #{$last-day}) {
+      display: none;
+    }
+  }
+}

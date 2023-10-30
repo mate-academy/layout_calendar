@@ -1,0 +1,22 @@
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $square-size;
+  width: $square-size;
+  background-color: $square-color;
+  border: 1px solid #000;
+
+  @for $index from 1 through 31 {
+    &--#{$index}::before {
+      content: "#{$index}";
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition: 0.5s;
+  }
+}
