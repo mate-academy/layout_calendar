@@ -1,6 +1,10 @@
 @import "./variables";
 @import "./normalize";
 
+html {
+  font-family: "Arial", sans-serif;
+}
+
 body {
   display: flex;
   width: 706px;
@@ -10,7 +14,6 @@ body {
 }
 
 .calendar {
-  font-family: "Arial", sans-serif;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -41,7 +44,7 @@ body {
     $day-name: nth($day, 1);
     $offset: nth($day, 2);
     &.calendar--start-day-#{$day-name} .calendar__day {
-      &:nth-child(#{$offset + 1 - index($days, $day)}) {
+      &:nth-child(#{$offset + 2 - index($days, $day)}) {
         margin-left: $offset * ($cell-size + $cell-gap);
       }
     }
