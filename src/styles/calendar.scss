@@ -1,0 +1,30 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * #{$cell-size} + 10px);
+  gap: #{$border-width};
+  margin: 0 auto;
+}
+
+.calendar__day {
+  width: #{$cell-size};
+  height: #{$cell-size};
+  border: #{$border-width} solid #000;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-size: #{$font-size};
+  position: relative;
+  cursor: pointer;
+  transition: background-color #{$animation-duration},
+    margin-left #{$animation-duration},
+    transform #{$animation-duration};
+
+  &:hover {
+    background-color: pink;
+    cursor: pointer;
+    transform: translateY(-#{$hover-translate});
+  }
+}
