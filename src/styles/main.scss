@@ -1,3 +1,63 @@
+$size-block: 100px;
+$size-calendar: ($size-block * 7) + 10px;
+$start-days:
+  mon 0,
+  tue $size-block + 1px,
+  wed 2*$size-block + 2px
+  thu 3*$size-block + 3px,
+  fri 4*$size-block + 4px,
+  sat 5*$size-block + 5px,
+  sun 6*$size-block + 6px;
+$month-length: 29;
+
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  width: $size-calendar;
+  margin: auto;
+
+  &__day {
+    height: $size-block;
+    width: $size-block;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: relative;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $number-day from 1 through 31 {
+      &:nth-child(#{$number-day})::before {
+        content: "#{$number-day}";
+        position: absolute;
+        top: 35%;
+        left: 35%;
+      }
+    }
+
+    @for $last-day from $month-length to 31 {
+      &:nth-child(#{$last-day + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@each $start-day, $shift in $start-days {
+  .calendar--start-day--#{$start-day} :first-child {
+    margin-left: $shift;
+  }
 }
