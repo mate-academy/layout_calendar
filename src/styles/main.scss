@@ -23,28 +23,28 @@ body {
     font-size: 30px;
     font-family: Arial, sans-serif;
 
-    &:hover {
-      cursor: pointer;
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
     @for $i from 1 through $number-of-day {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
 
-    @for $i from 28 to $number-of-day {
-      &__month-length--#{$i} :nth-child(n + #{1 + $i}) {
-        display: none;
-      }
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
     }
+  }
+  
+  @for $i from 28 to $number-of-day {
+    &__month-length--#{$i} :nth-child(n + #{1 + $i}) {
+      display: none;
+    }
+  }
 
-    @each $day, $margins in $days {
-      &__start-day--#{$day} :first-child {
-        margin-left: $margins;
-      }
+  @each $day, $margins in $days {
+    &__start-day--#{$day} :first-child {
+      margin-left: $margins;
     }
   }
 }
