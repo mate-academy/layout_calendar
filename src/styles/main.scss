@@ -7,7 +7,7 @@ body {
 .calendar {
   display: flex;
   width: $widht-calendar;
-  margin: 30px;
+  margin: 30px auto;
   flex-wrap: wrap;
   gap: 1px;
 
@@ -35,7 +35,7 @@ body {
       transform: translateY(-20px);
     }
   }
-  
+
   @for $i from 28 to $number-of-day {
     &__month-length--#{$i} :nth-child(n + #{1 + $i}) {
       display: none;
@@ -44,7 +44,7 @@ body {
 
   @each $day, $margins in $days {
     &__start-day--#{$day} :first-child {
-      margin-left: $margins;
+      margin-left: $margins * $margin-day;
     }
   }
 }
