@@ -1,0 +1,18 @@
+$daysOfWeek: (mon, tue, wed, thu, fri, sat, sun);
+
+@each $day in $daysOfWeek {
+  $multiplier: index($daysOfWeek, $day) - 1;
+  .calendar--start-#{$day} {
+    .calendar__cell:first-child {
+      margin-left: calc(#{$multiplier} * (100% / 7));
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__cell:nth-child(n+#{$i+1}):nth-child(n-31) {
+      visibility: hidden;
+    }
+  }
+}
