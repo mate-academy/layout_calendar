@@ -21,6 +21,18 @@ body {
   height: min-content;
   gap: 1px;
 
+  @each $day, $value in $start_day {
+    &--start-day-#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $value from 28 through 31 {
+    &--month-length-#{$value} :nth-child(n + #{$value + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     display: flex;
     width: $day_size;
@@ -32,6 +44,12 @@ body {
     font-size: 30px;
     transition: all 0.5s;
 
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+
     &:hover {
       background-color: $background_pink;
       cursor: pointer;
@@ -41,26 +59,4 @@ body {
   }
 }
 
-@each $day, $margin in $start_day {
-  .calendar--start-day-#{$day} {
-    > .calendar__day:first-child {
-      margin-left: $margin;
-      counter-reset: day-counter;
-    }
 
-    > .calendar__day::before {
-      content: counter(day-counter);
-      counter-increment: day-counter;
-    }
-  }
-}
-
-@for $i from 28 through 31 {
-  .calendar--month-length-#{$i} {
-    > div {
-      &:nth-child(n + #{$i + 1}) {
-        display: none;
-      }
-    }
-  }
-}
