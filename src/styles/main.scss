@@ -1,3 +1,61 @@
+$daysOfWeek: (mon, tue, wed, thu, fri, sat, sun);
+
+@each $day in $daysOfWeek {
+  $multiplier: index($daysOfWeek, $day) - 1;
+  .calendar--start--day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$multiplier} * (100% / 7));
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month--length-#{$i} {
+    .calendar__day:nth-child(n+#{$i+1}):nth-child(n-31) {
+      visibility: hidden;
+    }
+  }
+}
+
 body {
   margin: 0;
+
+  .calendar {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 10px;
+    gap: 1px;
+    max-width: 718px;
+
+    &__day {
+      height: 100px;
+      width: 100px;
+      background-color: #eee;
+      border: 1px solid #000;
+      position: relative;
+      transition-duration: 0.5s;
+
+      &::before {
+        content: "";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        background-color: pink;
+        transform: translateY(-20px);
+        cursor: pointer;
+      }
+    }
+
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
 }
