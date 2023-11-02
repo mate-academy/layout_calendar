@@ -1,22 +1,25 @@
 @import "./loops.scss";
+@import "./variables.scss";
 
 body {
   margin: 0;
 
   .calendar {
+    margin: 20px auto;
     display: flex;
     flex-wrap: wrap;
     padding: 0 10px;
-    gap: 1px;
-    max-width: 718px;
+    gap: $day-block-gap;
+    width: $calendar-width;
 
     &__cell {
-      height: 100px;
-      width: 100px;
+      height: $cell-size;
+      width: $cell-size;
       background-color: #eee;
       border: 1px solid #000;
       position: relative;
       transition-duration: 0.5s;
+      box-sizing: border-box;
 
       &::before {
         content: "";
