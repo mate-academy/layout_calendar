@@ -1,3 +1,67 @@
 body {
   margin: 0;
 }
+
+.calendar {
+  $dayCellSize: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-top: 50px;
+  gap: 1px;
+  width: 7 * $dayCellSize + 6px;
+  padding: 10px;
+  border: 10px solid #262626;
+  border-radius: 5%;
+  background-color: #9999ff;
+
+  $days:
+    mon 0,
+    tue 101px,
+    wed 202px,
+    thu 303px,
+    fri 404px,
+    sat 505px,
+    sun 606px;
+
+  @each $day, $margin in $days {
+    &--start--day-#{$day} div:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month--length-#{$lastDay} div:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: $dayCellSize;
+    height: $dayCellSize;
+    background-color: #000099;
+    color: white;
+    border: 1px solid #00ccff;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    @for $dayNumber from 1 through 31 {
+      &:nth-child(#{$dayNumber})::before {
+        content: "#{$dayNumber}";
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        font-size: 30px;
+        display: block;
+        text-align: center;
+        line-height: $dayCellSize;
+      }
+    }
+
+    &:hover {
+      background-color:  #ff0066;
+      transform: translateY(-20px);
+      color: #ffffff;
+      border: 5px solid #cc0066;
+    }
+  }
+}
