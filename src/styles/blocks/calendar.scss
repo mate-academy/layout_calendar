@@ -36,15 +36,15 @@
 
   @for $day from 28 through 31 {
     &--month-length--#{$day} {
-      &__day:nth-child(n + #{$day + 1}) {
+      .calendar__day:nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
-  }
 
-  @each $day, $day-index in $week {
-    &--start-day--#{$day} :first-child {
-      margin-left: (($gap + $--cell-size) * $day-index);
+    @each $day, $day-index in $week {
+      &--start-day--#{$day} :first-child {
+        margin-left: (($gap + $--cell-size) * $day-index);
+      }
     }
   }
 }
