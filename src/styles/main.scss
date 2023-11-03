@@ -28,14 +28,14 @@ body {
   $margin-increment: 0;
 
   @each $day in $start-days {
-    &__start-day--#{$day} > .calendar__day:nth-child(1) {
+    &__start-day--#{$day} > &__day:nth-child(1) {
       margin-left: $margin-increment;
       $margin-increment: $margin-increment + $day_side + $day_gap;
     }
   }
 
   @for $i from 28 through 31 {
-    &.calendar__month-length--#{$i} {
+    &__month-length--#{$i} {
       .calendar__day {
         &:nth-child(n + #{$i + 1}) {
           display: none;
