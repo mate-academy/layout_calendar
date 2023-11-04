@@ -37,15 +37,18 @@ section,
       background-color: rgb(254, 191, 203);
     }
 
+    &::before {
+      display: block;
+      text-align: center;
+      line-height: $main-line-height-day;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     @for $dat from 1 through 31 {
       &:nth-child(#{$dat}) {
         &::before {
-          display: block;
-          text-align: center;
-          line-height: $main-line-height-day;
           content: "#{$dat}";
-          font-size: 30px;
-          font-family: Arial, Helvetica, sans-serif;
         }
       }
     }
