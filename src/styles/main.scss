@@ -45,10 +45,17 @@ body {
   .calendar--start-day--#{$name} .calendar__day:first-child {
     margin-left: ($cell-size + $gap) * $day;
   }
+
 }
 
 @for $day from 28 through 31 {
   .calendar--month-length--#{$day} .calendar__day:nth-child(n + #{$day + 1}) {
     display: none;
+  }
+}
+
+@each $name, $day in $weekend-day {
+  .calendar--start-day--#{$name} .calendar__day:nth-child(7n + #{$day}) {
+    color: red;
   }
 }
