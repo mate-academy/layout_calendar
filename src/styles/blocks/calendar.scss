@@ -1,0 +1,57 @@
+body {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $cell-size * 7 + $cell-padding * 2;
+  margin-top: 20px;
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: $border-width solid black;
+    position: relative;
+    cursor: pointer;
+    transition: $transition-duration;
+    margin: 0;
+
+    &::before {
+      content: " ";
+      display: block;
+      width: $font-size;
+      height: $font-size;
+      margin: 0 auto;
+      font-size: $font-size;
+      color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $j from 1 through 31 {
+      &:nth-child(#{$j})::before {
+        content: "#{$j}";
+      }
+    }
+
+    &:nth-child(7n + 1) {
+      clear: left;
+    }
+  }
+}
