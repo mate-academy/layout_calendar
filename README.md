@@ -1,43 +1,11 @@
-# Calendar
-Replace `<your_account>` with your Github username and copy the links to Pull Request description:
-- [DEMO LINK](https://spojrzenie.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://spojrzenie.github.io/layout_calendar/report/html_report/)
+[DEMO LINK](https://spojrzenie.github.io/layout_calendar/)
 
-___
-> Follow [this instructions](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
+# Simple Calendar
 
-- Write styles in `src/styles/main.scss` instead of `src/style.css`.
-- This task does not have tests so you need to check if it works as expected manually.
-___
+This is a simple calendar layout created as part of exercises at Mate Academy.
 
-## ❗️❗️❗️ DON'T FORGET TO PROOFREAD YOUR CODE WITH [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md) BEFORE SENDING YOUR PULL REQUEST❗️❗️❗️
+## Project Description
 
-## Task
-Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
+This project contains a basic calendar layout created in HTML and styled using SCSS. The calendar has 28 days and starts on a Saturday.
 
-- Create a markup for the calendar block with 31 days inside
-  - DON'T add numbers in HTML (you will do it using CSS)
-- Each day is a grey (`#eee`) `100px` square (including 1px black border)
-  - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
-- Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
-  - Don't use hardcoded `px` values if they are used several times
-  - Use properly named variables to make all the calculations more clear.
-- Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
-  - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
-  - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
-  - You can just add correct `margin-left` for the first day
-- Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
-  - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
-
-On hovering over a cell:
-- cursor should become pointer
-- The hovered cell has to become pink
-
-## If you already know Transition and Transform
-- Move the hovered cell up by `20px` (use `transform`)
-- All changes should be animated with the duration of 0.5s
-
---> [CHECKLIST](https://github.com/mate-academy/layout_calendar/blob/master/checklist.md)
-
-## Here is a preview:
-![reference image](reference.png).
+The calendar is simple but can serve as a starting point for further development and adding more advanced features. Good luck with the project!
