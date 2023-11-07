@@ -1,3 +1,58 @@
+$cell-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$font-family: arial;
+$font-size: 30px;
+$padding: 10px;
+$gap: 1px;
+$animation-duration: 0.5s;
+$hovered-color: #ff69b4;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(7 * #{$cell-size} + #{$gap} + 2 * #{$padding});
+}
+
+.calendar__day--mon1 {
+  margin-left: 614px;
+}
+
+.calendar__day {
+  position: relative;
+  width: $cell-size;
+  height: $cell-size;
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
+  font-size: $font-size;
+  transition: all $animation-duration;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hovered-color;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(31n + #{$i}) {
+      display: block;
+      &::before {
+        content: "#{$i}";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 }
