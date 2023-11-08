@@ -8,20 +8,18 @@ $gap: 1px;
 $animation-duration: 0.5s;
 $hovered-color: #ff69b4;
 
+$days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7
+);
+
 body {
   margin: 0;
-}
-
-.calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
-  width: calc(7 * #{$cell-size} + #{$gap} + 2 * #{$padding});
-}
-
-.calendar__day--mon1 {
-  margin-left: 614px;
 }
 
 .calendar__day {
@@ -44,7 +42,7 @@ body {
   }
 
   @for $i from 1 through 31 {
-    &:nth-child(31n + #{$i}) {
+    &:nth-child(#{$i}) {
       display: block;
       &::before {
         content: "#{$i}";
@@ -55,4 +53,24 @@ body {
       }
     }
   }
+}
+
+@each $name, $number in $days {
+  .#{$name} {
+    number: $number;
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(8 * #{$cell-size});
+  height: calc(4 * #{$cell-size});
+  margin: 0 auto;
+}
+
+.mon-first {
+  margin-left: 613px;
 }
