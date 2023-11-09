@@ -6,11 +6,12 @@ body {
 }
 
 .calendar {
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   width: 730px;
-  margin: 10px;
+  padding-inline: 10px;
   box-sizing: border-box;
 }
 
@@ -35,33 +36,19 @@ body {
 }
 
 @for $day from 1 through 31 {
-  .calendar__day[data-day="#{$day}"]::before {
+  .calendar__day:nth-child(#{$day})::before {
     content: "#{$day}";
   }
 }
 
 @each $day, $margin in $days {
-  .start-day {
-    &:first-child {
-      margin-left: #{$margin}px; // Перший день місяця без відступу
-    }
-    &[data-day='#{$day}'] {
-      // Застосовуємо модифікатор для кожного дня тижня
-      margin-left: 1px;
-    }
+  .calendar--start-day > :first-child {
+    margin-left: #{$margin}px;
   }
 }
 
-.month-length-28,
-.month-length-29,
-.month-length-30,
-.month-length-31 {
-
-  display: none;
-}
-
-@for $day from 28 through $days-in-month {
-  .month-length-#{$day}[data-day='#{$day}'] {
-    display: flex;
+@for $day from $days-in-month + 1 through 32 {
+  .calendar--month-length>:nth-child(#{$day}) {
+    display: none;
   }
 }
