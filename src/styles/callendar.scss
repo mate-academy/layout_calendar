@@ -1,0 +1,45 @@
+@import "controlls";
+
+.callendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: #{$square-gap};
+  padding: 10px;
+  font-size: #{$font-size};
+  max-width: #{$calendar-width};
+
+  &__day {
+    width: #{$square};
+    height: #{$square};
+    background-color: #{$grey};
+    border: #{$square-gap} solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+
+  @each $day, $day-val in $days {
+    &--start-day-#{$day} .callendar__day:first-child {
+      margin-left: $day-val * ($square + 1);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--length-#{$i} .callendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
