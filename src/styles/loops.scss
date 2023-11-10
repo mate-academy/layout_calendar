@@ -1,0 +1,16 @@
+@import "variables";
+
+  @each $day, $number in $days {
+    .calendar--start-day-#{$day} :first-child {
+      margin-left: $number * ($cell-size + $gap) + $padding;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    .calendar--month--length-#{$i} {
+      .calendar__day:nth-child(n+#{$i}):nth-child(n-31) {
+        visibility: hidden;
+      }
+    }
+  }
+

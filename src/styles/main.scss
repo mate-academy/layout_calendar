@@ -1,44 +1,24 @@
-$cell-size: 100px;
-$border-color: #000;
-$background-color: #eee;
-$font-family: Arial;
-$font-size: 30px;
-$padding: 10px;
-$gap: 1px;
-$animation-duration: 0.5s;
-$hovered-color: #ff69b4;
+@import "variables";
+@import "loops.scss";
 
-$days: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6
-  );
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   padding: $padding;
-  width: calc(7 * #{$cell-size} + 6 * #{$gap} + 2 * #{$padding});
+  width: $calendar-width;
   margin: 0 auto;
-  position: relative;
 
-  .calendar__day {
+  &__day {
     position: relative;
     width: $cell-size;
     height: $cell-size;
     border: 1px solid $border-color;
     background-color: $background-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: $font-family;
     font-size: $font-size;
-    transition: all $animation-duration;
+    transition:  $animation-duration;
     cursor: pointer;
 
     &:hover {
@@ -48,28 +28,17 @@ $days: (
 
     &::before {
       content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
-
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+    content: "#{$i}";
     }
-  }
-
-  @each $startday, $position in $days {
-    .calendar--start-day-#{$startday} .calendar__day:first-child {
-      @if $startday == mon {
-        margin-left: calc(#{$position} * (#{$cell-size} + #{$gap}));
-      } @else {
-        margin-left: 0;
-      }
-    }
-  }
-
-  .calendar--month-length--28 .calendar__day:nth-child(n + 29),
-  .calendar--month-length--30 .calendar__day:nth-child(n + 31),
-  .calendar--month-length--31 .calendar__day:nth-child(n + 32) {
-    display: none;
   }
 }
+
+
