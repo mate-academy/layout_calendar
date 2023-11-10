@@ -1,3 +1,73 @@
+@import "./variables.scss";
+
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  $parent: &;
+  @each $day in $startDays {
+    &--start-day-#{$day} {
+      #{$parent}__day:nth-child(1) {
+        grid-column-start: index($startDays, $day);
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      @for $day from $length through 31 {
+        #{$parent}__day:nth-child(#{$day + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: fit-content;
+
+  &__day {
+    position: relative;
+    width: 98px;
+    height: 98px;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: all 150ms ease-out;
+    }
+
+    @for $i from 1 through $days {
+      &:nth-child(#{$i})::after {
+        content: "#{$i}";
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        line-height: 50px;
+        font: {
+          family: arial, helvetica, sans-serif;
+          size: 30px;
+        }
+        width: 100%;
+        height: 100%;
+        background-color: #eee;
+      }
+    }
+
+    &:hover::after {
+      cursor: pointer;
+      background: pink;
+      top: -5px;
+      left: -5px;
+    }
+  }
 }
