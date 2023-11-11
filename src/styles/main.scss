@@ -1,14 +1,15 @@
 $cell-size: 100px;
 $font-size: 30px;
+$day-block-gap: 1px;
 
 $weekdays: (
-  pn: "Пн",
-  vt: "Вт",
-  sr: "Ср",
-  ct: "Чт",
-  pt: "Пт",
-  sb: "Сб",
-  vs: "Нд"
+  mon: "Пн",
+  tue: "Вт",
+  wed: "Ср",
+  thu: "Чт",
+  fri: "Пт",
+  sat: "Сб",
+  sun: "Нд"
 );
 
 * {
@@ -29,32 +30,32 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
-}
 
-.calendar__day {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  position: relative;
-  width: $cell-size;
-  height: $cell-size;
-  border: 1px solid black;
-  background-color: #eee;
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
 
-  transition-duration: 0.5s;
-}
+    transition-duration: 0.5s;
 
-.calendar__day::before {
-  content: "";
-  font-family: "Arial", sans-serif;
-  font-size: $font-size;
-}
+    &::before {
+      content: "";
+      font-family: "Arial", sans-serif;
+      font-size: $font-size;
+    }
 
-.calendar__day:hover {
-  background-color: pink;
-  cursor: pointer;
-  transform: translateY(-20px);
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
 }
 
 @for $i from 1 through 31 {
@@ -69,9 +70,18 @@ body {
 }
 
 @each $day, $abbr in $weekdays {
-  .calendar__day--#{$day} {
+  .calendar__day--start-#{$day} {
+    margin-left: calc(($cell-size + 1px) * index($weekdays, $day));
     &::before {
       content: "#{$abbr}";
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n+#{$i+1}):nth-child(n-31) {
+      visibility: hidden;
     }
   }
 }
