@@ -1,13 +1,15 @@
-$column: 7;
-$padding: 10px;
-$widthDay: 100px;
-$heightDay: 100px;
-$gapPx: 1px;
-$borderPx: 1px;
+@import "./variables";
 
 body {
   margin: 0;
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calendar {
   padding: $padding;
   box-sizing: border-box;
@@ -36,16 +38,16 @@ body {
       transform: translateY(-20px);
     }
 
-  @for $index from 1 through 31 {
+    @for $index from 1 through 31 {
       &:nth-child(#{$index})::before {
-        content: '#{$index}';
+        content: "#{$index}";
       }
     }
   }
 
-  @each $day in mon, tue, wed, thu, fri, sat, sun {
+  @each $day in $daysWeek {
     &__day--#{$day} {
-      margin-left: calc((index(#{$day}, mon, tue, wed, thu, fri, sat, sun) - 1) * (#{$widthDay} + #{$gapPx}));
+      margin-left: calc((index(#{$day}, $daysWeek) - 1) * (#{$widthDay} + #{$gapPx}));
     }
   }
 
