@@ -1,0 +1,46 @@
+.container {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: 7 * $item-width + 2 * $padding-for-block;
+
+  &___item {
+    position: relative;
+
+    width: $item-width;
+    height: $item-heigh;
+    background-color: #eee;
+    border: $border-size solid black;
+    margin: 0;
+    transition: all $animation-duration;
+
+    &::before {
+      display: block;
+      text-align: center;
+      width: $font-size;
+      height: $font-size;
+      font-size: $font-size;
+      position: absolute;
+      top: ($item-heigh - $font-size) / 2;
+      left: ($item-width - $font-size) / 2;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+  }
+}

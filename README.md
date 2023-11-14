@@ -4,6 +4,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
+
 - Create a markup for the calendar block with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
@@ -19,6 +20,7 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
 
 On hovering over a cell:
+
 - cursor should become pointer
 - The hovered cell has to become pink
 - Move the hovered cell up by `20px` (use `transform`)
@@ -32,13 +34,12 @@ On hovering over a cell:
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://baraban2003.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://baraban2003.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
-- [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
-reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
-- [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
-- [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
+- [x] Changing 'month-lengh' and 'start-day' modifier in the code element reflects in changing calendar layout
+- [x] Each day has no modifiers, only class (eg. calendar\_\_day)
+- [x] All `Typical Mistakes` from `BEM` lesson theory are checked.
+- [x] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
