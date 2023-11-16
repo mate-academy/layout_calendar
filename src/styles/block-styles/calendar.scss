@@ -1,54 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calendar {
   display: flex;
+  gap: $gap-size;
   flex-wrap: wrap;
-  width: $width;
-}
+  padding: $container-padding;
+  width: $container-width;
+  flex-shrink: 0;
 
-.day {
-  position: relative;
-  width: $cell-size;
-  height: $cell-size;
-  border: $border-size solid black;
-  background-color: #eee;
-  margin: $margin;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.5s, transform 0.5s;
+  &__day {
+    background-color: $day-color;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
 
-  &:hover {
-    background-color: pink;
-    transform: translateY(-20px);
-  }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  &::before {
-    content: attr(data-day);
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-  }
-}
 
-@for $i from 1 through $days-in-week {
-  .day:nth-child(#{$days-in-week}n + #{$i}) {
-    margin-left: $cell-size + $border-size + $margin - 30px;
-  }
-}
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: all 0.5s ease;
+    }
 
-@each $day in pn, vt, sr, ch, pt, sb, vs {
-  .day[data-day="#{$day}"]::before {
-    content: "#{$day}";
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
-}
 
-@for $i from 28 through 31 {
-  .calendar:nth-child(#{$i}n) .day:nth-last-child(#{$i}):after {
-    content: "#{$i}";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: Arial, sans-serif;
-    font-size: 20px;
+  @each $day in $days-of-week {
+    &--start-day--#{$day} > div:first-child {
+      margin-left: index($days-of-week, $day) * $day-width - $day-width;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} > div:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
   }
 }
