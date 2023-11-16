@@ -45,27 +45,22 @@ body {
     }
   }
 
-  @each $day in $daysWeek {
-    &__day--#{$day} {
-      margin-left: calc((index(#{$day}, $daysWeek) - 1) * (#{$widthDay} + #{$gapPx}));
+  @for $i from 28 through 31 {
+    &[data-month-length="#{$i}"] {
+      .calendar__day:nth-child(n+#{$i + 1}) {
+        display: none;
+      }
+      .calendar__day:nth-child(n+#{$i + 1}):nth-child(-n+#{$i}) {
+        display: block;
+      }
     }
   }
 
-}
-
-.start-day-sunday .calendar__day:nth-child(7n + 1),
-.start-day-monday .calendar__dayy:nth-child(7n + 2),
-.start-day-tuesday .calendar__day:nth-child(7n + 3),
-.start-day-wednesday .calendar__day:nth-child(7n + 4),
-.start-day-thursday .calendar__day:nth-child(7n + 5),
-.start-day-friday .calendar__day:nth-child(7n + 6),
-.start-day-saturday .calendar__day:nth-child(7n + 7) {
-  order: 1;
-}
-
-.month-length-28 .calendar__day:nth-last-child(-n+4),
-.month-length-29 .calendar__day:nth-last-child(-n+5),
-.month-length-30 .calendar__day:nth-last-child(-n+6),
-.month-length-31 .calendar__day {
-  display: none;
+  @each $day, $marginsNumber in $week-days {
+    &.start-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($widthDay + $gapPx + $borderPx * 2) * $marginsNumber;
+      }
+    }
+  }
 }
