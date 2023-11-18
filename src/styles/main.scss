@@ -1,3 +1,86 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin dayCell {
+  width: 100px;
+  height: 100px;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+$dayCellContainer-size: 100px;
+$columns-per-one-day: 8;
+$border-color: #000;
+$background-color: #eee;
+$text-color: #000;
+$padding: 10px;
+$animation-duration: 0.5s;
+$days-in-week:(
+  "mon" : 0,
+  "tue" : 1,
+  "wed" : 2,
+  "thu" : 3,
+  "fri" : 4,
+  "sat" : 5,
+  "sun" : 6
+);
+$gap: 1px;
+
 body {
+  @include flex;
+  height: 100vh;
+
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 20px $padding;
+  width: ($columns-per-one-day * $dayCellContainer-size) + ($gap * 6);
+
+  @each $day, $i in $days-in-week {
+    &--start-day_#{$day} &__day:first-child {
+      margin-left: ($dayCellContainer-size + $gap) * $i;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length_#{$day} &__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include flex;
+    @include dayCell;
+
+    font-size: 30px;
+    background-color: $background-color;
+    border: 1px solid $border-color;
+    transition: transform $animation-duration linear,
+      $background-color $animation-duration linear;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
+    }
+  }
 }
