@@ -1,3 +1,62 @@
+@import "./variables";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
   margin: 0;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @for $d from 28 through 31 {
+    &--month-length--#{$d} {
+      .calendar__day:nth-child(n + #{$d + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $weekDay , $num in $day-of-wiks {
+    &--start-day--#{$weekDay} {
+      .calendar__day:first-child {
+        margin-left: $square-size * $num + $num;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    font-family: $font-fameli;
+    font-size: $font-size;
+    justify-content: center;
+    align-items: center;
+    height: $square-size;
+    width: $square-size;
+    background-color: $squre-bac-color;
+    border: 1px solid #000;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n})::before {
+        content: "#{$n}";
+      }
+    }
+  }
 }
