@@ -1,4 +1,10 @@
 # Calendar
+<<<<<<< HEAD
+Replace `<your_account>` with your Github username and copy the links to Pull Request description:
+- [DEMO LINK](https://donizer.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://donizer.github.io/layout_calendar/report/html_report/)
+=======
+>>>>>>> e8fdd285bd0959e5f662dda6ffd7daf98f060433
 
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
@@ -32,8 +38,8 @@ On hovering over a cell:
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://donizer.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://donizer.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
