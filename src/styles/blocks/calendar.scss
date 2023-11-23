@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+  gap: $gap-size;
+
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: $border-size solid black;
+    background-color: #eee;
+    transition: all 0.5s;
+    }
+
+    &__day:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+
+    }
+
+    &__day::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+    @for $day from 1 through 31 {
+      .calendar__day:nth-child(#{$day}) {
+        &::before {
+          content:'#{$day}';
+          }
+      }
+    }
+
+    @for $day from 28 through 31 {
+      .calendar--month-length--#{$day} {
+        &:nth-child(n + #{$day + 1}) {
+          display: none;
+        }
+      }
+    }
+
+    @each $day-position, $start-day in $start-days { // проходимося по start-days
+      .calendar--start-day--#{$start-day} { // створюємо селектори типу calendar-start-day-mon, calendar-start-day-tue і тд.
+        .calendar__day:first-child { // звертаємось до 1 елемента і додаємо йому певний margin
+          margin-left: ($day-position * ($day-size + $gap-size)) - ($day-size + $gap-size)}
+      }
+    }
