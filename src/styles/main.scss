@@ -1,3 +1,87 @@
+$cell-size: 100px;
+$font-size: 30px;
+$day-block-gap: 1px;
+
+$weekdays: (
+  mon: "Пн",
+  tue: "Вт",
+  wed: "Ср",
+  thu: "Чт",
+  fri: "Пт",
+  sat: "Сб",
+  sun: "Нд"
+);
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: (7 * $cell-size) + 10px;
+  gap: 1px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
+
+    transition-duration: 0.5s;
+
+    &::before {
+      content: "";
+      font-family: "Arial", sans-serif;
+      font-size: $font-size;
+    }
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+
+  $padding: ($cell-size - $font-size) / 2;
+  .calendar__day:nth-child(#{$i}) {
+    padding: $padding;
+  }
+}
+
+@each $day, $abbr in $weekdays {
+  .calendar__day--start-#{$day} {
+    margin-left: calc($cell-size + 1px);
+    &::before {
+      content: "#{$abbr}";
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n+#{$i+1}):nth-child(n-31) {
+      visibility: hidden;
+    }
+  }
 }
