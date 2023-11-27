@@ -1,0 +1,53 @@
+.calendar {
+  @include flexFamily(true);
+
+  max-width: $calendar-width;
+  margin: 0 auto;
+  padding: $calendar-padding;
+  box-sizing: border-box;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap-size;
+  }
+
+  &__day {
+    @include flexFamily(false);
+
+    background-color: $cell-standart-bg-color;
+    width: $cell-standart_width;
+    height: $cell-standart_width;
+    border: 1px solid black;
+    box-sizing: border-box;
+    transition: transform 0.5s;
+
+    @for $i from 1 through $current-month-length {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hovered-bg-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $name, $day in $days {
+    &__startday--#{$name} {
+      .calendar__month :first-child {
+        margin-left: $margin-left * $day;
+      }
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &__month-length--#{$month-length} {
+      .calendar__month :nth-child(-n + #{$month-length}) {
+        @include flexFamily(true);
+      }
+    }
+  }
+}
