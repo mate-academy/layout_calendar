@@ -39,11 +39,13 @@ body {
     @for $index from 1 through $month {
       &:nth-child(#{$index})::before {
         content: "#{$index}";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
       }
     }
 
     @for $index from 28 through $month {
-      .calendar--month-length-#{$index}
+      .calendar--month-length--#{$index}
       &:nth-child(n + #{$index + 1}) {
         display: none;
       }
@@ -54,9 +56,9 @@ body {
 $days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 @each $day, $index in $days {
-  .calendar--start-day-#{$day} {
+  .calendar--start-day--#{$day} {
     .calendar__day:first-child {
-      margin-left: ($box-size + $box-size) * $index;
+      margin-left: ($box-size + $gap-size) * $index;
     }
   }
 }
