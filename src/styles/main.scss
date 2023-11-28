@@ -1,3 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
+
+.calendar {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  position: relative;
+
+  &__day {
+    border: 1px solid #000;
+    background: #eee;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s linear;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
