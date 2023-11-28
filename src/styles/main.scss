@@ -1,17 +1,17 @@
 @import 'var';
 
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-
 .calendar {
+  text-align: center;
+  line-height: 100px;
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+
   &-block {
+    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
     gap: 1px;
-    width: $sheet-size * 7 + 10px;
-    margin-left: 10px;
+    width: $content-size;
 
     @each $positionDay, $position in $calendar {
       &__day--#{$positionDay} :nth-child(1) {
@@ -22,12 +22,9 @@
     @each $finalDay in $end-day {
       @for $day from 1 through $finalDay {
         &__month--#{$finalDay} :nth-child(#{$day}) {
+          box-sizing: border-box;
           border: 1px solid #000;
           background-color: #fff;
-          text-align: center;
-          line-height: 100px;
-          font-size: 30px;
-          font-family: Arial, sans-serif;
 
           &::before {
             content: '#{$day}';
@@ -52,12 +49,13 @@
   }
 
   &__header {
+    width: $content-size;
     display: flex;
     text-align: center;
     font-size: $font-size;
     line-height: $font-size;
     gap: 1px;
-    margin: 21px 10px;
+    margin: 21px auto;
 
     &-item {
       width: $sheet-size;
