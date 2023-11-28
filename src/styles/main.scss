@@ -1,3 +1,64 @@
+@import "../scripts/variables";
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $padding-size;
+  gap: $gap-size;
+  width: $week * $box-size + (2 * $padding-size) + (6 * $gap-size);
+
+  &__day {
+    position: relative;
+    width: $box-size;
+    height: $box-size;
+    line-height: $box-size;
+    text-align: center;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: pink;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+    }
+
+    @for $index from 1 through $month {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    @for $index from 28 through $month {
+      .calendar--month-length--#{$index}
+      &:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+$days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+@each $day, $index in $days {
+  .calendar--start-day--#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($box-size + $gap-size) * $index;
+    }
+  }
 }
