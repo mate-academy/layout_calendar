@@ -1,5 +1,6 @@
-$day-gap: 1px;
-$day-width: 100px;
+
+$box-size: 100px;
+$box-gap: 1px;
 $each-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 * {
@@ -37,19 +38,15 @@ body {
       }
     }
 
-    @each $name, $value in $each-day {
-      &--start-day--#{$name} {
-        .calendar__day:first-child {
-          margin-left: ($day-width + $day-gap) * $value;
-        }
+    @each $startday, $position in $each-day {
+      &--start-day--#{$startday} :first-child {
+        margin-left: $position * ($box-size + $box-gap);
       }
     }
 
-    @for $last-day from 28 through 31 {
-      &--month-length--#{$last-day} {
-        .calendar__day:nth-child(n + #{$last-day + 1}) {
-          display: none;
-        }
+    @for $month-length from 28 through 31 {
+      &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+        display: none;
       }
     }
 
