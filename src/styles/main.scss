@@ -19,33 +19,33 @@
       }
     }
 
-    @each $finalDay in $end-day {
-      @for $day from 1 through $finalDay {
-        &__month--#{$finalDay} :nth-child(#{$day}) {
+    @each $final-day in $end-day {
+      @for $day from 1 through $final-day {
+        &__month--#{$final-day} :nth-child(#{$day}) {
           box-sizing: border-box;
           border: 1px solid #000;
           background-color: #fff;
+          visibility: visible;
 
           &::before {
             content: '#{$day}';
           }
-
-          transition: transform 0.5s;
-
-          &:hover {
-            cursor: pointer;
-            background-color: pink;
-            transform: translateY(-20px);
-          }
         }
       }
     }
-
   }
 
   &-item {
+    visibility: hidden;
     width: $sheet-size;
     height: $sheet-size;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
   }
 
   &__header {
