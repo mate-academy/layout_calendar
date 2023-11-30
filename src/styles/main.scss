@@ -1,9 +1,16 @@
-@import './utils/variables.scss';
+@import './utils/variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
 }
 
 .calendar {
@@ -14,19 +21,19 @@ body {
   padding: $padding-between-days;
 
   &__day {
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
 
     height: $height-day-box;
     width: $width-day-box;
+
     border: 1px solid black;
+    cursor: pointer;
+    transition: color $transition-duration, transform $transition-duration;
 
     &:hover {
-      cursor: pointer;
       background-color: pink;
-      transition: $transition-during;
       transform: $transform-day-ceil;
     }
 
