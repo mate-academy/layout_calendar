@@ -1,3 +1,70 @@
+@import 'blocks/variables';
+
+@font-face {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+.container {
+  margin: 5px auto;
+  padding: $padding-mounth;
+  width: 7 * $day-box-size + 6 * $gap-mounth;
+  border: 2px solid tomato;
+}
+
+.mounth {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  gap: $border-day-box;
+
+  &__day {
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $day-box-size;
+    height: $day-box-size;
+    border: $border-day-box solid black;
+    background-color: $background-main-color;
+    box-sizing: border-box;
+
+    font-size: 30px;
+
+    transition: background-color $transform-duration, transform $transform-duration;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+
+      background-color: $background-secondary-color;
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+        position: absolute;
+        display: block;
+      }
+    }
+  }
+
+  @each $mounth, $days in $mounthes {
+    @for $extra-day from $days through 31 {
+      &--#{$mounth} > &__day:nth-child(#{$extra-day + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $index in $first-day {
+    &--start-#{$day} > &__day:first-child {
+      margin-left: ($gap-mounth + $day-box-size) * $index;
+    }
+  }
 }
