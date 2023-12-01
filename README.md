@@ -1,4 +1,9 @@
 # Calendar
+Replace `<your_account>` with your Github username and copy the links to Pull Request description:
+- [DEMO LINK](https://wasik07.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://wasik07.github.io/layout_calendar/report/html_report/)
+=======
+
 
 Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
 
