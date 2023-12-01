@@ -1,32 +1,24 @@
-$days-count: 31;
-$day-block-size: 100px;
-$days-name: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
+@import 'utils/variables';
+@import 'utils/reset';
 
 .calendar {
   margin: 0;
-  padding: 0 10px;
+  padding: $padding-value;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width:  7 * $day-block-size + 20px + 6px;
+  gap: $gap-value;
+  width: 7 * $day-block-size + ($padding-value * 2) + ($gap-value * 6) ;
 
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-
     box-sizing: border-box;
     border: 1px solid black;
     background-color: #eee;
     width: $day-block-size;
     height: $day-block-size;
     cursor: pointer;
-
     transition: 500ms;
   }
 
@@ -38,7 +30,7 @@ body {
   @for $day__num from 1 through $days-count {
     &__day:nth-child(3n + #{$day__num})::before {
       content: "#{$day__num}";
-      font-size:  30px;
+      font-size: 30px;
     }
   }
 
@@ -54,3 +46,4 @@ body {
     }
   }
 }
+
