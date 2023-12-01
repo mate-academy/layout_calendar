@@ -1,3 +1,67 @@
+$padding: 10px;
+$hovered-color: pink;
+$hovered-transform: translateY(-20px);
+$transition-duration: 0.5s;
+$mounth: 28;
+
+* {
+  box-sizing: border-box;
+  font-size: 30px;
+}
+
 body {
+  display: flex;
+  justify-content: center;
   margin: 0;
 }
+
+.calendar {
+  flex-wrap: wrap;
+  width: 708px;
+  display: flex;
+  gap: 1px;
+
+  &__day {
+    padding: 10px;
+    text-align: center;
+    gap: 1px;
+    justify-content: center;
+    display: flex;
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    border: solid 1px;
+    border-color: black;
+  }
+}
+
+
+
+@for $index from 1 through 31 {
+  .calendar__day:nth-child(#{$index})::before {
+    content: "#{$index}";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+$days-of-week: (mon: 0, tue: 102px, wed: 202px, thu: 302px, fri: 402px, sat: 502px, sun: 602px);
+
+@each $day, $retreat in $days-of-week {
+  .start-#{$day} {
+    margin-left: #{$retreat};
+  }
+}
+
+@for $lenght from 28 through 31 {
+  &--month-length--#{$lenght} :nth-child {
+        display: none;
+  }
+}
+
+.calendar__day:hover {
+  background-color: $hovered-color;
+  transform: $hovered-transform;
+}
+
