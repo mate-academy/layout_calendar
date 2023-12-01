@@ -1,3 +1,58 @@
+$box-size: 100px;
+$days-in-row: 7;
+$days-gap: 1px;
+$month-size: 31;
+$week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+$cell-background-color: #eee;
+$cell-border-color: black;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $days-gap;
+  width: $days-in-row * ($box-size + $days-gap);
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $box-size;
+    height: $box-size;
+
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 30px;
+
+    background-color: $cell-background-color;
+    box-sizing: border-box;
+    border: 1px solid $cell-border-color;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $day-count from 1 through $month-size {
+    &__day:nth-child(3n + #{$day-count})::before {
+      content: '#{$day-count}';
+    }
+  }
+
+  @each $day, $i in $week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($days-gap + $box-size) * $i;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length-#{$last-day} &__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
 }
