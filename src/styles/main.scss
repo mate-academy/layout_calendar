@@ -5,18 +5,13 @@ body {
   margin: 0;
 }
 
-.wrapper {
-  display: flex;
-  justify-content: center;
-
-  margin-top: 100px;
-}
-
 .calendar {
     display: flex;
     flex-wrap: wrap;
     gap: $flex-gap;
-    width: 7 * $cell-size + $cell-size * 0.3;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 7 * $cell-size;
     padding: 10px;
 
   &__day {
@@ -24,6 +19,7 @@ body {
     justify-content: center;
     align-items: center;
 
+    box-sizing: border-box;
     width: $cell-size;
     height: $cell-size;
     background-color: #eee;
@@ -50,7 +46,7 @@ body {
 
   @each $day, $num in $day-of-week {
     &--start-#{$day} &__day:first-child {
-      margin-left: $cell-size * $num + $flex-gap * $num * 3;
+      margin-left: ($cell-size + $flex-gap) * $num;
     }
   }
 
