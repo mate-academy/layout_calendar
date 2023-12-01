@@ -1,6 +1,4 @@
-$size-cell: 100px;
-$general-font-size: 30px;
-$gap: 1px;
+@import './var';
 
 html {
   font-family: Arial, Helvetica, sans-serif;
@@ -18,10 +16,14 @@ body {
 
 .calendar {
   display: flex;
+  justify-content: center;
+  align-items: center;
+
   flex-wrap: wrap;
   gap: $gap;
 
   width: $size-cell * 7 + $gap * 6;
+  margin: auto;
   padding: 10px;
 
   &__day {
@@ -53,8 +55,6 @@ body {
   }
 }
 
-$start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
-
  @each $day, $num in $start-day {
   .calendar--start--#{$day} > .calendar__day:nth-child(1) {
     margin-left: (($size-cell + 1) * $num);
@@ -68,3 +68,4 @@ $start-day: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
     }
   }
 }
+
