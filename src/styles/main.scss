@@ -1,50 +1,72 @@
-$card-width: 100px;
-$calendar-gap: 1px;
-$calendar-width: $card-width * 7 + $calendar-gap * 6;
-$calendar-start: $card-width * 6 + $calendar-gap * 6;
+$cell-size: 100px;
+$day-block-gap: 1px;
+$calendar-width: ($cell-size * 7) + ($day-block-gap * 6);
 
 body {
   margin: 0;
-}
 
-.calendar {
-  padding: 10px;
+  .calendar {
+  padding: 0 10px;
+  margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  gap: $calendar-gap;
-  width: $card-width;
+  gap: $day-block-gap;
+  width: $calendar-width;
 
-  &__day {
-    width: 100px;
-    height: 100px;
-    border: 1px solid black;
-    box-sizing: border-box;
-    background-color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
+    &__day {
+      width: $cell-size;
+      height: $cell-size;
+      border: 1px solid black;
+      box-sizing: border-box;
+      background-color: #eee;
+      position: relative;
+      transition-duration: 0.5s;
 
-    @for $month-length from 28 through 31 {
-      &--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
-        display: none;
+      &::before {
+        content: "";
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        background-color: pink;
+        transform: translateY(-20px);
+        cursor: pointer;
       }
     }
 
     @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
+      .calendar__day:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
   }
 
-  &__day:first-child {
-    margin-left:  #{$calendar-start};
+  $days-of-week: (
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6,
+  );
+
+  @each $day, $number in $days-of-week {
+    .calendar--start--#{$day} :first-child {
+      margin-left: $number * ($cell-size + $day-block-gap);
+    }
   }
 
-  @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
-      display: none;
+  @for $i from 28 through 31 {
+    .calendar--month--lenght--#{$i} {
+      .calendar__day:nth-child(n+#{$i}):nth-child(n-31) {
+        display: none;
+      }
     }
   }
 }
