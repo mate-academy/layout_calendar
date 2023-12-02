@@ -4,10 +4,14 @@
   flex-wrap: wrap;
   gap: $indentation-between-days;
 
-  width: $day-size * 7 + $indentation-between-days * 6 + $calendar-paddings * 2;
-  height: $day-size * 5 + $indentation-between-days * 4 + $calendar-paddings * 2;
+  width: $day-size * $calendar-columns + $indentation-between-days * ($calendar-columns - 1) + $calendar-inline-paddings;
 
   background-color: #fff;
+
+  &--no-indentations {
+    margin: 0;
+    padding: 0;
+  }
 
   &__day {
     display: flex;
@@ -19,8 +23,7 @@
 
     border: solid $day-border-size $day-border-color;
     background-color: $day-background-color;
-    transition: all $transition-duration ease-in-out;
-
+    transition: background-color $transition-duration, transform $transition-duration;
 
     text-decoration: none;
     color: $calendar-text-color;
