@@ -1,3 +1,46 @@
+$day-size: 100px;
+$day-gap: 1px;
+$block-padding: 10px;
+
+@font-face {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+.calendar-block {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: $day-gap;
+
+  width: $day-size * 7 + $day-gap * 6 + $block-padding * 2;
+  padding: $block-padding;
+
+
+  flex-wrap:wrap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid black;
+    width: $day-size;
+    height: $day-size;
+    box-sizing: border-box;
+
+    background-color: #eee;
+
+    font-size: 30px;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+        display: block;
+      }
+    }
+  }
 }
