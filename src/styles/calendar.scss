@@ -1,0 +1,58 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin-top: 150px;
+  align-items: center;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  width: 708px;
+  display: flex;
+  gap: 1px;
+
+  &__day {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    border: solid 1px;
+    border-color: black;
+
+    &:hover {
+      background-color: $hovered-color;
+      transform: $hovered-transform;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    .calendar__day:nth-child(#{$index})::before {
+      content: "#{$index}";
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@each $day, $retreat in $days-of-week {
+  .calendar--start-#{$day} .calendar__day:first-child {
+    margin-left: $retreat;
+  }
+}
+
+@for $count-of-days from 28 through 31 {
+  .calendar--month-length-#{$count-of-days} .calendar__day:nth-child(n + #{$count-of-days + 1}) {
+    display: none;
+  }
+}
+
