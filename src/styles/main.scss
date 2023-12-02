@@ -1,3 +1,69 @@
+$day-size: 100px;
+$gap-size: 1px;
+$padding-size: 10px;
+$start-day-size: $day-size + $gap-size;
+$week-days: (
+  mon: 0,
+  tue: $start-day-size,
+  wed: $start-day-size * 2,
+  thu: $start-day-size * 3,
+  fri: $start-day-size * 4,
+  sat: $start-day-size * 5,
+  sun: $start-day-size * 6,
+);
+$hover-color: pink;
+$background-color: #eee;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  margin: 0 auto;
+  padding: $padding-size;
+  width: (($day-size + $gap-size) * 7) + $padding-size * 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  &__day {
+    height: $day-size;
+    width: $day-size;
+    background-color: $background-color;
+    border: 1px solid black;
+    text-align: center;
+    line-height: $day-size;
+    font-size: 30px;
+
+    @for $i from 1 through 31 {
+      &:nth-child(n + #{$i})::after {
+        content: '#{$i}';
+      }
+    }
+
+
+    &:hover {
+      transition: transform 0.5s;
+      transform: translateY(-20px);
+      background-color: $hover-color;
+      cursor: pointer;
+    }
+  }
+
+  @for $lenght from 28 through 31 {
+    &--month-length-#{$lenght} .calendar__day:nth-child(n + #{$lenght + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $retreat in $week-days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: #{$retreat};
+    };
+  }
 }
