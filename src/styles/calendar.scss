@@ -1,0 +1,74 @@
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  .calendar--start-day-#{$day} {
+    $margin-left: 0;
+
+    @if $day == tue {
+      $margin-left: $day-size + $gap-size;
+    } @else if $day == wed {
+      $margin-left: 2 * ($day-size + $gap-size);
+    } @else if $day == thu {
+      $margin-left: 3 * ($day-size + $gap-size);
+    } @else if $day == fri {
+      $margin-left: 4 * ($day-size + $gap-size);
+    } @else if $day == sat {
+      $margin-left: 5 * ($day-size + $gap-size);
+    } @else if $day == sun {
+      $margin-left: 6 * ($day-size + $gap-size);
+    }
+
+    .calendar__day {
+      margin-left: $margin-left;
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      visibility: hidden;
+    }
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 7 * $day-size + 6 * $gap-size + 2 * $padding-size;
+  padding: $padding-size;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  border: $border-size solid black;
+  background-color: $grey;
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-size;
+  transition: background-color $animation-duration, transform $animation-duration, margin-left $animation-duration;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $pink;
+    transform: translateY(-20px);
+  }
+
+
+  &::before {
+    content: "";
+  }
+}
+
+.calendar__day + .calendar__day {
+  margin-left: $gap-size;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
