@@ -1,3 +1,67 @@
+$days: mon, tue, wed, thu, fri, sat, sun;
+$month-lengths: 28, 29, 30, 31;
+
 body {
   margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  gap: 1px 1px;
+  width: 706px;
+  margin: 0 auto;
+
+  @each $length in $month-lengths {
+    &--month-length-#{$length} .calendar__day {
+      &:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #eee;
+  border: 1px solid black;
+  transition-duration: 0.5s;
+
+  &:hover {
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &--#{$i} {
+      &:nth-child(#{$i}) {
+        display: flex;
+      }
+
+      &:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+
+      &::before {
+        content: "#{$i}";
+      }
+    }
+  }
+
+  @each $day in $days {
+    &--#{$day} {
+      margin-left: (list.index($days, $day) - 1) * 101px;
+    }
+  }
 }
