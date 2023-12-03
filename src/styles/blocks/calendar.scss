@@ -1,0 +1,14 @@
+.calendar {
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendarWidth;
+
+  @each $name, $dayNumber in $days {
+    &--start-day--#{$name} &__day:first-child {
+      margin-left: getMargin($dayNumber, $cellSize, $gap);
+    }
+  }
+}
