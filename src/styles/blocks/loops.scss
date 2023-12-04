@@ -7,11 +7,11 @@
     }
   }
 
-  $days-of-week: (mon: 0, tue: 104px, wed: 204px, thu: 304px, fri: 404px, sat: 504px, sun: 604px);
+  $days-of-week: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
 
   @each $day, $retreat in $days-of-week {
-    .calendar--start-#{$day} {
-      margin-left: #{$retreat};
+    .calendar--start-#{$day}  .calendar__number:first-child {
+      margin-left: $retreat * ($calendar-gap + $days-width);
     }
   }
 
