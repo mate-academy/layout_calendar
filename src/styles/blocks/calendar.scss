@@ -1,24 +1,22 @@
 .calendar {
-  box-sizing: border-box;
   display: flex;
-  flex-flow: row wrap;
-  font-family: $font-family;
-  font-size: $font-size;
+  flex-wrap: wrap;
+  width: $calendar-width;
   gap: $grid-gap;
   padding-inline: $calendar-inline-padding;
-  width: $calendar-width;
+  font-size: $font-size;
 
   &__day {
+    display: flex;
+    justify-content: center;
+    height: $day-size;
+    width: $day-size;
     align-items: center;
+
     background-color: $day-color;
     border: $day-border;
-    box-sizing: border-box;
     cursor: pointer;
-    display: flex;
-    height: $day-size;
-    justify-content: center;
-    transition: all $transition-duration;
-    width: $day-size;
+    transition: color $transition-duration, transform $transition-duration;
 
     &:hover {
       background-color: $hover-day-color;
