@@ -16,21 +16,14 @@
 
   border: $day-border;
   color: $day-text-color;
-  font-family: $day-font;
-  font-size: $day-text-size;
   background-color: $day-background-color;
+
+  transition: transform 0.5s ease-in-out;
 
   &:hover {
     cursor: pointer;
     background-color: $hover-color-day;
     transform: translateY(-20px);
-    transition: transform 0.5s ease-in-out;
-  }
-}
-
-@for $index from 1 through 31 {
-  &__day:nth-of-type(#{$index})::before {
-    content: "#{$index}";
   }
 }
 
@@ -39,6 +32,12 @@
   &__day:first-of-type {
     margin-left: $first-day-shift;
   };
+}
+
+@for $index from 1 through 31 {
+  &__day:nth-of-type(#{$index})::before {
+    content: "#{$index}";
+  }
 }
 
 @for $index from 28 through 31 {
