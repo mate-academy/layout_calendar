@@ -1,19 +1,23 @@
 @use "sass:map";
 
-$starting-day: 'friday';
+$starting-day: 'fri';
 $month-length: 29;
 $block-size: 100px;
 $columns: 7;
 $gap: 1px;
 $padding: 10px;
+$border-color: darkgrey;
+$background-color: #eee;
+$background-hover-color: pink;
+$font-color: black;
 $month-days: (
-  'monday':1,
-  'tuesday':2,
-  'wednesday':3,
-  'thursday':4,
-  'friday':5,
-  'saturday':6,
-  'sunday':7);
+  'mon':1,
+  'tue':2,
+  'wed':3,
+  'thu':4,
+  'fri':5,
+  'sat':6,
+  'sun':7);
 $get-day: map.get($month-days, $starting-day);
 
 
@@ -29,20 +33,20 @@ $get-day: map.get($month-days, $starting-day);
 .block {
   width: $block-size;
   height: $block-size;
-  background-color: #eee;
-  color: black;
+  background-color: $background-color;
+  color: $font-color;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30px;
-  border: 1px solid darkgrey;
+  border: 1px solid $border-color;
   box-sizing: border-box;
   border-radius: 5px;
-  transition: transform 0.3s;
+  transition: transform 0.5s, background-color 0.5s;
 
   &:hover {
-    transform: scale(1.05);
-    background-color: #e4e4e4;
+    transform: translateY(-30px);
+    background-color: $background-hover-color;
     cursor: pointer;
   }
 
