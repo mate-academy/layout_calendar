@@ -1,0 +1,36 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  max-width: $calendar-max-width;
+
+  &__day {
+    position: relative;
+  }
+
+  @for $day from 1 through 31 {
+    & :nth-child(n + #{$day})::before {
+      content: "#{$day}";
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      color: #000;
+
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @each $day, $num in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: $num * $margin-left-coef;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length--#{$day} :nth-child(n + #{$day + 1}) {
+      opacity: 0;
+    }
+  }
+}
