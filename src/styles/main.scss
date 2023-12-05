@@ -17,7 +17,7 @@ body {
   align-items: center;
   gap: $day-gap;
 
-  width: $day-size * 7 + $day-gap * 6 + $block-padding * 2;
+  width: $day-size * $days-count + $day-gap * $gap-count + $block-padding * $sides-count;
   padding: $block-padding;
 
   flex-wrap:wrap;
@@ -51,11 +51,9 @@ body {
     }
   }
 
-  @each $month, $days in $months {
-    @for $extra-day from $days through 31 {
-      &--#{$month} > &__day::nth-child(#{$extra-day + 1}) {
-        display:none;
-      }
+  @for $extra-day from 28 through 31 {
+    &--month-length_#{$extra-day} > &__day:nth-child(n + #{$extra-day + 1}) {
+      display:none;
     }
   }
 
