@@ -7,19 +7,12 @@ body {
 }
 
 .calendar {
+  margin: 0 auto;
   width: 726px;
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
   padding: 10px;
-
-  @for $i from 28 through 31 {
-    .month-length-#{$i} {
-      &:nth-last-child(#{$i}n) {
-        display: none;
-      }
-    }
-  }
 
   &__day {
     background-color: #eee;
@@ -47,4 +40,24 @@ body {
     }
   }
 
+}
+
+$days: ("mon": 101px, "tue": 202px, "wed": 303px,
+"thu": 404px, "fri": 505px, "sat": 606px, "sun": 707px);
+
+@each $day, $margin in $days {
+  .calendar_start-day--#{$day} {
+    .calendar__day {
+      &:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar_month-length--#{$index}
+  &:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
 }
