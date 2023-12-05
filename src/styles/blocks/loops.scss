@@ -1,0 +1,22 @@
+@for $index from 1 through 31 {
+  .calendar__number:nth-child(#{$index})::before {
+    content: "#{$index}";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+  $days-of-week: (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6);
+
+@each $day, $retreat in $days-of-week {
+  .calendar--start-#{$day}  .calendar__number:first-child {
+    margin-left: $retreat * ($calendar-gap + $days-width);
+  }
+}
+
+@for $count-of-days from 28 through 31 {
+  .calendar--month-length-#{$count-of-days} .calendar__number:nth-child(n + #{$count-of-days + 1}) {
+    display: none;
+  }
+}
