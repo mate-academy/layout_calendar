@@ -1,36 +1,18 @@
-@use "sass:map";
+@import '../styles/variables';
 
-$starting-day: 'fri';
-$month-length: 29;
-$block-size: 100px;
-$columns: 7;
-$gap: 1px;
-$padding: 10px;
-$border-color: darkgrey;
-$background-color: #eee;
-$background-hover-color: pink;
-$font-color: black;
-$month-days: (
-  'mon':1,
-  'tue':2,
-  'wed':3,
-  'thu':4,
-  'fri':5,
-  'sat':6,
-  'sun':7);
-$get-day: map.get($month-days, $starting-day);
-
-
-.container {
+html {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.list {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  max-width: calc(#{$columns} * #{$block-size} + (#{$columns} - 1) * #{$gap} + #{$padding * 2});
+  max-width: $columns * $block-size + ($columns - 1) * $gap + $padding * 2;
   margin: 50px auto;
 }
 
-.block {
+.list__cell {
   width: $block-size;
   height: $block-size;
   background-color: $background-color;
@@ -42,12 +24,12 @@ $get-day: map.get($month-days, $starting-day);
   border: 1px solid $border-color;
   box-sizing: border-box;
   border-radius: 5px;
-  transition: transform 0.5s, background-color 0.5s;
+  transition: transform $transition-duration, background-color $transition-duration;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-30px);
     background-color: $background-hover-color;
-    cursor: pointer;
   }
 
   &::before {
@@ -56,7 +38,7 @@ $get-day: map.get($month-days, $starting-day);
 }
 
 @for $i from 1 through 31 {
-  .block:nth-child(#{$i}) {
+  .list__cell:nth-child(#{$i}) {
     margin-bottom: $gap;
     margin-right: $gap;
 
@@ -71,13 +53,13 @@ $get-day: map.get($month-days, $starting-day);
 }
 
 @for $i from $month-length through 31 {
-  .block:nth-child(#{$i + 1}) {
+  .list__cell:nth-child(#{$i + 1}) {
     display: none;
   }
 }
 
 @for $i from 0 through $get-day {
-  .block:nth-child(#{1}) {
+  .list__cell:nth-child(#{1}) {
     margin-left: ($i - 1) * 102px;
   }
 }
