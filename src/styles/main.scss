@@ -1,3 +1,69 @@
+$weekDays:
+  mon 0,
+  tue 1,
+  wed 2,
+  thu 3,
+  fri 4,
+  sat 5,
+  sun 6;
+
+$cellSize: 100;
+$gap: 1;
+
+* {
+  box-sizing: border-box;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 726px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @each $name, $position in $weekDays {
+    &_start-day--#{$name} &__day:first-child {
+      margin-left: ($cellSize + $gap) * $position + px;
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    height: 100px;
+    width: 100px;
+    border: 1px black solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: transform 0.5s;
+    }
+  }
+
+}
+
+@for $index from 28 through 31 {
+  .calendar_month-length--#{$index}
+  &:nth-child(n + #{$index + 1}) {
+    display: none;
+  }
 }
