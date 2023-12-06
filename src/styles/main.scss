@@ -1,3 +1,74 @@
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
 body {
+  width: 100%;
   margin: 0;
+  counter-reset: unset;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  width: 726px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid #000;
+  }
+
+  @for $number from 1 through 27 {
+    &__cell:nth-child(#{$number})::before {
+      content: "#{$number}";
+    }
+  }
+
+  @for $monthlength from 28 through 31 {
+      &__cell:nth-child(#{$monthlength})::before {
+        content: "#{$monthlength}";
+      }
+    }
+
+  $start-day:
+  100px;
+
+  $weekdays:
+  "mon" 0,
+  "tue" $start-day,
+  "wed" $start-day * 2,
+  "thu" $start-day * 3,
+  "fri" $start-day * 4,
+  "sat" $start-day * 5,
+  "sun" $start-day * 6;
+
+  @each $day, $indent in $weekdays {
+    .calendar--start-day--#{$day}
+      &:first-child {
+        margin-left: 20px;
+      }
+  }
+
+
+
+  &__cell:hover {
+    background-color: pink;
+    cursor: pointer;
+
+    transform: translateY(-20px);
+    transition-duration: 500ms;
+  }
 }
