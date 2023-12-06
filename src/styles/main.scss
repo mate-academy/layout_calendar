@@ -2,6 +2,7 @@ html {
   font-family: Arial, sans-serif;
   font-size: 30px;
 }
+
 body {
   width: 100%;
   margin: 0;
@@ -16,9 +17,9 @@ body {
   width: 726px;
   padding: 10px;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: wrap;
   gap: 1px;
+  column-count: 7;
 
   &__cell {
     display: flex;
@@ -43,11 +44,8 @@ body {
       }
     }
 
-  $start-day:
-  100px;
-
-  $weekdays:
-  "mon" 0,
+  $start-day: 101px;
+  $weekdays: "mon" 0,
   "tue" $start-day,
   "wed" $start-day * 2,
   "thu" $start-day * 3,
@@ -56,13 +54,11 @@ body {
   "sun" $start-day * 6;
 
   @each $day, $indent in $weekdays {
-    .calendar--start-day--#{$day}
-      &:first-child {
-        margin-left: 20px;
+    &--start-day--#{$day} :first-child {
+        margin-left: $start-day;
+        box-sizing: border-box;
       }
   }
-
-
 
   &__cell:hover {
     background-color: pink;
