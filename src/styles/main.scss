@@ -1,14 +1,5 @@
-$cell-size: 100px;
-$count-days: 31;
-$days-order: (mon, tue, wed, thu, fri, sat, sun);
-$gap: 1px;
-
-@mixin center-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+@import 'variables.scss';
+@import 'mixin.scss';
 
 body {
   margin: 0;
@@ -20,7 +11,7 @@ body {
   align-items: center;
   gap: $gap;
 
-  max-width: calc(#{$cell-size} * 7 + 1px * 7 + 10px * 2);
+  max-width: $cell-size * $columns + 1px * $columns + $paddings * 2;
   margin: auto;
 
   @include center-content;
@@ -35,7 +26,7 @@ body {
 
     font-size: 32px;
     font-family: Arial, Helvetica, sans-serif;
-    transition: 0.5s;
+    transition: transform 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -58,10 +49,10 @@ body {
     }
   }
 
-  @each $start-day in $days-order {
+  @each $start-day, $retreat in $days-order {
     &--start-#{$start-day} {
-      .calendar__day {
-        margin-left: ($start-day - 1) + ($cell-size + 1px + $gap);
+      .calendar__day:first-child {
+        margin-left: ($cell-size + $gap) * $retreat;
       }
     }
   }
