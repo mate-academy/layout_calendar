@@ -1,6 +1,6 @@
-$blockSize: 100px;
+$block-size: 100px;
 $gap: 1px;
-$columnCount: 7;
+$column-count: 7;
 $padding: 10px;
 
 body {
@@ -13,13 +13,13 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: ($blockSize * $columnCount) + ($gap * $columnCount) + $padding;
+  width: ($block-size * $column-count) + ($gap * $column-count) + $padding;
 
   &__block {
     box-sizing: border-box;
     cursor: pointer;
-    height: $blockSize;
-    width: $blockSize;
+    height: $block-size;
+    width: $block-size;
     background-color: #eee;
     border: 1px solid #000;
     font-family: Arial, Helvetica, sans-serif;
@@ -39,14 +39,14 @@ body {
       }
     }
 
-    $startDays:
+    $start-days: 
       mon 0,
-      tue $blockSize + $gap,
-      wed ($blockSize + $gap) * 2,
-      thu ($blockSize + $gap) * 3,
-      fri ($blockSize + $gap) * 4,
-      sat ($blockSize + $gap) * 5,
-      sun ($blockSize + $gap) * 6;
+      tue $block-size + $gap,
+      wed ($block-size + $gap) * 2,
+      thu ($block-size + $gap) * 3,
+      fri ($block-size + $gap) * 4,
+      sat ($block-size + $gap) * 5,
+      sun ($block-size + $gap) * 6;
 
     @each $name, $margin in $startDays {
       &--1--#{$name} {
