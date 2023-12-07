@@ -1,57 +1,43 @@
-body {
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      min-height: 100vh;
-      align-items: center;
-    }
-
 .calendar {
+  max-width: $max-wigth;
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  width: $cell-size * 7 + $cell-padding * 2;
-  margin-top: 20px;
+  gap: 1px;
+  padding: 10px;
 
-  &__cell {
-    width: $cell-size;
-    height: $cell-size;
-    background-color: #eee;
-    border: $border-width solid black;
-    position: relative;
+  &__day {
+  box-sizing: border-box;
+  min-height: $height-day-box;
+  min-width: $weight-day-box;
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s;
+
+  &:hover {
     cursor: pointer;
-    transition: $transition-duration;
-    margin: 0;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
 
-    &::before {
-      content: " ";
-      display: block;
-      width: $font-size;
-      height: $font-size;
-      margin: 0 auto;
-      font-size: $font-size;
-      color: black;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    &:hover {
-      background-color: pink;
-      transform: translateY(-20px);
-    }
-
-    @for $j from 1 through 31 {
-      &:nth-child(#{$j})::before {
-        content: "#{$j}";
-      }
-    }
-
-    &:nth-child(7n + 1) {
-      clear: left;
+  @for $d from 1 through 31 {
+    &:nth-child(#{$d})::before {
+      content: '#{$d}';
     }
   }
+}
+
+@each $day, $index in $start-day {
+  &--start-#{$day} :first-child {
+    margin-left: calc(($weight-day-box + $gap-boxes) * $index);
+  }
+}
+
+@for $m from 28 through 31 {
+  &--month-#{$m} :nth-child(n + #{$m + 1}) {
+    display: none;
+  }
+}
 }
