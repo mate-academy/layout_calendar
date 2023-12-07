@@ -32,17 +32,18 @@ body {
     border: 1px solid #000;
   }
 
-  @for $number from 1 through 27 {
+  @for $number from 1 through 31 {
     &__cell:nth-child(#{$number})::before {
       content: "#{$number}";
     }
+
   }
 
-  @for $monthlength from 28 through 31 {
-      &__cell:nth-child(#{$monthlength})::before {
-        content: "#{$monthlength}";
-      }
+  @for $length from 28 to 32 {
+    &--month-length--#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
     }
+  }
 
   $start-day: 101px;
   $weekdays: "mon" 0,
@@ -53,10 +54,9 @@ body {
   "sat" $start-day * 5,
   "sun" $start-day * 6;
 
-  @each $day, $indent in $weekdays {
+  @each $day, $start-day in $weekdays {
     &--start-day--#{$day} :first-child {
         margin-left: $start-day;
-        box-sizing: border-box;
       }
   }
 
