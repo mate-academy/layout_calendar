@@ -2,12 +2,13 @@
   margin: 100px auto;
   max-width: 800px;
 }
+
 .calendar__list {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  display: flex;
 }
+
 .calendar__item {
   display: flex;
   flex: 1 1 13%;
@@ -18,21 +19,26 @@
     cursor: pointer;
     transform: translateY(-20px);
   }
+
+  &--1 {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
 }
 
 @for $i from 1 through 31 {
-  .calendar__item-#{$i}::before {
+  .calendar__item--#{$i}::before {
     content: "#{$i}";
+
     background-color: #eee;
     border: 1px solid black;
-    background-color: #eee;
 
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 30px;
     padding: 10px;
-    flex: 0 1 100px;
+    flex: 0 0 100px;
     transition: transform 0.5s;
   }
 }
