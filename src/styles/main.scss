@@ -1,3 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: 706px;
+}
+
+.day {
+  width: 100px;
+  height: 100px;
+  padding: 10px;
+  margin: 0;
+  background-color: #eee;
+  border: 1px solid #000;
+  font-family: Arial,serif;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.day:hover {
+  cursor: pointer;
+  transform: translateY(-20px);
+  transition-duration: 0.5s;
+}
+
+ul,li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@for $num from 1 through 31 {
+    li:nth-child(n + #{$num})::before {
+      content: "#{$num}";
+    }
+};
