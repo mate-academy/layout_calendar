@@ -1,3 +1,54 @@
+$days: thu 306, fri 408, sat 510, sun 6, mon 0, tue 102, wed 204;
+$days-in-month: 30;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 730px;
+  padding-inline: 10px;
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  background-color: #eee;
+  border: 1px solid #000;
+  transition: 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+}
+
+@each $day, $margin in $days {
+  .calendar--start-day > :first-child {
+    margin-left: #{$margin}px;
+  }
+}
+
+@for $day from $days-in-month + 1 through 32 {
+  .calendar--month-length>:nth-child(#{$day}) {
+    display: none;
+  }
 }
