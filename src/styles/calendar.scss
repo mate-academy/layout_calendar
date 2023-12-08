@@ -1,8 +1,8 @@
 $size-cell: 100px;
 $padding-main-block: 10px;
 $size-main-block: $size-cell * 7 + $padding-main-block * 2 + 7;
-$month-length: 31;
 $week-day: 1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun';
+
 
 body {
   display: flex;
@@ -19,6 +19,18 @@ body {
   display: flex;
   gap: 1px;
   flex-wrap: wrap;
+
+  @each $start-day, $day in $week-day {
+    &__start-day--#{$day} &__item:first-child {
+      margin-left: calc(($size-cell + 1px) * ($start-day - 1));
+    }
+  }
+
+  @for $index from 28 to 31 {
+    &__month-length--#{$index} &__item:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
 
   &__item {
     width: $size-cell;
@@ -39,24 +51,10 @@ body {
       transform: translateY(-20px);
     }
 
-    @for $number from 1 through $month-length {
-      &--#{$number}:before {
+    @for $number from 1 through 31 {
+      &:nth-child(#{$number}):before {
         content: '#{$number}';
       }
-    }
-
-    @each $srart-day, $day in $week-day {
-      &--#{$day} {
-        margin-left: calc(($size-cell + 1px) * ($srart-day - 1));
-      }
-    }
-  }
-}
-
-@for $month-leng from 28 to 31 {
-  .calendar--#{$month-leng} {
-    .calendar__item:nth-child(n + #{$month-leng + 1}) {
-      display: none;
     }
   }
 }
