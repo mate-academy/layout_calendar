@@ -1,3 +1,45 @@
-body {
+@import './mixins-and-variables';
+
+* {
+  box-sizing: border-box;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: $calendar-gap;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  width: ($cell-size * 7) + ($calendar-gap * 6) + ($calendar-padding * 2);
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid black;
+
+    transition: transform 0.5s;
+    cursor: pointer;
+
+    &:hover{
+      transform: translateY(-20px);
+      background-color: pink;
+    }
+  }
+}
+
+@for $day from 1 through $month-length {
+  .calendar__day:nth-child(#{$day}) {
+    display: flex;
+    &:before {
+      display: block;
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+      content: $day + '';
+    }
+  }
 }
