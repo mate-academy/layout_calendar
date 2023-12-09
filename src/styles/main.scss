@@ -1,3 +1,69 @@
+$casual-color: #eee;
+$cell-size: 100px;
+$month-length: 28, 29, 30, 31;
+
+$days: (
+  'mon': 0,
+  'tue': 1 * $cell-size + 1,
+  'wed': 2 * $cell-size + 2,
+  'thu': 3 * $cell-size + 3,
+  'fri': 4 * $cell-size + 4,
+  'sat': 5 * $cell-size + 5,
+  'sun': 6 * $cell-size + 6
+);
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  border: 2px solid #aaa;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: $cell-size * 7 + 10px;
+
+  &__dey {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $casual-color;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform:translateY(-20px);
+    }
+  }
+}
+
+@for $last-number from 28 through 31 {
+  .calendar--#{$last-number} {
+    .calendar__dey:nth-child(n + #{$last-number + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__dey:nth-child(#{$number}):before {
+    content: '#{$number}';
+  }
+}
+
+@each $start-day, $shift in $days {
+  .calendar__dey--#{$start-day} {
+    margin-left: $shift;
+  }
 }
