@@ -26,7 +26,7 @@ body {
   gap: 1px;
   max-width: $cell-size * 7 + 10px;
 
-  &__dey {
+  &__day {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -49,20 +49,20 @@ body {
 
 @for $last-number from 28 through 31 {
   .calendar--#{$last-number} {
-    .calendar__dey:nth-child(n + #{$last-number + 1}) {
+    .calendar__day:nth-child(n + #{$last-number + 1}) {
       display: none;
     }
   }
 }
 
 @for $number from 1 through 31 {
-  .calendar__dey:nth-child(#{$number}):before {
+  .calendar__day:nth-child(#{$number}):before {
     content: '#{$number}';
   }
 }
 
 @each $start-day, $shift in $days {
-  .calendar__dey--#{$start-day} {
+  .calendar__day--#{$start-day} {
     margin-left: $shift;
   }
 }
