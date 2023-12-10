@@ -1,4 +1,7 @@
-@import './mixins-and-variables';
+$days: tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+$cell-size: 100px;
+$calendar-padding: 10px;
+$calendar-gap: 1px;
 
 * {
   box-sizing: border-box;
@@ -15,7 +18,8 @@
   &__day {
     width: $cell-size;
     height: $cell-size;
-    display: none;
+    display: flex;
+    visibility: hidden;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -25,6 +29,12 @@
     transition: transform 0.5s;
     cursor: pointer;
 
+    &::before {
+      display: block;
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+    }
+
     &:hover{
       transform: translateY(-20px);
       background-color: pink;
@@ -32,14 +42,21 @@
   }
 }
 
-@for $day from 1 through $month-length {
-  .calendar__day:nth-child(#{$day}) {
-    display: flex;
-    &:before {
-      display: block;
-      font-size: 30px;
-      font-family: Arial, sans-serif;
-      content: $day + '';
+@for $day from 28 through 31 {
+  .calendar--month-length-#{$day} {
+    @for $newDay from 1 through $day {
+      .calendar__day:nth-child(#{$newDay}) {
+        visibility: visible;
+        &::before {
+          content: $newDay + '';
+        }
+      }
     }
+  }
+}
+
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($calendar-gap + $cell-size) * $i;
   }
 }
