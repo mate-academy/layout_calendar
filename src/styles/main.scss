@@ -1,49 +1,53 @@
 @import './variables';
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
-  box-sizing: border-box ;
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+  
   width: $calendar-width;
-  padding: 10px;
   gap: $gap;
-
+  padding-inline: $calendar-padding;
 
   &__day {
-    box-sizing: border-box;
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: $box-size;
     height: $box-size;
     position: relative;
     font-size: 30px;
-    align-items: center;
-    justify-content: center;
+
     background-color: $color-of-background;
     border: 1px solid $color-of-border;
+    cursor: pointer;
     transition: 0.5s;
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: "#{$i}";
-      }
-    }
 
     &:hover {
       cursor: pointer;
       background-color: $color-of-hover;
       transform: translateY(-20px);
     }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 
   @each $start-day, $i in $start-days {
-    &--start-day--#{$start-day} :first-child {
-      margin-left: ($box-size + $gap);
+    &--start-day--#{$start-day} &__day:first-child {
+      margin-left: ($box-size + $gap) *$i;
     }
   }
 
