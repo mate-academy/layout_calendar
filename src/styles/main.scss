@@ -17,6 +17,22 @@ $month-lengths: 28, 29, 30, 31;
   flex-wrap: wrap;
   gap: 1px;
 
+
+  @each $day in $days {
+    &.calendar__day-start-#{$day} {
+      margin-left: calc($cell-size * index($days, $day));
+    }
+  }
+
+
+  @each $length in $month-lengths {
+    .calendar__day-month-length:nth-child(#{$length}) {
+      .day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
   &__day {
     position: relative;
     display: inline-block;
@@ -41,20 +57,6 @@ $month-lengths: 28, 29, 30, 31;
     &:hover {
       background-color: pink;
       transform: translateY(-20px);
-    }
-
-    @each $day in $days {
-      &.start-#{$day} {
-        margin-left: calc($cell-size * list.index($days, $day));
-      }
-    }
-
-    @each $length in $month-lengths {
-      &:nth-child(#{$length}) {
-        .day:nth-child(n + #{$length + 1}) {
-          display: none;
-        }
-      }
     }
   }
 }
