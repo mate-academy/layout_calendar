@@ -1,55 +1,66 @@
 $cell-size: 100px;
-$border-size: 1px;
-$columns: 7;
-$margin: 1px;
+$cell-color: #eee;
+$cell-gap: 1px;
+$font-size: 30px;
 $transition-duration: 0.5s;
+$days: mon, tue, wed, thu, fri, sat, sun;
+$month-lengths: 28, 29, 30, 31;
 
-.calendar__day {
-  position: relative;
-  width: $cell-size;
-  height: $cell-size;
-  margin: $margin;
-  border: $border-size solid #ccc;
-  text-align: center;
-  line-height: $cell-size;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color $transition-duration, transform $transition-duration;
+.body {
+  margin: 0;
 }
 
 .calendar {
+  min-width: calc(7 * $cell-size);
+  max-width: calc(7 * $cell-size) + (7 * $cell-gap);
   display: flex;
   flex-wrap: wrap;
-  max-width: calc(#{$columns} * #{$cell-size} + #{$columns * 2 * $margin});
-  margin: 0 auto;
+  gap: 1px;
 
-  &--mon .calendar__day:nth-child(1n + 2),
-  &--tue .calendar__day:nth-child(1n + 3),
-  &--wed .calendar__day:nth-child(1n + 4),
-  &--thu .calendar__day:nth-child(1n + 5),
-  &--fri .calendar__day:nth-child(1n + 6),
-  &--sat .calendar__day:nth-child(1n + 7),
-  &--sun .calendar__day:nth-child(1n) {
-    margin-left: calc(#{$cell-size} + #{$border-size} + #{$margin});
-  }
-
-  &--month-length .calendar__day:nth-child(n + 29) {
-    display: none;
-  }
-
-  .calendar__day:hover {
-    background-color: #ffc0cb;
+  &__day {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-color;
+    border: 1px solid black;
     cursor: pointer;
-    transform: translateY(-20px);
+    transition: all $transition-duration;
+
+    &::before {
+      content: '';
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @each $day in $days {
+      &.start-#{$day} {
+        margin-left: calc($cell-size * list.index($days, $day));
+      }
+    }
+
+    @each $length in $month-lengths {
+      &:nth-child(#{$length}) {
+        .day:nth-child(n + #{$length + 1}) {
+          display: none;
+        }
+      }
+    }
   }
 }
-
 
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
-    font-size: 30px;
   }
 }
-
-
