@@ -11,13 +11,15 @@
     }
   }
 
-  $days: 'mon' 0,
+  $days: (
+    'mon' 0,
     'tue' 1 * $base-calendar-size + 1 * $base-calendar-gap,
     'wed' 2 * $base-calendar-size + 2 * $base-calendar-gap,
     'thu' 3 * $base-calendar-size + 3 * $base-calendar-gap,
     'fri' 4 * $base-calendar-size + 4 * $base-calendar-gap,
     'sat' 5 * $base-calendar-size + 5 * $base-calendar-gap,
-    'sun' 6 * $base-calendar-size + 6 * $base-calendar-gap;
+    'sun' 6 * $base-calendar-size + 6 * $base-calendar-gap,
+  );
 
   @each $day, $margin in $days {
     &--start-day--#{$day} :nth-child(1) {
@@ -35,7 +37,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition-property: all 500ms;
+    transition-property: all 0.5s;
 
     &:hover {
       background-color: $base-calendar-bg-color;
