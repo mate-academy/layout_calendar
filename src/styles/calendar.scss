@@ -1,11 +1,6 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
-
 @each $day, $n in $days-of-week {
   .calendar--start-#{$day} .calendar__day:first-child {
-    margin-left: ($calendar-day-width + (3 * $day-gap)) * $n;
+    margin-left: ($calendar-day-width + $day-gap) * ($n - 1);
   }
 }
 
@@ -20,10 +15,11 @@ body {
   display: flex;
   gap: $day-gap;
   flex-wrap: wrap;
-  padding: 10px;
-  max-width: calc($calendar-day-width * 8);
+  padding: $calendar-padding;
+  max-width: calc(($calendar-day-width + $day-gap + $calendar-padding) * 7);
 
   &__day {
+    box-sizing: border-box;
     width: $calendar-day-width;
     height: $calendar-day-height;
     background-color: #eee;
@@ -36,6 +32,7 @@ body {
     &:hover {
       transform: translateY(-20px);
       background-color: lightpink;
+      cursor: pointer;
     }
 
     @for $i from 1 through 31 {
