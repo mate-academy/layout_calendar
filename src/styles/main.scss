@@ -13,6 +13,10 @@ $days-start: (
   sun
 );
 
+@function find-index($list, $value) {
+  @return index($list, $value);
+}
+
 body,
 html {
   height: 100%;
@@ -91,18 +95,18 @@ html {
       }
     }
 
-    // Implementing start-day modifier using @each loop
-    @each $day in $days-start {
-      &.calendar-start-day--#{$day} {
-        $start-index: calendar-start-day--($days-start, $day);
-        $margin: ($start-index - 1) % $days-in-week; // Calculate margin for the start day
+      @each $day in $days-start {
+        &.start-day--#{$day} {
+          $start-index: find-index($days-start, $day);
+          $margin: ($start-index - 1);
 
-        .calendar__day:nth-child(#{-$margin + n}) {
-          margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding}
-        );
+        .calendar__day {
+          &:nth-child(n + #{$margin + 1}):nth-child(-n + #{$margin + $days-in-week + 1}) {
+            margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding});
+          }
+        }
       }
-    }
-    }
+      }
 
     // Adjust margin for Sunday
     &.calendar-start-day--sun {
