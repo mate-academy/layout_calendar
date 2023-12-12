@@ -1,11 +1,10 @@
-$cell-size: 100px;
-$day-block-gap: 1px;
-$calendar-width: ($cell-size * 7) + ($day-block-gap * 6);
+@import url(variables.scss);
 
 body {
   margin: 0;
+}
 
-  .calendar {
+.calendar {
   padding: 0 10px;
   margin: 20px;
   display: flex;
@@ -13,60 +12,47 @@ body {
   gap: $day-block-gap;
   width: $calendar-width;
 
-    &__day {
-      width: $cell-size;
-      height: $cell-size;
-      border: 1px solid black;
-      box-sizing: border-box;
-      background-color: #eee;
-      position: relative;
-      transition-duration: 0.5s;
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    box-sizing: border-box;
+    background-color: #eee;
+    position: relative;
+    transition-duration: 0.5s;
 
-      &::before {
-        content: "";
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
+    &::before {
+      content: "";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-      &:hover {
-        background-color: pink;
-        transform: translateY(-20px);
-        cursor: pointer;
-      }
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+      cursor: pointer;
     }
 
     @for $i from 1 through 31 {
-      .calendar__day:nth-child(#{$i})::before {
+      &:nth-child(#{$i})::before {
         content: "#{$i}";
       }
     }
   }
 
-  $days-of-week: (
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6,
-  );
-
-  @each $day, $number in $days-of-week {
-    .calendar--start--#{$day} :first-child {
-      margin-left: $number * ($cell-size + $day-block-gap);
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
     }
   }
 
-  @for $i from 28 through 31 {
-    .calendar--month--lenght--#{$i} {
-      .calendar__day:nth-child(n+#{$i}):nth-child(n-31) {
-        display: none;
-      }
+  @each $day, $number in $days-of-week {
+    .calendar--start-day--#{$day} :first-child {
+      margin-left: $number * ($cell-size + $day-block-gap);
     }
   }
 }
