@@ -63,10 +63,6 @@ html {
       transform: translateY(-20px);
     }
 
-    // &:nth-child(n + 8) {
-    //   margin-top: -$border-width; // Fixes alignment due to the border
-    // }
-
     &::after {
       content: '';
       position: absolute;
@@ -79,7 +75,6 @@ html {
     }
   }
 
-    // Implementing month-length modifier
     @for $i from 28 through 31 {
       &.calendar-month-length--#{$i} {
         .calendar__day:nth-child(n+#{$i + 1}) {
@@ -88,31 +83,64 @@ html {
       }
     }
 
-    // Add numbers using ::before and @for loop
     @for $i from 1 through 31 {
       .calendar__day:nth-child(#{$i})::before {
         content: '#{$i}';
       }
     }
 
-      @each $day in $days-start {
-        &.start-day--#{$day} {
-          $start-index: find-index($days-start, $day);
-          $margin: ($start-index - 1);
+    @each $day in $days-start {
+      &.start-day--#{$day} {
+        $start-index: find-index($days-start, $day);
+        $margin: ($start-index - 1);
 
-        .calendar__day {
-          &:nth-child(n + #{$margin + 1}):nth-child(-n + #{$margin + $days-in-week + 1}) {
-            margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding});
-          }
+      .calendar__day {
+        &:nth-child(n + #{$margin + 1}):nth-child(-n + #{$margin + $days-in-week + 1}) {
+          margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding});
         }
       }
-      }
+    }
+    }
 
-    // Adjust margin for Sunday
     &.calendar-start-day--sun {
       .calendar__day:nth-child(1) {
         margin-left: calc(6 * ($day-size + $border-width));
       }
     }
-  }
 
+    &.calendar-start-day--sat {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(5 * ($day-size + $border-width));
+      }
+    }
+
+    &.calendar-start-day--fri {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(4 * ($day-size + $border-width));
+      }
+    }
+
+    &.calendar-start-day--thu {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(3 * ($day-size + $border-width));
+      }
+    }
+
+    &.calendar-start-day--wed {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(2 * ($day-size + $border-width));
+      }
+    }
+
+    &.calendar-start-day--tue {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(1 * ($day-size + $border-width));
+      }
+    }
+
+    &.calendar-start-day--mon {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(0 * ($day-size + $border-width));
+      }
+    }
+  }
