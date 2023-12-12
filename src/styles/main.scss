@@ -1,3 +1,117 @@
-body {
+$day-size: 100px;
+$border-width: 1px;
+$padding: 10px;
+$days-in-week: 7;
+$gap: 1px;
+
+$days-start: (
+  mon,
+  tue,
+  wed,
+  thu,
+  fri,
+  sat,
+  sun
+);
+
+body,
+html {
+  height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.calendar-container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(7 * $day-size + 6 * $border-width + 2 * $padding);
+  position: relative;
+
+  .calendar__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial;
+    font-size: 30px;
+    position: relative;
+    transition: all 0.5s;
+
+    &::before {
+      content: '';
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    // &:nth-child(n + 8) {
+    //   margin-top: -$border-width; // Fixes alignment due to the border
+    // }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: $border-width solid #000;
+      box-sizing: border-box;
+      /* Ensure border width doesn't affect dimensions */
+    }
+  }
+
+    // Implementing month-length modifier
+    @for $i from 28 through 31 {
+      &.month-length--#{$i} {
+        .calendar__day:nth-child(n+#{$i + 1}) {
+          display: none;
+        }
+      }
+    }
+
+    // Add numbers using ::before and @for loop
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    // Implementing start-day modifier using @each loop
+    @each $day in $days-start {
+      &.start-day--#{$day} {
+        $start-index: index($days-start, $day);
+        $margin: (
+          $start-index - 1) % $days-in-week; // Calculate margin for the start day
+
+        .calendar__day:nth-child(#{-$margin + n}) {
+          margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding}
+        );
+      }
+    }
+    }
+
+    // Adjust margin for Sunday
+    &.start-day--sun {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(6 * ($day-size + $border-width));
+      }
+    }
+  }
+
