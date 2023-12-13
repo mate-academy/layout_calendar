@@ -89,58 +89,13 @@ html {
       }
     }
 
-    @each $day in $days-start {
-      &.start-day--#{$day} {
-        $start-index: find-index($days-start, $day);
-        $margin: ($start-index - 1);
+  @each $day in $days-start {
+    $index: find-index($days-start, $day);
 
-      .calendar__day {
-        &:nth-child(n + #{$margin + 1}):nth-child(-n + #{$margin + $days-in-week + 1}) {
-          margin-left: calc(#{$margin * ($day-size + 2 * $border-width)} + #{$padding});
-        }
-      }
-    }
-    }
-
-    &.calendar-start-day--sun {
+    &.calendar-start-day--#{$day} {
       .calendar__day:nth-child(1) {
-        margin-left: calc(6 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--sat {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(5 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--fri {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(4 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--thu {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(3 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--wed {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(2 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--tue {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(1 * ($day-size + $border-width));
-      }
-    }
-
-    &.calendar-start-day--mon {
-      .calendar__day:nth-child(1) {
-        margin-left: calc(0 * ($day-size + $border-width));
+        margin-left: calc((#{$index} - 1) * (#{$day-size} + 1 * #{$border-width}));
       }
     }
   }
+}
