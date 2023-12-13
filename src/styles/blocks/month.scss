@@ -1,0 +1,50 @@
+.month {
+  width: ($day-box-size * 7) + ($day-gap * 7) + ($paddings * 2);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $paddings;
+
+  &__day {
+    width: $day-box-size;
+    height: $day-box-size;
+    background-color: #eee;
+    border: 1px solid black;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+	  &::before {
+      display: block;
+	    line-height: $day-box-size;
+      text-align: center;
+	  }
+
+	  @for $i from 1 through 31 {
+	    &:nth-child(#{$i})::before {
+	  	  content: '#{$i}';
+	    }
+	  }
+  }
+
+  @each $day, $margins in $days {
+    &--start-day-#{$day} > &__day:first-child {
+      margin-left: $margins;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--length-#{$i} {
+      > div {
+        &:nth-child(n + #{$i + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
