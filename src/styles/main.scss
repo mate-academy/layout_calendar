@@ -1,3 +1,88 @@
-body {
+@import './utils/variables';
+
+@function find-index($list, $value) {
+  @return index($list, $value);
+}
+
+body,
+html {
+  height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-container {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(7 * $day-size + 6 * $border-width + 2 * $padding);
+  position: relative;
+
+  .calendar__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    transition: all 0.5s;
+
+    &::before {
+      content: '';
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: $border-width solid #000;
+      box-sizing: border-box;
+    }
+  }
+
+    @for $i from 28 through 31 {
+      &.calendar-month-length--#{$i} {
+        .calendar__day:nth-child(n+#{$i + 1}) {
+          display: none;
+        }
+      }
+    }
+
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+  @each $day in $days-start {
+    $index: find-index($days-start, $day);
+
+    &.calendar-start-day--#{$day} {
+      .calendar__day:nth-child(1) {
+        margin-left: calc((#{$index} - 1) * (#{$day-size} + 1 * #{$border-width}));
+      }
+    }
+  }
 }
