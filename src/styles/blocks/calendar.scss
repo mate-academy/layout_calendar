@@ -1,5 +1,6 @@
 .calendar {
   width: $calendar-width;
+  margin-top: $day-block-translate;
 
   display: flex;
   justify-content: flex-start;
@@ -9,7 +10,7 @@
 
   @include content-padding;
 
-  @for $number from 1 through 31 {
+  @for $number from 1 through $max-month-length {
     & :nth-child(#{$number})::before {
       content: '#{$number}';
     }
@@ -21,34 +22,32 @@
     width: $day-block-size;
     box-sizing: border-box;
     position: relative;
-    display: none;
 
     background: $day-default-color;
     border: 1px solid $day-border-color;
-
     font-size: 30px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: $transition-time;
   }
 
-  @for $count from 1 through $max-month-length {
-    &-month-length--#{$count} :nth-child(-n + #{$count}) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid $day-border-color;
-      background-color: $day-default-color;
-      transition-duration: $transition-time;
+  &__day:hover {
+    cursor: pointer;
+    background: $day-hover-color;
+    transform: translateY(-$day-block-translate);
+  }
 
-      &:hover {
-        cursor: pointer;
-        background-color: $day-hover-color;
-        transform: translateY(-$day-block-translate);
-      }
+  @for $count from $min-month-length through $max-month-length {
+    &-month-length--#{$count} :nth-child(n + #{$count + 1}) {
+      display: none;
     }
   }
 
-  @each $coefficient, $name in $days {
+  @each $column_number, $name in $days {
     &-start-day--#{$name} :first-child {
-      margin-left: ($day-block-size + $calendar-gap) * $coefficient;
+      margin-left: ($day-block-size + $calendar-gap) * $column_number;
     }
   }
 
