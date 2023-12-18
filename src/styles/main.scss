@@ -27,6 +27,7 @@ body {
     background-color: #eee;
     text-align: center;
     line-height: $square-size;
+    transition: all 0.5s ease;
 
     @for $i from 1 through $day-num {
       &:nth-child(#{$i})::after {
@@ -47,12 +48,10 @@ body {
       background-color: pink;
       cursor: pointer;
       transform: translateY(-20px);
-      transition: all 0.5s ease;
+
     }
   }
 }
-
-$days: mon 0, tue 1 wed 2, thu 3 fri 4, sat 5, sun 6;
 
 @each $day, $i in $days {
   .calendar--start-day-#{$day} {
