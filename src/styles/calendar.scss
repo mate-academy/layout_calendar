@@ -1,23 +1,21 @@
 .calendar {
   display: flex;
+  margin: 50px auto;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: $calendar-padding;
   gap: 1px;
-  width: $size-box-day * 7 + 26px;
+  width: $size-box-day * $week + $calendar-padding * ($week - 1);
 
   @each $day, $size in $days {
-    &--start-day-#{$day} .calendar__day:first-child {
+    &--start-day--#{$day} .calendar__day:first-child {
       margin-left: #{$size};
     }
   }
 
   @for $curret-month-size from 28 through 31 {
-    &--month-length-#{$curret-month-size}
+    &--month-length--#{$curret-month-size}
     &__day:nth-child(n + #{$curret-month-size + 1}) {
       display: none;
     }
   }
 }
-
-
-
