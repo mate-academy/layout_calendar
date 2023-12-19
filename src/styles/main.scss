@@ -1,3 +1,5 @@
+@import "color" ;
+
 * {
   box-sizing: border-box;
 }
@@ -16,6 +18,9 @@ body {
   flex-wrap: wrap;
   gap: 1px;
   max-width: 706px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .day {
@@ -23,25 +28,21 @@ body {
   height: 100px;
   padding: 10px;
   margin: 0;
-  background-color: #eee;
+  list-style: none;
+  background-color: $color-bg;
   border: 1px solid #000;
   font-family: Arial,serif;
   font-size: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.day:hover {
   cursor: pointer;
-  transform: translateY(-20px);
   transition-duration: 0.5s;
-}
 
-ul,li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  &:hover {
+    transform: translateY(-20px);
+    background-color: $color-hover;
+  }
 }
 
 @for $num from 1 through 31 {
@@ -49,3 +50,4 @@ ul,li {
       content: "#{$num}";
     }
 };
+
