@@ -12,6 +12,11 @@ body {
   height: 100vh;
 }
 
+.container {
+  justify-content: center;
+  display: flex;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -26,7 +31,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.5s;
+    transition: all 0.5s;
+
+    &:first-child {
+      margin-left: 505px;
+    }
 
     &::before {
       content: '';
@@ -41,6 +50,8 @@ body {
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
       }
     }
   }
@@ -51,8 +62,9 @@ body {
     }
   }
 
-  @for $month-length from 28 through 31 {
-    &__day:nth-child(n + #{$month-length + 1}) {
+  @for $length from 28 through 31 {
+    &--month-length--#{$length}
+    &__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
