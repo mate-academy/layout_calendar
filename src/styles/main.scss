@@ -1,3 +1,58 @@
+$cell-size: 100px;
+$cell-gap: 1px;
+$cell-color: #eee;
+$cell-color-hover: #ffd3e1;
+$number-size: 30px;
+$number-font: Arial;
+$number-color: #000;
+$week-days: mon, tue, wed, thu, fri, sat, sun;
+
 body {
-  margin: 0;
+  margin: 0 10px;
+}
+
+.calender {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  max-width: calc(7 * ($cell-size + 10px));
+
+  &__date {
+    background-color: $cell-color;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $cell from 1 through 31 {
+      &--#{$cell}::before {
+        content: "#{$cell}";
+        font-family: $number-font;
+        font-size: $number-size;
+        text-align: center;
+        color: $number-color;
+      }
+    }
+
+    @each $day in $week-days {
+      &--start-#{$day} {
+        margin-left: $cell-size;
+      }
+    }
+
+    @for $length from 28 through 31 {
+      &--month-length-#{$length} {
+        display: none;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-color-hover;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
 }
