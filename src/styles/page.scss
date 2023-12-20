@@ -1,3 +1,10 @@
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -6,16 +13,11 @@
   width: width-calendar($day-size);
 
   &__day {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
     box-sizing: border-box;
     background: $block-bg;
     width: $day-size;
     height: $day-size;
     border: 1px solid #000;
-    transition-duration: 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -29,6 +31,7 @@
       cursor: pointer;
       background: pink;
       transform: translateY(-20px);
+      transition-duration: 0.5s;
     }
   }
 
@@ -43,7 +46,7 @@
   @each $day, $margin-left in $days {
     &--day--#{$day} {
       .calendar__day:first-child {
-        margin-left: $margin-left;
+        margin-left: $margin-left * $day-size;
       }
     }
   }
