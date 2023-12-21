@@ -5,10 +5,10 @@ $cell-color-hover: #ffd3e1;
 $number-size: 30px;
 $number-font: Arial;
 $number-color: #000;
-$week-days: mon, tue, wed, thu, fri, sat, sun;
+$week-days: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 body {
-  margin: 0 10px;
+  margin: 0 20px;
 }
 
 .calender {
@@ -16,6 +16,18 @@ body {
   flex-wrap: wrap;
   gap: $cell-gap;
   max-width: calc(7 * ($cell-size + 10px));
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $index in $week-days {
+    &--start-#{$day} :first-child {
+      margin-left: ($cell-size + $cell-gap + 2px) * $index;
+    }
+  }
 
   &__date {
     background-color: $cell-color;
@@ -33,18 +45,6 @@ body {
         font-size: $number-size;
         text-align: center;
         color: $number-color;
-      }
-    }
-
-    @each $day in $week-days {
-      &--start-#{$day} {
-        margin-left: $cell-size;
-      }
-    }
-
-    @for $length from 28 through 31 {
-      &--month-length-31:nth-child(#{$length}) {
-        display: none;
       }
     }
 
