@@ -1,3 +1,80 @@
+@import "color" ;
+
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: 706px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar__day {
+  width: $day;
+  height: 100px;
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  background-color: $color-bg;
+  border: 1px solid #000;
+  font-family: Arial,serif;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition-duration: 0.5s;
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: $color-hover;
+  }
+}
+
+@for $num from 1 through 31 {
+    .calendar__day:nth-child(n + #{$num})::before {
+      content: "#{$num}";
+    }
+};
+
+$number: 30, 29, 28;
+
+@each $num in $number {
+  .calendar--month-length-#{$num} {
+    .calendar__day:nth-child(1n+#{$num + 1}) {
+      display: none;
+    }
+  }
+}
+
+$week: (
+  tue $day + 1px,
+  wed $day * 2 + 2px,
+  thu $day * 3 + 3px,
+  fri $day * 4 + 4px,
+  sat $day * 5 + 5px,
+  sun $day * 6 + 6px
+);
+
+@each $day, $marg in $week {
+  .calendar--star-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left:$marg;
+    }
+  }
 }
