@@ -1,5 +1,6 @@
 @import "color" ;
 
+
 * {
   box-sizing: border-box;
 }
@@ -23,8 +24,8 @@ body {
   list-style: none;
 }
 
-.day {
-  width: 100px;
+.calendar__day {
+  width: $day;
   height: 100px;
   padding: 10px;
   margin: 0;
@@ -46,8 +47,34 @@ body {
 }
 
 @for $num from 1 through 31 {
-    li:nth-child(n + #{$num})::before {
+    .calendar__day:nth-child(n + #{$num})::before {
       content: "#{$num}";
     }
 };
 
+$number: 30, 29, 28;
+
+@each $num in $number {
+  .calendar--month-length-#{$num} {
+    .calendar__day:nth-child(1n+#{$num + 1}) {
+      display: none;
+    }
+  }
+}
+
+$week: (
+  tue $day + 1px,
+  wed $day * 2 + 2px,
+  thu $day * 3 + 3px,
+  fri $day * 4 + 4px,
+  sat $day * 5 + 5px,
+  sun $day * 6 + 6px
+);
+
+@each $day, $marg in $week {
+  .calendar--star-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left:$marg;
+    }
+  }
+}
