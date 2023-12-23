@@ -10,6 +10,7 @@ body {
   gap: $gap-size;
   width: $calendar-width;
 
+
   &__day {
     width: $box-size;
     height: $box-size;
@@ -21,13 +22,16 @@ body {
     transition-duration: 0.5s;
     cursor: pointer;
 
-    &:first-child {
-      margin-left: 606px;
-    }
 
-    &::before {
-      content: '';
-      font-size: 30px;
+
+    @for $cell from 1 through 31 {
+      &:nth-child(#{$cell})::before {
+        content: "#{$cell}";
+        font-family: $number-font;
+        font-size: $number-size;
+        text-align: center;
+        color: black;
+      }
     }
 
     &:hover {
@@ -35,16 +39,18 @@ body {
       transform: translateY(-20px);
     }
 
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: '#{$i}';
-      }
-    }
   }
 
-  @for $month-qty from 29 through 31 {
-    &__day:nth-child(n + #{$month-qty + 1}) {
-      display: none;
-    }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $index in $week-days {
+  .calendar--start-#{$day} :first-child {
+    margin-left: ($box-size + $gap-size) * $index;
   }
 }
