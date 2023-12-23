@@ -1,3 +1,51 @@
-body {
+@import "utils/variables";
+@import "utils/mixins";
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0;
+}
+
+.calendar{
+  box-sizing: border-box;
+  width: ($width-day) * 7 + $padding * 2 + $gap * 6;
+  padding: $padding;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    @include one-box;
+
+    &:hover {
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $days from 1 through 31 {
+      &:nth-child(#{$days})::before  {
+        content: '#{$days}';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @each $day, $marg-index in $week-days{
+    &--start-day--#{$day} :first-child {
+      margin-left: ($width-day + $gap) * $marg-index;
+    }
+  }
+
+  @for $i from 28 to 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}){
+      display: none;
+    }
+  }
 }
