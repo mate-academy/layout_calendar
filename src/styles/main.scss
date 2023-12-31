@@ -1,10 +1,10 @@
-$day-size: 100px;
-$gap: 1px;
-$padding: 10px;
-$start-days: mon, tue, wed, thu, fri, sat, sun;
-$month-lengths: 28, 29, 30, 31;
+@import 'utils/variables.scss';
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
 }
 
@@ -14,13 +14,14 @@ body {
   flex-wrap: wrap;
   padding: $padding;
   max-width: calc(7 * $day-size + $padding);
+
 }
 
 @each $start in $start-days {
   $margin-left: 0;
 
   @each $day in $start-days {
-    .calendar--days-#{$day} .calendar__day:nth-child(1) {
+    .calendar--day-start-#{$day} .calendar__day:nth-child(1) {
       margin-left: $margin-left;
     }
 
@@ -29,7 +30,7 @@ body {
 }
 
 @each $length in $month-lengths {
-  .calendar--months-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
     display: none;
   }
 }
