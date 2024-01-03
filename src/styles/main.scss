@@ -1,3 +1,61 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
 body {
   margin: 0;
+}
+
+$height-of-block: 100px;
+$width-of-block: 100px;
+$amount-of-days-in-row: 7;
+$num-days: 31;
+
+@for $i from 1 through $num-days {
+  .calendar {
+    margin: 0 auto;
+    display: flex;
+    gap: 1px;
+    flex-wrap: wrap;
+    max-width: $height-of-block * $amount-of-days-in-row + $amount-of-days-in-row;
+
+    &__day {
+      box-sizing: border-box;
+      height: $height-of-block;
+      width: $width-of-block;
+      background-color: #eee;
+      border: 1px black solid;
+      text-align: center;
+      line-height: $height-of-block;
+      font-size: 30px;
+      transition: all 0.5s ease;
+
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+
+      &:hover {
+        background-color: pink;
+        transform: translate(0, -20px);
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+
+$start-day: 7; // enter from what day starts 1
+
+@each $day in $start-day - 1 {
+  .calendar__day:nth-child(1) {
+    margin-left: 100 * $day + $day;
+  }
+}
+
+$month-length: 30; // enter amount of days in a month
+
+@for $i from $month-length + 1 through $num-days + 1{
+  .calendar__day:nth-child(#{$i}) {
+    opacity: 0;
+  }
 }
