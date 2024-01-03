@@ -1,3 +1,55 @@
 body {
   margin: 0;
+
+  --height-width-of-block: 100px;
+}
+
+$num-days: 31;
+
+@for $i from 1 through $num-days {
+  .day-#{$i} {
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    height: var(--height-width-of-block);
+    width: var(--height-width-of-block);
+    background-color: #eee;
+    border: 1px black solid;
+    text-align: center;
+    line-height: var(--height-width-of-block);
+    font-size: 30px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      cursor: pointer;
+    }
+
+    &::before {
+      content: "#{$i}";
+    }
+  }
+}
+
+.numbers-container {
+  display: flex;
+  gap: 1px;
+  max-width: 710px;
+  flex-wrap: wrap;
+}
+
+$start-day: 7; // enter from what day starts 1
+
+@each $day in $start-day - 1 {
+  .day-1 {
+    margin-left: 100 * $day + $day;
+  }
+}
+
+$month-length: 29; // enter amount of days in a month
+
+@for $i from $month-length + 1 through $num-days + 1{
+  .day-#{$i} {
+    opacity: 0;
+  }
 }
