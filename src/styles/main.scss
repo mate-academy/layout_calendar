@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+h1 {
+  text-align: center;
+}
+
 .calendar {
   margin: 0 auto;
   padding: 20px;
@@ -14,6 +18,40 @@ body {
   display: flex;
   gap: 1px;
   flex-wrap: wrap;
+
+  $days: mon 0, tue 101px, wed 202px, thu 303px, fri 404px, sat 505px, sun 606px;
+
+  @each $day-name, $day-value in $days {
+    &--start-day-#{$day-name} > &__day:nth-child(1) {
+      margin-left: $day-value;
+    }
+  }
+
+  $length-month: 28, 29, 30, 31;
+
+  @each $num in $length-month {
+
+    &--month-length-#{$num} > &__day {
+
+      &:nth-child(n + #{$num + 1}) {
+        display: none;
+      }
+
+      @for $i from 1 through $num {
+
+        &:nth-child(#{$i}):before {
+          content: "#{$i}";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+      }
+
+    }
+
+  }
 
   &__day {
     position: relative;
@@ -24,16 +62,6 @@ body {
     border: 1px solid black;
     font-size: 30px;
     transition: all 0.5s;
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i}):before {
-        content: "#{$i}";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-    }
 
     &:hover {
       cursor: pointer;
