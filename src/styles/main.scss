@@ -1,3 +1,5 @@
+@import './variables';
+
 * {
   font-family: Arial, sans-serif;
 }
@@ -13,13 +15,13 @@ h1 {
 .calendar {
   margin: 0 auto;
   padding: 20px;
-  width: calc(100px * 7) + 6px;
+  width: $calendar-size;
 
   display: flex;
-  gap: 1px;
+  gap: $distance-between;
   flex-wrap: wrap;
 
-  $days: mon 0, tue 101px, wed 202px, thu 303px, fri 404px, sat 505px, sun 606px;
+  $days: mon 0, tue calc($field-size + $distance-between), wed calc(($field-size * 2) + ($distance-between * 2)), thu calc(($field-size * 3) + ($distance-between * 3)), calc(($field-size * 4) + ($distance-between * 4)), sat calc(($field-size * 5) + ($distance-between * 5)), sun calc(($field-size * 6) + ($distance-between * 6));
 
   @each $day-name, $day-value in $days {
     &--start-day-#{$day-name} > &__day:nth-child(1) {
@@ -56,16 +58,16 @@ h1 {
   &__day {
     position: relative;
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
+    width: $field-size;
+    height: $field-size;
+    background-color: $background-main-color;
     border: 1px solid black;
     font-size: 30px;
     transition: all 0.5s;
 
     &:hover {
       cursor: pointer;
-      background-color: #FFBFCB;
+      background-color: $background-hover-color;
       transform: translateY(-20px);
     }
 
