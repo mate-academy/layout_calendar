@@ -1,4 +1,6 @@
-* {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
@@ -10,28 +12,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin: 0;
 }
 
 .calendar {
   display: flex;
-  gap: $gap;
+  gap: $calendar-gap;
   flex-wrap: wrap;
-  padding: $padding;
-  max-width: calc(7 * $day-size + $padding);
+  padding: $calendar-padding;
+  max-width: 7 * $day-size + $calendar-padding * 2 + $calendar-gap * 6;
 
-  @each $count, $day in $week {
-    &--start-day-#{$day} :nth-child(1) {
-      margin-left: $day-size * $count + $gap * $count;
+  @each $day-name, $day-position in $week {
+    &--start-day--#{$day-name} :nth-child(1) {
+      margin-left: $day-position * ($day-size + $calendar-gap);
     }
   }
-}
 
-
-@each $length in $month-length {
-  .calendar--month-length--#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
-    display: none;
+  @for $last-day from 28 through 31 {
+    $disabled-day: $last-day + 1;
+    &--month-length--#{$last-day} :nth-child(n + #{$disabled-day}) {
+      display: none;
+    }
   }
 }
 
@@ -45,12 +47,11 @@ body {
   align-items: center;
   justify-content: center;
   transition: background-color 0.5s, transform 0.5s;
-  transition-delay: 0.4s;
 
-  @for $day from 1 through 31 {
-    &:nth-child(#{$day}) {
+  @for $number from 1 through 31 {
+    &:nth-child(#{$number}) {
       &::before {
-        content: '#{$day}';
+        content: '#{$number}';
         font-size: 30px;
       }
     }
