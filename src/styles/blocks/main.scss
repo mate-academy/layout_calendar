@@ -1,0 +1,66 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  gap: $calendar-gap;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  max-width: 7 * $day-size + $calendar-padding * 2 + $calendar-gap * 6;
+
+  @each $day-name, $day-position in $week {
+    &--start-day--#{$day-name} :nth-child(1) {
+      margin-left: $day-position * ($day-size + $calendar-gap);
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    $disabled-day: $last-day + 1;
+    &--month-length--#{$last-day} :nth-child(n + #{$disabled-day}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day {
+  border: 1px solid #000;
+  background-color: #eee;
+  position: relative;
+  height: $day-size;
+  width: $day-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.5s, transform 0.5s;
+
+  @for $number from 1 through 31 {
+    &:nth-child(#{$number}) {
+      &::before {
+        content: '#{$number}';
+        font-size: 30px;
+      }
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+  }
+}
+
