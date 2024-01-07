@@ -1,11 +1,4 @@
-$cell-size: 100px;
-$gap: 1px;
-$cell-count: 7;
-$month-length: 29;
-$digit-size: 0.8 * $cell-size;
-$shift: $cell-size / 2;
-$day-of-week: wed;
-$week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+@import './vars';
 
 * {
   box-sizing: border-box;
@@ -39,7 +32,7 @@ body {
     @for $count from 1 through 31 {
       &:nth-child(#{$count}n)::before {
         content: "#{$count}";
-        display: block;
+
         width: $digit-size;
         height: $digit-size;
 
@@ -48,8 +41,9 @@ body {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
 
-        top: $cell-size / 3;
-        left: $cell-size / 3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
 
@@ -60,8 +54,6 @@ body {
       cursor: pointer;
     }
   }
-
-  // @for $day from ;
 }
 
 @each $day, $index in $week {
