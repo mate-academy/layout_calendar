@@ -1,0 +1,48 @@
+@import './values';
+
+.calendar {
+  margin: 30px auto;
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: $calendar-width;
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid $day-border;
+    background-color: $day-color;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    line-height: $cell-size;
+    transition-duration: 0.5s;
+    &:hover {
+       cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+    @for $num from 1 through $number-of-days {
+      &:nth-child(#{$num})::before {
+        content: '#{$num}';
+      }
+    }
+  }
+
+  @each $day, $num in $days {
+    &__start-day--#{$day} :first-child {
+      margin-left: $num * $margin-day;
+    }
+  }
+
+  @for $num from 28 through 31 {
+    &__month-length--#{$num} :nth-child(n + #{$num + 1}) {
+      display: none;
+    }
+  }
+}
+
+
