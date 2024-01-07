@@ -1,3 +1,60 @@
-body {
+$size: 100px;
+$space-within: 1px;
+$space-around: 10px;
+$month-length: 29;
+$start-days: 0 "mon", 1 "tue", 2 "wed", 3 "thu", 4 "fri", 5 "sat", 6 "sun";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-within;
+  width: 7 * $size + 2 * $space-around + 6 * $space-within;
+  padding: $space-around;
+}
+
+@for $day from 1 through $month-length {
+  .calendar__day:nth-child(#{$day}) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $size;
+    width: $size;
+    background-color: #eee;
+    border: 1px solid #000;
+  }
+
+  .calendar__day:nth-child(#{$day})::before {
+    content: "#{$day}";
+  }
+}
+
+@each $column, $start-day in $start-days {
+  .calendar--start-day--#{$start-day} :first-child {
+    margin-left: $column * $size + $column * $space-within;
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: pink;
+  transform: translate(0, -20px);
+  transition-duration: 0.5s;
 }
