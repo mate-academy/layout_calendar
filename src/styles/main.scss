@@ -5,6 +5,7 @@ $month-length: 29;
 $digit-size: 0.8 * $cell-size;
 $shift: $cell-size / 2;
 $day-of-week: wed;
+$week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
 
 * {
   box-sizing: border-box;
@@ -12,13 +13,15 @@ $day-of-week: wed;
 
 body {
   margin: 0;
+  height: 100vh;
 }
 
 .calendar {
-  position: relative;
-
   margin: 0 auto;
-  margin-block: calc(10vh);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   width: ($cell-size + $gap) * $cell-count;
   display: flex;
@@ -33,21 +36,8 @@ body {
     border: 1px solid black;
     padding: 10px;
 
-    &:hover {
-      transform: translateY(-20px);
-      background-color: pink;
-      transition-duration: 0.5s;
-      cursor: pointer;
-    }
-
-    @for $length from $month-length through 31 {
-      &--#{$length + 1} {
-        display: none;
-      }
-    }
-
     @for $count from 1 through 31 {
-      &--#{$count}::before {
+      &:nth-child(#{$count}n)::before {
         content: "#{$count}";
         display: block;
         width: $digit-size;
@@ -63,14 +53,29 @@ body {
       }
     }
 
-    $week: 1 mon, 2 tue, 3 wed, 4 thu, 5 fri, 6 sat, 7 sun;
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      transition-duration: 0.5s;
+      cursor: pointer;
+    }
+  }
 
-    &--start-day--#{$day-of-week} {
-      @each $number, $day in $week {
-        @if $day == $day-of-week {
-          margin-left: ($number - 1) * $cell-size + $number - $gap;
-        }
-      }
+  // @for $day from ;
+}
+
+@each $day, $index in $week {
+  .calendar--start-day-#{$day} {
+    .calendar__cell:first-child {
+      margin-left: ($cell-size + $gap) * $index;
+    }
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar--month-length-#{$day - 1} {
+    .calendar__cell:nth-child(n + #{$day}) {
+      display: none;
     }
   }
 }
