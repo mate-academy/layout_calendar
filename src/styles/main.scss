@@ -1,3 +1,69 @@
+$weekdays: (
+  'mon' 0,
+  'tue' 1,
+  'wed' 2,
+  'thu' 3,
+  'fri' 4,
+  'sat' 5,
+  'sun' 6
+);
+$month-lengths: 28, 29, 30, 31;
+
+$calendar-day-gap: 1px;
+$calendar-day-width: 14.29%;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  width: 700px;
+}
+
+@for $calendar__day from 1 to 32 {
+  .calendar__day:nth-child(#{$calendar__day}) {
+    flex: 0 0 calc($calendar-day-width - $calendar-day-gap);
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    position: relative;
+
+    &::before {
+      content: "#{$calendar__day}";
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transition: transform 0.5s ease;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@each $weekday, $index in $weekdays {
+  .calendar--start-#{$weekday} {
+    .calendar__day:nth-child(#{$index + 1}) {
+      margin-left: calc(#{$index} * (#{$calendar-day-width} - #{$calendar-day-gap}));
+    }
+  }
+}
+
+@each $month-length in $month-lengths {
+  .calendar--month-length-#{$month-length} {
+    .calendar__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
 }
