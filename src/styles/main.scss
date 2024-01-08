@@ -12,7 +12,11 @@ $calendar-day-gap: 1px;
 $calendar-day-width: 14.29%;
 
 body {
+  height: 100vh;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar {
@@ -21,6 +25,15 @@ body {
   gap: 1px;
   padding: 10px;
   width: 700px;
+
+  @for $i from 1 through length($month-lengths) {
+    $month-length: nth($month-lengths, $i);
+    &.calendar--month-length-#{$month-length} {
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
 }
 
 @for $calendar__day from 1 to 32 {
@@ -31,6 +44,7 @@ body {
     width: 100px;
     height: 100px;
     position: relative;
+    transition: transform 0.5s ease;
 
     &::before {
       content: "#{$calendar__day}";
@@ -47,14 +61,6 @@ body {
       background-color: pink;
       transition: transform 0.5s ease;
       transform: translateY(-20px);
-    }
-  }
-}
-
-@each $weekday, $index in $weekdays {
-  .calendar--start-#{$weekday} {
-    .calendar__day:nth-child(#{$index + 1}) {
-      margin-left: calc(#{$index} * (#{$calendar-day-width} - #{$calendar-day-gap}));
     }
   }
 }
