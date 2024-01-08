@@ -6,9 +6,8 @@ $height-of-block: 100px;
 $width-of-block: 100px;
 $amount-of-days-in-row: 7;
 $num-days: 31;
-$start-day: 7;
-$month-length: 29;
-
+$start-days: 0 "mon", 1 "tue", 2 "wed", 3 "thu", 4 "fri", 5 "sat", 6 "sun";
+$month-length: 28, 29, 30, 31;
 
 body {
   margin: 0;
@@ -50,15 +49,17 @@ body {
   }
 }
 
-@each $day in $start-day - 1 {
-  .calendar__day:nth-child(1) {
-    margin-left: 100 * $day + $day;
+
+@each $index, $day in $start-days {
+  .calendar--start-day--#{$day} :first-child {
+    margin-left: 100px * $index + $index;
   }
 }
 
-@for $i from $month-length + 1 through $num-days + 1{
-  .calendar__day:nth-child(#{$i}) {
-    opacity: 0;
+@each $index in $month-length {
+  @for $i from $index through $num-days {
+    .calendar--month-length--#{$index} :nth-child(#{$i + 1}) {
+      opacity: 0;
+    }
   }
 }
-
