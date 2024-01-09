@@ -1,15 +1,15 @@
 $weekdays: (
-  'mon' 0,
-  'tue' 1,
-  'wed' 2,
-  'thu' 3,
-  'fri' 4,
-  'sat' 5,
-  'sun' 6
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6
 );
 $month-lengths: 28, 29, 30, 31;
 $calendar-day-gap: 1px;
-$calendar-day-width: 14.29%;
+$calendar-day-width: 100px - $calendar-day-gap;
 
 body {
   height: 100vh;
@@ -22,20 +22,19 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  width: 712px;
   gap: 1px;
   padding: 10px;
-  width: 700px;
+}
 
-  @for $i from 1 through length($month-lengths) {
-    // stylelint-disable-next-line scss/no-global-function-names
-    $month-length: nth($month-lengths, $i);
-    &.calendar--month-length-#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 1}) {
-        display: none;
-      }
+@each $day, $number in $weekdays {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: $number * ($calendar-day-width);
     }
   }
 }
+
 
 @for $calendar__day from 1 to 32 {
   .calendar__day:nth-child(#{$calendar__day}) {
@@ -46,6 +45,7 @@ body {
     height: 100px;
     position: relative;
     transition: transform 0.5s ease;
+    background-color: #eee;
 
     &::before {
       content: "#{$calendar__day}";
