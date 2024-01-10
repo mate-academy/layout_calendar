@@ -19,7 +19,7 @@ body {
 @each $day, $number in $weekdays {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: $number * ($calendar-day-width);
+      margin-left: $number * ($calendar-cell-size);
     }
   }
 }
@@ -30,8 +30,8 @@ body {
     flex: 0 0 $calendar-day-flex-basis;
     box-sizing: border-box;
     border: 1px solid black;
-    width: 100px;
-    height: 100px;
+    width: $calendar-cell-size;
+    height: $calendar-cell-size;
     position: relative;
     transition: transform 0.5s ease;
     background-color: #eee;
