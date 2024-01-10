@@ -1,15 +1,4 @@
-$weekdays: (
-  'mon': 0,
-  'tue': 1,
-  'wed': 2,
-  'thu': 3,
-  'fri': 4,
-  'sat': 5,
-  'sun': 6
-);
-$month-lengths: 28, 29, 30, 31;
-$calendar-day-gap: 1px;
-$calendar-day-width: 100px - $calendar-day-gap;
+@import 'variables';
 
 body {
   height: 100vh;
@@ -38,7 +27,7 @@ body {
 
 @for $calendar__day from 1 to 32 {
   .calendar__day:nth-child(#{$calendar__day}) {
-    flex: 0 0 calc($calendar-day-width - $calendar-day-gap);
+    flex: 0 0 $calendar-day-flex-basis;
     box-sizing: border-box;
     border: 1px solid black;
     width: 100px;
