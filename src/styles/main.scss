@@ -1,3 +1,69 @@
+:root {
+  --day-size: 100px;
+  --gap-size: 1px;
+}
+
 body {
   margin: 0;
 }
+
+$days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6,);
+
+@each $name, $index in $days {
+  .start-day-#{$name} > div:first-child {
+    margin-left: calc((var(--day-size) + var(--gap-size)) * #{$index});
+  }
+}
+
+$month-length: 28, 29, 30;
+
+@each $length in $month-length {
+  .month-length-#{$length} {
+    .month__day {
+      @for $i from $length + 1 through 31 {
+        &:nth-child( #{$i} ) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.month {
+  display: flex;
+  gap: var(--gap-size);
+  width: 706px;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &__day {
+    @for $i from 1 through 31 {
+      &:nth-child( #{$i} ) {
+        &:nth-child(#{$i})::before {
+          content:'#{$i}';
+          font-family: Arial, sans-serif;
+          font-size: 30px;
+        }
+      }
+    }
+
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #eee;
+    height: var(--day-size);
+    width: var(--day-size);
+    border: 1px solid black;
+
+    cursor: pointer;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: pink;
+      transition-duration: 0.5s;
+    }
+  }
+}
+
