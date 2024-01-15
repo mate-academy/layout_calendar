@@ -1,5 +1,10 @@
 @import 'variable';
 
+:root {
+  --day-size: 100px;
+  --gap-size: 1px;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -12,14 +17,14 @@ body {
   width: $calendar-width;
 }
 
-.calendar__day {
+.calendar__days {
   display: flex;
   flex-wrap: wrap;
   gap: $border-width;
   padding: $padding-for-table;
 }
 
-.calendar__days {
+.calendar__day {
   box-sizing: border-box;
   height: $day-size;
   width: $day-size;
@@ -38,32 +43,35 @@ body {
     transition: background-color $animation-duration, transform $animation-duration;
   }
 
-  @each $day in $mon, $tue, $wed, $thu, $fri, $sat, $sun {
-    &.start-#{$day} {
-      $day-index: get-day-index($day);
-
-      @if $day-index {
-        margin-left: $day-size * $day-index + $border-width;
-      }
-    }
-  }
-
-  @for $i from 28 through 31 {
-    &.month-length-#{$i} {
-      &:nth-child(#{$i}) {
-        background-color: lightblue;
-      }
-    }
-  }
-
   @for $i from 1 through 31 {
     &:nth-child(#{$i})::before {
       content: "#{$i}";
       font-size: $number-font-size;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+$days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6,);
+
+@each $name, $index in $days {
+  .calendar--start-day-#{$name} > div:first-child {
+    margin-left: calc((var(--day-size) + var(--gap-size)) * #{$index});
+  }
+}
+
+$month-length: 28, 29, 30, 31;
+
+@each $length in $month-length {
+  .calendar__days-#{$length} {
+    .calendar__day {
+      @for $i from $length + 1 through 31 {
+        &:nth-child( #{$i} ) {
+          display: none;
+        }
+      }
     }
   }
 }
