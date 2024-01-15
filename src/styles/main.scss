@@ -1,3 +1,85 @@
+$day-size: 100px;
+$col-numbers: 7;
+$gap: 1px;
+
 body {
   margin: 0;
 }
+
+.calendar {
+  margin: 30px;
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: calc(#{$day-size * $col-numbers + 10px});
+
+  $first-days-shifts:
+    mon 0,
+    tue calc(#{$day-size + $gap}),
+    wed calc(2 * #{$day-size + $gap} ),
+    thu calc(3 * #{$day-size + $gap}),
+    fri calc(4 * #{$day-size + $gap}),
+    sat calc(5 * #{$day-size + $gap}),
+    sun calc(6 * #{$day-size + $gap});
+
+  @each $first-day-name, $first-day-shift in $first-days-shifts{
+    &--start-day--#{$first-day-name} :first-child {
+      margin-left: $first-day-shift;
+    }
+  }
+
+  &__day {
+    display: none;
+  }
+
+  @for $month-length from 28 to 32 {
+    &--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
+      display: flex;
+    }
+  }
+
+
+
+  &__day {
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: all 0.5s;
+
+    @for $day from 1 to 32 {
+      &--#{$day}::before {
+        content: '#{$day}';
+      }
+    }
+
+
+
+
+
+
+
+
+    // $days-of-weak: ;
+    // @each $day-of-weak in $days-of-weak {
+
+    // }
+
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+    }
+
+  }
+
+
+}
+
+
