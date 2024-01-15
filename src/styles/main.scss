@@ -13,8 +13,7 @@ body {
   flex-wrap: wrap;
   width: calc(#{$day-size * $col-numbers + 10px});
 
-  $first-days-shifts:
-    mon 0,
+  $first-days-shifts: mon 0,
     tue calc(#{$day-size + $gap}),
     wed calc(2 * #{$day-size + $gap} ),
     thu calc(3 * #{$day-size + $gap}),
@@ -28,19 +27,10 @@ body {
     }
   }
 
+
+
   &__day {
     display: none;
-  }
-
-  @for $month-length from 28 to 32 {
-    &--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
-      display: flex;
-    }
-  }
-
-
-
-  &__day {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -58,28 +48,18 @@ body {
       }
     }
 
-
-
-
-
-
-
-
-    // $days-of-weak: ;
-    // @each $day-of-weak in $days-of-weak {
-
-    // }
-
-
     &:hover {
       cursor: pointer;
       background-color: pink;
       transform: translateY(-20px);
     }
-
   }
 
-
+  @for $month-length from 28 to 32 {
+    &--month-length--#{$month-length} :nth-child(-n + #{$month-length}) {
+      display: flex;
+    }
+  }
 }
 
 
