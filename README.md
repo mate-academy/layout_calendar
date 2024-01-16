@@ -1,6 +1,6 @@
 # Calendar
 
-Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't use JS.
+Display a calendar in the middle of the screen (both horizontally and vertically). Use SCSS and follow BEM. Don't use JS.
 
 - Write styles in `src/styles/main.scss` instead of `src/style.css`.
 - This task does not have tests so you need to check if it works as expected manually.
@@ -15,12 +15,14 @@ Display a calendar in the middle of the screen. Use SCSS and follow BEM. Don't u
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
   - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
   - You can just add correct `margin-left` for the first day
+  - Set calendar to start from Sunday by default
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
+  - Set 31 days by default
 
 On hovering over a cell:
 - cursor should become pointer
-- The hovered cell has to become pink
+- The hovered cell has to become pink (use `#FFBFCB`)
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
