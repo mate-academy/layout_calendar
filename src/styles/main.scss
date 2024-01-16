@@ -3,6 +3,10 @@ $border-color: #000;
 $font-size: 30px;
 $cell-size: 100px;
 $calendar-width: 7 * $cell-size + 10px;
+$left-margin-modifier: 20px;
+$redundant-days-modifier: 31;
+$days: mon tue wed thu fri sat sun;
+$month-lengths: 28 29 30 31;
 
 body {
   display: flex;
@@ -19,7 +23,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Arial , sans-serif;
+  font-family: Arial, sans-serif;
   font-size: $font-size;
   background-color: $base-color;
 
@@ -37,20 +41,20 @@ body {
   width: $calendar-width;
 }
 
-@for $day from 1 through 31 {
+@for $day from 1 through $redundant-days-modifier {
   .calendar-cell:nth-child(#{$day})::before {
     content: '#{$day}';
   }
 }
 
-@each $day, $index in (mon 1), (tue 2), (wed 3), (thu 4), (fri 5), (sat 6), (sun 7) {
-  .calendar.start-day-#{$day} {
-    margin-left: ($index - 1) * ($cell-size + 1px) + 10px;
+@each $day, $index in mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7 {
+  .start-day-#{$day} {
+    margin-left: $index * ($cell-size + 1px) + $left-margin-modifier;
   }
 }
 
-@for $day from 28 through 31 {
-  .calendar.month-length-#{$day} .calendar-cell:nth-child(n + #{$day + 1}) {
+@for $month-length from 28 through 31 {
+  .calendar--month-length-#{$month-length} .calendar-cell:nth-child(n + #{$month-length + 1}) {
     display: none;
   }
 }
