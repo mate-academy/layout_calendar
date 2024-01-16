@@ -11,11 +11,25 @@
 
   @for $amount-of-days from 28 through 31 {
     &--month-length--#{$amount-of-days} {
-      &>:nth-child(n + #{$amount-of-days + 1}) {
+      & :nth-child(n + #{$amount-of-days + 1}) {
         display: none;
       }
     }
   }
+
+  @each $day, $date in $days-and-dates {
+    &--start-day--#{$day} :first-child {
+        margin-left: $date * ($day-width + $calendar-gap);
+    }
+  }
+
+  //  @each $day, $date in $days-and-dates {
+  //     &--start-day--#{$day} {
+  //       &>:nth-child(#{$date}) {
+  //         margin-left: $date * ($day-width + $calendar-gap);
+  //       }
+  //     }
+  //   }
 
   &__day {
     position: relative;
@@ -46,11 +60,11 @@
       }
     }
 
-    @each $day, $date in $days-and-dates {
-      &--start-day--#{$day} {
-        margin-left: $date * ($day-width + $calendar-gap);
-      }
-    }
+    // @each $day, $date in $days-and-dates {
+    //   &--start-day--#{$day} {
+    //     margin-left: $date * ($day-width + $calendar-gap);
+    //   }
+    // }
 
   }
 }
