@@ -33,11 +33,12 @@ body {
   font-size: $font-size;
   position: relative;
 
+  transition: background-color $animation-duration, transform $animation-duration;
+
   &:hover {
     cursor: pointer;
     background-color: pink;
     transform: translateY(-20px);
-    transition: background-color $animation-duration, transform $animation-duration;
   }
 
   @for $i from 1 through 31 {
@@ -52,7 +53,7 @@ body {
 }
 
 @each $name, $index in $days {
-  .calendar--month-length-#{$name} > div:first-child {
+  .calendar--start-day-#{$name} > div:first-child {
     margin-left: calc((var(--day-size) + var(--gap-size)) * #{$index});
   }
 }
