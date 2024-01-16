@@ -36,17 +36,17 @@ const config = {
       ...basic,
       label: 'Calendar day with hover effect',
       hoverSelector: '.calendar__day:nth-child(5)',
-      postInteractionWait: 1000,
+      postDOMChangeWait: 1000,
     },
     {
       ...basic,
       label: 'Calendar starting from Wednesday',
-      postInteractionWait: 1000,
+      postDOMChangeWait: 1000,
     },
     {
       ...basic,
       label: 'Calendar with length of 29 days',
-      postInteractionWait: 1000,
+      postDOMChangeWait: 1000,
     },
   ],
 };

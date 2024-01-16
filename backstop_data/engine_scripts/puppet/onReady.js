@@ -4,7 +4,7 @@ module.exports = async (page, scenario, vp) => {
 
   const {
     label,
-    postInteractionWait = 0,
+    postDOMChangeWait = 0,
   } = scenario;
 
   switch (label) {
@@ -20,7 +20,7 @@ module.exports = async (page, scenario, vp) => {
       });
 
       await page.waitForSelector('.calendar--start-day-wed');
-      await page.waitForTimeout(postInteractionWait);
+      await page.waitForTimeout(postDOMChangeWait);
 
       break;
     }
@@ -37,7 +37,7 @@ module.exports = async (page, scenario, vp) => {
       });
 
       await page.waitForSelector('.calendar--month-length-29');
-      await page.waitForTimeout(postInteractionWait);
+      await page.waitForTimeout(postDOMChangeWait);
 
       break;
     }
