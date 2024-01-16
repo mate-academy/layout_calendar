@@ -15,9 +15,6 @@ body {
 
 .calendar {
   width: $calendar-width;
-}
-
-.calendar__days {
   display: flex;
   flex-wrap: wrap;
   gap: $border-width;
@@ -54,18 +51,14 @@ body {
   }
 }
 
-$days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6,);
-
 @each $name, $index in $days {
-  .calendar--start-day-#{$name} > div:first-child {
+  .calendar--month-length-#{$name} > div:first-child {
     margin-left: calc((var(--day-size) + var(--gap-size)) * #{$index});
   }
 }
 
-$month-length: 28, 29, 30, 31;
-
 @each $length in $month-length {
-  .calendar__days-#{$length} {
+  .calendar--month-length-#{$length} {
     .calendar__day {
       @for $i from $length + 1 through 31 {
         &:nth-child( #{$i} ) {
