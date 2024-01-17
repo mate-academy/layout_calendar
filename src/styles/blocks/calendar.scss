@@ -1,0 +1,60 @@
+@use '../utils/reset';
+@use '../utils/variables' as *;
+
+.calendar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: $calendar-width;
+  padding: $calendar-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  @each $day, $days-of-week in 'mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6 {
+    &--start-day--#{$day} :first-child {
+      margin-left: $days-of-week * ($day-width + $calendar-gap);
+    }
+  }
+
+  @for $days-amount from 28 through 31 {
+    &--month-length--#{$days-amount} {
+      & :nth-child(n + #{$days-amount + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    position: relative;
+    width: $day-width;
+    height: $day-height;
+    background-color: $day-color;
+    border: 1px solid $day-border-color;
+    border-radius: 3px;
+    transition: all 500ms;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $day-hover-color;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date}):before {
+        content: '#{$date}';
+      }
+    }
+  }
+}
