@@ -3,21 +3,24 @@
 
 .calendar {
   display: flex;
-  align-items: center;
   height: 100vh;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: calculateCalendarWidth($square-size, $elements-in-row,
+  $gap, $container-padding);
 
-  &__wrapper {
-    gap: $gap;
-    display: flex;
-    flex-wrap: wrap;
-    width: calculateCalendarWidth($square-size, $elements-in-row,
-    $gap, $container-padding);
+  @for $month-length from 28 through 31 {
+    &--month-length--#{$month-length} {
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
 
-    @for $day from 28 through 31 {
-      &--month-length-#{$day} {
-        .calendar__day:nth-child(n + #{$day + 1}) {
-          display: none;
-        }
+  @each $day, $day-of-week in $start-day {
+    &--start-day--#{$day} .calendar__day {
+      &:first-child {
+        margin-left: $day-of-week * ($square-size + $gap);
       }
     }
   }
@@ -25,33 +28,28 @@
   &__day {
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
-    transition: transform 0.5s, backround-color 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
     border: $border solid black;
     cursor: pointer;
     background-color: #eee;
 
-    @each $day, $day-of-week in $start-day {
-      &--#{$day} {
-        margin-left: $day-of-week * ($square-size + $gap);
-      }
-    }
-
     @include calendarCellSize($square-size);
 
     @for $day from 1 through 31 {
-      &--#{$day}::before {
-        display: flex;
+      &:nth-child(#{$day})::before {
         content: "#{$day}";
-        line-height: $square-size;
+        display: flex;
         justify-content: center;
+        align-items: center;
+        height: 100%;
       }
+    }
 
-      &--#{$day}:hover {
-        background-color: pink;
-        animation-name: "day-hover-in";
-        animation-duration: 0.5s;
-        transform: translate(0, -20px);
-      }
+    &:hover {
+      background-color: #ffbfcb;
+      animation-name: day-hover-in;
+      animation-duration: 0.5s;
+      transform: translate(0, -20px);
     }
   }
 }
