@@ -12,9 +12,9 @@
   flex-wrap: wrap;
   gap: $calendar-gap;
 
-  @each $day, $days-of-week in 'mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6 {
+  @each $day, $days-of-week in $days-in-week {
     &--start-day--#{$day} :first-child {
-      margin-left: $days-of-week * ($day-width + $calendar-gap);
+      margin-left: $days-of-week * ($day-size + $calendar-gap);
     }
   }
 
@@ -28,8 +28,8 @@
 
   &__day {
     position: relative;
-    width: $day-width;
-    height: $day-height;
+    width: $day-size;
+    height: $day-size;
     background-color: $day-color;
     border: 1px solid $day-border-color;
     border-radius: 3px;
@@ -48,8 +48,6 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
-
-
 
     @for $date from 1 through 31 {
       &:nth-child(#{$date}):before {
