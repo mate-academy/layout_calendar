@@ -1,58 +1,76 @@
-$calendar-day-size: 100px;
-$days-of-month: "tue" 1 1px, "wed" 2 2px, "thu" 3 3px, "fri" 4 4px, "sat" 5 5px, "sun" 6 6px;
+$calendar-font: Arial, Helvetica, sans-serif;
+$calendar-padding: 10px;
+$square-size: 100px;
+$square-gap-size: 1px;
+$square-size-full: calc($square-size + $square-gap-size);
+$square-border-size: 1px;
+$square-main-color: #eee;
+$square-hover-color: pink;
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+);
+$days-in-row: 7;
+$calendar-width: calc($square-size-full * $days-in-row);
 
 body {
   margin: 0;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: $calendar-font;
+  font-size: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .calendar {
   display: flex;
-  gap: 1px;
   flex-wrap: wrap;
-  width: 7 * $calendar-day-size + 10px;
+  gap: $square-gap-size;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  @each $day, $day-number in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $day-number * $square-size-full;
+    }
+  }
+
+  @for $days-number from 28 through 31 {
+    &--month-length-#{$days-number} &__day:nth-child(n + #{$days-number + 1}) {
+      display: none;
+    }
+  }
 
   &__day {
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
-    border: 1px solid #000;
-    width: $calendar-day-size;
-    height: $calendar-day-size;
-    font-size: 30px;
-    background-color: #eee;
-    cursor: pointer;
+    padding-left: 1px;
 
-    transition: all ease 0.5s;
-  }
+    background-color: $square-main-color;
+    height: $square-size;
+    width: $square-size;
+    border: solid $square-border-size black;
 
-  &__day:hover {
-    background-color: #ffcccb;
-    transform: translateY(-20px);
-  }
+    transition: 500ms;
 
-  @for $day from 1 through 31 {
-    &__day:nth-child(#{$day})::before {
-      content: '#{$day}';
+    &:hover {
+      cursor: pointer;
+      background-color: $square-hover-color;
+      transform: translateY(-20px);
     }
-  }
 
-  @each $start, $index, $index-px in $days-of-month {
-    &--start-day-#{$start} {
-      .calendar__day:first-child {
-        margin-left: $calendar-day-size * $index + $index-px;
-      }
-    }
-  }
-
-  @for $days from 28 through 31 {
-    &--month-length-#{$days} {
-      $end-day: $days + 1;
-
-      .calendar__day:nth-child(n + #{$end-day}) {
-        display: none;
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
       }
     }
   }
