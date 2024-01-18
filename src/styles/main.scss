@@ -1,3 +1,68 @@
+@import './variables';
+
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  font-size: $main-font-size;
+  font-family: Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+.calendar {
+  gap: $gap-size;
+  max-width: $calendar-width;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start ;
+  flex: 1 1 auto;
+
+  &__day {
+    width: $main-size;
+    height: $main-size;
+    background-color: $main-color;
+    padding: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    transition: transform 0.5s;
+
+    @for $days from 1 through 31 {
+      &:nth-child(#{$days})::before {
+        content: "#{$days}";
+
+      }
+    }
+  }
+
+
+  @each $day, $day-number in $weekend-days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $day-number * $square-size;
+    }
+  }
+
+  @for $days-number from 28 through 31 {
+    &--month-length-#{$days-number} &__day:nth-child(n + #{$days-number + 1}) {
+      display: none;
+    }
+  }
+
+  &__day:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
 }
