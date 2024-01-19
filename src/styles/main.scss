@@ -1,6 +1,7 @@
 $day-size: 100px;
 $col-numbers: 7;
 $gap: 1px;
+$shift-formula: $day-size + $gap;
 
 body {
   margin: 0;
@@ -14,20 +15,18 @@ body {
   width: calc(#{$day-size * $col-numbers + 10px});
 
   $first-days-shifts: mon 0,
-    tue calc(#{$day-size + $gap}),
-    wed calc(2 * #{$day-size + $gap} ),
-    thu calc(3 * #{$day-size + $gap}),
-    fri calc(4 * #{$day-size + $gap}),
-    sat calc(5 * #{$day-size + $gap}),
-    sun calc(6 * #{$day-size + $gap});
+    tue 1,
+    wed 2,
+    thu 3,
+    fri 4,
+    sat 5,
+    sun 6;
 
   @each $first-day-name, $first-day-shift in $first-days-shifts{
     &--start-day--#{$first-day-name} :first-child {
-      margin-left: $first-day-shift;
+      margin-left: $first-day-shift * $shift-formula;
     }
   }
-
-
 
   &__day {
     display: none;
@@ -43,7 +42,7 @@ body {
     transition: all 0.5s;
 
     @for $day from 1 to 32 {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: '#{$day}';
       }
     }
