@@ -7,6 +7,14 @@
   padding: $calendar-padding;
   gap: $calendar-gap;
 
+  &--start-day {
+    @each $day in $days {
+      &-#{$day} > *:first-child {
+        margin-left: ($card-size + $calendar-gap) * (list.index($days, $day) - 1);
+      }
+    }
+  }
+
   &__day {
     display: none;
     width: $card-size;
@@ -17,14 +25,6 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.5s;
-
-    &--start-day {
-      @each $day in $days {
-        &-#{$day} {
-          margin-left: ($card-size + $calendar-gap) * (list.index($days, $day) - 1);
-        }
-      }
-    }
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
