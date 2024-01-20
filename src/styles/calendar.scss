@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: $calendar-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $box-size;
+    height: $box-size;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: 500ms;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      font-size: $day-font-size;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+    }
+
+    @for $i from 1 through $max-days-count {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @for $i from 29 through $max-days-count {
+    &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
