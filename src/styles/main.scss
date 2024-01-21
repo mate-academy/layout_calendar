@@ -1,3 +1,57 @@
-body {
-  margin: 0;
+$cell-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$text-color: #000;
+$hover-color: #FFBFCB;
+$transition-duration: 0.5s;
+$padding: 10px;
+$columns: 7;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: calc(#{$cell-size} * #{$columns} + #{$padding} * 2);
+  margin: 0 auto;
+}
+
+.calendar__day {
+  width: calc(100% / #{$columns} - 1px);
+  height: #{$cell-size};
+  border: 1px solid $border-color;
+  background-color: $background-color;
+  position: relative;
+  cursor: pointer;
+  transition: background-color $transition-duration, transform $transition-duration;
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: $text-color;
+  }
+}
+
+// Modifiers for start day and month length
+@for $i from 1 through 7 {
+  .calendar--start-day-#{$i} .calendar__day:nth-child(#{$i}) {
+    margin-left: 0;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(#{$i + 1}),
+  .calendar--month-length-#{$i} .calendar__day:nth-last-child(#{$i}) {
+    display: none;
+  }
 }
