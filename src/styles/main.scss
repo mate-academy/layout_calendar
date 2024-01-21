@@ -1,5 +1,9 @@
 @import './variables';
 
+* {
+  margin: 0;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -12,12 +16,9 @@ body {
   padding: 10px;
   border: 2px solid red;
   width: $size-cell * 7 + 6;
-
-  &__field {
-    display: flex;
-    gap: 1px;
-    flex-wrap: wrap;
-  }
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
 
   &__day {
     box-sizing: border-box;
@@ -37,21 +38,31 @@ body {
     }
   }
 
-  &__day:nth-child(1) {
-      margin-left: $size-cell * ($start-day - 1) + $start-day - 1;
-    }
-
-  @for $num from 1 to $month-days + 1 {
+  @for $num from 1 to 32 {
     &__day:nth-child( #{$num})::before{
       content: '#{$num}';
       font-size: $size-number;
       position: absolute;
     }
   }
+}
 
-  @for $num from $month-days + 1 to 32 {
-    &__day:nth-child( #{$num}) {
-      visibility: hidden;
+@each $daysmonth in $month-days {
+  .calendar--month-length-#{$daysmonth} {
+    @for $num from $daysmonth + 1 to 32 {
+      .calendar__day:nth-child( #{$num}) {
+        visibility: hidden;
+        position: absolute;
+      }
+    }
+  }
+}
+
+
+@each $dayname, $daynum in $days {
+  .calendar--start-day-#{$dayname} {
+    .calendar__day:nth-child(1) {
+      margin-left: $size-cell * $daynum + $daynum;
     }
   }
 }
