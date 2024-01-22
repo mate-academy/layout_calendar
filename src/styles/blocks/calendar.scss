@@ -15,13 +15,13 @@
   }
 
   @each $day-name, $day-number in $days-of-week {
-    &--start-day--#{$day-name}>:nth-child(1) {
+    &--start-day-#{$day-name}>:nth-child(1) {
       margin-left: first-day-margin($day-number);
     }
   }
 
   @for $month-length from 28 through 31 {
-    &--month-length--#{$month-length}>:nth-child(n+#{$month-length + 1}) {
+    &--month-length-#{$month-length}>:nth-child(n+#{$month-length + 1}) {
       display: none;
     }
   }
@@ -29,7 +29,7 @@
   &__day{
     box-sizing: border-box;
 
-    @include square($day-width);
+    @include square($day-size);
     @include align-number;
 
     transition: transform 0.5s, background-color 0.5s;
