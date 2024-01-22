@@ -5,13 +5,13 @@ $text-color: #000;
 $hover-color: #FFBFCB;
 $animation-duration: 0.5s;
 $days-of-week: (
-  "sun": 0,
-  "mon": 1,
-  "tue": 2,
-  "wed": 3,
-  "thu": 4,
-  "fri": 5,
-  "sat": 6
+  'sun': 0,
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6
 );
 
 .calendar {
@@ -20,7 +20,7 @@ $days-of-week: (
   gap: 1px;
   padding: 10px;
   width: calc(7 * #{$cell-size} + 6 * 1px + 2 * 10px);
-  margin: 0 auto;
+  margin: 100px auto;
   text-align: center;
 
   @for $last-day from 28 to 31 {
@@ -29,11 +29,13 @@ $days-of-week: (
     }
   }
 
-  @each $start-day, $first-cell in $days-of-week {
-    &--start-day-#{$start-day} .calendar__day {
-      margin-left: calc(#{$first-cell} * (#{$cell-size} + 1px));
-    }
-  }
+        @each $start-day, $first-cell in $days-of-week {
+          &--start-day--#{$start-day} {
+            :first-child {
+              margin-left:calc(#{$first-cell} * ($cell-size + 3px));
+            }
+          }
+        }
 
   &__day {
     width: #{$cell-size};
