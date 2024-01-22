@@ -1,3 +1,83 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap';
+
+$square-size: 98px;
+$border-size: 1px;
+$gap: 1px;
+$weekdays: (
+  "tue": 1,
+  "mon": 0,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
+);
+$day-size: $square-size + $border-size * 2;
+$calendar-size: $day-size * 7 + $gap * 6;
+
 body {
   margin: 0;
+}
+
+.title {
+  font-family: Montserrat, sans-serif;
+  font-size: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 50px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-size;
+  gap: $gap;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+
+  & :first-child {
+    margin-left: $calendar-size - $day-size;
+  }
+
+  @each $day, $index in $weekdays {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($day-size * $index + ($index * $gap));
+    }
+  }
+
+  @for $j from 28 through 31 {
+    &--month-length-#{$j} :nth-child(n + #{$j + 1}) {
+     opacity: 0;
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: $square-size;
+    height: $square-size;
+    background-color: #eee;
+    border: $border-size solid black;
+    transition: all 500ms;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
+  }
 }
