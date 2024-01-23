@@ -1,3 +1,61 @@
+@import "./utils/variables";
+
 body {
   margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 30px;
 }
+
+.calendar-sheet {
+	margin: auto;
+	position: absolute;
+	inset: 0;
+	width: $cell-size * 7 + $gap * 7;
+	height: $cell-size * 6 + $gap * 6;
+	display: flex;
+	flex-wrap: wrap;
+	gap: $gap;
+  align-content: flex-start;
+
+
+	&__day {
+		box-sizing: border-box;
+		background-color: #eee;
+		text-align: center;
+		line-height: $cell-size;
+		height: $cell-size;
+		width: $cell-size;
+		border: 1px solid black;
+		transition: transform 0.5s;
+
+		&:hover {
+			cursor: pointer;
+			background-color: #FFBFCB;
+			transform: translateY(-20px);
+		}
+  }
+
+	&__day:nth-child(1) {
+		  margin-left: $sunday-margin;
+	}
+
+	@for $day-num from 1 through 31 {
+	  &__day:nth-child(#{$day-num})::before {
+			content: "#{$day-num}";
+		}
+	}
+}
+
+@each $day, $margin in $days-and-margins {
+	.calendar-sheet--first-day--#{$day} .calendar-sheet__day:nth-child(1){
+		margin-left: #{($sunday-margin - $margin)};
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .calendar-sheet--last-day--#{$last-day} :nth-child(n + #{$last-day + 1}) {
+		opacity: 0;
+	}
+}
+
+
