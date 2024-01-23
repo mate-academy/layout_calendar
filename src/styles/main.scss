@@ -1,17 +1,4 @@
-$days: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6
-);
-$days-in-row: 7;
-$square-size: 100px;
-$gap-size: 1px;
-$square-plus-gap: calc($square-size + $gap-size);
-$calendar-width: calc($square-plus-gap * $days-in-row);
+@use './variables';
 
 html {
   font-family: Arial, Helvetica, sans-serif;
@@ -20,19 +7,48 @@ html {
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .month {
   display: flex;
-  width: $calendar-width;
+  width: variables.$calendar-width;
   padding: 0 10px;
   flex-flow: row wrap;
   justify-content: left;
-  gap: $gap-size;
+  gap: variables.$gap-size;
 
-  @each $day, $day-number in $days {
+  &__day {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: variables.$square-size;
+    height: variables.$square-size;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid black;
+    transition-duration: 0.5s;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
+
+    &:hover {
+      background-color: pink;
+      transform: translate(0, -20px);
+      cursor: pointer;
+    }
+  }
+
+
+  @each $day, $day-number in variables.$days {
     &--start-day-#{$day} &__day:first-child {
-      margin-left: calc($day-number * $square-plus-gap + 1px);
+      margin-left: calc($day-number * variables.$square-plus-gap);
     }
   }
 
@@ -43,34 +59,9 @@ body {
   }
 }
 
+
 @for $i from 1 through 31 {
   .month__day:nth-child(#{$i})::before {
     content: '#{$i}';
-  }
-}
-
-
-.month__day {
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  width: $square-size;
-  height: $square-size;
-  background-color: #eee;
-  box-sizing: border-box;
-  border: 1px solid black;
-  transition-duration: 0.5s;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-  }
-
-  &:hover {
-    background-color: pink;
-    transform: translate(0, -20px);
-    cursor: pointer;
   }
 }
