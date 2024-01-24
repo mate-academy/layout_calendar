@@ -3,12 +3,12 @@ $day-block-gap: 1px;
 $calendar-size: (($day-block-size * 7) + ($day-block-gap * 6));
 $days: (
   "mon": 0,
-  "tue": $day-block-size + $day-block-gap,
-  "wed": ($day-block-size + $day-block-gap) * 2,
-  "thu": ($day-block-size + $day-block-gap) * 3,
-  "fri": ($day-block-size + $day-block-gap) * 4,
-  "sat": ($day-block-size + $day-block-gap) * 5,
-  "sun": ($day-block-size + $day-block-gap) * 6
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat":  5,
+  "sun": 6
 );
 
 body {
@@ -28,18 +28,14 @@ body {
   padding: 10px;
 
   @each $day, $margin in $days {
-    &-start-day-#{$day} {
-      &__day:first-child {
-        margin-left: $margin;
+    &--start-day-#{$day} :first-child {
+        margin-left: $margin * ($day-block-size + $day-block-gap);
       }
-    }
   }
 
   @for $month-length from 28 through 31 {
-    &-month-length-#{$month-length} {
-      &:nth-child(n + #{$month-length + 1}) {
-        display: none;
-      }
+    &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 
