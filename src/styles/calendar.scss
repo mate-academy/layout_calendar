@@ -1,0 +1,18 @@
+.calendar {
+  width: $width-calendar;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $gap-between-day;
+  padding: 10px;
+
+  @each $coef, $week-day in $week-days {
+    @if $week-day == $start-day {
+      & :nth-child(1) {
+        margin-left: $coef * ($size-block-day + $gap-between-day);
+      }
+    }
+  }
+}
+

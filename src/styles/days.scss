@@ -1,0 +1,35 @@
+.days {
+  box-sizing: border-box;
+  height: $size-block-day;
+  width: 100px;
+  background-color: #eee;
+
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #FFBFCB;
+    transform: translateY(-20px);
+    transition: transform 500ms;
+  }
+}
+
+@for $day from 1 through 32 {
+  .days--#{$day}::before {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    content: "#{$day}";
+  }
+}
+
+@for $day from $end-month + 1 through 32 {
+  .days--#{$day} {
+    display: none;
+  }
+}
+
