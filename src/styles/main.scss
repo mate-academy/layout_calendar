@@ -5,7 +5,6 @@ $cell-color: #FFBFCB;
 $font-size: 30px;
 $calendar-day-size: 100px;
 $gap: 1px;
-$sunday-margin: 606px;
 
 :root {
 font-family: Arial, Helvetica, sans-serif;
@@ -15,16 +14,6 @@ font-size: $font-size;
 body {
   margin: 0;
 }
-
-// $days-margins: (
-//   'mon' 1 * ($calendar-day-size + $gap),
-//   'tue' 2 * ($calendar-day-size + $gap),
-//   'wed' 3 * ($calendar-day-size + $gap),
-//   'thu' 4 * ($calendar-day-size + $gap),
-//   'fri' 5 * ($calendar-day-size + $gap),
-//   'sat' 6 * ($calendar-day-size + $gap),
-//   'sun'
-// );
 
 $days-margins: (
   'mon' 0,
@@ -43,9 +32,6 @@ $days-margins: (
   gap: $gap;
   max-width: 706px;
 
-// trzeba będzie zrobić each dla first day i
-// for dla last day
-
   @each $day, $numbers in $days-margins {
     &--start-day--#{$day} :first-child {
       margin-left: calc(#{$numbers} * ($calendar-day-size + $gap));
@@ -59,9 +45,6 @@ $days-margins: (
   }
 }
 
-
-
-
 .calendar__day {
   background-color: $day-color;
   height: $calendar-day-size;
@@ -73,9 +56,9 @@ $days-margins: (
   align-items: center;
   transition: 0.5s;
 
-  @for $day-num from 1 through 31 {
-	  &:nth-child(#{$day-num})::before {
-			content: '#{$day-num}';
+  @for $index from 1 through 31 {
+	  &:nth-child(#{$index})::before {
+			content: '#{$index}';
 		}
 	}
 
