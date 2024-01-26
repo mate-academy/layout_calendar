@@ -28,11 +28,11 @@ body {
     }
   }
 
-  @for $i from 1 through $calendardays {
-    &--month-length-#{$calendardays} {
+  @for $i from 28 through $calendardays {
+    &--month-length-#{$i} {
       .calendar__item {
-        &:nth-child(#{$i}) {
-          display: block;
+        &:nth-child(n + #{$i + 1}) {
+          display: none;
         }
       }
     }
@@ -44,8 +44,8 @@ body {
     position: relative;
     background-color: #eee;
     border: rem(1) solid $black;
-    display: none;
     cursor: pointer;
+    display: block;
     transition: 0.5s ease-in-out;
 
     &:hover {
