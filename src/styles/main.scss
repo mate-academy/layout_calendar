@@ -14,12 +14,13 @@ $day-width: 100px;
 $day-heigth: 100px;
 $day-padding: 10px;
 $day-gap: 1px;
+$day-week: 7;
 
 .calendar {
   display: flex;
   flex-flow: row wrap;
   gap: #{$day-gap};
-  width: calc(7 * #{$day-width} + 6 * #{$day-padding});
+  width: calc(#{$day-week} * #{$day-width} + 6 * #{$day-padding});
 
   &__number {
     height: #{$day-heigth};
@@ -43,7 +44,7 @@ $day-gap: 1px;
 }
 
   $days: 0 'mon', 1 'tue', 2 'wed', 3 'thu', 4 'fri', 5 'sat', 6 'sun';
-  $max-length: 31;
+  $max-length: 32;
 
   @for $number from 1 through $max-length {
     .calendar__number:nth-child(#{$number})::before {
@@ -53,7 +54,7 @@ $day-gap: 1px;
 
   @each $numbr, $day in $days {
     .calendar--start-day-#{$day}>:nth-child(1) {
-        margin-left: $numbr * ($day-heigth + $day-gap);
+        margin-left: $numbr * ($day-heigth + $day-gap + 2);
       }
   }
 
