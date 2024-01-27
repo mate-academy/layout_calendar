@@ -1,0 +1,42 @@
+html {
+  display: flex;
+  block-size: border-box;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+  gap: #{$day-gap};
+  width: calc(#{$day-week} * #{$day-width} + 6 * #{$day-padding});
+
+  &__number {
+    height: #{$day-heigth};
+    width: #{$day-width};
+    border: 1px solid #000;
+    background-color: #eee;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+  }
+}
+
+@include contentNumber;
+@include contentDay;
+@include contentMonth;

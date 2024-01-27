@@ -1,0 +1,25 @@
+@mixin contentNumber() {
+  @for $number from 1 through $max-length {
+    .calendar__number:nth-child(#{$number})::before {
+      content: '#{$number}';
+    }
+  }
+}
+
+@mixin contentDay() {
+  @each $numbr, $day in $days {
+    .calendar--start-day-#{$day}>:nth-child(1) {
+        margin-left: $numbr * ($day-heigth + $day-gap + 1.37);
+      }
+  }
+}
+
+@mixin contentMonth() {
+  @for $i from 28 through $max-length {
+    .calendar--month-length-#{$i} {
+      .calendar--month-length:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
