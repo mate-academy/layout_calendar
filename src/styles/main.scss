@@ -10,7 +10,7 @@ body {
   justify-content: left;
   box-sizing: border-box;
   margin: 40px auto;
-  max-width: ($cellSize + $gap) * 7 + ($padding * 2);
+  max-width: ($cellSize * 7) + ($gap * 6);
 
   @for $i from 0 to length($monthLengths) {
     $length: nth($monthLengths, $i + 1);
@@ -19,22 +19,21 @@ body {
     }
   }
 
-  @each $day in $daysOfWeek {
+  @each $day, $index in $daysOfWeek {
     &--start--#{$day} {
-      $shift: index($daysOfWeek, $day) + 1;
-      margin-left: (($cellSize + $gap) * $shift) + ($padding * 2);
 
-      .calendar__day:nth-child(n + #{$shift + 2}) {
-        margin-left: 0;
+      .calendar__day:first-child {
+       margin-left: ($cellSize * $index);
       }
     }
-}
+  }
 
-  .day {
+  &__day {
     width: $cellSize;
     height: $cellSize;
     border: 1px solid $borderColor;
     background-color: $backgroundColor;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,7 +45,6 @@ body {
 
       }
     }
-
 
     &:hover {
       cursor: pointer;
