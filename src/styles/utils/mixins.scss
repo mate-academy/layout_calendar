@@ -1,0 +1,27 @@
+@mixin content-number() {
+  @for $number from 1 through $max-length {
+    .calendar__number:nth-child(#{$number})::before {
+      content: '#{$number}';
+    }
+  }
+}
+
+@mixin content-day() {
+  @each $numbr, $day in $days {
+    .calendar--start-day-#{$day} {
+      .calendar__number:first-child {
+        margin-left: $numbr * ($day-heigth + $day-gap);
+      }
+    }
+  }
+}
+
+@mixin content-month() {
+  @for $i from 28 through $max-length {
+    .calendar--month-length-#{$i} {
+      .calendar__number:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
