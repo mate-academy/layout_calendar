@@ -1,7 +1,14 @@
 $general-color: #eee;
-$pink-color: #FFBFCB;
-$general-font-family: Arial, Helvetica, sans-serif;;
-$week-days: 0 "mon", 1 "tue", 2 "wed", 3 "thu", 4 "fri", 5 "sat", 6 "sun";
+$pink-color: #ffbfcb;
+$general-font-family: Arial, Helvetica, sans-serif;
+$week-days:
+  0 "mon",
+  1 "tue",
+  2 "wed",
+  3 "thu",
+  4 "fri",
+  5 "sat",
+  6 "sun";
 $columns: 7;
 $calendar-size: 100px;
 
@@ -12,31 +19,24 @@ body {
   font-size: 30px;
 }
 
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
   gap: 1px;
   max-width: $calendar-size * $columns + 10;
   height: min-content;
   padding: 10px;
 
-
-  /* Start day for first day in calendar  */
-  @each
-    $idx,
-    $day in $week-days {
+  @each $idx, $day in $week-days {
     &--start-day--#{$day} > &__day:first-child {
-      margin-left:  $idx * $calendar-size + 1px;
+      margin-left: $idx * $calendar-size + 1px;
     }
   }
 
-
-  /* Month length for calendar */
   @for $length from 28 through 31 {
-    &--month-length--#{$length} >
-    &__day:nth-child(n + #{$length + 1}) {
-     display: none;
+    &--month-length--#{$length} > &__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 
@@ -51,21 +51,17 @@ body {
     border: 1px solid black;
     transition: all 0.5s;
 
-    /* Hover a cell */
     &:hover {
       cursor: pointer;
       background: $pink-color;
       transform: translateY(-20px);
     }
 
-    /* All number in cell */
-    @for $number from 1 through 31  {
+    @for $number from 1 through 31 {
       &--#{$number}::before {
         display: block;
-        content: '#{$number}';
+        content: "#{$number}";
       }
     }
-
   }
 }
-
