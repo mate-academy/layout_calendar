@@ -38,10 +38,11 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    transition: background-color $transitionDuration, transform $transitionDuration;
 
-    @for $index from 1 to 32 {
-      &:nth-child(#{$index})::before {
-        content: "#{$index}";
+    @for $index from 0 to 31 {
+      &:nth-child(#{$index + 1})::before {
+        content: "#{$index + 1}";
 
       }
     }
