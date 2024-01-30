@@ -1,4 +1,5 @@
 $days: mon, tue, wed, thu, fri, sat, sun;
+$month-length: 31;
 
 :root {
   --day-size: 100px;
@@ -22,6 +23,13 @@ $days: mon, tue, wed, thu, fri, sat, sun;
 @each $day,$i in $days {
   .calendar--start-day-#{day} > .calendar__day:first-child {
     margin-left: calc((1 - i($days, $day)) * (100% / 7));
+  }
+}
+
+
+@for $i from 1 through $month-length {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
   }
 }
 
