@@ -1,3 +1,5 @@
+$days: mon, tue, wed, thu, fri, sat, sun;
+
 :root {
   --day-size: 100px;
   --day-border: 1px solid black;
@@ -15,6 +17,12 @@
   width: var(--calendar-width);
   margin: 10px;
   border-collapse: collapse;
+}
+
+@each $day,$i in $days {
+  .calendar--start-day-#{day} > .calendar__day:first-child {
+    margin-left: calc((1 - index($days, $day)) * (100% / 7));
+  }
 }
 
 .calendar__day {
