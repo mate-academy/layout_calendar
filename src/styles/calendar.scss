@@ -5,11 +5,11 @@
   gap: $gap;
   padding: $padding-calendar;
 
-  $start-days: $mon mon, $tue tue, $wed wed, $thu thu, $fri fri, $sat sat, $sun sun;
+  $start-days: 6 mon, 5 tue, 4 wed, 3 thu, 2 fri, 1 sat, 0 sun;
 
   @each $day, $start-day in $start-days {
     &--start-day-#{$start-day} :first-child {
-      margin-left: $day;
+      margin-left: ($width-calendar - $size-day-cell * ($day + 1) - ($gap * $day)) - ($padding-calendar * 2);
     }
   }
 
