@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width-calendar;
+  gap: $gap;
+  padding: $padding-calendar;
+
+  $start-days: 6 mon, 5 tue, 4 wed, 3 thu, 2 fri, 1 sat, 0 sun;
+
+  @each $day, $start-day in $start-days {
+    &--start-day-#{$start-day} :first-child {
+      margin-left: ($width-calendar - $size-day-cell * ($day + 1) - ($gap * $day)) - ($padding-calendar * 2);
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} :nth-child(n + #{$days + 1}){
+      display: none;
+    }
+  }
+
+  &__day {
+    border: 1px solid black;
+    background-color: $background-color;
+    height: $size-day-cell;
+    width: $size-day-cell;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @for $num from 1 through 31 {
+      &:nth-child(#{$num})::before {
+      content: "#{$num}";
+      }
+    }
+
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: $background-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+}
