@@ -1,3 +1,60 @@
+$size-px: 100px;
+
 body {
   margin: 0;
 }
+
+.calendar {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 726px;  /* padding-inline = 20px + gap = 6px */
+  gap: 1px;
+
+  $start-days: 'mon' ($size-px * 0) 0,
+  'tue' ($size-px * 1) 1,
+  'wed' ($size-px * 2) 2,
+  'thu' ($size-px * 3) 3,
+  'fri' ($size-px * 4) 4,
+  'sat' ($size-px * 5) 5,
+  'sun' ($size-px * 6) 6;
+
+
+  @each $name, $size, $indent in $start-days {
+    &--start-day--#{$name}>&__day:nth-child(1) {
+      margin-left: $size + $indent;
+    } /* the third variable $indent is based on the gap size which is 1px */
+  }
+
+  @for $day from 28 through 31 {
+    &--month-lenght--#{$day}>&__day:nth-child(n + #{$day + 1}) {
+      visibility: hidden;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: #{$size-px};
+    height: #{$size-px};
+    line-height: #{$size-px};
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+    transition: 0.5s;
+
+    &:hover {
+      transform: translate(0, -20px);
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date}):before {
+        content: '#{$date}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+}
+
