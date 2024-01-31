@@ -1,3 +1,62 @@
+$start-day: mon, tue, wed, thu, fri, sat, sun;
+$length: 31;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 706px;
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+
+  &__day::before {
+    content: "";
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    text-align: center;
+  }
+}
+
+@each $start, $index in (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7
+) {
+  .calendar--start-day-#{$start} {
+    .calendar__day:first-child {
+      margin-left: $index * 101px - 101px;
+    }
+  }
+}
+
+
+@for $i from 1 through $length {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+    transition-duration: 0.5s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
