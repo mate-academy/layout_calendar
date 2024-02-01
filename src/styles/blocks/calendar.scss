@@ -28,26 +28,24 @@
       transform: translateY(-20px);
     }
   }
-}
 
-@for $i from 1 through $days-in-month {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+  @for $i from 1 through $days-in-month {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
   }
-}
 
-
-@for $length from 28 through 31 {
-  .calendar--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
-    display: none;
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
   }
-}
 
-@each $day, $index in sun 1, mon 2, tue 3, wed 4, thu 5, fri 6, sat 7 {
-  .calendar--start-day-#{$day} {
-    .calendar__day:nth-child(#{$index}) {
-      margin-left: 0;
+  @each $day, $index in $days-of-week {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($cell-size + $padding) * ($index - 1);
+      }
     }
   }
 }
-
