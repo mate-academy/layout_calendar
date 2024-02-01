@@ -1,3 +1,68 @@
-body {
+$day-size: 100px;
+$step-day: $day-size + 1px;
+
+.body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  text-align: center;
+  line-height: $day-size;
+  width: $day-size * 7 + 10px;
+
+  $days:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $name, $day in $days {
+    &--start--#{$name} {
+      & :first-child {
+        margin-left: $step-day * $day;
+      }
+    }
+  }
+
+  @for $last-day from 28 to 32 {
+    &--month--#{$last-day} {
+      & :nth-child(#{$last-day + 1}),
+      & :nth-child(#{$last-day + 2}),
+      & :nth-child(#{$last-day + 3}) {
+        visibility: hidden;
+      }
+    }
+  }
+
+  &__day {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $day-size * 0.3;
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translatey(-20px);
+      transition: 0.5s;
+    }
+
+    @for $index from 1 to 32 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
+      }
+    }
+  }
 }
