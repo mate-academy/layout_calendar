@@ -1,3 +1,60 @@
+$month-length: 31;
+$start-day: (
+  0: 'mon',
+  1: 'tue',
+  2: 'wed',
+  3: 'thu',
+  4: 'fri',
+  5: 'sat',
+  6: 'sun'
+  );
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.calendar{
+  display: flex;
+  width: 800px;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  box-sizing: border-box;
+
+  @each $number, $name in $start-day {
+    &__first--#{$name} &__day:first-child {
+      margin-left: $number * (100 + 1);
+    }
+  }
+
+  @for $row from 1 through $month-length{
+    &__day:nth-child(#{$row}) {
+      display: flex;
+      width: 98px;
+      height: 98px;
+
+      justify-content: center;
+      align-items: center;
+
+      background-color: #eee;
+      border: 1px solid black;
+
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+  }
+
+  &__day:hover {
+    background-color: #FFBFCB;
+    transform: translateY(-20px);
+  }
+
+  @for $row from 1 through $month-length{
+    &__day:nth-child(#{$row})::before{
+      content: '#{$row}';
+      font-size: 30px;
+    }
+  }
+}
+
