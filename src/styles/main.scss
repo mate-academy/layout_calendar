@@ -1,3 +1,42 @@
-body {
+@import 'variables';
+@import 'func';
+@import 'normalize';
+
+.calendar {
+  box-sizing: border-box;
+
+  width: ($items-sizing * 7) + ($calendar-padding * 2) + ($calendar-gap * 6);
+
+  display: flex;
+  gap: $calendar-gap;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: wrap;
+
+  padding: $calendar-padding;
   margin: 0;
+
+  &__item {
+    box-sizing: border-box;
+
+    width: $items-sizing;
+    height: $items-sizing;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #FFBFCB;
+      cursor: pointer;
+
+      transform: translateY(-20px);
+    }
+  }
 }

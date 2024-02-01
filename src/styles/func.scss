@@ -1,0 +1,20 @@
+@import 'variables';
+
+@each $day, $dex-day-number in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: ($items-sizing + $calendar-gap) * $dex-day-number;
+  }
+}
+
+@for $i from 1 through $month-length {
+  .calendar :nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through $month-length {
+  .calendar--month-length-#{$i}
+   :nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
