@@ -36,7 +36,7 @@
   }
 
   @for $length from 28 through 31 {
-    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
@@ -44,7 +44,7 @@
   @each $day, $index in $days-of-week {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($cell-size + $padding) * ($index - 1);
+        margin-left: ($cell-size + 1px) * ($index);
       }
     }
   }
