@@ -1,0 +1,71 @@
+@import "../variables";
+
+@each $day in $days-of-week {
+  .calendar--start-#{$day} {
+    &:nth-child(7n + 1) {
+      margin-left: 0;
+    }
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $gap;
+  width: $container-width;
+  padding: $padding;
+
+  &__block-day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $background-color;
+    border: $border-width solid $border-color;
+    box-sizing: border-box;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.5s, transform 0.5s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: $font-size;
+    }
+
+    &:hover {
+      background-color: $background-hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Added numbers from 1 to 31
+  @for $i from 1 through 31 {
+    .calendar__block-day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+
+  &--month-length-28 {
+    .calendar__block-day:nth-child(n + 29) {
+      display: none;
+    }
+  }
+
+  &--month-length-29 {
+    .calendar__block-day:nth-child(n + 30) {
+      display: none;
+    }
+  }
+
+  &--month-length-30 {
+    .calendar__block-day:nth-child(n + 31) {
+      display: none;
+    }
+  }
+}
