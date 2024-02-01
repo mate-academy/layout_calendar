@@ -1,25 +1,17 @@
 @import "../variables";
 
-@each $day in $days-of-week {
-  .calendar--start-#{$day} {
-    &:nth-child(7n + 1) {
-      margin-left: 0;
-    }
-  }
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: $gap;
   width: $container-width;
   padding: $padding;
 
   &__block-day {
-    width: $day-size;
-    height: $day-size;
+    width: $box-size;
+    height: $box-size;
     background-color: $background-color;
     border: $border-width solid $border-color;
     box-sizing: border-box;
@@ -50,22 +42,16 @@
     }
   }
 
-
-  &--month-length-28 {
-    .calendar__block-day:nth-child(n + 29) {
+  // Added additional days that depend on the month
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__block-day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
 
-  &--month-length-29 {
-    .calendar__block-day:nth-child(n + 30) {
-      display: none;
-    }
-  }
-
-  &--month-length-30 {
-    .calendar__block-day:nth-child(n + 31) {
-      display: none;
-    }
+  @each $day, $day-number in $days-of-week {
+    &--start-#{$day} &__block-day:first-child {
+        margin-left: $day-number * ($box-size + $gap);
+      }
   }
 }
