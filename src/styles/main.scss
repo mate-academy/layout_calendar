@@ -1,3 +1,35 @@
+@import "./variables";
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container {
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+
+  .weeks {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__day {
+    @include calendar-day;
+
+    &:hover {
+      background-color: $color-pink;
+      cursor: pointer;
+    }
+    &--today {
+      background-color: pink;
+    }
+  }
 }

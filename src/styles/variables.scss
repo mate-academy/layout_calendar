@@ -1,0 +1,22 @@
+$color-grey: #eee;
+$color-pink: #FFBFCB;
+$animation-duration: 0.5s;
+$days-of-week: "mon", "tue", "wed", "thu", "fri", "sat", "sun";
+$day-width: 100px;
+
+@mixin calendar-day {
+  width: $day-width;
+  height: $day-width;;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-grey;
+  box-sizing: border-box;
+}
+
+@each $day in $days-of-week {
+  .calendar__day--#{start-day} {
+    @include calendar-day;
+  }
+}
