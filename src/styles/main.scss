@@ -15,14 +15,15 @@ body {
   $calendar-width: (
     $day-width + $days-gap-size ) * $days-in-row - $days-gap-size;
   $days: (
-    mon 1,
-    tue 2,
-    wed 3,
-    thu 4,
-    fri 5,
-    sat 6,
-    sun 7
+    mon,
+    tue,
+    wed,
+    thu,
+    fri,
+    sat,
+    sun
   );
+
 $transition-duration: 0.5s;
 
 padding: $calendar-paddings;
@@ -65,7 +66,7 @@ gap: 1px;
 }
 
 @each $day, $offset in $days {
-  &--start-day-#{$day} &__day:nth-child(#{$offset}) {
+  &--start-day-#{$day} :first-child  {
     margin-left: $calendar-width - $day-width;
   }
 }
