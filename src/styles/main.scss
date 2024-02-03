@@ -1,5 +1,6 @@
-$days: mon, tue, wed, thu, fri, sat, sun;
+$days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6,);
 $month-length: 31;
+$day-size: 100px;
 
 :root {
   --day-size: 100px;
@@ -12,25 +13,14 @@ $month-length: 31;
   --calendar-width: calc(7 * var(--day-size) + 10px);
 }
 
+
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   width: var(--calendar-width);
   margin: 10px;
   border-collapse: collapse;
-}
-
-@each $day,$i in $days {
-  .calendar--start-day-#{day} > .calendar__day:first-child {
-    margin-left: calc((1 - i($days, $day)) * (100% / 7));
-  }
-}
-
-
-@for $i from 1 through $month-length {
-  .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
-  }
 }
 
 .calendar__day {
@@ -61,37 +51,14 @@ $month-length: 31;
   margin-left: 0;
 }
 
-.calendar__day--start-day-mon {
-  margin-left: calc(var(--day-size) + 10px);
+@for $i from 1 through $month-length {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
 }
 
-.calendar__day--start-day-tue {
-  margin-left: calc(2 * var(--day-size) + 20px);
-}
-
-.calendar__day--start-day-wed {
-  margin-left: calc(3 * var(--day-size) + 30px);
-}
-
-.calendar__day--start-day-thu {
-  margin-left: calc(4 * var(--day-size) + 40px);
-}
-
-.calendar__day--start-day-fri {
-  margin-left: calc(5 * var(--day-size) + 50px);
-}
-
-.calendar__day--start-day-sat {
-  margin-left: calc(6 * var(--day-size) + 60px);
-}
-
-.calendar__day--start-day-sun {
-  margin-left: 0;
-}
-
-.calendar__day--month-length-28:nth-child(n+29),
-.calendar__day--month-length-29:nth-child(n+30),
-.calendar__day--month-length-30:nth-child(n+31),
-.calendar__day--month-length-31:nth-child(n+32) {
-  display: none;
+@each $day,$i in $days {
+  .calendar--start-day-#{day} > .calendar__day:first-child {
+    margin-left: ($day-size + 1px) * $i;
+  }
 }
