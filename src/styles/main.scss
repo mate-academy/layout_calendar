@@ -1,3 +1,79 @@
+// todo
+// add month--length modifier and upd cycles
+
+
+:root {
+  --day-size: 100px;
+  --gap-size: 1px;
+  --padding: 10px;
+}
+
 body {
   margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-size);
+  width: calc(7 * (var(--day-size) + var(--gap-size)) + 2 * var(--padding));
+
+  $days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6,);
+
+  @each $name, $index in $days {
+    &--start-day-#{$name} > div:first-child {
+      margin-left: calc((var(--day-size) + var(--gap-size)) * #{$index});
+    }
+  }
+}
+
+$month-length: 28, 29, 30;
+
+@each $length in $month-length {
+  .month--length-#{$length} {
+    .month-day {
+      @for $i from $length + 1 through 31 {
+        &:nth-child( #{$i} ) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.month-day {
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid black;
+  height: var(--day-size);
+  width: var(--day-size);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+
+  @for $day from 1 through 31 {
+    &:nth-child(#{$day})::before {
+      content: "#{$day}";
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: pink;
+    transform: translateY(-20px);
+
+    transition: all 0.5s ease-in-out;
+  }
+}
+
+
