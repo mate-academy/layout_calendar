@@ -20,25 +20,9 @@
     }
   }
 
-  @each $month in $month-length {
-    &--days--#{$month} {
-      @for $day from 1 through $default-days {
-        & :nth-child(#{$day}) {
-          display: flex;
-
-          &::after {
-            content: "#{$day}";
-            content-visibility: visible;
-            position: absolute;
-          }
-        }
-
-        @if $day > $month {
-          & :nth-child(#{$day}) {
-            display: none;
-          }
-        }
-      }
+  @for $month-length from 28 through 31 {
+    &--days--#{$month-length} &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 
