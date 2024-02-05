@@ -1,3 +1,4 @@
+
 * {
   box-sizing: border-box;
 }
@@ -13,7 +14,7 @@ body {
   align-items: center;
 }
 
-@function getMonthWidth($padding) {
+@function getmonthwidth($padding) {
   @return $week-width + $days-in-week + ($padding * 2);
 }
 
@@ -24,13 +25,14 @@ body {
 
 .month {
   padding: 0 $month-padding;
-  width: getMonthWidth($month-padding);
+  width: getmonthwidth($month-padding);
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
 
   &__day {
     @include square($day-width);
+    
     background-color: $background-color;
     border: 1px solid $color-black;
     position: relative;
@@ -63,7 +65,7 @@ body {
   }
 
   @for $count from 28 through $days-in-month {
-    &--#{$count} &__day:nth-child(n+#{$count+1}) {
+    &--#{$count} &__day:nth-child(n + #{$count + 1}) {
       display: none;
     }
   }
