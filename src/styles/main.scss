@@ -1,35 +1,48 @@
 @import "./variables";
+@import "./utils/mixins";
 
 body {
   margin: 0;
+  font-family: $font-family;
+}
+
+.container {
+  margin: 20px auto;
+  height: 100vh;
 }
 
 .calendar {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-}
+  flex-wrap: wrap;
+  gap: $gap;
 
-.container {
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-
-  .weeks {
-    display: flex;
-    gap: 10px;
-  }
+  width: $day-width * 7 + $gap * 6;
+  transition: all $animation-duration ease-in-out;
 
   &__day {
     @include calendar-day;
 
-    &:hover {
-      background-color: $color-pink;
-      cursor: pointer;
-    }
+    &:hover,
     &--today {
-      background-color: pink;
+      background-color: $color-pink;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-10%);
+    }
+  }
+}
+
+@for $i from 1 through $month-length {
+  .calendar__day {
+    &:nth-child(#{$i}) {
+      &::after {
+        content: "#{$i}";
+        font-size: 30px;
+      }
     }
   }
 }
