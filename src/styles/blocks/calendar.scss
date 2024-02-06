@@ -1,26 +1,21 @@
-@use "../variables/variables" as *;
+@use "../utils/variables" as *;
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
   padding: $padding-size;
-  width: $day-size * 7 + $padding-size;
+  width: ($day-size * 7) + ($padding-size * 2) + ($gap-size * 6);
 
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
-    box-sizing: border-box;
     border: 1px solid $black-color;
     background-color: $grey-color;
     width: $day-size;
     height: $day-size;
-
-    &:first-child {
-      margin-left: $day-size * 6 + $gap-size * 6;
-    }
 
     &:hover {
       transform: translateY(-20px);
@@ -35,6 +30,10 @@
         font-family: Arial, "Courier New", Courier, monospace;
       }
     }
+  }
+
+  &__day:first-child {
+    margin-left: $day-size * 6 + $gap-size * 6;
   }
 
   @for $day-index from 28 through 31 {
