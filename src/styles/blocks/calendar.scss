@@ -1,0 +1,50 @@
+@use '../variables.scss' as *;
+
+.calendar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+
+  &__day {
+    box-sizing: border-box;
+    background-color: $day-color;
+    border: 1px solid $day-border-color;
+    height: $day-height;
+    width: $day-width;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index}):before {
+        content: "#{$index}";
+      }
+    }
+  }
+
+  $week-days: "mon" 0, "tue" 1, "wed" 2, "thu" 3, "fri" 4, "sat" 5, "sun" 6;
+
+  @each $dayW, $number in $week-days {
+    &--start-#{$dayW}  &__day:first-child {
+      margin-left: calc(#{$number} * (#{$day-width} + #{$calendar-gap}));
+    }
+  }
+
+  @for $n from 28 through 31 {
+    &--month-#{$n} &__day:nth-child( n + #{$n + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day:hover {
+    cursor: pointer;
+    background-color: #FFBFCB;
+    transition: transform 0.5s;
+    transform: translateY(-20px);
+
+}
