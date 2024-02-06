@@ -1,0 +1,19 @@
+.calendar {
+  @each $week-day, $num-day in $week-days {
+    &--start-day--#{$week-day} {
+      .calendar__day:first-child {
+        margin-left: ($day-block-size + $calendar-gap) * $num-day;
+      }
+    }
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .month--length-#{$last-day} {
+    @include calendar-styles;
+
+    .calendar__day:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+}
