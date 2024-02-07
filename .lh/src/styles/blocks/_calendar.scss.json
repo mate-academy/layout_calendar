@@ -1,0 +1,30 @@
+{
+    "sourceFile": "src/styles/blocks/_calendar.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1707335645691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1707335958496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n     justify-content: center;\n     font-size: 30px;\n     position: relative;\n     background-color: #eee;\n-    font-family: Arial;\n+    font-family: Arial ;\n     transition: transform 0.5s;\n   }\n \n   &__day:hover {\n"
+                },
+                {
+                    "date": 1707335964965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,50 @@\n+.calendar {\n+  display: flex;\n+  flex-wrap: wrap;\n+  position: absolute;\n+  gap: $gap;\n+  max-width: calc(\n+    #{$columns} * #{$cell-size} + #{$columns} * #{$gap} + 2 * #{$padding}\n+  );\n+  padding: $padding;\n+  cursor: pointer;\n+\n+   &__day {\n+    width: $cell-size;\n+    height: $cell-size;\n+    border: $border-width solid black;\n+    display: flex;\n+    align-items: center;\n+    justify-content: center;\n+    font-size: 30px;\n+    position: relative;\n+    background-color: #eee;\n+    font-family: Arial;\n+    transition: transform 0.5s;\n+  }\n+\n+  &__day:hover {\n+    background-color: #ffbfcb;\n+    transform: translateY(-20px);\n+  }\n+\n+ @for $i from 1 through 31 {\n+    &__day:nth-child(#{$i})::before {\n+      content: \"#{$i}\";\n+    }\n+  }\n+\n+  &--start-day {\n+    @each $day, $i in $days {\n+      &-#{$day} > :first-child {\n+        margin-left: ($cell-size + $gap) * $i;\n+      }\n+    }\n+  }\n+\n+    @for $n from 28 through 31 {\n+  &--month-length-#{$n} > :nth-child(n + #{$n + 1}) {\n+display: none;\n+    }\n+  }\n+}\n"
+                },
+                {
+                    "date": 1707336140973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n     justify-content: center;\n     font-size: 30px;\n     position: relative;\n     background-color: #eee;\n-    font-family: Arial;\n+    font-family: Arial, sans-serif;\n     transition: transform 0.5s;\n   }\n \n   &__day:hover {\n@@ -47,54 +47,4 @@\n display: none;\n     }\n   }\n }\n-.calendar {\n-  display: flex;\n-  flex-wrap: wrap;\n-  position: absolute;\n-  gap: $gap;\n-  max-width: calc(\n-    #{$columns} * #{$cell-size} + #{$columns} * #{$gap} + 2 * #{$padding}\n-  );\n-  padding: $padding;\n-  cursor: pointer;\n-\n-   &__day {\n-    width: $cell-size;\n-    height: $cell-size;\n-    border: $border-width solid black;\n-    display: flex;\n-    align-items: center;\n-    justify-content: center;\n-    font-size: 30px;\n-    position: relative;\n-    background-color: #eee;\n-    font-family: Arial ;\n-    transition: transform 0.5s;\n-  }\n-\n-  &__day:hover {\n-    background-color: #ffbfcb;\n-    transform: translateY(-20px);\n-  }\n-\n- @for $i from 1 through 31 {\n-    &__day:nth-child(#{$i})::before {\n-      content: \"#{$i}\";\n-    }\n-  }\n-\n-  &--start-day {\n-    @each $day, $i in $days {\n-      &-#{$day} > :first-child {\n-        margin-left: ($cell-size + $gap) * $i;\n-      }\n-    }\n-  }\n-\n-    @for $n from 28 through 31 {\n-  &--month-length-#{$n} > :nth-child(n + #{$n + 1}) {\n-display: none;\n-    }\n-  }\n-}\n"
+                }
+            ],
+            "date": 1707335645690,
+            "name": "Commit-0",
+            "content": ".calendar {\n  display: flex;\n  flex-wrap: wrap;\n  position: absolute;\n  gap: $gap;\n  max-width: calc(\n    #{$columns} * #{$cell-size} + #{$columns} * #{$gap} + 2 * #{$padding}\n  );\n  padding: $padding;\n  cursor: pointer;\n\n   &__day {\n    width: $cell-size;\n    height: $cell-size;\n    border: $border-width solid black;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    font-size: 30px;\n    position: relative;\n    background-color: #eee;\n    font-family: Arial;\n    transition: transform 0.5s;\n  }\n\n  &__day:hover {\n    background-color: #ffbfcb;\n    transform: translateY(-20px);\n  }\n\n @for $i from 1 through 31 {\n    &__day:nth-child(#{$i})::before {\n      content: \"#{$i}\";\n    }\n  }\n\n  &--start-day {\n    @each $day, $i in $days {\n      &-#{$day} > :first-child {\n        margin-left: ($cell-size + $gap) * $i;\n      }\n    }\n  }\n\n    @for $n from 28 through 31 {\n  &--month-length-#{$n} > :nth-child(n + #{$n + 1}) {\ndisplay: none;\n    }\n  }\n}\n"
+        }
+    ]
+}
