@@ -1,3 +1,58 @@
+@import './variables';
+
 body {
   margin: 0;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  min-width: $calc-column-size;
+  max-width: $calc-column-size;
+  transition: padding-bottom 0.5s;
+
+  &__day {
+    background: #eee;
+    border: 1px solid #000;
+    width: $square-size;
+    height: $square-size;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+
+    @for $data from 1 through $month-length {
+    &:nth-child(#{$data}):before {
+      content: '#{$data}';
+    }
+    }
+
+    @for $data-square from $month-length through 31 {
+      &:nth-child(n + #{$data-square + 1}) {
+        display: none;
+      }
+    }
+
+    $days-of-week: $mon, $tue, $wed, $thu, $fri, $sat, $sun;
+
+    @each $day-of-week in $days-of-week {
+      &:first-child {
+        $padding-days: ($start-week-from - 1 - $day-of-week + 7) % 7;
+        $calc-start-day: calc(#{$padding-days} * $square-size + $gap * #{$padding-days} + #{$padding-days} * ($border-size * 2));
+
+        margin-left: #{$calc-start-day};
+      }
+
+    }
+    &:hover {
+      background-color: #FFBFCB;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+
