@@ -1,3 +1,63 @@
+$cell-size: 100px;
+$gap-size: 1px;
+$days: mon 6,
+  tue 1,
+  wed 2,
+  thu 3,
+  fri 4,
+  sat 5,
+  sun 6;
+$month-length: 31;
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  align-items: center;
+  width: calc(7 * $cell-size + 6 * $gap-size);
+  padding: $cell-size / 10;
+  margin: 5 auto;
+
+  @each $day, $num in $days {
+    &--start-day-#{$day} {
+      .cell:first-child {
+        margin-left: calc($num * ($cell-size + $gap-size));
+      }
+    }
+  }
+}
+
+.cell {
+  position: relative;
+  box-sizing: border-box;
+
+  @for $num-of-cell from 1 through $month-length {
+    &--#{$num-of-cell}{
+      width: $cell-size;
+      height: $cell-size;
+      border: 1px solid black;
+      background-color: #eee;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #FFBFCB;
+        transform: translateY(-20px);
+        transition: transform 0.5s;
+      }
+    }
+
+    &--#{$num-of-cell}::before {
+      content: '#{$num-of-cell}';
+      position: absolute;
+      top: 35%;
+      left: 42%;
+      font-size: 30px;
+    }
+  }
 }
