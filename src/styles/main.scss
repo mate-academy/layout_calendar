@@ -4,6 +4,12 @@ body {
   margin: 0;
 }
 
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -14,6 +20,7 @@ body {
   transition: padding-bottom 0.5s;
 
   &__day {
+    box-sizing: border-box;
     background: #eee;
     border: 1px solid #000;
     width: $square-size;
@@ -41,10 +48,9 @@ body {
 
     @each $day-of-week in $days-of-week {
       &:first-child {
-        $padding-days: ($start-week-from - 1 - $day-of-week + 7) % 7;
-        $calc-start-day: calc(#{$padding-days} * $square-size + $gap * #{$padding-days} + #{$padding-days} * ($border-size * 2));
+        $calcl-margin-days: ($start-day - 1 - $day-of-week + 7) % 7;
 
-        margin-left: #{$calc-start-day};
+        margin-left: calc(#{$calcl-margin-days} * $square-size + $gap * #{$calcl-margin-days});
       }
 
     }
