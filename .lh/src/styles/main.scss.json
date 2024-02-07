@@ -1,0 +1,78 @@
+{
+    "sourceFile": "src/styles/main.scss",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 15,
+            "patches": [
+                {
+                    "date": 1707297083311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1707297098950,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n body {\n   margin: 0;\n   box-sizing: border-box;\n }\n-.calendar {\n+.calendarPage {\n   display: flex;\n   gap: 1px;\n   flex-wrap: wrap;\n   width: 800px;\n"
+                },
+                {
+                    "date": 1707297106895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   display: flex;\n   gap: 1px;\n   flex-wrap: wrap;\n   width: 800px;\n-  &__singleDay {\n+  &__day {\n     display: flex;\n     justify-content: center;\n     align-items: center;\n     height: 100px;\n"
+                },
+                {
+                    "date": 1707297252929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,11 @@\n+\n+\n body {\n   margin: 0;\n   box-sizing: border-box;\n }\n-.calendarPage {\n+.calendar {\n   display: flex;\n   gap: 1px;\n   flex-wrap: wrap;\n   width: 800px;\n"
+                },
+                {
+                    "date": 1707297259041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+$box\n \n-\n body {\n   margin: 0;\n   box-sizing: border-box;\n }\n"
+                },
+                {
+                    "date": 1707297265368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-$box\n+$box-size: 100px;\n \n body {\n   margin: 0;\n   box-sizing: border-box;\n"
+                },
+                {
+                    "date": 1707297270865,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   &__day {\n     display: flex;\n     justify-content: center;\n     align-items: center;\n-    height: 100px;\n+    height: $box-size;\n     width: 100px;\n     background-color: #eee;\n     border: 1px solid black;\n     transition-duration: 0.2s;\n"
+                },
+                {
+                    "date": 1707297276869,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n     display: flex;\n     justify-content: center;\n     align-items: center;\n     height: $box-size;\n-    width: 100px;\n+    width: $box-size;\n     background-color: #eee;\n     border: 1px solid black;\n     transition-duration: 0.2s;\n     &:hover {\n"
+                },
+                {
+                    "date": 1707297292894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n $box-size: 100px;\n+#\n \n body {\n   margin: 0;\n   box-sizing: border-box;\n"
+                },
+                {
+                    "date": 1707297298757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n $box-size: 100px;\n-#\n+$calendar-size: \n \n body {\n   margin: 0;\n   box-sizing: border-box;\n"
+                },
+                {
+                    "date": 1707297310660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,39 @@\n+$box-size: 100px;\n+$calendar-size: calc($box-size*8)\n+\n+body {\n+  margin: 0;\n+  box-sizing: border-box;\n+}\n+.calendar {\n+  display: flex;\n+  gap: 1px;\n+  flex-wrap: wrap;\n+  width: 800px;\n+  &__day {\n+    display: flex;\n+    justify-content: center;\n+    align-items: center;\n+    height: $box-size;\n+    width: $box-size;\n+    background-color: #eee;\n+    border: 1px solid black;\n+    transition-duration: 0.2s;\n+    &:hover {\n+      cursor: pointer;\n+      background-color: #ffbfcb;\n+      transform: translate(0, -20px);\n+      transition-duration: 0.5s;\n+    }\n+    @for $index from 1 through  31 {\n+      &:nth-child(#{$index}) {\n+        &::before {\n+          content: \"#{$index}\";\n+          font-family: Arial, Helvetica, sans-serif;\n+          font-size: 30px;\n+        }\n+      }\n+    }\n+  }\n+}\n+\n"
+                },
+                {
+                    "date": 1707297318388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n $box-size: 100px;\n-$calendar-size: calc($box-size*8)\n+$calendar-size: calc($box-size*8);\n \n body {\n   margin: 0;\n   box-sizing: border-box;\n@@ -8,9 +8,9 @@\n .calendar {\n   display: flex;\n   gap: 1px;\n   flex-wrap: wrap;\n-  width: 800px;\n+  width: $calendar-size;\n   &__day {\n     display: flex;\n     justify-content: center;\n     align-items: center;\n@@ -36,43 +36,4 @@\n     }\n   }\n }\n \n-$box-size: 100px;\n-$calendar-size: \n-\n-body {\n-  margin: 0;\n-  box-sizing: border-box;\n-}\n-.calendar {\n-  display: flex;\n-  gap: 1px;\n-  flex-wrap: wrap;\n-  width: 800px;\n-  &__day {\n-    display: flex;\n-    justify-content: center;\n-    align-items: center;\n-    height: $box-size;\n-    width: $box-size;\n-    background-color: #eee;\n-    border: 1px solid black;\n-    transition-duration: 0.2s;\n-    &:hover {\n-      cursor: pointer;\n-      background-color: #ffbfcb;\n-      transform: translate(0, -20px);\n-      transition-duration: 0.5s;\n-    }\n-    @for $index from 1 through  31 {\n-      &:nth-child(#{$index}) {\n-        &::before {\n-          content: \"#{$index}\";\n-          font-family: Arial, Helvetica, sans-serif;\n-          font-size: 30px;\n-        }\n-      }\n-    }\n-  }\n-}\n-\n"
+                },
+                {
+                    "date": 1707297529779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n $box-size: 100px;\n $calendar-size: calc($box-size*8);\n \n+\n body {\n   margin: 0;\n   box-sizing: border-box;\n }\n"
+                },
+                {
+                    "date": 1707297538240,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n $box-size: 100px;\n $calendar-size: calc($box-size*8);\n+$days: 'mon'\n \n-\n body {\n   margin: 0;\n   box-sizing: border-box;\n }\n"
+                },
+                {
+                    "date": 1707297551046,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n $box-size: 100px;\n $calendar-size: calc($box-size*8);\n-$days: 'mon', 'tue'\n+$days: `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun`\n \n body {\n   margin: 0;\n   box-sizing: border-box;\n"
+                },
+                {
+                    "date": 1707297558125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n $box-size: 100px;\n $calendar-size: calc($box-size*8);\n-$days: `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun`\n+$days: `mon`, `tue`, `wed`, `thu`, `fri`, `sat` `sun`\n \n body {\n   margin: 0;\n   box-sizing: border-box;\n"
+                }
+            ],
+            "date": 1707297083311,
+            "name": "Commit-0",
+            "content": "body {\n  margin: 0;\n  box-sizing: border-box;\n}\n.calendar {\n  display: flex;\n  gap: 1px;\n  flex-wrap: wrap;\n  width: 800px;\n  &__singleDay {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    height: 100px;\n    width: 100px;\n    background-color: #eee;\n    border: 1px solid black;\n    transition-duration: 0.2s;\n    &:hover {\n      cursor: pointer;\n      background-color: #ffbfcb;\n      transform: translate(0, -20px);\n      transition-duration: 0.5s;\n    }\n    @for $index from 1 through  31 {\n      &:nth-child(#{$index}) {\n        &::before {\n          content: \"#{$index}\";\n          font-family: Arial, Helvetica, sans-serif;\n          font-size: 30px;\n        }\n      }\n    }\n  }\n}\n\n"
+        }
+    ]
+}
