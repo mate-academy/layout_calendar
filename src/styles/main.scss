@@ -1,4 +1,4 @@
-@import './block/varibles.scss';
+@import './variables';
 
 .center-block {
   height: 100vh;
@@ -33,7 +33,14 @@
     font-family: $number-font;
 
     cursor: pointer;
-    transition: background-color 0.5s, transform 0.5s;
+    transition:
+    background-color $transition-time,
+    transform $transition-time;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $background-color;
+    }
   }
 }
 
@@ -56,14 +63,9 @@
 }
 
 @each $day, $number-day in $days-of-week {
-  .calendar-first-day-#{$day} {
+  .calendar--first-day-#{$day} {
     .calendar__day:first-child {
       margin-left: ($square-size + $gap) * $number-day;
     }
   }
-}
-
-.calendar__day:hover {
-  transform: translateY(-20px);
-  background-color: #FFBFCB;
 }
