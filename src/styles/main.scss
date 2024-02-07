@@ -1,5 +1,4 @@
 @import "./variables";
-@import "./utils/mixins";
 
 body {
   margin: 0;
@@ -12,8 +11,6 @@ body {
   justify-content: center;
 
   height: 100vh;
-
-  margin: auto;
 }
 
 .calendar {
@@ -25,20 +22,32 @@ body {
 
   width: $day-width * 7 + $gap * 6;
 
-  @for $i from 28 through 31 {
-    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+  @each $day, $num in $days-of-week {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: ($day-width + $gap) * $num;
+    }
+  }
+
+  @for $i from 28 through $month-length {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
 
-  @each $day, $num in $days-of-week {
-    &--start-#{$day} .calendar__day:first-child {
-      margin-left: ($day-width + $gap) * ($num);
-    }
-  }
-
   &__day {
-    @include calendar-day;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $day-width;
+    height: $day-width;
+    font-size: 30px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: $color-grey;
+
+    transition: background-color $animation-duration ease-in-out,
+      transform $animation-duration ease-in-out;
 
     &:hover,
     &--today {
@@ -53,7 +62,6 @@ body {
     @for $i from 1 through $month-length {
       &:nth-child(#{$i})::before {
         content: "#{$i}";
-        font-size: 30px;
       }
     }
   }
