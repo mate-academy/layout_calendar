@@ -39,37 +39,22 @@ body {
   transform: translateY(-20px);
 }
 
-.calendar--start-day-mon .calendar__day:first-child {
-  margin-left: 0;
+$weekdays: mon, tue, wed, thu, fri, sat, sun;
+$margin-step: 101px;
+$margin-left: 0;
+
+@each $day in $weekdays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $margin-left;
+  }
+
+  $margin-left: $margin-left + $margin-step;
 }
 
-.calendar--start-day-tue .calendar__day:first-child {
-  margin-left: 101px;
-}
+$month-lengths: 28, 29, 30, 31;
 
-.calendar--start-day-wed .calendar__day:first-child {
-  margin-left: 202px;
-}
-
-.calendar--start-day-thu .calendar__day:first-child {
-  margin-left: 303px;
-}
-
-.calendar--start-day-fri .calendar__day:first-child {
-  margin-left: 404px;
-}
-
-.calendar--start-day-sat .calendar__day:first-child {
-  margin-left: 505px;
-}
-
-.calendar--start-day-sun .calendar__day:first-child {
-  margin-left: 606px;
-}
-
-.calendar--month-length-28 .calendar__day:nth-child(n+29),
-.calendar--month-length-29 .calendar__day:nth-child(n+30),
-.calendar--month-length-30 .calendar__day:nth-child(n+31),
-.calendar--month-length-31 .calendar__day:nth-child(n+32) {
-  display: none;
+@each $length in $month-lengths {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
 }
