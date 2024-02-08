@@ -1,10 +1,8 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  position: absolute;
   gap: $gap;
-  max-width: calc($columns * $cell-size + $columns * $gap + 2 * $padding
-  );
+  max-width: ($columns * $cell-size + 6 * $gap + 2 * $padding);
   padding: $padding;
   cursor: pointer;
 
@@ -41,9 +39,12 @@
     }
   }
 
-    @for $n from 28 through 31 {
-  &--month-length-#{$n} > :nth-child(n + #{$n + 1}) {
+  &--month-length {
+     @for $n from 28 through 31 {
+  &-#{$n} > :nth-child(n + #{$n + 1}) {
 display: none;
     }
   }
+  }
+
 }
