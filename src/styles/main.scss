@@ -19,6 +19,18 @@ body {
   max-width: $calc-column-size;
   transition: padding-bottom 0.5s;
 
+  @for $data-square from 28 through 31 {
+     &--month-length-#{$data-square} :nth-child(n + #{$data-square + 1}) {
+        display: none;
+      }
+    }
+
+  @each $week-day, $start-day in $week-days {
+    &--start-day-#{$week-day} :first-child {
+      margin-left: calc($start-day * (#{$square-size} + #{$gap}));
+    }
+  }
+
   &__day {
     box-sizing: border-box;
     background: #eee;
@@ -38,22 +50,7 @@ body {
     }
     }
 
-    @for $data-square from $month-length through 31 {
-      &:nth-child(n + #{$data-square + 1}) {
-        display: none;
-      }
-    }
 
-    $days-of-week: $mon, $tue, $wed, $thu, $fri, $sat, $sun;
-
-    @each $day-of-week in $days-of-week {
-      &:first-child {
-        $calcl-margin-days: ($start-day - 1 - $day-of-week + 7) % 7;
-
-        margin-left: calc(#{$calcl-margin-days} * $square-size + $gap * #{$calcl-margin-days});
-      }
-
-    }
     &:hover {
       background-color: #FFBFCB;
       transform: translateY(-20px);
