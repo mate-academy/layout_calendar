@@ -1,7 +1,4 @@
-$cell-size: 100px;
-$border-width: 1px;
-$calendar-width: 7 * ($cell-size + $border-width) - $border-width;
-$font-size: 30px;
+@import "variables";
 
 @mixin day($day) {
   width: $cell-size;
@@ -13,13 +10,12 @@ $font-size: 30px;
   justify-content: center;
   position: relative;
   background-color: #eee;
-
+  transition: all 0.5s;
 
   &:hover {
     cursor: pointer;
     background-color: #FFBFCB;
     transform: translateY(-20px);
-    transition: all 0.5s;
   }
 
   &::before {
@@ -58,8 +54,6 @@ $font-size: 30px;
 }
 
 }
-
-$week: ('mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6);
 
   @each $start-day, $day in $week {
     .calendar--start-day-#{$start-day} {
