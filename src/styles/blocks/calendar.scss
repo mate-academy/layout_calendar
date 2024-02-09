@@ -4,7 +4,7 @@
   @each $day, $num-of-blocks in $days {
       &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: calc((var($cell-size) + var($gap-size)) * #{$num-of-blocks});
+        margin-left: calc(($cell-size + $gap-size) * #{$num-of-blocks});
       }
     }
   }
@@ -17,11 +17,11 @@
     }
   }
 
-  width: calc(7 * var($cell-size) + 6 * var($gap-size) + 2 * var($padding));
+  width: calc(7 * $cell-size + 6 * $gap-size + 2 * $padding);
   display: flex;
-  gap: var($gap-size);
+  gap: $gap-size;
   flex-wrap: wrap;
-  padding: var($padding);
+  padding: $padding;
   box-sizing: border-box;
 
   &__day {
@@ -34,14 +34,15 @@
     height: 100px;
     margin: 0;
     cursor: pointer;
-    transition-duration: 0.5s;
+
+    transition: transform 0.5s, background-color 0.5s;
 
     &:hover {
       background-color: #FFBFCB;
       transform: translateY(-20px);
     }
 
-    &__day::before {
+    &::before {
       position: absolute;
       top: 50%;
       left: 50%;
