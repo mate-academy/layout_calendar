@@ -29,7 +29,7 @@
   }
 
   @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before{
+    &__day:nth-child(#{$i})::before {
       content: '#{$i}';
       color: black;
       font-family: Arial, sans-serif;
@@ -42,17 +42,17 @@
 
   &--start-day {
     @each $day, $i in $week-days {
-      &-#{$day} > :first-child {
+      &-#{$day}> :first-child {
         margin-left: $i * ($day-size + $calendar-gap);
       }
     }
   }
 
-    &--month-length {
-      @for $i from 28 through 31 {
-        &-#{$i} > :nth-child(n + #{$i + 1}) {
-          display: none;
-        }
+  &--month-lenght {
+    @each $length in $month-lengths {
+      &-#{$length}> :nth-child(n + #{$length + 1}) {
+        display: none;
       }
     }
+  }
 }
