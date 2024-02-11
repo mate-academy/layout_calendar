@@ -26,7 +26,7 @@ On hovering over a cell:
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
-> Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
+> Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-taskcos-on-github)
 
 ![reference image](reference.png).
 
@@ -34,13 +34,13 @@ On hovering over a cell:
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://y-ivsnko.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://y-ivsnko.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
-- [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
+- [х] Changing 'month-lengh' and 'start-day' modifier in the code element
 reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
-- [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
-- [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
+- [х] Each day has no modifiers, only class (eg. calendar__day)
+- [х] All `Typical Mistakes` from `BEM` lesson theory are checked.
+- [х] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
