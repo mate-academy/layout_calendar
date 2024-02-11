@@ -58,13 +58,16 @@ body {
     }
   }
 
-  @each $index, $day in $weekdays {
-    &--#{$day} :nth-child(0) {
-      margin-left: $index * $day-width + $index;
+  @each $day in $weekdays {
+    $index: nth($day, 1);
+    $name: nth($day, 2);
+
+    &--#{$name} .month__day:first-of-type {
+      margin-left: ($index - 1) * $day-width;
     }
   }
 
-  @for $count from 28 through $days-in-month {
+  @for $count from 1 through $days-in-month {
     &--#{$count} &__day:nth-child(n + #{$count + 1}) {
       display: none;
     }
