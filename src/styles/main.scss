@@ -38,12 +38,7 @@ body {
   }
 
   @for $month-lenght from 1 through 31 {
-    &__month-lenght--#{$month-lenght} :nth-child(-n + #{$month-lenght}) {
-      box-sizing: border-box;
-      border: 1px solid black;
-      width: 100px;
-      height: 100px;
-      background-color: #eee;
+    &__month-lenght--#{$month-lenght} :nth-child(#{$month-lenght}) {
     }
 
      & :nth-child(#{$month-lenght})::before {
@@ -57,8 +52,6 @@ body {
     }
   }
 
-
-
   &__day {
     display: flex;
     align-items: center;
@@ -67,6 +60,11 @@ body {
     z-index: 0;
     font-family: Arial, sans-serif;
     font-size: 30px;
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
   }
 
   &__day:hover {
