@@ -1,48 +1,43 @@
 .calendar {
   display: flex;
-  flex-wrap: wrap;
   gap: $day-gap;
-  padding: $calendar-padding;
-  width: $calendar-width;
+  width: 726px;
+  padding: 10px;
+  flex-wrap: wrap;
 
-  &__day  {
-    box-sizing: border-box;
-    width: $box-width;
-    height: $box-height;
-    border: 1px solid black;
-    background-color: #eee;
+  &__day {
     display: flex;
+    background-color: #eee;
+    border: 1px solid black;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    transition: all 0.5s ease;
+    width: $box-width;
+    height: $box-height;
+    transition-duration: 0.5s;
 
     &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
       transform: translateY(-20px);
-      background-color: #FFBFCB;
     }
-
   }
 
-  @for $i from 1 through $days-in-month {
+  @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
 
-  @for $i from 28 through 31 {
-    &--month-length-#{$i}
-    &__day:nth-child(n + #{$i + 1}) {
+  @each $day in $days-of-the-week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $margin-left;
+    }
+    $margin-left: $margin-left + $box-width + $day-gap;
+  }
+
+  @each $length in $days-in-month {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
-
-  @each $name, $index in $days-of-the-week {
-    &--start-day-#{$name} &__day:first-child {
-      margin-left: ($index - 1) * $box-width + $day-gap * ($index - 1)
-    }
-  }
-
 }
