@@ -1,3 +1,60 @@
+$days: 0 mon, 10px tue, 20px wen, 30px thu, 40px fri, 50px sat, 60px sun;
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar{
+  display: flex;
+  flex-wrap: wrap;
+  width: 707px;
+  gap: 1px;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+
+    background-color: #eee;
+    transition: all 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #FFBFCB;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $index from 1 through 31 {
+    & :nth-child(#{$index}) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &::before {
+        content: '#{$index}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  @each $margin, $day in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: #{$margin};
+    }
+  }
+
+  @for $dayCount from 28 through 31 {
+    $correct-days: 31 - $dayCount;
+
+    &--month-length-#{$dayCount} {
+      & :nth-last-child(-n + #{$correct-days}) {
+        display: none;
+      }
+    }
+  }
 }
