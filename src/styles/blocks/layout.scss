@@ -59,13 +59,13 @@ body {
   }
 
   @each $index, $name in $weekdays {
-    &--#{$name} .month__day:first-of-type {
-      margin-left: ($index - 1) * $day-width;
+    &--start-day--#{$name} .month__day:first-of-type {
+      margin-left: calc(($day-width + $gap) * ($index - 1));
     }
   }
 
   @for $count from 1 through $days-in-month {
-    &--#{$count} &__day:nth-child(n + #{$count + 1}) {
+    &--month-length--#{$count} &__day:nth-child(n + #{$count + 1}) {
       display: none;
     }
   }
