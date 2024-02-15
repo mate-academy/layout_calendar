@@ -67,20 +67,10 @@ $days-of-week: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
   }
 }
 
-.calendar--month-28 {
-  .calendar__day:nth-child(n+29) {
-    display: none;
-  }
-}
-
-.calendar--month-29 {
-  .calendar__day:nth-child(n+30) {
-    display: none;
-  }
-}
-
-.calendar--month-30 {
-  .calendar__day:nth-child(n+31) {
-    display: none;
+@for $i from 28 through 30 {
+  .calendar--month-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
   }
 }
