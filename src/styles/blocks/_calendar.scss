@@ -1,0 +1,55 @@
+.calendar {
+  width: ($cell-size + $date-gap) * 7;
+  margin: 0 auto;
+  padding: 40px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $date-gap;
+
+  $days-of-the-week:
+    "mon" 0,
+    "tue" 1,
+    "wed" 2,
+    "thu" 3,
+    "fri" 4,
+    "sat" 5,
+    "sun" 6;
+
+  @each $day-of-the-week, $number-of-the-week in $days-of-the-week {
+    &__start-day--#{$day-of-the-week} .calendar__item:nth-child(1) {
+      margin-left: $number-of-the-week * ($cell-size + $date-gap);
+    }
+  }
+
+  @for $date-length from 28 through 31 {
+    &--calendar-length--#{$date-length}
+    .calendar__item:nth-child(n+#{$date-length + 1}) {
+      display: none;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include square($cell-size);
+    background-color: $date-color;
+    border: 1px solid #000;
+    border-radius: 5px;
+    transition: all 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $date-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $date from 1 through 31 {
+    &__item:nth-child(#{$date}) {
+      &::before {
+        content: "#{$date}";
+      }
+    }
+  }
+}
