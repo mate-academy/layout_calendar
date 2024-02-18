@@ -5,9 +5,12 @@ $gap: 1px;
 $array: 1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun';
 
 body {
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+
 }
 
 .calendar {
@@ -15,9 +18,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: 707px;
-  height: 100%;
   margin: auto;
-
 
   &__day {
     box-sizing: border-box;
@@ -49,18 +50,19 @@ body {
   }
 
   @for $i from 28 through 31 {
-    &_month-length-#{$i} {
-      &:nth-child(n + #{$i + 1}) {
-      display: none;
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
       }
     }
   }
 
-  @each $day , $keyof in $array {
+  @each $keyof, $day in $array {
     &--start-day-#{$day} {
-      &:first-child {
+      .calendar__day:first-child {
         margin-left: calc((#{$keyof} - 1) * (#{$cell-size} + #{$gap}));
       }
     }
   }
 }
+
