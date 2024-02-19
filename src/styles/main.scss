@@ -1,4 +1,7 @@
+@import './utils/mixins';
 @import './variables';
+
+
 
 .body {
   margin: 0;
@@ -10,20 +13,19 @@
 }
 
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
-  width: 706px;
-  gap: 1px;
+  @include display-method;
 
+  width: $calendar-width;
+  gap: $cell-gap;
 
   &__day {
     box-sizing: border-box;
     background-color: $cell-color;
-    width: 100px;
-    height: 100px;
+    width: $width-cell;
+    height: $height-cell;
     border: 1px solid black;
     position: relative;
-    transition: all 0.5s;
+    transition: 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -46,7 +48,7 @@
 
   @each $day, $value in $days {
     &--start-day-#{$day} :first-child {
-      margin-left: $value;
+      margin-left: ($width-cell + $cell-gap) * $value;
     }
   }
 }
