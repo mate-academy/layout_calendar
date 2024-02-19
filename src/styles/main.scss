@@ -1,36 +1,60 @@
 $square-size: 100px;
+$font-size: 30px;
+$shift: ($square-size - $font-size) / 2;
+$days-of-week: 'mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6, 'sun' 7;
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 30px;
+  font-size: $font-size;
 }
 
 .calendar {
   margin: 0 auto;
-  width: $square-size * 7 + 19px;
+  width: $square-size * 7 + 10px;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   gap: 1px;
 
-  &__num{
-    @for $day from 1 through 31 {
-      &--day--#{$day} {
-        &::before {
-          content: '#{$day}';
-        }
-      }
-    }
-  }
-
   &__day {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: $square-size;
     height: $square-size;
     background-color: #eee;
     border: 1px solid black;
+    box-sizing: border-box;
+    transition: 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day}):before {
+        content: '#{$day}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #FFBFCB;
+    }
+  }
+
+  @each $day-of-week, $num in $days-of-week {
+    &--start-day--#{$day-of-week} {
+      .calendar__day:first-child{
+        margin-left: $square-size * ($num - 1) + ($num - 1);
+      }
+    }
+  }
+
+  @for $month from 28 through 31 {
+    $remove-days: 31 - $month;
+
+    &--month-length--#{$month} {
+      .calendar__day:nth-last-child(-n + #{$remove-days}){
+        display: none;
+      }
+    }
   }
 }
