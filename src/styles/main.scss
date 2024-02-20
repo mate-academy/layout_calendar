@@ -12,21 +12,20 @@ body {
   margin: 40px auto;
   max-width: ($cellSize * 7) + ($gap * 6);
 
-  @for $i from 0 to length($monthLengths) {
-    $length: nth($monthLengths, $i + 1);
-    &--month-length-#{$length} .day:nth-child(n + #{$length + 1}) {
+  @each $day, $index in $daysOfWeek {
+    &--start--#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($cellSize * $index);
+      }
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
 
-  @each $day, $index in $daysOfWeek {
-    &--start--#{$day} {
-
-      .calendar__day:first-child {
-       margin-left: ($cellSize * $index);
-      }
-    }
-  }
 
   &__day {
     width: $cellSize;
@@ -40,9 +39,9 @@ body {
     position: relative;
     transition: background-color $transitionDuration, transform $transitionDuration;
 
-    @for $index from 0 to 31 {
-      &:nth-child(#{$index + 1})::before {
-        content: "#{$index + 1}";
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: "#{$index}";
 
       }
     }
