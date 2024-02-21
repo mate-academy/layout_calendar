@@ -34,7 +34,7 @@ On hovering over a cell:
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
 - [DEMO LINK](https://GrigoryyKach.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<GrigoryyKach.github.io/layout_calendar/report/html_report/)
+- [TEST REPORT LINK](https://GrigoryyKach.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
