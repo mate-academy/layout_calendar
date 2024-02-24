@@ -1,3 +1,60 @@
-body {
+@import './utils/mixins';
+@import './variables';
+
+.body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  counter-reset: section;
+}
+
+.calendar {
+  @include display-method;
+
+  width: $calendar-width;
+  gap: $cell-gap;
+
+  &__day {
+    box-sizing: border-box;
+    background-color: $cell-color;
+    width: $width-cell;
+    height: $height-cell;
+    border: 1px solid black;
+    position: relative;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #FFBFCB;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      counter-increment: section;
+      content: counter(section);
+      font-family: $font;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%)
+    }
+  }
+
+  @each $day, $value in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($width-cell + $cell-gap) * $value;
+    }
+  }
+}
+
+@for $moreDay from 28 to 31 {
+  .calendar--month-length-#{$moreDay} {
+    .calendar__day:nth-child(n + #{$moreDay + 1}) {
+      display: none;
+    }
+  }
 }
