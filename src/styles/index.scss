@@ -29,6 +29,13 @@ body {
   gap: 1px;
 }
 
+.calendar__day::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @for $value from 28 through 31 {
   .calendar--month-length-#{$value} {
     @for $day from 1 through $value {
@@ -47,10 +54,6 @@ body {
         }
         &::before {
           content: '#{$day}';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
         }
       }
     }
