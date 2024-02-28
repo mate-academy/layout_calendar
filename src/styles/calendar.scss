@@ -33,14 +33,18 @@
   }  
 
   @each $day, $margin in $week-days {
-    &--start-day-#{$day} :nth-child(1) {
+    &--start-day-#{$day} {
+      .calendar__day:nth-child(1) {
         margin-left: $margin;
+      }
     }
   }
 
   @each $last-day in $last-day-in-month {
-    &--month-length-#{$last-day} :nth-child(n + #{$last-day + 1}) {
-      visibility: hidden;
+    &--month-length-#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day + 1}) {
+        visibility: hidden;
+      }
     }
   }
 }
