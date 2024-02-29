@@ -34,24 +34,22 @@
 
 @for $day from 1 through 31 {
   .calendar__day:nth-child(#{$day})::after {
-    content: '#{$day}'; 
+    content: '#{$day}';
   }
 }
 
-// Define the days of the week as a map
-// $days: (
-//   mon: 1,
-//   tue: 2,
-//   wed: 3,
-//   thu: 4,
-//   fri: 5,
-//   sat: 6,
-//   sun: 7
-// );
+@each $day, $index in $days {
+  .calendar__day--#{$day} .calendar__day:first-child {
+    margin-left: $index;
+  }
+}
 
-// // Loop through the map to create modifiers for each day of the week
-// @each $day, $index in $days {
-//   .calendar__day--#{$day} .calendar__day:first-child {
-//     margin-left: 
-//   }
-// }
+@for $i from 28 through 31 {
+  .calendar__day:nth-child(n + #{$i}) {
+    display: none;
+  }
+}
+
+.calendar__day:nth-child(n + #{$month-length}) {
+  display: block;
+}
