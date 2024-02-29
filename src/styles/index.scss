@@ -1,3 +1,8 @@
+$dayWidth: 100px;
+$borderWidth: 1px;
+$borderCount: 6;
+$marginSides: 10px;
+
 * {
   box-sizing: border-box;
 }
@@ -7,7 +12,7 @@ body {
 }
 
 .calendar {
-  width: calc((100 * 7) + (1 * 6) + (10 * 2));
+  width: calc((#{$dayWidth} * 7) + (#{$borderWidth} * #{$borderCount}) + (#{$marginSides} * 2));
   border: 1px solid black;
   border-radius: 5px;
   display: flex;
@@ -27,22 +32,20 @@ body {
     transition: transform 0.5s;
 
     &::before {
-      content: "";
+      content: '';
       font-size: 30px;
       font-family: Arial, sans-serif;
     }
   }
 
   &__day:hover {
-    background-color: #FFBFCB;
+    background-color: #ffbfcb;
     transform: translateY(-20px);
-
   }
 
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+      content: '#{$i}';
     }
   }
 }
-
