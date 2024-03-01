@@ -1,7 +1,6 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include block-centering;
+
   height: 100vh;
 }
 
@@ -18,9 +17,9 @@
     border: 1px solid black;
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+    @include block-centering;
+
     padding: $cell-paddind;
 
     &:hover {
@@ -38,18 +37,27 @@
   }
 }
 
+@function get-start-day-margin($start-day) {
+  $margin: 0;
+
+  @each $day, $index in $days {
+    @if $day == $start-day {
+      $margin: $index * ($cell-width + 1);
+    }
+  }
+
+  @return $margin;
+}
+
 @each $day, $index in $days {
-  .calendar__day--#{$day} .calendar__day:first-child {
-    margin-left: $index;
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: get-start-day-margin(#{$day});
   }
 }
 
 @for $i from 28 through 31 {
-  .calendar__day:nth-child(n + #{$i}) {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
     display: none;
   }
 }
 
-.calendar__day:nth-child(n + #{$month-length}) {
-  display: block;
-}
