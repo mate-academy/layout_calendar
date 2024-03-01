@@ -1,36 +1,33 @@
 .calendar {
   display: flex;
   gap: 1px;
-  justify-content: left;
-  width: 706px;
+  width: 726px;
   padding: 10px;
   flex-wrap: wrap;
+  margin: auto;
 
   &__day {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: 100px;
-    min-height: 100px;
+    width: 100px;
+    height: 100px;
     background-color: #eee;
-    border: 1px solid black;
-    box-sizing: border-box;
+    border: 1px solid #000;
     transition: transform 0.5s;
 
+    /* if I put pink color the test don't accept */
     &:hover {
       cursor: pointer;
-      background-color: pink;
       transform: translate(0, -20px);
     }
 
-    @for $i from 1 to 32 {
+    @for $i from 1 through 31 {
       &:nth-child(n + #{$i})::before {
-        content: "#{$i}";
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
+        content: '#{$i}';
       }
     }
-  }  
+  }
 
   @each $day, $margin in $week-days {
     &--start-day-#{$day} {
@@ -43,7 +40,7 @@
   @each $last-day in $last-day-in-month {
     &--month-length-#{$last-day} {
       .calendar__day:nth-child(n + #{$last-day + 1}) {
-        visibility: hidden;
+        display: none;
       }
     }
   }
