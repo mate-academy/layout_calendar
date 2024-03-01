@@ -1,3 +1,45 @@
+@import '../styles/mixins';
+@import '../styles/variables';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  width: $ceil-size * 7 + 6px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  gap: 1px;
+}
+
+.calendar__day {
+  display: flex;
+  width: $ceil-size;
+  height: $ceil-size;
+  background-color: #eee;
+  border: 1px solid black;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  cursor: pointer;
+  transform: translateY(-20px);
+  transition-duration: 0.5s;
 }
