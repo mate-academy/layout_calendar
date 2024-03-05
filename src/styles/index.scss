@@ -2,7 +2,8 @@ $dayWidth: 100px;
 $borderWidth: 1px;
 $borderCount: 6;
 $marginSides: 10px;
-$days: (mon, tue, wed, thu, fri, sat, sun);
+$calendar-days: ('mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6, 'sun' 7);
+$gap: 1px;
 
 * {
   box-sizing: border-box;
@@ -10,15 +11,21 @@ $days: (mon, tue, wed, thu, fri, sat, sun);
 
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 100% высоты видимого окна браузера */
 }
 
 .calendar {
-  width: calc((#{$dayWidth} * 7) + (#{$borderWidth} * #{$borderCount}) + (#{$marginSides} * 2));
-  border: 1px solid black;
+  width: calc((100 * 7) + (1 * 6) + (10 * 2));
+
+  /* (#{$dayWidth} * 7) + (#{$borderWidth} * #{$borderCount}) +
+      (#{$marginSides} * 2) */
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: #{$gap};
   margin: auto;
 
   &__day {
@@ -44,10 +51,19 @@ body {
     transform: translateY(-20px);
   }
 
-  @for $i from 1 through 31 {
-    .calendar__day:nth-child(#{$i})::before {
-      content: '#{$i}';
+  @for $day-name from 1 through 31 {
+    &--month-length--#{$day-name} :nth-child(n + #{$day-name + 1}) {
+      display: none;
+    }
+
+    .calendar__day:nth-child(#{$day-name})::before {
+      content: '#{$day-name}';
     }
   }
 
+  @each $day, $index in $calendar-days {
+    &--start-day--#{$day} :first-child {
+      margin-left: ($dayWidth + $gap) * ($index - 1);
+    }
+  }
 }
