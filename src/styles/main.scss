@@ -1,0 +1,66 @@
+$cell-size: 100px;
+$gap: 1px;
+$days:
+  0 'mon',
+  1 'tue',
+  2 'wed',
+  3 'thu',
+  4 'fri',
+  5 'sat',
+  6 'sun';
+$rowCells: 7;
+
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  height: 100vh;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $rowCells * ($gap + $cell-size);
+
+  &__day {
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 500ms;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      cursor: pointer;
+    }
+
+    @for $dayCount from 1 through 31 {
+      &:nth-child(#{$dayCount})::before {
+        content: '#{$dayCount}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  @each $dayNumber, $day in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $dayNumber * ($gap + $cell-size);
+    }
+  }
+
+  @for $cellsVisible from 28 through 31 {
+    &--month-length-#{$cellsVisible} :nth-child(n + #{$cellsVisible + 1}) {
+      display: none;
+    }
+  }
+}
