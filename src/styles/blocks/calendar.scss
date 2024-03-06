@@ -1,0 +1,43 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  width: $cellWidth * $daysPerWeek + $gap * ($daysPerWeek - 1);
+
+  @each $weekday, $indentation in $weekdaysIndentation {
+    &--start-day-#{$weekday} :first-child {
+      margin-left: #{$indentation};
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length-#{$lastDay} :nth-child(-n + #{$lastDay}) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__day {
+    display: none;
+    transition-duration: 0.5s;
+    box-sizing: border-box;
+    height: $cellWidth;
+    width: $cellWidth;
+    border: 1px solid black;
+    background-color: #eee;
+
+    @for $daysCount from 1 through 31 {
+      &:nth-child(#{$daysCount})::after {
+        content: '#{$daysCount}';
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: #ffbfcb;
+    }
+  }
+}
