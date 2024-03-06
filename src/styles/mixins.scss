@@ -1,0 +1,27 @@
+@import '../styles/variables';
+
+@function size($day-width) {
+  @return ($day-width + $gap) * 7;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}):before {
+    content: '#{$i}';
+    display: flex;
+    text-align: center;
+  }
+}
+
+
+@each $day, $index in $weekdays {
+  .calendar__day--#{$day} {
+    margin-left: ($index - 1) * ($day-width + $gap);
+  }
+}
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length-#{$lastDay}
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
+}
