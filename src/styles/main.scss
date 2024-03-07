@@ -7,12 +7,18 @@ body {
 }
 
 .calendar {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+
   display: flex;
-  padding: 52px 10px 0 29px;
+  align-items: center;
+  padding: 10px;
   gap: 1px;
   flex-wrap: wrap;
-  max-width: calc((7 * $width-square) + 26px);
-  margin: 30px auto 0;
+  width: calc((7 * $width-square) + 6px);
+  margin: 0 auto;
 
   &__day {
     position: relative;
@@ -22,6 +28,11 @@ body {
     border: 1px solid black;
     box-sizing: border-box;
     transition: 500ms;
+
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__day:hover {
@@ -40,11 +51,6 @@ body {
 @for $number from 1 through 31 {
   .calendar__day:nth-child(#{$number})::before {
     content: '#{$number}';
-    position: absolute;
-    font-size: 30px;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50.5%;
   }
 }
 
