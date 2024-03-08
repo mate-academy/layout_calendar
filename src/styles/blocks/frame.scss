@@ -1,18 +1,20 @@
 .frame {
   font-family: Arial, serif;
   display: flex;
-  gap: $gap-size;
+  gap: $frame-gap-size;
   flex-wrap: wrap;
-  padding: $padding;
-  width: calc(($cell-size * 7) + (6 * $gap-size) + ($padding * 2));
+  padding: $frame-padding;
+  width: calc(
+    ($frame-cell-size * 7) + (6 * $frame-gap-size) + ($frame-padding * 2)
+  );
 
   &__day {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #eee;
-    width: $cell-size;
-    height: $cell-size;
+    width: $frame-cell-size;
+    height: $frame-cell-size;
     border: 1px solid black;
 
     transition: all 0.5s;
@@ -31,9 +33,11 @@
     }
   }
 
-  @each $day, $index in $days {
-    &--start-day-#{$day} :first-child {
-      margin-left: calc(#{$index} * $cell-size + #{$index} * $gap-size);
+  @each $frame-day, $frame-index in $frame-days {
+    &--start-day-#{$frame-day} :first-child {
+      margin-left: calc(
+        #{$frame-index} * $frame-cell-size + #{$frame-index} * $frame-gap-size
+      );
     }
   }
 
