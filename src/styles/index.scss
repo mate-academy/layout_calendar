@@ -34,18 +34,9 @@ body {
     cursor: pointer;
     transform: translateY(-20px);
   }
-
 }
 
-$days-of-week: (
-  'mon' 0,
-  'tue' 1,
-  'wed' 2,
-  'thu' 3,
-  'fri' 4,
-  'sat' 5,
-  'san' 6
-);
+$days-of-week: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'san' 6);
 
 @each $day, $number in $days-of-week {
   .calendar--start-day--#{$day} .calendar_block:nth-child(1) {
@@ -61,6 +52,6 @@ $days-of-week: (
 
 @for $number from 1 to 32 {
   .calendar_block:nth-child(n + #{$number})::before {
-    content: "#{$number}";
+    content: '#{$number}';
   }
 }
