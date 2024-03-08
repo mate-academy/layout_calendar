@@ -1,0 +1,97 @@
+@import './utils/variables';
+
+$padding: 10px;
+$gap: 1px;
+$total-gap: $gap * 8;
+$square-side: 100px;
+$line-width: ($square-side * 7) + ($padding * 2) + $total-gap;
+$day-of-the-week: (
+  'mon': 0,
+  'tue': (
+    ($square-side + $gap),
+  ),
+  'wed': (
+    ($square-side + $gap) * 2,
+  ),
+  'thu': (
+    ($square-side + $gap) * 3,
+  ),
+  'fri': (
+    ($square-side + $gap) * 4,
+  ),
+  'sat': (
+    ($square-side + $gap) * 5,
+  ),
+  'sun': (
+    ($square-side + $gap) * 6,
+  ),
+);
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  box-sizing: border-box;
+  padding: $padding;
+  width: $line-width;
+
+  transform: translateX(1px);
+
+  &__day {
+    position: relative;
+    display: none;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    width: $square-side;
+    height: $square-side;
+    background-color: $grey;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    @for $j from 1 through $i {
+      & :nth-child(#{$j}) {
+        display: block;
+        position: relative;
+        &::before {
+          content: '#{$j}';
+          font-size: 30px;
+          font-family: Arial, sans-serif;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+}
+
+@each $day, $margin in $day-of-the-week {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-of-type {
+      margin-left: #{$margin};
+    }
+  }
+}
