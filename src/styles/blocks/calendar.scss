@@ -1,10 +1,11 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap;
   padding: 10px;
-  max-width: 800px;
-  margin-left: 130px;
+  max-width: 802px;
+  margin-left: 300px;
+  margin-top: 30px;
 
   &__day {
     background-color: #eee;
@@ -15,7 +16,7 @@
     transition: transform 0.5s ease;
 
     &:first-child {
-      margin-left: 614px;
+      margin-left: 615px;
     }
 
     &:hover {
@@ -36,15 +37,17 @@
 
     @for $i from 28 through 31 {
       &--month-length-#{$i} {
-        &:nth-child(n + #{$i + 1}) {
+        &:nth-child(#{$i}) {
           display: none;
         }
       }
     }
 
-    @each $day, $index in $numberOfDays {
-      &--start-day-#{$day} &:first-child {
-        margin-left: $index * 101;
+    @each $day, $num in $numberOfDays {
+      &--start-day--#{$day} {
+        .calendar__day:first-child {
+          margin-left: ($sizeOfBlocks + $gap) * $num;
+        }
       }
     }
   }
