@@ -16,18 +16,18 @@ body {
   flex-wrap: wrap;
 
   @each $key, $value in $weekdays {
-    &--start-day-#{$key} .calendar__days:nth-child(1) {
+    &--start-day-#{$key} .calendar__day:nth-child(1) {
       margin-left: $value * ($square-size + $gap);
     }
   }
 
   @for $l from 28 through 31 {
-    &--month-length-#{$l} .calendar__days:nth-child(n + #{$l + 1}) {
+    &--month-length-#{$l} .calendar__day:nth-child(n + #{$l + 1}) {
       display: none;
     }
   }
 
-  &__days {
+  &__day {
     box-sizing: border-box;
     width: $square-size;
     height: $square-size;
@@ -36,7 +36,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.5s;
+    transition: 1s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
