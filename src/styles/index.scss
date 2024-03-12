@@ -1,3 +1,74 @@
-body {
+@import './utils/variables';
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+.page {
   margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  width: ($day-size * 7) + ($day-gap * 6) + ($calendar-padding * 2);
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $day-gap;
+
+  padding: $calendar-padding;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #000;
+    font-size: 30px;
+    color: #000;
+    background-color: #eee;
+
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @each $day, $indentation in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($day-size * $indentation) + ($day-gap * $indentation);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
