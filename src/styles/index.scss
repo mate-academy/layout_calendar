@@ -1,3 +1,75 @@
-body {
+$cell-size: 100px;
+$days-in-month: 31;
+$days-of-weak: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  padding: 10px;
+  width: $cell-size * 7 + 20px + 6px;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background: #eee;
+    border: 1px solid black;
+    transition: all 0.5s;
+
+    @for $numberOfDay from 1 through 31 {
+      &:nth-child(#{$numberOfDay}) {
+        &::before {
+          font-family: Arial, sans-serif;
+          font-size: 30px;
+          content: '#{$numberOfDay}';
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $dayPosition in $days-of-weak {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($cell-size + 1px) * ($dayPosition - 1);
+      }
+    }
+  }
+
+  @for $monthLength from 28 through $days-in-month {
+    &--month-length-#{$monthLength} {
+      .calendar__day:nth-child(n + #{$monthLength + 1}) {
+        display: none;
+      }
+    }
+  }
 }
