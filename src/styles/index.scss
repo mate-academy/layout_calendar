@@ -1,3 +1,71 @@
-body {
+@import './variables';
+
+* {
   margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  max-width: calc(($cells-size * 7) + $padding-sum + 6px);
+  padding: 10px;
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length}
+      &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+
+  /* stylelint-disable */
+  $start-days:
+    mon 0,
+    tue 101px,
+    wed 202px,
+    thu 303px,
+    fri 404px,
+    sat 505px,
+    sun 606px;
+  /* stylelint-enable */
+  @each $day, $margin in $start-days {
+    &--start-day-#{$day} &__day:nth-child(1) {
+      margin-left: $margin;
+    }
+  }
+
+  &__day {
+    background-color: $background-color;
+    height: $cells-size;
+    width: $cells-size;
+    border: 1px solid $black !important;
+    position: relative;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translateY(-20px);
+    }
+
+    @for $cell-number from 1 through 31 {
+      &:nth-child(#{$cell-number}):before {
+        content: '#{$cell-number}';
+        font-size: 30px;
+        font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
 }
