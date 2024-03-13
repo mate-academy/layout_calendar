@@ -1,0 +1,22 @@
+@import '../styles/variables';
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}):before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $index in $weekdays {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: (($index - 1) * $cell-size) + (($index - 1) * $gap);
+    }
+  }
+}
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length-#{$lastDay}
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
+}
