@@ -1,78 +1,70 @@
-$weekdays: mon, tue, wed, thu, fri, sat, sun;
-$days: 31;
-
-@for $i from 28 through 31 {
-  .calendar--month-length-#{$i} {
-    @for $j from 1 through $i {
-      & :nth-child(#{$j}) {
-        display: block;
-        position: relative;
-
-        &::before {
-          content: '#{$j}';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-    }
-  }
-}
-
-@each $day, $margin in $weekdays {
-  .calendar--start-day-#{$day} {
-    .day__calendar:first-of-type {
-      margin-left: #{$margin};
-    }
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
+$weekday: mon, tue, wed, thu, fri, sat, sun;
+$dayBox: 100px;
+$gap: 1px;
+$weekdayIter: (
+  mon 0,
+  tue 101px,
+  wed 202px,
+  thu 303px,
+  fri 404px,
+  sat 505px,
+  sun 606px
+);
 
 body {
   margin: 0;
   padding: 0;
-}
-
-.main-main {
+  height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.main-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 800px;
-  height: 700px;
 }
 
 .calendar {
   padding: 10px;
   display: flex;
-  gap: 1px;
+  gap: $gap;
   text-align: center;
   flex-wrap: wrap;
+  width: 706px;
+
+  @each $weekday, $ind in $weekdayIter {
+    &--start-day-#{$weekday} :first-child {
+      margin-left: $ind;
+    }
+  }
+
+  @for $lastDay from 28 through 31 {
+    &--month-length-#{$lastDay} :nth-child(-n + #{$lastDay}) {
+      display: flex;
+    }
+  }
 }
 
-.calendar__day--calendar {
+.calendar__day {
+  box-sizing: border-box;
+  display: none;
   height: 100px;
   width: 100px;
   background-color: #eee;
   border: 1px solid #000;
-  display: flex;
   justify-content: center;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
-}
+  transition-duration: 0.5s;
 
-.calendar__day--calendar:hover {
-  background-color: #ffbfcb;
-  cursor: pointer;
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-style: 30px;
+    }
+  }
+  &:hover {
+    background-color: #ffbfcb;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
 }
