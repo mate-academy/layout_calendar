@@ -1,0 +1,66 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
+.page {
+  font-family: $font;
+  font-size: 30px;
+}
+
+.body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $calender-size;
+  gap: $gap-size;
+  margin: 0;
+  padding: 10px;
+
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $bg-color;
+    border: 1px black solid;
+    text-align: center;
+    transition: all 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      cursor: pointer;
+    }
+  }
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $index * ($cell-size + $gap-size);
+    }
+  }
+
+  @for $monthLength from 28 through 31 {
+    &--month-length-#{$monthLength} :nth-child(n + #{$monthLength + 1}) {
+      display: none;
+    }
+  }
+}
