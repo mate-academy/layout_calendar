@@ -18,7 +18,7 @@ body {
   gap: 1px;
   padding: $month__padding;
 
-  width: $day__size * 7 + $month__padding * 2 + $day__margin * 6;
+  min-width: $day__size * 7 + $month__padding * 2 + $day__margin * 6;
 
   &__day {
     display: block;
@@ -28,13 +28,13 @@ body {
     transition: all 0.5s;
 
     @for $index-day from 1 through 31 {
-      &--#{$index-day} {
+      &:nth-child(#{$index-day}) {
         width: $day__size;
         height: $day__size;
         background-color: #eee;
         border: 1px solid #000;
       }
-      &--#{$index-day}:before {
+      &:nth-child(#{$index-day}):before {
         content: '#{$index-day}';
         position: absolute;
         top: 50%;
@@ -47,7 +47,7 @@ body {
   :hover {
     cursor: pointer;
     background-color: #ffbfcb;
-    transform: translateY(-22px);
+    transform: translateY(-20px);
   }
 }
 
