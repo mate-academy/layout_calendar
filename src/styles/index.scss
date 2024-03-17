@@ -1,28 +1,25 @@
-$font-family: Arial, sans-serif;
-$font-size: 30px;
-$cell-color: #eee;
-$cell-size: 100px;
-$border-size: 1px;
-$gap-size: 1px;
-$cell-plus-border-size: $cell-size + $border-size;
+@import './calendar-styles';
+@import './calendar-days';
+@import './calendar-cycles';
 
 * {
   box-sizing: border-box;
-  font-family: $font-family;
-  font-size: $font-size;
 }
 
-ul li {
+body,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
 
 body {
-  margin: 0;
+  font-family: $font-family;
+  font-size: $font-size;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .calendar {
@@ -32,13 +29,8 @@ body {
   flex-wrap: wrap;
   padding: 10px;
   gap: $gap-size;
-
-  &::before {
-    content: '';
-    position: absolute;
-    font-size: $font-size;
-    color: black;
-  }
+  font-size: $font-size;
+  color: black;
 
   &__cell {
     box-sizing: border-box;
@@ -52,38 +44,15 @@ body {
     background-color: $cell-color;
     transition: transform 0.5s;
     transition-duration: 0.5s;
-  }
 
-  &__cell:hover {
-    background-color: #ffbfcb;
-    transform: translateY(-20px);
-  }
-}
+    &::before {
+      content: '';
+      position: absolute;
+    }
 
-@for $i from 1 through 31 {
-  .calendar__cell:nth-child(#{$i})::before {
-    content: '#{$i}';
-  }
-}
-
-$calendar-days: (
-  'mon': 0,
-  'tue': $cell-plus-border-size,
-  'wed': 2 * $cell-plus-border-size,
-  'thu': 3 * $cell-plus-border-size,
-  'fri': 4 * $cell-plus-border-size,
-  'sat': 5 * $cell-plus-border-size,
-  'sun': 6 * $cell-plus-border-size,
-);
-
-@each $day, $position in $calendar-days {
-  .calendar__cell--start-day-#{$day} {
-    margin-left: $position;
-  }
-}
-
-@for $length from 28 through 31 {
-  .calendar--month-length-#{$length} :nth-child(n + #{$length + 1}) {
-    display: none;
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
   }
 }
