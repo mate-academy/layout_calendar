@@ -1,10 +1,12 @@
-$width-calendar: 706px;
 $gap-days: 1px;
 $color-border-day: #000;
 $background-color-day: #eee;
+$background-color-day-hover: #ffbfcb;
 $width-days: 100px;
 $height-days: 100px;
 $font-size-days: 30px;
+$padding: 10px;
+$width-calendar: calc(($width-days * 7) + ($gap-days * 6) + ($padding * 2));
 
 body {
   margin: 0;
@@ -19,7 +21,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-days;
-  padding: 10px;
+  padding: $padding;
 
   &__day {
     box-sizing: border-box;
@@ -30,6 +32,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $background-color-day-hover;
+      transition: transform 0.5s;
+      transform: translateY(-20px);
+    }
 
     @for $days from 1 through 31 {
       &:nth-child(#{$days})::before {
