@@ -20,7 +20,6 @@
 
     &:hover {
       cursor: pointer;
-      background-color: $background-color-day-hover;
       transition: transform 0.5s;
       transform: translateY(-20px);
     }
@@ -34,14 +33,14 @@
     }
   }
 
-  @each $day, $marg-index in $week-days{
-    &--start-day--#{$day} :first-child {
+  @each $day, $marg-index in $week-days {
+    &--start-day-#{$day} :first-child {
       margin-left: ($width-days + $gap-days) * $marg-index;
     }
   }
 
   @for $i from 28 to 31 {
-    &--month-length--#{$i} :nth-child(n + #{$i + 1}){
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
