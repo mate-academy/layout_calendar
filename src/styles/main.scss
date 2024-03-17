@@ -1,3 +1,11 @@
+$width-calendar: 706px;
+$gap-days: 1px;
+$color-border-day: #000;
+$background-color-day: #eee;
+$width-days: 100px;
+$height-days: 100px;
+$font-size-days: 30px;
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -7,19 +15,18 @@ body {
 }
 
 .calendar {
-  box-sizing: border-box;
-  width: 700px;
+  width: $width-calendar;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $gap-days;
   padding: 10px;
 
   &__day {
     box-sizing: border-box;
-    border: solid 1px black;
-    background-color: #eee;
-    height: 100px;
-    width: 100px;
+    border: solid 1px $color-border-day;
+    background-color: $background-color-day;
+    height: $height-days;
+    width: $width-days;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +35,7 @@ body {
       &:nth-child(#{$days})::before {
         content: '#{$days}';
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
+        font-size: $font-size-days;
       }
     }
   }
