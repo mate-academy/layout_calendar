@@ -1,3 +1,70 @@
+$cell-width: 100px;
+$gap: 1px;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  box-sizing: border-box;
+  margin: auto;
+  width: 726px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+
+&__cell {
+  box-sizing: border-box;
+  height: 100px;
+  width: $cell-width;
+  background-color: #eee;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #FFBFCB;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition: transform 0.5s;
+
+  }
+}
+}
+
+@for $i from 1 through 31 {
+  .calendar__cell:nth-child(#{$i})::before {
+    content: "#{$i}";
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@for $end_date from 28 through 31 {
+  .calendar--month-length-#{$end_date} {
+    .calendar__cell:nth-child(n+#{$end_date}):not(:nth-child(#{$end_date})) {
+    display: none;
+  }
+}
+}
+
+$days: mon 0,
+tue 1,
+wed 2,
+thu 3,
+fri 4,
+sat 5,
+sun 6;
+
+@each $day, $ordinal_number in $days  {
+  .calendar--start-day-#{$day} {
+    .calendar__cell:first-child{
+    margin-left: ($ordinal_number * $cell-width) + ($ordinal_number * $gap);
+  }
+}
 }
