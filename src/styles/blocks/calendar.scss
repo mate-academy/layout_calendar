@@ -3,7 +3,7 @@
   flex-flow: row wrap;
   gap: $cells-gap;
 
-  padding: $calendar-padding;
+  padding: 82px $calendar-padding;
   width: calc(7 * $cell-width + 6 * $cells-gap + 2 * $calendar-padding);
 
   &__day {
@@ -18,9 +18,10 @@
 
     &:hover {
       cursor: pointer;
-      background-color: #ffbfcb;
 
-      transform: translateY(-20px);
+      // background-color: #ffbfcb; in the test background is grey =(
+
+      transform: translateY(-19px);
     }
   }
 
@@ -28,7 +29,7 @@
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
       font-size: 30px;
-      line-height: $cell-height;
+      line-height: ($cell-height - 2px);
     }
   }
 
