@@ -1,3 +1,5 @@
+@import './utils/variabless';
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,32 +10,37 @@ body {
   margin: 0;
 }
 
-.container {
+.calendar {
   display: flex;
-  width: 706px;
-
-  &__calendar {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    gap: 1px;
-  }
+  flex-wrap: wrap;
+  gap: $indentation;
+  margin: 0 auto;
+  width: $calendarWidth;
+  padding: $padding;
 
   &__day {
-    position: relative;
-    height: 100px;
-    width: 100px;
-    background-color: #eee;
+    display: flex;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $bg-day;
     border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
 
-    &::after {
-      content: '1';
-      display: block;
-      position: absolute;
-      font-size: 30px;
-      left: 45px;
-      top: 49px;
-      margin-top: -15px;
+    @for $dayOfMounth from 1 through $quantityDaysInMonth {
+
+      &:nth-child(#{$dayOfMounth})::before {
+        content: '#{$dayOfMounth}';
+        display: block;
+        font-size: $digit-size;
+      }
+    }
+  }
+
+  @each $day, $i in $daysOfWeek {
+
+    &--start-day-#{$day} :first-child {
+      margin-left: ($cell-size + $indentation) * $i;
     }
   }
 }
