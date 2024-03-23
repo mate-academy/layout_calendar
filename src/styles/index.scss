@@ -1,18 +1,10 @@
-$cell-size: 100px;
-$border-width: 1px;
-$gap: 1px;
-$padding: 10px;
-$days-in-week: 7;
-$start-day: 7;
-$start-day-name: sun;
-$calendar-width: ($cell-size * $days-in-week) + ($gap * ($days-in-week - 1));
-$start-day-margin: $cell-size * ($start-day - 1) + $gap * ($start-day - 1);
-$month-length: 31;
+@import 'mixins';
+@import 'variables';
+@import 'start-day-count';
+@import 'days-in-month-count';
 
-@mixin flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+html {
+  font-family: Arial, sans-serif;
 }
 
 body {
@@ -30,12 +22,6 @@ body {
   flex-wrap: wrap;
   gap: $gap;
   padding: $padding;
-
-  @for $i from 1 through $month-length {
-    .calendar__day:nth-child(#{$i})::before {
-      content: '#{$i}';
-    }
-  }
 
   &__day {
     width: $cell-size;
@@ -62,14 +48,4 @@ body {
       font-size: 30px;
     }
   }
-}
-
-@each $day in mon, tue, wed, thu, fri, sat, sun {
-  .calendar--start-#{$day} .calendar__day:first-child {
-    margin-left: $start-day-margin;
-  }
-}
-
-.calendar .calendar__day:first-child {
-  margin-left: $start-day-margin;
 }
