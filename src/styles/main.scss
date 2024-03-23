@@ -2,19 +2,22 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $fontFamily;
+  margin: auto;
+  width: 100vh;
+  height: 100vh;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $indentation;
-  margin: 0 auto;
+  gap: $gap;
   width: $calendarWidth;
   padding: $padding;
 
@@ -26,9 +29,15 @@ body {
     border: 1px solid #000;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: $bc-hover;
+      transform: translateY(-20px);
+    }
 
     @for $dayOfMounth from 1 through $quantityDaysInMonth {
-
       &:nth-child(#{$dayOfMounth})::before {
         content: '#{$dayOfMounth}';
         display: block;
@@ -38,9 +47,14 @@ body {
   }
 
   @each $day, $i in $daysOfWeek {
-
     &--start-day-#{$day} :first-child {
-      margin-left: ($cell-size + $indentation) * $i;
+      margin-left: ($cell-size + $gap) * $i;
+    }
+  }
+
+  @for $amountsOfDay from 28 through 31 {
+    &--month-length-#{$amountsOfDay} :nth-child(n + #{$amountsOfDay + 1}) {
+      display: none;
     }
   }
 }
