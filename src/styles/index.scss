@@ -1,7 +1,8 @@
 $column-width: 100px;
+$height: 100px;
+$gap: 1px;
 $padding: 10px;
-$week-days: (mon 0), (tue 1), (wed 2), (thu 3), (fri 4), (sat 5), (sun 6);
-$cell-size: $column-width + 2 * $padding;
+$week-days: 0 'mon', 1 'tue', 2 'wed', 3 'thu', 4 'fri', 5 'sat', 6 'sun';
 
 * {
   box-sizing: border-box;
@@ -20,7 +21,6 @@ body {
   flex-wrap: wrap;
   margin: auto;
   gap: 1px;
-  padding: $padding;
   width: calc(7 * #{$column-width} + 2 * #{$padding});
 }
 
@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   transition: background-color 0.5s, transform 0.5s;
 }
 
@@ -50,10 +49,10 @@ body {
   }
 }
 
-@each $day, $index in $week-days {
+@each $index, $day in $week-days {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: ($cell-size + 1px) * $index;
-  }
+      margin-left: ($index * ($height + 0.2));
+    }
 }
 
 @for $i from 28 through 31 {
