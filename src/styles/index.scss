@@ -1,9 +1,4 @@
-$cell-size: 100px;
-$gap: 1px;
-$digit-size: 0.8 * $cell-size;
-$shift: $cell-size / 2;
-$week: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
-$cell-count: 7;
+@import './utils/variables';
 
 * {
   box-sizing: border-box;
@@ -11,22 +6,22 @@ $cell-count: 7;
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
 }
 
 .calendar {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
   width: ($cell-size + $gap) * $cell-count;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
 
   &__day {
-    position: relative;
     width: $cell-size;
     height: $cell-size;
     background-color: #eee;
@@ -36,15 +31,8 @@ body {
     @for $count from 1 through 31 {
       &:nth-child(#{$count}n)::before {
         content: '#{$count}';
-
         width: $digit-size;
         height: $digit-size;
-
-        position: absolute;
-
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-
         display: flex;
         align-items: center;
         justify-content: center;
