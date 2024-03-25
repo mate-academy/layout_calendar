@@ -1,0 +1,39 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar{
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: 1px;
+  width: calc(7 * #{$column-width} + 2 * #{$padding});
+
+  &__day{
+    width: calc((100% - 6 * 1px - 2 * #{$padding}) / 7);
+    height: $column-width;
+    background-color: #eee;
+    border: 1px solid black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color $transition-duration, transform $transition-duration;
+
+    &:hover{
+      cursor: pointer;
+      background-color: #FFBFCB;
+      transform: translateY(-20px);
+    }
+  }
+}
