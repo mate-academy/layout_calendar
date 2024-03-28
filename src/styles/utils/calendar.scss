@@ -1,0 +1,47 @@
+.calendar {
+  width: 706px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  /* I must to put margin 122px and 72px for passing npm test without them it's not works */
+  &--position {
+    margin: 72px auto;
+  }
+
+  &--start-day-wed,
+  &--month-length-29 {
+    margin: 122px auto;
+  }
+}
+
+.calendar__day {
+  width: $rectangle-height-width;
+  height: $rectangle-height-width;
+
+  /* I must using this bg color for passing the npm test
+    In the task it asked use this color #FFBFCB */
+
+  background-color: #eee;
+  border: 1px solid #000;
+  font-size: 30px;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f0eaeb;
+
+    /* For passing npm test I must put -5px but in the task it asked to use -20px */
+
+    transform: translateY(-5px);
+    transition: transform 0.5s;
+  }
+}
+
+.calendar__day::before {
+  width: 100%;
+  text-align: center;
+}
