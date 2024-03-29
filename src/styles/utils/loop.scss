@@ -1,3 +1,10 @@
+/* start of function which calculate margin for the month start day */
+@function startday($dayOfMonth) {
+  @return ($dayOfMonth * 100) + $dayOfMonth;
+}
+
+/* end of function which calculate margin for the month start day */
+
 /* #start of loop for adding of text numbers to the calendar day */
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
@@ -11,7 +18,7 @@
 
 @each $day, $margin in $start-day {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: $margin;
+    margin-left: startday($margin);
   }
 }
 
