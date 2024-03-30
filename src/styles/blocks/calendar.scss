@@ -1,48 +1,57 @@
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $size-square-day * $columns-month + $gap * ($columns-month - 1) + $paddings;
-  gap: $gap;
-  padding: $paddings;
 
-
-  @each $week, $day in $week-days {
-    &--start-day-#{$week}
-    &__day:first-child{
-      margin-left: $day * $size-square-with-gap;
-    }
-  }
-
-  @for $current-number-day from 28 through 31 {
-    &--month-length-#{$current-number-day}
-    &__day:nth-child(n + #{$current-number-day + 1}) {
-      display: none;
-    }
-  }
+  width: 7 * $cell-size + 6 * $cell-gap + 2 * $calendar-padding;
+  padding: $calendar-padding;
+  gap: $cell-gap;
 
   &__day {
-    width: $size-square-day;
-    height: $size-square-day;
-    border: 1px solid black;
-    background-color: #eee;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    text-align: center;
-    line-height: $size-square-day;
-    transition-duration: 0.5s;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @for $numbr from 1 through $number-days-month {
-      &:nth-child(#{$numbr})::before{
-        content: "#{$numbr}";
+    border: 1px solid #000;
+    width: $cell-size;
+    height: $cell-size;
+
+    background-color: #eee;
+
+    transition: 0.5s;
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number}):before {
+        content: '#{$day-number}';
+
+        font-size: 30px;
+        font-family: Arial, sans-serif;
       }
     }
 
     &:hover {
-      background-color: #ffc0cb;
-      cursor: pointer;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
+      cursor: pointer;
+      background-color: $hover-color;
+    }
+  }
+
+  @each $day-of-week, $weekday-number in $days {
+    &--start-day-#{$day-of-week} :first-child {
+      margin-left: ($cell-size + $cell-gap) * $weekday-number;
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 }
