@@ -18,24 +18,10 @@ body {
   height: 100vh;
 }
 
-@each $start-day in mon, tue, wed, thu, fri, sat, sun {
-  $margin-left: 0;
+$margin-left-for-sun: $day-size-with-border * 6 + 6px;
 
-  @if $start-day == sun {
-    $margin-left: $margin-left-for-sun;
-  } @else if $start-day == mon {
-    $margin-left: 0;
-  } @else if $start-day == tue {
-    $margin-left: ($day-size-with-border + 1px) * 1;
-  } @else if $start-day == wed {
-    $margin-left: ($day-size-with-border + 1px) * 2;
-  } @else if $start-day == thu {
-    $margin-left: ($day-size-with-border + 1px) * 3;
-  } @else if $start-day == fri {
-    $margin-left: ($day-size-with-border + 1px) * 4;
-  } @else if $start-day == sat {
-    $margin-left: ($day-size-with-border + 1px) * 5;
-  }
+@each $start-day, $index in (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6), (sun, 7){
+  $margin-left: ($index - 1) * $day-size-with-border + ($index - 1) * 1px;
 
   .calendar--start-day-#{$start-day} {
     display: flex;
@@ -44,9 +30,8 @@ body {
     margin: 0 auto;
     gap: 1px;
 
-
     .calendar__day:first-child {
-      margin-left: $margin-left;
+      margin-left: if($start-day == sun, $margin-left-for-sun, $margin-left);
     }
   }
 }
