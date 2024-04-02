@@ -1,3 +1,48 @@
+@import 'variables';
+
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  font-size: $square-font-size;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 7 * ($square-size + $gap-size + $padding);
+  gap: $gap-size;
+
+  @each $key, $value in $week-days {
+    &--start-day-#{$key} .calendar__day:nth-child(1) {
+      margin-left: 6 * ($square-size + $gap-size);
+    }
+  }
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    height: $square-size;
+    width: $square-size;
+    background-color: $square-color;
+    border: black solid 1px;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translate(0, -20px);
+  transition: 0.5s;
 }
