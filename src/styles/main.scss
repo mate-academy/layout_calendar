@@ -1,0 +1,36 @@
+.calendar {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  gap: 1px;
+  width: 706px;
+  counter-reset: day;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: end;
+
+  .cell {
+    box-sizing: border-box;
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+    line-height: 100px;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition: 300ms;
+    }
+
+    &::before {
+      counter-increment: day;
+      content: counter(day);
+    }
+  }
+}
