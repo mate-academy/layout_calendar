@@ -37,13 +37,15 @@
 
   @each $day, $index in $day-of-week {
     &--start-day--#{$day} {
-      margin-left: ($index - 1) * ($calendar-day-width + 1px);
+      .calendar__day:nth-child(1) {
+        margin-left: ($index - 1) * ($calendar-day-width + 1px);
+      }
     }
   }
 
   @for $lastDay from 28 through 31 {
     &--month-length--#{$lastDay} {
-      &:nth-child(#{$lastDay}) {
+      .calendar__day:nth-child(n + #{$lastDay + 1}) {
         display: none;
       }
     }
