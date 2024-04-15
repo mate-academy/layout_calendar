@@ -1,3 +1,73 @@
+$cell-size: 100px;
+$border-width: 1px;
+$block-column: 7;
+$gap: 1px;
+$font-size: 30px;
+$days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
+
 body {
   margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $block-column * ($cell-size + $gap);
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($cell-size + $gap) * $index;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-width solid #000;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    background-color: #eee;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 0.5s ease-in-out;
+
+    &:hover {
+      animation: move-and-change 0.5s ease-in-out forwards;
+    }
+
+    @keyframes move-and-change {
+      50% {
+        transform: translateY(-20px);
+      }
+      100% {
+        transform: translateY(-20px);
+        background-color: #ffbfcb;
+      }
+    }
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+      }
+    }
+  }
 }
