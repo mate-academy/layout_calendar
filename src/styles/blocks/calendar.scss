@@ -30,7 +30,7 @@
 @each $day, $margin-left in $days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: $margin-left;
+      margin-left: $margin-left * 101px;
     }
   }
 }
@@ -54,7 +54,9 @@
         }
       }
     }
-
+    // Actually don't know how to remove this "redundant" part, my algorithm makes 31 days if there is no modificator
+    // and make 28 days if modificator says 28 days, then it makes 29, 30, 31 days 0 size, if you give me an better
+    // idea - i'll happily implement this :)
     @for $j from $i + 1 through 32 {
       .calendar__day:nth-child(#{$j}) {
         width: 0;
