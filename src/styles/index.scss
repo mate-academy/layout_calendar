@@ -1,7 +1,7 @@
 @import './variables';
 
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -53,6 +53,14 @@ body {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       margin-left: ($box-size + $days-gap) * $i;
+    }
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 }
