@@ -1,0 +1,167 @@
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  margin-top: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+  position: relative;
+
+  &--month-length-31 {
+    @for $day from 1 through 31 {
+      .calendar__day:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+  }
+
+  &--month-length-30 {
+    @for $day from 1 through 30 {
+      .calendar__day:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+      .calendar__day:nth-child(1) {
+        margin-top: 50px;
+      }
+      .calendar__day:nth-child(31) {
+        display: none;
+      }
+    }
+  }
+
+  &--month-length-29 {
+    @for $day from 1 through 29 {
+      .calendar__day:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+      .calendar__day:nth-child(1) {
+        margin-top: 50px;
+      }
+      .calendar__day:nth-child(30) {
+        display: none;
+      }
+      .calendar__day:nth-child(31) {
+        display: none;
+      }
+    }
+  }
+
+  &--month-length-28 {
+    @for $day from 1 through 28 {
+      .calendar__day:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+      .calendar__day:nth-child(1) {
+        margin-top: 50px;
+      }
+      .calendar__day:nth-child(29) {
+        display: none;
+      }
+      .calendar__day:nth-child(30) {
+        display: none;
+      }
+      .calendar__day:nth-child(31) {
+        display: none;
+      }
+    }
+  }
+}
+
+.calendar__day {
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  border: 1px solid #000;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transition-duration: 0.5s;
+  transform: translateY(-20px);
+}
+
+.calendar--start-day-mon {
+  .calendar__day:nth-child(1) {
+    margin-left: 0;
+  }
+
+  @for $day from 1 through 7 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-tue {
+  .calendar__day:nth-child(1) {
+    margin-left: 101px;
+  }
+
+  @for $day from 1 through 6 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-wed {
+  .calendar__day:nth-child(1) {
+    margin-left: 202px;
+  }
+
+  @for $day from 1 through 5 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-thu {
+  .calendar__day:nth-child(1) {
+    margin-left: 303px;
+  }
+
+  @for $day from 1 through 4 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-fri {
+  .calendar__day:nth-child(1) {
+    margin-left: 404px;
+  }
+
+  @for $day from 1 through 3 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-sat {
+  .calendar__day:nth-child(1) {
+    margin-left: 505px;
+  }
+
+  @for $day from 1 through 2 {
+    .calendar__day:nth-child(#{$day}) {
+      margin-top: 50px;
+    }
+  }
+}
+
+.calendar--start-day-sun {
+  .calendar__day:nth-child(1) {
+    margin-left: 606px;
+  }
+}
