@@ -16,14 +16,14 @@ body {
   margin: 10px;
   width: $calendar-width;
 
-  @each $day in $days {
-    &--start-day-#{$day} :nth-child(1) {
-    margin-left: ($cell-width * 6) + ($gap-between-cells * 6);
+  @each $week-day, $ind in $week {
+    &--start-day-#{$week-day} :nth-child(1) {
+    margin-left: $ind * ($gap-between-cells + $cell-width);
     }
   }
 
   @for $length from 28 to 31 {
-    &--month-length-#{$length} :nth-child(#{$length + 1}) {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
     display: none;
     }
   }
@@ -38,6 +38,9 @@ body {
   border: black 1px solid;
   justify-content: center;
   align-items: center;
+  transition:
+    transform 0,5s,
+    background-color 0,5s;
 
   @for $i from 1 through 31 {
     &:nth-child(#{$i})::before {
@@ -47,8 +50,7 @@ body {
 
   &:hover {
     cursor: pointer;
-    background-color: #FFC0CB;
     transform: translateY(-20px);
-    transition-delay: 0,5s;
+    background-color: #FFC0CB;
   }
 }
