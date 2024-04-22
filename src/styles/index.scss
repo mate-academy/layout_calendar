@@ -2,11 +2,11 @@
 
 .calendar {
   display: flex;
-  flex-flow: row-reverse wrap-reverse;
+  flex-wrap: wrap;
   padding: $padding;
   gap: $gap;
   width: $calendar-width;
-  height: auto; // Allows the container to grow with the content
+  height: auto; 
 
   &__day {
     width: $block-size;
@@ -47,5 +47,21 @@
 @for $i from 1 through 31 {
   .calendar .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
+  }
+}
+
+$days-start: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+@each $day, $index in $days-start {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($block-size + $gap) * $index;
   }
 }
