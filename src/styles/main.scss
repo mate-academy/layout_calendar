@@ -2,11 +2,15 @@ $cell-size: 100px;
 $padding-general: 10px;
 $field-width: (7 * $cell-size) + (2 * $padding-general) + 6;
 $days: 31;
-$day-of-week: (mon 1, tue 2, wed 3, thu 4, fri 5, sat 6, sun 7);
+$day-of-week: ('mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6, 'sun' 7);
 
 body {
   margin: 0;
-  padding: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .calendar {
@@ -16,11 +20,6 @@ body {
   flex-wrap: wrap;
   width: $field-width;
   padding-inline: $padding-general;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
 
   &__day {
     display: flex;
@@ -54,13 +53,15 @@ body {
 }
 
 @each $name, $startPosition in $day-of-week {
-  .calendar--start-day-#{$name}:first-child {
-    margin-left: ($cell-size * ($startPosition - 1)) + ($startPosition - 1);
+  .calendar__start-day--#{$name} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size * ($startPosition - 1)) + ($startPosition - 1);
+    }
   }
 }
 
 @for $i from 28 through $days {
-  .calendar--month-length-#{$i} {
+  .calendar__month-length--#{$i} {
     .calendar__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
