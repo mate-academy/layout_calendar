@@ -1,3 +1,111 @@
+$fieldSide: 100px;
+$fieldGap: 1px;
+$fontSize: 30px;
+$paddings: 10px;
+$marginStartDay: $fieldSide + $fieldGap;
+$globalWidth: ($fieldSide * 7) + ($fieldGap * 6) + ($paddings * 2);
+
+@mixin day-field-style {
+  height: $fieldSide;
+  width: $fieldSide;
+  background-color: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $fontSize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid black 1px;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+}
+
+.calendar {
+  gap: $fieldGap;
+  width: $globalWidth;
+  padding: $paddings;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__day {
+    transition: transform 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  &--month-length {
+    &--28 {
+      @for $i from 1 through 28 {
+        .calendar__day {
+          &:nth-child(#{$i})::before {
+            @include day-field-style;
+
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+
+    &--29 {
+      @for $i from 1 through 29 {
+        .calendar__day {
+          &:nth-child(#{$i})::before {
+            @include day-field-style;
+
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+
+    &--30 {
+      @for $i from 1 through 30 {
+        .calendar__day {
+          &:nth-child(#{$i})::before {
+            @include day-field-style;
+
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+
+    &--31 {
+      @for $i from 1 through 31 {
+        .calendar__day {
+          &:nth-child(#{$i})::before {
+            @include day-field-style;
+
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--start-day {
+    &--tue :first-child {
+      margin-left: $marginStartDay;
+    }
+    &--wed :first-child {
+      margin-left: $marginStartDay * 2;
+    }
+    &--thu :first-child {
+      margin-left: $marginStartDay * 3;
+    }
+    &--fri :first-child {
+      margin-left: $marginStartDay * 4;
+    }
+    &--sat :first-child {
+      margin-left: $marginStartDay * 5;
+    }
+    &--sun :first-child {
+      margin-left: $marginStartDay * 6;
+    }
+  }
 }
