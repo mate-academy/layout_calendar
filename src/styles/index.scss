@@ -3,7 +3,7 @@ $fieldGap: 1px;
 $fontSize: 30px;
 $paddings: 10px;
 $marginStartDay: $fieldSide + $fieldGap;
-$globalWidth: ($fieldSide * 7) + ($fieldGap * 6) + ($paddings * 2);
+$globalWidth: ($fieldSide * 7) + ($fieldGap * 6);
 
 @mixin day-field-style {
   height: $fieldSide;
@@ -19,7 +19,12 @@ $globalWidth: ($fieldSide * 7) + ($fieldGap * 6) + ($paddings * 2);
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .calendar {
@@ -38,73 +43,70 @@ body {
     }
   }
 
-  &--month-length {
-    &--28 {
-      @for $i from 1 through 28 {
-        .calendar__day {
-          &:nth-child(#{$i})::before {
-            @include day-field-style;
+  &--month-length--28 {
+    @for $i from 1 through 28 {
+      .calendar__day {
+        &:nth-child(#{$i})::before {
+          @include day-field-style;
 
-            content: '#{$i}';
-          }
+          content: '#{$i}';
         }
       }
     }
+  }
+  &--month-length--29 {
+    @for $i from 1 through 29 {
+      .calendar__day {
+        &:nth-child(#{$i})::before {
+          @include day-field-style;
 
-    &--29 {
-      @for $i from 1 through 29 {
-        .calendar__day {
-          &:nth-child(#{$i})::before {
-            @include day-field-style;
-
-            content: '#{$i}';
-          }
+          content: '#{$i}';
         }
       }
     }
+  }
 
-    &--30 {
-      @for $i from 1 through 30 {
-        .calendar__day {
-          &:nth-child(#{$i})::before {
-            @include day-field-style;
+  &--month-length--30 {
+    @for $i from 1 through 30 {
+      .calendar__day {
+        &:nth-child(#{$i})::before {
+          @include day-field-style;
 
-            content: '#{$i}';
-          }
+          content: '#{$i}';
         }
       }
     }
+  }
 
-    &--31 {
-      @for $i from 1 through 31 {
-        .calendar__day {
-          &:nth-child(#{$i})::before {
-            @include day-field-style;
+  &--month-length--31 {
+    @for $i from 1 through 31 {
+      .calendar__day {
+        &:nth-child(#{$i})::before {
+          @include day-field-style;
 
-            content: '#{$i}';
-          }
+          content: '#{$i}';
         }
       }
     }
   }
 
   &--start-day {
-    &--tue :first-child {
+    &-tue :first-child {
       margin-left: $marginStartDay;
     }
-    &--wed :first-child {
+    &-wed :first-child {
       margin-left: $marginStartDay * 2;
     }
-    &--thu :first-child {
+    &-thu :first-child {
       margin-left: $marginStartDay * 3;
     }
-    &--fri :first-child {
+    &-fri :first-child {
       margin-left: $marginStartDay * 4;
     }
-    &--sat :first-child {
+    &-sat :first-child {
       margin-left: $marginStartDay * 5;
     }
-    &--sun :first-child {
+    &-sun :first-child {
       margin-left: $marginStartDay * 6;
     }
   }
