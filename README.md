@@ -13,6 +13,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
 - Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
   - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
+
   - You can just add correct `margin-left` for the first day
   - Set calendar to start from Sunday by default
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
