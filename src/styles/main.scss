@@ -1,0 +1,60 @@
+@import '../units/vars';
+
+* {
+  box-sizing: border-box;
+}
+
+.calendar {
+  padding: $calendarPaddings;
+
+  width: $calendarPaddings * 2 + $cellSize * 7 + $cellGap * 6;
+  height: auto;
+  cursor: pointer;
+
+  display: flex;
+  gap: $cellGap;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &__day {
+    border: $cellBorder solid $cellBorderColor;
+    background-color: $cellColor;
+    width: $cellSize;
+    height: $cellSize;
+
+    align-items: center;
+    text-align: center;
+    line-height: $cellSize - $cellBorder * 2;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: #000;
+
+    transition: 0.5s;
+  }
+
+  @for $i from 0 to 31 {
+    &__day:nth-child(#{$i + 1})::before {
+      content: '#{$i + 1}';
+    }
+  }
+
+  &__day:hover {
+    background-color: $cellColorNowDay;
+
+    transform: translateY(-20px);
+  }
+}
+
+@each $day in $weekDays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $startDay * $numWeek;
+  }
+
+  $numWeek: $numWeek + 1;
+}
+
+@for $i from 28 to 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
