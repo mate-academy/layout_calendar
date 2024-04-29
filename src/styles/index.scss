@@ -46,23 +46,23 @@ body {
     cursor: pointer;
     transition: all $transition-time ease;
     transition-property: transform, background-color;
+    font-size: 30px;
 
     &:hover {
       background-color: $bg-hover;
       transform: translateY(-20px);
     }
 
-    @for $date from 1 through $month-length {
-      &--#{$date} {
-        font-size: 30px;
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-        &::before {
-          position: absolute;
-          content: '#{$date}';
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
+    @for $day from 1 through $month-length {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
       }
     }
   }
