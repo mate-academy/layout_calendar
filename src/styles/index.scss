@@ -13,20 +13,20 @@ body {
 }
 
 .calendar {
-  width: ($box-size + $days-gap) * $columns;
+  width: ($side-cell + $gap-calendar) * $max-row;
   display: flex;
   flex-wrap: wrap;
-  gap: $days-gap;
+  gap: $gap-calendar;
 
   &__day {
-    width: $box-size;
-    height: $box-size;
+    width: $side-cell;
+    height: $side-cell;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 1px solid black;
-    padding: 10px;
-    background-color: $bg-color;
+    padding: $padding-calendar;
+    background-color: $color-cell;
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
@@ -38,25 +38,22 @@ body {
 
     &:hover {
       transform: translateY(-20px);
-      background-color: $bg-color-hover;
+      background-color: $color-hover;
       transition-duration: 0.5s;
       cursor: pointer;
     }
   }
 
-  @each $day, $i in $days {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: ($box-size + $days-gap) * $i;
-      }
+  @each $day, $number in $first-day {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $number * ($side-cell + $gap-calendar);
     }
   }
 
-  @for $day from 28 through 31 {
-    &--month-length-#{$day} {
-      .calendar__day:nth-child(n + #{$day + 1}) {
-        display: none;
-      }
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length}
+      &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 }
