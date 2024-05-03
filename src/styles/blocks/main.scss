@@ -1,6 +1,6 @@
 body {
   @include content-position-center;
-  
+
   height: 100vh;
   font-family: Arial, sans-serif;
   font-size: 30px;
@@ -12,7 +12,8 @@ body {
 
   gap: $gapCalendar;
   padding: $paddingCalendar;
-  width: $size-cell * 7 + $gapCalendar * ($max-row - 1) + $paddingCalendar * 2;
+  width: $size-cell * $max-row + $gapCalendar * ($max-row - 1) +
+    $paddingCalendar * 2;
 
   @each $day, $i in $daysOfWeek {
     &--start-day-#{$day} :first-child {
