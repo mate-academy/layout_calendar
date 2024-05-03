@@ -19,10 +19,11 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
   - Set 31 days by default
 
-On hovering over a cell:
+On hovering over a day:
+
 - cursor should become pointer
-- The hovered cell has to become pink (use `#FFBFCB`)
-- Move the hovered cell up by `20px` (use `transform`)
+- The hovered day has to become pink (use `#FFBFCB`)
+- Move the hovered day up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
 > Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
@@ -33,13 +34,13 @@ On hovering over a cell:
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://nineuito.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://nineuito.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
 - [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
-reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
+      reflects in changing calendar layout
+- [ ] Each day has no modifiers, only class (eg. calendar\_\_day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
