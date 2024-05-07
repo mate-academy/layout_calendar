@@ -1,8 +1,8 @@
-$calendar-width: 726px;
-$day-width: 100px;
+$calWid: 726px;
+$dWidth: 100px;
 $day-hight: 100px;
 $day-color: #eee;
-$date-padding: 10px;
+$day_pad: 10px;
 $start-day: (
   'mon': 7,
   'tue': 6,
@@ -27,10 +27,10 @@ body {
   align-items: center;
   justify-content: center;
 
-  @each $day, $column in $start-day {
+  @each $day, $col in $start-day {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: $calendar-width - (($day-width * $column) + ($column - 1) + ($date-padding * 2));
+        margin-left: $calWid - (($dWidth * $col) + ($col - 1) + ($day_pad * 2));
       }
     }
   }
@@ -47,9 +47,9 @@ body {
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
-    width: $calendar-width;
+    width: $calWid;
     gap: 1px;
-    padding: $date-padding;
+    padding: $day_pad;
   }
 
   &__day {
@@ -59,7 +59,7 @@ body {
     box-sizing: border-box;
     border: 1px solid black;
     height: $day-hight;
-    min-width: $day-width;
+    min-width: $dWidth;
     background-color: $day-color;
     font-family: Arial, sans-serif;
     font-size: 30px;
@@ -82,7 +82,7 @@ body {
 
   &--start-day-sun {
     .calendar__day:first-child {
-      margin-left: $calendar-width - ($day-width + ($date-padding * 2));
+      margin-left: $calWid - ($dWidth + ($day_pad * 2));
     }
   }
 }
