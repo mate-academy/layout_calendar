@@ -1,35 +1,59 @@
-body {
-  margin: 0;
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
 }
 
 .calendar {
-display: flex;
-flex-wrap: wrap;
-gap: 1px;
-align-content: center;
-justify-content: center;
-padding: 0 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $limit-columns * ($cal-size + $cal-padding);
 
 
   &__day {
     background-color: $bc-color;
-    width: 100px;
-    height: 100px;
+    width: $cal-size;
+    height: $cal-size;
     border: $border-size solid black;
     text-align: center;
-     flex: 1 0 calc((100% - 60px) / 7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  // відцентрувати обчисленням
+    cursor: pointer;
+    transition: transform 0.5s;
 
+    @for $index from 1 through $col-counts {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: pink;
+    }
   }
 
-  @for $i from 1 through $col-counts {
-    &__day:nth-child(#{$i})::before{
-      content: '#{$i}';
-      font-size: 30px;
-      font-family: Arial, Helvetica, sans-serif;
+  @each $day, $index in $days {
+    &--start-day-#{$day} > :first-child {
+      margin-left: #{(($cal-size + $gap) * $index)};
+    }
+  }
 
-
+  @for $index from 28 through $col-counts {
+    &--month-length-#{$index} .calendar__day:nth-child(n + #{$index + 1}) {
+      display: none;
     }
   }
 }
