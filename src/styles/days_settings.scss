@@ -1,0 +1,56 @@
+.calendar--start-day-mon {
+  .calendar__day:nth-child(1) {
+    margin-left: 0.5px;
+  }
+}
+
+.calendar--start-day-tue {
+  .calendar__day:nth-child(1) {
+    margin-left: 101.5px;
+  }
+}
+
+.calendar--start-day-wed {
+  .calendar__day:nth-child(1) {
+    margin-left: 202.5px;
+  }
+}
+
+.calendar--start-day-thu {
+  .calendar__day:nth-child(1) {
+    margin-left: 303.5px;
+  }
+}
+
+.calendar--start-day-fri {
+  .calendar__day:nth-child(1) {
+    margin-left: 404.5px;
+  }
+}
+
+.calendar--start-day-sat {
+  .calendar__day:nth-child(1) {
+    margin-left: 505.5px;
+  }
+}
+
+.calendar--start-day-sun {
+  .calendar__day:nth-child(1) {
+    margin-left: 606.5px;
+  }
+}
+
+@for $day from 1 to 32 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: '#{$day}';
+    margin: auto;
+  }
+}
+
+@for $day from 28 to 31 {
+  .calendar--month-length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
