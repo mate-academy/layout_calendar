@@ -1,29 +1,28 @@
-body {
-  margin: 0;
-}
+@import 'variables';
 
-$backgroundColor: #eee;
-$cellWidth: 100px;
-$cellHeight: 100px;
-$cellBorderStyle: 1px solid #000;
-$fontSize: 30px;
-$padding: 10px;
-$gap: 1px;
-$calendarWidth: 700px;
-$numberOfColumns: 7;
+// Body styles
+body {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
 * {
   box-sizing: border-box;
 }
 
+// Calendar styles
 .calendar {
   padding: $padding;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  justify-content: center;
-  width: 700px;
+  width: $calendarWidth;
+  margin: 0 auto;
 
+  // Day styles
   &__day {
     display: flex;
     justify-content: center;
@@ -44,16 +43,43 @@ $numberOfColumns: 7;
     }
   }
 
+  // Dynamically generate calendar days with numbers and start-day modifiers
   @for $day from 1 through 31 {
-    &__day:nth-child(#{$day})::before {
-      content: "#{$day}";
+    .calendar__day:nth-child(#{$day})::before {
+      content: '#{$day}';
     }
   }
 
-  // $days: "sun", "mon", "tue", "wed", "thu", "fri", "sat";
+  // Apply start-day modifiers version 1
+  @each $day in $days {
+    $index: 0;
 
-  // @each $day in $days {
-  //   &--start-day-#{$day} {
-  //   }
-  // }
+    @if $day == 'sun' {
+      $index: 6;
+    } @else if $day == 'mon' {
+      $index: 0;
+    } @else if $day == 'tue' {
+      $index: 1;
+    } @else if $day == 'wed' {
+      $index: 2;
+    } @else if $day == 'thu' {
+      $index: 3;
+    } @else if $day == 'fri' {
+      $index: 4;
+    } @else if $day == 'sat' {
+      $index: 5;
+    }
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: $index * ($cellWidth + $gap);
+      }
+    }
+  }
+
+  // Hide days beyond the default month length
+  @for $monthLength from 28 through 31 {
+    &--month-length-#{$monthLength} &__day:nth-child(n + #{$monthLength + 1}) {
+      display: none;
+    }
+  }
 }
