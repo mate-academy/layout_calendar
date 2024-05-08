@@ -1,3 +1,73 @@
+$week: (1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun');
+$width-day: 100px;
+$height-day: 100px;
+$gap-day: 1px;
+$main-color: #eee;
+$hover-color: #ffbfcb;
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.calendar {
+  display: flex;
+  gap: $gap-day;
+  width: calc(7 * ($width-day + $gap-day));
+  flex-wrap: wrap;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: $width-day;
+    height: $height-day;
+    background-color: $main-color;
+    border: 1px solid #000;
+    font-size: 30px;
+
+    transition-duration: 0.5s;
+  }
+
+  &__day:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: '#{$number}';
+    margin-left: 1px;
+  }
+}
+
+@each $position, $day in $week {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($position * ($width-day + $gap-day)) - ($width-day + $gap-day);
+    }
+  }
+}
+
+@for $last-day-month from 28 through 31 {
+  .calendar--month-length-#{$last-day-month} {
+    .calendar__day:nth-child(n + #{$last-day-month + 1}) {
+      display: none;
+    }
+  }
 }
