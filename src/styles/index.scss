@@ -1,10 +1,7 @@
 @import '../styles/variables';
 
-* {
-  box-sizing: border-box;
-}
-
 body {
+  box-sizing: border-box;
   margin: 0;
   height: 100vh;
   flex-direction: column;
@@ -14,6 +11,7 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: $gap-width;
@@ -22,6 +20,7 @@ body {
 }
 
 .calendar__day {
+  box-sizing: border-box;
   width: $width-day;
   height: $height-day;
   background-color: #eee;
@@ -43,7 +42,7 @@ body {
 }
 
 @for $i from 1 through 31 {
-  calendar_day:nth-child(#{$i})::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
   }
 }
