@@ -1,42 +1,19 @@
-.calendar--start-day-mon {
-  .calendar__day:nth-child(1) {
-    margin-left: 0.5px;
-  }
-}
+// довелось вставити цю команду, бо prettier не дає розмістити
+// $days в один рядок, а після переносу не бачить пропуску перед двокрапкою
 
-.calendar--start-day-tue {
-  .calendar__day:nth-child(1) {
-    margin-left: 101.5px;
-  }
-}
+/* prettier-ignore */
+$days: 'mon' 0,'tue' 1,'wed' 2,'thu' 3,'fri' 4,'sat' 5,'sun' 6;
 
-.calendar--start-day-wed {
-  .calendar__day:nth-child(1) {
-    margin-left: 202.5px;
-  }
-}
+// @each $weekDay in $days {
+//   $i: list.index($days, $weekDay) - 1;
+//   .calendar--start-day-#{$weekDay} .calendar__day:first-child {
+//     margin-left: calc($i * 100px + $i * 1px + 0.5px);
+//   }
+// }
 
-.calendar--start-day-thu {
-  .calendar__day:nth-child(1) {
-    margin-left: 303.5px;
-  }
-}
-
-.calendar--start-day-fri {
-  .calendar__day:nth-child(1) {
-    margin-left: 404.5px;
-  }
-}
-
-.calendar--start-day-sat {
-  .calendar__day:nth-child(1) {
-    margin-left: 505.5px;
-  }
-}
-
-.calendar--start-day-sun {
-  .calendar__day:nth-child(1) {
-    margin-left: 606.5px;
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} > :first-child {
+    margin-left: #{($index * 100px + $index * 1px + 0.5px)};
   }
 }
 
