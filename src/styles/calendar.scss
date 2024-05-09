@@ -1,0 +1,63 @@
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__date {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    display: flex;
+    width: $calendar-width;
+    gap: 1px;
+    padding: $date-padding;
+  }
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    height: $day-height;
+    min-width: $day-width;
+    background-color: $day-color;
+    transition: 0.5s;
+
+    $total-days: 31;
+
+    @for $i from 1 through $total-days {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $column in $start-day {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+         /* prettier-ignore */
+        margin-left: $calendar-width - (($day-width * $column) + ($column - 1) + ($date-padding * 2));
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day-sun {
+    .calendar__day:first-child {
+      margin-left: $calendar-width - ($day-width + ($date-padding * 2));
+    }
+  }
+}
