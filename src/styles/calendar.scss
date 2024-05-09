@@ -1,10 +1,10 @@
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -15,13 +15,11 @@
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  max-width: $limit-columns * ($cal-size + $cal-padding);
-
-
+  max-width: $max-width-math + (($limit-day-columns - 1) * $gap);
   &__day {
-    background-color: $bc-color;
-    width: $cal-size;
-    height: $cal-size;
+    background-color: $background-color;
+    width: $day-box-size;
+    height: $day-box-size;
     border: $border-size solid black;
     text-align: center;
     display: flex;
@@ -31,7 +29,7 @@
     cursor: pointer;
     transition: transform 0.5s;
 
-    @for $index from 1 through $col-counts {
+    @for $index from 1 through $days-counts {
       &:nth-child(#{$index})::before {
         content: '#{$index}';
         font-size: 30px;
@@ -47,11 +45,11 @@
 
   @each $day, $index in $days {
     &--start-day-#{$day} > :first-child {
-      margin-left: #{(($cal-size + $gap) * $index)};
+      margin-left: #{(($day-box-size + $gap) * $index)};
     }
   }
 
-  @for $index from 28 through $col-counts {
+  @for $index from 28 through $days-counts {
     &--month-length-#{$index} .calendar__day:nth-child(n + #{$index + 1}) {
       display: none;
     }
