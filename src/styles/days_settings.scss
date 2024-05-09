@@ -1,0 +1,33 @@
+// довелось вставити цю команду, бо prettier не дає розмістити
+// $days в один рядок, а після переносу не бачить пропуску перед двокрапкою
+
+/* prettier-ignore */
+$days: 'mon' 0,'tue' 1,'wed' 2,'thu' 3,'fri' 4,'sat' 5,'sun' 6;
+
+// @each $weekDay in $days {
+//   $i: list.index($days, $weekDay) - 1;
+//   .calendar--start-day-#{$weekDay} .calendar__day:first-child {
+//     margin-left: calc($i * 100px + $i * 1px + 0.5px);
+//   }
+// }
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} > :first-child {
+    margin-left: #{($index * 100px + $index * 1px + 0.5px)};
+  }
+}
+
+@for $day from 1 to 32 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: '#{$day}';
+    margin: auto;
+  }
+}
+
+@for $day from 28 to 31 {
+  .calendar--month-length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
