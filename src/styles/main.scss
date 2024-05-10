@@ -1,10 +1,4 @@
-$week: (1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun');
-$width-day: 100px;
-$height-day: 100px;
-$gap-day: 1px;
-$main-color: #eee;
-$hover-color: #ffbfcb;
-
+@import './utils/variables';
 
 * {
   box-sizing: border-box;
@@ -26,7 +20,7 @@ body {
 .calendar {
   display: flex;
   gap: $gap-day;
-  width: calc(7 * ($width-day + $gap-day));
+  width: calc(7 * ($size-day + $gap-day));
   flex-wrap: wrap;
 
   &__day {
@@ -34,8 +28,8 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: $width-day;
-    height: $height-day;
+    width: $size-day;
+    height: $size-day;
     background-color: $main-color;
     border: 1px solid #000;
     font-size: 30px;
@@ -59,7 +53,7 @@ body {
 @each $position, $day in $week {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: ($position * ($width-day + $gap-day)) - ($width-day + $gap-day);
+      margin-left: ($position * ($size-day + $gap-day)) - ($size-day + $gap-day);
     }
   }
 }
