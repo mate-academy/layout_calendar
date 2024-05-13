@@ -1,0 +1,44 @@
+$day-gap: 1px;
+$day-width: 100px;
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+body {
+  margin: 0 20px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  width: 7 * ($day-width + 1);
+  gap: $day-gap;
+  padding: 10px;
+
+  &__day {
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $day-width;
+    height: 100px;
+    border: 1px solid black;
+    gap: $day-gap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+}
