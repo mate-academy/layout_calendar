@@ -1,9 +1,4 @@
-$day--width: 100px;
-$day--height: 100px;
-$gap-between-days: 1px;
-$calendar--width: 706px;
-$main--color: #eee;
-$hover--color: #ffbfcb;
+@import 'variables.scss';
 
 html {
   box-sizing: border-box;
@@ -33,27 +28,17 @@ body {
     }
   }
 
-  $week: (
-    mon: 0,
-    tue: 1,
-    wed: 2,
-    thu: 3,
-    fri: 4,
-    sat: 5,
-    sun: 6,
-  );
-
   @each $start-day, $number-of-day in $week {
     &--start-day-#{$start-day} {
       .calendar__day:first-child {
-        margin-left: calc(($day--width + $gap-between-days) * $number-of-day);
+        margin-left: calc(($day-size + $gap-between-days) * $number-of-day);
       }
     }
   }
 
   &__day {
-    width: $day--width;
-    height: $day--height;
+    width: $day-size;
+    height: $day-size;
 
     background-color: $main--color;
     border: 1px solid black;
@@ -71,7 +56,6 @@ body {
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: '#{$number}';
-        display: block;
       }
     }
 
