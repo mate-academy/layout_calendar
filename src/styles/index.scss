@@ -1,3 +1,78 @@
+@import 'https://fonts.cdnfonts.com/css/arial-2';
+
+$card-size: 100px;
+$gap: 1px;
+$card-color: #eee;
+$hover-card-color: #ffbfcb;
+$days-of-week: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $card-size * 7 + $gap * 6;
+
+  cursor: pointer;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: $card-size;
+    height: $card-size;
+
+    background-color: $card-color;
+    border: solid 1px black;
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day})::before {
+      content: '#{$day}';
+      font-size: 30px;
+    }
+  }
+
+  @each $day, $value in $days-of-week {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($card-size + $gap) * ($value - 1);
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} {
+      .calendar__day:nth-child(n + #{$day + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+.calendar__day:hover {
+  background-color: $hover-card-color;
+  transform: translateY(-20px);
+  transition: 0.5s;
 }
