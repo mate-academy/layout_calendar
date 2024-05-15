@@ -1,0 +1,43 @@
+@use 'sass:math' as *;
+@use 'sass:list' as *;
+
+$white: #fff;
+$black: #000;
+$pink: #ffbfcb;
+$calendardays: 31;
+$mainfont: 16;
+$days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$gap: 1px;
+$daywidth: 100px;
+
+@function rem($value) {
+  $remvalue: div($value, $mainfont) + rem;
+
+  @return $remvalue;
+}
+
+@function vw($value) {
+  $vwvalue: calc(#{$value} / #{$maxwidth} * 100vw);
+
+  @return $vwvalue;
+}
+
+@function lineheight($pixels, $fontsize) {
+  $lineheight: $pixels / $fontsize;
+
+  @return $lineheight;
+}
+
+@function summaxwidth($maxwidth, $gapelements) {
+  $summaxwidthvar: calc(#{$maxwidth}px + #{$gapelements}px);
+
+  @return $summaxwidthvar;
+}
