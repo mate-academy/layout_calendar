@@ -1,5 +1,3 @@
-$array: (1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun');
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -36,7 +34,7 @@ $array: (1 'mon', 2 'tue', 3 'wed', 4 'thu', 5 'fri', 6 'sat', 7 'sun');
     }
   }
 
-  @each $keyof, $day in $array {
+  @each $keyof, $day in $days-week {
     &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: calc((#{$keyof} - 1) * ($cell-size + $gap));
