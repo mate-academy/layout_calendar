@@ -1,0 +1,36 @@
+$day-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$text-color: #000;
+$hover-color: #ffbfcb;
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day in mon, tue, wed, thu, fri, sat, sun {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: if(
+        $day == mon,
+        0,
+        if(
+          $day == tue,
+          1,
+          if(
+            $day == wed,
+            2,
+            if($day == thu, 3, if($day == fri, 4, if($day == sat, 5, 6)))
+          )
+        )
+      ) *
+      ($day-size + 2.7px);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
