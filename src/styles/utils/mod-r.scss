@@ -1,0 +1,33 @@
+$day-size: 100px;
+$border-color: #000;
+$background-color: #eee;
+$text-color: #000;
+$hover-color: #ffbfcb;
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+$weekDays: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+@each $day, $num in $weekDays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $num * ($day-size + 2.7px);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
