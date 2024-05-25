@@ -3,6 +3,13 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -37,19 +44,15 @@
     }
   }
 
-  @each $day, $values in days {
-    &--start-day-#{$day} {
-      &--day:first-child() {
-        margin-left: calc(#{$values} * (#{$day-size} + 1px));
-      }
+  @each $day, $value in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: calc(#{$value} * (#{$day-size} + 1px));
     }
   }
 
-  @for $month-length from 28 through 29 {
-    &--month-length-#{$month-length} {
-      &--day:nth-child(n + #{$month-length + 1}) {
-        display: none;
-      }
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length}:nth-child(n + #{$month-length + 1}) {
+      display: none;
     }
   }
 }
