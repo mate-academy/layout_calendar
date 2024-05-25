@@ -1,3 +1,53 @@
-body {
+$one-day-width: 100px;
+$one-day-height: 100px;
+
+.page {
   margin: 0;
 }
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  width: 710px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  position: relative;
+  width: $one-day-width;
+  height: $one-day-height;
+  background-color: #eee;
+  border: 1px solid green;
+  box-sizing: border-box;
+}
+
+@for $number from 1 through 31 {
+  .calendar__day--#{$number}::before {
+    content: "#{$number}";
+  }
+}
+
+.calendar__day::before {
+  position: absolute;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+}
+
+.day--modificator {
+  margin-left: 200px;
+}
+
