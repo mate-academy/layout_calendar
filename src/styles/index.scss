@@ -2,16 +2,18 @@ $day-width: 100px;
 $day-height: 100px;
 $calendar-gap: 1px;
 $padding-prefered: 10px;
-$background-day-color-hover: #FFBFCB;
+$background-day-color-hover: #ffbfcb;
 $background-day-color: #eee;
 $min-max-day-width: ($day-width * 7 + 2 * $padding-prefered + 8);
-$days: ("mon": 0,
-        "tue": #{$day-width + $calendar-gap},
-        "wed": #{($day-width + $calendar-gap) * 2},
-        "thu": #{($day-width + $calendar-gap) * 3},
-        "fri": #{($day-width + $calendar-gap) * 4},
-        "sat": #{($day-width + $calendar-gap) * 5},
-        "sun": #{($day-width + $calendar-gap) * 6});
+$days: (
+  'mon': 0,
+  'tue': #{$day-width + $calendar-gap},
+  'wed': #{($day-width + $calendar-gap) * 2},
+  'thu': #{($day-width + $calendar-gap) * 3},
+  'fri': #{($day-width + $calendar-gap) * 4},
+  'sat': #{($day-width + $calendar-gap) * 5},
+  'sun': #{($day-width + $calendar-gap) * 6},
+);
 
 .page {
   margin: 0;
@@ -33,7 +35,6 @@ $days: ("mon": 0,
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  border: 1px solid black;
 }
 
 .calendar__day {
@@ -41,7 +42,7 @@ $days: ("mon": 0,
   width: $day-width;
   height: $day-height;
   background-color: $background-day-color;
-  border: 1px solid green;
+  border: 1px solid black;
   box-sizing: border-box;
   transition: all 0.5s;
   display: none;
@@ -49,7 +50,7 @@ $days: ("mon": 0,
 
 @for $number from 1 through 31 {
   .calendar__day--#{$number}::before {
-    content: "#{$number}";
+    content: '#{$number}';
   }
 }
 
@@ -62,12 +63,11 @@ $days: ("mon": 0,
   transform: translate(-50%, -50%);
 }
 
-.calendar__day:hover{
+.calendar__day:hover {
   transform: translateY(-20px);
   background-color: $background-day-color-hover;
   cursor: pointer;
 }
-
 
 @each $name, $left-margin in $days {
   .calendar__day--start-day-#{$name} {
