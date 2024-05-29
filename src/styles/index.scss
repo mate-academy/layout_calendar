@@ -1,3 +1,63 @@
+@import 'variables';
+
 body {
   margin: 0;
+
+  .block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+
+    .calendar {
+      display: flex;
+      flex-flow: row wrap;
+      gap: $gap;
+      width: $calendar-width;
+
+      &__day {
+        box-sizing: border-box;
+        background-color: $block-color;
+        width: $block-size;
+        height: $block-size;
+        border: $block-border;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $font;
+        font-size: 30px;
+        transition: transform, 0.5s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $block-color-hover;
+          transform: translate(0, -20px);
+        }
+      }
+
+      &--month-length-31 &__day:nth-child(32) {
+        display: none;
+      }
+    }
+  }
+}
+
+// add numbers into the blocks
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+// Calculate margin
+@each $days, $index in $days-start {
+  .calendar--start-day-#{$days} .calendar__day:first-child {
+    margin-left: ($block-size + $gap) * $index;
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
