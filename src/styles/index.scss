@@ -6,16 +6,15 @@ $day-color: #eee;
 $hover-color: #FFBFCB;
 $animation-duration: 0.5ms;
 $days-gap: 10px;
+$week-days: "mon" 0,
+"tue" 1,
+"wed" 2,
+"thu" 3,
+"fri" 4,
+"sat" 5,
+"sun" 6;
 
-$week-days:
-    "mon" 0,
-    "tue" 1,
-    "wed" 2,
-    "thu" 3,
-    "fri" 4,
-    "sat" 5,
-    "sun" 6;
-// $day та $marginNumber
+// $day and $marginNumber
 
 body {
   margin: 0;
@@ -48,6 +47,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
+transition: transform $animation-duration, background-color $animation-duration;
 }
 
 &::before {
@@ -65,12 +65,13 @@ cursor: pointer;
   transition: transform $animation-duration;
   transform: translateY(-10px);
 }
+
 @for $i from 28 through 31 {
- month--lengh-#{$i}  &__day:nth-child(n + #{$i+1}){
-  display: block;
- }
+  .month--length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
-}
+
 
 @each $day, $marginNumber in $week-days {
   &--start-#{$day} &__day:first-child {
@@ -79,3 +80,4 @@ cursor: pointer;
 }
 }
 
+}
