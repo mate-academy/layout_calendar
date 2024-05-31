@@ -6,20 +6,12 @@ $day-color: #eee;
 $hover-color: #FFBFCB;
 $animation-duration: 0.5s;
 $days-gap: 10px;
-$week-days: "mon" 0,
-"tue" 1,
-"wed" 2,
-"thu" 3,
-"fri" 4,
-"sat" 5,
-"sun" 6;
-
-// $day and $marginNumber
+$week-days: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
 
 body {
   margin: 0;
   padding: 0;
-  box-sizing: box-sizing;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,57 +19,54 @@ body {
 }
 
 .calendar {
-display: flex;
-flex-wrap: wrap;
-margin: auto;
-width: calc(7 * #{$day-size} + 6 * #{$day-border} + 20px);
-gap: $day-border;
-padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: calc(7 * #{$day-size} + 6 * #{$day-border} + 20px);
+  gap: $day-border;
+  padding: 10px;
 
-&__day {
-height: $day-size;
-width: $day-size;
-border: $day-border solid black;
-size: $day-size;
-font-family: $font-family;
-font-size: $font-size;
-background-color: $day-color;
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: grabbing;
-transition: transform $animation-duration, background-color $animation-duration;
-}
+  &__day {
+    height: $day-size;
+    width: $day-size;
+    border: $day-border solid black;
+    background-color: $day-color;
+    font-family: $font-family;
+    font-size: $font-size;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer; // Changed from grabbing to pointer
+    transition: transform $animation-duration, background-color $animation-duration;
 
-&::before {
-  content: '';
-  position: absolute;
-}
+    &::before {
+      content: '';
+      position: absolute;
+    }
 
-@for $i from 1 through 31 {
-  &__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-10px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
   }
 
-&__day:hover {
-  background-color: $hover-color;
-  transition: transform $animation-duration;
-  transform: translateY(-10px);
-}
+  @for $i from 28 through 31 {
+    &.month--length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 
-@for $i from 28 through 31 {
-  .month--length-#{$i} &__day:nth-child(n + #{$i + 1}) {
-    display: none;
+  @each $day, $marginNumber in $week-days {
+    &--start-#{$day} &__day:first-child {
+      margin-left: calc(($day-size + $day-border) * $marginNumber);
+    }
   }
 }
 
-
-@each $day, $marginNumber in $week-days {
-  &--start-#{$day} &__day:first-child {
-    margin-left:($day-size + $day-border + 1.5px) * $marginNumber;
-  }
-}
-}
-
-}
