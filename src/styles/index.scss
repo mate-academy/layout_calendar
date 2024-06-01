@@ -1,3 +1,7 @@
+@import './variables';
+@import './mixin';
+
+
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -7,16 +11,6 @@ html {
   margin: 0;
   padding: 0;
 }
-
-@mixin on-hover {
-  background-color: #ffbfcb;
-  cursor: pointer;
-  transform: translateY(-20px);
-  transition-duration: 500ms;
-}
-
-$cell-size: 100px;
-$cell-color: #eee;
 
 .container {
   display: flex;
@@ -67,7 +61,7 @@ $cell-color: #eee;
   }
 }
 
-@each $var1, $var2 in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7) {
+@each $var1, $var2 in $days-week {
   .calendar--start-day-#{$var1} .calendar__day:nth-child(1) {
     margin-left: (($cell-size + 1px) * ($var2 - 1));
   }
