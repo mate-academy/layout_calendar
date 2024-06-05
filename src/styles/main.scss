@@ -63,11 +63,10 @@ body {
     }
   }
 
-  &--month-length-28 .calendar__day:nth-child(n + 29),
-  &--month-length-29 .calendar__day:nth-child(n + 30),
-  &--month-length-30 .calendar__day:nth-child(n + 31),
-  &--month-length-31 .calendar__day:nth-child(n + 32) {
-    display: none;
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{($i + 1)}) {
+      display: none;
+    }
   }
 
   @each $day, $margin-left in $start-days {
