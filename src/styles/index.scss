@@ -1,11 +1,3 @@
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: '#{$i}';
-    font-size: 30px;
-    margin: auto;
-  }
-}
-
 html {
   font-family: Arial, sans-serif;
 }
@@ -25,7 +17,7 @@ body {
 
 .calendar {
   display: flex;
-  width: 700px + 6px;
+  width: 706px;
   height: fit-content;
   flex-wrap: wrap;
   gap: 1px;
@@ -40,31 +32,39 @@ body {
     transition: transform 0.5s;
   }
 
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-size: 30px;
+      margin: auto;
+    }
+  }
+
+  $days: (
+    'mon': 0,
+    'tue': 101px,
+    'wed': 202px,
+    'thu': 303px,
+    'fri': 404px,
+    'sat': 505px,
+    'sun': 606px,
+  );
+
+  @each $name, $day in $days {
+    &--start-day-#{$name} &__day:first-child {
+      margin-left: $day;
+    }
+  }
+
+  @for $j from 28 through 31 {
+    &--month-length-#{$j} &__day:nth-child(n + #{$j + 1}) {
+      visibility: hidden;
+      display: none;
+    }
+  }
+
   &__day:hover {
     cursor: pointer;
     transform: translate(0, -20px);
-  }
-}
-
-$days: (
-  'mon': 0,
-  'tue': 101px,
-  'wed': 202px,
-  'thu': 303px,
-  'fri': 404px,
-  'sat': 505px,
-  'sun': 606px,
-);
-
-@each $name, $day in $days {
-  .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: $day;
-  }
-}
-
-@for $j from 28 through 31 {
-  .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
-    visibility: hidden;
-    display: none;
   }
 }
