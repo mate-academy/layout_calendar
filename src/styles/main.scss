@@ -39,39 +39,26 @@ body {
   transform: translateY(-20px);
 }
 
-.calendar--start-day-mon .calendar__day:first-child {
-  margin-left: 0;
+$days: (
+  'mon': '0',
+  'tue': '101px',
+  'wed': '202px',
+  'thu': '303px',
+  'fri': '404px',
+  'sat': '505px',
+  'sun': '606px',
+);
+
+@each $day, $ml in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: #{$ml};
+  }
 }
 
-.calendar--start-day-tue .calendar__day:first-child {
-  margin-left: 101px;
-}
-
-.calendar--start-day-wed .calendar__day:first-child {
-  margin-left: 202px;
-}
-
-.calendar--start-day-thu .calendar__day:first-child {
-  margin-left: 303px;
-}
-
-.calendar--start-day-fri .calendar__day:first-child {
-  margin-left: 404px;
-}
-
-.calendar--start-day-sat .calendar__day:first-child {
-  margin-left: 505px;
-}
-
-.calendar--start-day-sun .calendar__day:first-child {
-  margin-left: 606px;
-}
-
-.calendar--month-length-28 .calendar__day:nth-child(n + 29),
-.calendar--month-length-29 .calendar__day:nth-child(n + 30),
-.calendar--month-length-30 .calendar__day:nth-child(n + 31),
-.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
-  display: none;
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
 
 @for $i from 1 through 31 {
