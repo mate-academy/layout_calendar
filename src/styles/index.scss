@@ -1,14 +1,7 @@
 $colums: 7;
 $box-size: 100px;
-$days: (
-  0: 'mon',
-  1: 'tue',
-  2: 'wed',
-  3: 'thu',
-  4: 'fri',
-  5: 'sat',
-  6: 'sun',
-);
+$days-gap: 1px;
+$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 
 body {
   margin: 0;
@@ -21,36 +14,45 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
+  margin: 0 auto;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $days-gap;
   max-width: $box-size * $colums + 20;
 }
 
 .calendar__day {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   width: $box-size;
   height: $box-size;
   padding: 10px;
   border: 1px solid #000;
   background-color: #eee;
-  cursor: pointer;
   animation-name: move;
-  transition: 500ms;
-  transition-property: all;
-}
-
-.calendar__day:hover {
-  transform: translateY(-20px);
-  background-color: #ffbfcb;
+  transition: all 500ms;
 }
 
 .calendar__day:first-child {
-  margin-left: ($colums - 1) * $box-size;
+  margin-left: ($colums - 1) * $box-size + ($colums - 1) * $days-gap;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '' + #{$i};
+    position: absolute;
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  transform: translateY(-20px);
+  background-color: #ffbfcb;
 }
 
 @keyframes move {
@@ -62,18 +64,10 @@ body {
   }
 }
 
-@for $i from 1 through 31 {
-  .calendar:nth-child(31n + #{$i}) {
-    .calendar::before {
-      content: '#{$i}';
-    }
-  }
-}
-
-@each $i, $day in $days {
-  .calendar--start-day--#{$day} {
-    .calendar:first-child {
-      margin-left: $i * $box-size + 10;
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: $i * $box-size + $days-gap * $i;
     }
   }
 }
