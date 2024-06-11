@@ -20,6 +20,19 @@ body {
   flex-wrap: wrap;
   gap: $daysGap;
 
+  @each $day, $numDay in $week-days {
+    &--start-day-#{$day} > &__day:first-child {
+      margin-left: ($cell-size + $daysGap) * $numDay;
+    }
+  }
+
+  @for $lengthCalendarDay from 28 through 31 {
+    &--month-length-#{$lengthCalendarDay}
+      :nth-child(n + #{$lengthCalendarDay + 1}) {
+      display: none;
+    }
+  }
+
   &__day {
     box-sizing: border-box;
     background-color: #eee;
@@ -43,19 +56,6 @@ body {
       &:nth-child(#{$countCalendarDay})::before {
         content: '#{$countCalendarDay}';
       }
-    }
-
-    @for $lengthCalendarDay from 28 through 31 {
-      &__day:nth-child(#{$lengthCalendarDay}) {
-        display: none;
-      }
-    }
-  }
-
-  // Margin left and start day in calendar
-  @each $day, $numDay in $week-days {
-    &--start-day-#{$day} > &__day:first-child {
-      margin-left: ($cell-size + $daysGap) * $numDay;
     }
   }
 }
