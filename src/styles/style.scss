@@ -2,7 +2,7 @@ $cell-size: 100px;
 $daysGap: 1px;
 $daysCount: 31;
 $calendarPaddings: 10px;
-$week-days: (mon 0, tue 1, wed 2, thu 3, fri 4, sun 5, sat 6);
+$week-days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 $width: 7 * $cell-size + 6 * $daysGap;
 
 body {
@@ -32,24 +32,23 @@ body {
     font-size: 30px;
     border: 1px solid black;
     cursor: pointer;
-  }
 
-  @for $countCalendarDay from 1 through $daysCount {
-    &__day:nth-child(#{$countCalendarDay})::before {
-      content: '#{$countCalendarDay}';
+    &:hover {
+      transform: translateY(-20px);
+      transition: 500ms;
+      background-color: #ffbfcb;
     }
-  }
 
-  // @for $lengthCalendarDay from 28 through 31 {
-  //   &__day:nth-child(#{$lengthCalendarDay}) {
-  //     display: none;
-  //   }
-  // }
+    @for $countCalendarDay from 1 through $daysCount {
+      &:nth-child(#{$countCalendarDay})::before {
+        content: '#{$countCalendarDay}';
+      }
+    }
 
-  @for $lengthCalendarDay from 28 through 31 {
-    &--month-length-#{$lengthCalendarDay}
-      :nth-child(n + #{$lengthCalendarDay + 1}) {
-      display: none;
+    @for $lengthCalendarDay from 28 through 31 {
+      &__day:nth-child(#{$lengthCalendarDay}) {
+        display: none;
+      }
     }
   }
 
@@ -57,14 +56,6 @@ body {
   @each $day, $numDay in $week-days {
     &--start-day-#{$day} > &__day:first-child {
       margin-left: ($cell-size + $daysGap) * $numDay;
-    }
-  }
-
-  @for $transformationCalendar from 1 through $daysCount {
-    &__day:nth-child(#{$transformationCalendar}):hover {
-      transform: translateY(-20px);
-      transition: 500ms;
-      background-color: #ffbfcb;
     }
   }
 }
