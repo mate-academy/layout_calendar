@@ -26,9 +26,9 @@ body {
     }
   }
 
-  @each $startday, $shift in $weekday {
-    &--start-day-#{$startday} &__day:first-child {
-      margin-left: #{$shift};
+  @each $stday, $dayshift in $weekday {
+    &--start-day-#{$stday} &__day:first-child {
+      margin-left: $calendar-cell * $dayshift + $shift * $dayshift;
     }
   }
 
