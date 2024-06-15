@@ -1,3 +1,5 @@
+@import './utils/var';
+
 html {
   font-family: Arial, sans-serif;
   font-size: 30px;
@@ -14,16 +16,10 @@ body {
 }
 
 .calendar {
-  height: fit-content;
-  margin: 0 9px;
   display: flex;
   flex-wrap: wrap;
   width: 707px;
-
-  &__first {
-    margin-left: 606px;
-  }
-
+  
   &__day {
     margin: 1px;
     box-sizing: border-box;
@@ -42,33 +38,31 @@ body {
     }
   }
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: '#{$i}';
+  &__day:first-child {
+    margin-left: 606px;
+  }
+
+
+  @each $name, $margin in $days_of_week {
+    &__day---start-day-#{$name} {
+      & :first-child {
+        margin-left: ($cellSize + $gapSize) * $margin;
+      }
     }
   }
-}
 
-$days: (
-  'mon': 0,
-  'tue': 101px,
-  'wed': 202px,
-  'thu': 303px,
-  'fri': 404px,
-  'sat': 505px,
-  'sun': 606px,
-);
-
-@each $day, $left-margin in $days {
-  .calendar__day--start-day-#{$day} {
-    margin-left: $left-margin;
-  }
-}
-
-@for $day from 28 through 31 {
-  .calendar--month-length-#{$day} {
-    .calendar__day:nth-child(n + #{$day + 1}) {
-      display: none;
+    @for $i from 1 through 31 {
+      &__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
     }
   }
-}
+
+  @for $name from 28 through 31 {
+    .calendar--month-length-#{$name} {
+      .calendar__day:nth-child(n + #{$name + 1}) {
+        display: none;
+      }
+    }
+  }
+
