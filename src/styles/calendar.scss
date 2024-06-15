@@ -41,13 +41,14 @@
   }
 
   @each $day, $start-column in $days-start-column {
-    &--start-day--#{$day} :first-child {
+    &--start-day-#{$day} &__day:nth-child(1) {
       margin-left: calc(#{$start-column} * (#{$day-size} + #{$gap}));
     }
   }
 
   @for $days-in-month from 28 through 31 {
-    &--month-length--#{$days-in-month} :nth-child(n + #{$days-in-month + 1}) {
+    &--month-length-#{$days-in-month}
+      &__day:nth-child(n + #{$days-in-month + 1}) {
       display: none;
     }
   }
