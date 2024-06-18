@@ -1,0 +1,64 @@
+$width: 100px;
+$daysMonth: 31;
+$startDay: sun;
+$retreat: 1px;
+$daysWeek: (
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 715px;
+  margin: 0 10px;
+
+  @each $startDay, $num in $daysWeek {
+    &--start-day-#{$startDay} &__day:first-child {
+      margin-left: $width * $num + $retreat * $num;
+    }
+  }
+
+  &__day {
+    width: $width;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid #000;
+    cursor: pointer;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+
+    &:nth-child(n + #{$daysMonth + 1}) {
+      display: none;
+    }
+
+    @for $num from 1 through $daysMonth {
+      &:nth-child(#{$num})::before {
+        content: '#{$num}';
+        font-size: 30px;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+    }
+  }
+}
