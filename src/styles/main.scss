@@ -1,5 +1,6 @@
 $widthDay: 100px;
-$daysMonth: 31;
+$widthCalendar: 7 * $widthDay + 6 * 1;
+$daysMonth: 29;
 $startDay: sun;
 $retreat: 1px;
 $daysWeek: (
@@ -11,19 +12,26 @@ $daysWeek: (
   sun: 6,
 );
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
 .section {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  box-sizing: border-box;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  width: 720px;
+  width: $widthCalendar;
   margin: 0 10px;
 
   @each $startDay, $num in $daysWeek {
