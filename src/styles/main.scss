@@ -1,0 +1,74 @@
+$widthDay: 100px;
+$daysMonth: 31;
+$startDay: sun;
+$retreat: 1px;
+$calendarPadding: 10px;
+$widthCalendar: 7 * $widthDay + 6 * 1 + $calendarPadding * 2;
+$daysWeek: (
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $widthCalendar;
+  padding: 0 10px;
+
+  @for $daysOfMonth from 28 through $daysMonth {
+    &--month-length-#{$daysOfMonth} &__day:nth-child(n + #{$daysOfMonth + 1}) {
+      display: none;
+    }
+  }
+
+  @each $startDay, $num in $daysWeek {
+    &--start-day-#{$startDay} &__day:first-child {
+      margin-left: $widthDay * $num + $retreat * $num;
+    }
+  }
+
+  &__day {
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: $widthDay;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      cursor: pointer;
+    }
+
+    @for $num from 1 through $daysMonth {
+      &:nth-child(#{$num})::before {
+        content: '#{$num}';
+      }
+    }
+  }
+}
