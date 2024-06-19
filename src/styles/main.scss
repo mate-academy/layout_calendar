@@ -1,6 +1,6 @@
 $widthDay: 100px;
 $widthCalendar: 7 * $widthDay + 6 * 1;
-$daysMonth: 29;
+$daysMonth: 31;
 $startDay: sun;
 $retreat: 1px;
 $daysWeek: (
@@ -34,6 +34,12 @@ body {
   width: $widthCalendar;
   margin: 0 10px;
 
+  @for $daysOfMonth from 28 through $daysMonth {
+    &--month-length-#{$daysOfMonth} &__day:nth-child(n + #{$daysOfMonth + 1}) {
+      display: none;
+    }
+  }
+
   @each $startDay, $num in $daysWeek {
     &--start-day-#{$startDay} &__day:first-child {
       margin-left: $widthDay * $num + $retreat * $num;
@@ -45,12 +51,12 @@ body {
     height: 100px;
     background-color: #eee;
     border: 1px solid #000;
-    cursor: pointer;
     transition: transform 0.5s;
 
     &:hover {
       transform: translateY(-20px);
       background-color: #ffbfcb;
+      cursor: pointer;
     }
 
     &:nth-child(n + #{$daysMonth + 1}) {
