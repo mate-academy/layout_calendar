@@ -1,0 +1,76 @@
+$grey: #eee;
+$black: #000;
+$pink: #ffbfcb;
+$day-size: 100px;
+$border-size: 1px;
+$font-size: 30px;
+$gap-size: 1px;
+$padding-size: 10px;
+$animation-duration: 0.5s;
+
+// Основные стили для календаря
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * #{$day-size} + 6 * #{$gap-size});
+  padding: $padding-size;
+  gap: $gap-size;
+  background-color: #fff;
+
+  &__day {
+    margin: 0;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: $border-size solid $black;
+    background-color: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all $animation-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+      color: $black;
+    }
+  }
+}
+
+// Добавляем числа к дням месяца
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Модификаторы для начального дня недели
+@each $day, $index in (sun: 6, mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5) {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(#{$index} * ($day-size + $gap-size));
+  }
+}
+
+// Модификаторы для длины месяца
+@for $length from 28 through 30 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
