@@ -5,22 +5,6 @@
   width: $calendar-with;
   gap: $cell-gap;
 
-  @each $name, $num in $week-days {
-    &--start-day-#{$name} {
-      .calendar__day--1 {
-        margin-left: ($num - 1) * $cell-size + ($num - 1) * $cell-gap;
-      }
-    }
-  }
-
-  @for $day from 28 through 31 {
-    &--month-length-#{$day} {
-      & :nth-child(n + #{$day + 1}) {
-        display: none;
-      }
-    }
-  }
-
   &__day {
     box-sizing: border-box;
     width: $cell-size;
@@ -36,10 +20,26 @@
       background-color: $cell-color-hover;
       transform: translateY(-20px);
     }
+  }
 
-    @for $day from 1 through 31 {
-      &--#{$day}:before {
-        content: '#{$day}';
+  @each $name, $num in $week-days {
+    &--start-day-#{$name} {
+      & :first-child {
+        margin-left: ($num - 1) * $cell-size + ($num - 1) * $cell-gap;
+      }
+    }
+  }
+
+  @for $day from 1 through 31 {
+    & :nth-child(#{$day}):before {
+      content: '#{$day}';
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} {
+      & :nth-child(n + #{$day + 1}) {
+        display: none;
       }
     }
   }
