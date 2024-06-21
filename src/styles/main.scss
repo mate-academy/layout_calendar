@@ -1,0 +1,34 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: 720px;
+  padding: 10px;
+
+    &__item {
+      width: $cell-width;
+      height: $cell-height;
+      border: $cell-border;
+      list-style: none;
+      background-color: $cell-color;
+      text-align: center;
+      font-family: Arial;
+
+      &:first-child {
+      margin-left: 600px;
+
+        }
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__item:nth-child(#{$i})::before {
+      content: "#{$i}";
+      color: black;
+      font-size: 30px;
+      line-height: 99px;
+    }
+  }
+
