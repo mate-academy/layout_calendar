@@ -29,18 +29,14 @@
   }
 
   @each $weekday, $day-num in $weekdays {
-    &--start-day-#{$weekday} {
-      .calendar__day:first-child {
-        margin-left: $day-num * ($day-width + $day-gap);
-      }
+    &--start-day-#{$weekday} :first-child {
+      margin-left: $day-num * ($day-width + $day-gap);
     }
   }
 
   @for $length from 28 through $days-quantity {
-    &--month-length-#{$length} {
-      .calendar__day:nth-child(n + #{$length + 1}) {
-        display: none;
-      }
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 }
