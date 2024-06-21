@@ -1,0 +1,70 @@
+// src/styles/main.scss
+$padding: 10px;
+$gap: 1px;
+$day-color: #eee;
+$day-color-hover: #ffbfcb;
+$day-height: 100px;
+$day-width: 100px;
+$day-size: 100px;
+$calendar-width: $day-width * 7 + $gap * 6;
+$days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.calendar {
+  padding: $padding;
+  display: flex;
+  gap: $gap;
+  width: $calendar-width;
+  flex-wrap: wrap;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    height: $day-height;
+    width: $day-width;
+    background-color: $day-color;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($day-width + $gap) * $index;
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} :nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @for $number from 1 through 31 {
+    &__day:nth-child(#{$number})::before {
+      content: '#{$number}';
+    }
+  }
+}
