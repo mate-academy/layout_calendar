@@ -1,3 +1,66 @@
+$padding: 10px;
+$cellSize: 100px;
+$gap: 1px;
+$dayNumber: 7;
+
+@function blockwidth($padding, $dayWidth, $gap, $columnNumber) {
+  @return (2 * $padding) + ($dayWidth * $dayNumber) +
+    (($columnNumber - 1) * $gap);
+}
+
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: 'Arial', sans-serif;
+}
+
+.calendar {
+  max-width: blockwidth($padding, $cellSize, $gap, $dayNumber);
+  width: 100%;
+  padding: 0 $padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  $weekdays: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+  @each $dayName, $dayIndex in $weekdays {
+    &--start-day-#{$dayName} :first-child {
+      margin-left: $dayIndex * $cellSize + $gap * $dayIndex;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cellSize;
+    height: $cellSize;
+    background-color: #eee;
+    border: 1px solid black;
+    cursor: pointer;
+    transition:
+      0.5s transform,
+      0.5s background-color;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
