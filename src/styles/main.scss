@@ -6,7 +6,6 @@
   gap: 1px;
   max-width: 720px;
   padding: 10px;
-  align-content: start;
 
     &__item {
       width: $cell-width;
@@ -36,14 +35,14 @@
     }
 
 
-    @each $day, $index in $days {
-      $index: index($days, $day);
+    @each $day in $days {
+      $index: list.index($days, $day);
 
-    &__start-day--#{$day} {
-      .calendar__item:first-child {
-        margin-left: (100% / 7) * ($index - 1);
+      &__start-day--#{$day} {
+        .calendar__item:first-child {
+          margin-left: (100% / 7) * ($index - 1);
       }
     }
-  }
 }
 
+}
