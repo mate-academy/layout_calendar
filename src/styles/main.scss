@@ -1,11 +1,12 @@
 .calendar {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 1px;
   max-width: 720px;
   padding: 10px;
+  align-content: start;
 
     &__item {
       width: $cell-width;
@@ -16,19 +17,33 @@
       text-align: center;
       font-family: Arial, Helvetica, sans-serif;
 
-      &:first-child {
-      margin-left: 600px;
-
+      @for $i from 1 through 31 {
+        &:nth-child(#{$i}) {
+          @if $i > $length {
+            display: none;
+          }
         }
-    }
-  }
+      }
 
-  @for $i from 1 through 31 {
-    .calendar__item:nth-child(#{$i})::before {
-      content: "#{$i}";
-      color: black;
-      font-size: 30px;
-      line-height: 99px;
+      @for $i from 1 through 31 {
+        &:nth-child(#{$i})::before {
+          content: "#{$i}";
+          color: black;
+          font-size: 30px;
+          line-height: 99px;
+        }
+      }
+    }
+
+
+    @each $day, $index in $days {
+      $index: index($days, $day);
+
+    &__start-day--#{$day} {
+      .calendar__item:first-child {
+        margin-left: (100% / 7) * ($index - 1);
+      }
     }
   }
+}
 
