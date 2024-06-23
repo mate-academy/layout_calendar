@@ -1,0 +1,19 @@
+$day-width: 100px;
+$day-height: 100px;
+$day-border-size: 1px;
+$days-in-row: 7;
+$day-gap: 1px;
+
+@function calculate-margin($dayNumber) {
+  @return calc(($day-width + $day-gap) * $dayNumber);
+}
+
+$start-days: (
+  'mon' 0,
+  'tue' calculate-margin(1),
+  'wed' calculate-margin(2),
+  'thu' calculate-margin(3),
+  'fri' calculate-margin(4),
+  'sat' calculate-margin(5),
+  'sun' calculate-margin(6)
+);
