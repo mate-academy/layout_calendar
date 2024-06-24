@@ -12,7 +12,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - Use properly named variables to make all the calculations more clear.
 - Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
-  - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
+  - The month should start at the correct column (Monday is the 1s't, Friday is the 5th)
   - You can just add correct `margin-left` for the first day
   - Set calendar to start from Sunday by default
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
@@ -33,8 +33,8 @@ On hovering over a cell:
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+  - [DEMO LINK](https://MaxBorovique.github.io/layout_calendar/)
+  - [TEST REPORT LINK](https://MaxBorovique.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
