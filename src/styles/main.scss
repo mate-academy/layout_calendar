@@ -1,4 +1,4 @@
-  @use "sass:list";
+@use 'sass:list';
 
 .calendar {
   display: flex;
@@ -6,8 +6,10 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1px;
-  max-width: 720px;
+  max-width: 713px;
   padding: 10px;
+  top: 100%;
+  left: 100%;
 
   &__item {
     width: $cell-width;
@@ -44,9 +46,11 @@
   }
 
   @each $day in $days {
-    .calendar__start-day--#{$day} {
+    $index: list.index($days, $day);
+
+    &--start-day-#{$day} {
       .calendar__item:first-child {
-        margin-left: (100% / 7) * list.index($days, $day);
+        margin-left: (100% / 7) * ($index - 1);
       }
     }
   }
