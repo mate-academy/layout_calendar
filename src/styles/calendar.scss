@@ -1,0 +1,38 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(
+    (#{$day-size} + 1px * 2 + 1px) * #{$days-in-week} - 1px + #{$padding * 2}
+  );
+  padding: $padding;
+  list-style: none;
+  counter-reset: day;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    background-color: $color-grey;
+    border: $border-width solid $color-black;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    cursor: pointer;
+    transition:
+      transform $animation-duration,
+      background-color $animation-duration;
+
+    &:hover {
+      background-color: $color-pink;
+      transform: translateY(-$hover-move);
+    }
+
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      position: absolute;
+    }
+  }
+}
