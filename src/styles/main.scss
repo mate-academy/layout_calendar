@@ -6,10 +6,20 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1px;
-  max-width: 713px;
+  max-width: 727px;
   padding: 10px;
   top: 100%;
   left: 100%;
+
+  @for $days from 28 through 30 {
+    &--month-length-#{$days} {
+      @for $i from ($days + 1) through 31 {
+        .calendar__item:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
 
   &__item {
     width: $cell-width;
@@ -19,20 +29,13 @@
     background-color: $cell-color;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
     transition: transform 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: $hovered-cell-color;
       transform: translateY(-20px);
-    }
-
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i}) {
-        @if $i > $length {
-          display: none;
-        }
-      }
     }
 
     @for $i from 1 through 31 {
