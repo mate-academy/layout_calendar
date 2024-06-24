@@ -1,3 +1,78 @@
+// Змінні
+$color-grey: #eee;
+$color-black: #000;
+$color-pink: #ffbfcb;
+$border-width: 1px;
+$day-size: 100px;
+$font-size: 30px;
+$gap: 1px;
+$padding: 10px;
+$hover-move: 20px;
+$animation-duration: 0.5s;
+
+// Основні стилі
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: calc(
+    (#{$day-size} + #{$border-width * 2} + #{$gap}) * 7 - #{$gap} + #{10px * 2}
+  );
+  padding: $padding;
+  list-style: none;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    background-color: $color-grey;
+    border: $border-width solid $color-black;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    cursor: pointer;
+    transition:
+      transform $animation-duration,
+      background-color $animation-duration;
+
+    &:hover {
+      background-color: $color-pink;
+      transform: translateY(-$hover-move);
+    }
+
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      position: absolute;
+    }
+  }
+
+  counter-reset: day;
+}
+
+// Модифікатори для стартового дня
+@each $day, $margin in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 0)
+{
+  .calendar--start-day--#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(
+      (#{$day-size} + #{$border-width * 2} + #{$gap}) * #{$margin}
+    );
+  }
+}
+
+// Модифікатори для довжини місяця
+@for $i from 28 through 31 {
+  .calendar--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
