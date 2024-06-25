@@ -1,11 +1,4 @@
-$main-color: #eee;
-$hover-color: #ffbfcb;
-$border-color: #000;
-$day-size: 100px;
-$border-width: 1px;
-$gap: 1px;
-$padding: 10px;
-$font-size: 30px;
+@import 'variables';
 
 html,
 body {
@@ -20,22 +13,22 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  width: calc(7 * $day-size + 6 * $gap + 2 * $padding);
+  width: calc(7 * $day-size + 6 * $gap-between-days + 2 * $padding);
   padding: $padding;
-  gap: $gap;
+  gap: $gap-between-days;
   counter-reset: day;
 
   &__day {
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
-    background-color: $main-color;
-    border: $border-width solid $border-color;
+    background-color: $day-main-color;
+    border: $border-width solid $day-border-color;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    font-size: $font-size;
+    font-size: $numbers-font-size;
     cursor: pointer;
     transition:
       transform 0.5s,
@@ -43,7 +36,7 @@ body {
     position: relative;
 
     &:hover {
-      background-color: $hover-color;
+      background-color: $day-hover-color;
       transform: translateY(-10px);
     }
 
@@ -53,7 +46,7 @@ body {
     }
 
     &:nth-child(1) {
-      margin-left: calc(6 * ($day-size + $gap));
+      margin-left: calc(6 * ($day-size + $gap-between-days));
     }
   }
 }
@@ -67,10 +60,10 @@ body {
 @each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
 {
   .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap) * #{$margin});
+    margin-left: calc(($day-size + $gap-between-days) * #{$margin});
   }
 }
 
 .calendar--start-day-sun .calendar__day:nth-child(1) {
-  margin-left: calc(6 * ($day-size + $gap));
+  margin-left: calc(6 * ($day-size + $gap-between-days));
 }
