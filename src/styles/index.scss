@@ -16,21 +16,9 @@ body {
   gap: $days-gap;
   padding: $calendar-padding;
 
-  @each $day in $days {
+  @each $day, $index in $days {
     &--start-day-#{$day} > .calendar__day:first-child {
-      @if $day == tue {
-        margin-left: $square-size + $days-gap;
-      } @else if $day == wed {
-        margin-left: 2 * ($square-size + $days-gap);
-      } @else if $day == thu {
-        margin-left: 3 * ($square-size + $days-gap);
-      } @else if $day == fri {
-        margin-left: 4 * ($square-size + $days-gap);
-      } @else if $day == sat {
-        margin-left: 5 * ($square-size + $days-gap);
-      } @else if $day == sun {
-        margin-left: 6 * ($square-size + $days-gap);
-      }
+      margin-left: $index * ($square-size + $days-gap);
     }
   }
 
