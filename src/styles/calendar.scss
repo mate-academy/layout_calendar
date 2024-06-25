@@ -15,9 +15,9 @@
 
   &__day {
     box-sizing: border-box;
-    border: 1px solid #000;
-    height: 100px;
-    width: 100px;
+    border: $calendar-border solid #000;
+    height: $calendar-size;
+    width: $calendar-size;
     background-color: #eee;
     transition: transform, 0.5s;
   }
@@ -30,7 +30,7 @@
 
   @each $day, $day-position in $days {
     &--start-day-#{$day} :first-child {
-      margin-left: (100px + 1px) * $day-position;
+      margin-left: ($calendar-size + $calendar-border) * $day-position;
     }
   }
 
