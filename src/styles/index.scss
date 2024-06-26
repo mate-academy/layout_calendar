@@ -17,11 +17,15 @@ body {
 
 .calendar {
   width: 706px;
-  border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
   gap: 1px;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
     box-sizing: border-box;
@@ -49,7 +53,7 @@ body {
   }
 
   @for $day from 28 through 31 {
-    &--month-length-#{$day}:nth-child(n + #{$day + 1}) {
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
