@@ -55,17 +55,17 @@ body {
 
   $week:
     'mon' 0,
-    'tue' $square-value + $gap,
-    'wed' ($square-value + $gap) * 2,
-    'thu' ($square-value + $gap) * 3,
-    'fri' ($square-value + $gap) * 4,
-    'sat' ($square-value + $gap) * 5,
-    'sun' ($square-value + $gap) * 6;
+    'tue' 1,
+    'wed' 2,
+    'thu' 3,
+    'fri' 4,
+    'sat' 5,
+    'sun' 6;
 
-  @each $day, $day-margin-left in $week {
+  @each $day, $index-of-day in $week {
     &--start-day--#{$day} {
       :first-child {
-        margin-left: $day-margin-left;
+        margin-left: ($square-value + $gap) * $index-of-day;
       }
     }
   }
