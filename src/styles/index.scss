@@ -38,6 +38,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
 
     @for $i from 1 through 31 {
       &:nth-child(n + #{$i})::before {
@@ -56,13 +65,5 @@ body {
     &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
       display: none;
     }
-  }
-
-  &__day:hover {
-    cursor: pointer;
-    background-color: #ffbfcb;
-    transform: translateY(-20px);
-    animation-timing-function: 0.5s;
-    transition: all;
   }
 }
