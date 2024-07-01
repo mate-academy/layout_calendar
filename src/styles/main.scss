@@ -1,7 +1,4 @@
-$day_background-color: #eee;
-$day_block-size: 100px;
-$calendat-gap: 1px;
-$calendar-width: calc($day_block-size * 7 + $calendat-gap * 6);
+@use './utiles/variables' as *;
 
 @mixin squere($size) {
   height: $size;
@@ -21,7 +18,7 @@ body {
   width: #{$calendar-width};
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: #{$calendar-gap};
 
   @for $index from 28 through 31 {
     &--month-length-#{$index} {
@@ -39,7 +36,7 @@ body {
 
     @include squere($day_block-size);
 
-    background-color: #{$day_background-color};
+    background-color: white;
     border: 1px solid black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
@@ -59,7 +56,6 @@ body {
   }
 
   $days: 
-
     'mon' 0,
     'tue' calc(($day_block_size + 1px) * 1),
     'wed' calc(($day_block_size + 1px) * 2),
