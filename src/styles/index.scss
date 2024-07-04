@@ -1,3 +1,70 @@
-body {
-  margin: 0;
+$calendar-week-days-sum: 7;
+$calendar-days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$start-day: 'sun';
+$calendar-month-length: 31;
+$general-font-family: Arial, Helvetica, sans-serif;
+$general-font-size: 30px;
+$calendar-size: 100px;
+$calendar-padding: 10px;
+
+html {
+  font-family: $general-font-family;
+  font-size: $general-font-size;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc($calendar-size * 7 + $calendar-padding * 2);
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    background-color: #eee;
+    border: 1px solid black;
+    height: 99px;
+    width: 99px;
+    margin: 1px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transition: 0.5s;
+      transform: translate(0, -20px);
+    }
+
+    @for $i from 1 through $calendar-month-length {
+      &:nth-child(#{$i})::before {
+        content: '' + $i;
+        display: block;
+      }
+    }
+
+    @for $i from 1 through $calendar-week-days-sum {
+      &:first-child {
+        margin-left: ($calendar-size * 5 + $calendar-padding + 6px);
+      }
+    }
+  }
+
+  @for $amount-days from 28 through 31 {
+    &--month-length-#{$amount-days}:nth-child(n + #{$amount-days + 1}) {
+      display: none;
+    }
+  }
 }
