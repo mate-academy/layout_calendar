@@ -19,6 +19,14 @@ body {
     border: 1px solid #000;
     transition-duration: 0.5s;
     box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*height: 98px;*/
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    padding-top: 2px;
   }
 
   &__day:hover {
@@ -40,24 +48,20 @@ $days: (
 );
 
 @each $day, $margin in $days {
-  .calendar__day-#{$day}:first-child {
-    margin-left: ($margin * 100px + ($margin * 1px));
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: #{$margin * (100px + 1px)};
   }
 }
+
 
 @for $data from 1 through 31 {
   .calendar__day:nth-child(#{$data})::before {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     content: '#{$data}';
-    height: 98px;
-    font-family: Arial, sans-serif;
-    font-size: 30px;
   }
 }
 
-.ones {
-  margin-left: 606px;
-  animation-duration: 0;
+@for $final from 28 through 31 {
+  .calendar--month-length-#{$final} .calendar__day:nth-child(n + #{$final + 1}) {
+    display: none;
+  }
 }
