@@ -1,0 +1,72 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-width;
+  max-width: calc(
+    7 * #{$column-size} + 6 * #{$gap-width} + 2 * #{$padding-width}
+  );
+  margin: 0 auto;
+  padding: $padding-width;
+
+  &__day {
+    width: $column-size;
+    height: $column-size;
+    position: relative;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition: all 0.5s;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-21px);
+      cursor: pointer;
+    }
+  }
+}
+
+@for $day-number from 1 through 31 {
+  .calendar__day:nth-child(#{$day-number}) {
+    &::before {
+      content: '#{$day-number}';
+    }
+  }
+}
+
+@for $last-day from 28 through 31 {
+  .calendar--month-length-#{$last-day}
+    .calendar__day:nth-child(n + #{$last-day + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $number in $days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: calc($number * $column-size + $number * $gap-width);
+  }
+}
