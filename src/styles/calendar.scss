@@ -1,9 +1,5 @@
 body {
   margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 
 .calendar {
@@ -20,17 +16,16 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     background-color: #eee;
     border: 1px solid black;
+    transition: 1s ease-in-out 0.5s;
 
     &:hover {
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translate(0, -20px);
-      transition: 1s ease-in-out 0.5s;
     }
   }
 
@@ -50,7 +45,7 @@ body {
     }
   }
 
-  @each $day, $index in (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6) {
+  @each $day, $index in $weekDays {
     &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: calc(#{$index} * ($calendar-day-size + 1px));
