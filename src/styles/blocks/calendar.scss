@@ -2,10 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-item-gap;
-  width: ($calendar-item-size * 7) + (7 - 1) * $calendar-item-gap;
+  width: ($calendar-item-size * $calendar-columns) + ($calendar-columns - 1) *
+    $calendar-item-gap;
   padding: 10px;
 
   &__item {
+    display: none;
     position: relative;
     background-color: $color-grey;
     height: $calendar-item-size;
@@ -52,20 +54,8 @@ $start-days: (
   }
 }
 
-@for $k from 28 through 31 {
-  .calendar--month-length--#{$k} .calendar__item:nth-child(#{$k + 1}) {
-    display: none;
-  }
-
-  .calendar--month-length--#{$k} .calendar__item:nth-child(#{$k + 2}) {
-    display: none;
-  }
-
-  .calendar--month-length--#{$k} .calendar__item:nth-child(#{$k + 3}) {
-    display: none;
-  }
-
-  .calendar--month-length--#{$k} .calendar__item:nth-child(#{$k + 4}) {
-    display: none;
+@for $k from 1 through 31 {
+  .calendar--month-length--#{$k} .calendar__item:nth-child(-n + #{$k}) {
+    display: block;
   }
 }
