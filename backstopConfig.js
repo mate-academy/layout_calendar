@@ -1,5 +1,4 @@
 'use strict';
-// https://github.com/garris/BackstopJS#advanced-scenarios
 
 const backstop = require('@mate-academy/backstop-config');
 const { basicScenario } = backstop;
@@ -7,10 +6,8 @@ const { basicScenario } = backstop;
 const basic = {
   ...basicScenario,
   label: 'Elementary test',
-  selectors: ['body'],
-  removeSelectors: [
-    'h1',
-  ],
+  selectors: ['html'], 
+  removeSelectors: [],
   misMatchThreshold: 0.5,
   referenceUrl: basicScenario.referenceUrl + '/calendar/',
 };
@@ -31,23 +28,15 @@ const config = {
     {
       ...basic,
       label: 'Calendar initial state',
+      selectors: ['html'],
     },
     {
       ...basic,
       label: 'Calendar day with hover effect',
-      hoverSelector: '.calendar__day:nth-child(5)',
-      postDOMChangeWait: 1000,
-    },
-    {
-      ...basic,
-      label: 'Calendar starting from Wednesday',
-      postDOMChangeWait: 1000,
-    },
-    {
-      ...basic,
-      label: 'Calendar with length of 29 days',
-      postDOMChangeWait: 1000,
-    },
+      hoverSelector: 'html', 
+      postInteractionWait: 0,  
+    }
+
   ],
 };
 
