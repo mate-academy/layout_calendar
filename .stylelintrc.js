@@ -3,5 +3,9 @@ module.exports = {
   plugins: [
     "stylelint-scss"
   ],
-  rules: {}
+  
+    "rules": {
+      "scss/dollar-variable-colon-space-after": "always-single-line"
+    }
+  
 };
