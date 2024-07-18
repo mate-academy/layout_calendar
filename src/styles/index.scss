@@ -1,3 +1,47 @@
 body {
   margin: 0;
 }
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 707px;
+  padding: 10px;
+}
+
+.calendar_day {
+  background-color: #eee;
+  box-sizing: border-box;
+  height: 100px;
+  width: 100px;
+  border: 1px solid black;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #FFBFCB;
+    transform: translate(0, -20px);
+    transition-duration: 500ms;
+  }
+
+  @for $numberday from 1 through 31 {
+    &::before {
+      padding: auto;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      content: #{$numberday};
+    }
+}
+
+
+
+$days-week: mon, tue, wed, thu, fri, sat, sun;
+
+@each $day in $days-week {
+
+}
+
+
+}
