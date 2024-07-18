@@ -16,6 +16,13 @@ $days-of-week: (
 );
 $boxheight: auto;
 
+@mixin start-day($start-day) {
+  $margin: map.get($days-of-week, $start-day);
+  .calendar--start-day-#{$start-day} .calendar__day:first-child {
+    margin-left: calc(#{$margin} * (#{$daywidth} + #{$border-width}));
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -32,7 +39,7 @@ body {
   width: 7 * $daywidth + 6 * $border-width;
   height: $boxheight;
   gap: $border-width;
-
+  counter-reset: day-counter;
   &__day {
     display: flex;
     justify-content: center;
@@ -48,12 +55,13 @@ body {
       font-size: 30px;
       justify-content: center;
       align-self: center;
-      content: attr(data-day);
+      content: counter(day-counter);
+      counter-increment: day-counter;
     }
-    &:hover{
-      background-color: #FFBFCB;
+    &:hover {
+      background-color: #ffbfcb;
       cursor: pointer;
-      transform: translateY(-20px)
+      transform: translateY(-20px);
     }
   }
 
@@ -77,13 +85,13 @@ body {
   @each $days in (28, 29, 30, 31) {
     &.calendar--month-length-#{$days} {
       @for $i from 1 through $days {
-        .calendar__day--#{$i} {
+        .calendar__day:nth-child(#{$i}) {
           display: flex;
         }
       }
 
       @for $i from ($days + 1) through 32 {
-        .calendar__day--#{$i} {
+        .calendar__day:nth-child(#{$i}) {
           display: none;
         }
       }
