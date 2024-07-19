@@ -1,27 +1,6 @@
 @use 'sass:map';
-
-$daybackground: #eee;
-$dayheight: 100px;
-$daywidth: 100px;
-$daycount: 31;
-$border-width: 1px;
-$days-of-week: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6,
-);
-$boxheight: auto;
-
-@mixin start-day($start-day) {
-  $margin: map.get($days-of-week, $start-day);
-  .calendar--start-day-#{$start-day} .calendar__day:first-child {
-    margin-left: calc(#{$margin} * (#{$daywidth} + #{$border-width}));
-  }
-}
+@import './variables';
+@import './mixin';
 
 body {
   margin: 0;
@@ -89,7 +68,7 @@ body {
           .calendar__day:nth-child(#{$i}) {
             display: none;
           }
-        } 
+        }
       }
     }
   }
