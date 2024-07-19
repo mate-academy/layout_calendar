@@ -82,18 +82,14 @@ body {
     }
   }
 
-  @each $days in (28, 29, 30, 31) {
-    &.calendar--month-length-#{$days} {
-      @for $i from 1 through $days {
-        .calendar__day:nth-child(#{$i}) {
-          display: flex;
-        }
-      }
-
-      @for $i from ($days + 1) through 32 {
-        .calendar__day:nth-child(#{$i}) {
-          display: none;
-        }
+  @for $i from 1 through 31 {
+    @each $days in (28, 29, 30, 31) {
+      &.calendar--month-length-#{$days} {
+        @if $i > $days {
+          .calendar__day:nth-child(#{$i}) {
+            display: none;
+          }
+        } 
       }
     }
   }
