@@ -1,12 +1,12 @@
 @import 'variable';
 
-.calendar {
+body {
   height: 100vh;
   align-items: center;
   justify-content: center;
   display: flex;
 
-  &__field {
+  .calendar {
     width: $width-cell;
     flex-wrap: wrap;
     display: flex;
@@ -14,8 +14,8 @@
     padding: 10px;
 
     @each $start-day, $count in $start-days {
-      &--start-#{$start-day} {
-        .calendar__cell:nth-child(1) {
+      &--start-day-#{$start-day} {
+        .calendar__day:nth-child(1) {
           margin-left: calc(#{$count * ($cell-size + $gap)});
         }
       }
@@ -23,14 +23,14 @@
 
     @for $days from 28 through 31 {
       &--month-length-#{$days} {
-        .calendar__cell:nth-child(n + #{$days + 1}) {
+        .calendar__day:nth-child(n + #{$days + 1}) {
           display: none;
         }
       }
     }
   }
 
-  &__cell {
+  .calendar__day {
     border: #{$border} solid black;
     height: $cell-size;
     width: $cell-size;
