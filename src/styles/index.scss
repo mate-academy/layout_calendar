@@ -1,3 +1,72 @@
+@use 'sass:list';
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  $calculated-width: $day-size * $columns;
+  $calculated-border: $day-border-width * 2 * $columns;
+  $calculated-gap: $gap * ($columns - 1);
+  $calculated-suffix: #{$columns - 1}px;
+
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $paddings;
+  gap: $gap;
+  width: calc(
+    #{$calculated-width} + #{$calculated-border} + #{$calculated-gap} + $calculated-suffix
+  );
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+      background-color $day-transition,
+      transform $day-transition;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-hover-bg;
+      transform: $day-hover-transform;
+    }
+
+    &::before {
+      font-size: $day-font-size;
+      font-family: $day-font-family;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-of-type(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @for $i from 0 through length($week-days) - 1 {
+    $day: list.nth($week-days, $i + 1);
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: $i * $start-day-margin-left;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
