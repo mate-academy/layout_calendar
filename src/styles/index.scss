@@ -12,7 +12,6 @@ body {
   height: 100vh;
 }
 
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -66,7 +65,7 @@ body {
 @each $day, $number in $days-of-week {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: ($full-day-size + 1) * $number;
+      margin-left: #{$number * ($day-size + $gap-size)};
     }
   }
 }
