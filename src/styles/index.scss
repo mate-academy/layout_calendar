@@ -1,3 +1,58 @@
-body {
-  margin: 0;
+@import './variables';
+
+.page {
+  font-family: Arial, Helvetica, sans-serif;
+
+  &__body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: $calendar-width;
+
+  @for $day from 1 through 31 {
+    & :nth-child(#{$day})::before {
+      content: '#{$day}';
+    }
+  }
+
+  @each $day, $value in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: $value * $cell-size + $value;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $cell-background-color;
+    border: 1px solid #000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
