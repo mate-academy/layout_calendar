@@ -1,27 +1,15 @@
-$cell-height: 100px;
-$cell-width: 100px;
-$cell-background-color: #eee;
-$calendar-width: $cell-width * 7 + 6px; // 6px is the total gap between cells
-$days: (
-  mon: 0,
-  tue: 101px,
-  wed: 202px,
-  thu: 303px,
-  fri: 404px,
-  sat: 505px,
-  sun: 606px,
-);
+@import './variables';
 
-body {
-  margin: 0;
+.page {
   font-family: Arial, Helvetica, sans-serif;
-}
 
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  &__body {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 }
 
 .calendar {
@@ -38,7 +26,7 @@ body {
 
   @each $day, $value in $days {
     &--start-day-#{$day} :first-child {
-      margin-left: $value;
+      margin-left: $value * $cell-size + $value;
     }
   }
 
@@ -50,8 +38,8 @@ body {
 
   &__day {
     box-sizing: border-box;
-    height: $cell-height;
-    width: $cell-width;
+    height: $cell-size;
+    width: $cell-size;
     background-color: $cell-background-color;
     border: 1px solid #000;
 
