@@ -1,3 +1,24 @@
+:root {
+  --gap: 1px;
+  --padding: 10px;
+  --columns: 7;
+  --day-size: 100px;
+  --total-gap-width: calc((var(--columns) - 1) * var(--gap));
+  --calendar-width: calc(
+    var(--columns) * var(--day-size) + var(--total-gap-width) + 2 * var(--padding)
+  );
+}
+
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
 * {
   box-sizing: border-box;
 }
@@ -15,37 +36,34 @@ body {
 
 .calendar {
   flex-wrap: wrap;
-  gap: $gap;
-  width: 726px;
-  padding: 10px;
+  gap: var(--gap);
+  width: var(--calendar-width);
+  padding: var(--padding);
   display: flex;
 }
 
-$days-of-week: (mon, tue, wed, thu, fri, sat, sun);
-
-@for $i from 1 through length($days-of-week) {
-  $day: nth($days-of-week, $i);
+@each $day, $index in $days-of-week {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: #{($i - 1) * 101}px;
+    margin-left: calc($index * (var(--day-size) + var(--gap)));
   }
 }
 
-.calendar--month-length-28 .calendar__day:nth-child(n + 29),
-.calendar--month-length-29 .calendar__day:nth-child(n + 30),
-.calendar--month-length-30 .calendar__day:nth-child(n + 31),
-.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
-  display: none;
-}
-
 .calendar__day {
+  // display: block;
   background-color: #eee;
   border: 1px solid #000;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  width: var(--day-size);
+  height: var(--day-size);
   transition-duration: 0.5s;
   display: flex;
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
 
 @for $i from 1 through 31 {
