@@ -1,23 +1,26 @@
+@import 'variables';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
 
-$day-size: 100px;
-$border-size: 1px;
-$day-color: #eee;
-$hover-color: #ffbfcb;
-$font-size: 30px;
-$font-family: Arial, sans-serif;
-$transition-duration: 0.5s;
-$calendar-gap: 1px;
-$calendar-padding: 10px;
+.calendar-wrraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc(
-    7 * #{$day-size + $calendar-gap} - #{$calendar-gap} + 2 * #{$calendar-padding}
-  );
+
+  // prettier-ignore
+  width: calc( 7 * ($day-size + 2 * $border-size + $calendar-gap) - $calendar-gap + 2 * $calendar-padding );
   padding: $calendar-padding;
   margin: 0 auto;
 
@@ -50,13 +53,9 @@ $calendar-padding: 10px;
 
   counter-reset: day-counter 0;
 
-  @each $day,
-    $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
-  {
+  @each $day, $margin in $week-days {
     &--start-day-#{$day} .calendar__day:nth-child(1) {
-      margin-left: calc(
-        (#{$margin} * (#{$day-size} + #{$calendar-gap})) + #{$calendar-gap} / 2
-      );
+      margin-left: ($day-size * $margin) + ($calendar-gap * $margin);
     }
   }
 
