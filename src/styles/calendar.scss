@@ -38,6 +38,14 @@
 
 @import 'variables';
 
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -53,6 +61,7 @@
     border: 1px solid black;
     position: relative;
     transition: transform 0.5s;
+    box-sizing: border-box;
 
     &:hover {
       background-color: pink;
@@ -79,13 +88,13 @@
 }
 
 @each $name, $offset in $days-start-column {
-    .calendar--start-day--#{$name} .calendar__day:first-child {
-      margin-left: calc(#{$offset * ($day-size + $gap)});
-    }
+  .calendar--start-day--#{$name} .calendar__day:first-child {
+    margin-left: calc(#{$offset * ($day-size + $gap)});
   }
+}
 
-  @for $i from 28 through 31 {
-    .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
-    }
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
   }
+}
