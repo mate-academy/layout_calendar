@@ -76,17 +76,16 @@
       content: '#{$i}';
     }
   }
-
-  @each $name, $offset in $days-start-column {
-    .calendar--start-day--#{$name} .calendar__day:first-child {
-      margin-left: calc(#{$offset} * $day-size + $offset * $gap);
-    }
-  }
-
-  @for $length from 28 through 31 {
-    .calendar--month-length--#{$length}
-      .calendar__days:nth-child(-n + #{$length}) {
-      display: block;
-    }
-  }
 }
+
+@each $name, $offset in $days-start-column {
+    .calendar--start-day--#{$name} .calendar__day:first-child {
+      margin-left: calc(#{$offset * ($day-size + $gap)});
+    }
+  }
+
+  @for $i from 28 through 31 {
+    .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
