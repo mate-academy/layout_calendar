@@ -1,0 +1,63 @@
+@import './utils/variables';
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc((7 * #{$day-size}) + 6px);
+  padding: 10px;
+  gap: 1px;
+  counter-reset: day-counter 0;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    border: $day-border;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+
+    &::before {
+      counter-increment: day-counter;
+      content: counter(day-counter);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+      transition: all $animation-duration;
+    }
+  }
+
+  @each $day, $index in $days-of-week {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: calc(#{$index} * (#{$day-size} + 1px));
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@counter-style day-counter {
+  system: numeric;
+  symbols: '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12' '13' '14' '15'
+    '16' '17' '18' '19' '20' '21' '22' '23' '24' '25' '26' '27' '28' '29' '30'
+    '31';
+}
