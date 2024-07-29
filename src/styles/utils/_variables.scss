@@ -1,17 +1,21 @@
-$day-size: 100px;
-$gap: 1px;
-$shift-size: 10px;
-$day-week:
-  'monday' 1,
-  'tuesday' 2,
-  'wednesday' 3,
-  'thursday' 4,
-  'friday' 5,
-  'saturday' 6,
-  'sunday' 7;
-
-@mixin start-day($day, $margin-left) {
-  .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: #{$margin-left}px;
-  }
+:root {
+  --gap: 1px;
+  --padding: 10px;
+  --columns: 7;
+  --day-size: 100px;
+  --total-gap-width: calc((var(--columns) - 1) * var(--gap));
+  --calendar-width: calc(
+    var(--columns) * var(--day-size) + var(--total-gap-width) + 2 *
+      var(--padding)
+  );
 }
+
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
