@@ -1,14 +1,15 @@
 @import '../utils/variables';
 
-* {
-  margin: 0;
-}
-
 body {
+  margin: 0;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
 }
 
 .calendar {
@@ -17,33 +18,26 @@ body {
   flex-wrap: wrap;
   max-width: ($col-count * $block) + $padding-calc;
 
-  &__day {
-    box-sizing: border-box;
-    height: $block;
-    width: $block;
+  @for $num-of-day from 1 through 31 {
+    &__day:nth-child(#{$num-of-day})::before {
+      box-sizing: border-box;
+      height: $block;
+      width: $block;
+      content: '#{$num-of-day}';
+      border: 1px solid #000;
+      background-color: #eee;
 
-    border: 1px solid #000;
-    background-color: #eee;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 500ms;
-
-    @for $num-of-day from 1 through 31 {
-      &--#{$num-of-day}::before {
-        content: '#{$num-of-day}';
-        color: #000;
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-      }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 500ms;
     }
+  }
 
-    &:hover {
-      cursor: pointer;
-      background-color: #ffbfcb;
-      transform: translate(0, -20px);
-    }
+  &__day:hover::before {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
   }
 
   @each $day, $index in $days {
