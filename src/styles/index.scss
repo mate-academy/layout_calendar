@@ -8,13 +8,22 @@ $padding-size: 10px;
 $hover-offset: -20px;
 $transition-duration: 0.5s;
 $columns: 7;
-$calendar-width: 800px;
+$date-position: $date-size + 3 * $gap-size;
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
-  width: $calendar-width;
+  width: calc((#{$columns} * #{$date-size}) + 114px);
   padding: $padding-size;
   box-sizing: border-box;
   counter-reset: day;
@@ -53,34 +62,42 @@ $calendar-width: 800px;
   }
 }
 
-@each $date,
-  $margin
-    in (
-      mon: 0,
-      tue: (
-        1 * ($date-size + 3 * $gap-size),
-      ),
-      wed: (
-        2 * ($date-size + 3 * $gap-size),
-      ),
-      thu: (
-        3 * ($date-size + 3 * $gap-size),
-      ),
-      fri: (
-        4 * ($date-size + 3 * $gap-size),
-      ),
-      sat: (
-        5 * ($date-size + 3 * $gap-size),
-      ),
-      sun: (
-        6 * ($date-size + 3 * $gap-size),
-      )
-    )
-{
-  .calendar--start-day-#{$date} .calendar__day:nth-child(1) {
+@each $day, $index in $days {
+  $margin: $index * $date-position;
+
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
     margin-left: $margin;
   }
 }
+
+// @each $date,
+//   $margin
+//     in (
+//       mon: 0,
+//       tue: (
+//         1 * ($date-position),
+//       ),
+//       wed: (
+//         2 * ($date-position),
+//       ),
+//       thu: (
+//         3 * ($date-position),
+//       ),
+//       fri: (
+//         4 * ($date-position),
+//       ),
+//       sat: (
+//         5 * ($date-position),
+//       ),
+//       sun: (
+//         6 * ($date-position),
+//       )
+//     )
+// {
+//   .calendar--start-day-#{$date} .calendar__day:nth-child(1) {
+//     margin-left: $margin;
+//   }
+// }
 
 @for $date from 28 through 31 {
   .calendar--month-length-#{$date} .calendar__day:nth-child(n + #{$date + 1}) {
@@ -88,10 +105,7 @@ $calendar-width: 800px;
   }
 }
 
-.calendar--start-day-wed {
-  margin-top: 122px;
-}
-
+.calendar--start-day-wed,
 .calendar--month-length-29 {
   margin-top: 122px;
 }
