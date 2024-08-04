@@ -17,6 +17,19 @@ body {
   gap: $gap;
   flex-wrap: wrap;
   max-width: ($col-count * $block) + $padding-calc;
+  
+  &__day::before {
+      box-sizing: border-box;
+      height: $block;
+      width: $block;
+      border: 1px solid #000;
+      background-color: #eee;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 500ms;
+  }
 
   @for $num-of-day from 1 through 31 {
     &__day:nth-child(#{$num-of-day})::before {
