@@ -1,0 +1,38 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px;
+  margin: auto;
+  width: 706px;
+  padding: 10px;
+
+  &__day {
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    position: relative;
+    box-sizing: border-box;
+    background-color: #eee;
+    height: $size-day;
+    width: $size-day;
+    border: 1px solid black;
+    font-size: 30px;
+    transition: transform 500ms;
+    transition-property: transform, background-color;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: $shift-number-day;
+        left: $shift-number-day;
+        transform: translate(-$shift-number-day, -$shift-number-day);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
