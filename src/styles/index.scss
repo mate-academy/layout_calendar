@@ -1,23 +1,4 @@
-$date-size: 98px;
-$border-width: 1px;
-$date-bg-color: #eee;
-$hover-color: #ffbfcb;
-$font-size: 30px;
-$gap-size: 1px;
-$padding-size: 10px;
-$hover-offset: -20px;
-$transition-duration: 0.5s;
-$columns: 7;
-$date-position: $date-size + 3 * $gap-size;
-$days: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6,
-);
+@import 'variables';
 
 .calendar {
   display: flex;
@@ -36,7 +17,7 @@ $days: (
     }
   }
 
-  .calendar__day {
+  &__day {
     width: $date-size;
     height: $date-size;
     background-color: $date-bg-color;
@@ -69,35 +50,6 @@ $days: (
     margin-left: $margin;
   }
 }
-
-// @each $date,
-//   $margin
-//     in (
-//       mon: 0,
-//       tue: (
-//         1 * ($date-position),
-//       ),
-//       wed: (
-//         2 * ($date-position),
-//       ),
-//       thu: (
-//         3 * ($date-position),
-//       ),
-//       fri: (
-//         4 * ($date-position),
-//       ),
-//       sat: (
-//         5 * ($date-position),
-//       ),
-//       sun: (
-//         6 * ($date-position),
-//       )
-//     )
-// {
-//   .calendar--start-day-#{$date} .calendar__day:nth-child(1) {
-//     margin-left: $margin;
-//   }
-// }
 
 @for $date from 28 through 31 {
   .calendar--month-length-#{$date} .calendar__day:nth-child(n + #{$date + 1}) {
