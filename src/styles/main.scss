@@ -6,28 +6,23 @@
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  box-sizing: content-box;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   padding: 10px;
-  width: 806px;
+  width: 707px;
 
   @each $day, $day-position in $day-map {
     &--start-day-#{$day} .calendar__day:first-child {
       margin-left: ($cell-size + 1) * $day-position;
-    }
-  }
-
-  @for $i from 1 through 31 {
-    &:nth-child(n + #{$i})::before {
-      content: '#{$i}';
     }
   }
 
@@ -57,10 +52,14 @@ body {
     }
 
     &::before {
-      content: '';
-      position: absolute;
       font-size: 30px;
       font-family: Arial, sans-serif;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(n + #{$i})::before {
+        content: '#{$i}';
+      }
     }
   }
 }
