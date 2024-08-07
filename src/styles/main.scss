@@ -1,5 +1,10 @@
+$lengths: (28, 29, 30, 31);
+$day: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
 * {
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
 }
 
 body {
@@ -9,8 +14,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
-  font-size: 30px;
 }
 
 .calendar {
@@ -28,13 +31,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: #ffbfcb;
-    transform: translateY(-20px);
-    transition-duration: 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
   }
 
   @for $num from 1 through 31 {
@@ -44,18 +47,18 @@ body {
   }
 }
 
-$day: (mon 0, tue 101, wed 202, thu 303, fri 404, sat 505, sun 606);
-
 @each $days, $margin in $day {
   .calendar--start-day-#{$days} .calendar__day:first-child {
-    margin-left: $margin;
+    margin-left: $margin * 101px;
   }
 }
 
-$lenghts: (28 29, 29 30, 30 31, 31 32);
-
-@each $beginning, $nth in $lenghts {
-  .calendar--month-length-#{$beginning} .calendar__day:nth-child(n + #{$nth}) {
-    display: none;
+@each $beginning in $lengths {
+  .calendar--month-length-#{$beginning} {
+    @for $index from ($beginning + 1) through 32 {
+      .calendar__day:nth-child(#{$index}) {
+        display: none;
+      }
+    }
   }
 }
