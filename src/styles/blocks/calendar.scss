@@ -1,0 +1,38 @@
+@import '../utils/variables';
+@import '../utils/mixin';
+
+.calendar {
+  @include calendar;
+
+  &__day {
+    @include cell-of-days;
+
+    &:hover {
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+      background-color: pink;
+      cursor: pointer;
+    }
+
+    @for $count from 1 through 31 {
+      &:nth-child(#{$count})::before {
+        content: '#{$count}';
+        font-size: 30px;
+        top: 50%; // Center vertically
+        left: 50%; // Center horizontally
+      }
+    }
+  }
+}
+
+@each $day, $index in $week {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: ($size-of-day + $gap) * $index;
+  }
+}
+
+@for $day from 28 to 31 {
+  .calendar--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
