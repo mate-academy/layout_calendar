@@ -1,15 +1,25 @@
 @import 'variables';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
-  padding: $padding-size;
-  box-sizing: border-box;
   counter-reset: day;
-  margin-left: 141px;
-  margin-top: 72px;
-  width: calc((#{$columns} * #{$date-size}) + 114px);
+  width: calc((#{$columns} * 100px) + (#{$columns - 1} * #{$gap-size}));
 
   &__day {
     width: $date-size;
@@ -23,6 +33,7 @@
     font-family: Arial, sans-serif;
     font-size: $font-size;
     transition: all $transition-duration;
+    box-sizing: border-box;
 
     &:hover {
       cursor: pointer;
@@ -43,7 +54,7 @@
   }
 
   @each $day, $index in $days {
-    $margin: $index * $date-position;
+    $margin: ($index * $date-size) + (($index) * $gap-size);
 
     &--start-day-#{$day} &__day:first-child {
       margin-left: $margin;
@@ -55,9 +66,4 @@
       display: none;
     }
   }
-}
-
-.calendar--start-day-wed,
-.calendar--month-length-29 {
-  margin-top: 122px;
 }
