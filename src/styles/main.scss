@@ -1,0 +1,55 @@
+$calendar-day-size: 100px;
+$calendar-gap-size: 1px;
+$calendar-font-size: 30px;
+$weekdays: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+.calendar {
+  width: 7 * ($calendar-day-size + $calendar-gap-size);
+  padding: 10px;
+  display: flex;
+
+  @each $start-day, $column in $weekdays {
+    &--start-day-#{$start-day} &__day:first-child {
+      margin-left: calc(#{$column} * ($calendar-day-size + $calendar-gap-size));
+    }
+  }
+
+  &__board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $calendar-gap-size;
+  }
+
+  &__day {
+    box-sizing: border-box;
+    height: $calendar-day-size;
+    width: $calendar-day-size;
+    border: 1px solid black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(n + #{$day})::before {
+        content: '#{$day}';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} &__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
