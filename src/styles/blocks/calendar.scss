@@ -1,11 +1,7 @@
 @import '../utils/variables';
 
 html {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: Arial, sans-serif;
 }
 
 .calendar {
@@ -20,16 +16,16 @@ html {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    position: relative;
     width: $cell-size;
     height: $cell-size;
     background-color: $day-color;
-    font-size: 30px;
+    font-size: $font-size;
     border: 1px solid black;
 
-    @for $index from 1 through 31 {
+    @for $index from 1 through $calendar-max-days {
       &:nth-child(#{$index})::before {
         content: '#{$index}';
-        position: absolute;
       }
     }
 
@@ -49,7 +45,7 @@ html {
     }
   }
 
-  @for $index from 28 through 31 {
+  @for $index from 28 through $calendar-max-days {
     &--month-length-#{$index} &__day:nth-child(n + #{$index + 1}) {
       display: none;
     }
