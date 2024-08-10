@@ -2,4 +2,13 @@ $day-background-color: #eee;
 $day-width: 100px;
 $day-height: 100px;
 $gap: 1px;
-$calendar-width: calc(($day-width * 7) + ($gap * 6));
+$column-number: 7;
+$total-gap-distance: $gap * ($column-number - 1);
+$calendar-width: calc(($day-width * $column-number) + $total-gap-distance);
+$start-day: 'mon' 0,
+  'tue' calc(($day-width) + ($gap)),
+  'wed' calc(($day-width * 2) + ($gap * 2)),
+  'thu' calc(($day-width * 3) + ($gap * 3)),
+  'fri' calc(($day-width * 4) + ($gap * 4)),
+  'sat' calc(($day-width * 5) + ($gap * 5)),
+  'sun' calc(($day-width * 6) + ($gap * 6));
