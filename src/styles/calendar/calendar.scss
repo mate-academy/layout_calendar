@@ -1,0 +1,29 @@
+@use '../utils/variables' as *;
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: $calendar-width;
+  gap: $gap;
+  align-content: flex-end;
+  }
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $day-background-color;
+  width: $day-width;
+  height: $day-height;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
