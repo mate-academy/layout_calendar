@@ -1,0 +1,55 @@
+@use './variables.scss' as *;
+
+.calendar {
+  width: $calendar-size;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: $gap;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    height: $box-size;
+    width: $box-size;
+    border: $border-style;
+    background-color: $standard-color;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      animation-name: example;
+      transform: translateY(-20px);
+      animation-duration: 0.5s;
+      background-color: $chose-color;
+    }
+  }
+
+  @for $index from 1 through 31 {
+    &__day:nth-child(#{$index})::before {
+      content: '#{$index}';
+    }
+  }
+
+  @each $day, $margin in $week {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: $margin;
+      }
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} {
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+body {
+  margin: 0;
+}
