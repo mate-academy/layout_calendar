@@ -9,13 +9,13 @@
   align-content: flex-end;
 
   @for $i from 1 through 31 {
-    &--month-length-#{$i} div:nth-child(-n + #{$i}) {
+    &--month-length-#{$i} &__day:nth-child(-n + #{$i}) {
       display: flex;
     }
   }
 
   @each $day, $position in $start-day {
-    &--start-day-#{$day} div:first-child {
+    &--start-day-#{$day} &__day:first-child {
       margin-left: $position;
     }
   }
@@ -42,7 +42,7 @@
     &:hover {
       transform: translateY(-20px);
       cursor: pointer;
-      background-color: #ffbfcb;
+      background-color: $day-background-color-hover;
     }
   }
 }
