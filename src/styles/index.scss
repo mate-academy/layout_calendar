@@ -16,13 +16,11 @@ $day-of-week: (
   sat: ($total-size + $gap) * 6
 );
 $month-lengths: 28, 29, 30, 31;
-
 $day-background: #eee;
 $day-border: 1px solid black;
 $day-in-month: 31;
 $number-font-family: Arial, sans-serif;
 $number-font-size: 30px;
-// $start-day-in-week: sun;
 
 body {
   display: flex;
@@ -51,7 +49,6 @@ body {
     border: $day-border;
     background-color: $day-background;
 
-    // position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,18 +71,17 @@ body {
     }
   }
 
-
-  &.start-day-sun .calendar__day:first-child {
+  &--start-day-sun .calendar__day:first-child {
     margin-left: $margin-left;
   }
 
   @for $days from 28 through 30 {
-    &.month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+    &--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
 
-  &.month-length-31 .calendar__day:nth-child(n + 32) {
+  &--month-length-29 .calendar__day:nth-child(n + 32) {
     display: none;
   }
 }
