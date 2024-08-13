@@ -1,3 +1,76 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  gap: $calendar__day-gap;
+  max-width: calc(
+    2 * #{$calendar__padding} + 7 * #{$calendar__day-size} + 6 * #{$calendar__day-gap}
+  );
+  max-height: calc(
+    6 * #{$calendar__day-size} + 5 * #{$calendar__day-gap} + 2 * #{$calendar__padding}
+  );
+  padding: $calendar__padding;
+  position: relative;
+
+  @for $cell from 1 through 31 {
+    &__day:nth-child(#{$cell})::before {
+      content: '#{$cell}';
+    }
+  }
+
+  @for $days-in-month from 28 through 30 {
+    &--month-length-#{$days-in-month} {
+      & > :nth-child(n + #{$days-in-month + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: #eee;
+    width: $calendar__day-size;
+    height: $calendar__day-size;
+    border: solid 1px black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: $calendar__day-size;
+    transition: 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+
+  @each $day,
+    $day-num
+      in ('mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6)
+  {
+    &--start-day-#{$day} {
+      & > :nth-child(1) {
+        // prettier-ignore
+        margin-left: calc(#{$day-num} * #{$calendar__day-size} + #{$day-num} * #{$calendar__day-gap});
+      }
+    }
+  }
 }
