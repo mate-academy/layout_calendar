@@ -1,3 +1,71 @@
+$week: (
+  'mon' 0,
+  'tue' 101px,
+  'wed' 202px,
+  'thu' 303px,
+  'fri' 404px,
+  'sat' 505px,
+  'sun' 606px
+);
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  width: 706px;
+
+  &__day {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+
+    transition:
+      background-color 500ms linear,
+      transform 500ms linear;
+
+    @for $count from 1 through 31 {
+      &:nth-child(n + #{$count})::before {
+        content: '#{$count}';
+      }
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $maxDay from 28 through 31 {
+    &--month-length-#{$maxDay} {
+      .calendar__day:nth-child(n + #{$maxDay + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $dayW, $offset in $week {
+    &--start-day-#{$dayW} {
+      .calendar__day:nth-child(1) {
+        margin-left: $offset;
+      }
+    }
+  }
 }
