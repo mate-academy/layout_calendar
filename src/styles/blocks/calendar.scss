@@ -21,14 +21,18 @@
     }
   }
 
+  @for $i from 1 through 31 {
+    & :nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
   $startDay: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
 
   @each $day, $offset in $startDay {
-    @for $i from 1 through 31 {
-      $adjusted-index: $i + $offset;
-      &--start-day--#{$day} :nth-child(#{$adjusted-index})::before {
-        content: '#{$i}';
+      &--start-day--#{$day} :first-child {
+        $result: 101 * $offset;
+        margin-left: #{$result}px;
       }
-    }
   }
 }
