@@ -1,19 +1,19 @@
-$day-size: 100px;
+$cell-size: 100px;
 $gap: 1px;
 $border-size: 1px;
 $total-columns: 7;
-$total-size: $day-size + $border-size;
+$total-size: $cell-size + $border-size;
 $padding: 10px;
-$calendar-width: ($total-columns * $day-size) + (6 * $gap);
+$calendar-width: ($total-columns * $cell-size) + (6 * $gap);
 $margin-left: ($total-size + $gap) * 6;
-$day-of-week: (
-  sun: 0,
-  mon: $total-size + $gap,
-  tue: ($total-size + $gap) * 2,
-  wed: ($total-size + $gap) * 3,
-  thu: ($total-size + $gap) * 4,
-  fri: ($total-size + $gap) * 5,
-  sat: ($total-size + $gap) * 6
+$star-day: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
 );
 $month-lengths: 28, 29, 30, 31;
 $day-background: #eee;
@@ -32,26 +32,21 @@ body {
 
 .calendar {
   display: flex;
-  justify-content: center;
   padding: $padding;
-
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap;
-    width: $calendar-width;
-    }
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
 
   &__day {
     box-sizing: border-box;
-    width: $day-size;
-    height: $day-size;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
     border: $day-border;
     background-color: $day-background;
 
     display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: $number-font-family;
     font-size: $number-font-size;
 
@@ -66,23 +61,20 @@ body {
 
     @for $i from 1 through $day-in-month {
       &:nth-child(#{$i})::before {
-        content: "#{$i}";
+        content: '#{$i}';
       }
     }
   }
 
-  &--start-day-sun .calendar__day:first-child {
-    margin-left: $margin-left;
-  }
-
-  @for $days from 28 through 30 {
-    &--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
-      display: none;
+  @each $day, $i in $star-day {
+    &--start-day-#{$day} :first-child {
+      margin-left: calc(#{$i} * $cell-size + (#{$i} * 1px));
     }
   }
 
-  &--month-length-29 .calendar__day:nth-child(n + 32) {
-    display: none;
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
   }
 }
-
