@@ -1,14 +1,14 @@
 .calendar {
-  width:706px;
+  width: #{($calendarCellWidth * 7 + ($calendarCellGap * 6))}px;
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: #{$calendarCellGap}px;
 
   &__day {
-    width: 100px;
-    height: 100px;
+    width: #{$calendarCellWidth}px;
+    height: #{$calendarCellHeight}px;
     background-color: #eee;
-    border: 1px solid #000;
+    border: #{$calendarCellBorder}px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,8 +31,7 @@
 
   @each $day, $offset in $startDay {
       &--start-day--#{$day} :first-child {
-        $result: 101 * $offset;
-        margin-left: #{$result}px;
+        margin-left: #{(($calendarCellWidth + $calendarCellGap) * $offset)}px;
       }
   }
 }
