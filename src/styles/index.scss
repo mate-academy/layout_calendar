@@ -31,40 +31,40 @@ body {
   flex-wrap: wrap;
   padding: 10px;
 
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid black;
+
+    transition-duration: 0.5s;
+  }
+
   @for $i from 1 through 31 {
     &__day--#{$i}::before {
-      box-sizing: border-box;
       display: block;
       content: '#{$i}';
-      width: $day-size;
-      height: $day-size;
-      background-color: #eee;
       text-align: center;
       line-height: $day-size;
       font-size: 30px;
-      border: 1px solid black;
       font-family: Arial, sans-serif;
-      transition-duration: 0.5s;
     }
   }
 
   @each $day, $margin in $week {
-    &--start-#{$day} {
-      .calendar__day--1 {
-        margin-left: $margin;
-      }
+    &--start-#{$day} :first-child {
+      margin-left: $margin;
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
-        visibility: hidden;
-      }
+    &--month-#{$i} :nth-child(n + #{$i + 1}) {
+      visibility: hidden;
     }
   }
 
-  &__day:hover::before {
+  &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
     transform: translateY(-20px);
