@@ -34,7 +34,7 @@ $day-offsets: (
     border: 1px solid #000;
     position: relative;
     cursor: pointer;
-    transition: transform 0.5s;
+    transition: transform 0.5s, background-color 0.5s;
 
     &::before {
       content: '';
@@ -58,10 +58,12 @@ $day-offsets: (
     }
   }
 
-  @each $day, $index in $day-offsets {
-    $margin: $index * ($day-size + $gap-size);
 
-    .#{$day}-element {
+
+  @each $day, $index in $day-offsets {
+    $margin: $index * ($day-size + $gap-size + 1.5px);
+
+    &.calendar--start-#{$day} .calendar__day:nth-child(1) {
       margin-left: $margin;
     }
   }
@@ -72,3 +74,6 @@ $day-offsets: (
     }
   }
 }
+
+
+
