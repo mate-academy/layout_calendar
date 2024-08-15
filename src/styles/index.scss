@@ -1,14 +1,4 @@
-$day-size: 100px;
-$gap-size: 1px;
-$week: (
-  mon: 0,
-  tue: calc(#{$day-size} + $gap-size),
-  wed: calc(2 * (#{$day-size} + $gap-size)),
-  thu: calc(3 * (#{$day-size} + $gap-size)),
-  fri: calc(4 * (#{$day-size} + $gap-size)),
-  sat: calc(5 * (#{$day-size} + $gap-size)),
-  sun: calc(6 * (#{$day-size} + $gap-size)),
-);
+@import 'utils/variables';
 
 html {
   margin: 0;
@@ -47,7 +37,7 @@ body {
   }
 
   @for $i from 1 through 31 {
-    &__day--#{$i}::before {
+    &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
