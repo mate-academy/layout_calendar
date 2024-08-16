@@ -23,7 +23,7 @@
     }
 
     &:hover {
-      background-color: #FFBFCB;
+      background-color: #ffbfcb;
       transform: translateY(-20px);
     }
   }
@@ -34,16 +34,24 @@
     }
   }
 
-  $startDay: ("mon": 0, "tue": 1, "wed": 2, "thu": 3, "fri": 4, "sat": 5, "sun": 6);
+  $startDay: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
 
   @each $day, $offset in $startDay {
-      &--start-day--#{$day} :first-child {
-        margin-left: #{(($calendarCellWidth + $calendarCellGap) * $offset)}px;
-      }
+    &--start-day-#{$day} :first-child {
+      margin-left: #{(($calendarCellWidth + $calendarCellGap) * $offset)}px;
+    }
   }
 
   @for $i from 28 through 31 {
-    &--month-length--#{$i} :nth-child(n+#{($i + 1)}) {
+    &--month-length-#{$i} :nth-child(n + #{($i + 1)}) {
       display: none;
     }
   }
