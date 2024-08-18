@@ -17,7 +17,7 @@ body {
 
   &__day {
     position: relative;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     width: 100px;
@@ -56,5 +56,11 @@ $day-start-styles: (
 @each $day-of-start, $margins in $day-start-styles {
   .calendar--start-day-#{$day-of-start} :first-child {
     margin-left: $margins;
+  }
+}
+
+@for $day-show from 29 to 32 {
+  .calendar--month-length-#{$day-show} :nth-child(-n + #{$day-show}) {
+    display: flex;
   }
 }
