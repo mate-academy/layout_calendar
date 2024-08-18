@@ -1,7 +1,4 @@
-$calendar-box: 100px;
-$gap: 1px;
-$padding: 10px;
-$calendar-width: $calendar-box * 7 + $gap * 6 + $padding * 2;
+@import 'variables';
 
 body {
   display: flex;
@@ -50,31 +47,9 @@ body {
     }
   }
 
-  $days: (
-    'mon': 0,
-    'tue': (
-      $calendar-box + $gap,
-    ),
-    'wed': (
-      $calendar-box * 2 + $gap * 2,
-    ),
-    'thu': (
-      $calendar-box * 3 + $gap * 3,
-    ),
-    'fri': (
-      $calendar-box * 4 + $gap * 4,
-    ),
-    'sat': (
-      $calendar-box * 5 + $gap * 5,
-    ),
-    'sun': (
-      $calendar-box * 6 + $gap * 6,
-    ),
-  );
-
-  @each $day, $m-left in $days {
+  @each $day, $index in $days {
     &--start-day-#{$day} &__day:first-child {
-      margin-left: #{$m-left};
+      margin-left: #{$calendar-box * $index + $gap * $index};
     }
   }
 
