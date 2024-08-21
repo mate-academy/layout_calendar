@@ -1,15 +1,13 @@
+$square-background: #eee;
+$square-size: 100px;
+$square-border: 1px solid black;
+$square-text-size: 30px;
+$days-in-month: 31;
+$square-margin: 1px;
+$square-text-family: Arial, Helvetica, sans-serif;
+
 * {
   box-sizing: border-box;
-}
-
-:root {
-  --square-background: #eee;
-  --square-width: 100px;
-  --square-height: 100px;
-  --square-border: 1px solid black;
-  --square-font: Arial, Helvetica, sans-serif;
-  --square-size: 30px;
-  --square-margin-right: 1px;
 }
 
 body {
@@ -24,210 +22,61 @@ li {
   list-style: none;
 }
 
-.calendar__block {
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar__days {
   display: flex;
   flex-wrap: wrap;
-  width: 714px;
-  text-align: center;
-  line-height: 100px;
+  width: 707px;
+  list-style-type: decimal;
+  line-height: 98px;
   transition-duration: 0, 5s;
+
+  .calendar__day {
+    position: relative;
+    background: $square-background;
+    width: $square-size;
+    height: $square-size;
+    border: $square-border;
+    margin-right: $square-margin;
+    margin-bottom: $square-margin;
+    text-align: center;
+    font-size: $square-text-size;
+    font-family: $square-text-family;
+
+    @for $i from 1 through $days-in-month {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        margin-left: 1px;
+      }
+    }
+  }
 }
 
-.calendar__day {
-  width: var(--square-width);
-  height: var(--square-height);
-  background: var(--square-background);
-  border: var(--square-border);
-  margin: var(--square-margin-right);
+$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__days .calendar__day:first-child {
+      margin-left: calc(($square-size + $square-margin) * $index);
+    }
+  }
 }
 
-.calendar__block .calendar__day:first-child::before {
-  content: '1';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__days .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
 
-.calendar__block .calendar__day:nth-child(2)::before {
-  content: '2';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(3)::before {
-  content: '3';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(4)::before {
-  content: '4';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(5)::before {
-  content: '5';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(6)::before {
-  content: '6';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(7)::before {
-  content: '7';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(8)::before {
-  content: '8';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(9)::before {
-  content: '9';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(10)::before {
-  content: '10';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(11)::before {
-  content: '11';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(12)::before {
-  content: '12';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(13)::before {
-  content: '13';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(14)::before {
-  content: '14';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(15)::before {
-  content: '15';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(16)::before {
-  content: '16';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(17)::before {
-  content: '17';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(18)::before {
-  content: '18';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(19)::before {
-  content: '19';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(20)::before {
-  content: '20';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(21)::before {
-  content: '21';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(22)::before {
-  content: '22';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(23)::before {
-  content: '23';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(24)::before {
-  content: '24';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(25)::before {
-  content: '25';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(26)::before {
-  content: '26';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(27)::before {
-  content: '27';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(28)::before {
-  content: '28';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(29)::before {
-  content: '29';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(30)::before {
-  content: '30';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(31)::before {
-  content: '31';
-  font-size: var(--square-size);
-  font-family: var(--square-font);
-}
-
-.calendar__block .calendar__day:nth-child(12):hover {
+.calendar__days .calendar__day:nth-child(12):hover {
   cursor: pointer;
   background: #ffbfcb;
   transform: translate(0, -20px);
