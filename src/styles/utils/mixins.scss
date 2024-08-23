@@ -1,0 +1,31 @@
+@mixin calendar-config($col, $cs, $padding, $gap: 1px) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: ($col * $cs) + (($col - 1) * $gap) + (2 * $padding);
+  padding: $padding;
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($gap * $index) + ($index * $cs);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@mixin calendar-cell($calendar-cell-size) {
+  width: $calendar-cell-size;
+  height: $calendar-cell-size;
+  background-color: $main-calendar-bg;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  cursor: pointer;
+}
