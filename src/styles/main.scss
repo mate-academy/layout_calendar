@@ -16,11 +16,11 @@ body {
   margin: 0 auto;
   max-width: $calendar-width;
 
-  $start-days: (mon 0, tue 101, wed 202, thu 303, fri 404, sat 505, sun 606);
+  $start-days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 
   @each $start-day, $marg in $start-days {
     &--start-day-#{$start-day} :first-child {
-      margin-left: $marg;
+      margin-left: $marg * 101;
     }
   }
 
@@ -50,15 +50,15 @@ body {
     background-color: #eee;
     position: relative;
     display: flex;
-
+    transition: transform 500ms;
     justify-content: center;
     align-items: center;
   }
+
   &__day:hover {
     cursor: pointer;
 
-    // background-color: #ffbfcb;
+    background-color: #ffbfcb;
     transform: translateY(-20px);
-    transition: transform 500ms;
   }
 }
