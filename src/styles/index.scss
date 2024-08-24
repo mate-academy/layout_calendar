@@ -8,6 +8,10 @@ $start-day: (
   'sun': 6,
 );
 
+$widthDayItems: 100px;
+$heightDayItems: 100px;
+$currentShift: 1px;
+
 html {
   font-family: Arial, sans-serif;
   font-size: 30px;
@@ -24,14 +28,14 @@ body {
 .calendar {
   display: flex;
   gap: 1px;
-  width: calc(7 * 100px + 6 * 1px);
+  width: calc(7 * $widthDayItems + 6 * $currentShift);
   flex-wrap: wrap;
   padding: 0 10px;
 
   &__day {
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
+    width: $widthDayItems;
+    height: $heightDayItems;
     border: 1px solid black;
     background-color: #eee;
     display: flex;
@@ -55,7 +59,7 @@ body {
 
 @each $day, $i in $start-day {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: calc(#{$i} * 100px + #{$i * 1px});
+    margin-left: calc(#{$i} * $widthDayItems + #{$i * $currentShift});
   }
 }
 
