@@ -1,0 +1,19 @@
+$day-size: 100px;
+$font-size: 30px;
+$border__gap-size: 1px;
+
+@function calendar-size($day-size, $border__gap-size) {
+  @return $day-size + $border__gap-size;
+}
+
+$calendar-row-width: calendar-size($day-size, $border__gap-size) * 7;
+$calendar-width: $calendar-row-width - $border__gap-size;
+$start-day: (
+  mon: 0,
+  tue: calendar-size($day-size, $border__gap-size),
+  wed: calendar-size($day-size, $border__gap-size) * 2,
+  thu: calendar-size($day-size, $border__gap-size) * 3,
+  fri: calendar-size($day-size, $border__gap-size) * 4,
+  sat: calendar-size($day-size, $border__gap-size) * 5,
+  sun: calendar-size($day-size, $border__gap-size) * 6,
+);
