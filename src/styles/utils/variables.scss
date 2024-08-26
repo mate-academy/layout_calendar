@@ -1,0 +1,20 @@
+$cell-size: 100px;
+$cell-count: 7;
+$gap: 1px;
+$font-size: 30px;
+
+@function calendar-size($cell-size, $gap) {
+  @return $cell-size + $gap;
+}
+
+$calendar-row-width: calendar-size($cell-size, $gap) * 7;
+$calendar-width: $calendar-row-width - $gap;
+$start-day: (
+  mon: 0,
+  tue: calendar-size($cell-size, $gap),
+  wed: calendar-size($cell-size, $gap) * 2,
+  thu: calendar-size($cell-size, $gap) * 3,
+  fri: calendar-size($cell-size, $gap) * 4,
+  sat: calendar-size($cell-size, $gap) * 5,
+  sun: calendar-size($cell-size, $gap) * 6,
+);
