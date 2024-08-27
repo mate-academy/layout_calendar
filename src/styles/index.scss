@@ -34,17 +34,19 @@ li {
   flex-wrap: wrap;
   width: 707px;
   list-style-type: decimal;
-  line-height: 98px;
   transition-duration: 0, 5s;
 
   .calendar__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     background: $square-background;
     width: $square-size;
     height: $square-size;
     border: $square-border;
     margin-right: $square-margin;
-    margin-bottom: $square-margin;
+    gap: $square-margin;
     text-align: center;
     font-size: $square-text-size;
     font-family: $square-text-family;
@@ -52,7 +54,7 @@ li {
     @for $i from 1 through $days-in-month {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
-        margin-left: 1px;
+        width: 100%;
       }
     }
   }
