@@ -2,45 +2,60 @@ $fontBody: Arial, sans-serif;
 $gapSize: 1px;
 $daySize: 100px;
 $paddingSize: 10px;
-$daysOfWeek: (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6);
-// $month-length: (28, 29, 30, 31);
+$bodyHeight: 100vh;
+$bodySize: 30px;
+$calendarWidth: 726px;
+$dayBackColor: #eee;
+$dayBorderColor: #000;
+$dayHoverColor: #ffbfcb;
+$daysOfWeek: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+* {
+  box-sizing: border-box;
+}
 
 body {
+  flex-direction: column;
   font-family: $fontBody;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: $bodyHeight;
+  display: flex;
+  font-size: $bodySize;
 }
 
 .calendar {
-  height: 100vh;
+  gap: $gapSize;
+  padding: $paddingSize;
   display: flex;
-  justify-content: center;
-  align-items: center;
-
-
-  &__month-length {
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(#{$daySize * 7} + #{$gapSize * 6} + #{$paddingSize * 2});
-    padding: $paddingSize;
-    gap: $gapSize;
-    box-sizing: border-box;
-  }
+  flex-wrap: wrap;
+  width: $calendarWidth;
 
   &__day {
     display: flex;
-    background-color: #eee;
-    border: 1px solid black;
-    width: 100px;
-    height: 100px;
-    padding: $paddingSize;
-    gap: $gapSize;
-    box-sizing: border-box;
+    background-color: $dayBackColor;
+    border: 1px solid $dayBorderColor;
+    width: $daySize;
+    height: $daySize;
     justify-content: center;
     align-items: center;
   }
 
-  // &__day:first-child {
-  //   margin-left: calc(#{$daySize * 6} + #{$gapSize * 6});
-  // }
+  &__day:hover {
+    cursor: pointer;
+    background-color: $dayHoverColor;
+    transform: translateY(-20px);
+    transition: all 0.5s;
+  }
 
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
@@ -51,19 +66,16 @@ body {
     }
   }
 
-  &--start-sun .calendar__day:first-child {
-    margin-left: calc(#{$daySize} * 6 + #{$gapSize} * 6);
-  }
-
   @each $day, $offset in $daysOfWeek {
-    &--start-#{$day} .calendar__day:first-child {
+    &--start-day-#{$day} .calendar__day:first-child {
       margin-left: calc(#{$daySize} * #{$offset} + #{$gapSize} * #{$offset});
     }
   }
+}
 
-  // @for $i from 28 through 31 {
-  //   &--month-length:nth-child(#{$i}) {
-
-  //   }
-  // }
+.calendar--month-length-28 .calendar__day:nth-child(n + 29),
+.calendar--month-length-29 .calendar__day:nth-child(n + 30),
+.calendar--month-length-30 .calendar__day:nth-child(n + 31),
+.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
+  display: none;
 }
