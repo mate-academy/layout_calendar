@@ -30,13 +30,13 @@ $calendar-start-day-shift: $cell-width + $calendar-cell-gap;
 
   // #region start-day
   $days: (
-    'mon': 0,
-    'tue': $calendar-start-day-shift,
-    'wed': $calendar-start-day-shift * 2,
-    'thu': $calendar-start-day-shift * 3,
-    'fri': $calendar-start-day-shift * 4,
-    'sat': $calendar-start-day-shift * 5,
-    'sun': $calendar-start-day-shift * 6,
+    "mon": 0,
+    "tue": $calendar-start-day-shift,
+    "wed": $calendar-start-day-shift * 2,
+    "thu": $calendar-start-day-shift * 3,
+    "fri": $calendar-start-day-shift * 4,
+    "sat": $calendar-start-day-shift * 5,
+    "sun": $calendar-start-day-shift * 6
   );
 
   @each $day-name, $shift in $days {
@@ -66,13 +66,14 @@ $calendar-start-day-shift: $cell-width + $calendar-cell-gap;
     box-sizing: border-box;
     background-color: #eee;
     border: 1px solid #000;
+    color: #000;
+    font-size: 30px;
+
     transition: 0.5s;
 
     @for $d from 1 through 31 {
       &:nth-child(#{$d})::before {
-        content: '#{$d}';
-        color: #000;
-        font-size: 30px;
+        content: "#{$d}";
       }
     }
 
