@@ -34,7 +34,9 @@ li {
   flex-wrap: wrap;
   width: 707px;
   list-style-type: decimal;
-  transition-duration: 0, 5s;
+  transition-duration:
+    linear 0,
+    5s;
 
   .calendar__day {
     display: flex;
@@ -45,6 +47,7 @@ li {
     width: $square-size;
     height: $square-size;
     border: $square-border;
+    margin-bottom: $square-margin;
     margin-right: $square-margin;
     gap: $square-margin;
     text-align: center;
@@ -78,8 +81,12 @@ $days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
   }
 }
 
-.calendar__days .calendar__day:nth-child(12):hover {
+.calendar__days .calendar__day:hover {
   cursor: pointer;
   background: #ffbfcb;
   transform: translate(0, -20px);
+}
+
+.calendar_days .calendar_day:first-child {
+  margin-top: 2px;
 }
