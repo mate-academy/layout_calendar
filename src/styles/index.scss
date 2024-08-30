@@ -1,15 +1,4 @@
-$size: 100px;
-$gap: 1px;
-$padding: 10px;
-$days: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6,
-);
+@import './variables';
 
 * {
   box-sizing: border-box;
@@ -63,8 +52,6 @@ body {
   @each $name, $value in $days {
     &--start-day-#{$name} .calendar__day:first-child {
       margin-left: calc(#{$value} * ($size + $gap));
-
-      // margin-left: calc(6 * (100px + 1px));
     }
   }
 
