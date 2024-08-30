@@ -54,10 +54,20 @@ li {
     font-size: $square-text-size;
     font-family: $square-text-family;
 
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -2px);
+    }
+
+    &:first-child {
+      margin-top: $square-margin;
+    }
+
     @for $i from 1 through $days-in-month {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
         width: 100%;
+        margin-left: $square-margin;
       }
     }
   }
@@ -79,14 +89,4 @@ $days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
       display: none;
     }
   }
-}
-
-.calendar__days .calendar__day:hover {
-  cursor: pointer;
-  background: #ffbfcb;
-  transform: translate(0, -20px);
-}
-
-.calendar_days .calendar_day:first-child {
-  margin-top: 2px;
 }
