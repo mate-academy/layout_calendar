@@ -1,19 +1,28 @@
-$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6
+  );
 
 body {
   margin: 0;
+  position: relative;
 }
 
 .calendar {
-  margin: auto;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(5%) translateX(-50%);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  align-content: flex-start;
   flex-wrap: wrap;
+  gap: 1px;
   padding: 10px;
-  width: calc(7 * 100px + 6px + 7 * 2px + 20px);
+  width: calc(7 * 100px + 6px + 2 * 7px);
 
   &__day {
     border: 1px solid black;
@@ -22,6 +31,10 @@ body {
     text-align: center;
     line-height: 100px;
     background-color: #eee;
+
+    &:first-child {
+      margin-left: calc(100px * 6 + 12px);
+    }
 
     &::before {
       content: '';
@@ -36,10 +49,31 @@ body {
     }
   }
 
-  @each $day, $index in $days {
-    .calendar--start-day--#{$day} .calendar__day:first-child {
-      margin-left: calc($index * (100px + 1px));
+  @each $name, $value in $days {
+    .calendar--start-day--#{$name} .calendar__day:first-child {
+      margin-left: calc($value * (100px + 1px));
     }
   }
 }
+
+
+// .calendar {
+//   margin: auto;
+//   height: 100vh;
+//   display: flex;
+//   place-content: flex-start;
+//   flex-wrap: wrap;
+//   padding: 10px;
+//   width: calc(7 * 100px + 6px + 7 * 2px + 20px);
+
+//   &__day {
+//     border: 1px solid black;
+//     height: 100px;
+//     width: 100px;
+//     text-align: center;
+//     line-height: 100px;
+//     background-color: #eee;
+//   }
+
+
 
