@@ -1,3 +1,45 @@
+$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
 body {
   margin: 0;
 }
+
+.calendar {
+  margin: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: calc(7 * 100px + 6px + 7 * 2px + 20px);
+
+  &__day {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #eee;
+
+    &::before {
+      content: '';
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $index in $days {
+    .calendar--start-day--#{$day} .calendar__day:first-child {
+      margin-left: calc($index * (100px + 1px));
+    }
+  }
+}
+
