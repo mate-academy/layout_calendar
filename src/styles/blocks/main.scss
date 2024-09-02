@@ -16,7 +16,7 @@ body {
   width: 706px;
   counter-reset: first;
 
-  &__date {
+  &__day {
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -31,19 +31,19 @@ body {
     transition: transform 0.5s;
   }
 
-  &__date:hover {
+  &__day:hover {
     background: $calendarDateHoverBG;
     transform: translateY(-20px);
   }
 
   @for $i from 1 through 31 {
-    &__date:nth-child(#{$i})::before {
+    &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
 
   @each $day, $number in (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6) {
-    &--start-day-#{$day} .calendar__date:first-child {
+    &--start-day-#{$day} .calendar__day:first-child {
       margin-left: calc(
         #{$number} * #{$calendarDateSize} + #{$calendarDateGap} * #{$number}
       );
@@ -51,7 +51,7 @@ body {
   }
 
   @for $days from 28 through 31 {
-    &--month-length-#{$days} .calendar__date:nth-child(n + #{$days + 1}) {
+    &--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
   }
