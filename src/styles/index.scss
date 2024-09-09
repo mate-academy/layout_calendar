@@ -51,9 +51,12 @@ body {
     }
   }
 
-  @each $day, $margin in $days-with-gaps {
+  @for $i from 1 through length($days) {
+    /* stylelint-disable-next-line scss/no-global-function-names */
+    $day: nth($days, $i);
+
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: $margin;
+      margin-left: ($i - 1) * $day-with-gap;
     }
   }
 }
