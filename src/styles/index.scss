@@ -1,4 +1,4 @@
-@import './utils/variable.scss';
+@import './utils/variable';
 
 body {
   margin: 0;
@@ -20,9 +20,9 @@ body {
   width: $main-width;
   padding: $padding-calendar;
 
-  @each $day in $days-of-week {
+  @each $day, $value in $days-of-week {
     &--start-day-#{$day} > :first-child {
-      margin-left: $margin-left-first-day;
+      margin-left: ($width-days * $value) + $value;
     }
   }
 
