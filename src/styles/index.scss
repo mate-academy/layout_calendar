@@ -39,27 +39,6 @@
 
     transition: 0.5s background-color;
 
-    &__day {
-      &:first-child {
-        @each $day,
-          $offset
-            in (
-              'mon': 0,
-              'tue': $margin-left * 1,
-              'wed': $margin-left * 2,
-              'thu': $margin-left * 3,
-              'fri': $margin-left * 4,
-              'sat': $margin-left * 5,
-              'sun': $margin-left * 6
-            )
-        {
-          .calendar--start-day-#{$day} & {
-            margin-left: $offset;
-          }
-        }
-      }
-    }
-
     &:hover {
       transition: 0.5s transform;
       background-color: #ffbfcb;
@@ -81,6 +60,14 @@
     &--month-length-#{$length} {
       .calendar__day:nth-child(n + #{$hide-from}) {
         display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    &-#{'sun'} {
+      .calendar__day:first-child {
+        margin-left: map-get($weekday-offsets, 'sun');
       }
     }
   }
