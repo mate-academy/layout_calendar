@@ -1,13 +1,22 @@
+@use 'sass:map';
 @import './variables';
 
-.page {
-  margin: 0;
+* {
   box-sizing: border-box;
+}
 
-  display: flex;
+html {
+  margin: 0;
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.page {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
+  display: flex;
 }
 
 .calendar {
@@ -15,32 +24,25 @@
   flex-flow: wrap;
   flex-direction: row;
 
-  width: 800px;
-  min-width: 50vmin;
-  max-width: 100vmin;
-
-  padding: 10px;
   gap: 1px;
+  width: 726px;
+  padding: 10px;
 
   &__day {
-    width: $box-size;
-    height: $box-size;
     background-color: #eee;
-    border: 1px solid black;
-
-    font-size: 30px;
-    font-family: Arial, sans-serif;
-
-    display: flex;
+    border: 1px solid #000;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    display: flex;
+
     position: relative;
     cursor: pointer;
 
-    transition: 0.5s background-color;
+    transition: 0.5s all;
 
     &:hover {
-      transition: 0.5s transform;
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
@@ -52,6 +54,14 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @each $day-name, $day-index in $start-days {
+    &--start-day-#{$day-name} {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(#{$day-index} * 101px);
       }
     }
   }
