@@ -1,3 +1,75 @@
+@use 'sass:list';
+@import './variables';
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.section {
+  padding: 10px;
+  max-width: calc(($width * 7) + 6px);
+}
+
+.calendar {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  $days: mon, tue, wed, thu, fri, sat, sun;
+
+  @each $day in $days {
+    $i: list.index($days, $day);
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(($width * ($i - 1)) + (($i - 1) * $gap));
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: $background-color;
+    border: 1px solid black;
+
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+
+    transition:
+      transform 500ms linear 500ms,
+      background-color 500ms linear 500ms;
+
+    &:hover {
+      cursor: pointer;
+
+      transform: translateY(-20px);
+      background-color: $background-color-hover;
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(n + #{$number})::after {
+        box-sizing: inherit;
+        content: '#{$number}';
+      }
+    }
+  }
 }
