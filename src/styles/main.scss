@@ -1,0 +1,60 @@
+$block-color: #eee;
+$block-size: 100px;
+$block-gap: 1px;
+$colmuns: 7;
+$padding: 10px;
+$calendar-size: calc($block-size * $colmuns + $block-gap * ($colmuns - 1));
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+.calendar {
+  width: $calendar-size;
+  display: flex;
+  padding: $padding;
+  justify-content: left;
+  flex-wrap: wrap;
+  gap: $block-gap;
+
+  @each $day, $offset in $days-of-week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc(#{$offset} * ($block-size + $block-gap));
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $block-color;
+    width: $block-size;
+    height: $block-size;
+    box-sizing: border-box;
+    border: 1px solid black;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::after {
+        content: '#{$day}';
+      }
+    }
+  }
+}
