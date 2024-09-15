@@ -17,15 +17,15 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
+  gap: $gap-of-cell;
+  padding: $padding-of-cell;
   width: calc(
-    #{$size-of-cell} * #{$number-of-columns} + #{$gap} * 6 + #{$padding} * 2
+    $size-of-cell * $number-of-columns + $gap-of-cell * 6 + $padding-of-cell * 2
   );
 
   &__day {
-    height: 100px;
-    width: 100px;
+    height: $size-of-cell;
+    width: $size-of-cell;
     border: 1px solid #000;
     background-color: $color-of-cell;
     display: flex;
@@ -49,13 +49,12 @@ body {
 
   @each $day, $index in $days-of-week {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: calc((#{$size-of-cell} + #{$gap}) * #{$index});
+      margin-left: calc((#{$size-of-cell} + #{$gap-of-cell}) * #{$index});
     }
   }
 
   @for $last-days from 28 to 31 {
-    &--month-length-#{$last-days}
-      .calendar__day:nth-child(n + #{$last-days + 1}) {
+    &--max-days-#{$last-days} .calendar__day:nth-child(n + #{$last-days + 1}) {
       display: none;
     }
   }
