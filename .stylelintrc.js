@@ -3,5 +3,8 @@ module.exports = {
   plugins: [
     "stylelint-scss"
   ],
-  rules: {}
+  rules: {
+    // Added this rule because i alway catch error "scss/dollar-variable-colon-space-after:"
+    "scss/dollar-variable-colon-space-after": null
+  }
 };
