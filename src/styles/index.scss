@@ -1,3 +1,61 @@
-body {
+@import './utils/variables';
+
+* {
+  box-sizing: border-box;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-of-cell;
+  padding: $padding-of-cell;
+  width: calc(
+    $size-of-cell * $number-of-columns + $gap-of-cell * 6 + $padding-of-cell * 2
+  );
+
+  &__day {
+    height: $size-of-cell;
+    width: $size-of-cell;
+    border: 1px solid #000;
+    background-color: $color-of-cell;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all $duration-of-animation;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-on-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $days from 1 through 31 {
+    &__day:nth-child(#{$days})::before {
+      content: '#{$days}';
+    }
+  }
+
+  @each $day, $index in $days-of-week {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc((#{$size-of-cell} + #{$gap-of-cell}) * #{$index});
+    }
+  }
+
+  @for $last-days from 28 to 31 {
+    &--max-days-#{$last-days} .calendar__day:nth-child(n + #{$last-days + 1}) {
+      display: none;
+    }
+  }
 }
