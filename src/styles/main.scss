@@ -1,0 +1,50 @@
+@import './variables/variables';
+@import './colors/colors-variables';
+@import './page/page';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $width;
+  padding: $innerIdentation;
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(-n + #{$i}) {
+      display: flex;
+    }
+  }
+
+  @each $day, $size in $margines {
+    &--start-day-#{$day} :first-child {
+      margin-left: $size;
+    }
+  }
+
+  &__day {
+    justify-content: center;
+    align-items: center;
+    display: none;
+    transition: all 0.5s;
+    border: $borderWidth solid $borderColor;
+    box-sizing: border-box;
+    width: $cellWidth;
+    height: $cellWidth;
+    background-color: $cellColor;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $hoverColor;
+      cursor: pointer;
+    }
+  }
+}
