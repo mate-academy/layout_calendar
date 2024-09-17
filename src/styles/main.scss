@@ -1,0 +1,82 @@
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$cell-size: $day-size + ($border-width * 2) + $gap;
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+$month-length: 31;
+
+// Mixin for generating nth-child selector
+@mixin nth-child($modifier, $total) {
+  &:nth-child(#{$total}n + #{$modifier}) {
+    @content;
+  }
+}
+
+// Mixin for generating transition
+@mixin transition($properties) {
+  -webkit-transition: $properties;
+  transition: $properties;
+}
+
+// Calendar block
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: $padding;
+  max-width: $columns * $cell-size;
+  margin: 20px auto;
+
+  // Day cell
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: $border-width solid black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @include transition(all 0.5s);
+  }
+
+  // Modifier for month length
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // Modifier for start day
+  @each $day in $start-days {
+    &--start-day-#{$day} {
+      /* stylelint-disable */ // Треба бо по іншому не працює!!
+      $start-column: index($start-days, $day);
+      /* stylelint-enable */
+      .calendar__day:first-child {
+        grid-column: $start-column;
+      }
+    }
+  }
+
+  // Generate calendar days
+  @for $i from 1 through $month-length {
+    .calendar__day:nth-child(#{$i}) {
+      &::before {
+        content: '#{$i}';
+      }
+    }
+  }
+}
