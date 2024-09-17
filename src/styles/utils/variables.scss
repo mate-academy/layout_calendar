@@ -1,0 +1,17 @@
+$size-calendar-day: 100px;
+$gap-calendar-day: 1px;
+$width-calendar: calc(7 * #{$size-calendar-day} + 6 * #{$gap-calendar-day});
+
+@function margin-left($count) {
+  @return ($size-calendar-day + $gap-calendar-day) * $count;
+}
+
+$margin-start-day: (
+  'mon': 0,
+  'tue': margin-left(1),
+  'wed': margin-left(2),
+  'thu': margin-left(3),
+  'fri': margin-left(4),
+  'sat': margin-left(5),
+  'sun': margin-left(6),
+);
