@@ -1,0 +1,20 @@
+@import '../styles/variables';
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length-#{$lastDay}
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(n + #{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $index in $start-day {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $index * $ceil-size + $index;
+  }
+}
