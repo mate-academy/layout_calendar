@@ -1,18 +1,16 @@
-$day-size: 100px;
-$gap-size: 1px;
-$columns: 7;
-$padding-size: 10px;
+@import 'variables';
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
+  width: 706px;
   padding: $padding-size;
   gap: $gap-size;
   max-width: calc(
     #{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap-size} + 2 * #{$padding-size}
   );
 
-  .day {
+  &__day {
     display: flex;
     justify-content: center;
     box-sizing: border-box;
@@ -40,12 +38,10 @@ $padding-size: 10px;
     }
   }
 
-  @each $day,
-    $index
-      in ('mon': 1, 'tue': 2, 'wed': 3, 'thu': 4, 'fri': 5, 'sat': 6, 'sun': 7)
+  @each $day, $index in $days-of-week
   {
     &.calendar--start-day-#{$day} {
-      .day {
+      .calendar__day {
         &:nth-child(1) {
           margin-left: calc((#{$index} - 1) * (#{$day-size} + #{$gap-size}));
         }
