@@ -1,5 +1,15 @@
 @import '../utils/variables';
 
+@keyframes hoverTransform {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-20px);
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -17,7 +27,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-columns;
-  max-width: ($day-size + $gap-columns) * $columns;
+  max-width: (($day-size + $gap-columns) * $columns);
 
   &__day {
     display: flex;
@@ -40,8 +50,7 @@ body {
       cursor: pointer;
       background-color: $bg-hover;
       transform: translateY(-20px);
-      animation-name: transform;
-      animation-duration: 500ms;
+      animation: hoverTransform 500ms ease-in-out;
     }
   }
 
