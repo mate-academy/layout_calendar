@@ -1,15 +1,5 @@
 @import '../utils/variables';
 
-@keyframes hoverTransform {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(-20px);
-  }
-}
-
 * {
   box-sizing: border-box;
 }
@@ -19,6 +9,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -27,7 +18,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap-columns;
-  max-width: (($day-size + $gap-columns) * $columns);
+  max-width: (($day-size + $gap-columns) * $columns - $gap-columns);
 
   &__day {
     display: flex;
@@ -37,11 +28,11 @@ body {
     height: $day-size;
     width: $day-size;
     border: 1px solid black;
+    animation: translateY(-20px);
 
     @for $number from 1 through 31 {
       &:nth-child(#{$number})::before {
         content: '#{$number}';
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 30px;
       }
     }
@@ -49,14 +40,13 @@ body {
     &:hover {
       cursor: pointer;
       background-color: $bg-hover;
-      transform: translateY(-20px);
-      animation: hoverTransform 500ms ease-in-out;
+      transition: transform 500ms;
     }
   }
 
   @for $length from 28 through 31 {
-    &--month-length-#{$length - 1} {
-      .calendar__day:nth-child(n + #{$length}) {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
         display: none;
       }
     }
@@ -65,7 +55,7 @@ body {
   @each $key, $value in $days {
     &--start-day-#{$key} {
       .calendar__day:first-child {
-        margin-left: ($day-size + $gap-columns) * $value;
+        margin-left: (($day-size + $gap-columns) * $value);
       }
     }
   }
