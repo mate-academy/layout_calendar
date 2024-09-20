@@ -9,6 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all;
+    transition-duration: 0.5s;
 
     box-sizing: border-box;
     height: $column-size;
@@ -21,7 +23,6 @@
 
     &:hover {
       transition-property: transform, background-color;
-      transition-duration: 0.5s;
       transform: translateY(-20px);
       cursor: pointer;
       background-color: $hover-color;
@@ -36,7 +37,7 @@
 
   @each $day, $num in $week-days {
     &--start-day-#{$day} :first-child {
-      margin-left: ($gap-size * ($num - 1)) + (($num - 1) * $column-size);
+      margin-left: (($gap-size * ($num - 1)) + (($num - 1) * $column-size));
     }
   }
 
