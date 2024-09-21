@@ -1,0 +1,118 @@
+$day-size: 100px;
+$day-gap: 1px;
+$border-size: 1px;
+$calendar-padding: 10px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$day-background: #eee;
+$hover-background: #ffbfcb;
+$transition-duration: 0.5s;
+$columns: 7;
+$days-in-week: 7;
+$display-flex: flex;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: $font-family;
+  font-size: $font-size;
+  display: $display-flex;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+  display: $display-flex;
+
+  &__day {
+    background-color: #eee;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    transition-duration: 0.5s;
+    display: $display-flex;
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-background;
+      transform: translateY(-20px);
+      transition:
+        background-color $transition-duration,
+        transform $transition-duration;
+    }
+    &:first-child {
+      margin-left: 606px;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day,
+    $margin in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-#{$day} .calendar__day:first-child {
+      margin-left: calc(#{$margin} * ($day-size + $day-gap));
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+.calendar--start-day-mon .calendar__day:first-child {
+  margin-left: 0;
+}
+
+.calendar--start-day-tue .calendar__day:first-child {
+  margin-left: 101px;
+}
+
+.calendar--start-day-wed .calendar__day:first-child {
+  margin-left: 202px;
+}
+
+.calendar--start-day-thu .calendar__day:first-child {
+  margin-left: 303px;
+}
+
+.calendar--start-day-fri .calendar__day:first-child {
+  margin-left: 404px;
+}
+
+.calendar--start-day-sat .calendar__day:first-child {
+  margin-left: 505px;
+}
+
+.calendar--start-day-sun .calendar__day:first-child {
+  margin-left: 606px;
+}
+
+.calendar--month-length-28 .calendar__day:nth-child(n + 29),
+.calendar--month-length-29 .calendar__day:nth-child(n + 30),
+.calendar--month-length-30 .calendar__day:nth-child(n + 31),
+.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
+  display: none;
+}
