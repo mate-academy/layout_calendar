@@ -11,12 +11,8 @@ $days-of-week: (
 );
 $gap: 1px;
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,9 +25,10 @@ body {
   gap: $gap;
   display: flex;
   flex-wrap: wrap;
-  width: calc(7 * $cell-size + 6 * $gap);
+  width: 7 * ($cell-size + $gap) - $gap;
 
   &__day {
+    margin: 0;
     box-sizing: border-box;
     height: $cell-size;
     width: $cell-size;
@@ -40,9 +37,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition-duration: 0.5s;
 
     &:hover {
+      transition-duration: 0.5s;
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translate(0, -20px);
@@ -58,7 +55,7 @@ body {
   }
 }
 
-@for $days from 28 through 31 {
+@for $days from 28 through $default-month-length {
   .calendar--month-length-#{$days} {
     @for $i from ($days + 1) through 32 {
       .calendar__day:nth-child(#{$i}) {
