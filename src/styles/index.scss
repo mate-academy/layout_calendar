@@ -1,3 +1,39 @@
-body {
+@import './utils/variables';
+@import './utils/cycles';
+
+* {
   margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  gap: $gap;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * $cell-size + 6 * $gap);
+
+  &__day {
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+      transition-duration: 0.5s;
+    }
+  }
 }
