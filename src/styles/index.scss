@@ -7,7 +7,6 @@ html {
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -29,7 +28,8 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: $calendar-gap;
-  width: calc((#{$calendar-day-size} + #{$calendar-gap}) * 7 + 10px);
+  padding: 10px;
+  width: 707px;
 
   &__day {
     background-color: $calendar-bg-color;
@@ -42,6 +42,7 @@ body {
     position: relative;
     transition: all 0.5s;
     text-align: center;
+    box-sizing: border-box;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
