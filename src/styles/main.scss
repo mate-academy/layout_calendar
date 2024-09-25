@@ -1,0 +1,62 @@
+@import './variable';
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 7 * ($width + $gap);
+  position: absolute;
+  gap: $gap;
+  padding: 10px;
+
+  &__day {
+    width: $width;
+    height: 100px;
+    border: 1px solid black;
+    background-color: #eee;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $number from 1 through 31 {
+    & :nth-child(#{$number}) {
+      &::after {
+        content: '#{$number}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        padding-left: 1px;
+      }
+    }
+  }
+
+  @for $maxDays from 28 through 31 {
+    &--month-length-#{$maxDays} :nth-child(n + #{$maxDays + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $index in $days {
+    &--start-day--#{$day} {
+      & :nth-child(1) {
+        margin-left: ($width + $gap) * $index;
+      }
+    }
+  }
+}
