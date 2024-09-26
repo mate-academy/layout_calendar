@@ -1,3 +1,41 @@
+@import '../styles/main';
+@import '../styles/variables';
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width;
+  gap: 1px;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid #000;
+    background-color: $main-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background: $hover-color;
+    transform: translateY(-20px);
+  }
 }
