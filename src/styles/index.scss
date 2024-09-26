@@ -19,10 +19,12 @@ html {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
+  gap: 1px;
   padding: 10px;
-  width: calc(#{$week * $day-size} + #{$week * 10} * $gap);
+  max-width: 707px;
   position: relative;
+  box-sizing: content-box;
+  counter-reset: day-counter 0;
 
   &__day {
     width: $day-size;
@@ -51,9 +53,7 @@ html {
     }
   }
 
-  counter-reset: day-counter 0;
-
-  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  @each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
   {
     &--start-day-#{$day} .calendar__day:nth-child(1) {
       margin-left: calc(#{$index * ($day-size + $gap)});
