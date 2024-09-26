@@ -1,3 +1,70 @@
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+  width: $calendar-size;
+  border-collapse: collapse;
+  gap: 1px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border;
+    box-sizing: border-box;
+    background-color: $day-color;
+    font-family: Arial, sans-serif;
+    font-size: $day-font-size;
+    transition: $day-transition;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $day-hover-color;
+    transform: $day-hover-transform;
+  }
+
+  &__day::before {
+    content: attr(data-day);
+  }
+
+  &__day:nth-child(7n + 1) {
+    margin-left: 0;
+  }
+}
+
+@for $i from 1 through $month-length {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through $month-length {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+@each $day, $i in $week-days {
+  .calendar--start-day-#{$day} > .calendar__day:first-child {
+    margin-left: ($day-size + 1px) * $i;
+  }
 }
