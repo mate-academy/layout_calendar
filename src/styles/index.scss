@@ -1,3 +1,81 @@
+$fontBody: Arial, sans-serif;
+$gapSize: 1px;
+$daySize: 100px;
+$paddingSize: 10px;
+$bodyHeight: 100vh;
+$bodySize: 30px;
+$calendarWidth: 726px;
+$dayBackColor: #eee;
+$dayBorderColor: #000;
+$dayHoverColor: #ffbfcb;
+$daysOfWeek: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  flex-direction: column;
+  font-family: $fontBody;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  height: $bodyHeight;
+  display: flex;
+  font-size: $bodySize;
+}
+
+.calendar {
+  gap: $gapSize;
+  padding: $paddingSize;
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendarWidth;
+
+  &__day {
+    display: flex;
+    background-color: $dayBackColor;
+    border: 1px solid $dayBorderColor;
+    width: $daySize;
+    height: $daySize;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $dayHoverColor;
+    transform: translateY(-20px);
+    transition: all 0.5s;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-family: $fontBody;
+      font-size: 30px;
+      align-items: center;
+    }
+  }
+
+  @each $day, $offset in $daysOfWeek {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(#{$daySize} * #{$offset} + #{$gapSize} * #{$offset});
+    }
+  }
+}
+
+.calendar--month-length-28 .calendar__day:nth-child(n + 29),
+.calendar--month-length-29 .calendar__day:nth-child(n + 30),
+.calendar--month-length-30 .calendar__day:nth-child(n + 31),
+.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
+  display: none;
 }
