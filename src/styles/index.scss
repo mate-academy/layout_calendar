@@ -10,10 +10,11 @@ $gap: 1px;
 
 body,
 html {
-  height: 100%;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  width: 100%;
 }
 
 .calendar {
@@ -21,8 +22,7 @@ html {
   flex-wrap: wrap;
   gap: 1px;
   padding: 10px;
-  max-width: 707px;
-  position: relative;
+  width: 707px;
   box-sizing: content-box;
   counter-reset: day-counter 0;
 
@@ -53,7 +53,7 @@ html {
     }
   }
 
-  @each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+  @each $day, $index in (sun: 6, mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5)
   {
     &--start-day-#{$day} .calendar__day:nth-child(1) {
       margin-left: calc(#{$index * ($day-size + $gap)});
