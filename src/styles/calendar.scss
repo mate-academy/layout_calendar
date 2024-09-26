@@ -35,14 +35,12 @@
     }
   }
 
-  @each $day in $week-days {
-    &--start-day#{$day} {
+  @each $day-name, $day-number in $week-days {
+    &--start-day-#{$day-name} {
       .calendar__day:nth-child(1) {
-        margin-left: $counter * $base-spacing;
+        margin-left: $day-number * $base-spacing;
       }
     }
-
-    $counter: $counter + 1;
   }
 
   @for $i from 28 through 31 {
