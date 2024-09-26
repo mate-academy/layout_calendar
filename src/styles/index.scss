@@ -12,7 +12,7 @@ $text-size: 30px;
 $gap: 1px;
 $hover-color: #ffbfcb;
 $transition-duration: 0.5s;
-$widthCalendar: 7 * $size + $gap * 6;
+$width-calendar: 7 * $size + $gap * 6;
 $days: (
   sun: 6,
   mon: 0,
@@ -23,7 +23,7 @@ $days: (
   sat: 5,
 );
 
-.blockCalendar {
+.block_calendar {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -32,9 +32,10 @@ $days: (
 }
 
 .calendar {
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   flex-wrap: wrap;
-  width: $widthCalendar;
+  width: $width-calendar;
   gap: $gap;
 
   @each $day, $index in $days {
@@ -48,7 +49,6 @@ $days: (
 
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i}) {
-    font-family: Arial, Helvetica, sans-serif;
     width: $size;
     height: $size;
     background-color: $background;
@@ -67,7 +67,6 @@ $days: (
 
     &::before {
       content: '#{$i}';
-      font-family: Arial, sans-serif;
       font-size: $text-size;
       color: $text-color;
       position: absolute;
