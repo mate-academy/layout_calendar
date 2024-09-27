@@ -47,44 +47,46 @@ $days: (
   gap: $gap;
 }
 
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i}) {
-    width: $size;
-    height: $size;
-    background-color: $background;
-    border: $border;
-    cursor: pointer;
-    position: relative;
+@mixin calendar-day-styles($i) {
+  width: $size;
+  height: $size;
+  background-color: $background;
+  border: $border;
+  cursor: pointer;
+  position: relative;
 
-    transition:
-      background-color $transition-duration,
-      transform $transition-duration;
+  transition:
+    background-color $transition-duration,
+    transform $transition-duration;
 
-    &:hover {
-      background-color: $hover-color;
-      transform: translateY(-20px);
-    }
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
 
-    &::before {
-      content: '#{$i}';
-      font-size: $text-size;
-      color: $text-color;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
+  &::before {
+    content: '#{$i}';
+    font-size: $text-size;
+    color: $text-color;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    @include calendar-day-styles($i);
+  }
+}
+
 
 @for $length from 28 through 31 {
   .calendar--month-length-#{$length} {
-    @for $i from 1 through 31 {
-      @if $i > $length {
-        .calendar__day:nth-child(#{$i}) {
-          display: none;
-        }
-      }
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 }
+
