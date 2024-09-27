@@ -1,3 +1,66 @@
+@import './utils/variables';
+
 body {
   margin: 0;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
 }
+
+.day {
+  box-sizing: border-box;
+  width: $days-width;
+  height: $days-height;
+  background-color: #eee;
+  border: 1px solid black;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.month {
+  /* counter-reset: section; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  border: 3px solid black;
+  padding: 10px;
+  width: $calendar-width;
+}
+
+.day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+  transition: 0.5s;
+}
+
+@for $dayOfMonth from 1 through 31 {
+  .day:nth-child(#{$dayOfMonth})::before {
+    content: '#{$dayOfMonth}';
+  }
+}
+
+@each $dayOfWeekKey, $dayOfWeekValue in $week {
+  .month--start-day-#{$dayOfWeekKey} .day:first-child {
+    margin-left: calc($dayOfWeekValue * $calendar-day-width);
+    color: red;
+  }
+}
+
+@for $extraDay from 28 to 31 {
+  .month--month-length-#{$extraDay} .day:nth-child(n + #{$extraDay + 1}) {
+    display: none;
+  }
+}
+
+/* .day::before {
+  counter-increment: section;
+  content: "Day " counter(section) ": "; */
