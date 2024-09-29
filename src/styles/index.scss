@@ -17,10 +17,10 @@ html {
 
 body {
   margin: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  display: flex;
 }
 
 .calendar {
@@ -54,12 +54,19 @@ body {
   }
 
   @each $day, $i in $days {
-    // &--start-day-#{$day} &__day:first-child {
-    //   margin-left: calc(#{i} * (100px + 1px));
-    // }
     &--start-day-#{$day} {
       .calendar__day:nth-child(1) {
-        margin-left: $i * (100px + 1px);
+        margin-left: $i * ($cell-width + 1px);
+      }
+    }
+  }
+
+  @each $day in 29, 30 {
+    &--month-length-#{$day} {
+      @for $day-number from $day + 1 through 31 {
+        .calendar__day:nth-child(#{$day-number}) {
+          display: none;
+        }
       }
     }
   }
