@@ -1,3 +1,53 @@
+$cell-size: 100px;
+$gap: 1px;
+
 body {
   margin: 0;
+}
+
+.calendar {
+  position: relative;
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  &__day {
+    background-color: #eee;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @for $i from 1 through 31 {
+      &[data-day='#{$i}']::before {
+        content: '#{$i}';
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  $week-days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  @each $day, $day-position in $week-days {
+    .calendar--start-#{$day}:first-child {
+      margin-left: calc((#{$cell-size} + #{$gap}) * #{$day-position});
+    }
+  }
+
 }
