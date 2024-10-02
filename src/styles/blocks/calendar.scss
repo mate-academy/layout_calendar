@@ -7,52 +7,56 @@ body {
   height: 100vh;
 }
 
-.calendar {
-  flex-wrap: wrap;
-  gap: $calendar-gap;
-  width: calc(7 * $calendar-day-width + 7px);
-  list-style: none;
-  display: flex;
-
-  &__day {
-    cursor: pointer;
-    background-color: $calendar-day-color;
-    border: 1px solid black;
-    justify-content: center;
-    align-items: center;
-    height: $calendar-day-height;
-    width: $calendar-day-width;
-    transition: 500ms;
+  .calendar {
+    flex-wrap: wrap;
+    gap: $calendar-gap;
+    width: calc(7 * $calendar-day-width + 7px);
+    list-style: none;
     display: flex;
-    box-sizing: border-box;
 
-    &:hover {
-      background-color: #ffbfcb;
-      transform: translateY(-20px);
-    }
+    &__day {
+      cursor: pointer;
+      background-color: $calendar-day-color;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+      height: $calendar-day-height;
+      width: $calendar-day-width;
+      transition: 500ms;
+      display: flex;
+      box-sizing: border-box;
 
-    &::before {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: $calendar-day-font-size;
-      content: '';
-    }
+      &:hover {
+        background-color: #FFBFCB;
+        transform: translateY(-20px);
 
-    @for $number from 1 through $calendar-length {
-      &:nth-child(#{$number})::before {
-        content: '#{$number}';
+      }
+
+      &::before {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $calendar-day-font-size;
+        content: "";
+      }
+
+      @for $number from 1 through $calendar-length {
+        &:nth-child(#{$number})::before {
+          content: "#{$number}";
+        }
       }
     }
+
+    @each $day, $index in $days {
+      &--start-#{$day} > :first-child {
+        margin-left: ($index - 1) * ($calendar-day-width + $calendar-gap) ;
+      }
+    }
+
+    @for $i from $calendar-length
+     through 31 {
+      &__day:nth-child(#{$i + 1}) {
+        display: none;
+      }
+    }
+
   }
 
-  @each $day, $index in $days {
-    &--start-#{$day} > :first-child {
-      margin-left: ($index - 1) * ($calendar-day-width + $calendar-gap);
-    }
-  }
-
-  @for $i from $calendar-lenght through 31 {
-    &__day:nth-child(#{$i + 1}) {
-      display: none;
-    }
-  }
-}
