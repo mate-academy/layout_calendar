@@ -1,0 +1,81 @@
+@import '/src/styles/variables';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  max-width: calc((100px + 1px * 2 + 1px) * 7 - 1px);
+  counter-reset: dayCounter 0;
+}
+
+.calendar .day {
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  cursor: pointer;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+}
+
+.calendar .day::before {
+  content: counter(dayCounter);
+  counter-increment: dayCounter;
+}
+
+.calendar .day:hover {
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+.calendar--mon .day:nth-child(1) {
+  margin-left: 0%;
+}
+
+.calendar--tue .day:nth-child(1) {
+  margin-left: 14.28%;
+}
+
+.calendar--wed .day:nth-child(1) {
+  margin-left: 28.56%;
+}
+
+.calendar--thu .day:nth-child(1) {
+  margin-left: 42.84%;
+}
+
+.calendar--fri .day:nth-child(1) {
+  margin-left: 57.12%;
+}
+
+.calendar--sat .day:nth-child(1) {
+  margin-left: 71.4%;
+}
+
+.calendar--sun .day:nth-child(1) {
+  margin-left: 85.68%;
+}
+
+.calendar--month-length-28 .day:nth-child(n + 29) {
+  display: none;
+}
+
+.calendar--month-length-29 .day:nth-child(n + 30) {
+  display: none;
+}
+
+.calendar--month-length-30 .day:nth-child(n + 31) {
+  display: none;
+}
+
+.calendar--month-length-31 .day:nth-child(n + 32) {
+  display: none;
+} /*# sourceMappingURL=main.css.map */
