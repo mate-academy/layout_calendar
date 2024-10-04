@@ -1,3 +1,5 @@
+$days-of-week: (mon, tue, wed, thu, fri, sat, sun);
+
 * {
   box-sizing: border-box;
 }
@@ -45,32 +47,10 @@ body {
   width: 726px;
   padding: 10px;
 
-  &--start-day-mon .calendar__day:first-child {
-    margin-left: 0;
-  }
-
-  &--start-day-tue .calendar__day:first-child {
-    margin-left: 101px;
-  }
-
-  &--start-day-wed .calendar__day:first-child {
-    margin-left: 202px;
-  }
-
-  &--start-day-thu .calendar__day:first-child {
-    margin-left: 303px;
-  }
-
-  &--start-day-fri .calendar__day:first-child {
-    margin-left: 404px;
-  }
-
-  &--start-day-sat .calendar__day:first-child {
-    margin-left: 505px;
-  }
-
-  &--start-day-sun .calendar__day:first-child {
-    margin-left: 606px;
+  @for $i from 1 through 7 {
+    &--start-day-#{nth($days-of-week, $i)} .calendar__day:first-child {
+      margin-left: ($i - 1) * 101px;
+    }
   }
 
   &--month-length-28 .calendar__day:nth-child(n + 29),
