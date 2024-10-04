@@ -1,9 +1,9 @@
+// Variables
 $calendar-padding: 10px;
 $element-day-size: 100px;
 $space-between-days: 1px;
-$max-width-calendar: (
-  7 * $element-day-size + 6 * $space-between-days + 2 * $calendar-padding
-);
+$max-width-calendar: 7 * $element-day-size + 6 * $space-between-days + 2 * $calendar-padding;
+
 $days: (
   mon: 0,
   tue: 1,
@@ -11,7 +11,7 @@ $days: (
   thu: 3,
   fri: 4,
   sat: 5,
-  sun: 6,
+  sun: 6
 );
 
 html {
@@ -51,6 +51,10 @@ body {
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
+
+    &::before {
+      content: '';
+    }
   }
 
   @each $day, $value in $days {
@@ -73,7 +77,7 @@ body {
 
   @for $number-days from 28 through 31 {
     &--month-length-#{$number-days} {
-      &:nth-child(n + #{($number-days + 1)}) {
+      &__day:nth-child(n + #{($number-days + 1)}) {
         display: none;
       }
     }
