@@ -1,17 +1,17 @@
 $day-size: 100px;
 $border-color: #000;
-$backgroundColor: #eee;
-$backgroundColorHover: #ffbfcb;
+$background-color: #eee;
+$background-color-hover: #ffbfcb;
 $border-width: 1px;
 $gap-size: 1px;
 $padding-size: 10px;
 $font-size: 30px;
 $font-family: Arial, Helvetica, sans-serif;
-$moveUp: -20px;
+$move-up: -20px;
 $calendar-width: calc(
   (#{$day-size} * 7) + (#{$gap-size} * 6) + (#{$padding-size})
 );
-$calendar_week: (
+$calendar-week: (
   'mon': 1,
   'tue': 2,
   'wed': 3,
@@ -35,7 +35,7 @@ $calendar_week: (
     position: relative;
     text-align: center;
     border: $border-width solid $border-color;
-    background-color: $backgroundColor;
+    background-color: $background-color;
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
@@ -50,12 +50,12 @@ $calendar_week: (
     }
     &:hover {
       cursor: pointer;
-      transform: translateY($moveUp + $gap-size);
-      background-color: $backgroundColorHover;
+      transform: translateY($move-up);
+      background-color: $background-color-hover;
     }
   }
 
-  @each $day, $column in $calendar_week {
+  @each $day, $column in $calendar-week {
     &--start-day-#{$day} .calendar__day:first-child {
       grid-column-start: $column;
     }
