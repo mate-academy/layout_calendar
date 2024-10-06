@@ -1,7 +1,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc(#{$width-cell * $cells-in-row} + #{$gap-size * ($cells-in-row - 1)});
+  width: calc(
+    #{$width-cell * $cells-in-row} + #{$gap-size * ($cells-in-row - 1)}
+  );
   gap: $gap-size;
 
   &__day {
@@ -44,7 +46,9 @@
 
   @each $day, $day-number in $week-days {
     &--start-day-#{$day} :first-child {
-      margin-left: calc(#{$day-number - 1} * #{$width-cell} + #{$gap-size * ($day-number - 1)});
+      margin-left: calc(
+        #{$day-number - 1} * #{$width-cell} + #{$gap-size * ($day-number - 1)}
+      );
     }
   }
 }
