@@ -28,7 +28,7 @@ body {
 }
 
 .calendar {
-  width: ($calendar-size + $days-gap) * $columns;
+  width: ($calendar-size * $columns) + (6 * $days-gap);
   flex-wrap: wrap;
   display: flex;
   gap: $days-gap;
@@ -53,9 +53,8 @@ body {
     }
 
     &:hover {
-      transform: translateY(-20px);
+      animation: move 0.5s ease alternate forwards;
       background-color: $hover-color;
-      transition-duration: 0.5s;
       cursor: pointer;
     }
   }
@@ -74,5 +73,15 @@ body {
     .calendar__day:nth-child(n + #{$day + 1}) {
       display: none;
     }
+  }
+}
+
+@keyframes move {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -20px;
   }
 }
