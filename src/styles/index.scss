@@ -14,13 +14,14 @@ body {
   border: 1px solid white;
   padding: $calendar-padding;
   width: calc((7 * $day-size) + (6 * $day-gap) + (2 * $calendar-padding));
+  gap: $day-gap;
 }
 
 .calendar__day {
   position: relative;
   width: $day-size;
   height: $day-size;
-  gap: $day-gap;
+  
   border: $day-border;
   background-color: $day-color;
 
@@ -51,8 +52,11 @@ body {
 }
 
 @each $day, $index in $start-days {
-  .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: calc(#{$index} * ($day-size + $day-gap));
+  .calendar--start-day-#{$day} {
+    // Зміщення для першого дня
+    .calendar__day:first-child {
+      margin-left: calc(#{$index} * ($day-size + $day-gap));
+    }
   }
 }
 
