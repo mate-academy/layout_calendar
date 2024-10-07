@@ -1,0 +1,34 @@
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$cell-width: 100px;
+$gap: 1px;
+
+@each $day, $index in $days-of-week {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(($cell-width + $gap) * $index);
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    display: block;
+    text-align: center;
+    line-height: 99px;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
