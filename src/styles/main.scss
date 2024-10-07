@@ -15,8 +15,6 @@ $week: (
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  font-size: 30px;
 }
 
 body {
@@ -24,6 +22,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
 }
 
 .calendar {
@@ -52,7 +52,7 @@ body {
   }
 
   @for $dayNumber from 1 through 31 {
-    :nth-child(n + #{$dayNumber})::before {
+    :nth-child(#{$dayNumber})::before {
       content: '#{$dayNumber}';
     }
   }
