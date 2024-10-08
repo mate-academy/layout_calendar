@@ -2,8 +2,8 @@
 
 body {
   margin: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: calc(7 * ($day-size + 1px));
+  width: calc(7 * ($day-size + $gap));
   padding: $padding;
   &__day {
     position: relative;
@@ -45,7 +45,7 @@ body {
 
 @each $day, $offset in $days {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: $offset * ($day-size + $gap);
+    margin-left: calc($offset * ($day-size + $gap));
   }
 }
 
