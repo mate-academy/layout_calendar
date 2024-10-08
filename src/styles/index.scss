@@ -18,7 +18,9 @@ body {
   display: flex;
   flex-wrap: wrap;
 
+
   &__day {
+    padding: 10px;
     display: flex;
     box-sizing: border-box;
     height: 100px;
@@ -29,32 +31,33 @@ body {
     font-size: 30px;
     align-items: center;
     justify-content: center;
-  }
+    transition: 0.5s;
+  };
 
   &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
     transform: translate(0, -20px);
-    transition-duration: 0.5s;
-  }
+  };
 
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
-  }
+  };
 }
 
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
-    .calendar__day:nth-child(n + #{$i + 1}) {
+  .calendar__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
 }
 
 @each $day, $index in $days-of-week {
-  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+  .calendar--start-day-#{$day}
+  .calendar__day:nth-child(1) {
     margin-left: $index * 100px;
   }
 }
