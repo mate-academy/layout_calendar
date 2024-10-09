@@ -13,7 +13,7 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: $with;
+  width: $width;
   gap: $size-gap;
 
   &_day {
@@ -42,14 +42,14 @@ body {
 }
 
 @for $i from 28 through 31 {
-  .calendar--month-length-#{$i} .calendar_day:nth-child(n + #{$i + 1}) {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
     display: none;
   }
 }
 
 @each $name-day, $nomber-dey in $day {
   .calendar--start-day-#{$name-day} {
-    .calendar_day:first-child {
+    .calendar__day:first-child {
       margin-left: ($nomber-dey - 1) * ($size-day + $size-gap);
     }
   }
