@@ -1,7 +1,7 @@
 :root {
-  --one-day-box-size: 100px;
-  --gap-between: 1px;
-  --padding-around: 10px;
+  --box-size: 100px;
+  --gap: 1px;
+  --pad-around: 10px;
   --border-color: #000;
   --background-color: #eee;
   --text-color: #000;
@@ -38,14 +38,16 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--gap-between);
-  padding: var(--padding-around);
-  width: calc((100px * 7) + (1px * 6) + (10px * 2));
+  gap: var(--gap);
+  padding: var(--pad-around);
+  width: calc(
+    (var(--box-size) * 7) + (var(--gap) * 6) + (var(--pad-around) * 2)
+  );
 }
 
 .calendar__day {
-  width: var(--one-day-box-size);
-  height: var(--one-day-box-size);
+  width: var(--box-size);
+  height: var(--box-size);
   background-color: var(--background-color);
   color: var(--text-color);
   text-align: center;
@@ -70,9 +72,7 @@ body {
 
 @each $day, $index in $start-day {
   .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
-    margin-left: calc(
-      var(--one-day-box-size) * #{$index} + var(--gap-between) * #{$index}
-    );
+    margin-left: calc(var(--box-size) * #{$index} + var(--gap) * #{$index});
   }
 }
 
@@ -93,8 +93,4 @@ body {
   cursor: pointer;
   background-color: #ffbfcb;
   transform: translateY(-20px);
-}
-
-.calendar--start-day-sun .calendar__day:nth-child(1) {
-  margin-left: calc((100px * 6) + (1px * 6));
 }
