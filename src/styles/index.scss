@@ -1,12 +1,11 @@
 @import 'vars';
+@import 'extend';
 
 .page__body {
   margin: 0;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  box-sizing: border-box;
+
+  @include flex-block;
 }
 
 .calendar {
@@ -17,23 +16,20 @@
   padding: 10px;
 
   &__day {
+    @include flex-block;
+    @include text-style;
+
     width: $day-width;
     height: $day-width;
     background-color: $calendar-color;
     color: black;
     border: $day-border;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    font-size: 30px;
+    transition-duration: 500ms;
 
     &:hover {
       cursor: pointer;
       background-color: $pointer-calendar-color;
       transform: translateY(-20px);
-      transition-duration: 500ms;
     }
 
     @for $numbers from 1 through 31 {
