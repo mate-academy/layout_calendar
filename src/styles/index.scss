@@ -8,6 +8,18 @@
   --font-size: 30px;
 }
 
+$start-day: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$month-lengths: (28, 29, 30, 31);
+$default-length: 31;
+
 * {
   box-sizing: border-box;
 }
@@ -28,20 +40,8 @@ body {
   flex-wrap: wrap;
   gap: var(--gap-between);
   padding: var(--padding-around);
-  width: calc((100px * 7) + (1px * 6) + (10px * 2));
+  width: calc((var(--one-day-box-size) * 7) + (var(--gap-between) * 6) + (var(--padding-around) * 2));
 }
-
-$start-day: (
-  'mon': 0,
-  'tue': 1,
-  'wed': 2,
-  'thu': 3,
-  'fri': 4,
-  'sat': 5,
-  'sun': 6,
-);
-$month-lengths: (28, 29, 30, 31);
-$default-length: 31;
 
 .calendar__day {
   width: var(--one-day-box-size);
