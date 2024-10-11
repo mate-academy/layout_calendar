@@ -4,6 +4,9 @@
   gap: $daysGap;
   width: ($cellWidth * 7) + ($calendarPadding * 2) + ($daysGap * 6);
   padding: $calendarPadding;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+
   &__day {
     display: flex;
     justify-content: center;
@@ -25,8 +28,6 @@
   @for $day from 1 through 31 {
     & :nth-child(#{$day})::before {
       content: '#{$day}';
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
     }
   }
 
@@ -34,7 +35,7 @@
 
   @each $weekDay, $index in $weekDays {
     &--start-day-#{$weekDay} :first-child {
-      margin-left: $cellWidth * $index + $daysGap * $index;
+      margin-left: ($cellWidth + $daysGap) * $index;
     }
   }
 
