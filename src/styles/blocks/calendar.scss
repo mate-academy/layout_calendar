@@ -1,22 +1,22 @@
 .calendar {
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   box-sizing: border-box;
   width: $widthCalendar;
 
   &__day {
     width: $widthDay;
     height: $heightDay;
-    margin: $marginBetweenDays / 2;
+    margin: calc(#{$marginBetweenDays} / 2);
     box-sizing: border-box;
     background-color: $backgroundDay;
-    border: 1px solid #000;
+    border: 1px solid $colorBorder;
     position: relative;
-    transition: all 0.5s ease 0s;
+    transition: transform 0.5s ease 0s;
 
     &:hover {
       cursor: pointer;
-      background-color: #ffbfcb;
+      background-color: $backgroundHover;
       transform: translateY(-20px);
     }
 
@@ -34,14 +34,18 @@
   }
 
   @each $dayWeek, $i in $daysOfWeek {
-    &--start-day-#{$dayWeek} .calendar__day:first-child {
-      margin-left: $widthDay * $i + $marginBetweenDays * ($i + 0.5);
+    &--start-day-#{$dayWeek} {
+      .calendar__day:first-child {
+        margin-left: $widthDay * $i + $marginBetweenDays * ($i + 0.5);
+      }
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 }
