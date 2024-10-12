@@ -1,0 +1,96 @@
+@use 'sass:list';
+
+// Variables
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$padding-size: 10px;
+$background-color: #eee;
+$hover-color: #ffbfcb;
+$transition-duration: 0.5s;
+$font-size: 30px;
+
+// List of starting days and month lengths
+$start-days: (mon, tue, wed, thu, fri, sat, sun);
+$month-lengths: (28, 29, 30, 31);
+
+// General Reset
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+// Flexbox for calendar layout
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $padding-size;
+  margin: auto;
+  max-width: calc(7 * $day-size + 6 * $gap-size + $padding-size * 2);
+
+  &__day {
+    width: $day-size; // Maintain the width at 100px
+    height: $day-size; // Maintain the height at 100px
+    background-color: $background-color;
+    border: $border-size solid black;
+    position: relative;
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      content: attr(data-day);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: $hover-color;
+    }
+
+    &:active {
+      transform: translateY(-20px); // Further lift on click (active state)
+    }
+  }
+
+  // Modifiers for starting day of the week
+  @each $day in $start-days {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        @if $day == mon {
+          margin-left: 0; // No margin for Monday
+        } @else {
+          margin-left: calc(
+            (list.index($start-days, $day) - 1) * ($day-size + $gap-size)
+          );
+        }
+      }
+    }
+  }
+
+  // Month length modifier
+  @each $length in $month-lengths {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
