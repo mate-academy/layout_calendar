@@ -9,8 +9,10 @@ $background-color: #eee;
 $hover-color: #ffbfcb;
 $transition-duration: 0.5s;
 $font-size: 30px;
+$font-family: Arial, Helvetica, sans-serif;
 
 // List of starting days and month lengths
+$total-days-in-week: 7;
 $start-days: (mon, tue, wed, thu, fri, sat, sun);
 $month-lengths: (28, 29, 30, 31);
 
@@ -23,12 +25,11 @@ $month-lengths: (28, 29, 30, 31);
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: $font-family;
 }
 
 // Flexbox for calendar layout
@@ -38,7 +39,7 @@ body {
   gap: $gap-size;
   padding: $padding-size;
   margin: auto;
-  max-width: calc(7 * $day-size + 6 * $gap-size + $padding-size * 2);
+  max-width: calc($total-days-in-week * $day-size + 6 * $gap-size + $padding-size * 2);
 
   &__day {
     width: $day-size; // Maintain the width at 100px
@@ -53,7 +54,7 @@ body {
 
     &::before {
       content: attr(data-day);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: $font-family;
       font-size: $font-size;
       position: absolute;
       top: 50%;
@@ -66,7 +67,7 @@ body {
     }
 
     &:active {
-      transform: translateY(-20px); // Further lift on click (active state)
+      transform: translateY(-20px);
     }
   }
 
