@@ -3,6 +3,8 @@
   flex-wrap: wrap;
   gap: $gap;
   padding: 10px;
+
+  // Final column width including the total width of days and the gaps between them
   width: calc((#{$day-size} * #{$columns}) + (#{$gap} * #{$columns - 1}));
   background-color: #fff;
 
@@ -13,7 +15,9 @@
     display: flex;
     border: 1px solid #000;
     box-sizing: border-box;
-    transition: all 0.5s;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
 
     &::before {
       display: flex;
@@ -28,7 +32,9 @@
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: all 0.5s;
+      transition:
+        background-color 0.5s,
+        transform 0.5s;
     }
   }
 }
