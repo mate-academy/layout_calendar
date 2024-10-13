@@ -3,8 +3,6 @@ const calendar = document.querySelector('.calendar');
 
 const daysInMonth = 31;
 
-
-
 function generateCalendar(daysInMonth) {
 
   // Add divs for each day in the month

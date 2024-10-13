@@ -34,16 +34,19 @@ body {
 
 // Flexbox for calendar layout
 .calendar {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: $gap-size;
   padding: $padding-size;
   margin: auto;
-  max-width: calc($total-days-in-week * $day-size + 6 * $gap-size + $padding-size * 2);
+  max-width: calc(
+    $total-days-in-week * $day-size + 6 * $gap-size + $padding-size * 2
+  );
 
   &__day {
-    width: $day-size; // Maintain the width at 100px
-    height: $day-size; // Maintain the height at 100px
+    width: $day-size;
+    height: $day-size;
     background-color: $background-color;
     border: $border-size solid black;
     position: relative;
@@ -76,7 +79,7 @@ body {
     &--start-day-#{$day} {
       .calendar__day:first-child {
         @if $day == mon {
-          margin-left: 0; // No margin for Monday
+          margin-left: 0;
         } @else {
           margin-left: calc(
             (list.index($start-days, $day) - 1) * ($day-size + $gap-size)
