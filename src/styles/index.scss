@@ -12,7 +12,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: $days-gap;
-  width: ($box-size + 10px) * $columns;
+  width: $box-size * $columns + $days-gap * 6;
 
   &__day {
     box-sizing: border-box;
@@ -25,6 +25,7 @@
     border: 1px solid #000;
     width: $box-size;
     height: $box-size;
+    transition: transform 500ms;
 
     @for $number-of-days from 1 through 31 {
       &:nth-child(#{$number-of-days})::before {
@@ -39,7 +40,6 @@
       cursor: pointer;
       background-color: $hover-color;
       transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
   }
 }
