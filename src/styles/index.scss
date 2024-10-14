@@ -1,37 +1,11 @@
 @import './utils/variables';
+@import './utils/typography';
+@import './blocks/calendar';
 
 body {
   margin: 0;
   height: 100vh;
   display: flex;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 30px;
-}
-
-.calendar {
-  display: flex;
-  margin: auto;
-  flex-wrap: wrap;
-  gap: $base-gap;
-  width: ($square-size * $days-in-week) + ($base-gap * ($days-in-week - 1));
-  padding: 10px;
-
-  &__day {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: $square-size;
-    width: $square-size;
-    background-color: $square-color;
-    border: 1px solid black;
-    transition: 500ms;
-
-    &:hover {
-      background-color: $square-color-hover;
-      transform: translateY(-20px);
-    }
-  }
 }
 
 @for $day from 1 through 31 {
@@ -46,9 +20,9 @@ body {
   }
 }
 
-@for $day from 28 through 31 {
+@for $day from $min-days through $max-days {
   .calendar--month-length-#{$day}
-    .calendar__day:nth-last-child(-n + #{31 - $day}) {
+    .calendar__day:nth-last-child(-n + #{$max-days - $day}) {
     display: none;
   }
 }
