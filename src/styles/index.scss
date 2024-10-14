@@ -1,3 +1,84 @@
-body {
+@import './utils/variables';
+
+* {
   margin: 0;
+  box-sizing: border-box;
+}
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Mixin to style the day cell
+@mixin day-cell-style($bg-color, $border-color) {
+  height: $day-cell-height;
+  width: $day-cell-width;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  border: 1px solid $border-color;
+  background-color: $bg-color;
+  transition-duration: 500ms;
+}
+
+@mixin day-cell-hover-style($bg-color) {
+  background-color: $bg-color;
+  transform: translateY(-20px);
+  cursor: pointer;
+}
+
+// Function to calculate dynamic calendar width based on parameters
+@function calendar-width($day-cell-width, $cols-gap-size, $calendar-padding) {
+  @return ($day-cell-width * 7) + ($cols-gap-size * 6) + (2 * $calendar-padding);
+}
+
+body {
+  height: 100vh;
+
+  // Display a calendar in the middle of the screen (both horizontally and vertically)
+  @include center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cols-gap-size; // gaps between columns
+  padding: $calendar-padding; // padding around the calendar
+  transition-duration: 1000ms;
+  width: calendar-width(
+    $day-cell-width,
+    $cols-gap-size,
+    $calendar-padding
+  ); // calendar-width(100px, 1px, 10px);
+
+  &__day {
+    @include center;
+    @include day-cell-style(#eee, black);
+
+    &:hover {
+      @include day-cell-hover-style(#ffbfcb);
+    }
+  }
+
+  // display the date number on the every day cell
+  @for $date from 1 through 31 {
+    &__day:nth-child(#{$date})::before {
+      content: '#{$date}';
+    }
+  }
+
+  // for the first day of the month
+  @each $day, $col in $weekday {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc($col * ($day-cell-width + $cols-gap-size));
+    }
+  }
+
+  // for modifier month-length
+  @for $date from 28 through 31 {
+    &--month-length-#{$date} &__day:nth-child(n + #{$date + 1}) {
+      display: none;
+    }
+  }
 }
