@@ -1,18 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     />
-    <title>Calendar</title>
+    <title>Календарь</title>
     <link
       rel="stylesheet"
       href="styles/index.scss"
     />
   </head>
   <body>
-    <h1>Calendar</h1>
+    <div
+      class="calendar calendar--start-day-sun calendar--month-length-31"
+    ></div>
+
+    <script>
+      (() => {
+        let template = '';
+        for (let i = 0; i < 31; i++) {
+          template += '<div class="calendar__day"></div>';
+        }
+
+        document.querySelector('.calendar').innerHTML = template;
+      })();
+    </script>
   </body>
 </html>
