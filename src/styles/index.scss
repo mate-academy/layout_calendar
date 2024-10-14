@@ -6,7 +6,6 @@
   display: flex;
   padding: $calendar-indent;
   flex-wrap: wrap;
-  align-items: center;
   gap: $gap;
 
   @extend %calendar-width;
@@ -38,6 +37,7 @@
     justify-content: center;
     align-items: center;
     background-color: $day-bgc-color;
+    transition: 0.5s;
 
     @for $day from 1 through $max-days {
       &:nth-child(#{$day})::after {
@@ -47,7 +47,6 @@
 
     &:hover {
       transform: translateY(-20px);
-      transition: 0.5s;
       background-color: $hover-color;
     }
   }
