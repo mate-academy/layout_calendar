@@ -1,7 +1,12 @@
-@import "variables";
+@import 'variables';
 
 body {
   margin: 0;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
@@ -11,32 +16,30 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $border-day-size;
+  gap: $border-day-gap;
 
   padding: 10px;
-  width: ($day-size + $border-day-size) * 7;
-      
+  width: ($day-size * 7 + $border-day-gap * 6);
+
   &__day {
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      width: $day-size;
-      height: $day-size;
-      background-color: #eee;
-      border: 1px solid $black-color;
-      transition: all 0.5s ease-in-out;
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid $black-color;
+    transition: all 0.5s ease-in-out;
 
-
-      &:hover {
-          background-color: #FFBFCB;
-          cursor: pointer;
-          transform: translateY(-20px);
-      }
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
   }
 }
-
 
 @for $days from 1 through 31 {
   .calendar__day:nth-child(#{$days})::before {
@@ -45,13 +48,13 @@ body {
 }
 
 @for $days from 28 through 31 {
-  .calendar--mounth-lenght-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
     display: none;
   }
 }
 
 @each $day-name, $day-value in $days-of-week {
   .calendar--start-day-#{$day-name} .calendar__day:first-child {
-    margin-left: ($day-size * $day-value) + ($border-day-size * $day-value);
+    margin-left: ($day-size * $day-value) + ($border-day-gap * $day-value);
   }
 }
