@@ -6,29 +6,33 @@ $calendar-padding: 10px;
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  font-family: Arial, sans-serif;
 }
 
 .calendar {
-  margin-top: 150px;
   display: flex;
   flex-wrap: wrap;
   max-width: calc($day-size * 7 + $day-gap * 6 + $calendar-padding);
   padding-left: $calendar-padding;
   gap: $day-gap;
+
   &__day {
     box-sizing: border-box;
     height: $day-size;
     width: $day-size;
     background-color: #eee;
     border: 1px solid black;
-    font-family: Arial, sans-serif;
     font-size: $day-font-size;
     line-height: $day-size;
     text-align: center;
     transition: transform 0.5s;
     &:hover {
       cursor: pointer;
-      background-color: #ffbfcb;
       transform: translateY(-20px);
     }
   }
@@ -53,7 +57,7 @@ $day-names: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
     .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
+      visibility: hidden;
     }
   }
 }
