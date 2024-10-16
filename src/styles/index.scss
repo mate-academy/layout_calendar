@@ -56,15 +56,16 @@ body {
     content: '#{$days}';
   }
 
-@for $days from 28 through 31 {
-  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
-    display: none;
+  @for $days from 28 through 31 {
+    .calendar--month-length-#{$days}
+      .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
   }
-}
 
-@each $day-name, $day-value in $days-of-week {
-  .calendar--start-day-#{$day-name} .calendar__day:first-child {
-    margin-left: ($day-size * $day-value) + ($border-day-gap * $day-value);
+  @each $day-name, $day-value in $days-of-week {
+    .calendar--start-day-#{$day-name} .calendar__day:first-child {
+      margin-left: ($day-size * $day-value) + ($border-day-gap * $day-value);
+    }
   }
-}
 }
