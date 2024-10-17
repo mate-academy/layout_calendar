@@ -47,19 +47,23 @@ body {
     }
   }
 
-  @for $deDay from 28 to 31 {
-    .calendar--month-day-length-#{$deDay} {
-      @for $de from ($deDay + 1) through 31 {
-        & :nth-child(n + #{$de}) {
-          display: none;
+  @for $i from 28 through 31 {
+    .calendar--month-length-#{$i} {
+      @if $i < 31 {
+        @for $o from($i + 1) through 31 {
+          .calendar__day:nth-child(#{$o}) {
+            display: none;
+          }
         }
       }
     }
   }
 
-  @each $name, $value in $daysOfWeek {
-    .calendar--start-day-#{$name} .calendar__day:first-child {
-      margin-left: ($value * ($daySize + $gap)) - ($daySize + $gap);
+  @each $day, $index in $daysOfWeek {
+    &--start-day-#{$day} {
+      .calendar__day:nth-child(1) {
+        margin-left: $index * ($daySize + $gap) - ($daySize + $gap);
+      }
     }
   }
 }
