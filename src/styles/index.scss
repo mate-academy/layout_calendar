@@ -16,7 +16,7 @@ $month-length: (
   '31': 31,
 );
 
-@mixin flex($flex, $justify-content, $align-items) {
+@mixin display($flex, $justify-content, $align-items) {
   display: $flex;
   justify-content: $justify-content;
   align-items: $align-items;
@@ -40,18 +40,18 @@ $month-length: (
   .calendar--month-length-#{$length} {
     @for $i from 1 through $num {
       .calendar__day {
-        visibility: hidden;
+        display: none;
       }
 
       .calendar__day:nth-child(#{$i}) {
-        visibility: visible;
+        display: flex;
       }
     }
   }
 }
 
 body {
-  @include flex(flex, center, center);
+  @include display(flex, center, center);
 
   flex-direction: column;
   height: 100vh;
@@ -61,15 +61,16 @@ body {
 }
 
 .calendar {
-  @include flex(flex, left, center);
+  @include display(flex, left, center);
 
+  box-sizing: border-box;
   max-width: ($size * 7) + 26px;
-  padding: 10px;
-  gap: 1px;
   flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
 
   &__day {
-    @include flex(flex, center, center);
+    @include display(flex, center, center);
 
     background-color: #eee;
     box-sizing: border-box;
@@ -80,8 +81,8 @@ body {
 
   &__day:hover {
     cursor: pointer;
-    background-color: #FFBFCB;
+    background-color: #ffbfcb;
     transform: translate(0, -20px);
-    transition-duration: .5s;
+    transition-duration: 0.5s;
   }
 }
