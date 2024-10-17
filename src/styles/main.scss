@@ -1,6 +1,15 @@
 $width-box: 100px;
 $gap: 1px;
-$days-of-week: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+$week-column: 7;
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
 
 body {
   display: flex;
@@ -15,8 +24,10 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-  width: 706px;
+  gap: $gap;
+  width: calc(
+    #{$week-column} * #{$width-box} + (#{$week-column} - 1) * #{$gap}
+  );
 
   &__day {
     box-sizing: border-box;
@@ -33,7 +44,6 @@ body {
       transform: translateY(-20px);
       background-color: #ffbfcb;
       cursor: pointer;
-      transition-duration: 0.5s;
     }
 
     @for $i from 1 through 31 {
@@ -45,7 +55,7 @@ body {
 
   @each $day, $index in $days-of-week {
     &--start-day-#{$day} &__day:first-child {
-      margin-left: (($width-box + $gap) * $index);
+      margin-left: calc(($width-box + $gap) * #{$index});
     }
   }
 
