@@ -1,3 +1,68 @@
+$sell-size: 100px;
+$padding: 10px;
+$gap: 1px;
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: ($sell-size * 7) + ($padding * 2) + ($gap * 6);
+  box-sizing: border-box;
+  gap: $gap;
+  padding: $padding;
+
+  @for $number from 1 through 31 {
+    & div:nth-child(#{$number})::before {
+      content: '#{$number}';
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length-#{$last-day} div:nth-child(n + #{$last-day + 1}) {
+      display: none;
+    }
+  }
+
+  $start-day: (
+    mon ($sell-size * 0),
+    tue (($sell-size + $gap) * 1),
+    wed (($sell-size + $gap) * 2),
+    thu (($sell-size + $gap) * 3),
+    fri (($sell-size + $gap) * 4),
+    sat (($sell-size + $gap) * 5),
+    sun (($sell-size + $gap) * 6)
+  );
+
+  @each $day, $margin in $start-day {
+    &--start-day-#{$day} div:nth-child(1) {
+      margin-left: $margin;
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    box-sizing: border-box;
+    height: $sell-size;
+    width: $sell-size;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+  }
 }
