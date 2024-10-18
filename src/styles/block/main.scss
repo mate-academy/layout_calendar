@@ -11,9 +11,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  max-width: $cellSize * 7 + 10;
+  max-width: $cellSize * $daysOfWeek + $paddingInline;
   margin-left: 4px;
-  padding-inline: 10px;
+  padding-inline: $paddingInline;
   gap: $cellValue;
 
   &__day {
@@ -51,7 +51,7 @@
 }
 
 // position first day
-@each $name, $value in $daysOfWeek {
+@each $name, $value in $namesOfDays {
   .calendar--start-day-#{$name} .calendar__day:first-child {
     margin-left: ($value * ($cellSize + $cellValue)) - ($cellSize + $cellValue);
   }
