@@ -4,6 +4,10 @@ $gap: 1px;
 
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -23,8 +27,8 @@ body {
   }
 
   @for $last-day from 28 through 31 {
-    &--#{$last-day} div:nth-child(n + #{$last-day + 1}) {
-      visibility: hidden;
+    &--month-length-#{$last-day} div:nth-child(n + #{$last-day + 1}) {
+      display: none;
     }
   }
 
@@ -39,7 +43,7 @@ body {
   );
 
   @each $day, $margin in $start-day {
-    &--#{$day} div:nth-child(1) {
+    &--start-day-#{$day} div:nth-child(1) {
       margin-left: $margin;
     }
   }
@@ -62,4 +66,3 @@ body {
     transform: translate(0, -20px);
   }
 }
-
