@@ -30,16 +30,20 @@ body {
     background-color: $bg-color;
     border: #{$gap} solid black;
 
+    &::before {
+      content: '';
+      display: flex;
+      margin: auto;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-family: Arial, sans-serif;
+      font-size: $number-size;
+    }
+
     @for $n from 1 through 31 {
       &--#{$n}:before {
         content: '#{$n}';
-        display: flex;
-        margin: auto;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        font-family: Arial, sans-serif;
-        font-size: $number-size;
       }
     }
 
