@@ -21,13 +21,13 @@ body {
 
 .calendar {
   display: flex;
-  flex-flow: wrap;
+  flex-flow: row wrap; /* Dodanie kierunku dla flex-flow */
   box-sizing: border-box;
-  width: 7 * $cell-size + 6px;
+  width: calc(7 * #{$cell-size} + 6px); /* Poprawiona kalkulacja z użyciem calc */
   gap: 1px;
 
-  & &__day {
-    display: none;
+  &__day {
+    display: none; /* Usunięto dodatkowe `&` w selektorze */
     box-sizing: border-box;
     background: #eee;
     height: $cell-size;
@@ -62,7 +62,7 @@ body {
 
   @each $day, $i in $days-of-the-week {
     &--start-day-#{$day} :first-child {
-      margin-left: ($i * $cell-size) + $i;
+      margin-left: calc($i * #{$cell-size} + #{$i}px); /* Poprawiona kalkulacja z użyciem calc */
     }
   }
 }
