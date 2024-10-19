@@ -21,12 +21,12 @@ body {
 
 .calendar {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: wrap;
   box-sizing: border-box;
-  width: calc(7 * #{$cell-size} + 6px);
+  width: 7 * $cell-size + 6px;
   gap: 1px;
 
-  &__day {
+  & &__day {
     display: none;
     box-sizing: border-box;
     background: #eee;
@@ -40,8 +40,6 @@ body {
     transition:
       background-color 0.5s,
       transform 0.5s;
-
-    /* Wymagana pusta linia przed &:hover */
 
     &:hover {
       cursor: pointer;
@@ -64,7 +62,7 @@ body {
 
   @each $day, $i in $days-of-the-week {
     &--start-day-#{$day} :first-child {
-      margin-left: calc($i * #{$cell-size} + #{$i}px);
+      margin-left: ($i * $cell-size) + $i;
     }
   }
 }
