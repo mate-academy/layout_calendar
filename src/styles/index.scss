@@ -21,13 +21,13 @@ body {
 
 .calendar {
   display: flex;
-  flex-flow: row wrap; /* Dodanie kierunku dla flex-flow */
+  flex-flow: row wrap;
   box-sizing: border-box;
-  width: calc(7 * #{$cell-size} + 6px); /* Poprawiona kalkulacja z użyciem calc */
+  width: calc(7 * #{$cell-size} + 6px);
   gap: 1px;
 
   &__day {
-    display: none; /* Usunięto dodatkowe `&` w selektorze */
+    display: none;
     box-sizing: border-box;
     background: #eee;
     height: $cell-size;
@@ -41,13 +41,13 @@ body {
       background-color 0.5s,
       transform 0.5s;
 
+    /* Wymagana pusta linia przed &:hover */
+
     &:hover {
       cursor: pointer;
       background: #ffbfcb;
       transform: translateY(-20px);
     }
-
-    /* Dodano pustą linię tutaj, aby rozdzielić grupy reguł */
   }
 
   @each $count in $days-count {
@@ -64,7 +64,7 @@ body {
 
   @each $day, $i in $days-of-the-week {
     &--start-day-#{$day} :first-child {
-      margin-left: calc($i * #{$cell-size} + #{$i}px); /* Poprawiona kalkulacja z użyciem calc */
+      margin-left: calc($i * #{$cell-size} + #{$i}px);
     }
   }
 }
