@@ -1,0 +1,53 @@
+@use '../_variables/variables' as *;
+
+.calendar {
+  width: $CellSize * 7 + $DateBorderWidth * 6 + $CalendarBorders * 2;
+  height: auto;
+  padding: $CalendarBorders;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $CalendarCellsGap;
+  place-content: center flex-start;
+
+  &__day {
+    width: $CellSize;
+    height: $CellSize;
+    border: $DateBorderWidth solid $DateBorderColor;
+    background: $DateBackgroundColor;
+
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+    transition-property: transform, background-color;
+    transition-duration: $TransitionDuration;
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $DateBackgroundColorHover;
+    }
+
+    @for $dateNumber from 1 through 31 {
+      &:nth-child(#{$dateNumber})::before {
+        content: '#{$dateNumber}';
+        font: $DateFontSize $DateFont;
+      }
+    }
+  }
+
+  @for $value from 28 through 31 {
+    &--month-length-#{$value} :nth-child(-n + #{$value}) {
+      display: flex;
+    }
+  }
+
+  @each $weekday, $weekdayId in $start-days {
+    &--start-day-#{$weekday} &__day:first-child {
+      @if $weekday != mon {
+        margin-left: ($CalendarCellsGap + $CellSize) * $weekdayId;
+      }
+    }
+  }
+}
