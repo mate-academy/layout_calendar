@@ -27,6 +27,8 @@ On hovering over a cell:
 
 > Here are the [Layout Tasks Instruction](https://github.com/mate-academy/layout_task-guideline#how-to-solve-the-layout-tasks-on-github)
 
+In this task, you can directly link *.scss files to HTML. This is possible because [we use the Parcel library](https://en.parceljs.org/scss.html) to bundle the source code.
+
 ![reference image](reference.png).
 
 ## Checklist
