@@ -12,7 +12,9 @@
     background-color: $backgroundDay;
     border: 1px solid $colorBorder;
     position: relative;
-    transition: transform 0.5s ease 0s;
+    transition:
+      transform 0.5s ease 0s,
+      background-color 0.5s ease 0s;
 
     &:hover {
       cursor: pointer;
@@ -20,15 +22,18 @@
       transform: translateY(-20px);
     }
 
+    &:nth-child(n)::before {
+      display: inline-block;
+      font-size: $fontSize;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: '#{$day}';
-        display: inline-block;
-        font-size: $fontSize;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
       }
     }
   }
