@@ -38,23 +38,22 @@ body {
       transform: translateY(-20px);
     }
   }
-}
 
-@for $day from 1 through 31 {
-  .calendar__day:nth-child(#{$day}):before {
-    content: '#{$day}';
+  @for $day from 1 through 31 {
+    .&__day:nth-child(#{$day}):before {
+      content: '#{$day}';
+    }
   }
-}
 
-@each $day, $index in $day-names {
-  .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: (($index - 1) * $base-size) + (($index - 1) * $base-gap);
+  @each $day, $index in $day-names {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: (($index - 1) * $base-size) + (($index - 1) * $base-gap);
+    }
   }
-}
 
-@for $day from 28 through 31 {
-  .calendar--month-length-#{$day}
-    .calendar__day:nth-last-child(-n + #{31 - $day}) {
-    display: none;
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} &__day:nth-last-child(-n + #{31 - $day}) {
+      display: none;
+    }
   }
 }
