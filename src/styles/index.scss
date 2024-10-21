@@ -1,3 +1,116 @@
-body {
-  margin: 0;
+$day-size: 100px;
+$gap-size: 1px;
+$border-size: 1px;
+
+.page__body,
+.calendar__day {
+  box-sizing: border-box;
 }
+
+.page__body {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  gap: 1px;
+  width: (7 * $day-size) + ($gap-size * 6);
+  padding: 10px;
+  display: flex;
+
+  &__day {
+    background-color: #eee;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    transition-duration: 0.5s;
+    display: flex;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transition-duration: 0.5s;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  /* !!!!!!!!!!!!!!!!!!!!!! the test does not work with this ⇩ piece of code !!!!!!!!!!!!!!!!!!!!!!!!!! */
+  
+  // @each $day, $margin in ("mon": 0px,
+  //   "tue": ($day-size + $gap-size),
+  //   "wed": ($day-size + $gap-size) * 2,
+  //   "thu": ($day-size + $gap-size) * 3,
+  //   "fri": ($day-size + $gap-size) * 4,
+  //   "sat": ($day-size + $gap-size) * 5,
+  //   "sun": ($day-size + $gap-size) * 6) {
+    //   &--start-day-#{$day} .calendar__day:first-child {
+      //     margin-left: $margin;
+      //   }
+      // }
+      
+      
+      /* !!!!!!!!!!!!!!!!!!!!!! the test does not work with this ⇪ piece of code !!!!!!!!!!!!!!!!!!!!!!!!!! */
+
+  &--start-day-mon .calendar__day:first-child {
+    margin-left: 0;
+  }
+
+  &--start-day-tue .calendar__day:first-child {
+    margin-left: 101px;
+  }
+
+  &--start-day-wed .calendar__day:first-child {
+    margin-left: 202px;
+  }
+
+  &--start-day-thu .calendar__day:first-child {
+    margin-left: 303px;
+  }
+
+  &--start-day-fri .calendar__day:first-child {
+    margin-left: 404px;
+  }
+
+  &--start-day-sat .calendar__day:first-child {
+    margin-left: 505px;
+  }
+
+  &--start-day-sun .calendar__day:first-child {
+    margin-left: 606px;
+  }
+}
+
+/********************* I also tried using this ⇩ one piece of code *******************/
+
+//   @each $day, $margin in ("mon": 0px,
+//   "tue": (100px + 1px),
+//   "wed": (100px + 1px) * 2,
+//   "thu": (100px + 1px) * 3,
+//   "fri": (100px + 1px) * 4,
+//   "sat": (100px + 1px) * 5,
+//   "sun": (100px + 1px) * 6) {
+//   &--start-day-#{$day} .calendar__day:first-child {
+//     margin-left: $margin;
+//   }
+// }
