@@ -1,0 +1,18 @@
+@for $day-number from 1 through 31 {
+  .calendar__day:nth-child(#{$day-number})::before {
+    content: '#{$day-number}';
+    color: $black-color;
+    padding-left: 1px;
+  }
+
+  .calendar--month-length-#{$day-number}
+    .calendar__day:nth-child(-n + #{$day-number}) {
+    display: flex;
+  }
+}
+
+@each $day-name, $day-value in $days-of-week {
+  .calendar.calendar--start-day-#{$day-name} .calendar__day:first-child {
+    margin-left: ($day-size * $day-value) + ($indent-of-days * $day-value);
+  }
+}
