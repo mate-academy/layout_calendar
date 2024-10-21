@@ -1,3 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+$daysSize: 100px;
+$calendarGap: 1px;
+$calendarPadding: 10px;
+$calendarWidth: $daysSize * 7 + 6px;
+$daysBackgroundColor: #eee;
+$daysAMonth: 31;
+$daySizeWithGap: $daysSize + $calendarGap;
+$daysAWeek: (
+  mon ($daySizeWithGap * 0),
+  tue ($daySizeWithGap * 1),
+  wed ($daySizeWithGap * 2),
+  thu ($daySizeWithGap * 3),
+  fri ($daySizeWithGap * 4),
+  sat ($daySizeWithGap * 5),
+  sun ($daySizeWithGap * 6)
+);
+
+.calendar {
+  display: flex;
+  gap: $calendarGap;
+  flex-wrap: wrap;
+  width: $calendarWidth;
+
+  &__day {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: $daysSize;
+    height: $daysSize;
+    line-height: $daysSize;
+    border: 1px solid black;
+    background-color: $daysBackgroundColor;
+    transition: transform 0.5s;
+
+    &::before {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      content: '';
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $Number from 1 through 31 {
+      &:nth-child(#{$Number})::before {
+        content: '#{$Number}';
+      }
+    }
+  }
+}
+
+@each $day, $i in $daysAWeek {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: #{$i};
+  }
+}
+
+$days-in-month: 28, 29, 30, 31;
+
+@for $lastDay from 28 through 31 {
+  .calendar--month-length-#{$lastDay}
+    .calendar__day:nth-child(n + #{$lastDay + 1}) {
+    display: none;
+  }
 }
