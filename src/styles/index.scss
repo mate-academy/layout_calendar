@@ -1,8 +1,4 @@
-// variables
-$day-size: 100px;
-$day-font-size: 30px;
-$day-gap: 1px;
-$calendar-padding: 10px;
+@import 'variables';
 
 body {
   margin: 0;
@@ -25,7 +21,7 @@ body {
     box-sizing: border-box;
     height: $day-size;
     width: $day-size;
-    background-color: #eee;
+    background-color: $color-day;
     border: 1px solid black;
     font-size: $day-font-size;
     line-height: $day-size;
@@ -33,6 +29,7 @@ body {
     transition: transform 0.5s;
     &:hover {
       cursor: pointer;
+      background-color: $color-on-hover;
       transform: translateY(-20px);
     }
   }
@@ -43,8 +40,6 @@ body {
     content: '#{$i}';
   }
 }
-
-$day-names: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 
 @each $day-name, $day-number in $day-names {
   .calendar--start-day-#{$day-name} {
