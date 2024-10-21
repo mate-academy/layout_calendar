@@ -1,21 +1,22 @@
+@use 'sass:list';
+@use 'variables';
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: $gap;
+  gap: variables.$gap;
   padding: 10px;
-  width: calc((#{$day-size} * #{$columns}) + (#{$gap} * #{$columns - 1}));
-  background-color: $calendar-background-color;
+  width: calc((#{variables.$day-size} * #{variables.$columns}) + (#{variables.$gap} * #{variables.$columns - 1}));
+  background-color: variables.$calendar-background-color;
 
   &__day {
     box-sizing: border-box;
     display: flex;
-    border: 1px solid $border-color;
-    width: $day-size;
-    height: $day-size;
-    background-color: $day-background-color;
-    transition:
-      background-color 0.5s,
-      transform 0.5s;
+    border: 1px solid variables.$border-color;
+    width: variables.$day-size;
+    height: variables.$day-size;
+    background-color: variables.$day-background-color;
+
     &::before {
       display: flex;
       justify-content: center;
@@ -24,7 +25,7 @@
     }
     &:hover {
       cursor: pointer;
-      background-color: $hover-background-color;
+      background-color: variables.$hover-background-color;
       transform: translateY(-20px);
       transition:
         background-color 0.5s,
@@ -32,10 +33,10 @@
     }
   }
 
-  @each $day in $days {
-    $index: list.index($days, $day) - 1;
+  @each $day in variables.$days {
+    $index: list.index(variables.$days, $day) - 1;
     &--start-day-#{$day} .calendar__day:nth-child(1) {
-      margin-left: $index * ($day-size + 1px);
+      margin-left: $index * (variables.$day-size + 1);
     }
   }
 }
