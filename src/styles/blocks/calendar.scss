@@ -22,7 +22,8 @@
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translate(0, -20px);
-      animation-duration: 0, 5s;
+      animation-duration: 0.5s;
+      transition: 0.5s;
     }
 
     @for $number from 1 through $month-length {
@@ -46,7 +47,7 @@
 
   @for $day from 28 through $month-length {
     &--month-length-#{$day} {
-      &__day:nth-child(n + #{$day - 1}) {
+      .calendar__day:nth-child(n + #{$day + 1}) {
         display: none;
       }
     }
