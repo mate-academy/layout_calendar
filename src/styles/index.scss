@@ -1,3 +1,139 @@
+$day-size: 100px;
+$border: 1px;
+$grey: #eee;
+$font-size: 30px;
+$gap: 1px;
+$padding: 10px;
+
+// DAYS
+
+$days: (
+  mon: 'Monday',
+  tue: 'Tuesday',
+  wed: 'Wednesday',
+  thu: 'Thursday',
+  fri: 'Friday',
+  sat: 'Saturday',
+  sun: 'Sunday',
+);
+$months: (28, 29, 30, 31);
+
 body {
   margin: 0;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: $font-size;
+  display: flex;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $gap;
+  width: 706px;
+  padding: $padding;
+  display: flex;
+
+  &__day {
+    background-color: $grey;
+    width: $day-size;
+    height: $day-size;
+    border: $border solid #000;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  &__day:first-child {
+    content: '';
+    margin-left: 606px;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+    transform: translateY(-20px);
+  }
+}
+
+// .calendar.calendar--start-day-mon .calendar__day:first-child {
+//   margin-left: 0;
+// }
+
+// .calendar.calendar--start-day-tue .calendar__day:first-child {
+//   margin-left: 101px;
+// }
+
+// .calendar.calendar--start-day-wed .calendar__day:first-child {
+//   margin-left: 202px;
+// }
+
+// .calendar.calendar--start-day-thu .calendar__day:first-child {
+//   margin-left: 303px;
+// }
+
+// .calendar.calendar--start-day-fri .calendar__day:first-child {
+//   margin-left: 404px;
+// }
+
+// .calendar.calendar--start-day-sat .calendar__day:first-child {
+//   margin-left: 505px;
+// }
+
+@for $i from 1 through 31 {
+  .calendar.calendar--start-day-mon .calendar__day:first-child {
+    margin-left: 0;
+  }
+
+  .calendar.calendar--start-day-tue .calendar__day:first-child {
+    margin-left: 101px;
+  }
+
+  .calendar.calendar--start-day-wed .calendar__day:first-child {
+    margin-left: 202px;
+  }
+
+  .calendar.calendar--start-day-thu .calendar__day:first-child {
+    margin-left: 303px;
+  }
+
+  .calendar.calendar--start-day-fri .calendar__day:first-child {
+    margin-left: 404px;
+  }
+
+  .calendar.calendar--start-day-sat .calendar__day:first-child {
+    margin-left: 505px;
+  }
+
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $d from 28 through 31 {
+  .calendar.calendar--month-length-28 .calendar__day:nth-child(29),
+  .calendar.calendar--month-length-28 .calendar__day:nth-child(30),
+  .calendar.calendar--month-length-28 .calendar__day:nth-child(31),
+  .calendar.calendar--month-length-29 .calendar__day:nth-child(30),
+  .calendar.calendar--month-length-29 .calendar__day:nth-child(31),
+  .calendar.calendar--month-length-30 .calendar__day:nth-child(31) {
+    display: none;
+  }
+}
+
+@each $name, $day in $days {
+  .calendar.calendar--start-day-#{$name} .calendar__day:first-child {
+    content: $day;
+  }
 }
