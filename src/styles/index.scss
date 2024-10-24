@@ -1,10 +1,8 @@
-$sell-size: 100px;
+$cell-size: 100px;
 $gap-size: 1px;
 $padding-size: 10px;
 $border-size: 1px;
-
 $calendar-width: (7 * $sell-size) + (6 * $gap-size);
-
 $days: (
   'mon': 0,
   'tue': 1,
@@ -17,12 +15,15 @@ $days: (
 
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar {
   padding: 10px;
   display: flex;
-  margin: auto;
   flex-wrap: wrap;
   gap: $gap-size;
   width: $calendar-width;
@@ -42,12 +43,12 @@ body {
     transition: all 0.5s;
 
     &:first-child {
-      margin-left: (6 * $sell-size) + (6 * $gap-size);
+      margin-left: (6 * $cell-size) + (6 * $gap-size);
     }
 
     &:hover {
       cursor: pointer;
-      background-color: #FFBFCB;
+      background-color: #ffbfcb;
       transform: translateY(-20px);
     }
   }
@@ -61,7 +62,7 @@ body {
 
 @each $day, $offset in $days {
   .calendar--start-day-#{$day} .calendar__day:first-child {
-    margin-left: ($offset * $sell-size) + ($gap-size * $offset);
+    margin-left: ($offset * $cell-size) + ($gap-size * $offset);
   }
 }
 
