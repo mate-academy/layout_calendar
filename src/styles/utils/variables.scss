@@ -1,0 +1,22 @@
+$start-day: // a
+  'mon' 0,
+  'tue' 105px,
+  'wed' 205px,
+  'thu' 305px,
+  'fri' 405px,
+  'sat' 505px,
+  'sun' 605px;
+
+@each $day, $margin in $start-day {
+  .day--#{$day} {
+    margin-left: $margin;
+  }
+}
+
+$month-length: 28, 29, 30, 31;
+
+@for $i from 28 through 31 {
+  .calendar .day__month--length:nth-child(#{$i}) {
+    opacity: 1;
+  }
+}
