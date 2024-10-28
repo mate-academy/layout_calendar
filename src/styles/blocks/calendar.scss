@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    min-width: $cell-width;
+    min-height: $cell-height;
+    background-color: $cell-background;
+    border: 1px solid black;
+    transition:
+      transform $animation-duration ease,
+      background-color $animation-duration ease;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: $cell-background-hover;
+    }
+  }
+}
