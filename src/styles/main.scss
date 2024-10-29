@@ -1,0 +1,75 @@
+$page_size: 100px;
+$page_gap: 1px;
+$calendar_padd: 10px;
+
+.hmtl {
+  display: flex;
+  min-height: 100vh;
+  min-width: 10vw;
+}
+
+body {
+  max-width: calc($page_size * 7 + $page_gap * 6 + $calendar_padd * 2);
+  box-sizing: border-box;
+  display: flex;
+  margin: auto;
+  min-height: 100vh;
+  min-width: 10vw;
+}
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $page_gap;
+  padding: $calendar_padd;
+
+  &__day {
+    width: $page_size;
+    height: $page_size;
+    background-color: #eee;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} {
+      div:nth-child(-n + #{$index}) {
+        display: flex;
+      }
+    }
+  }
+
+  @each $day, $index in 'mon' calc($page_size * 0 + $page_gap * 0),
+    'tue' calc($page_size * 1 + $page_gap * 1),
+    'wed' calc($page_size * 2 + $page_gap * 2),
+    'thu' calc($page_size * 3 + $page_gap * 3),
+    'fri' calc($page_size * 4 + $page_gap * 4),
+    'sat' calc($page_size * 5 + $page_gap * 5),
+    'sun' calc($page_size * 6 + $page_gap * 6)
+  {
+    &--start-day-#{$day} {
+      div:nth-child(1) {
+        margin-left: $index;
+      }
+    }
+  }
+}
+
+@for $index from 1 through 31 {
+  .page-#{$index}::before {
+    content: '#{$index}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
