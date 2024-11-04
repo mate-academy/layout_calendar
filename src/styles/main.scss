@@ -1,0 +1,209 @@
+$border-size: 1px;
+$day-size: 100px;
+$gap-size: 1px;
+$padding-size: 10px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$calendar-columns: 7;
+$hover-color: #ffbfcb;
+$hover-move: -20px;
+$transition-duration: 0.5s;
+$start-days: (sun, mon, tue, wed, thu, fri, sat);
+$start-day-offsets: (
+  sun: 0,
+  mon: calc(#{$day-size} + #{$gap-size}),
+  tue: calc(2 * (#{$day-size} + #{$gap-size})),
+  wed: calc(3 * (#{$day-size} + #{$gap-size})),
+  thu: calc(4 * (#{$day-size} + #{$gap-size})),
+  fri: calc(5 * (#{$day-size} + #{$gap-size})),
+  sat: calc(6 * (#{$day-size} + #{$gap-size})),
+);
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  padding: $padding-size;
+  width: 706px;
+  flex-flow: row wrap;
+  gap: $gap-size;
+  position: relative;
+
+  .calendar__day {
+    width: calc(#{$day-size} - #{$border-size} * 2);
+    height: calc(#{$day-size} - #{$border-size} * 2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: $border-size solid black;
+    font-family: $font-family;
+    font-size: $font-size;
+    color: black;
+    position: relative;
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      content: attr(data-day);
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY($hover-move);
+    }
+  }
+
+  .calendar-length-31 .calendar__day {
+    display: flex;
+  }
+
+  @for $i from 28 through 30 {
+    .calendar-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $margin in $start-day-offsets {
+    .calendar--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+}
+
+.calendar-day:nth-child(1)::before {
+  content: '1';
+}
+
+.calendar-day:nth-child(2)::before {
+  content: '2';
+}
+
+.calendar-day:nth-child(3)::before {
+  content: '3';
+}
+
+.calendar-day:nth-child(4)::before {
+  content: '4';
+}
+
+.calendar-day:nth-child(5)::before {
+  content: '5';
+}
+
+.calendar-day:nth-child(6)::before {
+  content: '6';
+}
+
+.calendar-day:nth-child(7)::before {
+  content: '7';
+}
+
+.calendar-day:nth-child(8)::before {
+  content: '8';
+}
+
+.calendar-day:nth-child(9)::before {
+  content: '9';
+}
+
+.calendar-day:nth-child(10)::before {
+  content: '10';
+}
+
+.calendar-day:nth-child(11)::before {
+  content: '11';
+}
+
+.calendar-day:nth-child(12)::before {
+  content: '12';
+}
+
+.calendar-day:nth-child(13)::before {
+  content: '13';
+}
+
+.calendar-day:nth-child(14)::before {
+  content: '14';
+}
+
+.calendar-day:nth-child(15)::before {
+  content: '15';
+}
+
+.calendar-day:nth-child(16)::before {
+  content: '16';
+}
+
+.calendar-day:nth-child(17)::before {
+  content: '17';
+}
+
+.calendar-day:nth-child(18)::before {
+  content: '18';
+}
+
+.calendar-day:nth-child(19)::before {
+  content: '19';
+}
+
+.calendar-day:nth-child(20)::before {
+  content: '20';
+}
+
+.calendar-day:nth-child(21)::before {
+  content: '21';
+}
+
+.calendar-day:nth-child(22)::before {
+  content: '22';
+}
+
+.calendar-day:nth-child(23)::before {
+  content: '23';
+}
+
+.calendar-day:nth-child(24)::before {
+  content: '24';
+}
+
+.calendar-day:nth-child(25)::before {
+  content: '25';
+}
+
+.calendar-day:nth-child(26)::before {
+  content: '26';
+}
+
+.calendar-day:nth-child(27)::before {
+  content: '27';
+}
+
+.calendar-day:nth-child(28)::before {
+  content: '28';
+}
+
+.calendar-day:nth-child(29)::before {
+  content: '29';
+}
+
+.calendar-day:nth-child(30)::before {
+  content: '30';
+}
+
+.calendar-day:nth-child(31)::before {
+  content: '31';
+}
