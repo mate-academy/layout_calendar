@@ -1,0 +1,26 @@
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  border: $border-size solid black;
+  background-color: $grey-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition:
+    transform $animation-duration ease,
+    background-color $animation-duration ease;
+
+  &::before {
+    content: counter(day);
+    counter-increment: day;
+    font-family: Arial;
+    font-size: $font-size;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+}
