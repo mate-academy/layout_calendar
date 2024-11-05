@@ -1,3 +1,40 @@
 body {
   margin: 0;
 }
+
+
+.calendar{
+ display: grid;
+ gap: 1px;
+ grid-template-columns: repeat(7, 1fr);
+ padding: 10px;
+ max-width: 350px;
+ margin: 0 auto;
+
+&__cell {
+  position: relative;
+  background-color: #eee;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  transition: transform 500ms;
+ }
+
+ &__cell:hover{
+  cursor: pointer;
+  background-color: #FFBFCB;
+  transform: translateY(20px);
+ }
+}
+
+@for $i from 1 through 31 {
+  .calendar .calendar__cell:nth-child(#{$i})::before {
+    content: "#{$i}"; // Вставляємо число за допомогою content
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); // Центруємо число
+  }
+}
