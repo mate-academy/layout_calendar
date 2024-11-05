@@ -9,15 +9,15 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - x Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
 - x Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
   - x Don't use hardcoded `px` values if they are used several times
-  - Use properly named variables to make all the calculations more clear.
-- Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
-  - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
-  - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
+  - x  Use properly named variables to make all the calculations more clear.
+- x Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
+  - x Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
+  - x The month should start at the correct column (Monday is the 1st, Friday is the 5th)
   - You can just add correct `margin-left` for the first day
-  - Set calendar to start from Sunday by default
-- Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
+  - x Set calendar to start from Sunday by default
+- x Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
-  - Set 31 days by default
+  - x Set 31 days by default
 
 On hovering over a cell:
 - x cursor should become pointer
@@ -40,7 +40,7 @@ On hovering over a cell:
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
-- [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
+- [x] Changing 'month-lengh' and 'start-day' modifier in the code element
 reflects in changing calendar layout
 - [x] Each day has no modifiers, only class (eg. calendar__day)
 - [x] All `Typical Mistakes` from `BEM` lesson theory are checked.
