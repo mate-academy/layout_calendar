@@ -5,15 +5,14 @@
   display: flex;
   flex-wrap: wrap;
   padding: 10px;
-  font-size: 30px;
   gap: 1px;
-  max-width: ($widthDays + $gapDays) * 7;
+  width: ($widthDays + $gapDays) * 7;
 
   @for $i from 1 through $month-length {
-    &--day-length-31 :nth-child(#{$i}),
-    &--day-length-30 :nth-child(#{$i}),
-    &--day-length-29 :nth-child(#{$i}),
-    &--day-length-28 :nth-child(#{$i}) {
+    &--month-length-31 :nth-child(#{$i}),
+    &--month-length-30 :nth-child(#{$i}),
+    &--month-length-29 :nth-child(#{$i}),
+    &--month-length-28 :nth-child(#{$i}) {
       width: $widthDays;
       height: $heightDays;
       box-sizing: border-box;
@@ -25,9 +24,9 @@
     }
   }
 
-  &--day-length-30 :nth-child(n + 31),
-  &--day-length-29 :nth-child(n + 30),
-  &--day-length-28 :nth-child(n + 29){
+  &--month-length-30 :nth-child(n + 31),
+  &--month-length-29 :nth-child(n + 30),
+  &--month-length-28 :nth-child(n + 29) {
     visibility: hidden;
   }
 
