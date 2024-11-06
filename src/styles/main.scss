@@ -1,0 +1,57 @@
+@import './init/variables';
+@import './blocks/page';
+
+.calendar {
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  display: flex;
+  width: ($widthDays + $gapDays) * 7;
+
+  @for $i from 1 through $month-length {
+    &--month-length-31 :nth-child(#{$i}),
+    &--month-length-30 :nth-child(#{$i}),
+    &--month-length-29 :nth-child(#{$i}),
+    &--month-length-28 :nth-child(#{$i}) {
+      width: $widthDays;
+      height: $heightDays;
+      box-sizing: border-box;
+      border: 1px solid black;
+      background-color: #eee;
+      position: relative;
+      transition-property: transform, background-color;
+      transition-duration: 0.5s;
+      cursor: pointer;
+    }
+  }
+
+  &--month-length-30 :nth-child(n + 31),
+  &--month-length-29 :nth-child(n + 30),
+  &--month-length-28 :nth-child(n + 29) {
+    visibility: hidden;
+  }
+
+  @for $i from 1 through $month-length {
+    & :nth-child(#{$i}):before {
+      content: '#{$i}';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+  }
+
+  @each $day, $i in $calendar {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($widthDays + $gapDays) * $i;
+    }
+  }
+}
