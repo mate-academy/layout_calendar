@@ -1,0 +1,96 @@
+$days: 31;
+$days-of-week: (mon, 0), (tue, 14.28%), (wed, 28.56%), (thu, 42.84%),
+  (fri, 57.12%), (sat, 71.4%), (sun, 85.68%);
+
+.calendar {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  flex-wrap: wrap;
+  padding: 10px;
+  max-width: calc(7 * 100px + 6 * 1px + 20px);
+  width: 100%;
+
+  &__day {
+    box-sizing: border-box;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid #000;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    transition: all 0.5s ease;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through $days {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: #000;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} {
+      .calendar__day {
+        display: block;
+      }
+
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $start-margin in $days-of-week {
+    &--start-day-#{$day} {
+      .day:first-child {
+        margin-left: #{$start-margin};
+      }
+    }
+  }
+
+  &--month-length-31 {
+    .calendar__day {
+      display: block;
+    }
+
+    .calendar__day:nth-child(n + 32) {
+      display: none;
+    }
+  }
+
+  &--start-day-mon .calendar__day:first-child {
+    margin-left: 0;
+  }
+  &--start-day-tue .calendar__day:first-child {
+    margin-left: 14.28%;
+  }
+  &--start-day-wed .calendar__day:first-child {
+    margin-left: 28.56%;
+  }
+  &--start-day-thu .calendar__day:first-child {
+    margin-left: 42.84%;
+  }
+  &--start-day-fri .calendar__day:first-child {
+    margin-left: 57.12%;
+  }
+  &--start-day-sat .calendar__day:first-child {
+    margin-left: 71.4%;
+  }
+  &--start-day-sun .calendar__day:first-child {
+    margin-left: 85.68%;
+  }
+}
