@@ -1,0 +1,47 @@
+@use 'variables' as v;
+
+.calendar {
+  margin: 0 auto;
+  width: 706px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  @each $day, $i in v.$week {
+    &--start-day-#{$day} :first-child {
+      margin-left: $i * v.$block-margin;
+    }
+  }
+
+  &--month-length-28 :nth-child(n + 29),
+  &--month-length-29 :nth-child(n + 30),
+  &--month-length-30 :nth-child(n + 31) {
+    display: none;
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+
+    & ::before {
+      content: '';
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      transition-duration: 0.5s;
+    }
+  }
+}
