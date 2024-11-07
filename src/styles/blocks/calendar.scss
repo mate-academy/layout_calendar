@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as v;
 
 .calendar {
   margin: 0 auto;
@@ -8,15 +8,15 @@
   flex-wrap: wrap;
   gap: 1px;
 
-  @each $day, $i in $week {
+  @each $day, $i in v.$week {
     &--start-day-#{$day} :first-child {
-      margin-left: $i * $block-margin;
+      margin-left: $i * v.$block-margin;
     }
   }
 
-  &--month-length-28 :nth-child(n + 29),
-  &--month-length-29 :nth-child(n + 30),
-  &--month-length-30 :nth-child(n + 31) {
+  &--month-length-28:nth-child(n + 29),
+  &--month-length-29:nth-child(n + 30),
+  &--month-length-30:nth-child(n + 31) {
     display: none;
   }
 
@@ -33,7 +33,7 @@
     box-sizing: border-box;
     border: 1px solid black;
 
-    & ::before {
+    &::before {
       content: '';
     }
 
