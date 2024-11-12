@@ -1,0 +1,63 @@
+@import 'variable';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: 1px;
+
+  &__day {
+    position: relative;
+    display: flex;
+    width: $day-size;
+    height: $day-size;
+    border: $border;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: #ffbfcb;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@each $i, $margin in $days {
+  .calendar--start-day-#{$i} {
+    .calendar__day:first-child {
+      margin-left: ($day-size + $gap) * $margin;
+    }
+  }
+}
+
+@for $i from 31 through 31 {
+  .calendar {
+    @if $i < 31 {
+      .calendar__day:nth-child(31) {
+        display: none;
+      }
+    }
+
+    @if $i < 30 {
+      .calendar__day:nth-child(30) {
+        display: none;
+      }
+    }
+
+    @if $i < 29 {
+      .calendar__day:nth-child(29) {
+        display: none;
+      }
+    }
+  }
+}
