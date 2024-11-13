@@ -1,3 +1,78 @@
+@import './utils/variables';
+
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  color: #000;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  box-sizing: border-box;
+  width: $field-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: $field-pad;
+
+  @each $number, $day in $week {
+    &--start-day-#{$day} > .calendar__day:first-child {
+      margin-left: ($number - 1) * ($cell-size + $cell-gap);
+    }
+  }
+
+  // @for $last-day from 28 through 30 {
+  //   &--month-length-#{$last-day} {
+  //     @for $day from ($last-day + 1) through $days {
+  //       > .calendar__day:nth-child(#{$day}) {
+  //         display: none;
+  //       }
+  //     }
+  //   }
+  // }
+
+  @each $last-day in $possible-month-lengths {
+    &--month-length-#{$last-day} {
+      @if $last-day < $days {
+        @for $day from ($last-day + 1) through $days {
+          > .calendar__day:nth-child(#{$day}) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+    justify-content: center;
+    align-items: center;
+
+    @for $day from 1 through $days {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
