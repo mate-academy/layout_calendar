@@ -10,13 +10,13 @@ $hover-bg: #ffbfcb;
 $font-size: 30px;
 $font-color: #000;
 $days: (
-  sun: 0,
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
+  sun: 6,
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
 );
 
 .calendar {
@@ -30,14 +30,6 @@ $days: (
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  @each $day,
-    $offset in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
-  {
-    &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: calc((6 - #{$offset}) * (#{$day-size} + #{$day-gap}));
-    }
-  }
 
   @for $i from 28 through 31 {
     &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
@@ -57,8 +49,6 @@ $days: (
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Arial, sans-serif;
-    font-size: $font-size;
     transition:
       background-color 0.5s,
       transform 0.5s;
@@ -70,8 +60,18 @@ $days: (
 
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
+        font-family: Arial, sans-serif;
+        font-size: $font-size;
         content: '#{$day}';
       }
+    }
+  }
+}
+
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:nth-child(1) {
+      margin-left: ($day-size * ($i) + ($day-size * ($i) / 100));
     }
   }
 }
