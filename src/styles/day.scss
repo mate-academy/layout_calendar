@@ -1,0 +1,28 @@
+@import './index.scss';
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: #eee;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family;
+  position: relative;
+
+  // Показ числа
+  &::before {
+    content: attr(data-day);
+    font-size: 30px;
+    color: $primary-color;
+  }
+
+  // Ховер ефекти
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-20px);
+    transition: all $transition-duration ease-in-out;
+  }
+}
