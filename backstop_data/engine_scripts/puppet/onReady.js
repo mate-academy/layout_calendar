@@ -20,7 +20,7 @@ module.exports = async (page, scenario, vp) => {
       });
 
       await page.waitForSelector('.calendar--start-day-wed');
-      await page.waitForTimeout(postDOMChangeWait);
+      await new Promise(resolve => setTimeout(resolve, postDOMChangeWait));
 
       break;
     }
@@ -37,7 +37,7 @@ module.exports = async (page, scenario, vp) => {
       });
 
       await page.waitForSelector('.calendar--month-length-29');
-      await page.waitForTimeout(postDOMChangeWait);
+      await new Promise(resolve => setTimeout(resolve, postDOMChangeWait));
 
       break;
     }

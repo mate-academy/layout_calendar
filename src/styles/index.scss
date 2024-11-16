@@ -1,3 +1,47 @@
-body {
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  padding: 10px;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: (100px + 10px) * 7;
+  gap: 1px;
+}
+
+.day {
+  position: relative;
+  background-color: #eee;
+  width: 100px; /* ширина блока дня */
+  height: 100px; /* высота блока дня */
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 100px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @for $number from 1 through 31 {
+    &:nth-child(#{$number})::before {
+      content: '#{$number}';
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: #ffbfcb;
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
 }
