@@ -1,3 +1,55 @@
 body {
   margin: 0;
 }
+
+$days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+$month-length: 31;
+$start-day: sun;
+
+.calendar {
+  width: 707px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+  margin-top: 72px;
+  margin-inline: 149px;
+
+  @each $name, $pos in $days {
+    @if $name == $start-day {
+      &__day:first-child {
+        margin-left: calc((#{$pos} - 1) * (100px + 1px));
+      }
+    }
+  }
+
+  @for $day from 1 through $month-length {
+    &__day:nth-child(#{$day}) {
+      position: relative;
+      box-sizing: border-box;
+      background-color: #eee;
+      height: 100px;
+      width: 100px;
+      border: 1px solid #000;
+
+      &::before {
+        content: '#{$day}';
+        position: absolute;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+    }
+  }
+}
