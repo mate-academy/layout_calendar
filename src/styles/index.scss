@@ -11,6 +11,7 @@ $padding-size: 10px;
 body {
   margin: 0;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -26,13 +27,14 @@ body {
   width: $col-count * $cell-size + 6 * $gap-size + 2 * $padding-size;
 
   &__day {
-    position: relative;
+    display: flex;
+    justify-content: center;
     height: $cell-size;
     width: $cell-size;
     border: 1px solid #000;
     background-color: #eee;
-    text-align: center;
-    line-height: $cell-size;
+    align-items: center;
+    transition-duration: 0.5s;
 
     @for $index from 1 through $day-count {
       &:nth-child(#{$index})::before {
@@ -41,7 +43,7 @@ body {
     }
 
     @for $index from 28 through $day-count {
-      .calendar--month-length--#{$index} &:nth-child(n + #{$index + 1}) {
+      .calendar--month-length-#{$index} &:nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
@@ -66,7 +68,7 @@ $days: (
 );
 
 @each $day, $index in $days {
-  .calendar--start-day--#{$day} {
+  .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       margin-left: ($cell-size + $gap-size) * $index;
     }
