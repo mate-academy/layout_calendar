@@ -11,8 +11,7 @@ $days: (
   sat: 6,
   sun: 7,
 );
-$month-length: 31;
-$start-day: sun;
+$durations: 28, 29, 30, 31;
 
 .calendar {
   width: 707px;
@@ -24,31 +23,51 @@ $start-day: sun;
   margin-inline: 149px;
 
   @each $name, $pos in $days {
-    @if $name == $start-day {
-      &__day:first-child {
-        margin-left: calc((#{$pos} - 1) * (100px + 1px));
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: ($pos - 1) * 101;
       }
     }
   }
 
-  @for $day from 1 through $month-length {
-    &__day:nth-child(#{$day}) {
-      position: relative;
-      box-sizing: border-box;
-      background-color: #eee;
-      height: 100px;
-      width: 100px;
-      border: 1px solid #000;
+  //           On hovering over a cell:
+  // - cursor should become pointer
+  // - The hovered cell has to become pink (use `#FFBFCB`)
+  // - Move the hovered cell up by `20px` (use `transform`)
+  // - All changes should be animated with the duration of 0.5s
 
-      &::before {
-        content: '#{$day}';
-        position: absolute;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 30px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
+  @each $month-duration in $durations {
+    // modifiers for possible month durations
+    &--month-length-#{$month-duration} {
+      @for $day from 1 through $month-duration {
+        // draw correct number of dates cells
+        & .calendar__day:nth-child(#{$day}) {
+          position: relative;
+          box-sizing: border-box;
+          background-color: #eee;
+          height: 100px;
+          width: 100px;
+          border: 1px solid #000;
+          transition-duration: 500ms;
+
+          // draw dates numbers
+          &::before {
+            content: '#{$day}';
+            position: absolute;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+          }
+
+          &:hover {
+            cursor: pointer;
+            background-color: #ffbfcb;
+            transform: translateY(-20px);
+          }
+        }
       }
     }
   }
