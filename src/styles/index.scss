@@ -1,3 +1,65 @@
+* {
+  font-family: Arial, sans-serif;
+}
+
+$height-block: 100px;
+$width-block: 100px;
+$amount-days-in-row: 7;
+$num-days: 31;
+$month-length: 28, 29, 30, 31;
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+@for $i from 1 through $num-days {
+  .calendar {
+    display: flex;
+    gap: 1px;
+    flex-wrap: wrap;
+    max-width: ($width-block * $amount-days-in-row + $amount-days-in-row);
+
+    &__day {
+      box-sizing: border-box;
+      height: $height-block;
+      width: $width-block;
+      background-color: #eee;
+      border: 1px black solid;
+      text-align: center;
+      line-height: $height-block;
+      font-size: 30px;
+      transition: all 0.5s ease;
+      background-size: 100% 100%;
+
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+
+      &:hover {
+        background-color: pink;
+        transform: translate(0, -20px);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+$start-days: (0 'mon', 1 'tue', 2 'wed', 3 'thu', 4 'fri', 5 'sat', 6 'sun');
+
+@each $index, $day in $start-days {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: 100px * $index + $index;
+  }
+}
+
+@each $index in $month-length {
+  @for $i from $index through $num-days {
+    .calendar--month-length-#{$index}:nth-child(#{$i + 1}) {
+      display: none;
+    }
+  }
 }
