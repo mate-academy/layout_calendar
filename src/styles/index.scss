@@ -56,10 +56,8 @@ $start-days: (0 'mon', 1 'tue', 2 'wed', 3 'thu', 4 'fri', 5 'sat', 6 'sun');
   }
 }
 
-@each $index in $month-length {
-  @for $i from $index through $num-days {
-    .calendar--month-length-#{$index}:nth-child(#{$i + 1}) {
-      display: none;
-    }
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
