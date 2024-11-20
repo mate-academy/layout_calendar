@@ -1,3 +1,62 @@
+$daySize: 100px;
+$countDays: 31;
+$gapValue: 1px;
+$calendarWidth: $daySize * 7 + 10;
+$daysOfWeek: ('mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6, 'sun' 7);
+$startDay: 'sun';
+
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 82px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline: 10px;
+  gap: $gapValue;
+  max-width: $calendarWidth;
+}
+
+.calendar__day {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  border: 1px solid black;
+  height: $daySize;
+  width: $daySize;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transition-duration: 0.5s;
+  transform: translateY(-20px);
+}
+
+@for $dayNumber from 1 through 31 {
+  @if $dayNumber <= $countDays {
+    .calendar__day:nth-child(#{$dayNumber})::before {
+      content: '#{$dayNumber}';
+    }
+  }
+
+  @if $dayNumber > $countDays {
+    .calendar__day:nth-child(#{$dayNumber}) {
+      display: none;
+    }
+  }
+}
+
+@each $name, $value in $daysOfWeek {
+  @if $startDay == $name {
+    .calendar--start-day-sun .calendar__day:first-child {
+      margin-left: ($value * ($daySize + $gapValue)) - ($daySize + $gapValue);
+    }
+  }
 }
