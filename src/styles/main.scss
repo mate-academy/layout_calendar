@@ -1,0 +1,82 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+// Переменные
+$grey: #eee;
+$purple: #ffbfcb;
+$font-size: 30px;
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$paddings: 10px;
+$hover-transition: 0.5s;
+$dayInWe: 7;
+
+// БЭМ стили
+.calendar {
+  width: 726px;
+  display: flex;
+
+  padding: $paddings;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+
+  background-color: $grey;
+  border: $border-width solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform $hover-transition;
+  box-sizing: border-box;
+}
+
+.calendar__day :hover {
+  transform: translateY(-20px);
+  background-color: $purple;
+  cursor: pointer;
+}
+
+@for $n from 1 through 31 {
+  .calendar :nth-child(#{$n})::before {
+    content: '#{$n}';
+
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+  }
+}
+
+$week: //
+  'mon' 0,
+  'tue' 101px,
+  'wed' 202px,
+  'thu' 303px,
+  'fri' 404px,
+  'sat' 505px,
+  'sun' 606px;
+
+@each $day, $margin in $week {
+  .calendar--start-day-#{$day} :first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
