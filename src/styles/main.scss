@@ -1,0 +1,88 @@
+$color-primary: #060b35;
+$day-color: #eee;
+$border-color: #000;
+$active-color: #ffbfcb;
+$day-size: 100px;
+$font-size: 30px;
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+$month-lengths: 28, 29, 30, 31;
+$default-margin-left: 6 * ($day-size + 1px);
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  width: calc($day-size * 7 + 26px);
+  margin: 0 auto;
+  gap: 1px;
+  box-sizing: border-box;
+  padding: 0 10px;
+
+  .calendar__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    background-color: $day-color;
+    border: 1px solid $border-color;
+  }
+
+  .calendar__day:hover {
+    background-color: $active-color;
+    transform: translateY(-20px);
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+  }
+
+  .calendar__day:first-child {
+    margin-left: $default-margin-left;
+  }
+
+  @each $day in $start-days {
+    &--start-day-#{$day} &__day:first-child {
+      @if $day == mon {
+        margin-left: 0;
+      } @else if $day == tue {
+        margin-left: ($day-size + 1px) * 1;
+      } @else if $day == wed {
+        margin-left: ($day-size + 1px) * 2;
+      } @else if $day == thu {
+        margin-left: ($day-size + 1px) * 3;
+      } @else if $day == fri {
+        margin-left: ($day-size + 1px) * 4;
+      } @else if $day == sat {
+        margin-left: ($day-size + 1px) * 5;
+      } @else if $day == sun {
+        margin-left: ($day-size + 1px) * 6;
+      }
+    }
+  }
+
+  @each $length in $month-lengths {
+    @if $length < 31 {
+      @for $i from ($length + 1) through 31 {
+        &--month-length-#{$length} .calendar__day:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: $font-size;
+  }
+}
