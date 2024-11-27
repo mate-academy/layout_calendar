@@ -1,3 +1,6 @@
+$width: 100px;
+$calendar-width: 712px;
+$gap:1px;
 $days: (
   'mon': 0,
   'tue': 1,
@@ -31,8 +34,9 @@ body {
 .calendar {
   flex-wrap: wrap;
   gap: 1px;
-  width: 706px;
+  width: 712px;
   display: flex;
+  padding: 0, 10px;
 }
 
 .calendar__day {
@@ -50,12 +54,8 @@ body {
 
 @each $day, $index in $days {
   .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
-    margin-left: calc(100px * $index + 1px * $index);
+    margin-left: calc($width * $index + $gap * $index);
   }
-}
-
-.calendar__day::before {
-  content: number;
 }
 
 .calendar__day:hover {
