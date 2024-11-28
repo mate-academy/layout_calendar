@@ -1,15 +1,4 @@
-// Переменные
-$day-size: 100px;
-$border-size: 1px;
-$gap-size: 1px;
-$padding-size: 10px;
-$days-per-week: 7;
-$hover-color: #FFBFCB;
-$bg-color: #eee;
-$font-family: Arial, sans-serif;
-$font-size: 30px;
-$transform-move: 20px;
-$transition-duration: 0.5s;
+@use './variables' as *;
 
 // Стили для body
 body {
@@ -20,22 +9,21 @@ body {
   align-items: center;
 }
 
-// Календарь
+// Стили для календаря
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat($days-per-week, $day-size);
   gap: $gap-size;
-  padding: $padding-size;
-  width: calc(($day-size + $gap-size) * $days-per-week + 2 * $padding-size);
-  box-sizing: border-box;
+  padding: $padding;
+  width: calc(($day-size + $gap-size) * $days-per-week - $gap-size);
 
   &__day {
     width: $day-size;
     height: $day-size;
     background-color: $bg-color;
-    border: $border-size solid black;
+    border: $border-width solid $border-color;
     position: relative;
-    transition: transform $transition-duration ease, background-color $transition-duration ease;
+    transition: transform $animation-duration ease, background-color $animation-duration ease;
 
     &::before {
       content: '';
@@ -43,18 +31,18 @@ body {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: $font-family;
+      font-family: Arial, sans-serif;
       font-size: $font-size;
     }
 
     &:hover {
       background-color: $hover-color;
-      transform: translateY(-$transform-move);
+      transform: translateY(-10px);
       cursor: pointer;
     }
   }
 
-  // Генерация номеров дней через @for
+  // Генерация дней месяца через цикл
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: "#{$i}";
@@ -71,11 +59,9 @@ body {
   }
 
   // Модификаторы для начального дня недели
-  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: calc(#{$index} * ($day-size + $gap-size));
-      }
+  @each $day, $offset in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 0) {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: calc(#{$offset} * ($day-size + $gap-size));
     }
   }
 }
