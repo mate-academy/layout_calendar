@@ -1,10 +1,15 @@
 // Переменные
 $day-size: 100px;
+$border-size: 1px;
 $gap-size: 1px;
-$bg-color: #eee;
+$padding-size: 10px;
+$days-per-week: 7;
 $hover-color: #FFBFCB;
-$days: ('sun' 0, 'mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6);
-$month-lengths: (28, 29, 30, 31);
+$bg-color: #eee;
+$font-family: Arial, sans-serif;
+$font-size: 30px;
+$transform-move: 20px;
+$transition-duration: 0.5s;
 
 // Стили для body
 body {
@@ -17,18 +22,20 @@ body {
 
 // Календарь
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, $day-size);
+  display: flex;
+  flex-wrap: wrap;
   gap: $gap-size;
-  padding: 10px;
+  padding: $padding-size;
+  width: calc(($day-size + $gap-size) * $days-per-week + 2 * $padding-size);
+  box-sizing: border-box;
 
   &__day {
     width: $day-size;
     height: $day-size;
     background-color: $bg-color;
-    border: 1px solid black;
+    border: $border-size solid black;
     position: relative;
-    transition: all 0.5s ease;
+    transition: transform $transition-duration ease, background-color $transition-duration ease;
 
     &::before {
       content: '';
@@ -36,13 +43,13 @@ body {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: Arial, sans-serif;
-      font-size: 30px;
+      font-family: $font-family;
+      font-size: $font-size;
     }
 
     &:hover {
       background-color: $hover-color;
-      transform: translateY(-20px);
+      transform: translateY(-$transform-move);
       cursor: pointer;
     }
   }
@@ -55,7 +62,7 @@ body {
   }
 
   // Модификаторы для длины месяца
-  @each $length in $month-lengths {
+  @each $length in (28, 29, 30, 31) {
     &--month-length-#{$length} {
       .calendar__day:nth-child(n + #{$length + 1}) {
         display: none;
@@ -64,10 +71,10 @@ body {
   }
 
   // Модификаторы для начального дня недели
-  @each $day, $dayCount in $days {
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
     &--start-day-#{$day} {
-      .calendar__day:nth-child(1) {
-        margin-left: calc($dayCount * (#{$day-size} + $gap-size));
+      .calendar__day:first-child {
+        margin-left: calc(#{$index} * ($day-size + $gap-size));
       }
     }
   }
