@@ -40,21 +40,13 @@ body {
 }
 
 @for $dayNumber from 1 through 31 {
-  @if $dayNumber <= $countDays {
-    .calendar__day:nth-child(#{$dayNumber})::before {
-      content: '#{$dayNumber}';
-    }
-  }
-
-  @if $dayNumber > $countDays {
-    .calendar__day:nth-child(#{$dayNumber}) {
-      display: none;
-    }
+  .calendar__day:nth-child(#{$dayNumber})::before {
+    content: '#{$dayNumber}';
   }
 }
 
-@each $name, $value in $daysOfWeek {
-  .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: ($value * ($daySize + $gapValue)) - ($daySize + $gapValue);
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
