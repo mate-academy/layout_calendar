@@ -1,0 +1,67 @@
+@use './variables' as *;
+
+// Стили для body
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Стили для календаря
+.calendar {
+  display: grid;
+  grid-template-columns: repeat($days-per-week, $day-size);
+  gap: $gap-size;
+  padding: $padding;
+  width: calc(($day-size + $gap-size) * $days-per-week - $gap-size);
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $bg-color;
+    border: $border-width solid $border-color;
+    position: relative;
+    transition: transform $animation-duration ease, background-color $animation-duration ease;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-10px);
+      cursor: pointer;
+    }
+  }
+
+  // Генерация дней месяца через цикл
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Модификаторы для длины месяца
+  @each $length in (28, 29, 30, 31) {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // Модификаторы для начального дня недели
+  @each $day, $offset in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 0) {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: calc(#{$offset} * ($day-size + $gap-size));
+    }
+  }
+}
