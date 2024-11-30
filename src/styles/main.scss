@@ -1,4 +1,4 @@
-@import '../utils/variables';
+@import './utils/variables';
 
 body {
   margin: 0;
@@ -52,6 +52,12 @@ body {
 
     @for $i from $month-length + 1 through 32 {
       &:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+
+    @for $i from 28 through 31 {
+      .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
     }
