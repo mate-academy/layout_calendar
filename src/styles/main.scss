@@ -1,0 +1,43 @@
+@import './utils/variables';
+
+.month {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $width-calendar;
+  margin: auto;
+}
+
+.day {
+  background-color: #eee;
+  width: $width-square;
+  height: $width-square;
+  border: 1px solid black;
+  box-sizing: border-box;
+
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  line-height: 100px;
+
+  @for $i from 1 through $month-length {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  &:first-child {
+    margin-left: $margin-first-day;
+  }
+
+  &:nth-last-child(-n + 2) {
+    display: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+}
