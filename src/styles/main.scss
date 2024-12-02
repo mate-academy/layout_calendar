@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  counter-reset: day-counter 0;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $day-size);
+  gap: $gap;
+  width: calc(#{$columns * $day-size} + (#{$columns - 1} * $gap));
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    position: relative;
+    cursor: pointer;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(-n + 31)::before {
+      content: counter(day-counter);
+      counter-increment: day-counter;
+    }
+  }
+
+  // Модифікатори для відступу першого дня тижня
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-#{$day} .calendar__day:nth-child(1) {
+      grid-column: #{$index + 1};
+    }
+  }
+}
