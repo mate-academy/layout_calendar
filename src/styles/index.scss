@@ -1,28 +1,26 @@
-$cell-size: 100px;
-$border: 1px solid black;
-$day-color: #eee;
-$hover-color: #ffbfcb;
-$font-size: 30px;
-$animation-duration: 0.5s;
-$days-of-week: (
-  mon: 0,
-  tue: 1,
-  wed: 2,
-  thu: 3,
-  fri: 4,
-  sat: 5,
-  sun: 6,
-);
+$square_size: 100px;
+$number-size: 30px;
 $gap: 1px;
-$font-family: Arial, sans-serif;
+$days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$month-length: 31;
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-}
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 
-html {
-  height: 100%;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,51 +28,49 @@ html {
 
 .calendar {
   display: flex;
+  max-width: 726px;
   flex-wrap: wrap;
-  width: calc((7 * #{$cell-size}) + 6px);
-  padding: 10px;
-  gap: $gap;
-  counter-reset: day-counter 0;
+  gap: 1px;
+  padding-inline: 10px;
+
   &__day {
-    width: $cell-size;
-    height: $cell-size;
+    display: flex;
     justify-content: center;
     align-items: center;
-    font-family: $font-family;
-    font-size: $font-size;
-    background-color: $day-color;
-    border: $border;
-    display: flex;
-    box-sizing: border-box;
-    &::before {
-      counter-increment: day-counter;
-      content: counter(day-counter);
-    }
+
+    background-color: #eee;
+    width: $square_size;
+    height: $square_size;
+    border: 1px solid black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
     &:hover {
-      cursor: pointer;
-      background-color: $hover-color;
+      background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: all $animation-duration;
     }
-  }
 
-  @each $day, $index in $days-of-week {
-    &--start-day-#{$day} .calendar__day:nth-child(1) {
-      margin-left: calc(#{$index} * (#{$cell-size} + 1px));
-    }
-  }
-
-  @for $i from 28 through 31 {
-    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
+    @for $number-of-day from 1 through $month-length {
+      &:nth-child(#{$number-of-day})::before {
+        content: '#{$number-of-day}';
+        font-size: $number-size;
+      }
     }
   }
 }
 
-@each $day, $index in $days-of-week {
-  .calendar--start-day--#{$day} {
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: ($cell-size + $gap) * $index;
+      margin-left: ($square_size + $gap) * $i;
+    }
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
     }
   }
 }
