@@ -13,19 +13,17 @@ body {
   flex-wrap: wrap;
   gap: $gap;
   width: calc((#{$day-size} * 7) + (#{$gap} * 6));
-  counter-reset: day-counter 0; // Ініціалізація лічильника днів
-
-  // Генерація днів
+}
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
       content: "#{$i}";
     }
   }
 
-  &--start-day-sun .calendar__day:first-child {
+  .month-length--start-day .calendar__day:first-child {
     margin-left: $calc-margin;
   }
-}
+
 
 .calendar__day {
   box-sizing: border-box;
