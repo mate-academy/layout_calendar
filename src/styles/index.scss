@@ -12,8 +12,11 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f8f9fa;
-  font-family: Arial, sans-serif;
-  font-size: 30px;
+}
+
+div {
+  display: block;
+  unicode-bidi: isolate;
 }
 
 .calendar {
@@ -25,16 +28,13 @@ body {
   counter-reset: day-counter;
 
   &__day {
+    position: relative;
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
     background-color: $default-background;
     border: 1px solid #000;
     text-align: center;
-    line-height: $day-size;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     transition: all 0.5s ease;
     cursor: pointer;
 
@@ -42,6 +42,12 @@ body {
       content: counter(day-counter);
       counter-increment: day-counter;
       color: #000;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
 
     &:hover {
