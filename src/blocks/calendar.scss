@@ -8,7 +8,7 @@
   list-style: none;
 
   @each $length, $days in $month-lengths {
-    &.calendar--length-#{$length} {
+    &.calendar--month-length-#{$length} {
       .calendar__day:nth-child(n + #{$days + 1}) {
         display: none;
       }
@@ -29,6 +29,7 @@
       transition: transform 500ms;
       background-color: #ffbfcb;
       transform: translate(0, -20px);
+      cursor: pointer;
     }
 
     @for $i from 1 through 31 {
@@ -39,7 +40,7 @@
   }
 
   @each $day, $index in $start-days {
-    &.calendar--start-#{$day} {
+    &.calendar--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: calc($day-size * $index + $gap * $index);
       }
