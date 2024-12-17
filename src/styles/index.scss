@@ -1,3 +1,108 @@
+$day-size: 100px;
+$day-border: 1px;
+$day-gap: $day-border;
+$day-bg: #eee;
+$font-size: 30px;
+$month-length: 31;
+$day-size: 100px;
+$calendar: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+);
+$day-size: 100px;
+
+@each $day, $i in $calendar {
+  .calendar--start-day-#{$day} .calendar-day:first-of-type {
+    margin-left: ($day-size + $day-gap) * $i;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: calc(($day-size + $day-gap) * 7);
+
+  &-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    background-color: $day-bg;
+    height: $day-size;
+    width: $day-size;
+    border: $day-border solid black;
+
+    transition-property: background-color, transform;
+    transition-duration: 0.5s;
+
+    @for $i from 1 through $month-length {
+      &:nth-child(n + #{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: $font-size;
+      color: black;
+    }
+  }
+}
+
+.calendar-day:hover {
+  background-color: #ffbfcb;
+  transform: translate(0, -20px);
+}
+
+@for $i from 28 through $month-length {
+  .calendar--month-length-#{$i} .calendar-day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+.calendar--start-day-sun .calendar-day:first-child {
+  margin-left: calc($day-size + $day-gap);
+}
+
+.calendar--start-day-mon .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 2);
+}
+
+.calendar--start-day-tue .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 3);
+}
+
+.calendar--start-day-wed .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 4);
+}
+
+.calendar--start-day-thu .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 5);
+}
+
+.calendar--start-day-fri .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 6);
+}
+
+.calendar--start-day-sat .calendar-day:first-child {
+  margin-left: calc(($day-size + $day-gap) * 7);
 }
