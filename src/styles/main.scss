@@ -1,8 +1,3 @@
-:root {
-  margin: 0;
-  padding: 0;
-}
-
 $day-size: 100px;
 $day-border: 1px;
 $day-background: #eee;
@@ -14,20 +9,28 @@ $gap: 1px;
 $padding: 10px;
 $transition-duration: 0.5s;
 
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: $gap;
-
-  // prettier-ignore
-  max-width: calc(
-  (#{$day-size} + #{$day-border} * 2) * $columns + $gap * ($columns - 1) + $padding
-);
-
   margin: auto;
-  padding: $padding;
+  max-width: calc(
+    (#{$day-size} + #{$day-border} * 2) * #{$columns} + $gap * (
+        #{$columns} - 1
+      ) + $padding
+  );
   box-sizing: border-box;
+  padding: $padding;
 
   &__day {
     position: relative;
@@ -45,7 +48,7 @@ $transition-duration: 0.5s;
     cursor: pointer;
     transition:
       transform $transition-duration,
-      background-color $day-background;
+      background-color $transition-duration;
 
     &::before {
       content: counter(day);
@@ -62,19 +65,25 @@ $transition-duration: 0.5s;
     }
   }
 
-  @for $i from 28 through 31 {
-    &--days-#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
-        display: none;
+  &--start-sun {
+    .calendar__day:first-child {
+      margin-left: 0;
+    }
+  }
+
+  @each $day, $margin in (mon: 1, tu: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7)
+  {
+    &--start-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($day-size + $gap) * ($margin - 1);
       }
     }
   }
 
-  @each $day, $margin in (pon: 0, wt: 1, śr: 2, czw: 3, pt: 4, sob: 5, niedz: 6)
-  {
-    &--start-niedz {
-      .calendar__day:first-child {
-        margin-left: calc((#{$day-size} * 6) + ($gap * 6));
+  @for $i from 28 through 31 {
+    &--days-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
       }
     }
   }
