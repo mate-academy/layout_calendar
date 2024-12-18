@@ -1,5 +1,4 @@
 .calendar {
-  margin: 71.5px 149px;
   font-size: 30px;
   padding: $square-paddings;
   display: flex;
@@ -39,9 +38,9 @@
     }
   }
 
-  @each $day, $count in $start-days {
-    &--start-day--#{$day} :first-child {
-      margin-left: #{$count};
+  @each $day, $index in $days {
+    &--start-day--#{$day} .calendar__day:first-child {
+      margin-left: ($square-size + $square-spacing) * $index;
     }
   }
 }
