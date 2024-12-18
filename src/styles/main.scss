@@ -24,12 +24,7 @@ body {
   justify-content: flex-start;
   gap: $gap;
   margin: auto;
-  max-width: calc(
-    (#{$day-size} + #{$day-border} * 2) * #{$columns} + $gap * (
-        #{$columns} - 1
-      ) + $padding
-  );
-  box-sizing: border-box;
+  max-width: 706px;
   padding: $padding;
 
   &__day {
@@ -54,7 +49,7 @@ body {
       content: counter(day);
       counter-increment: day;
       position: absolute;
-      top: 50%;
+      top: 49%;
       left: 50%;
       transform: translate(-50%, -50%);
     }
@@ -65,7 +60,7 @@ body {
     }
   }
 
-  &--start-sun {
+  &--start-day-sun {
     .calendar__day:first-child {
       margin-left: 0;
     }
@@ -73,7 +68,7 @@ body {
 
   @each $day, $margin in (mon: 1, tu: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7)
   {
-    &--start-#{$day} {
+    &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: ($day-size + $gap) * ($margin - 1);
       }
@@ -81,7 +76,7 @@ body {
   }
 
   @for $i from 28 through 31 {
-    &--days-#{$i} {
+    &--month-length-#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
