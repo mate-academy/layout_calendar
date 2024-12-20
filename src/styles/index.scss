@@ -1,6 +1,9 @@
 $numOfFirstDay: 1;
-$numOfLastDay: 31;
-$firstDay: 3;
+$numOfLastDay: 28;
+$startDay: 3;
+
+$calendarDayHeight: 100px;
+$calendarDayWidth: 100px;
 
 body {
   margin: 0;
@@ -15,29 +18,31 @@ body {
   gap: 1px;
 }
 
-.calendar__day {
-  // position: relative;
-
-  height: 100px;
-  width: 100px;
-  box-sizing: border-box;
-  border: 1 solid black;
-  background-color: #eee;
-
-}
-
 .calendar__day:first-child {
-  margin-left: 101px * ($firstDay - 1);
+  margin-left: 101px * ($startDay - 1);
 }
+
 
 @for $i from $numOfFirstDay through $numOfLastDay {
-  .calendar :nth-child(n) {
-    .calendar__day::before {
-      line-height: 30px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      content: '#{$i}';
-      // position: fixed;
-    }
+  .calendar__day:nth-child(#{$i} of .calendar__day) {
+    position: relative;
+
+    height: $calendarDayHeight;
+    width: $calendarDayWidth;
+    box-sizing: border-box;
+    border: 1 solid black;
+    background-color: #eee;
+  }
+
+  .calendar__day:nth-child(#{$i} of .calendar__day)::before {
+    content: '#{$i}';
+    position: absolute;
+    height: $calendarDayHeight;
+    width: $calendarDayWidth;
+
+    text-align: center;
+    line-height: $calendarDayHeight;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
   }
 }
