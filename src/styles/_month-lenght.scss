@@ -1,0 +1,36 @@
+@use 'variables';
+
+@each $number in variables.$month-length {
+  .calendar--month-length-#{$number} {
+    @for $i from 1 through $number {
+      .calendar__day:nth-child(#{$i} of .calendar__day) {
+        position: relative;
+
+        height: variables.$calendarDayHeight;
+        width: variables.$calendarDayWidth;
+        box-sizing: border-box;
+        border: 1 solid black;
+        background-color: #eee;
+        transition: all 0.5s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: #ffbfcb;
+          transform: translate(0, -20px);
+        }
+      }
+
+      .calendar__day:nth-child(#{$i} of .calendar__day)::before {
+        content: '#{$i}';
+        position: absolute;
+        height: variables.$calendarDayHeight;
+        width: variables.$calendarDayWidth;
+
+        text-align: center;
+        line-height: variables.$calendarDayHeight;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+}
