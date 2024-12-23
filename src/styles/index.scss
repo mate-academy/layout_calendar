@@ -1,5 +1,4 @@
-$week: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
-$day-size: 100px;
+@use './variables' as *;
 
 body {
   margin: 0;
@@ -14,13 +13,13 @@ body {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
+  gap: $gap-size;
   width: 726px;
   padding: 10px;
-  gap: 1px;
 
   @each $day, $index in $week {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: ($day-size + 1px) * $index;
+      margin-left: ($day-size + $gap-size) * $index;
     }
   }
 
