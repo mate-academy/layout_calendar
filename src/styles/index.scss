@@ -1,3 +1,74 @@
-body {
+// Змінні для стилів
+$day-size: 100px; // Розмір кожної комірки (ширина і висота).
+$day-border: 1px; // Ширина рамки кожної комірки.
+$day-color: #eee; // Колір фону для кожної комірки.
+$hover-color: #ffbfcb; // Колір фону при наведенні миші.
+$hover-transform: -20px; // Зсув комірки вгору при наведенні.
+$gap: 1px; // Проміжок між комірками.
+$font-size: 30px; // Розмір шрифту для цифр у комірках.
+$calendar-width: calc(
+  (#{$day-size} + #{$gap}) * 7 - #{$gap}
+); // Вираховує ширину календаря: ширина 7 комірок + проміжки між ними, плюс 20px на padding.
+
+* {
   margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  flex-wrap: wrap;
+  padding: 10px;
+  counter-reset: day-counter;
+  gap: $gap;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: $day-border solid black;
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    transition: all 0.5s ease;
+
+    &::before {
+      content: counter(day-counter);
+      counter-increment: day-counter;
+      position: absolute;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY($hover-transform);
+    }
+  }
+
+  // Модифікатори для кількості днів у місяці
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  // Модифікатори для початку місяця з певного дня тижня
+  @each $day,
+    $offset in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+  {
+    &--start-#{$day} .calendar__day:first-child {
+      margin-left: calc((#{$day-size} + #{$gap}) * #{$offset});
+    }
+  }
 }
