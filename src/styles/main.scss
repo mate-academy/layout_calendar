@@ -1,0 +1,60 @@
+$day-size: 100px;
+$day-color: #eee;
+$day-hover-color: #ffbfcb;
+$border-color: #000;
+$font-color: #000;
+$transition-duration: 0.5s;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: calc(7 * #{$day-size} + 6px);
+  margin: auto;
+  padding: 10px;
+  gap: 1px;
+
+  counter-reset: day;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    border: 1px solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      color: $font-color;
+    }
+
+    &:hover {
+      background-color: $day-hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 29 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-day-#{$day} &__day:nth-child(1) {
+      margin-left: calc(#{$index} * #{$day-size} + #{$index}px);
+    }
+  }
+}
