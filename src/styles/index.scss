@@ -1,3 +1,78 @@
-body {
-  margin: 0;
+// Variables
+$cell-size: 100px;
+$border-size: 1px;
+$font-size: 30px;
+$color-grey: #eee;
+$color-border: #000;
+$color-hover: #ffbfcb;
+$calendar-padding: 10px;
+$gap: 1px;
+$animation-duration: 0.5s;
+
+// Calendar Base Styles
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: calc(
+    7 * (#{$cell-size} + #{$border-size} * 2) + #{$gap} * 6 +
+      #{$calendar-padding} * 2
+  ); // Усі операції в одному рядку
+  margin: auto;
+  padding: $calendar-padding;
+  gap: $gap;
+  border: 1px solid $color-border;
+  background-color: $color-grey;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-size solid $color-border;
+    background-color: $color-grey;
+    position: relative;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    transition:
+      transform $animation-duration ease,
+      background-color $animation-duration ease;
+
+    &:hover {
+      background-color: $color-hover;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      content: attr(data-day);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: $font-size;
+      font-weight: bold;
+      color: $color-border;
+    }
+  }
+}
+
+// Start-Day Modifier
+@each $day, $margin in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+{
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(
+      #{$margin} * (#{$cell-size} + #{$gap} + #{$border-size} * 2)
+    ); // Усі операції в одному рядку
+  }
+}
+
+// Month-Length Modifier
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
