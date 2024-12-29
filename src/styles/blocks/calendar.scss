@@ -29,32 +29,32 @@ body {
     background-color: #ffbfcb;
     transform: translate(0, -20px);
   }
-}
 
-$days: (
-  mon 0,
-  tue 101px,
-  wed 202px,
-  thu 303px,
-  fri 404px,
-  sat 505px,
-  sun 606px
-);
+  $days: (
+    mon: 0,
+    tue: 101px,
+    wed: 202px,
+    thu: 303px,
+    fri: 404px,
+    sat: 505px,
+    sun: 606px,
+  );
 
-@for $i from 1 through 31 {
-  .calendar__day--#{$i}::before {
-    content: '#{$i}';
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
   }
-}
 
-@each $day, $margin in $days {
-  .start-#{$day} {
-    margin-left: $margin;
+  @each $day, $margin in $days {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: $margin;
+    }
   }
-}
 
-@for $da from 28 through 31 {
-  .calendar--month-length-#{$da} .calendar__day:nth-child(n + #{$da + 1}) {
-    visibility: hidden;
+  @for $date from 28 through 31 {
+    &--month-length-#{$date} .calendar__day:nth-child(n + #{$date + 1}) {
+      visibility: hidden;
+    }
   }
 }
