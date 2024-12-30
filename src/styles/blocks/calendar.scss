@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  width: 800px;
+  height: 800px;
 }
 
 .calendar {
@@ -32,12 +34,12 @@ body {
 
   $days: (
     mon: 0,
-    tue: 101px,
-    wed: 202px,
-    thu: 303px,
-    fri: 404px,
-    sat: 505px,
-    sun: 606px,
+    tue: 1px,
+    wed: 2px,
+    thu: 3px,
+    fri: 4px,
+    sat: 5px,
+    sun: 6px,
   );
 
   @for $i from 1 through 31 {
@@ -48,7 +50,7 @@ body {
 
   @each $day, $margin in $days {
     &--start-day-#{$day} .calendar__day:nth-child(1) {
-      margin-left: $margin;
+      margin-left: (100 * $margin) + $margin;
     }
   }
 
