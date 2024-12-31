@@ -1,3 +1,109 @@
+$day-size: 100px;
+$border-width: 1px;
+$day-gap: 1px;
+$font-size: 30px;
+$hover-color: #ffbfcb;
+$day-color: #eee;
+$border-color: black;
+
+html,
 body {
-  margin: 0;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 7px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: calc((#{$day-size} + #{$border-width * 2} + #{$day-gap}) * 7);
+  padding: 10px;
+  gap: $day-gap;
+
+  // Нульова точка лічильника
+  counter-reset: day-counter;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: $border-width solid $border-color;
+    background-color: $day-color;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    position: relative;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      content: counter(day-counter);
+      counter-increment: day-counter;
+      position: absolute;
+      top: 50%;
+      left: 50.5%;
+      transform: translate(-50%, -50%);
+      line-height: $day-size;
+      font-size: $font-size;
+    }
+  }
+
+  // Налаштування довжини місяця
+  &--month-length-31 .calendar__day {
+    display: flex;
+  }
+
+  &--month-length-28 .calendar__day:nth-child(n + 29) {
+    display: none;
+  }
+
+  &--month-length-29 .calendar__day:nth-child(n + 30) {
+    display: none;
+  }
+
+  &--month-length-30 .calendar__day:nth-child(n + 31) {
+    display: none;
+  }
+
+  // Зміщення першого дня для кожного варіанту
+  &--start-day-mon .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 0);
+  }
+
+  &--start-day-tue .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 1);
+  }
+
+  &--start-day-wed .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 2);
+  }
+
+  &--start-day-thu .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 3);
+  }
+
+  &--start-day-fri .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 4);
+  }
+
+  &--start-day-sat .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 5);
+  }
+
+  &--start-day-sun .calendar__day:nth-child(1) {
+    margin-left: calc(($day-size + $day-gap) * 6);
+  }
 }
