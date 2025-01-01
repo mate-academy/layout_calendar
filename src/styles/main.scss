@@ -4,7 +4,7 @@ $border-size: 1px;
 $font-size: 30px;
 $font-color: #000;
 $grey: #eee;
-$pink: #FFBFCB;
+$pink: #f5a9d6;
 $animation-duration: 0.5s;
 
 // Calendar styles
@@ -14,9 +14,7 @@ $animation-duration: 0.5s;
   width: calc(($cell-size + $border-size * 2) * 7 + 10px);
   gap: $border-size;
   padding: 10px;
-  counter-reset: day-counter;
-  align-items: center; // Центрируем по вертикали
-  justify-content: center; // Центрируем по горизонтали
+  counter-reset: day-counter; // Добавляем сброс счетчика на 1
 
   &__day {
     position: relative;
@@ -28,9 +26,7 @@ $animation-duration: 0.5s;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition:
-      transform $animation-duration,
-      background-color $animation-duration;
+    transition: transform $animation-duration, background-color $animation-duration;
 
     // Day number
     &::before {
@@ -50,11 +46,10 @@ $animation-duration: 0.5s;
 }
 
 // Start day modifiers
-@each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
-{
+@each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
   .calendar--start-#{$day} {
     .calendar__day:first-child {
-      margin-left: calc(($cell-size + $border-size * 2) * $margin);
+      margin-left: calc(($cell-size + $border-size * 2) * $margin - $border-size);
     }
   }
 }
@@ -62,7 +57,7 @@ $animation-duration: 0.5s;
 // Month length modifiers
 @for $length from 28 through 31 {
   .calendar--month-length-#{$length} {
-    .calendar__day:nth-child(n + #{$length + 1}) {
+    .calendar__day:nth-child(n+#{$length + 1}) {
       display: none;
     }
   }
