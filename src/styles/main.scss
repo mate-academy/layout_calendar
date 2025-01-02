@@ -1,5 +1,5 @@
 $gap-width: 1px;
-$number-of-columns: 7;
+$columns: 7;
 $width-day-cell: 100px;
 $height-day-cell: 100px;
 $days-week: (
@@ -26,7 +26,9 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc(#{$number-of-columns} * #{$width-day-cell} + 6px);
+  width: calc(
+    #{$columns} * #{$width-day-cell} + #{$gap-width} * (#{$columns} - 1)
+  );
   gap: 1px;
   padding: 10px;
 
