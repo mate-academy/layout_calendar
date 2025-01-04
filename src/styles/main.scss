@@ -1,0 +1,72 @@
+@use './index.scss';
+
+// Variables
+$cell-size: 100px;
+$cell-border: 1px;
+$cell-color: #eee;
+$cell-hover-color: #ffbfcb;
+$font-size: 30px;
+$calendar-padding: 10px;
+$gap: 1px;
+$hover-offset: 20px;
+$animation-duration: 0.5s;
+
+// Calendar Styles
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  width: calc(7 * ($cell-size + 2 * $cell-border) + 12 * $gap);
+  margin: auto;
+  box-sizing: border-box;
+
+  // Modifiers
+  @each $day,
+    $margin in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7)
+  {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: calc(($margin - 1) * ($cell-size + $gap));
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $cell-border solid black;
+    background-color: $cell-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition:
+      background-color $animation-duration,
+      transform $animation-duration;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: '#{$i}';
+        }
+      }
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+      color: black;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-color;
+      transform: translateY(-$hover-offset);
+    }
+  }
+}
