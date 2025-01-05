@@ -10,6 +10,7 @@ $font-size: 30px;
 $gap: 1px;
 $columns: 7;
 $animation-duration: 0.5s;
+$days: (sun, mon, tue, wed, thu, fri, sat);
 
 @function calculate-calendar-width() {
   @return ($day-size + $gap) * $columns - $gap;
@@ -53,28 +54,10 @@ $animation-duration: 0.5s;
     }
   }
 
-  &--start-day-mon .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 1;
-  }
-
-  &--start-day-tue .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 2;
-  }
-
-  &--start-day-wed .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 3;
-  }
-
-  &--start-day-thu .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 4;
-  }
-
-  &--start-day-fri .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 5;
-  }
-
-  &--start-day-sat .calendar__day:nth-child(1) {
-    margin-left: ($day-size + $gap) * 6;
+  @each $day, $index in $days {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: ($day-size + $gap) * $index;
+    }
   }
 
   @for $i from 28 through 31 {
