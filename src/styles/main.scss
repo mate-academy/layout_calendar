@@ -6,42 +6,39 @@ body {
   align-items: center;
 }
 
-.calendar-container {
+.calendar {
+ width: 726px;
+ display: flex;
+ flex-wrap: wrap;
+ gap: 1px;
+ padding: 10px;
 
-  .calendar {
-    width: 726px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-    padding: 10px;
+ &__day {
+   box-sizing: border-box;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100px;
+   height: 100px;
+   background-color: #eee;
+   border: 1px solid black;
 
-    &__day {
-      box-sizing: border-box;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100px;
-      height: 100px;
-      background-color: #eee;
-      border: 1px solid black;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 30px;
+   transition: 0.5s;
+ }
 
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 30px;
-      transition: 0.5s;
-    }
+ &__day:hover {
+   background-color: #ffbfcb;
+   transform: translateY(-20px);
+   transition: 0.5s;
+ }
 
-    &__day:hover {
-      background-color: #ffbfcb;
-      transform: translateY(-20px);
-      transition: 0.5s;
-    }
-
-    @for $i from 1 through 31 {
-      &__day:nth-child(#{$i})::after {
-        content: '#{$i}';
-      }
-    }
-  }
+ @for $i from 1 through 31 {
+   &__day:nth-child(#{$i})::after {
+     content: '#{$i}';
+   }
+ }
 }
 
 @for $days from 28 through 31 {
