@@ -1,0 +1,47 @@
+@import 'variables';
+
+.calendar {
+  flex-wrap: wrap;
+  width: $size-calendar;
+  display: flex;
+  gap: $size-day-gap;
+  padding: $size-calendar-padding;
+
+  &__day {
+    width: $size-day-box;
+    height: $size-day-box;
+    border: $size-day-border solid $color-border;
+    background-color: $color-default;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $color-hover;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-of-type(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @each $dayname, $dow in $days-in-week {
+    &--start-day-#{$dayname} :first-child {
+      margin-left: calc(($size-day-box + $size-day-gap) * $dow);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
