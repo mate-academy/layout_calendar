@@ -1,7 +1,7 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: $calendar-margin;
+  gap: $calendar-gap;
   list-style: none;
   justify-content: center;
   align-items: center;
@@ -36,7 +36,7 @@
   @each $day, $index in $start-day {
     &.calendar--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: calc(($day-size + $calendar-margin) * $index);
+        margin-left: calc((($day-size) * ($index - 1)) + ($calendar-gap * 4));
       }
     }
   }
