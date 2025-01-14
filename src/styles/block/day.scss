@@ -1,0 +1,35 @@
+.calendar__day {
+  display: block;
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: $size-day;
+  width: $size-day;
+  background-color: #eee;
+  position: relative;
+  transition:
+    transform 0.5s ease,
+    background-color 0.5s ease;
+
+  &::before {
+    content: attr(data-day);
+    color: black;
+    position: absolute;
+    top: 50%; // Центрируем текст
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
