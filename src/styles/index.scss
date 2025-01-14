@@ -1,8 +1,4 @@
-$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
-$cell-height: 100px;
-$cell-width: 100px;
-$cell-gap: 1px;
-$padding: 10px;
+@import '../styles/utils/variables';
 
 * {
   font-family: Arial, Helvetica, sans-serif;
@@ -12,26 +8,24 @@ $padding: 10px;
   font-size: 30px;
 }
 
-.calendar {
+body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 100vh;
+}
 
-  &__wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $cell-gap;
-
-    padding: $padding;
-    width: calc((7 * $cell-width) + (6 * $cell-gap) + (2 * $padding));
-  }
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  padding: $padding;
+  width: calc((7 * $cell-size) + (6 * $cell-gap) + (2 * $padding));
 
   &__day {
     position: relative;
-    height: $cell-height;
-    width: $cell-width;
+    height: $cell-size;
+    width: $cell-size;
     background-color: #eee;
     border: 1px solid #000;
 
@@ -46,7 +40,7 @@ $padding: 10px;
     @each $day, $index in $days {
       .calendar--start-day-#{$day} & {
         &:nth-child(1) {
-          margin-left: #{$index * ($cell-height + $cell-gap)};
+          margin-left: #{$index * ($cell-size + $cell-gap)};
         }
       }
     }
@@ -55,22 +49,17 @@ $padding: 10px;
   @for $days from 28 through 31 {
     &--month-length-#{$days} {
       .calendar__day {
-        @for $i from 1 through 31 {
-          &:nth-child(#{$i}) {
-            @if $i <= $days {
-              &::before {
-                content: '#{$i}';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-style: Arial;
-                font-size: 30px;
-              }
-            } @else {
-              display: none;
-            }
+        @for $i from 1 through $days {
+          &:nth-child(#{$i})::before {
+            content: '#{$i}';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
           }
+        }
+        &:nth-child(n + #{$days + 1}) {
+          display: none;
         }
       }
     }
