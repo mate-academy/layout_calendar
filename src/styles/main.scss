@@ -11,7 +11,7 @@ body {
   padding: 10px;
 }
 
-.calendar__box {
+.calendar__day {
   width: 100px; /* Width of each block */
   height: 100px; /* Height of each block */
   background-color: #eee;
@@ -20,20 +20,20 @@ body {
   transition-duration: 0.5s;
 }
 
-.calendar__box:hover {
+.calendar__day:hover {
   cursor: pointer;
   background-color: #ffbfcb;
   transform: translateY(-20px);
 }
 
-.calendar__box:first-child {
+.calendar__day:first-child {
   display: flex;
   justify-content: start;
 }
 
 /* Pseudo-element to display day numbers */
 @for $i from 1 through 31 {
-  .calendar__box:nth-child(#{$i})::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
     position: absolute;
     top: 50%; /* Center vertically */
@@ -52,7 +52,7 @@ body {
 
 /* Start-day modifiers */
 @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
-  .calendar--#{$day} .calendar__box:nth-child(1) {
+  .calendar--#{$day} .calendar__day:nth-child(1) {
     margin-left: calc(
       102.5px * #{$index}
     ); /* Add margin-left for the first day */
