@@ -5,37 +5,32 @@ html {
   padding: 0;
 }
 
-@each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
-  %calendar-start-#{$day} {
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: calc(#{$index} * $size-day + (#{$index}) * $gap);
+      margin-left: calc(#{$index} * $size-day + #{$index} * $gap);
     }
   }
 }
 
 @for $days from 28 through 31 {
   .calendar--month-length-#{$days} {
-    @for $i from $days + 1 through 32 {
-      .calendar__day:nth-child(n + #{$i}) {
-        display: none;
+    @for $i from 1 through $days {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
+    }
+    .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
     }
   }
 }
 
-.calendar--start-day-sun {
-  @extend %calendar-start-sun;
-}
-
-.calendar--month-length-31 {
-  @extend .calendar--month-length-31;
-}
-
 .calendar {
-  @extend %calendar-start-sun;
-  @extend .calendar--month-length-31;
-  // box-sizing: border-box;
-  // overflow-y: hidden;
   display: flex;
   align-content: center;
   gap: 1px;
@@ -45,11 +40,4 @@ html {
   height: calc(100vh - 20px);
   max-width: calc(7 * $size-day + 6 * $gap + 20px);
   --month-length: 31;
-
-  // @for $days from 28 through 30 {
-  //   &:has([style*='--month-length: #{$days}'])
-  //     .calendar__day:nth-child(n + #{$days + 1}) {
-  //     display: none;
-  //   }
-  // }
 }
