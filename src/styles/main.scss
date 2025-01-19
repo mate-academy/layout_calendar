@@ -4,6 +4,15 @@ $day-size: 100px;
 $border-width: 1px;
 $gap: 1px;
 $padding: 10px;
+$days-of-week: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+);
 
 @mixin transition($properties...) {
   transition: $properties 0.5s ease;
@@ -30,6 +39,8 @@ $padding: 10px;
 .calendar__day {
   width: $day-size;
   height: $day-size;
+
+  // margin: 0 $gap $gap 0;
   background-color: $grey;
   border: $border-width solid black;
   display: flex;
@@ -52,21 +63,23 @@ $padding: 10px;
     @include transition(background-color, transform);
   }
 
-  @each $day,
-    $margin in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
-  {
-    &--start-day-#{day} {
-      &__day:first-child {
-        margin-left: calc(($day-size + $border-width * 2 + $gap) * $margin);
-      }
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+@each $day, $index in $days-of-week {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    @if $index == 0 {
+      margin-left: calc(($day-size + $border-width * 2 + $gap / 2) * 6);
+    } @else {
+      margin-left: calc(($day-size + $border-width * 2 + $gap / 2) * $index);
     }
   }
+}
 
-  @for $length from 28 through 31 {
-    &--month-length-#{$length} {
-      &__day:nth-child(n + #{$length + 1}) {
-        display: none;
-      }
-    }
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
   }
 }
