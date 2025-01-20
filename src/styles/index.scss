@@ -74,8 +74,10 @@ $month-lengths: (
   transform: translateY(-20px);
 }
 
-@for $date from 1 through 31 {
-  .calendar__day:nth-child(3n + #{$date})::before {
-    content: '#{$date}';
+$days-in-month: 31;
+
+@for $day from 1 through $days-in-month {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
   }
 }
