@@ -1,3 +1,66 @@
+$calendar-date-size: 100px;
+$calendar-date-gap: 1px;
+$weak-days: (
+  'mon' 0,
+  'tue' $calendar-date-size,
+  'wed' ($calendar-date-size + $calendar-date-gap) * 2,
+  'thu' ($calendar-date-size + $calendar-date-gap) * 3,
+  'fri' ($calendar-date-size + $calendar-date-gap) * 4,
+  'sat' ($calendar-date-size + $calendar-date-gap) * 5,
+  'sun' ($calendar-date-size + $calendar-date-gap) * 6
+);
+
 body {
+  height: 100vh;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-date-gap;
+  padding: 10px;
+  width: calc($calendar-date-size * 7 + 6px);
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} > .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $days, $size in $weak-days {
+    &--start-day-#{$days} :first-child {
+      margin-left: $size;
+    }
+  }
+}
+
+.calendar__day {
+  width: $calendar-date-size;
+  height: $calendar-date-size;
+  background-color: #eee;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  transition: 0.5s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @for $i from 1 through 31 {
+    &--#{$i}::before {
+      content: '#{$i}';
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
 }
