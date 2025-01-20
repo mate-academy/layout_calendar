@@ -1,4 +1,6 @@
-body {
+@import '../styles/variables.scss';
+
+body{
   margin: 0;
 }
 
@@ -11,9 +13,9 @@ body {
 
   &__day {
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
+    width: $day-size;
+    height: $day-size;
+    line-height: $day-size;
     border: 1px solid black;
     margin-left: 1px;
     margin-top: 1px;
@@ -40,9 +42,9 @@ body {
         font-size: 30px;
         text-align: center;
         position: absolute;
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
+        width: $day-size;
+        height: $day-size;
+        line-height: $day-size;
       }
     }
   }
@@ -59,7 +61,7 @@ body {
 
   @each $day, $column in $days {
     &--start-day-#{$day} .calendar__day:nth-child(1) {
-      margin-left: calc(((#{$column} - 1) * 100px) + #{$column}px);
+      margin-left: calc(((#{$column} - 1) * #{$day-size}) + #{$column}px);
     }
   }
 
