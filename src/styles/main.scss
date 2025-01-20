@@ -1,5 +1,8 @@
 $calendar-date-size: 100px;
 $calendar-date-gap: 1px;
+$calendar-date-background: #eee;
+$hover-calendar-date-background: #ffbfcb;
+
 $weak-days: (
   'mon' 0,
   'tue' $calendar-date-size,
@@ -39,11 +42,11 @@ body {
 }
 
 .calendar__day {
+  background-color: $calendar-date-background;
+  box-sizing: border-box;
+  border: 1px solid #000;
   width: $calendar-date-size;
   height: $calendar-date-size;
-  background-color: #eee;
-  border: 1px solid #000;
-  box-sizing: border-box;
   transition: 0.5s;
 
   display: flex;
@@ -51,7 +54,7 @@ body {
   align-items: center;
 
   @for $i from 1 through 31 {
-    &--#{$i}::before {
+    &:nth-child(#{$i})::before {
       content: '#{$i}';
       font-family: Arial, Helvetica, sans-serif;
       font-size: 30px;
@@ -60,7 +63,7 @@ body {
 
   &:hover {
     cursor: pointer;
-    background-color: #ffbfcb;
+    background-color: $hover-calendar-date-background;
     transform: translateY(-20px);
   }
 }
