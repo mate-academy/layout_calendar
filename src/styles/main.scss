@@ -1,6 +1,9 @@
 $days-of-week: 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun';
 $max-days-in-month: 28, 29, 30, 31;
 $days-in-month: 31;
+$cell-size: 100px;
+$cell-gap: 1px;
+$padding-body: 10px;
 
 body {
   margin: 0;
@@ -22,37 +25,37 @@ body {
 
     @if $day == 'tue' {
       & :first-child {
-        margin-left: 101;
+        margin-left: $cell-gap + $cell-size;
       }
     }
 
     @if $day == 'wed' {
       & :first-child {
-        margin-left: 202;
+        margin-left: 2 * ($cell-gap + $cell-size);
       }
     }
 
     @if $day == 'thu' {
       & :first-child {
-        margin-left: 303;
+        margin-left: 3 * ($cell-gap + $cell-size);
       }
     }
 
     @if $day == 'fri' {
       & :first-child {
-        margin-left: 404;
+        margin-left: 4 * ($cell-gap + $cell-size);
       }
     }
 
     @if $day == 'sat' {
       & :first-child {
-        margin-left: 505;
+        margin-left: 5 * ($cell-gap + $cell-size);
       }
     }
 
     @if $day == 'sun' {
       & :first-child {
-        margin-left: 606;
+        margin-left: 6 * ($cell-gap + $cell-size);
       }
     }
   }
@@ -75,18 +78,18 @@ body {
 
 .calendar {
   display: flex;
-  gap: 1px;
+  gap: $cell-gap;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: $padding-body;
   box-sizing: border-box;
-  max-width: 726px;
+  max-width: 7 * $cell-size + 6 * $cell-gap + 2 * $padding-body;
 
   &__day {
-    height: 100px;
+    height: $cell-size;
     display: none;
     align-items: center;
     justify-content: center;
-    flex-basis: 100px;
+    flex-basis: $cell-size;
     box-sizing: border-box;
     background-color: #eee;
     border: 1px solid #000;
