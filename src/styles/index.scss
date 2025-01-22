@@ -14,7 +14,6 @@ body {
   gap: $gap;
   padding: $padding;
   margin-left: 20px;
-
   max-width: calc(
     #{$columns} * #{$max-day-size} + (#{$columns} - 1) * #{$gap} + 2 * #{$padding}
   );
@@ -29,12 +28,12 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-  }
+    transition: transform 0.5s;
 
-  &__day:hover {
-    background-color: #ffbfcb;
-    transform: translateY(-20px);
-    transition: 0.5s;
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
   }
 
   &--month-length-31 {
@@ -51,16 +50,10 @@ body {
     }
   }
 
-  @each $day, $index in $days-of-week {
+  @each $day, $margin-multiplier in $days-of-week {
     &--start-day-#{$day} {
-      @if $index == 0 {
-        .calendar__day:nth-child(1) {
-          margin-left: calc(6 * (#{$max-day-size} + #{$gap}));
-        }
-      } @else {
-        .calendar__day:nth-child(1) {
-          margin-left: calc($index * (#{$max-day-size} + #{$gap}));
-        }
+      .calendar__day:first-child {
+        margin-left: calc(#{$margin-multiplier} * (#{$max-day-size} + #{$gap}));
       }
     }
   }
