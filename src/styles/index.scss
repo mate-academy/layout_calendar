@@ -1,3 +1,79 @@
+// Переменные
+$day-size: 100px;
+$border-color: #000;
+$border-width: 1px;
+$day-gap: 1px;
+$font-family: Arial, sans-serif;
+$font-size: 30px;
+$hover-bg-color: #ffbfcb;
+$hover-transform: -20px;
+$animation-duration: 0.5s;
+$padding: 10px;
+
+// Основные стили для календаря
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  justify-content: start;
+  gap: $day-gap;
+  width: calc(7 * (#{$day-size} + #{$day-gap} + #{$padding}));
+  margin: auto;
+  height: 100vh;
+  align-items: center;
+  align-content: center;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: $border-width solid $border-color;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    // Число через ::before
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      font-family: $font-family;
+      font-size: $font-size;
+      color: $border-color;
+    }
+
+    // Ховер-эффекты
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg-color;
+      transform: translateY($hover-transform);
+      transition:
+        transform $animation-duration,
+        background-color $animation-duration;
+    }
+  }
+
+  // Устанавливаем начальный день недели
+  @each $day,
+    $margin in (sun: 6, mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5)
+  {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc($margin * (#{$day-size} + #{$day-gap} + 2px));
+    }
+  }
+
+  // Устанавливаем количество дней в месяце
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Сброс счетчика и установка по умолчанию
 body {
-  margin: 0;
+  counter-reset: day;
+  
 }
