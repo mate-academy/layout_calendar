@@ -1,3 +1,65 @@
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$month-lengths: 28, 29, 30, 31;
+
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: 0 auto;
+  width: calc(100px * 7 + 26px);
+
+  &__day {
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid black;
+
+    display: flex;
+    flex: 0 0 calc((100% - (1px * 6) - 20px) / 7);
+    justify-content: center;
+    align-items: center;
+    transition-duration: 500ms;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $numberDay from 1 through 31 {
+    &__day:nth-child(#{$numberDay})::before {
+      content: '#{$numberDay}';
+      font-size: 30px;
+    }
+  }
+}
+
+@each $day, $offset in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc((100px + 1px) * $offset);
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
 }
