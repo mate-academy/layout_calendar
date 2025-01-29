@@ -1,14 +1,17 @@
+.calendar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
 .calendar {
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: 7 * $cell-size + 6 * $cell-gap;
 
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $cell-gap;
-    width: 7 * $cell-size + 6 * $cell-gap;
-  }
-
-  &__cell {
+  &__day {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +24,7 @@
   }
 
   @for $cell from 1 through 31 {
-    &__cell:nth-child(#{$cell})::after {
+    &__day:nth-child(#{$cell})::after {
       content: '#{$cell}';
       font-family: Arial, sans-serif;
       font-size: $cell-font-size;
@@ -38,18 +41,18 @@
     'sun' 6;
 
   @each $day, $step in $days {
-    &__field--start-day--#{$day} :first-child {
+    &--start-day-#{$day} :first-child {
       margin-left: $step * $cell-size + $step * $cell-gap;
     }
   }
 
   @for $month from 28 through 31 {
-    &__field--month-length--#{$month} :nth-child(n + #{$month + 1}) {
+    &--month-length-#{$month} :nth-child(n + #{$month + 1}) {
       display: none;
     }
   }
 
-  &__cell:hover {
+  &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
     transform: translateY($cell-shift);
