@@ -1,3 +1,86 @@
+$width: 100px;
+$Indent-mon: calc(0);
+$Indent-tue: calc((1 * $width) + (1px * 1));
+$Indent-wed: calc((2 * $width) + (1px * 2));
+$Indent-thu: calc((3 * $width) + (1px * 3));
+$Indent-fri: calc((4 * $width) + (1px * 4));
+$Indent-sat: calc((5 * $width) + (1px * 5));
+$Indent-sun: calc((6 * $width) + (1px * 6));
+$iterations: 31;
+$name-day: mon, tue, wed, thu, fri, sat, sun;
+$my-margin-values: (
+  mon: $Indent-mon,
+  tue: $Indent-tue,
+  wed: $Indent-wed,
+  thu: $Indent-thu,
+  fri: $Indent-fri,
+  sat: $Indent-sat,
+  sun: $Indent-sun,
+);
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  max-width: calc((1px * 7) + 10px + ($width * 7));
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  padding: 10px;
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  @each $name in $name-day {
+    &--start-day-#{$name} &:first-child {
+      margin-left: map-get($my-margin-values, $name);
+    }
+  }
+ 
+  @for $i from 1 through $iterations {
+    &__day:nth-child(#{$i})::before {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      content: '#{$i}';
+      color: #000;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__day {
+    margin: 1 1 1 0;
+    background-color: #eee;
+    height: $width;
+    min-width: $width;
+    box-sizing: border-box;
+    border: 1px solid #000;
+  }
+
+  &__day:nth-child(n + 32) {
+    display: none;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+    transition: transform 0.5s;
+  }
+
+  &__day:first-child {
+    margin-left: map-get($my-margin-values, sun);
+  }
 }
