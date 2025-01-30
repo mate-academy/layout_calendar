@@ -1,3 +1,84 @@
-body {
+@import './var';
+
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+  background-color: $bgColor;
+
+  &__day {
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--start-day-mon &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $mon);
+  }
+  &--start-day-tue &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $tue);
+  }
+  &--start-day-wed &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $wed);
+  }
+  &--start-day-thu &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $thu);
+  }
+  &--start-day-fri &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $fri);
+  }
+  &--start-day-sat &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $sat);
+  }
+  &--start-day-sun &__day:first-child {
+    margin-left: calc(($daySize + 1px) * $sun);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      color: black;
+      display: block;
+      font-family: $font;
+      font-size: $fontSize;
+    }
+
+    &__day:nth-child(n + #{$i}):hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
+  }
+
+  &--month-length-28 > &__day:nth-child(n + 29),
+  &--month-length-29 > &__day:nth-child(n + 30),
+  &--month-length-30 > &__day:nth-child(n + 31),
+  &--month-length-31 > &__day:nth-child(n + 32) {
+    background-color: $bgColor;
+    border: none;
+    cursor: default;
+    transform: none;
+    display: none;
+  }
 }
