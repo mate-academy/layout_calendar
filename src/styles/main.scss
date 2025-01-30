@@ -1,0 +1,67 @@
+@use 'variables' as var;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: var.$calendar-width;
+  padding: 10px;
+  gap: var.$gap-size;
+  margin: auto;
+  position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__day {
+    width: var.$day-size;
+    height: var.$day-size;
+    background: var.$default-bg;
+    border: var.$border-size solid black;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: var.$font-size;
+    position: relative;
+    transition:
+      transform 0.5s,
+      background 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background: var.$hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day,
+    $offset
+      in (
+        sun: 605px,
+        mon: 605px,
+        tue: 605px,
+        wed: 600px,
+        thu: 605px,
+        fri: 605px,
+        sat: 605px
+      )
+  {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $offset;
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
