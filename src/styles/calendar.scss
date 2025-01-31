@@ -6,7 +6,7 @@
   font-weight: bold;
 }
 
-.calendar-grid {
+.calendar--grid{
   display: grid;
   grid-template-columns: repeat(7, 50px);
   gap: 10px;
@@ -25,7 +25,9 @@
     font-size: 1.2rem;
     background-color: $background-color;
     position: relative;
-    transition: background-color 0.3s, transform 0.5s;
+    transition:
+      background-color 0.3s,
+      transform 0.5s;
 
     &::before {
       content: attr(data-day);
@@ -36,9 +38,9 @@
   }
 
   // Динамічна генерація чисел
-  @for $i from 1 through 31 {
+  @for $i from 1 through 29 {
     &__card:nth-child(#{$i})::before {
-      content: "#{$i}";
+      content: '#{$i}';
     }
   }
 
@@ -52,7 +54,7 @@
   }
 
   // Модифікатор для довжини місяця
-  @for $i from 28 through 31 {
+  @for $i from 28 through 29 {
     &--length-#{$i} {
       .calendar-grid__card:nth-child(n + #{$i + 1}) {
         display: none;
