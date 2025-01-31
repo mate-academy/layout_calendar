@@ -1,0 +1,62 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 50px);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: $border-color;
+
+  &__card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    background-color: $background-color;
+    position: relative;
+    transition: background-color 0.3s, transform 0.5s;
+
+    &::before {
+      content: attr(data-day);
+      position: absolute;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+  // Динамічна генерація чисел
+  @for $i from 1 through 31 {
+    &__card:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Модифікатор для зміщення першого дня тижня
+  @for $i from 1 through 7 {
+    &--start-#{$i} {
+      .calendar-grid__card:nth-child(#{$i}) {
+        grid-column-start: $i;
+      }
+    }
+  }
+
+  // Модифікатор для довжини місяця
+  @for $i from 28 through 31 {
+    &--length-#{$i} {
+      .calendar-grid__card:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
