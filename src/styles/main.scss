@@ -13,7 +13,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   gap: $calendar-gap;
-  counter-reset: day 1;
+  counter-reset: day;
 
   &__day {
     width: $calendar-size;
@@ -36,9 +36,7 @@ body {
     &:hover {
       background-color: $calendar-hover-color;
       transform: translateY($calendar-hover-transform);
-      transition:
-        transform $animation-duration,
-        background-color $animation-duration;
+
     }
   }
 
@@ -84,11 +82,10 @@ body {
     }
   }
 
-  @for $i from 28 through 31 {
-    &--month-length-#{$i} {
-      &__day:nth-child(n + #{$i + 1}) {
+  @for $index from 28 through 31 {
+    &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
         display: none;
       }
     }
   }
-}
+
