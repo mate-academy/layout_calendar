@@ -1,0 +1,60 @@
+@use "./variables" as *;
+@use "./blocks" as *;
+
+body,
+main,
+div {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+.centered {
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  @include calendar;
+
+  width: $calendar-width;
+
+  @each $day, $index in $days-of-week {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($index - 1) * ($square-day + 1px);
+      }
+    }
+  }
+
+  @for $initial-day from 28 through 31 {
+    &--month-length-#{$initial-day} {
+      @for $day from ($initial-day + 1) through 32 {
+        .calendar__day:nth-child(#{$day}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__day {
+    @include day;
+
+    @for $day from $initial-day through $default-days {
+      &:nth-child(#{$day})::before {
+        content: "#{$day}";
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $base-font;
+      }
+    }
+
+    &:hover {
+      @include day-hover;
+    }
+  }
+}
