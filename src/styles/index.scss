@@ -4,6 +4,7 @@ $font-size: 30px;
 $font-family: Arial, sans-serif;
 $background-color: #eee;
 $highlight-color: #ffbfcb;
+$margin: 0;
 
 body {
   margin: 0;
@@ -79,18 +80,18 @@ body {
   }
 }
 
-$days: mon, tue, wed, thu, fri, sat, sun;
-$margins: 1, 2, 3, 4, 5, 6, 0;
 
-@each $day,
-  $margin
-    in (
-      mon: 0,
-      tue: calc($day-size + $day-gap),
-      wed: calc(2 * ($day-size + $day-gap)),
-      thu: calc(3 * ($day-size + $day-gap)),
-      fri: calc(4 * ($day-size + $day-gap)),
-      sat: calc(5 * ($day-size + $day-gap)),
-      sun: calc(6 * ($day-size + $day-gap))
-    )
-;
+@each $day, $margin in (
+  mon: 0,
+  tue: calc($day-size + $day-gap),
+  wed: calc(2 * ($day-size + $day-gap)),
+  thu: calc(3 * ($day-size + $day-gap)),
+  fri: calc(4 * ($day-size + $day-gap)),
+  sat: calc(5 * ($day-size + $day-gap)),
+  sun: calc(6 * ($day-size + $day-gap))
+) {
+  .calendar--start-#{$day} .calendar__day:nth-child(1) {
+    margin-left: $margin;
+  }
+}
+
