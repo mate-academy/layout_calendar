@@ -11,17 +11,17 @@ body {
 
   padding: $calendar-padding;
 
-  width: ($box-size * 7) + ($calendar-gap + $calendar-padding);
+  width: (($calendar-gap + $box-size) * 7) + (2 * $calendar-padding);
 
   @each $day, $step in $days {
-    &--start-day--#{$day} :first-child {
+    &--start-day-#{$day} :first-child {
       margin-left: #{$step};
     }
   }
 
   @for $last-day from 28 through 31 {
     $last-day-inc: ($last-day + 1);
-    &--month-length--#{$last-day} :nth-child(n + #{$last-day-inc}) {
+    &--month-length-#{$last-day} :nth-child(n + #{$last-day-inc}) {
       visibility: hidden;
       pointer-events: none;
     }
