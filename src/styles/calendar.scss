@@ -1,20 +1,52 @@
+
+$days-in-week: 7; // Количество дней в неделе
+$max-days: 31; // Максимальное количество дней в месяце
+
 .calendar {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
+  flex-direction: column;
+  align-items: center;
 
-.calendar--grid{
-  display: grid;
-  grid-template-columns: repeat(7, 50px);
-  gap: 10px;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: $border-color;
+  &__days {
+    display: grid;
+    grid-template-columns: repeat($days-in-week, 1fr);
+    gap: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
 
-  &__card {
+    &__day {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: #333;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat($days-in-week, 50px);
+    gap: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: $border-color;
+
+    // Цикл для начальных дней месяца
+    @for $i from 1 through $days-in-week {
+      &--start-day-#{$i} .calendar__cell:nth-child(1) {
+        grid-column-start: $i; // Первый день месяца начинается с $i-го столбца
+      }
+    }
+
+    // Цикл для скрытия лишних дней в коротких месяцах
+    @for $i from 28 through $max-days {
+      &--month-length-#{$i} .calendar__cell:nth-child(n + #{$i + 1}) {
+        display: none; // Скрываем дни после $i-го
+      }
+    }
+  }
+
+  &__cell {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,43 +54,21 @@
     width: 50px;
     border: 1px solid $border-color;
     border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     background-color: $background-color;
     position: relative;
-    transition:
-      background-color 0.3s,
-      transform 0.5s;
+    transition: background-color 0.3s, transform 0.3s;
 
     &::before {
       content: attr(data-day);
       position: absolute;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
     }
-  }
 
-  // Динамічна генерація чисел
-  @for $i from 1 through 29 {
-    &__card:nth-child(#{$i})::before {
-      content: '#{$i}';
-    }
-  }
-
-  // Модифікатор для зміщення першого дня тижня
-  @for $i from 1 through 7 {
-    &--start-#{$i} {
-      .calendar-grid__card:nth-child(#{$i}) {
-        grid-column-start: $i;
-      }
-    }
-  }
-
-  // Модифікатор для довжини місяця
-  @for $i from 28 through 29 {
-    &--length-#{$i} {
-      .calendar-grid__card:nth-child(n + #{$i + 1}) {
-        display: none;
-      }
+    &:hover {
+      background-color: color.adjust($background-color, $lightness: 10%);
+      transform: scale(1.1);
     }
   }
 }
