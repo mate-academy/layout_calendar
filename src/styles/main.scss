@@ -29,6 +29,12 @@ body {
     font-family: $calendar-font;
     font-size: $calendar-font-size;
 
+    &__day:first-child {
+      grid-column: $calendar-columns;
+      font-weight: bold;
+      background-color: $calendar-bg-color;
+    }
+
     &::before {
       content: counter(day);
       counter-increment: day;
@@ -40,45 +46,9 @@ body {
     }
   }
 
-  &--start-day-sun {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 0);
-    }
-  }
-
-  &--start-day-mon {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 1 + $calendar-gap * 1);
-    }
-  }
-
-  &--start-day-tue {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 2 + $calendar-gap * 2);
-    }
-  }
-
-  &--start-day-wed {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 3 + $calendar-gap * 3);
-    }
-  }
-
-  &--start-day-thu {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 4 + $calendar-gap * 4);
-    }
-  }
-
-  &--start-day-fri {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 5 + $calendar-gap * 5);
-    }
-  }
-
-  &--start-day-sat {
-    &__day:nth-child(1) {
-      margin-left: calc($calendar-size * 6 + $calendar-gap * 6);
+  @each $day, $position in $weekdays {
+    &--start-day {
+      margin-left: calc(#{$position});
     }
   }
 
