@@ -1,48 +1,73 @@
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 $cell-size: 100px;
 $gap: 1px;
 $border-color: black;
-$hover-color: #FFBFCB;
+$hover-color: #ffbfcb;
 $text-color: black;
 
 .calendar {
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(7 * ($cell-size + $gap) + 10px);
-    padding: 10px;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-    gap: $gap;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * ($cell-size + $gap) + 10px);
+  padding: 10px;
+  margin: auto;
+  gap: $gap;
 
-    &__day {
-        box-sizing: border-box;
-        position: relative;
-        width: $cell-size;
-        height: $cell-size;
-        background-color: #eee;
-        border: 1px solid $border-color;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-        color: $text-color;
-        transition: transform 0.5s, background-color 0.5s;
+  /* stylelint-disable-next-line scss/dollar-variable-colon-space-after */
+  $days:
+    mon 0,
+    tue 1 * ($cell-size + $gap),
+    wed 2 * ($cell-size + $gap),
+    thu 3 * ($cell-size + $gap),
+    fri 4 * ($cell-size + $gap),
+    sat 5 * ($cell-size + $gap),
+    sun 6 * ($cell-size + $gap);
 
-        &::before {
-            content: counter(day);
-            counter-increment: day;
-        }
-
-        &:hover {
-            background-color: $hover-color;
-            transform: translateY(-20px);
-            cursor: pointer;
-        }
+  @each $day, $calendar-margin in $days {
+    &--start-day--#{$day} > &__day:first-child {
+      margin-left: $calendar-margin;
     }
-}
+  }
 
+  @for $index from 28 through 31 {
+    &--month-length--#{$index} > &__day:nth-child(#{n + #{$index + 1}} ) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: $text-color;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+      }
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
