@@ -3,6 +3,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 $cell-size: 100px;
@@ -14,7 +15,7 @@ $text-color: black;
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc(7 * ($cell-size + $gap) + 10px);
+  width: calc((7 * $cell-size) + ($gap * 6));
   padding: 10px;
   margin: auto;
   gap: $gap;
@@ -30,13 +31,13 @@ $text-color: black;
     sun 6 * ($cell-size + $gap);
 
   @each $day, $calendar-margin in $days {
-    &--start-day--#{$day} > &__day:first-child {
+    &--start-day-#{$day} > &__day:first-child {
       margin-left: $calendar-margin;
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length--#{$index} > &__day:nth-child(#{n + #{$index + 1}} ) {
+    &--month-length-#{$index} > &__day:nth-child(n + #{$index + 1}) {
       display: none;
     }
   }
