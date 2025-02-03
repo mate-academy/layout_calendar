@@ -7,18 +7,19 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   width: $calendar-width;
-  margin: auto;
+  margin-left: 40px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   gap: $calendar-gap;
   counter-reset: day;
-  box-sizing: 100px;
+  box-sizing: border-box;
 
   &__day {
-    width: $calendar-size;
-    height: $calendar-size;
+    width: 100px;
+    height: 100px;
+
     background-color: $calendar-bg-color;
     border: $calendar-border-width solid $calendar-border-color;
     display: flex;
@@ -28,12 +29,6 @@ body {
     cursor: pointer;
     font-family: $calendar-font;
     font-size: $calendar-font-size;
-
-    &__day:first-child {
-      grid-column: $calendar-columns;
-      font-weight: bold;
-      background-color: $calendar-bg-color;
-    }
 
     &::before {
       content: counter(day);
@@ -47,14 +42,16 @@ body {
   }
 
   @each $day, $position in $weekdays {
-    &--start-day {
-      margin-left: calc(#{$position});
+    &__day:first-child {
+      margin-left: $position;
     }
   }
 
   @for $index from 28 through 31 {
-    &--month-length-#{$index} :nth-child(n + #{$index + 1}) {
-      display: none;
+    &--month-length-#{$index} {
+      &:nth-child(n + #{$index + 1}) {
+        display: none;
+      }
     }
   }
 }
