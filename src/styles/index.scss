@@ -1,3 +1,48 @@
 body {
   margin: 0;
 }
+
+$cell-size: 100px;
+$gap: 1px;
+$border-color: black;
+$hover-color: #FFBFCB;
+$text-color: black;
+
+.calendar {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(7 * ($cell-size + $gap) + 10px);
+    padding: 10px;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    gap: $gap;
+
+    &__day {
+        box-sizing: border-box;
+        position: relative;
+        width: $cell-size;
+        height: $cell-size;
+        background-color: #eee;
+        border: 1px solid $border-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        color: $text-color;
+        transition: transform 0.5s, background-color 0.5s;
+
+        &::before {
+            content: counter(day);
+            counter-increment: day;
+        }
+
+        &:hover {
+            background-color: $hover-color;
+            transform: translateY(-20px);
+            cursor: pointer;
+        }
+    }
+}
+
