@@ -1,0 +1,31 @@
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day}) {
+    &::before {
+      content: '#{$day}';
+    }
+  }
+}
+
+$days: (
+  'sun': 6,
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+);
+
+@each $day, $num in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{100px * $num + 1px * $num});
+  }
+}
+
+@for $lastdays from 28 through 31 {
+  .calendar--month-length-#{$lastdays} {
+    .calendar__day:nth-child(n + #{$lastdays + 1}) {
+      display: none;
+    }
+  }
+}
