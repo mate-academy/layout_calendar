@@ -1,46 +1,21 @@
-// !? 1. Display calendar in the middle of the screen vertically and horizontally
-// DONE
-// !? 2. Calendar consists of 31 days
-// DONE
-// !? 3. Dont add numbers in HTML, it will be done by using CSS
-// DONE
-// !? 4. Each day is of Gray color [#eee] and 100px square including 1px black border, meaning i need to use box-sizing.
-// DONE
-// !? 5. Using ::before I will have to add a number to the center of each box using @for loop with the font style of Arial 30px
-// DONE
-// !? 6. I think I will have to use Gap: 1px style, as I will need to make a 1px gap between the days, also make exactly 7 columns with 10px padding on first and last column
-// DONE
-// !? 7. Cant use hardcoded px values if they are used multiple times, meaning I might need to store some in a variable.
-// !? 8. Use proper variables names to help with calculations
-// DONE
-// !? 9. I need to implement 'start day' modifier -> '--modifier' for 'calendar' with 'mon' 'tue' 'wed' 'thu' 'fri' 'sat' 'sun' values
-// DONE
-// !? 10. I can use @each method to assign all of the modifiers -> https://sass-lang.com/documentation/at-rules/control/each
-// DONE
-// !? 11. Month should start at the correct column -> Mon is 1st and Fri is 5th
-// DONE
-// !? 12. I can achieve ^ this by applying margin-left property on the first day of the month (monday)
-// !? 13. I need to set calendar to start from Sunday by default, so it will be the Sunday 7th
-// DONE
-// !? 14. Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`) - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
-// !? Not sure about what it is asking me to do, need to double check.
-// DONE
-// !? 15. I need to set 31 days by default with the @for loop.
-// DONE
+
+@use 'sass:list';
 
 $gap: 6px;
 $days: 'mon' 'tue' 'wed' 'thu' 'fri' 'sat' 'sun';
 $cell-width: 100px;
 
+/* stylelint-disable scss/operator-no-newline-after */
 @each $day in $days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: (index($days, $day) - 1) *
+      margin-left: (list.index($days, $day) - 1) *
         $cell-width +
-        (index($days, $day) - 1);
+        (list.index($days, $day) - 1);
     }
   }
 }
+/* stylelint-enable scss/operator-no-newline-after */
 
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
@@ -77,4 +52,11 @@ $cell-width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translate(0, -20px);
+  transform: scale(0.5);
 }
