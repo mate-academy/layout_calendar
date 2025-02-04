@@ -1,0 +1,50 @@
+.calendar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
+  background-color: white;
+  max-width: calc($columns * ($day-size + $gap) - $gap + 2 * $padding);
+}
+
+.calendar__day {
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-bg;
+  border: $border-size solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  font-weight: bold;
+  color: $text-color;
+  transition:
+    transform $hover-duration ease,
+    background-color $hover-duration ease;
+
+  &:hover {
+    background-color: $hover-bg;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  &::before {
+    content: '';
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $offset in $days {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc($offset * ($day-size + $gap));
+  }
+}
