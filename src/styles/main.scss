@@ -1,5 +1,4 @@
 $day-size: 100px;
-$height-page: 100vh;
 $gap: 1px;
 $columns: 7;
 $padding: 10px;
@@ -18,31 +17,29 @@ $color-basic: black;
 $background-color: #eee;
 $background-color-second: #ffbfcb;
 
-
 body {
+  margin: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  height: $height-page;
-  margin: 0;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
   gap: $gap;
   padding: $padding;
-  width: ($day-size * $columns) + ($gap * 6) + $padding * 2;
-  margin: auto;
+  width: calc((100px * #{$columns}) + $gap * 6);
 
   &__day {
+    box-sizing: border-box;
     position: relative;
-    display: block;
-    width: $day-size;
-    height: $day-size;
-    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: $background-color;
     border: 1px solid $color-basic;
     transition: transform 0.5s;
@@ -50,15 +47,13 @@ body {
     &::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       font-family: $font-family;
       font-size: $font-size;
       color: $color-basic;
     }
 
     &:hover {
+      cursor: pointer;
       background-color: $background-color-second;
       transform: translateY(-20px);
     }
@@ -71,14 +66,14 @@ body {
   }
 }
 
-@each $name, $amount in $start-days {
-  .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: ($day-size + $gap) * $amount;
-  }
-}
-
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
     display: none;
+  }
+}
+
+@each $name, $amount in $start-days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: calc((100px * #{$amount}) + #{$gap} * #{$amount});
   }
 }
