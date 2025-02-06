@@ -1,9 +1,10 @@
-
 @use 'sass:list';
 
 $gap: 6px;
 $days: 'mon' 'tue' 'wed' 'thu' 'fri' 'sat' 'sun';
 $cell-width: 100px;
+$background-color: #eee;
+$hover-background-color: #ffbfcb;
 
 /* stylelint-disable scss/operator-no-newline-after */
 @each $day in $days {
@@ -48,15 +49,17 @@ $cell-width: 100px;
   border: 1px solid black;
   width: 100px;
   height: 100px;
-  background-color: #eee;
+  background-color: $background-color;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
 }
 
 .calendar__day:hover {
-  cursor: pointer;
-  background-color: #ffbfcb;
   transform: translate(0, -20px);
-  animation: 0.5s;
+  cursor: pointer;
+  background-color: $hover-background-color;
 }
