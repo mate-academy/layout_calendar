@@ -1,0 +1,65 @@
+@use 'sass:list';
+
+$gap: 6px;
+$days: 'mon' 'tue' 'wed' 'thu' 'fri' 'sat' 'sun';
+$cell-width: 100px;
+$background-color: #eee;
+$hover-background-color: #ffbfcb;
+
+/* stylelint-disable scss/operator-no-newline-after */
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: (list.index($days, $day) - 1) *
+        $cell-width +
+        (list.index($days, $day) - 1);
+    }
+  }
+}
+/* stylelint-enable scss/operator-no-newline-after */
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day--#{$i}::before {
+    content: '#{$i}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  flex-flow: row wrap;
+  padding-inline: 10px;
+  justify-content: start;
+  align-items: center;
+  width: 700px + $gap;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  background-color: $background-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+}
+
+.calendar__day:hover {
+  transform: translate(0, -20px);
+  cursor: pointer;
+  background-color: $hover-background-color;
+}
