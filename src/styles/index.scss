@@ -76,13 +76,22 @@ body {
 @each $day, $i in $days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: calc(#{$i} * ($day-size + $gap-size));
+      margin-left: calc(#{$i} * $day-size + #{$i} * $gap-size);
     }
   }
 }
 
 @for $days from 28 through 31 {
   .calendar--month-length-#{$days} {
+    @for $i from 1 through $days {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
     .calendar__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
