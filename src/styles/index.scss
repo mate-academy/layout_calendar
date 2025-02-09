@@ -1,3 +1,68 @@
+$day-size: 100px;
+$gap-size: 1px;
+$calendar-padding: 10px;
+$width-calendar: calc(($day-size * 7) + ($gap-size * 6));
+$days: (
+  'sun': 1,
+  'mon': 2,
+  'tue': 3,
+  'wed': 4,
+  'thu': 5,
+  'fri': 6,
+  'sat': 7,
+);
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: $width-calendar;
+  padding: $calendar-padding;
+  justify-content: center;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+    background-color: #eee;
+
+    &:first-child {
+      margin-left: 0 auto;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  &--start-day-tue .calendar__day:first-child {
+    margin-left: calc((3 - 1) * $day-size); /* Для вівторка */
+  }
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(
+        ($index - 1) * $day-size
+      ); /* Загальний принцип для кожного дня */
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
 }
