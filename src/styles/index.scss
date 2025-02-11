@@ -1,3 +1,60 @@
-body {
-  margin: 0;
+// styles/index.scss
+
+// Змінні
+$day-size: 100px;
+$day-gap: 1px;
+$border-color: #000;
+$hover-color: #FFBFCB;
+$day-font-size: 30px;
+$font-family: Arial, sans-serif;
+$transition-duration: 0.5s;
+
+// Календар
+.calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(7 * #{$day-size} + 6 * #{$day-gap});
+  margin-top: 0; // Забираємо відступ зверху
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $day-gap;
+    grid-template-rows: repeat(auto-fill, $day-size);
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    text-align: center;
+    font-family: $font-family;
+  }
+
+  &__day-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    margin: $day-gap;
+    background-color: #eee;
+    border: 1px solid $border-color;
+    cursor: pointer;
+    transition: transform $transition-duration, background-color $transition-duration;
+    box-sizing: border-box;
+
+    &::before {
+      content: attr(data-day);
+      font-size: $day-font-size;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
 }
