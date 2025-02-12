@@ -3,7 +3,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
   height: 100vh;
 }
 
@@ -24,9 +23,10 @@ body {
     border: 1px solid black;
     background-color: #eee;
     transition: all 500ms;
+    cursor: pointer;
+    box-sizing: border-box;
 
     &:hover {
-      cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
@@ -44,7 +44,7 @@ body {
   @each $day, $numbers in $dayss {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: $numbers * $cell-size + $numbers + 12;
+        margin-left: $numbers * 100px + $numbers * 1px;
       }
     }
   }
