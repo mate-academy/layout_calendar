@@ -1,5 +1,6 @@
 $cell-size: 100px;
 $gap-wigth: 1px;
+$cal-padding: 10px;
 $week-days: (
   sun: 6,
   mon: 0,
@@ -10,22 +11,24 @@ $week-days: (
   sat: 5,
 );
 
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 body {
   height: 100vh;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-family: Arial, sans-serif;
-  font-size: 30px;
 }
 
 .calendar {
   display: flex;
-  width: 7 * ($cell-size + $gap-wigth);
-  gap: $gap-wigth;
   padding: 0 10px;
+  width: 7 * $cell-size + 6 * $gap-wigth;
+  gap: $gap-wigth;
   flex-wrap: wrap;
 
   &__day {
@@ -35,35 +38,32 @@ body {
     height: $cell-size;
     width: $cell-size;
     position: relative;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       background-color: #ffbfcb;
-      transform: translate(0, -20px);
-      transition-duration: 0.5s;
+      transform: translateY(-20px);
     }
   }
 
   @for $i from 1 through 31 {
-    & :nth-child(n + #{$i})::before {
+    .calendar__day:nth-child(n + #{$i})::before {
       content: '#{$i}';
     }
   }
 
   @each $day, $value in $week-days {
-    &--start-day-#{$day} {
-      & :first-child {
-        margin-left: $value * ($cell-size + $gap-wigth);
-      }
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $value * ($cell-size + $gap-wigth);
     }
   }
 
-  @for $days from 28 through 31 {
-    &--month-length-#{$days - 1} :nth-child(n + #{$days}) {
+  @for $days from 29 through 31 {
+    &--month-length-#{$days} :nth-child(n + #{$days + 1}) {
       visibility: hidden;
     }
   }
