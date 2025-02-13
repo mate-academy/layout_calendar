@@ -16,33 +16,7 @@
 
     &:hover {
       background-color: #ffbfcb;
-      transform: translate(0, 20px);
-    }
-
-    &:first-child {
-      @function day-offset($start-day) {
-        @if $start-day == 'mon' {
-          @return 1;
-        } @else if $start-day == 'tue' {
-          @return 2;
-        } @else if $start-day == 'wed' {
-          @return 3;
-        } @else if $start-day == 'thu' {
-          @return 4;
-        } @else if $start-day == 'fri' {
-          @return 5;
-        } @else if $start-day == 'sat' {
-          @return 6;
-        } @else if $start-day == 'sun' {
-          @return 0;
-        }
-      }
-
-      margin-left: day-offset($start-day) * ($cell-size + 1);
-    }
-
-    &:nth-child(n+#{$month-length + 1}) {
-      display: none;
+      transform: translate(0, -20px);
     }
   }
 
@@ -55,6 +29,36 @@
       font-family: Arial, sans-serif;
       font-size: 30px;
       transform: translate(-50%, -50%);
+    }
+  }
+
+  @each $number in $month-length {
+    &.calendar--month-length-#{$number} :nth-child(n + #{$number + 1}) {
+      display: none;
+    }
+  }
+
+  @function day-offset($dayname) {
+    @if $dayname == 'mon' {
+      @return 6;
+    } @else if $dayname == 'tue' {
+      @return 1;
+    } @else if $dayname == 'wed' {
+      @return 2;
+    } @else if $dayname == 'thu' {
+      @return 3;
+    } @else if $dayname == 'fri' {
+      @return 4;
+    } @else if $dayname == 'sat' {
+      @return 5;
+    } @else if $dayname == 'sun' {
+      @return 0;
+    }
+  }
+
+  @each $dayname in $start-day {
+    &.calendar--start-day-#{$dayname} :first-child {
+      margin-left: ($cell-size + 1) * day-offset($dayname);
     }
   }
 }
