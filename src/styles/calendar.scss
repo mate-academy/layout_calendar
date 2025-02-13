@@ -15,41 +15,40 @@
     transition: transform 500ms;
 
     &:hover {
-      background-color: #FFBFCB;
+      background-color: #ffbfcb;
       transform: translate(0, 20px);
-
     }
 
     &:first-child {
-      @function day-offset($day) {
-        @if $day == 'mon' {
+      @function day-offset($start-day) {
+        @if $start-day == 'mon' {
           @return 0;
-        } @else if $day == 'tue' {
+        } @else if $start-day == 'tue' {
           @return 1;
-        } @else if $day == 'wed' {
+        } @else if $start-day == 'wed' {
           @return 2;
-        } @else if $day == 'thu' {
+        } @else if $start-day == 'thu' {
           @return 3;
-        } @else if $day == 'fri' {
+        } @else if $start-day == 'fri' {
           @return 4;
-        } @else if $day == 'sat' {
+        } @else if $start-day == 'sat' {
           @return 5;
-        } @else if $day == 'sun' {
+        } @else if $start-day == 'sun' {
           @return 0;
         }
       }
-      
-      margin-left: day-offset($start-say) * ($cellsize + 1px);
+
+      margin-left: day-offset($start-day) * ($cellsize + 1px);
     }
 
-    &:nth-child(n + (#{$month-length} + 1)) {
+    &:nth-child(n+(#{$month-length} + 1)) {
       display: none;
     }
   }
 
   @for $daynumber from 1 through 31 {
     .calendar__day:nth-child(#{$daynumber})::before {
-      content: "#{$daynumber}";
+      content: '#{$daynumber}';
       position: absolute;
       top: 50%;
       left: 50%;
@@ -59,4 +58,3 @@
     }
   }
 }
-
