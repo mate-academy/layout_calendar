@@ -6,11 +6,10 @@ body {
   display: flex;
   flex-wrap: wrap;
   position: absolute;
-  margin-left: 10px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  padding: 10px;
   gap: $calendar-gap;
   counter-reset: day;
   width: $calendar-width;
@@ -25,7 +24,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
     cursor: pointer;
     font-family: $calendar-font;
     font-size: $calendar-font-size;
@@ -42,20 +40,6 @@ body {
     }
   }
 
-  @each $start-day, $position in $weekdays {
-    &__day:first-child {
-      margin-left: $position;
-    }
-  }
-
-  @for $index from 28 through 31 {
-    &--month-length-#{$index} {
-      &:nth-child(n + #{$index + 1}) {
-        display: none;
-      }
-    }
-  }
-
   @for $i from 28 through 31 {
     &--month-length-#{$i} div:nth-child(n + #{$i + 1}) {
       display: none;
@@ -64,7 +48,7 @@ body {
 
   @each $day, $index in $start-day {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: $index * ($calendar-size + $calendar-gap);
+      margin-left: $index * ($sell-size + $gap);
     }
   }
 }
