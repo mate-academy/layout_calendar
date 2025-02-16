@@ -1,0 +1,98 @@
+// Variáveis reutilizáveis
+$cell-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$border-color: black;
+$bg-color: #eee;
+$text-color: black;
+$hover-color: #FFBFCB;
+$transition-duration: 0.5s;
+$hover-offset: 20px;
+
+// Centralizar a página inteira
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+// Container do calendário usando flex
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  // Largura exata: 7 células + 6 gaps + 2 vezes o padding
+  width: calc(7 * $cell-size + 6 * $gap + 2 * $padding);
+}
+
+// Estilização de cada dia
+.calendar__day {
+  width: $cell-size;
+  height: $cell-size;
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  transition: transform $transition-duration, background-color $transition-duration;
+  position: relative; // Necessário para posicionar o ::before
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-$hover-offset);
+  }
+
+  // Usamos ::before para inserir o número
+  &::before {
+    position: absolute;
+    display: block;
+  }
+}
+
+// Gerar os números (1 a 31) com @for e nth-child
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+    color: $text-color;
+  }
+}
+
+// Modificadores para o comprimento do mês
+$month-lengths: 28, 29, 30, 31;
+@each $length in $month-lengths {
+  .calendar--month-length-#{$length} {
+    @for $i from ($length + 1) through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Modificadores para o primeiro dia do mês
+// Considerando a ordem da semana: domingo, segunda, terça, quarta, quinta, sexta, sábado
+// O modificador "calendar--start-<dia>" adiciona um deslocamento (margin-left)
+// Se o mês começar em domingo (default), nenhum offset é aplicado.
+$start-day-offsets: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6
+);
+
+@each $day, $offset in $start-day-offsets {
+  .calendar--start-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$offset} * ($cell-size + $gap));
+    }
+  }
+}
