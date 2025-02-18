@@ -1,22 +1,25 @@
 # Calendar
 
-### Description
+## 🎮 About the Project
+A responsive calendar with hover effects.
 
-- Added a resposive on hover "Calendar" 
+## 🚀 Tech Stack
+- **HTML** (BEM methodology for structured markup)
+- **CSS** (Responsive & clean styles)
+- **JavaScript** (Basic interactivity)
 
-### Stack
+## 🛠️ Tools & Dependencies
+- **ESLint** – Ensuring code quality
+- **Prettier** – Code formatting for readability
+- **Jest** – Unit testing framework
+- **Parcel** – Bundler for fast development
 
-- HTML (BEM)
-- CSS
-- JS
+## 📌 Features
+✅ Responsive on hover  
+✅ Clean design  
 
-### Tools
+## 🌐 Demo
+🔗 [Live Demo](https://AndriiZakharenko.github.io/calendar/)
 
-- ESlint
-- Prettier
-- Jest
-- Parcel
-
-### Demo Links
-
-- [Demo](https://AndriiZakharenko.github.io/calendar/)
+## 📜 License
+This project is forked from 💻 [Mate Academy](https://github.com/mate-academy/layout_calendar)
