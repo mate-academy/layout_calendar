@@ -27,6 +27,18 @@ body {
   font-family: $font-family;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh; // Full viewport height
+  width: 100vw; // Full viewport width
+  overflow: hidden; // Prevent scrolling
+  background: #f8f8f8;
+}
+
+.calendar-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .calendar {
@@ -38,8 +50,20 @@ body {
   width: $calendar-width;
   padding: $padding-size;
   gap: $gap-size;
-  margin: 0 auto;
   position: relative;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  &__header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: $font-size - 5px;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+
   &__day {
     width: $day-size;
     height: $day-size;
@@ -52,13 +76,15 @@ body {
     font-size: $font-size;
     position: relative;
     transition: 0.3s ease-in-out;
+
     &::before {
       position: absolute;
     }
+
     &:hover {
       cursor: pointer;
       background: pink;
-      transform: translate(0, -20px);
+      transform: translateY(-20px);
     }
   }
 
