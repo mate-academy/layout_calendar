@@ -6,9 +6,18 @@ $font-size: 30px;
 $font-family: Arial, sans-serif;
 $border-color: black;
 $day-color: #eee;
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
 
 // Обчислення ширини календаря (7 колонок + відступи)
-$calendar-width: (7 * $day-size) + (6 * $gap-size) + (2 * $padding-size);
+$calendar-width: calc(7 * $day-size + $padding-size);;
 
 html,
 body {
@@ -21,6 +30,7 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -28,7 +38,7 @@ body {
   width: $calendar-width;
   padding: $padding-size;
   gap: $gap-size;
-  margin: 50px auto;
+  margin: 0 auto;
   position: relative;
 
   &__day {
@@ -62,11 +72,12 @@ body {
   }
 
   // Start day modifier to shift the first day of the month
-  @each $day,
-    $margin in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 0)
-  {
-    &--start-day-#{$day} &__day:first-child {
-      margin-left: calc(($day-size + $gap-size) * $margin);
+
+  @each $day, $index in $days-of-week {
+    .calendar--start-day--#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($day-size + $gap-size) * $index;
+      }
     }
   }
 
