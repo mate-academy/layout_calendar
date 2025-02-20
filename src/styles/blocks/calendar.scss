@@ -1,0 +1,41 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: 10px;
+  width: $width-calendar;
+
+  @each $day, $margin in $days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $i from 28 through $big-month {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $box-day-size;
+    height: $box-day-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through $big-month {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
