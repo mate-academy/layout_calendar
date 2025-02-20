@@ -10,18 +10,14 @@ $day-color: #eee;
 // Обчислення ширини календаря (7 колонок + відступи)
 $calendar-width: (7 * $day-size) + (6 * $gap-size) + (2 * $padding-size);
 
-html {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  gap: 0;
-}
-
+html,
 body {
-  font-family: Arial, serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: $font-family;
+  display: flex;
+  justify-content: center;
 }
 
 .calendar {
@@ -32,8 +28,8 @@ body {
   width: $calendar-width;
   padding: $padding-size;
   gap: $gap-size;
-  margin: auto; // Центруємо горизонтально
-  position: absolute;
+  margin: 50px auto;
+  position: relative;
 
   &__day {
     width: $day-size;
@@ -43,14 +39,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: $font-family;
     font-size: $font-size;
     position: relative;
-    transition-duration: 0.5s;
+    transition: 0.3s ease-in-out;
 
     &::before {
       position: absolute;
     }
+
     &:hover {
       cursor: pointer;
       background: pink;
@@ -67,7 +63,7 @@ body {
 
   // Start day modifier to shift the first day of the month
   @each $day,
-    $margin in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 6.1)
+    $margin in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 0)
   {
     &--start-day-#{$day} &__day:first-child {
       margin-left: calc(($day-size + $gap-size) * $margin);
@@ -75,7 +71,7 @@ body {
   }
 
   // Month length modifier to hide unnecessary days
-  @for $days from 28 through 30 {
+  @for $days from 28 through 31 {
     &--month-length-#{$days} &__day:nth-child(n + #{$days + 1}) {
       display: none;
     }
