@@ -1,0 +1,48 @@
+@use '../blocks/utils/variables.scss' as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  gap: $calendar-gap;
+  width: $calendar-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $size-cell;
+    width: $size-cell;
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    font-family: $font-family;
+    font-size: $font-size;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color-hover;
+      transition-duration: 0.5s;
+      transform: translateY($transform-size);
+    }
+  }
+}
+
+@each $day, $px in $weekdays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $px;
+  }
+}
+
+@for $dayNum from 28 through 31 {
+  .calendar--month-length-#{$dayNum}
+    .calendar__day:nth-child(n + #{$dayNum + 1}) {
+    display: none;
+  }
+}
