@@ -1,4 +1,5 @@
 'use strict';
+
 document.addEventListener("DOMContentLoaded", function () {
   const calendar = document.getElementById("calendar");
   const startDaySelect = document.getElementById("start-day-select");
@@ -8,18 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const startDay = startDaySelect.value;
     const monthLength = monthLengthSelect.value;
 
-    // Видаляємо попередні модифікатори
-    calendar.classList.forEach((cls) => {
-      if (cls.startsWith("calendar--start-day-") || cls.startsWith("calendar--month-length-")) {
-        calendar.classList.remove(cls);
-      }
-    });
-
-    // Додаємо нові модифікатори
-    calendar.classList.add(`calendar--start-day-${startDay}`);
-    calendar.classList.add(`calendar--month-length-${monthLength}`);
+    // Оновлюємо класи календаря без зайвих маніпуляцій
+    calendar.className = `calendar calendar--start-day-${startDay} calendar--month-length-${monthLength}`;
   }
 
+  // Додаємо обробники подій
   startDaySelect.addEventListener("change", updateCalendar);
   monthLengthSelect.addEventListener("change", updateCalendar);
+
+  // Викликаємо оновлення календаря при завантаженні сторінки
+  updateCalendar();
 });
