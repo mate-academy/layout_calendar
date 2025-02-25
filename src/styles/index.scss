@@ -1,3 +1,58 @@
-body {
+@import './calendar-styles';
+@import './calendar-days';
+@import './calendar-cycles';
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+ul,
+li {
   margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  width: (7 * ($cell-size + (2 * $border-size))) + (6 * (2 * $gap-size));
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: $gap-size;
+  font-size: $font-size;
+  color: black;
+
+  &__cell {
+    box-sizing: border-box;
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: $border-size solid black;
+    background-color: $cell-color;
+    transition: transform 0.5s;
+    transition-duration: 0.5s;
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
