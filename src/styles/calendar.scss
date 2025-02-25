@@ -1,0 +1,49 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: $calendar-size;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all;
+    transition-duration: 0.5s;
+
+    box-sizing: border-box;
+    height: $column-size;
+    width: $column-size;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    background-color: #eee;
+    border: 1px solid black;
+
+    &:hover {
+      transition-property: transform, background-color;
+      transform: translateY(-20px);
+      cursor: pointer;
+      background-color: $hover-color;
+    }
+  }
+
+  @for $day-number from 1 through 31 {
+    & :nth-child(#{$day-number})::before {
+      content: '#{$day-number}';
+    }
+  }
+
+  @each $day, $num in $week-days {
+    &--start-day-#{$day} :first-child {
+      margin-left: (($gap-size * ($num - 1)) + (($num - 1) * $column-size));
+    }
+  }
+
+  @for $last-days from 28 through 31 {
+    &--month-length-#{$last-days} :nth-child(n + #{$last-days + 1}) {
+      display: none;
+    }
+  }
+}
