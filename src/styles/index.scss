@@ -1,3 +1,70 @@
-body {
+$day-cell-size: 100px;
+$calendar-padding: 10px;
+$gap: 1px;
+$hovered-cell-translate: -20px;
+$calendar-max-width: (7 * $day-cell-size) + (6 * $gap);
+$weekDays: (
+  1: 'mon',
+  2: 'tue',
+  3: 'wed',
+  4: 'thu',
+  5: 'fri',
+  6: 'sat',
+  7: 'sun',
+);
+
+.page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
   margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  max-width: $calendar-max-width;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-cell-size;
+    height: $day-cell-size;
+    background-color: #eee;
+    box-sizing: border-box;
+    border: 1px solid black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        display: block;
+      }
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY($hovered-cell-translate);
+    }
+  }
+
+  @each $index, $weekDay in $weekDays {
+    &--start-day-#{$weekDay} &__day:first-child {
+      margin-left: (($index - 1) * $day-cell-size) + (($index - 1) * $gap);
+    }
+  }
+
+  @for $lastDay from 28 to 31 {
+    &--month-length-#{$lastDay} &__day:nth-child(n + #{$lastDay + 1}) {
+      display: none;
+    }
+  }
 }
