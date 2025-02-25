@@ -1,0 +1,12 @@
+@each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+{
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + #{$gap}) * $margin);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}

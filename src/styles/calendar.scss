@@ -1,0 +1,52 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  counter-reset: day-number 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc((#{$day-size} * 7) + (#{$gap} * 6) + #{$padding} * 2);
+  padding: $padding;
+  gap: $gap;
+}
+
+h1 {
+  display: none;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $bg-color-default;
+  border: $border-width solid $border-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition:
+    transform $animation-duration,
+    background-color $animation-duration;
+
+  // Псевдоелемент для чисел днів
+  &::before {
+    content: counter(day-number);
+    counter-increment: day-number;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    color: $text-color;
+    position: absolute;
+  }
+
+  &:hover {
+    background-color: $bg-color-hover;
+    cursor: pointer;
+    transform: translateY(-20px);
+    transition:
+      transform $animation-duration,
+      background-color $animation-duration;
+  }
+}
