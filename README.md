@@ -20,6 +20,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - Set 31 days by default
 
 On hovering over a cell:
+
 - cursor should become pointer
 - The hovered cell has to become pink (use `#FFBFCB`)
 - Move the hovered cell up by `20px` (use `transform`)
@@ -36,13 +37,13 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://larysa1387.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://larysa1387.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
 - [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
-reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
+      reflects in changing calendar layout
+- [ ] Each day has no modifiers, only class (eg. calendar\_\_day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
