@@ -1,0 +1,90 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'Arial Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url '../fonts/ARIAL.woff';
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $width-calendar;
+  margin: 0;
+  padding: $padding;
+  gap: $gap;
+  box-sizing: border-box;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $size-calendar-box;
+    width: $size-calendar-box;
+    list-style: none;
+    box-sizing: border-box;
+
+    background-color: $bg-color;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    @for $num from 1 through 31 {
+      &:nth-child(#{$num})::before {
+        content: '#{$num}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $bg-color-hover;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  $days: (
+    'mon': 0,
+    'tue': (
+      $size-calendar-box + $gap,
+    ),
+    'wed': (
+      $size-calendar-box * 2 + $gap * 2,
+    ),
+    'thu': (
+      $size-calendar-box * 3 + $gap * 3,
+    ),
+    'fri': (
+      $size-calendar-box * 4 + $gap * 4,
+    ),
+    'sat': (
+      $size-calendar-box * 5 + $gap * 5,
+    ),
+    'sun': (
+      $size-calendar-box * 6 + $gap * 6,
+    ),
+  );
+
+  @each $day, $m-left in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: #{$m-left};
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
