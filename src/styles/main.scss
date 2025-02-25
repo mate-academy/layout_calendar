@@ -1,0 +1,63 @@
+@import './vearable';
+
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  width: 726px;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+
+  &__day {
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  @for $num from 1 through 31 {
+    &__day:nth-child(#{$num})::before {
+      content: '#{$num}';
+    }
+  }
+}
+
+@each $days, $margin in $day {
+  .calendar--start-day-#{$days} .calendar__day:first-child {
+    margin-left: $margin * 101px;
+  }
+}
+
+@each $beginning in $lengths {
+  .calendar--month-length-#{$beginning} {
+    @for $index from ($beginning + 1) through 32 {
+      .calendar__day:nth-child(#{$index}) {
+        display: none;
+      }
+    }
+  }
+}
