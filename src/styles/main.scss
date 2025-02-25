@@ -1,0 +1,25 @@
+@import './normalize';
+@import './variables';
+@import './calendar';
+
+@each $day, $number in $weekdays {
+  .calendar--start-day-#{$day} {
+    & :first-child {
+      margin-left: (#{($number) * ($column-width + 1px)});
+    }
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar :nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length-#{$index} {
+    & :nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
+}
