@@ -1,3 +1,77 @@
+$fontFamily: Arial, Helvetica, sans-serif;
+$cell-size: 100px;
+$columns: 7;
+$gap: 1px;
+$digit-size: 0.3 * $cell-size;
+$padding: 10px;
+$bg-day: #eee;
+$quantityDaysInMonth: 31;
+$bg-hover: #ffbfcb;
+$daysOfWeek: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$calendarWidth: (($cell-size + $gap) * $columns) - $gap + 2 * $padding;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $fontFamily;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendarWidth;
+  padding: $padding;
+
+  &__day {
+    display: flex;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $bg-day;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: $bg-hover;
+      transform: translateY(-20px);
+    }
+
+    @for $dayOfMounth from 1 through $quantityDaysInMonth {
+      &:nth-child(#{$dayOfMounth})::before {
+        content: '#{$dayOfMounth}';
+        display: block;
+        font-size: $digit-size;
+      }
+    }
+  }
+
+  @each $day, $i in $daysOfWeek {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($cell-size + $gap) * $i;
+    }
+  }
+
+  @for $amountsOfDay from 28 through 31 {
+    &--month-length-#{$amountsOfDay} :nth-child(n + #{$amountsOfDay + 1}) {
+      display: none;
+    }
+  }
 }
