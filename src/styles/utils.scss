@@ -1,0 +1,15 @@
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function px-to-rem($px) {
+  @return #{strip-unit($px) / strip-unit($html-font-size)}rem;
+}
+
+@function get-start-day-margin($start-day-index) {
+  @if not $start-day-index {
+    @return 'unset';
+  }
+
+  @return ($cell-size + $cell-gap-size) * $start-day-index;
+}
