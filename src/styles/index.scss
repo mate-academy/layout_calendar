@@ -1,3 +1,67 @@
-body {
+$start-days: (0 'mon', 1 'tue', 2 'wed', 3 'thu', 4 'fri', 5 'sat', 6 'sun');
+$day-size: 100px;
+$gap-size: 1px;
+$days-in-month: 31;
+$calendar-width: ($day-size * 7) + 6 * $gap-size;
+
+.body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  padding: 10px;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    border: 1 solid black;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    transition-duration: 500ms;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+    cursor: pointer;
+  }
+
+  &--start-day {
+    @each $day-number, $start-day in $start-days {
+      &-#{$start-day} :first-child {
+        margin-left: calc($day-number * ($day-size + $gap-size));
+      }
+    }
+  }
+
+  &--month-length {
+    @for $end-day from 28 through 31 {
+      &-#{$end-day} :nth-child(n + #{$end-day + 1}) {
+        visibility: hidden;
+        display: none;
+      }
+    }
+  }
+}
+
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: '#{$number}';
+  }
 }
