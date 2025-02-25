@@ -1,3 +1,89 @@
+$cell-size: 100px;
+$gap: 1px;
+$border-width: 1px;
+$font-size: 30px;
+$hover-color: #ffbfcb;
+$animation-duration: 0.5s;
+$font-family: Arial, Helvetica, sans-serif;
+
+@mixin flex-container($columns: 7) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: calc(#{$columns} * #{$cell-size} + (#{$columns} - 1) * #{$gap});
+}
+
+$days-of-week: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+@each $day, $index in $days-of-week {
+  .calendar--start-day-#{$day} {
+    .calendar__day {
+      &:first-child {
+        margin-left: calc(#{$index} * (#{$cell-size} + #{$gap}));
+      }
+    }
+  }
+}
+
 body {
   margin: 0;
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  @include flex-container;
+
+  padding: 10px;
+  margin: auto;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  width: $cell-size;
+  height: $cell-size;
+  border: $border-width solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  position: relative;
+  background-color: #eee;
+  transition:
+    background-color $animation-duration,
+    transform $animation-duration;
+
+  &::before {
+    content: '';
+    font-size: $font-size;
+    font-family: $font-family;
+    display: inline-block;
+    position: absolute;
+  }
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
