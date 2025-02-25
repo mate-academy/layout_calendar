@@ -1,0 +1,54 @@
+$card-size: 100px;
+$gap-width: 1px;
+$days-of-week: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-width;
+  width: $card-size * 7 + $gap-width * 6;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $card-size;
+    height: $card-size;
+    border: solid 1px black;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: pink;
+      transform: translateY(-20px);
+      transition: 0.5s;
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $value in $days-of-week {
+    &--start-day-#{$day} :first-child {
+      margin-left: ($card-size + $gap-width) * ($value - 1);
+    }
+  }
+}
