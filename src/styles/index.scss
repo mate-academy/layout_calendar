@@ -1,3 +1,118 @@
-body {
+/* stylelint-disable import-notation */
+@use 'sass:list';
+@import './variables';
+
+.page {
+  height: 100%;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(7 * #{$calendar-size} + 6 * #{$calendar-gap});
+
+  gap: $calendar-gap;
+  padding: 10px;
+
+  counter-reset: day;
+
+  @for $day from 1 through 31 {
+    .calendar__day:nth-child(#{$day}) {
+      position: relative;
+      width: $calendar-size;
+      height: $calendar-size;
+      background-color: $calendar-bg-color;
+      border: $calendar-border;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: $calendar-font-size;
+      cursor: pointer;
+      transition:
+        transform $animation-duration,
+        background-color $animation-duration;
+
+      &::before {
+        content: counter(day);
+        counter-increment: day;
+        font-size: $calendar-font-size;
+      }
+
+      &:hover {
+        background-color: $calendar-hover-bg-color;
+        transform: translateY(-$calendar-hover-move);
+      }
+    }
+  }
+
+  @for $i from 0 through 6 {
+    $day-name: list.nth(mon tue wed thu fri sat sun, $i + 1);
+
+    &--start-day-#{$day-name} {
+      .calendar__day:nth-child(1) {
+        @if $i == 1 {
+          margin-left: 0;
+        } @else {
+          margin-left: calc(#{$i} * $calendar-size + #{$i} * $calendar-gap);
+        }
+      }
+    }
+  }
+
+  // &--start-day-sun {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(6 * #{$calendar-size} + 6 * #{$calendar-gap});
+  //   }
+  // }
+
+  // &--start-day-mon {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: 0;
+  //   }
+  // }
+
+  // &--start-day-tue {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(1 * #{$calendar-size} + 1 * #{$calendar-gap});
+  //   }
+  // }
+
+  // &--start-day-wed {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(2 * #{$calendar-size} + 2 * #{$calendar-gap});
+  //   }
+  // }
+
+  // &--start-day-thu {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(3 * #{$calendar-size} + 3 * #{$calendar-gap});
+  //   }
+  // }
+
+  // &--start-day-fri {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(4 * #{$calendar-size} + 4 * #{$calendar-gap});
+  //   }
+  // }
+
+  // &--start-day-sat {
+  //   .calendar__day:nth-child(1) {
+  //     margin-left: calc(5 * #{$calendar-size} + 5 * #{$calendar-gap});
+  //   }
+  // }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
 }
