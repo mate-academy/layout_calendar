@@ -1,3 +1,70 @@
+$start-day: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+$widthDayItems: 100px;
+$heightDayItems: 100px;
+$currentShift: 1px;
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  width: calc(7 * $widthDayItems + 6 * $currentShift);
+  flex-wrap: wrap;
+  padding: 0 10px;
+
+  &__day {
+    box-sizing: border-box;
+    width: $widthDayItems;
+    height: $heightDayItems;
+    border: 1px solid black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
+  }
+}
+
+@for $numberday from 1 through 31 {
+  .calendar__day:nth-child(n + #{$numberday})::before {
+    content: '#{$numberday}';
+  }
+}
+
+@each $day, $i in $start-day {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{$i} * $widthDayItems + #{$i * $currentShift});
+  }
+}
+
+@for $numberday from 28 through 31 {
+  .calendar--month-length-#{$numberday} :nth-child(n + #{$numberday + 1}) {
+    display: none;
+  }
 }
