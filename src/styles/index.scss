@@ -1,3 +1,75 @@
+@use 'sass:map';
+@import './variables';
+@import './mixin';
+
 body {
   margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 7 * $daywidth + 6 * $border-width;
+  height: $boxheight;
+  gap: $border-width;
+  counter-reset: day-counter;
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #{$daybackground};
+    box-sizing: border-box;
+    margin: 0;
+    width: $daywidth;
+    height: $dayheight;
+    border: $border-width solid black;
+    transition-duration: 0.5s;
+    &::before {
+      font-size: 30px;
+      justify-content: center;
+      align-self: center;
+      content: counter(day-counter);
+      counter-increment: day-counter;
+    }
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through $daycount {
+    .calendar__day--#{$i}::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $start in $days-of-week {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        $start-day: $day;
+        $margin: map.get($days-of-week, $start-day);
+
+        margin-left: calc(#{$margin} * ((#{$daywidth} + #{$border-width})));
+      }
+    }
+  }
+
+  @for $i from 1 through 31 {
+    @each $days in (28, 29, 30, 31) {
+      &.calendar--month-length-#{$days} {
+        @if $i > $days {
+          .calendar__day:nth-child(#{$i}) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
