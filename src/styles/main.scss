@@ -1,0 +1,64 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  gap: $day-gap;
+  width: ($column-count * $day-size) + ($gap-count * $day-gap);
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: $day-border-width solid $border-color;
+    background-color: $day-color;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+
+    @for $date from 1 through 31 {
+      &:nth-child(#{$date})::before {
+        content: '#{$date}';
+      }
+    }
+  }
+
+  @each $weekday, $num in $weekdays {
+    &--start-day-#{$weekday} .calendar__day:first-child {
+      margin-left: $num * ($day-size + $day-gap);
+    }
+  }
+
+  @for $days-in-month from 28 through 31 {
+    &--month-length-#{$days-in-month}
+      .calendar__day:nth-child(n + #{$days-in-month + 1}) {
+      display: none;
+    }
+  }
+}
