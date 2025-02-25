@@ -1,3 +1,69 @@
+@import './variables.scss';
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
+  position: relative;
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-sizing: border-box;
+  padding: $padding;
+  width: ($square-value * 7) + ($gap * 6) + ($padding * 2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $square-value;
+    height: $square-value;
+    background-color: $cell-color;
+    border: 1px solid black;
+    transition-duration: 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-size: 30px;
+        line-height: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+
+
+  @each $day, $index-of-day in $week {
+    &--start-day--#{$day} {
+      :first-child {
+        margin-left: ($square-value + $gap) * $index-of-day;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} {
+      :nth-child(-n + #{$i}) {
+        visibility: visible;
+      }
+    }
+  }
 }
