@@ -1,3 +1,84 @@
-body {
+@use 'sass:map';
+@import './variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
   margin: 0;
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+
+  &__day {
+    background-color: #eee;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    display: flex;
+
+    position: relative;
+    cursor: pointer;
+
+    transition: 0.5s all;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @each $day-name, $day-index in $start-days {
+    &--start-day-#{$day-name} {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(#{$day-index} * 101px);
+      }
+    }
+  }
+
+  @each $length, $hide-from in $month-lengths {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$hide-from}) {
+        display: none;
+      }
+    }
+  }
+
+  &--start-day {
+    &-#{'sun'} {
+      .calendar__day:first-child {
+        margin-left: map.get($weekday-offsets, 'sun');
+      }
+    }
+  }
 }
