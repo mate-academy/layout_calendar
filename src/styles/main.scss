@@ -1,0 +1,100 @@
+@use 'sass:list';
+
+// Variables
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$padding-size: 10px;
+$background-color: #eee;
+$hover-color: #ffbfcb;
+$transition-duration: 0.5s;
+$font-size: 30px;
+$font-family: Arial, Helvetica, sans-serif;
+
+// List of starting days and month lengths
+$total-days-in-week: 7;
+$start-days: (mon, tue, wed, thu, fri, sat, sun);
+$month-lengths: (28, 29, 30, 31);
+
+// General Reset
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: $font-family;
+}
+
+// Flexbox for calendar layout
+.calendar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $padding-size;
+  margin: auto;
+  max-width: calc(
+    $total-days-in-week * $day-size + 6 * $gap-size + $padding-size * 2
+  );
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $background-color;
+    border: $border-size solid black;
+    position: relative;
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      content: attr(data-day);
+      font-family: $font-family;
+      font-size: $font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      background-color: $hover-color;
+    }
+
+    &:active {
+      transform: translateY(-20px);
+    }
+  }
+
+  // Modifiers for starting day of the week
+  @each $day in $start-days {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        @if $day == mon {
+          margin-left: 0;
+        } @else {
+          margin-left: calc(
+            (list.index($start-days, $day) - 1) * ($day-size + $gap-size)
+          );
+        }
+      }
+    }
+  }
+
+  // Month length modifier
+  @each $length in $month-lengths {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
