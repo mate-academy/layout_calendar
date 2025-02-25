@@ -1,0 +1,19 @@
+$days-in-month: (28, 29, 30, 31);
+
+.calendar {
+  &__day {
+    visibility: hidden;
+  }
+
+  @each $day in $days-in-month {
+    @for $i from 1 through $day {
+      &--month-length-#{$day} &__day:nth-child(#{$i}) {
+        visibility: visible;
+      }
+
+      &--month-length-#{$day} &__day:nth-child(#{$i}):before {
+        content: '#{$i}';
+      }
+    }
+  }
+}

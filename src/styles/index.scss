@@ -1,3 +1,51 @@
+@import 'mixins';
+@import 'variables';
+@import 'start-day-margin-calc';
+@import 'days-in-month-calc';
+
+html {
+  font-family: Arial, sans-serif;
+}
+
 body {
   margin: 0;
+  padding: 0;
+  height: 100vh;
+
+  @include flex-center;
+}
+
+.calendar {
+  font-family: Arial, sans-serif;
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-width solid black;
+    background-color: #eee;
+    box-sizing: border-box;
+    position: relative;
+    transition: transform 0.5s;
+    font-size: 30px;
+
+    @include flex-center;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      content: '';
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
 }
