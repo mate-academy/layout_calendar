@@ -1,0 +1,100 @@
+$days: 31;
+$columns: 7;
+$inactive: #eee;
+$active: #ffbfcb;
+$day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$day-width: $day-size + (1.6 * $gap);
+$calendar-width1: $columns * $day-size + ($columns - 1) * $gap;
+$calendar-width2: $padding * ($columns);
+$calendar-width: $calendar-width1 + $calendar-width2;
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$days-in-months: (
+  28: 28,
+  29: 29,
+  30: 30,
+  31: 31,
+);
+
+@each $day, $offset in $start-days {
+  .calendar--start-#{$day} .calendar__day:first-child {
+    margin-left: ($day-width + $gap) * $offset;
+  }
+}
+
+body {
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+
+  @each $days-in-month, $month-length in $days-in-months {
+    &--month-length-#{$month-length} {
+      @for $i from 1 through $month-length {
+        .calendar__day:nth-child(#{$i}) {
+          display: block;
+        }
+      }
+
+      // Скрываем дни, если длина месяца меньше 31
+      @for $i from ($month-length + 1) through 32 {
+        .calendar__day:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $inactive;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
+
+  &__day:hover {
+    background-color: $active;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+
+  @for $i from 1 through $days {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+    }
+  }
+}
