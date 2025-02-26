@@ -6,7 +6,6 @@ $font-size: 30px;
 $day-size: 100px;
 $gap-size: 1px;
 $padding-offset: 10px;
-$sunday-offset: ($day-size * 6) + ($gap-size * 6);
 $calendar-width: ($day-size * 7) + ($gap-size * 6);
 $color-black: #000;
 $color-pink: #ffbfcb;
@@ -47,10 +46,6 @@ $days:
     align-items: center;
     transition-duration: 0.5s;
 
-    &:first-child {
-      margin-left: $sunday-offset;
-    }
-
     &::before {
       font-family: Arial, sans-serif;
       font-size: $font-size;
@@ -70,7 +65,7 @@ $days:
   }
 
   @each $day, $offset in $days {
-    &--#{$day} .calendar__day:first-child {
+    &--start-day-#{$day} .calendar__day:first-child {
       margin-left: $offset;
     }
   }
