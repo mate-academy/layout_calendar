@@ -10,13 +10,16 @@ $sunday-offset: ($day-size * 6) + ($gap-size * 6);
 $calendar-width: ($day-size * 7) + ($gap-size * 6);
 $color-black: #000;
 $color-pink: #ffbfcb;
-$days: 'mon' 0,
+/* stylelint-disable */
+$days:
+  'mon' 0,
   'tue' $day-size + $gap-size,
   'wed' ($day-size * 2) + ($gap-size * 2),
   'thu' ($day-size * 3) + ($gap-size * 3),
   'fri' ($day-size * 4) + ($gap-size * 4),
   'sat' ($day-size * 5) + ($gap-size * 5),
   'sun' ($day-size * 6) + ($gap-size * 6);
+/* stylelint-enable */
 
 .calendar {
   justify-content: center;
@@ -28,7 +31,7 @@ $days: 'mon' 0,
   &__content {
     display: flex;
     flex-wrap: wrap;
-    gap: 1;
+    gap: $gap-size;
     width: $calendar-width;
     padding: $padding-offset;
   }
