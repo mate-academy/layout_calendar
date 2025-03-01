@@ -1,3 +1,55 @@
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+@import 'maps';
+
 body {
-  margin: 0;
+  min-height: 100vh;
+
+  @include center-all;
+}
+
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-family: $font-family;
+      font-size: $font-size;
+
+      @include center-all;
+    }
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-size solid #000;
+    background-color: $cell-color;
+    transition: all 0.5s ease;
+
+    @include center-all;
+  }
+  :hover {
+    cursor: pointer;
+    background-color: $cell-hover-color;
+    transform: translateY(-20px);
+  }
+}
+
+@each $day, $margin in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+    display: none;
+  }
 }
