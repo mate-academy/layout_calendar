@@ -1,0 +1,94 @@
+$day-size: 100px;
+$day-border-color: #000;
+$day-bg-color: #eee;
+$day-hover-color: #ffbfcb;
+$day-font-color: #000;
+$day-font-size: 30px;
+$gap: 1px;
+$transition-duration: 0.5s;
+$columns: 7;
+$calendar-padding: 10px;
+$calendar-width: calc(
+  #{$columns * $day-size} + #{$gap * ($columns - 1)} + #{$calendar-padding * 2}
+);
+$days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+  box-sizing: border-box;
+  position: relative;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid $day-border-color;
+    background-color: $day-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    will-change: transform, background-color;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &::before {
+      content: '';
+      display: block;
+      font-size: $day-font-size;
+      font-family: Arial, Helvetica, sans-serif;
+      color: $day-font-color;
+    }
+
+    &:hover {
+      background-color: $day-hover-color;
+      transform: translateY(-20px);
+    }
+
+    &:nth-child(1)::before {
+      content: '1';
+    }
+
+    @for $i from 2 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @each $day, $number in $days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(#{($day-size + $gap) * $number});
+    }
+  }
+
+  &--month-length-28 .calendar__day:nth-child(n + 29),
+  &--month-length-29 .calendar__day:nth-child(n + 30),
+  &--month-length-30 .calendar__day:nth-child(n + 31),
+  &--month-length-31 .calendar__day:nth-child(n + 32) {
+    display: none;
+  }
+}
