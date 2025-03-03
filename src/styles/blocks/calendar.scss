@@ -1,0 +1,21 @@
+.calendar {
+  width: $day-width * 7 + 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  box-sizing: content-box;
+  padding: 10px;
+
+  @each $day, $number in $week-start-day {
+    &__start-day--#{$day} {
+      margin-left: ($day-width + 1) * $number;
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &__month-length--#{$length}>*:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
