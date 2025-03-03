@@ -1,11 +1,11 @@
 @import 'variables';
 
 .calendar {
+  gap: $gap;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  width: calc(($day-size + $gap) * $columns - $gap);
+  width: calc($columns * $day-size + ($columns - 1) * $gap + $padding * 2);
   margin: auto;
   padding: 10px;
   background-color: white;
@@ -47,7 +47,7 @@
   $margin
     in (
       mon: 0,
-      tue: $day-size,
+      tue: $day-size + 1px,
       wed: $day-size * 2,
       thu: $day-size * 3,
       fri: $day-size * 4,
