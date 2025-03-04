@@ -43,17 +43,15 @@
   }
 }
 
-@each $day,
-  $margin
-    in (
-      mon: 0,
-      tue: $day-size + 1px,
-      wed: $day-size * 2,
-      thu: $day-size * 3,
-      fri: $day-size * 4,
-      satsun: $day-size * 5
-    )
-{
+@each $day, $margin in (
+  mon: 0,
+  tue: calc(1 * ($day-size + $gap)),
+  wed: calc(2 * ($day-size + $gap)),
+  thu: calc(3 * ($day-size + $gap)),
+  fri: calc(4 * ($day-size + $gap)),
+  sat: calc(5 * ($day-size + $gap)),
+  sun: calc(6 * ($day-size + $gap))
+) {
   .calendar--start-day-#{$day} .calendar__day:first-child {
     margin-left: $margin;
   }
@@ -61,6 +59,6 @@
 
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-    display: none;
+    visibility: hidden;
   }
 }
