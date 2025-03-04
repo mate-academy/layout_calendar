@@ -43,15 +43,18 @@
   }
 }
 
-@each $day, $margin in (
-  mon: 0,
-  tue: calc(1 * ($day-size + $gap)),
-  wed: calc(2 * ($day-size + $gap)),
-  thu: calc(3 * ($day-size + $gap)),
-  fri: calc(4 * ($day-size + $gap)),
-  sat: calc(5 * ($day-size + $gap)),
-  sun: calc(6 * ($day-size + $gap))
-) {
+@each $day,
+  $margin
+    in (
+      mon: 0,
+      tue: calc(1 * ($day-size + $gap)),
+      wed: calc(2 * ($day-size + $gap)),
+      thu: calc(3 * ($day-size + $gap)),
+      fri: calc(4 * ($day-size + $gap)),
+      sat: calc(5 * ($day-size + $gap)),
+      sun: calc(6 * ($day-size + $gap))
+    )
+{
   .calendar--start-day-#{$day} .calendar__day:first-child {
     margin-left: $margin;
   }
