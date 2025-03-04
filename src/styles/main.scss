@@ -1,0 +1,74 @@
+@import './utils/variables';
+
+body {
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #2d2b2b;
+}
+
+.calendar {
+  box-sizing: border-box;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+
+  background-color: blueviolet;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 500ms;
+  }
+
+  @for $date from 1 through 31 {
+    &__day:nth-child(#{$date})::before {
+      content: '#{$date}';
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+  }
+
+  @each $day, $value in $calendar-start-day {
+    &--start-day--#{$day} :first-child {
+      margin-left: $value;
+    }
+  }
+
+  @for $date from $month-length-28 through 31 {
+    &--month-length--28 :nth-child(n+#{$date})::before {
+      display: none;
+    }
+  }
+
+  @for $date from $month-length-29 through 31 {
+    &--month-length--29 :nth-child(n+#{$date})::before {
+      display: none;
+    }
+  }
+
+  @for $date from $month-length-30 through 31 {
+    &--month-length--30 :nth-child(n+#{$date})::before {
+      display: none;
+    }
+  }
+}
+
