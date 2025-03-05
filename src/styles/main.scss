@@ -17,11 +17,13 @@ body {
 
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $days-gap-size;
 
   background-color: blueviolet;
 
   &__day {
+    // margin-left: $day-size * 6 + $days-gap-size * 5;
+
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
@@ -31,6 +33,10 @@ body {
     justify-content: center;
     align-items: center;
     transition: transform 500ms;
+  }
+
+  &__day:first-child {
+    margin-left: ($day-size + $days-gap-size) * 6;
   }
 
   @for $date from 1 through 31 {
@@ -54,21 +60,20 @@ body {
   }
 
   @for $date from $month-length-28 through 31 {
-    &--month-length--28 :nth-child(n+#{$date})::before {
+    &--month-length--28 :nth-child(n + #{$date})::before {
       display: none;
     }
   }
 
   @for $date from $month-length-29 through 31 {
-    &--month-length--29 :nth-child(n+#{$date})::before {
+    &--month-length--29 :nth-child(n + #{$date})::before {
       display: none;
     }
   }
 
   @for $date from $month-length-30 through 31 {
-    &--month-length--30 :nth-child(n+#{$date})::before {
+    &--month-length--30 :nth-child(n + #{$date})::before {
       display: none;
     }
   }
 }
-
