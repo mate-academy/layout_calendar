@@ -1,0 +1,33 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  margin: 0 auto;
+  padding: 10px;
+  width: 706px;
+
+  &__day {
+    box-sizing: border-box;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-size: $main-fontSize;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
