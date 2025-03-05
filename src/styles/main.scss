@@ -6,8 +6,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background-color: #2d2b2b;
 }
 
 .calendar {
@@ -19,11 +17,7 @@ body {
   flex-wrap: wrap;
   gap: $days-gap-size;
 
-  background-color: blueviolet;
-
   &__day {
-    // margin-left: $day-size * 6 + $days-gap-size * 5;
-
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
@@ -53,26 +47,38 @@ body {
     transform: translate(0, -20px);
   }
 
-  @each $day, $value in $calendar-start-day {
-    &--start-day--#{$day} :first-child {
-      margin-left: $value;
+  @each $day, $numb in $days {
+    &--start-day-#{$day} :first-child {
+      margin-left: $numb * ($day-size + $days-gap-size);
     }
   }
 
-  @for $date from $month-length-28 through 31 {
-    &--month-length--28 :nth-child(n + #{$date})::before {
-      display: none;
-    }
-  }
+  // @for $date from $month-length-28 through 31 {
+  //   &--month-length-28 :nth-child(n + #{$date}) {
+  //     display: none;
+  //   }
+  // }
 
-  @for $date from $month-length-29 through 31 {
-    &--month-length--29 :nth-child(n + #{$date})::before {
-      display: none;
-    }
-  }
+  // @for $date from $month-length-29 through 31 {
+  //   &--month-length-29 :nth-child(n + #{$date}) {
+  //     display: none;
+  //   }
+  // }
 
-  @for $date from $month-length-30 through 31 {
-    &--month-length--30 :nth-child(n + #{$date})::before {
+  // @for $date from $month-length-30 through 31 {
+  //   &--month-length-30 :nth-child(n + #{$date}) {
+  //     display: none;
+  //   }
+  // }
+
+  // @for $date from $month-length-31 through 31 {
+  //   &--month-length-31 :nth-child(n + #{$date}) {
+  //     display: block;
+  //   }
+  // }
+
+  @for $date from 28 through 31 {
+    &--month-length-#{$date} :nth-child(n + #{$date + 1}) {
       display: none;
     }
   }
