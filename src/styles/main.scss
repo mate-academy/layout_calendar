@@ -1,3 +1,17 @@
+$main-fontSize: 30px;
+$days: mon 100px,
+  tue 200px,
+  wed 300px,
+  thu 400px,
+  fri 500px,
+  sat 600px,
+  sun 0;
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -5,8 +19,9 @@
   margin: 0 auto;
   padding: 10px;
   width: 706px;
+}
 
-  &__day {
+  div {
     box-sizing: border-box;
     position: relative;
     width: 100px;
@@ -28,6 +43,26 @@
       font-size: $main-fontSize;
       text-align: center;
       transform: translate(-50%, -50%);
+    }
+  }
+
+
+@each $dayName, $margin in $days {
+  .calendar--start-day--#{$dayName} div:first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day-#{$day}::before {
+    content: '#{$day}';
+  }
+}
+
+@for $monthLength from 28 through 31 {
+  .calendar--month-length--#{$monthLength} {
+    div:nth-child(n + #{$monthLength + 1}) {
+      display: none;
     }
   }
 }
