@@ -13,38 +13,34 @@ $days-per-week: 7;
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc(
-    ($day-size + $day-border * 2 + $gap) * $days-per-week + $padding * 2 - $gap
-  );
-  padding: $padding;
+  width: calc((var(--day-size) + var(--day-border) * 2 + var(--gap)) * var(--days-per-week) + var(--padding) * 2 - var(--gap));
+  padding: var(--padding);
   margin: auto;
   justify-content: center;
   align-items: center;
 
-  .day {
-    width: $day-size;
-    height: $day-size;
-    border: $day-border solid black;
-    background-color: $day-color;
+  &__day {
+    width: var(--day-size);
+    height: var(--day-size);
+    border: var(--day-border) solid black;
+    background-color: var(--day-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: $day-font-size;
-    font-family: $day-font-family;
+    font-size: var(--day-font-size);
+    font-family: var(--day-font-family);
     position: relative;
-    transition:
-      transform $animation-duration,
-      background-color $animation-duration;
+    transition: transform var(--animation-duration), background-color var(--animation-duration);
 
     &:hover {
-      background-color: $hover-color;
-      transform: translateY($hover-move);
+      background-color: var(--hover-color);
+      transform: translateY(var(--hover-move));
       cursor: pointer;
     }
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
-        content: '#{$i}';
+        content: "#{$i}";
       }
     }
   }
