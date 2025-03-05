@@ -1,3 +1,74 @@
-body {
-  margin: 0;
+$day-size: 100px;
+$day-border: 1px;
+$day-font-size: 30px;
+$day-font-family: Arial, sans-serif;
+$day-color: #eee;
+$hover-color: #ffbfcb;
+$hover-move: -20px;
+$animation-duration: 0.5s;
+$gap: 1px;
+$padding: 10px;
+$days-per-week: 7;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(
+    ($day-size + $day-border * 2 + $gap) * $days-per-week + $padding * 2 - $gap
+  );
+  padding: $padding;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+
+  .day {
+    width: $day-size;
+    height: $day-size;
+    border: $day-border solid black;
+    background-color: $day-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: $day-font-size;
+    font-family: $day-font-family;
+    position: relative;
+    transition:
+      transform $animation-duration,
+      background-color $animation-duration;
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY($hover-move);
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  // Definir o modificador para o primeiro dia do mês de forma otimizada
+  &.start-day-sun .day:first-child {
+    margin-left: 1px;
+  }
+  &.start-day-mon .day:first-child {
+    margin-left: calc($day-size + $gap);
+  }
+  &.start-day-tue .day:first-child {
+    margin-left: calc(($day-size + $gap) * 2);
+  }
+  &.start-day-wed .day:first-child {
+    margin-left: calc(($day-size + $gap) * 3);
+  }
+  &.start-day-thu .day:first-child {
+    margin-left: calc(($day-size + $gap) * 4);
+  }
+  &.start-day-fri .day:first-child {
+    margin-left: calc(($day-size + $gap) * 5);
+  }
+  &.start-day-sat .day:first-child {
+    margin-left: calc(($day-size + $gap) * 6);
+  }
 }
