@@ -1,7 +1,15 @@
 @use './variables.scss' as *;
 
-.body {
+* {
+  box-sizing: border-box;
   margin: 0;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -42,16 +50,17 @@
   }
 
   $days: (
-    sun: 0,
-    mon: 6,
-    tue: 5,
-    wed: 4,
+    mon: 0,
+    tue: 1,
+    wed: 2,
     thu: 3,
-    fri: 2,
-    sat: 1);
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
 
   @each $day, $margin in $days {
-    .calendar--start-#{$day} .calendar__day:first-child {
+    &--start-#{$day} .calendar__day:first-child {
       margin-left: calc(($day-size + $gap-size) * $margin);
     }
   }
