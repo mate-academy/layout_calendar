@@ -1,3 +1,54 @@
+
+
 body {
   margin: 0;
+  font-family: 'Arial';
+  font-size: 30px;
+
+}
+
+
+.calendar {
+  width: 700px;
+  border: 2px solid #000;
+}
+
+
+
+
+.calendar__day {
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid black;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar__days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+$calendar__days: ".calendar__days";
+$calendar__day: ".calendar__day";
+$calendar__days-of-week: ".calendar__days-of-week";
+$calendar__day-of-week: ("mon" "tue" "wed" "thu" "fri" "sat" "sun");
+$calendar: ".calendar";
+
+@each $calendar__day-of-week in $calendar__days-of-week i {
+    content: "#{$i}";
+}
+
+
+@each $calendar__day in $calendar__days {
+
+}
+
+@for $calendar__day from 1 through 31 {
+  .calendar__day::before {
+    content: "#{$i}";
+  }
 }
