@@ -1,5 +1,9 @@
 body {
+  height: 100vh;
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 $block-width: 100px;
@@ -8,8 +12,8 @@ $block-gap: 1px;
 
 .calendar {
   display: flex;
-  gap: $block-gap;
   flex-wrap: wrap;
+  gap: $block-gap;
   width: 706px;
   padding: 10px;
 
@@ -22,7 +26,7 @@ $block-gap: 1px;
   }
 
   @for $data from 28 through 31 {
-    &--month-length--#{$data} .calendar__day:nth-child(n + #{$data + 1}) {
+    &--month-length-#{$data} .calendar__day:nth-child(n + #{$data + 1}) {
       display: none;
     }
   }
@@ -38,7 +42,7 @@ $block-gap: 1px;
   );
 
   @each $name, $day in $days {
-    &__start-day--#{$name} .day:first-child {
+    &--start-day-#{$name} .day:first-child {
       margin-left: $day * ($block-width + $block-gap);
     }
   }
