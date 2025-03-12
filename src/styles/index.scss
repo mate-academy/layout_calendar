@@ -1,14 +1,12 @@
+@import './variables';
+
 body {
-  height: 100vh;
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  margin: 0;
 }
-
-$block-width: 100px;
-$block-height: 100px;
-$block-gap: 1px;
 
 .calendar {
   display: flex;
@@ -18,11 +16,38 @@ $block-gap: 1px;
   padding: 10px;
 
   &__day {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
-    width: $block-width;
-    height: $block-height;
-    border: 1px solid black;
+    width: $square;
+    height: $square;
+
     background-color: #eee;
+    border: 1px solid black;
+
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    cursor: pointer;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
   }
 
   @for $data from 28 through 31 {
@@ -31,47 +56,9 @@ $block-gap: 1px;
     }
   }
 
-  $days: (
-    'mon': 0,
-    'tue': 1,
-    'wed': 2,
-    'thu': 3,
-    'fri': 4,
-    'sat': 5,
-    'sun': 6,
-  );
-
   @each $name, $day in $days {
-    &--start-day-#{$name} .day:first-child {
-      margin-left: $day * ($block-width + $block-gap);
+    &--start-day-#{$name} .calendar__day:first-child {
+      margin-left: $day * ($square + $block-gap);
     }
-  }
-}
-
-.day {
-  cursor: pointer;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  transition:
-    background-color 0.5s,
-    transform 0.5s;
-
-  &::before {
-    font-family: Arial, sans-serif;
-    font-size: 30px;
-  }
-
-  @for $i from 1 through 31 {
-    &:nth-child(#{$i})::before {
-      content: '#{$i}';
-    }
-  }
-
-  &:hover {
-    background-color: #ffbfcb;
-    transform: translate(0, -20px);
   }
 }
