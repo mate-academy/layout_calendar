@@ -1,10 +1,10 @@
 @import 'variables';
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, $day-size);
+  display: flex;
+  flex-wrap: wrap;
   gap: $calendar-gap;
-  width: $calendar-width;
+  width: calc($calendar-width * 7);
 
   &__day {
     padding: 10px;
@@ -40,8 +40,8 @@
   }
 
   @each $day, $index in $week-days {
-    .calendar--start-day-#{$day} > .calendar__day:first-child {
-      margin-left: calc(#{$day-size} * #{$index});
+    .calendar.calendar--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc((#{$day-size} + #{$calendar-gap}) * #{$index});
     }
   }
 }
