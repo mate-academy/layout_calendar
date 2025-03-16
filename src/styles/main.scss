@@ -21,19 +21,26 @@ body {
     flex-wrap: wrap;
   }
 
-  &__item {
-    width: $widthItem;
-    height: $heightItem;
-    box-sizing: border-box;
-    border: 1px solid #000;
-    margin: 0.5px;
-  }
-
   @for $i from 1 through 31 {
+    &__item:nth-child(#{$i}) {
+      width: $widthItem;
+      height: $heightItem;
+      box-sizing: border-box;
+      border: 1px solid #000;
+      margin: 0.5px;
+
+      &:hover {
+        transform: translate(0, -20px);
+        transition: all 0.5s;
+      }
+    }
+
     &__item:nth-child(#{$i}) a::before {
       content: '#{$i}';
     }
   }
+
+
 
   &__item:first-child {
     margin-left: $marginLeftFirstItem;
