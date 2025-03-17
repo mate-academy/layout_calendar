@@ -1,3 +1,8 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .calendar {
   position: relative;
 
@@ -6,8 +11,7 @@
   align-items: flex-start;
   justify-content: start;
 
-  width: calc(($columns * $day-size) + (($columns - 1) * $day-gap) + (2 * $calendar-padding));
-  margin: 74px 149px;
+  width: calc(7 * ($day-size + 2 * $border-size + $day-gap) - $day-gap + 2 * $calendar-padding);
 
   @each $firstDay, $ofset in $days {
     &--start-day-#{$firstDay} {
