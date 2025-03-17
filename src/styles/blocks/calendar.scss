@@ -6,7 +6,7 @@
   align-items: flex-start;
   justify-content: start;
 
-  width: calc(7 * ($day-size + 2 * $border-size + 6 * $day-gap));
+  width: calc(($columns * $day-size) + (($columns - 1) * $day-gap) + (2 * $calendar-padding));
   margin: 74px 149px;
 
   @each $firstDay, $ofset in $days {
@@ -14,7 +14,7 @@
       gap: 1px;
 
       .calendar__day:first-child {
-        margin-left: ($day-size + 2 * $border-size + $day-gap) * ($ofset);
+        margin-left: ($day-size + 2 * $border-size + $day-gap) * $ofset;
       }
     }
   }
