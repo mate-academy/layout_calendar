@@ -22,17 +22,17 @@ body {
   flex-wrap: wrap;
 
   $start-days: (
-    'mon': calc(0 * ($daysGap + $daysSize)),
-    'tue': calc(1 * ($daysGap + $daysSize)),
-    'wed': calc(2 * ($daysGap + $daysSize)),
-    'thu': calc(3 * ($daysGap + $daysSize)),
-    'fri': calc(4 * ($daysGap + $daysSize)),
-    'sat': calc(5 * ($daysGap + $daysSize)),
-    'sun': calc(6 * ($daysGap + $daysSize)),
+    "mon": calc(0 * ($daysGap + $daysSize)),
+    "tue": calc(1 * ($daysGap + $daysSize)),
+    "wed": calc(2 * ($daysGap + $daysSize)),
+    "thu": calc(3 * ($daysGap + $daysSize)),
+    "fri": calc(4 * ($daysGap + $daysSize)),
+    "sat": calc(5 * ($daysGap + $daysSize)),
+    "sun": calc(6 * ($daysGap + $daysSize))
   );
 
   @each $week-day, $margin in $start-days {
-    &--start-day-#{$week-day} :first-child {
+    &--start-day-#{$week-day} :nth-child(1) {
       margin-left: $margin;
     }
   }
@@ -56,8 +56,8 @@ body {
     font-size: 31px;
 
     @for $date from 1 through 31 {
-      &:nth-child(n + #{$date})::before {
-        content: '#{$date}';
+      &:nth-child(#{$date})::before {
+        content: "#{$date}";
       }
     }
   }
