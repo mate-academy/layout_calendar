@@ -1,3 +1,91 @@
+@use 'sass:list';
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+}
+
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$number-font-size: 30px;
+$default-color: #eee;
+$hover-color: #ffbfcb;
+$border-color: #000;
+$padding-size: 10px;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: $padding-size;
+  width: calc((7 * $day-size) + (6 * $gap-size) + (2 * $padding-size));
+  gap: $gap-size;
+  margin-left: 20px;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  border: $border-size solid $border-color;
+  background-color: $default-color;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+
+  &:nth-child(n) {
+    &::before {
+      content: '#{n}';
+      font-family: Arial, sans-serif;
+      font-size: $number-font-size;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}) {
+    &::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+$days: (mon, tue, wed, thu, fri, sat, sun);
+
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:nth-child(1) {
+      $index: list.index($days, $day) - 1; // Oblicz indeks dnia tygodnia (0-6)
+      $combined_size: ($day-size + $gap-size); // Oblicz szerokość dnia + odstęp
+
+      margin-left: $index * $combined_size; // Ustaw margines
+    }
+  }
+}
+
+// Domyślne ustawienie - niedziela
+.calendar__day:nth-child(1) {
+  $index_sun: list.index($days, sun) - 1;
+  $combined_size_sun: ($day-size + $gap-size);
+
+  margin-left: $index_sun * $combined_size_sun;
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
