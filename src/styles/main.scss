@@ -13,6 +13,22 @@ body {
 
   background-color: #ccc;
 
+  @for $day from 28 through $month-length {
+    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  &--start-day {
+    @each $week-day__name, $week-day__number in $week-day {
+      &-#{$week-day__name} {
+        .calendar__day:first-child {
+          margin-left: ($cell-size + $gap) * ($week-day__number - 1);
+        }
+      }
+    }
+  }
+
   &__day {
     display: flex;
     box-sizing: border-box;
@@ -29,9 +45,16 @@ body {
     font-size: 30px;
     font-family: Arial, Helvetica, sans-serif;
 
+    transition:
+      background-color 0.5s,
+      transform 0.5s,
+      border-radius 0.1s;
+
     &:hover {
       cursor: pointer;
       background-color: #ffbfcb;
+      transform: translate(0, -20px);
+      border-radius: 20px;
 
       // transform:
       // bottom: 20px;
@@ -40,27 +63,6 @@ body {
     @for $date from 1 through $month-length {
       &:nth-child(#{$date})::before {
         content: '#{$date}';
-      }
-    }
-
-    &--start-day {
-      @each $week-day__name, $week-day__number in $week-day {
-        &-#{$week-day__name} {
-          margin-left: ($cell-size + $gap) * ($week-day__number - 1);
-        }
-      }
-    }
-
-    &--month-length {
-      @for $date from 28 through $month-length {
-        .calendar__day:nth-child(#{$date}) {
-          display: none;
-          background-color: none;
-          border: none;
-          visibility: hidden;
-        }
-
-        // &-#{$date} {
       }
     }
   }
