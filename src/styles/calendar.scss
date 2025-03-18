@@ -4,7 +4,6 @@
   gap: 1px;
   justify-content: center;
   padding: 10px;
-  background-color: $koko;
 
   &__day {
     display: flex;
@@ -34,6 +33,10 @@
     }
   }
 
-
+  @each $day, $offset in start-days {
+    .start-#{$day} .day:first-child {
+      margin-left: calc($offset * 100px);
+    }
+  }
 }
 
