@@ -2,8 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  justify-content: center;
+
   padding: 10px;
+  width: 700px + $paddingInline;
 
   &__day {
     display: flex;
@@ -33,9 +34,17 @@
     }
   }
 
-  @each $day, $offset in start-days {
-    .start-#{$day} .day:first-child {
-      margin-left: calc($offset * 100px);
+  @each $day, $offset in $start-days {
+    .calendar__start--day-#{$day} &__day:first-child {
+      margin-left: calc($offset * 100px + $paddingInline);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &.month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 }
