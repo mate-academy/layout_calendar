@@ -1,10 +1,9 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  gap: 1px;
-
-  padding: 10px;
-  width: 700px + $paddingInline;
+  gap: $gapBeetwenBoxes;
+  padding: $paddingInline;
+  width: $containerWidth + ($paddingInline) * 2;
 
   &__day {
     display: flex;
@@ -13,8 +12,8 @@
     font-family: Arial, Helvetica, sans-serif;
     background-color: #eee;
     border: 1px solid #000;
-    width: 100px;
-    height: 100px;
+    width: $sizeOfSquare;
+    height: $sizeOfSquare;
     transition-duration: 0.5s;
     position: relative;
   }
@@ -36,12 +35,12 @@
 
   @each $day, $offset in $start-days {
     .calendar__start--day-#{$day} &__day:first-child {
-      margin-left: calc($offset * 100px + $paddingInline);
+      margin-left: calc($offset * $sizeOfSquare + ($paddingInline) * 2 - $gapBeetwenBoxes);
     }
   }
 
   @for $i from 28 through 31 {
-    &.month-length-#{$i} {
+    &__month-length--#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
