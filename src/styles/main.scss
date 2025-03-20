@@ -45,21 +45,20 @@ body {
       content: '#{$i}';
     }
 
-    $days: (
-      'mon': 0,
-      'tue': 1,
-      'wed': 2,
-      'thu': 3,
-      'fri': 4,
-      'sat': 5,
-      'sun': 6,
-    );
-    
-    @each $name, $day in $days {
+    $days: ('mon':0, 'tue':1, 'wed':2, 'thu':3, 'fri':4, 'sat':5, 'sun':6);
+
+    @each  $name, $day in $days {
       &--start-day-#{$name} .calendar__day:first-child {
         margin-left: $day * ($days-size + $border-size);
       }
     }
+
+    @for $data from 28 through 31{
+      .calendar--month-length-#{$data} .calendar--month-length:nth-child(n+#{$data + 1}){
+        display: none;
+      }
+    }
+
   }
 }
 
