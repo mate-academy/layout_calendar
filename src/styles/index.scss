@@ -1,3 +1,64 @@
+@import './variables';
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__month {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    width: $col-count * $day-cell-size + 10px;
+
+    @each $name, $column in $week-days {
+      &--start-day--#{$name} :first-child {
+        margin-left: $column * ($day-cell-size + 1px);
+      }
+    }
+
+    @for $index from 1 to $days-amount {
+      &--month-length--#{$days-amount + 1} :nth-child(#{$index}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: block;
+    box-sizing: border-box;
+    height: $day_cell_size;
+    width: $day_cell_size;
+    background-color: #eee;
+    border: 1px solid #000;
+    position: relative;
+    transition: transform 500ms;
+
+    @for $day from 1 through $days-amount {
+      &--#{$day}::before {
+        content: '#{$day}';
+        position: absolute;
+        display: block;
+        height: $day-cell-size * 0.3;
+        width: $day-cell-size * 0.3;
+        top: $position-day-coumt;
+        left: $position-day-coumt;
+        color: #000;
+        text-align: center;
+        line-height: $day-cell-size * 0.3;
+        font-size: 30px;
+      }
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
 }
