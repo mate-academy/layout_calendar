@@ -11,7 +11,8 @@ body {
 .calendar {
   padding: 10px;
   width: $widthCalendar;
-  height: $heightCalendar;
+
+  /* height: $heightCalendar; */
 
   &__list {
     margin: 0;
@@ -21,29 +22,35 @@ body {
     flex-wrap: wrap;
   }
 
-  @for $i from 1 through 31 {
-    &__item:nth-child(#{$i}) {
-      width: $widthItem;
-      height: $heightItem;
-      box-sizing: border-box;
-      border: 1px solid #000;
-      margin: 0.5px;
+  @each $count in $countDays {
+    &--month-length-#{$count} {
+      @for $i from 1 through $count {
+        .calendar__day:nth-child(#{$i}) {
+          width: $widthItem;
+          height: $heightItem;
+          box-sizing: border-box;
+          border: 1px solid #000;
+          margin: 0.5px;
+        }
 
-      &:hover {
-        transform: translate(0, -20px);
-        transition: all 0.5s;
+        .calendar__day:nth-child(#{$i}) a::before {
+          content: '#{$i}';
+        }
       }
-    }
-
-    &__item:nth-child(#{$i}) a::before {
-      content: '#{$i}';
     }
   }
 
+  &__day:hover {
+    transform: translate(0, -20px);
+    transition: all 0.5s;
+  }
 
-
-  &__item:first-child {
-    margin-left: $marginLeftFirstItem;
+  @each $name, $value in $startDay {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: $value;
+      }
+    }
   }
 
   &__link {
@@ -61,6 +68,7 @@ body {
 
     &:hover {
       background-color: #ffbfcb;
+
       cursor: pointer;
     }
   }
