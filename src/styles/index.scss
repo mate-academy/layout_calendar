@@ -23,7 +23,7 @@ body {
     }
 
     @for $index from 1 to $days-amount {
-      &--month-length--#{$days-amount + 1} :nth-child(#{$index}) {
+      &:nth-child(#{$index}) ~ {
         display: none;
       }
     }
@@ -32,15 +32,15 @@ body {
   &__day {
     display: block;
     box-sizing: border-box;
-    height: $day_cell_size;
-    width: $day_cell_size;
+    height: $day-cell-size;
+    width: $day-cell-size;
     background-color: #eee;
     border: 1px solid #000;
     position: relative;
     transition: transform 500ms;
 
     @for $day from 1 through $days-amount {
-      &--#{$day}::before {
+      &:nth-child(#{$day})::before {
         content: '#{$day}';
         position: absolute;
         display: block;
