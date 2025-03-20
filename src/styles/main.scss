@@ -17,6 +17,7 @@ body {
   align-items: center;
   gap: $gap;
   width: (7 * $days-size) + (6 * $gap);
+  margin-top: -16px;
 
   &__day {
     width: $days-size;
@@ -62,9 +63,10 @@ body {
     }
 
     @for $data from 28 through 31 {
-      .calendar--month-length-#{$data} .calendar__day:nth-child(n + #{$data + 1}) {
+      &--month-length-#{$data} &__day:nth-child(n + #{$data + 1}) {
         display: none;
       }
     }
+
   }
 }
