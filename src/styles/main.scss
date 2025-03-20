@@ -58,13 +58,12 @@ body {
 
     @each $name, $day in $days {
       &--start-day-#{$name} .calendar__day:first-child {
-        margin-left: $day * ($days-size + $border-size);
+        margin-left: $day * $days-size;
       }
     }
 
     @for $data from 28 through 31 {
-      .calendar--month-length-#{$data}
-        .calendar--month-length:nth-child(n + #{$data + 1}) {
+      .calendar--month-length-#{$data} .calendar__day:nth-child(n + #{$data + 1}) {
         display: none;
       }
     }
