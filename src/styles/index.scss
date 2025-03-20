@@ -17,13 +17,13 @@ body {
     width: $col-count * $day-cell-size + 10px;
 
     @each $name, $column in $week-days {
-      &--start-day--#{$name} :first-child {
+      &--#{$name} :first-child {
         margin-left: $column * ($day-cell-size + 1px);
       }
     }
 
     @for $index from 1 to $days-amount {
-      &:nth-child(#{$index}) ~ {
+      & ~ :nth-child(#{$index}) {
         display: none;
       }
     }
