@@ -1,3 +1,96 @@
+// Variables
+$day-size: 100px;
+$day-bg: #eee;
+$day-border: 1px solid black;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$font-family: Arial;
+$font-size: 30px;
+$hover-color: #ffbfcb;
+$hover-translate: -20px;
+$animation-duration: 0.5s;
+
+// Base styles
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Calendar block
+.calendar {
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, $day-size);
+    gap: $gap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background: $day-bg;
+    border: $day-border;
+    position: relative;
+    transition: all $animation-duration ease;
+    box-sizing: border-box;
+
+    &::before {
+      content: attr(data-day);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font: {
+        family: $font-family;
+        size: $font-size;
+      }
+    }
+
+    &:hover {
+      background: $hover-color;
+      transform: translateY($hover-translate);
+      cursor: pointer;
+    }
+  }
+}
+
+// Generate day numbers (1-31)
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Start day modifiers
+$start-days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+@each $day, $offset in $start-days {
+  .calendar--start-day-#{$day} {
+    .calendar__day {
+      &:nth-child(1) {
+        grid-column-start: $offset;
+      }
+    }
+  }
+}
+
+// Month length modifiers
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+    display: none;
+  }
 }
