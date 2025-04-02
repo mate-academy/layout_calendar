@@ -1,3 +1,45 @@
 body {
-  margin: 0;
+  margin: 10px auto;
+}
+
+.calendar{
+  display: flex;
+  flex-wrap: wrap;
+  width: 727px;
+  margin: 0 auto;
+
+  &__day{
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border: black solid 1px;
+    margin: 1px;
+
+    transition: transform 0.5s;
+  }
+
+  &__day:first-child {
+    margin-left: 613px;
+  }
+
+  &__day:hover{
+    cursor: pointer;
+    background-color: #FFBFCB;
+    transform: translateY(-20px);
+  }
+}
+
+@for $i from 0 through 31 {
+  .calendar__day:nth-child(n + #{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    align-self: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
 }
