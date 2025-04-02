@@ -58,7 +58,7 @@ body {
 }
 
 @for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
+  .calendar-day:nth-child(#{$i})::before {
     content: '#{$i}';
   }
 }
@@ -74,14 +74,14 @@ $start-days: (
 );
 
 @each $name, $index in $start-days {
-  .calendar--start-day-#{$name} .calendar__day:first-child {
+  .calendar--start-day-#{$name} .calendar-day:first-child {
     margin-left: calc((#{$day-size} + #{$gap}) * #{$index});
   }
 }
 
 @for $length from 28 through 31 {
   .calendar--month-length-#{$length}
-    .calendar__day:nth-child(n + #{$length + 1}) {
+    .calendar-day:nth-child(n + #{$length + 1}) {
     display: none;
   }
 }
