@@ -1,0 +1,90 @@
+$calendar-gap: 1px;
+$day-size: 100px;
+$day-color: #eee;
+$day-border-color: black;
+$font-size: 30px;
+$max-width: calc(7 * $day-size + 6 * $calendar-gap + 20px);
+$padding: 10px;
+$animation-duration: 0.5s;
+$animation-bg-color: #ffbfcb;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $max-width;
+  margin: auto;
+  padding: $padding;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $day-size;
+    width: $day-size;
+    background-color: $day-color;
+    border: 1px solid $day-border-color;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    position: relative;
+    transition:
+      transform $animation-duration,
+      background-color $animation-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $animation-bg-color;
+      transform: translateY(-20px);
+    }
+
+    // додаємо в календар значення від 1 до 31
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+  &--start-day-sun {
+    .calendar__day:nth-child(1) {
+      margin-left: calc($max-width - $day-size - $padding * 2);
+    }
+  }
+
+  // модифікатор дня тижня
+  $start-days: (
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
+
+  @each $day, $margin in $start-days {
+    .calendar--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc($margin * ($day-size + $calendar-gap));
+    }
+  }
+
+  // модифікатор довжини місяця
+  @for $days from 28 through 31 {
+    .calendar--month-length-#{$days}
+      .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
