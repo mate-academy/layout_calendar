@@ -22,42 +22,42 @@ body, html {
 }
 
 .calendar {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  padding: $padding;
   width: $calendar-width;
+  padding: $padding;
   box-sizing: border-box;
-  position: relative;
+
+  counter-reset: day;
 
   &__day {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: $cell-size;
     height: $cell-size;
     border: $border-size solid black;
     background-color: $default-color;
-    position: relative;
     font-family: $font-family;
     transition: background-color $transition-time, transform $transition-time;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     &:hover {
-      background-color: $hover-color;
+      position: relative;
       cursor: pointer;
+      background-color: $hover-color;
       transform: translateY(-20px);
     }
 
-    // Add numbers using ::before
     &::before {
-      counter-increment: day;
-      content: counter(day);
-      font-size: $font-size;
       position: absolute;
+      content: counter(day);
+      counter-increment: day;
+      font-size: $font-size;
     }
   }
-
-  counter-reset: day;
 
   // Month length modifiers
   @for $i from 28 through 31 {
@@ -70,6 +70,10 @@ body, html {
   @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
     &--start-day-#{$day} .calendar__day:first-child {
       margin-left: ($cell-size + $gap + $border-size * 2) * $index;
+    }
+  }
+}
+
     }
   }
 }
