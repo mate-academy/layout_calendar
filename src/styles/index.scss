@@ -6,6 +6,8 @@ $font-size: 30px;
 $hover-color: #ffbfcb;
 $default-color: #eee;
 $day-count: 31;
+$first-day-of-week: 0;
+$month-length: 31;
 
 body {
   display: flex;
@@ -49,42 +51,18 @@ body {
     }
   }
 
-  @for $i from 1 through $day-count {
+  &__day:nth-child(1) {
+    margin-left: calc(($day-size + $gap-size) * #{$first-day-of-week});
+  }
+
+  @for $i from 1 through $month-length {
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
 
-  &--start-day-sun &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 6);
-  }
-
-  &--start-day-mon &__day:nth-child(1) {
-    margin-left: 0;
-  }
-
-  &--start-day-tue &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 1);
-  }
-
-  &--start-day-wed &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 2);
-  }
-
-  &--start-day-thu &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 3);
-  }
-
-  &--start-day-fri &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 4);
-  }
-
-  &--start-day-sat &__day:nth-child(1) {
-    margin-left: calc(($day-size + $gap-size) * 5);
-  }
-
-  @for $i from 28 through 30 {
-    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+  @for $i from ($month-length + 1) through $day-count {
+    &__day:nth-child(#{$i}) {
       display: none;
     }
   }
