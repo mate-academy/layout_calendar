@@ -1,72 +1,68 @@
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  counter-reset: day;
-}
-
 $day-size: 100px;
-$day-border: 1px;
-$day-font-size: 30px;
-$day-color: #eee;
-$day-hover-color: #ffbfcb;
 $day-gap: 1px;
-$calendar-columns: 7;
-$calendar-padding: 10px;
-$animation-duration: 0.5s;
-$calendar-columns: 7;
-$cell-total: $day-size + ($day-border * 2);
-$gap-total: $day-gap * ($calendar-columns - 1);
+$day-border: 1px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$bg-color: #eee;
+$hover-color: #ffbfcb;
+$columns: 7;
+$cell-size: $day-size + ($day-border * 2);
+$calendar-width: calc(($cell-size * $columns) + ($day-gap * ($columns - 1)));
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
   gap: $day-gap;
-  width: calc(($cell-total * $calendar-columns) + $gap-total);
-  padding: $calendar-padding;
-  box-sizing: border-box;
+  width: $calendar-width;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &__day {
-    position: relative;
     width: $day-size;
     height: $day-size;
-    background-color: $day-color;
+    background-color: $bg-color;
     border: $day-border solid black;
+    font-family: $font-family;
+    font-size: $font-size;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Arial, sans-serif;
-    font-size: $day-font-size;
-    cursor: pointer;
+    position: relative;
     transition:
-      transform $animation-duration,
-      background-color $animation-duration;
-
-    &::before {
-      content: counter(day);
-      counter-increment: day;
-    }
+      background-color 0.5s,
+      transform 0.5s;
 
     &:hover {
-      background-color: $day-hover-color;
+      background-color: $hover-color;
       transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
     }
   }
 
-  @each $day,
-    $margin in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
   {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: calc(($day-size + $day-border * 2 + $day-gap) * $margin);
+      margin-left: calc($cell-size * $index + $day-gap * $index);
     }
   }
 
-  @for $i from 28 through 31 {
+  @for $i from 28 through 30 {
     &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
+}
+
+.calendar__day:nth-child(n + 32) {
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
 }
