@@ -1,3 +1,75 @@
-body {
+$cell-size: 100px;
+$border-size: 1px;
+$gap: 100px; //dddd
+$padding: 10px;
+$calendar-columns: 7;
+$hover-color: #FFBFCB;
+$default-color: #eee;
+$font-size: 30px;
+$transition-time: 0.5s;
+$font-family: Arial, sans-serif;
+
+// Calculations
+$calendar-width: ($cell-size + $border-size * 2 + $gap) * $calendar-columns + $padding * 2;
+
+// Base styles
+body, html {
   margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendar-width;
+  box-sizing: border-box;
+  position: relative;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-size solid black;
+    background-color: $default-color;
+    position: relative;
+    font-family: $font-family;
+    transition: background-color $transition-time, transform $transition-time;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $hover-color;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    // Add numbers using ::before
+    &::before {
+      counter-increment: day;
+      content: counter(day);
+      font-size: $font-size;
+      position: absolute;
+    }
+  }
+
+  counter-reset: day;
+
+  // Month length modifiers
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  // Start day modifiers
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: ($cell-size + $gap + $border-size * 2) * $index;
+    }
+  }
 }
