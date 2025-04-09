@@ -1,3 +1,60 @@
+@use 'sass:map';
+
+$day-block-width: 100px;
+$day-block-height: 100px;
+$days: 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun';
+$day-offsets: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
 body {
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: calc(7 * #{$day-block-width} + 20px);
+  padding: 10px;
+
+  div {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $day-block-height;
+    width: $day-block-width;
+    background-color: #eee;
+    border: 1px solid black;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  @for $i from 1 through 31 {
+    div:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day in $days {
+    &.calendar--start-day-#{$day} {
+      $offset: map.get($day-offsets, $day);
+      $margin-calc: $offset * $day-block-width + $offset;
+      div:first-child {
+        margin-left: calc(#{$margin-calc});
+      }
+    }
+  }
 }
