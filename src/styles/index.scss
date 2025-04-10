@@ -11,7 +11,6 @@ $start-day: (
 );
 $dayNum: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31;
-$paddings: 1px;
 $target-color: #ffbfcb;
 
 html,
@@ -67,7 +66,7 @@ body {
 
 @each $name, $order in $start-day {
   .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: #{$dayWidth * ($order - 1) + $order}px;
+    margin-left: #{$dayWidth * ($order - 1) + ($order - 1)}px;
   }
 }
 
@@ -79,7 +78,6 @@ body {
   }
 }
 
-// Додавання чисел до дня
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
