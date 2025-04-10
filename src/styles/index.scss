@@ -7,34 +7,37 @@ $background-color: #eee;
 $hover-background-color: #ffbfcb;
 
 body {
+  display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
-  display: flex;
   height: 100vh;
   width: 100vw;
 }
 
+/* Set left margin for the first day based on the start day */
 @each $day in $days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       $index: list.index($days, $day) - 1;
 
-      margin-left: $index * $cell-width + $index * $gap;
+      margin-left: $index * ($cell-width + $gap);
     }
   }
 }
 
+/* Hide days that exceed the month length */
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
-    .calendar__day:nth-child(n + #{$i + 1}) {
+    .calendar__day:nth-child(n + #{ $i + 1 }) {
       display: none;
     }
   }
 }
 
+/* Apply day numbering via :nth-child */
 @for $i from 1 through 31 {
-  .calendar__day--#{$i}::before {
+  .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
@@ -43,19 +46,19 @@ body {
 
 .calendar {
   display: flex;
+  flex-wrap: wrap;
   gap: $gap;
-  flex-flow: row wrap;
-  padding-inline: 10px;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
-  width: 7 * $cell-width + 6 * $gap; // 7 days + 6 gaps
+  padding-inline: 10px;
+  width: (7 * $cell-width) + (6 * $gap); // 7 days + 6 gaps, calculated with clarity
 }
 
 .calendar__day {
   box-sizing: border-box;
-  border: 1px solid black;
   width: $cell-width;
   height: $cell-width;
+  border: 1px solid black;
   background-color: $background-color;
   display: flex;
   justify-content: center;
@@ -66,7 +69,7 @@ body {
 }
 
 .calendar__day:hover {
-  transform: translate(0, -20px);
   cursor: pointer;
+  transform: translateY(-20px);
   background-color: $hover-background-color;
 }
