@@ -1,19 +1,7 @@
-$dayWidth: 100;
-$dayHeight: 100px;
-$start-day: (
-  'mon': 1,
-  'tue': 2,
-  'wed': 3,
-  'thu': 4,
-  'fri': 5,
-  'sat': 6,
-  'sun': 7,
-);
-$dayNum: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-  21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31;
-$target-color: #ffbfcb;
+@use './variables.scss';
 
-html,body{
+html,
+body {
   width: 100%;
   height: 100%;
 }
@@ -31,20 +19,19 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate( -50%, -50%);
-  box-sizing: border-box;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  width: (($dayWidth * 7) + 20px);
+  width: ((variables.$dayWidth * 7) + 20px);
   gap: 1px;
 }
 
 .calendar__day {
   box-sizing: border-box;
-  width: $dayWidth;
-  height: $dayHeight;
+  width: variables.$dayWidth;
+  height: variables.$dayHeight;
   background-color: #eee;
   border: 1px solid black;
   display: flex;
@@ -53,7 +40,7 @@ body {
 
   &:hover {
     cursor: pointer;
-    background-color: $target-color;
+    background-color: variables.$target-color;
     transform: translateY(-20px);
     transition: all 0.5s;
   }
@@ -65,13 +52,9 @@ body {
   }
 }
 
-.calendar__day:first-child {
-  margin-left: 605px;
-}
-
-@each $name, $order in $start-day {
+@each $name, $order in variables.$start-day {
   .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: #{$dayWidth * ($order - 1) + ($order - 1)}px;
+    margin-left: #{variables.$dayWidth * ($order - 1) + ($order - 1)}px;
   }
 }
 
