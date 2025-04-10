@@ -1,6 +1,6 @@
 @use 'sass:list';
 
-$gap: 6px;
+$gap: 1px;
 $days: 'mon' 'tue' 'wed' 'thu' 'fri' 'sat' 'sun';
 $cell-width: 100px;
 $background-color: #eee;
@@ -14,17 +14,16 @@ body {
   height: 100vh;
   width: 100vw;
 }
-/* stylelint-disable scss/operator-no-newline-after */
+
 @each $day in $days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: (list.index($days, $day) - 1) *
-        $cell-width +
-        (list.index($days, $day) - 1);
+      $index: list.index($days, $day) - 1;
+
+      margin-left: $index * $cell-width + $index * $gap;
     }
   }
 }
-/* stylelint-enable scss/operator-no-newline-after */
 
 @for $i from 28 through 31 {
   .calendar--month-length-#{$i} {
@@ -44,19 +43,19 @@ body {
 
 .calendar {
   display: flex;
-  gap: 1px;
+  gap: $gap;
   flex-flow: row wrap;
   padding-inline: 10px;
   justify-content: start;
   align-items: center;
-  width: 700px + $gap;
+  width: 7 * $cell-width + 6 * $gap; // 7 days + 6 gaps
 }
 
 .calendar__day {
   box-sizing: border-box;
   border: 1px solid black;
-  width: 100px;
-  height: 100px;
+  width: $cell-width;
+  height: $cell-width;
   background-color: $background-color;
   display: flex;
   justify-content: center;
