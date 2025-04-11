@@ -1,3 +1,110 @@
+$day-color: #eee;
+$day-color-hover: #ffbfcb;
+$day-width: 100px;
+$border: 1px solid black;
+$font-size: 30px;
+$text-color: #000;
+$calendar-padding: 10px;
+$calendar-gap: 1px;
+$calendar-columns: 7;
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.calendar-wrapper {
+  margin: auto;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+  width: $day-width * 7 + ((7 - 1) * $calendar-gap) + ($calendar-padding * 2);
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  width: $day-width;
+  height: $day-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $day-color;
+  font-size: $font-size;
+  color: $text-color;
+  border: $border;
+  position: relative;
+  cursor: pointer;
+  transition:
+    background-color 0.5s ease,
+    transform 0.5s ease;
+
+  &:hover {
+    background-color: $day-color-hover;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    content: '';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: $font-size;
+    color: $text-color;
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+@each $day-name,
+  $day-index
+    in ('mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6)
+{
+  .calendar--start-day-#{$day-name} {
+    > .calendar__day:first-child {
+      margin-left: $day-index * ($day-width + $calendar-gap);
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    > .calendar__day:nth-child(n + #{($length + 1)}) {
+      display: none;
+    }
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
