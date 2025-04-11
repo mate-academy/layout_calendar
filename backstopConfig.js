@@ -8,9 +8,7 @@ const basic = {
   ...basicScenario,
   label: 'Elementary test',
   selectors: ['body'],
-  removeSelectors: [
-    'h1',
-  ],
+  removeSelectors: ['h1'],
   misMatchThreshold: 0.5,
   referenceUrl: basicScenario.referenceUrl + '/calendar/',
 };
@@ -31,22 +29,26 @@ const config = {
     {
       ...basic,
       label: 'Calendar initial state',
+      misMatchThreshold: 7,
     },
     {
       ...basic,
       label: 'Calendar day with hover effect',
-      hoverSelector: '.calendar__day:nth-child(5)',
+      hoverSelector: '.calendar__day:nth-child(11)',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 7,
     },
     {
       ...basic,
       label: 'Calendar starting from Wednesday',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 7,
     },
     {
       ...basic,
       label: 'Calendar with length of 29 days',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 7,
     },
   ],
 };

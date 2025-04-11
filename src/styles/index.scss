@@ -1,3 +1,64 @@
+$day-size: 100px;
+$gap: 1px;
+
 body {
-  margin: 0;
+  box-sizing: border-box;
+}
+
+@for $i from 1 through 31 {
+  // Regra mais específica — vem primeiro
+  .calendar--start-day-sun .calendar__day:nth-of-type(#{$i + 2})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 1 through 31 {
+  // Regra menos específica — vem depois
+  .calendar__day:nth-of-type(#{$i + 6})::before {
+    content: '#{$i}';
+  }
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: $gap;
+  max-width: 700px;
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.calendar__day-empty {
+  background: none;
+  border: none;
+}
+
+.calendar__day {
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid black;
+  background-color: rgb(238, 238, 238);
+  font-size: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $day-size;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+  transform: translateY(0);
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: rgb(255, 191, 203);
+  transform: translateY(-10px);
+}
+
+@each $day, $offset in (sun: 1, mon: 2, tue: 3, wed: 4, thu: 5, fri: 6, sat: 7)
+{
+  .start-day-#{$day} .calendar__day:nth-of-type(#{$offset}) {
+    grid-column-start: #{$offset};
+  }
 }
