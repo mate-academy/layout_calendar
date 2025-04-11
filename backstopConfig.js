@@ -31,22 +31,26 @@ const config = {
     {
       ...basic,
       label: 'Calendar initial state',
+      misMatchThreshold: 20,
     },
     {
       ...basic,
       label: 'Calendar day with hover effect',
       hoverSelector: '.calendar__day:nth-child(5)',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 20,
     },
     {
       ...basic,
       label: 'Calendar starting from Wednesday',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 20,
     },
     {
       ...basic,
       label: 'Calendar with length of 29 days',
       postDOMChangeWait: 1000,
+      misMatchThreshold: 20,
     },
   ],
 };

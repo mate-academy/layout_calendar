@@ -1,3 +1,77 @@
+$day-size: 100px;
+$border-size: 1px;
+$day-gap: 1px;
+$calendar-padding: 10px;
+$day-color: #eee;
+$hover-color: #ffbfcb;
+$font-size: 30px;
+$days-per-row: 7;
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+  width: calc(
+    ($day-size + $day-gap) * $days-per-row - $day-gap + $calendar-padding * 2
+  );
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-color;
+  border: $border-size solid black;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    font-size: $font-size;
+    content: '';
+  }
+}
+
+@each $day, $offset in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+{
+  .calendar--start-day-#{$day} {
+    .calendar__day:nth-child(1) {
+      margin-left: calc(($day-size + $day-gap) * #{$offset});
+    }
+
+    // Preenche só a partir da célula certa com os dias do mês
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i + $offset})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
