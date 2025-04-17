@@ -1,0 +1,57 @@
+@import 'variables';
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 $pd;
+  gap: $gp;
+  width: 726px;
+  &__day {
+    position: relative;
+    width: $ds;
+    height: $ds;
+    background: $dcolor;
+    border: 1px solid black;
+    box-sizing: $bs;
+    transition: transform 0.5s;
+
+    &:hover {
+      background-color: $hcolor;
+      cursor: pointer;
+      margin-top: -20px;
+    }
+    &::before {
+      content: '';
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      align-items: center;
+      font-size: $fs;
+      height: 100%;
+    }
+  }
+
+  @for $i from 1 through $days {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+@each $day, $number in $week {
+  .calendar--#{$day} .calendar__day:first-child {
+    margin-left: ($ds + $gp) * $number;
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
