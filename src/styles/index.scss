@@ -7,37 +7,18 @@ body {
 
 .calendar {
   display: flex; // Используем flexbox для выравнивания блока календаря
-  justify-content: center; // Центрируем календарь по горизонтали
-  align-items: center; // Центрируем календарь по вертикали
-  padding: $paddings; // Добавляем внутренние отступы (например, 10px)
+  flex-wrap: wrap; // Позволяет элементам переноситься на новую строку при нехватке места
+  // Добавляем внутренние отступы (например, 10px)
   width: $calendar-width; // Устанавливаем точную ширину календаря (7 колонок + gap + padding)
-  flex-wrap: nowrap; // Позволяет элементам переноситься на новую строку при нехватке места
+  gap: $gap; // Зазор между днями (обычно 1px)
+  align-items: center;
+  margin: auto;
+  padding: 10px;
 
-  &__month {
-    display: flex; // Внутри — тоже flexbox
-    flex-wrap: wrap; // Чтобы дни могли переноситься строками
-    gap: $gap; // Зазор между днями (обычно 1px)
-    // Растягиваем на всю ширину родителя .calendar
-
-    // Сдвиг первого дня
-    // Сдвиг первого дня месяца (например, если месяц начинается с четверга)
-    @each $name, $column in $week-days {
-      &--start-#{$name} {
-        // Пример: &--start-mon → .calendar__month--start-mon
-        .calendar__day:first-child {
-          margin-left: $column * ($day-size + $gap) + $paddings; // Сдвигаем 1-й день месяца в зависимости от дня недели
-        }
-      }
-    }
-
-    // Скрытие лишних дней
-    // Скрытие лишних дней — если в месяце 28, 29 или 30 дней
-    @for $i from 28 through 31 {
-      &--length--#{$i} {
-        // Пример: .calendar__month--length--28
-        .calendar__day:nth-child(n + #{$i + 1}) {
-          display: none; // Прячем все ячейки, начиная с 29-й и выше
-        }
+  @each $name, $column in $week-days {
+    &--start-#{$name} {
+      .calendar__day:first-child {
+        margin-left: $column * ($day-size + $gap) + $paddings; // Сдвигаем 1-й день месяца в зависимости от дня недели
       }
     }
   }
@@ -53,6 +34,9 @@ body {
     font-family: $font-base; // Шрифт текста внутри дня
     font-size: $font-size; // Размер шрифта
     position: relative; // Нужно для абсолютного позиционирования числа через ::before
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
 
     &::before {
       position: absolute; // Размещаем число внутри ячейки независимо от потока
@@ -70,9 +54,15 @@ body {
     }
     &:hover {
       cursor: pointer;
-      transition: all 0.5s ease;
       background-color: #ffbfcb;
       transform: translateY(-20px);
+    }
+  }
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 }
