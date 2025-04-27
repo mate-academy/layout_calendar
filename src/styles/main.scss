@@ -1,0 +1,70 @@
+$day-size: 100px; // Розмір квардрата дня (ширина та висота)
+$border-width: 1px; // Товщина рамки дня
+$day-color: #eee; // Колір фону дня
+$hover-color: #ffbfcb; // Колір фону при наведенні
+$transition-time: 0.5s; // Тривалість анімації при наведенні
+$gap: 1px; // Відступи між днями
+$calendar-padding: 10px; // Внутрішні відступи календаря
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: calc(($day-size + $gap) * 7 + $calendar-padding * 2);
+  padding: $calendar-padding;
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-color;
+  border: $border-width solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+
+  position: relative;
+  transition: all $transition-time;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+}
+
+.calendar__day::before {
+  content: '';
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(($day-size + $gap) * $index);
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
