@@ -1,3 +1,89 @@
+// This is a SCSS file that styles the calendar
+$cell-size: 100px;
+$gap-width: 1px;
+$start-days: (
+  'mon': (
+    ($cell-size + $gap-width) * 0,
+  ),
+  'tue': (
+    ($cell-size + $gap-width) * 1,
+  ),
+  'wed': (
+    ($cell-size + $gap-width) * 2,
+  ),
+  'thu': (
+    ($cell-size + $gap-width) * 3,
+  ),
+  'fri': (
+    ($cell-size + $gap-width) * 4,
+  ),
+  'sat': (
+    ($cell-size + $gap-width) * 5,
+  ),
+  'sun': (
+    ($cell-size + $gap-width) * 6,
+  ),
+);
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-width;
+  padding: 10px;
+  max-width: $cell-size * 7 + $gap-width * 6;
+  align-self: center;
+
+  @each $start-day, $value in $start-days {
+    &--start-day-#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: #{$value};
+      }
+    }
+  }
+
+  @for $j from 28 through 31 {
+    &--month-length-#{$j} {
+      .calendar__day:nth-child(n + #{$j + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-7px);
+      cursor: pointer;
+    }
+  }
 }
