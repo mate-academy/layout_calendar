@@ -1,24 +1,31 @@
 @use './variable' as *;
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
-  padding: 0;
 }
 
 .calendar {
+  gap: $gap; // Зазор между днями (обычно 1px)
   display: flex; // Используем flexbox для выравнивания блока календаря
   flex-wrap: wrap; // Позволяет элементам переноситься на новую строку при нехватке места
-  // Добавляем внутренние отступы (например, 10px)
-  width: $calendar-width; // Устанавливаем точную ширину календаря (7 колонок + gap + padding)
-  gap: $gap; // Зазор между днями (обычно 1px)
   align-items: center;
+  width: $calendar-width; // Устанавливаем точную ширину календаря (7 колонок + gap + padding)
   margin: auto;
   padding: 10px;
+  background-color: white;
 
-  @each $name, $column in $week-days {
+  @each $name, $columns in $days {
     &--start-day-#{$name} {
       .calendar__day:first-child {
-        margin-left: $column * ($day-size + $gap) + $paddings; // Сдвигаем 1-й день месяца в зависимости от дня недели
+        margin-left: $columns * ($day-size + $gap); // Сдвигаем 1-й день месяца в зависимости от дня недели
       }
     }
   }
@@ -39,9 +46,6 @@ body {
       background-color 0.5s;
 
     &::before {
-      position: absolute; // Размещаем число внутри ячейки независимо от потока
-      top: $position-day-count; // Отступ сверху (чтобы число не прилипало)
-      left: $position-day-count; // Отступ слева
       font-size: $font-size; // Размер шрифта числа
     }
 
@@ -59,7 +63,7 @@ body {
     }
   }
   @for $i from 28 through 31 {
-    &--month--length-#{$i} {
+    &--month-length-#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
