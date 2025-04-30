@@ -1,3 +1,72 @@
+@use './variable' as *;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  gap: $gap; // Зазор между днями (обычно 1px)
+  display: flex; // Используем flexbox для выравнивания блока календаря
+  flex-wrap: wrap; // Позволяет элементам переноситься на новую строку при нехватке места
+  align-items: center;
+  width: $calendar-width; // Устанавливаем точную ширину календаря (7 колонок + gap + padding)
+  margin: auto;
+  padding: 10px;
+  background-color: white;
+
+  @each $name, $columns in $days {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: $columns * ($day-size + $gap); // Сдвигаем 1-й день месяца в зависимости от дня недели
+      }
+    }
+  }
+
+  &__day {
+    width: $day-size; // Ширина одного дня ( 100px)
+    height: $day-size; // Высота одного дня
+    background-color: #eee; // Цвет фона (светло-серый)
+    border: $border; // Рамка (например, 1px solid #000)
+    display: flex; // Flex для удобного позиционирования содержимого
+    align-items: center; // Центрируем по вертикали
+    justify-content: center; // Центрируем по горизонтали
+    font-family: $font-base; // Шрифт текста внутри дня
+    font-size: $font-size; // Размер шрифта
+    position: relative; // Нужно для абсолютного позиционирования числа через ::before
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &::before {
+      font-size: $font-size; // Размер шрифта числа
+    }
+
+    // Генерация чисел через & + :nth-child
+    @for $i from 1 through $days-amount {
+      &:nth-child(#{$i})::before {
+        // Для каждой ячейки (по порядку)
+        content: '#{$i}'; // Вставляем соответствующее число (1, 2, ..., 31)
+      }
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
 }
