@@ -1,0 +1,59 @@
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$calendar-padding: 10px;
+$hover-color: red;
+$day-bg: #eee;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$transition-duration: 0.5s;
+
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  @include center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(($day-size + $gap) * 7 - $gap + 2 * $calendar-padding);
+  padding: $calendar-padding;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $border-width solid black;
+    margin: $gap;
+    position: relative;
+    font-family: $font-family;
+    font-size: $font-size;
+    text-align: center;
+    line-height: $day-size;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      background-color: $hover-color;
+      cursor: pointer;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
