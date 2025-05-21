@@ -1,83 +1,56 @@
 // Variáveis
 $day-size: 100px;
-$day-border: 1px solid black;
-$day-bg: #eee;
-$gap: 1px;
-$padding: 10px;
+$day-border: 1px solid #000;
+$day-bg: #f0f0f0;
 $hover-color: #ffbfcb;
-$transition-duration: 0.5s;
+$empty-day-bg: transparent;
 
-// Estrutura BEM do calendário
+// Estrutura principal
 .calendar {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 
   &__grid {
     display: flex;
     flex-wrap: wrap;
-    gap: $gap;
-    padding: $padding;
-    max-width: calc(7 * $day-size + 6 * $gap + 2 * $padding); // 7 colunas
+    width: calc(7 * #{$day-size} + 6px);
+    gap: 1px;
+  }
 
-    // Gerar dias (31 quadrados com números via ::before)
-    @for $i from 1 through 31 {
-      & > div:nth-child(#{$i})::before {
-        content: '#{$i}';
-      }
-    }
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background: $day-bg;
+    border: $day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    transition: all 0.5s ease;
 
-    // Estilo base dos dias
-    & > div {
-      width: $day-size;
-      height: $day-size;
-      background: $day-bg;
-      border: $day-border;
-      position: relative;
-      transition: all $transition-duration ease;
-
-      // Número centralizado
-      &::before {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-      }
-
-      // Efeito hover
-      &:hover {
-        cursor: pointer;
-        background: $hover-color;
-        transform: translateY(-20px);
-      }
+    &:hover:not(&--empty) {
+      background: $hover-color;
+      transform: translateY(-5px);
+      cursor: pointer;
     }
   }
 
-  // Modificadores de dia inicial (start-day)
-  $start-days: (
-    'mon': 1,
-    // Segunda (margin-left do 1º dia)
-    'tue': 2,
-    'wed': 3,
-    'thu': 4,
-    'fri': 5,
-    'sat': 6,
-    'sun': 0,
-  );
-
-  @each $name, $value in $start-days {
-    &--start-day-#{$name} &__grid > div:first-child {
-      margin-left: calc($value * ($day-size + $gap));
-    }
+  // Células vazias
+  &__day--empty {
+    background: $empty-day-bg;
+    border-color: transparent;
   }
 
-  // Modificadores de duração do mês (month-length)
-  @for $length from 28 through 31 {
-    &--month-length-#{$length} &__grid > div:nth-child(n + #{$length + 1}) {
-      display: none;
-    }
+  // Modificador para começar na quarta
+  &--start-day-wed &__grid > .calendar__day:first-child {
+    margin-left: calc(3 * (#{$day-size} + 1px));
+  }
+
+  // Modificador para 29 dias
+  &--month-length-29 &__grid > .calendar__day:nth-child(n + 30) {
+    display: none;
   }
 }
