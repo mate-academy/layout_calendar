@@ -1,0 +1,30 @@
+@import 'variables';
+
+.calendar__day {
+  position: relative;
+  width: $day-size;
+  height: $day-size;
+  background: $bg-color-day;
+  border: $border-size solid #000;
+  box-sizing: border-box;
+  transition: all 0.5s;
+
+  &:hover {
+    background: $bg-color-hover;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+}
+
+// Numbering days 1–31 using ::before
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: $font-family-day;
+    font-size: $font-size-day;
+  }
+}
