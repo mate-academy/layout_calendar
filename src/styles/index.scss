@@ -1,11 +1,9 @@
-// Variáveis
 $day-size: 100px;
 $day-border: 1px solid #000;
 $day-bg: #f0f0f0;
 $hover-color: #ffbfcb;
 $empty-day-bg: transparent;
 
-// Estrutura principal
 .calendar {
   display: flex;
   justify-content: center;
@@ -13,9 +11,8 @@ $empty-day-bg: transparent;
   font-family: Arial, sans-serif;
 
   &__grid {
-    display: flex;
-    flex-wrap: wrap;
-    width: calc(7 * #{$day-size} + 6px);
+    display: grid;
+    grid-template-columns: repeat(7, $day-size);
     gap: 1px;
   }
 
@@ -28,7 +25,6 @@ $empty-day-bg: transparent;
     justify-content: center;
     align-items: center;
     font-size: 30px;
-    font-family: Arial, sans-serif;
     transition: all 0.5s ease;
 
     &:hover:not(&--empty) {
@@ -38,19 +34,31 @@ $empty-day-bg: transparent;
     }
   }
 
-  // Células vazias
   &__day--empty {
     background: $empty-day-bg;
     border-color: transparent;
   }
 
-  // Modificador para começar na quarta
-  &--start-day-wed &__grid > .calendar__day:first-child {
-    margin-left: calc(3 * (#{$day-size} + 1px));
+  // Começar na quarta-feira (3 dias vazios antes)
+  &--start-day-wed &__grid {
+    & > .calendar__day:first-child {
+      grid-column-start: 3;
+    }
   }
 
-  // Modificador para 29 dias
+  // Começar no domingo (nenhum dia vazio)
+  &--start-day-sun &__grid {
+    & > .calendar__day:first-child {
+      grid-column-start: 1;
+    }
+  }
+
+  // Esconde dias acima do necessário (ex: só 29 dias no mês)
   &--month-length-29 &__grid > .calendar__day:nth-child(n + 30) {
+    display: none;
+  }
+
+  &--month-length-30 &__grid > .calendar__day:nth-child(n + 31) {
     display: none;
   }
 }
