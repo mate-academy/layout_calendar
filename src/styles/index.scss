@@ -1,14 +1,30 @@
+// Variáveis
 $day-size: 100px;
 $day-border: 1px solid #000;
 $day-bg: #f0f0f0;
 $hover-color: #ffbfcb;
-$empty-day-bg: transparent;
 
+// Reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Centralizar tudo na tela
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+// Calendário
 .calendar {
   display: flex;
   justify-content: center;
   padding: 20px;
-  font-family: Arial, sans-serif;
 
   &__grid {
     display: grid;
@@ -25,40 +41,37 @@ $empty-day-bg: transparent;
     justify-content: center;
     align-items: center;
     font-size: 30px;
+    position: relative;
     transition: all 0.5s ease;
 
-    &:hover:not(&--empty) {
+    &:hover {
       background: $hover-color;
       transform: translateY(-5px);
       cursor: pointer;
     }
-  }
 
-  &__day--empty {
-    background: $empty-day-bg;
-    border-color: transparent;
-  }
-
-  // Começar na quarta-feira (3 dias vazios antes)
-  &--start-day-wed &__grid {
-    & > .calendar__day:first-child {
-      grid-column-start: 3;
+    // Números dos dias via ::before e @for
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
     }
   }
 
-  // Começar no domingo (nenhum dia vazio)
-  &--start-day-sun &__grid {
-    & > .calendar__day:first-child {
-      grid-column-start: 1;
+  // Controle de início do mês usando @each
+  @each $day, $index in (sun: 7, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-day-#{$day} &__grid > .calendar__day:first-child {
+      grid-column: $index;
     }
   }
 
-  // Esconde dias acima do necessário (ex: só 29 dias no mês)
-  &--month-length-29 &__grid > .calendar__day:nth-child(n + 30) {
-    display: none;
-  }
-
-  &--month-length-30 &__grid > .calendar__day:nth-child(n + 31) {
-    display: none;
+  // Esconder os dias extras do mês
+  @each $length, $limit in (29: 30, 30: 31) {
+    &--month-length-#{$length}
+      &__grid
+      > .calendar__day:nth-child(n + #{$limit}) {
+      display: none;
+    }
   }
 }
