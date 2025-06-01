@@ -1,3 +1,63 @@
 body {
   margin: 0;
 }
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.calendar {
+  max-width: 560px;
+  width: 100%;
+}
+
+.calendar__grid {
+  font-family: Arial, Helvetica, sans-serif;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 2px;
+}
+
+.calendar__day {
+  background-color: #eee;
+  border: 1px solid black;
+  color: black;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.calendar__day:hover {
+  background-color: #aaa;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+@each $day, $col in (sun: 7, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    grid-column-start: #{$col};
+  }
+}
+
+@each $length in (28, 29, 30) {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n+#{$length + 1}) {
+    display: none;
+  }
+}
