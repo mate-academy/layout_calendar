@@ -1,3 +1,93 @@
+@import 'normalize.css';
+
+$cell-width: 100px;
+$cell-gap: 1px;
+$start-day-week: sun;
+$start-day: 0;
+$number-of-days: 31;
+
+@if $start-day-week == sun {
+  $start-day: 7;
+}
+
+@if $start-day-week == mon {
+  $start-day: 1;
+}
+
+@if $start-day-week == tue {
+  $start-day: 2;
+}
+
+@if $start-day-week == wed {
+  $start-day: 3;
+}
+
+@if $start-day-week == thu {
+  $start-day: 4;
+}
+
+@if $start-day-week == fri {
+  $start-day: 5;
+}
+
+@if $start-day-week == sat {
+  $start-day: 6;
+}
+
 body {
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
   margin: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.container {
+  height: 100vh;
+  min-width:calc((7 * $cell-width) + (5 * $cell-gap));
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  width: 800px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1px;
+  &__day {
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid black;
+    &:hover {
+          background-color: #FFBFCB;
+          transform: translate(0, -10px);
+          transition: transform 0.5s ease-in-out;
+        }
+    @for $i from 1 through $number-of-days {
+      &--#{$i}::before {
+        content: '#{$i}';
+        display: block;
+        text-align: center;
+        line-height: 100px;
+        font-size: 30px;
+      }
+    }
+    @for $i from ($number-of-days + 1) through 32 {
+      &--#{$i} {
+      display: none;
+    }
+    }
+  }
+  &__empty {
+      background-color: transparent;
+      width: calc((($start-day - 1) * ($cell-width + 2px)) + (($start-day - 2) * $cell-gap));
+      height: 100px;
+    }
 }
