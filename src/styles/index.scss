@@ -2,35 +2,35 @@
 
 $cell-width: 100px;
 $cell-gap: 1px;
-$start-day-week: sun;
+$calendar--start-day: sun;
 $start-day: 0;
-$number-of-days: 31;
+$calendar--month-length: 31;
 
-@if $start-day-week == sun {
+@if $calendar--start-day == sun {
   $start-day: 7;
 }
 
-@if $start-day-week == mon {
+@if $calendar--start-day == mon {
   $start-day: 1;
 }
 
-@if $start-day-week == tue {
+@if $calendar--start-day == tue {
   $start-day: 2;
 }
 
-@if $start-day-week == wed {
+@if $calendar--start-day == wed {
   $start-day: 3;
 }
 
-@if $start-day-week == thu {
+@if $calendar--start-day == thu {
   $start-day: 4;
 }
 
-@if $start-day-week == fri {
+@if $calendar--start-day == fri {
   $start-day: 5;
 }
 
-@if $start-day-week == sat {
+@if $calendar--start-day == sat {
   $start-day: 6;
 }
 
@@ -47,7 +47,7 @@ h1 {
 
 .container {
   height: 100vh;
-  min-width:calc((7 * $cell-width) + (5 * $cell-gap));
+  min-width: calc((7 * $cell-width) + (5 * $cell-gap));
   margin: 20px;
   display: flex;
   align-items: center;
@@ -66,12 +66,12 @@ h1 {
     background-color: #eee;
     border: 1px solid black;
     &:hover {
-          background-color: #FFBFCB;
-          transform: translate(0, -10px);
-          transition: transform 0.5s ease-in-out;
-        }
+      background-color: #ffbfcb;
+      transform: translate(0, -10px);
+      transition: transform 0.5s ease-in-out;
+    }
 
-    @for $i from 1 through $number-of-days {
+    @for $i from 1 through $calendar--month-length {
       &--#{$i}::before {
         content: '#{$i}';
         display: block;
@@ -81,15 +81,17 @@ h1 {
       }
     }
 
-    @for $i from ($number-of-days + 1) through 32 {
+    @for $i from ($calendar--month-length + 1) through 32 {
       &--#{$i} {
-      display: none;
-    }
+        display: none;
+      }
     }
   }
   &__empty {
-      background-color: transparent;
-      width: calc((($start-day - 1) * ($cell-width + 2px)) + (($start-day - 2) * $cell-gap));
-      height: 100px;
-    }
+    background-color: transparent;
+    width: calc(
+      (($start-day - 1) * ($cell-width + 2px)) + (($start-day - 2) * $cell-gap)
+    );
+    height: 100px;
+  }
 }
