@@ -1,52 +1,29 @@
 $cell-width: 100px;
 $cell-gap: 1px;
-$calendar--start-day: sun;
-$start-day: 0;
+$cell-color: #eee;
+$start-day: sun;
 $calendar--month-length: 31;
+$days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
 
-@if $calendar--start-day == sun {
-  $start-day: 7;
-}
-
-@if $calendar--start-day == mon {
-  $start-day: 1;
-}
-
-@if $calendar--start-day == tue {
-  $start-day: 2;
-}
-
-@if $calendar--start-day == wed {
-  $start-day: 3;
-}
-
-@if $calendar--start-day == thu {
-  $start-day: 4;
-}
-
-@if $calendar--start-day == fri {
-  $start-day: 5;
-}
-
-@if $calendar--start-day == sat {
-  $start-day: 6;
+@each $start-day, $index in $days {
+  .calendar__day:first-child {
+    margin-left: calc(($cell-width + $cell-gap) * ($index - 1));
+  }
 }
 
 body {
   font-family: Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
-}
-
-h1 {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.container {
   height: 100vh;
-  min-width: calc((7 * $cell-width) + (5 * $cell-gap));
-  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -54,44 +31,41 @@ h1 {
 
 .calendar {
   display: flex;
-  width: 720px;
-  height: 618px;
+  place-content: center flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 1px;
+  padding: 0 10px;
+  margin-right: -20;
+  width: calc(($cell-width * 7) + ($cell-gap * 6) + 20px);
   &__day {
-    width: 100px;
-    height: 100px;
-    background-color: #eee;
+    box-sizing: border-box;
+    width: #{$cell-width};
+    height: #{$cell-width};
+    background-color: #{$cell-color};
     border: 1px solid black;
     &:hover {
       background-color: #ffbfcb;
       transform: translate(0, -10px);
-      transition: transform 0.5s ease-in-out;
+      transition: all 500ms;
       cursor: pointer;
     }
 
     @for $i from 1 through $calendar--month-length {
-      &--#{$i}::before {
+      &:nth-child(#{$i})::before {
         content: '#{$i}';
-        display: block;
+        display: inline-block;
         text-align: center;
-        line-height: 100px;
+        width: $cell-width;
+        line-height: $cell-width;
         font-size: 30px;
       }
     }
 
     @for $i from ($calendar--month-length + 1) through 32 {
-      &--#{$i} {
+      &:nth-child(#{$i}) {
         display: none;
       }
     }
-  }
-  &__empty {
-    background-color: transparent;
-    width: calc(
-      (($start-day - 1) * ($cell-width + 2px)) + (($start-day - 2) * $cell-gap)
-    );
-    height: 100px;
   }
 }
