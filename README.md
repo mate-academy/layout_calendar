@@ -41,7 +41,7 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
-- [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
+- [x] Changing 'month-lengh' and 'start-day' modifier in the code element
 reflects in changing calendar layout
 - [ ] Each day has no modifiers, only class (eg. calendar__day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
