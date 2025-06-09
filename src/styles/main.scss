@@ -1,0 +1,85 @@
+$day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$border-width: 1px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$bg-color: #eee;
+$hover-color: #ffbfcb;
+$columns: 7;
+$total-days: 31;
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// === Calendário
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(
+    #{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap} + 2 * #{$padding}
+  );
+  background: white;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background: $bg-color;
+    border: $border-width solid black;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-family;
+    transition:
+      background 0.5s,
+      transform 0.5s;
+
+    &::before {
+      content: '';
+      font-size: $font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through $total-days {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// 👇 Adiciona a linha em branco antes do @each (corrige o erro do lint)
+$days: (sun, mon, tue, wed, thu, fri, sat);
+
+@each $day in $days {
+  $index: list.index($days, $day) - 1; // ✅ corrigido
+
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(#{$index} * (#{$day-size} + #{$gap}));
+  }
+}
+
+// 👇 Também com espaçamento antes do @for
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} .calendar__day:nth-child(n + #{$len + 1}) {
+    display: none;
+  }
+}
