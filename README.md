@@ -39,7 +39,7 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 - [DEMO LINK](https://aleks-pashkevych.github.io/layout_calendar/dist/index.html)
 - [TEST REPORT LINK](https://aleks-pashkevych.github.io/layout_calendar/report/html_report/)
 - [? TEST REPORT LINK](https://aleks-pashkevych.github.io/layout_calendar/backstop_data/html_report/index.html)
-- ![Image test result] (./BackstopJSReport.png)
+![test results](BackstopJSReport.png).
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
