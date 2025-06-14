@@ -36,7 +36,7 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://aleks-pashkevych.github.io/layout_calendar/index.html)
+- [DEMO LINK](https://aleks-pashkevych.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://aleks-pashkevych.github.io/layout_calendar/report/html_report/)
 ![test results](BackstopJSReport.png).
 
