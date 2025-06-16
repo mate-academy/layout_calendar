@@ -45,9 +45,9 @@ body {
   }
 }
 
-@for $i from 1 through 7 {
-  .calendar__day--start-day-#{$i} {
-    margin-left: ($cell-size + $gap-size) * ($i - 1);
+@each $day, $i in $week {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($cell-size + $gap-size) * $i;
   }
 }
 
@@ -57,10 +57,8 @@ body {
   }
 }
 
-@for $j from 29 through 31 {
-  @if $j < 29 {
-    .calendar__day--month-length-#{$j} {
-      display: none;
-    }
+@for $j from 28 through 31 {
+  .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
+    display: none;
   }
 }
