@@ -1,7 +1,10 @@
 @use './vars.scss' as *;
 
 body {
+  margin: 0;
+  height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
@@ -10,6 +13,7 @@ body {
   flex-wrap: wrap;
   align-content: center;
   width: $calendar-width;
+  gap: $gap-size;
 
   &__day {
     box-sizing: border-box;
@@ -22,7 +26,6 @@ body {
 
     width: $cell-size;
     height: $cell-size;
-    gap: $gap-size;
 
     font-family: Arial, sans-serif;
     font-size: 30px;
@@ -36,23 +39,17 @@ body {
       transition-duration: 0.5s;
     }
 
-    // &--mon {
-    //   margin-left: $cell-size * 6;
-    // }
+    &--start-day {
+      margin-left: ($cell-size + $gap-size) * 6;
+    }
   }
 }
 
 @for $i from 1 through 7 {
-  .calendar__day--#{$i} {
+  .calendar__day--start-day-#{$i} {
     margin-left: ($cell-size + $gap-size) * ($i - 1);
   }
 }
-
-// @for $i from 1 to 2 {
-//   .calendar__day:nth-child(#{$i}) {
-//     margin-left: ($cell-size) * 6;
-//   }
-// }
 
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
