@@ -55,18 +55,22 @@ body {
   }
 }
 
-@for $i from 28 through 31 {
-  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{($i + 1)}) {
-    display: none;
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    @for $j from ($i + 1) through 31 {
+      .calendar__day:nth-child(#{$j}) {
+        display: none;
+      }
+    }
   }
 }
 
 .calendar__day:nth-child(n + 32) {
   display: none;
-}
-
-@for $i from 1 through 31 {
-  .calendar__day:nth-child(#{$i})::before {
-    content: '#{$i}';
-  }
 }
