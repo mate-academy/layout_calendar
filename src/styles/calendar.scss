@@ -4,16 +4,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  width: $colummn-size * 7 + $calendar-gap * 6;
+  width: $column-size;
 
   &__day {
-    width: $colummn-size;
-    height: $colummn-size;
+    width: $column-size;
+    height: $column-size;
 
     box-sizing: border-box;
     border: 1px solid #000;
-    background-color: $colummn-bg-color;
-    padding: $colummn-padding;
+    background-color: $column-bg-color;
+    padding: $column-padding;
 
     &::before {
       display: flex;
@@ -26,7 +26,7 @@
     &:hover {
       transform: translateY(-20px);
       transition-duration: 0.5s;
-      background-color: $colummn-bg-color-hover;
+      background-color: $column-bg-color-hover;
       cursor: pointer;
     }
 
@@ -41,7 +41,7 @@
     @each $day, $index in $start-days-variations {
       &-#{$day} {
         .calendar__day:nth-child(1) {
-          margin-left: ($colummn-size + $calendar-gap) * $index;
+          margin-left: ($column-size + $calendar-gap) * $index;
         }
       }
     }
