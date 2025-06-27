@@ -1,0 +1,74 @@
+@import './var';
+
+html {
+  box-sizing: border-box;
+}
+
+:root {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: ($cell-width * 7) + ($cell-gap * (7 - 1)) + (10 * 2);
+  gap: $cell-gap;
+  padding: 0 10px;
+}
+
+.calendar__cell {
+  box-sizing: border-box;
+  border: $cell-border solid black;
+  height: $cell-height;
+  width: $cell-width;
+  background-color: $cell-color;
+  cursor: pointer;
+  transition: transform 500ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar__cell:hover {
+  background-color: $cell-hover-color;
+  transform: translateY(-20px);
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    .calendar__cell:nth-of-type(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__cell:nth-of-type(#{$i}) {
+    &::before {
+      content: '#{$i}';
+      font-family: $cell-font;
+      font-size: 30px;
+      color: black;
+    }
+  }
+}
+
+@each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+  .calendar--start-day-#{$day} .calendar__cell:first-child {
+    margin-left: ($cell-width + $cell-gap) * $index;
+  }
+}
