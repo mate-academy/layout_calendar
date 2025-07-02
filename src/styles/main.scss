@@ -6,7 +6,6 @@
   width: calc(7 * #{$day-size} + 6 * #{$gap-size} + 2 * #{$calendar-padding});
   padding: $calendar-padding;
   gap: $gap-size;
-  margin: 72px auto 60px;
   box-sizing: border-box;
   counter-reset: day;
 
@@ -35,9 +34,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   box-sizing: border-box;
-  transition: transform 0.5s;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
   counter-increment: day;
 
   &::before {
@@ -47,5 +47,6 @@
   &:hover {
     transform: translateY(-20px);
     background-color: $day-bg--hover;
+    cursor: pointer;
   }
 }
