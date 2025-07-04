@@ -48,6 +48,16 @@ body {
   }
 }
 
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{($i + 1)}) {
+    display: none;
+  }
+}
+
+.calendar__day:nth-child(n + 32) {
+  display: none;
+}
+
 @each $day, $offset in $daysOfWeek {
   .calendar--start-day-#{$day} :first-child {
     margin-left: calc(($offset * 100px) + (1px * $offset));
