@@ -1,6 +1,6 @@
 $cell-size: 100px;
 $gap: 1px;
-$calendar-width: calc(7 * ($cell-size + $gap) - $gap + 20px);
+$calendar-width: calc(7 * (#{$cell-size} + #{$gap}) - #{$gap} + 20px);
 
 .body {
   margin: 0;
@@ -11,22 +11,19 @@ $calendar-width: calc(7 * ($cell-size + $gap) - $gap + 20px);
 }
 
 .calendar {
-  // 7 колонок * (розмір + gap) - останній gap + 20px padding
   width: $calendar-width;
-
-  &__field {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $gap;
-    padding: 10px;
-  }
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 10px;
 
   &__day {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $cell-size;
-    width: $cell-size;
+    height: #{$cell-size};
+    width: #{$cell-size};
     border: 1px solid #000;
     background-color: #eee;
     box-sizing: border-box;
@@ -39,12 +36,6 @@ $calendar-width: calc(7 * ($cell-size + $gap) - $gap + 20px);
     }
   }
 
-  // Дефолт: перший день місяця припадає на суботу
-  &__day:first-child {
-    margin-left: ($cell-size + $gap) * 6;
-  }
-
-  // Додаємо номери днів
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
       content: '#{$i}';
@@ -53,8 +44,7 @@ $calendar-width: calc(7 * ($cell-size + $gap) - $gap + 20px);
     }
   }
 
-  // Модифікатори start-day (без sun, бо sun = default)
-  $days: ('sun' 0, 'mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6);
+  $days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
 
   @each $day, $i in $days {
     &--start-day-#{$day} {
@@ -64,8 +54,7 @@ $calendar-width: calc(7 * ($cell-size + $gap) - $gap + 20px);
     }
   }
 
-  // Модифікатори місяців (від 28 до 30)
-  @for $i from 28 through 30 {
+  @for $i from 28 through 31 {
     $to-hide: $i + 1;
     &--month-length-#{$i} {
       .calendar__day:nth-child(n + #{$to-hide}) {
