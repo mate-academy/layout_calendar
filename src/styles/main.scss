@@ -65,9 +65,9 @@ $days: (
 
 $months-length: 28, 29, 30, 31;
 
-@for $months-length from 28 through 30 {
-  .calendar--month-length-#{$months-length} {
-    .calendar__day:nth-child(n + #{$months-length + 1}) {
+@each $length in $months-length {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
   }
