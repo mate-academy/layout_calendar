@@ -1,0 +1,79 @@
+@use './units/variables' as *;
+
+.page {
+  margin: 0;
+  height: 100vh;
+}
+
+.calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $day-size);
+  gap: $day-gap;
+  padding: $padding;
+  width: $total-width;
+  box-sizing: border-box;
+}
+
+// Element calendar__day
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  box-sizing: border-box;
+  background-color: #eee;
+  border: $border-width solid #000;
+  position: relative;
+  transition:
+    background-color 0.5s ease,
+    transform 0.5s ease;
+
+  &:hover {
+    background-color: #ffbfcb;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: $font-family;
+    font-size: $font-size;
+    color: #000;
+
+    line-height: 1; // Zresetuj line-height, aby nie było dodatkowej przestrzeni
+    text-align: center; // Just in case, wycentruje tekst w pseudoelemencie
+    display: block; // by właściwość text-align zadziałała
+    width: 100%; // aby wypełnić cały element i mieć punkt odniesienia
+  }
+}
+
+// Numeracja dni 1–31
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Start day modifiers (mon, tue, ... sun)
+@each $day, $index in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    // margin-left: calc(($day-size + $day-gap) * #{$index});
+    grid-column-start: #{$index + 1}; // grid columns numerujemy od 1
+  }
+}
+
+// Month length modifiers 28,29,30,31
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
