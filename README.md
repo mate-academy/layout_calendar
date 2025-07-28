@@ -38,7 +38,6 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 - [DEMO LINK](https://Kirky359.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://Kirky359.github.io/layout_calendar/report/html_report/)
 
-❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
 - [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
 reflects in changing calendar layout
