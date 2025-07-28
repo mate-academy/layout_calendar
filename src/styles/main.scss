@@ -1,0 +1,78 @@
+// Variables
+$day-size: 100px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$border: 1px;
+$hover-color: #FFBFCB;
+$default-color: #eee;
+$font-size: 30px;
+
+// Center calendar
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+// Calendar block
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: calc($columns * $day-size + ($columns - 1) * $gap + 2 * $padding);
+  padding: $padding;
+  box-sizing: border-box;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $default-color;
+    border: $border solid black;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.5s, background-color 0.5s;
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      font-size: $font-size;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Inject numbers 1–31 via ::before
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Month length modifier: hide days after N
+  @for $i from 28 through 30 {
+    &--month-length_#{$i} {
+      &__day:nth-child(n+#{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // Start day modifiers (margin-left for first day)
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+    &--start-day_#{$day} {
+      &__day:first-child {
+        margin-left: calc(($day-size + $gap) * #{$index});
+      }
+    }
+  }
+}
