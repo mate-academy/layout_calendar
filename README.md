@@ -34,7 +34,6 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ## Checklist
 
-❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
 - [DEMO LINK](https://Kirky359.github.io/layout_calendar/)
 - [TEST REPORT LINK](https://Kirky359.github.io/layout_calendar/report/html_report/)
