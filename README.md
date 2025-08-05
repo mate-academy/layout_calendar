@@ -28,7 +28,7 @@ On hovering over a cell:
 
 > Here are the [Layout Tasks Instructions](https://mate-academy.github.io/layout_task-guideline)
 
-*Important note*: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
+_Important note_: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
 This is possible because [we use the Parcel library](https://en.parceljs.org/scss.html) to bundle your solution's source code.
 
 ![reference image](reference.png).
@@ -43,7 +43,7 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
 - [x] Changing 'month-length' and 'start-day' modifier in the code element
-  reflects in changing calendar layout
-- [x] Each day has no modifiers, only class (eg. calendar__day)
+      reflects in changing calendar layout
+- [x] Each day has no modifiers, only class (eg. calendar\_\_day)
 - [x] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [x] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
