@@ -35,14 +35,12 @@
     }
   }
 
-  // ::before com os números 1–31
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
 
-  // Modificadores para o primeiro dia da semana
   @each $n in 1, 2, 3, 4, 5, 6, 7 {
     &--start-day-#{$n} {
       & > .calendar__day:nth-child(1) {
@@ -51,7 +49,6 @@
     }
   }
 
-  // Modificadores para o comprimento do mês
   @each $length in 28, 29, 30, 31 {
     &--month-length-#{$length} {
       & > .calendar__day:nth-child(n + #{$length + 1}) {
