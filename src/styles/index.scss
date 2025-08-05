@@ -1,81 +1,16 @@
-// Variáveis
-$calendar-size: 320px;
-$gap: 4px;
-$day-size: calc(($calendar-size - $gap * 6) / 7);
-$color-bg: #f5f5f5;
-$color-day: #fff;
-$color-hover: #e0f7fa;
+@import 'variables';
+@import 'calendar';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-  margin: 0;
-  background: $color-bg;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
-}
-
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: $gap;
-  width: $calendar-size;
-  background: white;
-  padding: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.calendar__day {
-  background: $color-day;
-  width: $day-size;
-  height: $day-size;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  border-radius: 6px;
-  transition: background 0.3s ease;
-
-  &:hover {
-    background: $color-hover;
-    cursor: pointer;
-  }
-}
-
-// ===== Início do mês (alinha o primeiro dia)
-.calendar--start-day-sun .calendar__day:nth-child(1) {
-  grid-column-start: 1;
-}
-
-.calendar--start-day-mon .calendar__day:nth-child(1) {
-  grid-column-start: 2;
-}
-
-.calendar--start-day-tue .calendar__day:nth-child(1) {
-  grid-column-start: 3;
-}
-
-.calendar--start-day-wed .calendar__day:nth-child(1) {
-  grid-column-start: 4;
-}
-
-.calendar--start-day-thu .calendar__day:nth-child(1) {
-  grid-column-start: 5;
-}
-
-.calendar--start-day-fri .calendar__day:nth-child(1) {
-  grid-column-start: 6;
-}
-
-.calendar--start-day-sat .calendar__day:nth-child(1) {
-  grid-column-start: 7;
-}
-
-// ===== Oculta dias excedentes
-.calendar--month-length-30 .calendar__day:nth-child(31) {
-  display: none;
-}
-
-.calendar--month-length-28 .calendar__day:nth-child(n + 29) {
-  display: none;
+  background-color: #f5f5f5;
 }
