@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables' as *;
 
 .calendar {
   display: grid;
@@ -6,21 +6,21 @@
   gap: $gap;
   padding: $padding;
   justify-content: center;
-  margin: 50px auto;
-  width: max-content;
+  margin: auto;
   font-family: $font-family;
-  position: relative;
 
   &__day {
     width: $day-size;
     height: $day-size;
     background-color: $day-bg;
     border: $day-border;
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.5s, background-color 0.5s;
+    position: relative;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
 
     &::before {
       content: '';
@@ -35,14 +35,14 @@
     }
   }
 
-  // Loop para adicionar números com ::before
+  // ::before com os números 1–31
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
-      content: "#{$i}";
+      content: '#{$i}';
     }
   }
 
-  // Modificadores: dia de início (1 a 7)
+  // Modificadores para o primeiro dia da semana
   @each $n in 1, 2, 3, 4, 5, 6, 7 {
     &--start-day-#{$n} {
       & > .calendar__day:nth-child(1) {
@@ -51,7 +51,7 @@
     }
   }
 
-  // Modificadores: comprimento do mês
+  // Modificadores para o comprimento do mês
   @each $length in 28, 29, 30, 31 {
     &--month-length-#{$length} {
       & > .calendar__day:nth-child(n + #{$length + 1}) {
