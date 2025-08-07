@@ -1,62 +1,75 @@
-@use 'variables' as *;
+@use 'variables';
 
+// Reset básico
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Centraliza o calendário
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: $font-family;
+  background: #fff;
+}
+
+// Calendário
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, $day-size);
-  gap: $gap;
-  padding: $padding;
+  gap: $gap-size;
+  padding: $padding-size;
   justify-content: center;
-  margin: auto;
-  font-family: $font-family;
 
-  &__day {
-    width: $day-size;
-    height: $day-size;
-    background-color: $day-bg;
-    border: $day-border;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition:
-      transform 0.5s,
-      background-color 0.5s;
+  counter-reset: day-counter;
+}
 
-    &::before {
-      content: '';
-      font-size: $day-font-size;
-      color: black;
-    }
+// Cada dia
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $background-day;
+  border: 1px solid $border-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform $animation-duration, background-color $animation-duration;
 
-    &:hover {
-      background-color: $hover-color;
-      transform: translateY(-20px);
-      cursor: pointer;
-    }
+  counter-increment: day-counter;
+
+  &::before {
+    content: counter(day-counter);
+    font-size: $font-size-day;
+    color: black;
+    position: absolute;
+    top: 5px;
+    left: 5px;
   }
 
-  // Números dos dias via ::before
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: '#{$i}';
-    }
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
   }
+}
 
-  // Modificadores para o primeiro dia da semana (1 = domingo, 7 = sábado)
-  @each $n in 1, 2, 3, 4, 5, 6, 7 {
-    &--start-day-#{$n} {
-      & > .calendar__day:nth-child(1) {
-        grid-column-start: $n;
-      }
-    }
+// Modificadores para o primeiro dia da semana
+@each $start in 1, 2, 3, 4, 5, 6, 7 {
+  .calendar--start-day-#{$start} > .calendar__day:nth-child(1) {
+    grid-column-start: $start;
   }
+}
 
-  // Modificadores para o comprimento do mês
-  @each $length in 28, 29, 30, 31 {
-    &--month-length-#{$length} {
-      & > .calendar__day:nth-child(n + #{$length + 1}) {
-        display: none;
-      }
-    }
+// Modificadores para o comprimento do mês
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} > .calendar__day:nth-child(n + #{ $days + 1 }) {
+    display: none;
   }
 }
