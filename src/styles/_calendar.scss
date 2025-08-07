@@ -1,7 +1,3 @@
-@use 'variables';
-
-// Reset básico
-*,
 *::before,
 *::after {
   margin: 0;
@@ -23,8 +19,8 @@ body {
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, $day-size);
-  gap: $gap-size;
-  padding: $padding-size;
+  gap: $gap;
+  padding: $padding;
   justify-content: center;
 
   counter-reset: day-counter;
@@ -41,7 +37,9 @@ body {
   align-items: center;
   position: relative;
   cursor: pointer;
-  transition: transform $animation-duration, background-color $animation-duration;
+  transition:
+    transform $animation-duration,
+    background-color $animation-duration;
 
   counter-increment: day-counter;
 
@@ -69,7 +67,8 @@ body {
 
 // Modificadores para o comprimento do mês
 @for $days from 28 through 31 {
-  .calendar--month-length-#{$days} > .calendar__day:nth-child(n + #{ $days + 1 }) {
+  .calendar--month-length-#{$days}
+    > .calendar__day:nth-child(n + #{ $days + 1 }) {
     display: none;
   }
 }
