@@ -15,12 +15,19 @@
     }
   }
 
-  @each $length in $month-length {
-    $start: $length + 1;
-    &--month-length-#{$length} &__day:nth-child(n + #{$start}) {
+  @for $len from 28 through 31 {
+    $start: $len + 1; // скрывать начинаем с следующего дня
+    &--month-length-#{$len} &__day:nth-child(n + #{$start}) {
       display: none;
     }
   }
+
+  // @each $length in $month-length {
+  //   $start: $length + 1;
+  //   &--month-length-#{$length} &__day:nth-child(n + #{$start}) {
+  //     display: none;
+  //   }
+  // }
 
   &__day {
     box-sizing: border-box;
