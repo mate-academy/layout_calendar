@@ -1,3 +1,80 @@
+// Variables
+$day-size: 100px;
+$border: 1px;
+$gap: 1px;
+$padding: 10px;
+$font-size: 30px;
+$day-bg: #eee;
+$hover-bg: #ffbfcb;
+$days-in-week: 7;
+
+* {
+  box-sizing: border-box;
+}
+
+// Reset body
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+// Calendar
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(
+    $day-size * $days-in-week + $gap * ($days-in-week - 1) + $padding * 2
+  );
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $border solid black;
+    position: relative;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    &::before {
+      font-size: $font-size;
+    }
+
+    &:hover {
+      background-color: $hover-bg;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+
+  // Numbers with ::before
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // Month length
+  @for $i from 28 through 30 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  // Start day offset
+  @each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+  {
+    &--start-day-#{$day} .calendar__day:nth-child(1) {
+      margin-left: calc(($day-size + $gap) * #{$index});
+    }
+  }
 }
