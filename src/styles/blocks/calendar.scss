@@ -7,40 +7,33 @@
 
   &__day {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-sizing: border-box;
     height: $day-size;
     width: $day-size;
     border: $border-size solid black;
     background-color: #eee;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
   }
 
   &__day::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     font-family: Arial, sans-serif;
     font-size: 30px;
   }
 
   &__day:hover {
+    cursor: pointer;
     background-color: #ffbfcb;
-    animation-name: move;
-    animation-duration: 0.5s;
+    transform: translateY(-20px);
   }
 
   @for $i from 1 through 31 {
     &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
-  }
-}
-
-@keyframes move {
-  from {
-    transform: translate(0, 0);
-  }
-  to {
-    transform: translate(0, -20px);
   }
 }

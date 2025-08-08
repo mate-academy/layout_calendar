@@ -3,23 +3,21 @@ $border-size: 1px;
 $gap-size: 1px;
 $calendar-padding: 10px;
 $max-width: calc(
-  7 * (#{$day-size} + 2 * #{$border-size}) + 6 * #{$gap-size} + 2 * #{$calendar-padding}
+  7 * #{$day-size} + 6 * #{$gap-size} + 2 * #{$calendar-padding}
 );
 $days-map: (
-  start-day-sun: 0,
-  start-day-mon: 1,
-  start-day-tue: 2,
-  start-day-wed: 3,
-  start-day-thu: 4,
-  start-day-fri: 5,
-  start-day-sat: 6,
+  start-day-mon: 0,
+  start-day-tue: 1,
+  start-day-wed: 2,
+  start-day-thu: 3,
+  start-day-fri: 4,
+  start-day-sat: 5,
+  start-day-sun: 6,
 );
 
 @each $day, $pos in $days-map {
-  .calendar--#{$day} {
-    .calendar__day:first-child {
-      margin-left: calc(#{$pos} * ($day-size + $gap-size));
-    }
+  .calendar--start-day-#{$day}:first-child {
+    margin-left: calc(#{$pos} * ($day-size + $gap-size));
   }
 }
 
