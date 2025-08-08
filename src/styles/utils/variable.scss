@@ -1,0 +1,30 @@
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$calendar-padding: 10px;
+$max-width: calc(
+  7 * (#{$day-size} + 2 * #{$border-size}) + 6 * #{$gap-size} + 2 * #{$calendar-padding}
+);
+$days-map: (
+  start-day-sun: 0,
+  start-day-mon: 1,
+  start-day-tue: 2,
+  start-day-wed: 3,
+  start-day-thu: 4,
+  start-day-fri: 5,
+  start-day-sat: 6,
+);
+
+@each $day, $pos in $days-map {
+  .calendar--#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$pos} * ($day-size + $gap-size));
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}

@@ -1,0 +1,46 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: $max-width;
+  gap: $gap-size;
+  padding: $calendar-padding;
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: $border-size solid black;
+    background-color: #eee;
+  }
+
+  &__day::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    animation-name: move;
+    animation-duration: 0.5s;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+@keyframes move {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -20px);
+  }
+}
