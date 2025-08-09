@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+}
+
+// === VARIABLES ===
+$cell-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$days-in-week: 7;
+$border: 1px solid #000;
+$day-bg: #eee;
+$hover-bg: #ffbfcb;
+$font-size: 30px;
+$transition-time: 0.5s;
+
+// === CALENDAR ===
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(($cell-size + $gap) * $days-in-week - $gap + 2 * $padding);
+  padding: $padding;
+  gap: $gap;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border;
+    background-color: $day-bg;
+    position: relative;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition:
+      background-color $transition-time,
+      transform $transition-time;
+
+    &:hover {
+      background-color: $hover-bg;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  // === MONTH LENGTH MODIFIERS ===
+  @for $i from 28 through 30 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // === START DAY MODIFIERS ===
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc(($cell-size + $gap) * #{$index});
+      }
+    }
+  }
+}
