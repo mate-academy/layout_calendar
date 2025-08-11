@@ -49,8 +49,11 @@ body {
     font-size: $font-size-day;
     color: black;
     position: absolute;
-    top: 5px;
-    left: 5px;
+    inset: 0;               // faz ocupar toda a célula
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;      // evita seleção do número ao clicar
   }
 
   &:hover {
@@ -60,9 +63,9 @@ body {
 }
 
 // Modificadores para o primeiro dia da semana
-@each $start in 1, 2, 3, 4, 5, 6, 7 {
-  .calendar--start-day-#{$start} > .calendar__day:nth-child(1) {
-    grid-column-start: $start;
+@each $name, $num in (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6), (sun, 7) {
+  .calendar--start-day-#{$name} > .calendar__day:nth-child(1) {
+    grid-column-start: $num;
   }
 }
 
