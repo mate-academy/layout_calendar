@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-// Centraliza o calendário
 body {
   display: flex;
   justify-content: center;
@@ -16,18 +15,15 @@ body {
   background: #fff;
 }
 
-// Calendário
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, $day-size);
   gap: $gap;
   padding: $padding;
   justify-content: center;
-
   counter-reset: day-counter;
 }
 
-// Cada dia
 .calendar__day {
   width: $day-size;
   height: $day-size;
@@ -37,11 +33,9 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
-  cursor: pointer;
   transition:
     transform $animation-duration,
     background-color $animation-duration;
-
   counter-increment: day-counter;
 
   &::before {
@@ -49,27 +43,25 @@ body {
     font-size: $font-size-day;
     color: black;
     position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
+    top: 5px;
+    left: 5px;
   }
 
   &:hover {
     background-color: $hover-color;
     transform: translateY(-20px);
+    cursor: pointer; // cursor só no hover
   }
 }
 
-// Modificadores para o primeiro dia da semana
-@each $name, $num in (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6), (sun, 7) {
+// Modificador: início do mês
+@each $start, $name in (1: sun, 2: mon, 3: tue, 4: wed, 5: thu, 6: fri, 7: sat) {
   .calendar--start-day-#{$name} > .calendar__day:nth-child(1) {
-    grid-column-start: $num;
+    grid-column-start: $start;
   }
 }
 
-// Modificadores para o comprimento do mês
+// Modificador: quantidade de dias
 @for $days from 28 through 31 {
   .calendar--month-length-#{$days}
     > .calendar__day:nth-child(n + #{ $days + 1 }) {
