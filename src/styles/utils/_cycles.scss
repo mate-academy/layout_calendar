@@ -1,0 +1,27 @@
+@import './variables';
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day-name,
+  $shift in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+{
+  .calendar--start-day-#{$day-name} .calendar__day:first-child {
+    margin-left: calc(#{$shift} * ($column-width + $gap));
+  }
+}
+
+$max-days: 31;
+
+@for $length from 28 through 30 {
+  .calendar--month-length-#{$length} {
+    @for $i from ($length + 1) through $max-days {
+      .calendar__day:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+  }
+}

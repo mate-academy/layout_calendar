@@ -1,0 +1,52 @@
+@import './utils/cycles';
+@import './utils/variables';
+
+body {
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding-left: $horizontal-padding;
+  padding-right: $horizontal-padding;
+  box-sizing: border-box;
+
+  /* prettier-ignore */
+  width: calc(
+    #{$column-count * $column-width} + #{$gap * ($column-count - 1)} + #{2 * $horizontal-padding}
+  );
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $day-border;
+
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: $font-family;
+
+    transition: all 0.5s ease;
+    cursor: default;
+
+    &::before {
+      font-size: $font-size;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
