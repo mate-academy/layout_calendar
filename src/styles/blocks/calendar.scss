@@ -1,0 +1,38 @@
+@use './variables.scss';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 0 10px;
+  width: 726px;
+  margin: auto;
+
+  &__day {
+    width: variables.$dimension;
+    height: variables.$dimension;
+    background: #eee;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar.month-length--#{$length} {
+  }
+}
+
+@each $startDay in variables.$week-days {
+  .start-day--#{$startDay} {
+  }
+}
