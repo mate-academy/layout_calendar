@@ -1,0 +1,65 @@
+$daysWeek: mon, tue, wed, thu, fri, sat, sun;
+
+@use 'sass:list';
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.calendar {
+  --day-size: 100px;
+
+  &__field {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+    width: calc(7 * var(--day-size));
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    height: var(--day-size);
+    width: var(--day-size);
+    gap: 1px;
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition-duration: all 0.5;
+    }
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+$daysWeek: mon, tue, wed, thu, fri, sat, sun;
+
+@each $start-day in $daysWeek {
+  $index: list.index($daysWeek, $start-day);
+  $margin: calc(var(--day-size) * (#{$index - 1}));
+  .calendar--start-day-#{$start-day} .calendar__day:first-child {
+    margin-left: $margin;
+  }
+}
+
+@for $month-lenght from 28 through 31 {
+  .calendar--month-length-#{$month-lenght}
+    .calendar__day:nth-child(n + #{$month-lenght + 1}) {
+    display: none;
+  }
+}
