@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   gap: 1px;
   padding: 0 10px;
-  width: 726px;
+  width: 706px;
   margin: auto;
 
   &__day {
@@ -16,6 +16,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: variables.$hover-color;
+      transform: translateY(-20px);
+    }
   }
 }
 
@@ -28,11 +35,15 @@
 }
 
 @for $length from 28 through 31 {
-  .calendar.month-length--#{$length} {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
   }
 }
 
-@each $startDay in variables.$week-days {
-  .start-day--#{$startDay} {
+@each $startDay, $value in variables.$week-days {
+  $shift: ($value - 1);
+  .calendar--start-day-#{$startDay} .calendar__day:first-child {
+    margin-left: #{(($value - 1) * 100px) + $shift};
   }
 }
