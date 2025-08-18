@@ -4,11 +4,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1px;
-  padding: 0 10px;
+  padding: 10px;
   width: 706px;
   margin: auto;
 
   &__day {
+    box-sizing: border-box;
     width: variables.$dimension;
     height: variables.$dimension;
     background: #eee;
@@ -16,7 +17,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 500ms;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -42,8 +45,7 @@
 }
 
 @each $startDay, $value in variables.$week-days {
-  $shift: ($value - 1);
   .calendar--start-day-#{$startDay} .calendar__day:first-child {
-    margin-left: #{(($value - 1) * 100px) + $shift};
+    margin-left: #{(($value - 1) * 100px) + ($value - 1)};
   }
 }
