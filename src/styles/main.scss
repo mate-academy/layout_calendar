@@ -1,5 +1,5 @@
-@import '/src/styles/variables';
 @use 'sass:list';
+@import 'variables';
 
 body {
   margin: 0;
@@ -13,8 +13,8 @@ body {
   &__field {
     display: flex;
     flex-wrap: wrap;
-    padding: 10px;
-    width: calc(7 * $cellsize);
+    padding: $pading;
+    width: calc(7 * ($cellsize + $gap));
     gap: $gap;
   }
 
@@ -47,7 +47,7 @@ body {
 }
 
 @for $month-length from 28 through 31 {
-  .calendar--month-length-#{$month-lenght}
+  .calendar--month-length-#{$month-length}
     .calendar__day:nth-child(n + #{$month-length + 1}) {
     display: none;
   }
@@ -55,7 +55,7 @@ body {
 
 @each $start-day in $daysWeek {
   $index: list.index($daysWeek, $start-day);
-  $margin: calc($cellsize * (#{$index - 1}));
+  $margin: calc(($cellsize + $gap) * (#{$index - 1}));
   .calendar--start-day-#{$start-day} .calendar__day:first-child {
     margin-left: $margin;
   }
