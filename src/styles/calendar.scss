@@ -1,23 +1,24 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: 726px;
-  gap: 1px;
-  padding: 10px;
+  width: calc(
+    #{$day-size * $count-column} + #{$calendar-padding * 2} + #{$count-column * $day-gap - 1});
+  gap: $day-gap;
+  padding: $calendar-padding;
 
   &__day {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: $day-size;
+    height: $day-size;
     border: 1px solid #000;
     background-color: #eee;
     transition-duration: 0.5s;
 
     &:hover {
       cursor: pointer;
-      background-color: #ffbfcb;
+      background-color: $day-hover-color;
       transform: translateY(-20px);
     }
 
@@ -38,7 +39,7 @@
   {
     &--start-day-#{$day} {
       & > .calendar__day:first-child {
-        margin-left: calc(101 * #{$index});
+        margin-left: calc(($day-size + $day-gap) * #{$index});
       }
     }
   }
