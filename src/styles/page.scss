@@ -1,2 +1,84 @@
-@import 'variables';
-@import 'main';
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+
+  height: $height-display;
+  justify-content: center;
+  align-items: center;
+  margin: $margin0;
+}
+
+.calendar {
+  position: relative;
+  box-sizing: border-box;
+  justify-content: center;
+
+  display: flex;
+  padding: $padding;
+  width: calc(
+    #{$cols} * #{$cell-size} + (#{$cols} - 1) * #{$gap} + 2 * #{$padding}
+  );
+
+  &__month {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+  }
+
+  &__day {
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $cell-size;
+    width: $cell-size;
+    background-color: $bg;
+    border: $border solid black;
+    transition-duration: $tduration;
+    transition-property:
+      background-color $tduration,
+      transform $tduration;
+  }
+  &__day::before {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__day:hover {
+    background-color: $bg-hover;
+    transform: translateY($hover-lift);
+    cursor: pointer;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: $number-font-size;
+    display: flex;
+    align-content: center;
+  }
+}
+
+@each $day, $i in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$i} * #{$cell-size + $gap});
+    }
+  }
+}
+
+@for $last from 28 through 31 {
+  .calendar--month-length-#{$last} {
+    .calendar__day:nth-child(n + #{$last + 1}) {
+      display: none;
+    }
+  }
+}
