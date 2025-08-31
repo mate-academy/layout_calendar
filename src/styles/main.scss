@@ -1,7 +1,7 @@
 $daysInMonth: 31;
 $cellSize: 100px;
 $gapSize: 1px;
-$padding: 5px;
+$padding: 10px;
 $days: (
   mon: 0,
   tue: 1,
@@ -38,12 +38,11 @@ body {
 }
 
 .calendar {
-  width: 7 * $cellSize + 6 * $gapSize + 2 * $padding;
+  width: calc(7 * #{$cellSize} + 6 * #{$gapSize});
   display: flex;
   flex-wrap: wrap;
   gap: $gapSize;
-  padding-left: $padding;
-  padding-right: $padding;
+  padding: $padding;
 
   &__day {
     position: relative;
@@ -52,6 +51,13 @@ body {
     width: $cellSize;
     height: $cellSize;
     border: 1px solid #000;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
 
     @for $i from 1 through $daysInMonth {
       &:nth-child(#{$i})::before {
@@ -63,13 +69,6 @@ body {
         font-family: Arial, sans-serif;
         font-size: 30px;
       }
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: #ffbfcb;
-      transform: translateY(-20px);
-      transition-duration: 0.5s;
     }
   }
 }
