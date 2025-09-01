@@ -7,16 +7,14 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-size: 30px;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .calendar {
   display: flex;
   gap: $calendar-gap;
   flex-wrap: wrap;
-  width: $calendar-width-day * 7 + $calendar-gap * 6;
-  padding: 10px;
+  width: ($calendar-width-day * 7 + $calendar-gap * 6);
+  padding: 0 5px;
 
   &__day {
     box-sizing: border-box;
@@ -26,20 +24,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #eee;
-    cursor: pointer;
-    transition: 0.5s;
+    background-color: $day-bg;
+    transition:
+      background-color 0.5s,
+      color 0.5s,
+      transform 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
+        font-size: $calendar-font-size;
+        font-family: $calendar-font-family;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
-  }
-
-  &__day:hover {
-    transform: translate(0, -50px);
-    background-color: #ffbfcb;
+    &:hover {
+      transform: translateY(-20px);
+      background-color: $day-action-bg;
+      cursor: pointer;
+    }
   }
 
   @function calc-margin($index) {
