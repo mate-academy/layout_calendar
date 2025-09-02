@@ -1,69 +1,68 @@
-@import './variables';
+// @import './variables';
 
-html {
-  height: 100%;
-}
+// html {
+//   height: 100%;
+// }
 
-body {
-  margin: 0;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
+// body {
+//   margin: 0;
+//   display: flex;
+//   height: 100%;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-.calendar {
-  margin: 10px;
-  padding: 0;
-  width: $li-size-x * $days-in-week + $li-gap * ($days-in-week - 1);
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  gap: $li-gap;
+// .calendar {
+//   padding: 10px;
+//   width: $li-size-x * $days-in-week + $li-gap * ($days-in-week - 1);
+//   display: flex;
+//   flex-wrap: wrap;
+//   list-style: none;
+//   gap: $li-gap;
 
-  &__day {
-    width: $li-size-x;
-    height: $li-size-y;
-    background: $li-bg-color;
-    border: 1px solid;
-    box-sizing: border-box;
-    text-align: center;
+//   &__day {
+//     width: $li-size-x;
+//     height: $li-size-y;
+//     background: $li-bg-color;
+//     border: 1px solid $li-border-color;
+//     box-sizing: border-box;
+//     text-align: center;
 
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-  }
+//     font-family: Arial, Helvetica, sans-serif;
+//     font-size: 30px;
+//     transition: 0.5s;
+//   }
 
-  &--month-length {
-    &-28 {
-      @include calculate-days(28 + 1);
-    }
-    &-29 {
-      @include calculate-days(29 + 1);
-    }
-    &-30 {
-      @include calculate-days(30 + 1);
-    }
-  }
+//   &--month-length {
+//     &-28 {
+//       @include calculate-days(28 + 1);
+//     }
+//     &-29 {
+//       @include calculate-days(29 + 1);
+//     }
+//     &-30 {
+//       @include calculate-days(30 + 1);
+//     }
+//   }
 
-  @each $day, $margin-left in $days {
-    &--start-day-#{$day} {
-      li:first-child {
-        margin-left: $margin-left;
-      }
-    }
-  }
+//   @each $day, $margin-left in $days {
+//     &--start-day-#{$day} {
+//       li:first-child {
+//         margin-left: $margin-left;
+//       }
+//     }
+//   }
 
-  &__day:hover {
-    cursor: pointer;
-    background: $li-bg-color-hover;
-    transform: translate(0, -20px);
-    transition: 0.5s;
-  }
+//   &__day:hover {
+//     cursor: pointer;
+//     background: $li-bg-color-hover;
+//     transform: translate(0, -20px);
+//   }
 
-  @for $i from 1 through 31 {
-    li:nth-child(#{$i})::before {
-      content: '#{$i}';
-      line-height: $li-size-x - $border-width * 2;
-    }
-  }
-}
+//   @for $i from 1 through 31 {
+//     li:nth-child(#{$i})::before {
+//       content: '#{$i}';
+//       line-height: $li-size-x - $border-width * 2;
+//     }
+//   }
+// }
