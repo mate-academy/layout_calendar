@@ -33,7 +33,7 @@ body {
 
 .calendar {
   display: flex;
-  gap: 1px;
+  gap: $gap-size;
   width: calc($day-size * $columns + $gap-size * ($columns - 1) + $padding * 2);
   flex-wrap: wrap;
   padding: $padding;
@@ -62,7 +62,9 @@ body {
     height: $day-size;
     border: 1px solid $border-color;
     background-color: $day-bg;
-    transition-duration: 0.5s;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
 
     &:hover {
       background-color: $hover-color;
