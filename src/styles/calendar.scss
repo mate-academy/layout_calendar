@@ -1,0 +1,70 @@
+@import 'variables';
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat($columns, $day-size);
+  gap: $gap;
+  padding: $padding;
+  max-width: calc(
+    #{$padding * 2} + #{$day-size * $columns} + #{$gap * ($columns - 1)}
+  );
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-bg;
+  border: $border-width solid $border-color;
+  position: relative;
+  box-sizing: border-box;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+
+  &::before {
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+$start-day-map: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+@each $day, $start-column in $start-day-map {
+  .calendar--start-day-#{$day} .calendar__day:first-of-type {
+    grid-column-start: $start-column;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-of-type(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $length from 28 through 30 {
+  .calendar--month-length-#{$length} {
+    @for $i from ($length + 1) through 31 {
+      .calendar__day:nth-of-type(#{$i}) {
+        display: none;
+      }
+    }
+  }
+}
