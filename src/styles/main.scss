@@ -8,7 +8,7 @@ $day-hover-bg: #ffbfcb;
 $transition-time: 0.5s;
 
 $calendar-gap: 1px;
-$calendar-padding: 5px; // исправлено, чтобы суммарно было 10px
+$calendar-padding: 5px; // суммарно 10px горизонтально
 $columns: 7;
 
 // ---------------- Calendar ----------------
@@ -16,10 +16,9 @@ $columns: 7;
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap;
-  width: ($columns * ($day-size + $day-border * 2)) + ($columns - 1) * $calendar-gap + $calendar-padding * 2;
+  width: $columns * $day-size + ($columns - 1) * $calendar-gap + $calendar-padding * 2;
   padding: $calendar-padding;
 
-  // Центрирование на экране
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,7 +31,7 @@ $columns: 7;
     background-color: $day-bg;
     position: relative;
     font-family: $day-font;
-    box-sizing: border-box; // исправлено
+    box-sizing: border-box;
 
     // числа через ::before
     @for $i from 1 through 31 {
@@ -49,13 +48,12 @@ $columns: 7;
       transform: translate(-50%, -50%);
     }
 
-    // hover
-    transition: background-color $transition-time, transform $transition-time; // исправлено
+    transition: background-color $transition-time, transform $transition-time;
     cursor: pointer;
 
     &:hover {
       background-color: $day-hover-bg;
-      transform: translateY(-20px); // исправлено
+      transform: translateY(-20px);
     }
   }
 
@@ -69,10 +67,10 @@ $columns: 7;
   }
 
   // ---------------- Start-day modifiers ----------------
-  @each $day, $index in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7) { // исправлено
+  @each $day, $index in (sun: 1, mon: 2, tue: 3, wed: 4, thu: 5, fri: 6, sat: 7) {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($index - 1) * ($day-size + $day-border * 2 + $calendar-gap);
+        margin-left: ($index - 1) * ($day-size + $calendar-gap);
       }
     }
   }
