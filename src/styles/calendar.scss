@@ -9,14 +9,18 @@
   $days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
 
   @each $day, $i in $days {
-    &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: calc(($day-width + $day-gap) * #{$i});
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc(($day-width + $day-gap) * #{$i});
+      }
     }
   }
 
   @for $i from 28 through 31 {
-    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
     }
   }
 
