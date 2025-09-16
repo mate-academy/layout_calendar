@@ -5,8 +5,17 @@
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $day-gap;
+  padding: 5px;
 
-  $days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
+  $days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
 
   @each $day, $i in $days {
     &--start-day-#{$day} .calendar__day:first-child {
@@ -27,7 +36,7 @@
     box-sizing: border-box;
     width: $day-width;
     height: $day-height;
-    border: 1px solid black;
+    border: $border-width solid $border-color;
     background-color: #eee;
     font-size: 30px;
     transition: all 0.5s;
