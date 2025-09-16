@@ -2,10 +2,12 @@
 
 .calendar {
   display: flex;
+  box-sizing: border-box;
   flex-wrap: wrap;
   width: $calendar-width;
   gap: $day-gap;
-  padding: 5px;
+  padding-left: $calendar-padding;
+  padding-right: $calendar-padding;
 
   $days: (
     'mon': 0,
@@ -39,7 +41,7 @@
     border: $border-width solid $border-color;
     background-color: #eee;
     font-size: 30px;
-    transition: all 0.5s;
+    transition: all $transition-duration;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
@@ -48,9 +50,9 @@
     }
 
     &:hover {
-      transform: translateY(-20px);
+      transform: translateY(-$hover-shift);
       cursor: pointer;
-      background-color: #ffbfcb;
+      background-color: $hover-bg;
     }
   }
 }
