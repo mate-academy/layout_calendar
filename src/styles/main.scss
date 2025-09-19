@@ -1,0 +1,99 @@
+@use 'sass:list';
+
+$cell: 100px;
+$gap: 1px;
+$calendar-width: 726px;
+$pad: 10px;
+$bg-day: #eee;
+$border: #000;
+$hover: #ffbfcb;
+$font: Arial, sans-serif;
+$transition: 0.5s;
+$start-offsets: (
+  mon: 0,
+  tue: 101,
+  wed: 202,
+  thu: 303,
+  fri: 404,
+  sat: 505,
+  sun: 606,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: $font;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $pad;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell;
+    height: $cell;
+    background-color: $bg-day;
+    border: 1px solid $border;
+    transition-duration: $transition;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover;
+      transition-duration: $transition;
+      transform: translateY(-20px);
+    }
+  }
+
+  // números 1..31
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // comprimento do mês
+  &--month-length-28 {
+    .calendar__day:nth-child(n + 29) {
+      display: none;
+    }
+  }
+  &--month-length-29 {
+    .calendar__day:nth-child(n + 30) {
+      display: none;
+    }
+  }
+  &--month-length-30 {
+    .calendar__day:nth-child(n + 31) {
+      display: none;
+    }
+  }
+  &--month-length-31 {
+    .calendar__day:nth-child(n + 32) {
+      display: none;
+    }
+  }
+
+  // início do mês (margem da 1ª célula)
+  @each $key, $px in $start-offsets {
+    &--start-day-#{$key} {
+      .calendar__day:first-child {
+        margin-left: #{$px}px;
+      }
+    }
+  }
+}
