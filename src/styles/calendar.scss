@@ -1,3 +1,4 @@
+@use "sass:list";
 @import 'variables';
 
 .calendar {
@@ -7,20 +8,17 @@
   width: $calendar-width;
   padding: 0 10px;
 
-  $i: 0;
-
   @each $day in $week {
+    $position: list.index($week, $day);
     &--start-day-#{$day} {
       .calendar__day:first-of-type {
-        margin-left: calc($i * (#{$day-size} + #{$gap}));
+        margin-left: calc(($position - 1) * (#{$day-size} + #{$gap}));
       }
-
-      $i: $i + 1;
     }
   }
 
   @for $i from 1 through $days-in-month {
-    &__day:nth-child(#{$i})::before {
+    & .calendar__day:nth-child(#{$i})::before {
       content: '#{$i}';
       top: 50%;
       left: 50%;
@@ -28,10 +26,11 @@
       color: #000;
       position: absolute;
     }
-    &__day:nth-child(#{$i}):hover {
+  }
+
+  &__day:nth-child(n):hover {
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
-  }
 }
