@@ -18,8 +18,6 @@ body {
   width: 7 * $day-size + 6 * $gap + 2 * $padding;
   gap: $gap;
   padding: $padding;
-
-  counter-reset: day-counter;
 }
 
 .calendar__day {
@@ -27,12 +25,10 @@ body {
   height: $day-size;
   border: $border-width solid $border-color;
   background-color: $day-bg;
-
-  counter-increment: day-counter;
+  box-sizing: border-box;
 }
 
 .calendar__day::before {
-  content: counter(day-counter);
   display: block;
   text-align: center;
   line-height: $day-size;
@@ -50,6 +46,12 @@ body {
 @each $day, $offset in $days {
   .calendar--start-#{$day} .calendar__day:first-child {
     margin-left: $offset * ($day-size + $gap);
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
   }
 }
 
