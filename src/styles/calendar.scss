@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   gap: $gap;
   width: $calendar-width;
+  padding: 0 10px;
 
   $i: 0;
 
@@ -19,16 +20,18 @@
   }
 
   @for $i from 1 through $days-in-month {
-    &__day:nth-child(n + #{$i})::before {
+    &__day:nth-child(#{$i})::before {
       content: '#{$i}';
-      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: #000;
+      position: absolute;
     }
-  }
-
-    &__day:nth-child(5):hover {
+    &__day:nth-child(#{$i}):hover {
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
+  }
 }
