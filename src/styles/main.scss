@@ -10,7 +10,8 @@ $pad-y: 10px;
 $calendar-width: (
   $columns * $cell + ($columns - 1) * $gap + $total-horizontal-padding
 );
-$transition: all 0.5s;
+$number-size: 30px;
+$transition-duration: all 0.5s;
 $font: Arial, sans-serif;
 $days: mon tue wed thu fri sat sun;
 
@@ -26,15 +27,14 @@ body {
   height: 100vh;
   margin: 0;
   font-family: $font;
-  font-size: 30px;
+  font-size: $number-size;
 }
 
 .calendar {
   width: $calendar-width;
   padding: $pad-y $pad-x-right $pad-y $pad-x-left;
-  display: flex;
   flex-wrap: wrap;
-  grid-template-columns: repeat($columns, $cell);
+  display: flex;
   gap: $gap;
 
   &__day {
@@ -44,10 +44,10 @@ body {
     display: grid;
     place-items: center;
     background: #eee;
-    box-shadow: 0 0 0 1px #000 inset;
+    border: 1px solid #000;
     transition:
-      transform $transition,
-      background-color $transition;
+      transform $transition-duration,
+      background-color $transition-duration;
 
     &:hover {
       cursor: pointer;
@@ -56,7 +56,7 @@ body {
     }
 
     &::before {
-      font-size: 30px;
+      font-size: $number-size;
       font-weight: 400;
       color: #000;
     }
@@ -79,15 +79,7 @@ body {
     }
   }
 
-  /* ===== Numeração forçada (zera e escreve por último) ===== */
-  > .calendar__day::before {
-    content: '' !important;
-  } /* zera qualquer conteúdo anterior */
-  > .calendar__day:first-child::before {
-    content: '1' !important;
-  } /* garante que inicia em 1 */
-
-  @for $i from 2 through 31 {
+  @for $i from 1 through 31 {
     > .calendar__day:nth-child(#{$i})::before {
       content: '#{$i}' !important;
     }
