@@ -2,7 +2,7 @@
 
 .calendar {
   display: flex;
-  width: calc($columns * $size) + (7 * $gap);
+  width: calc(($columns * $size) + (($columns - 1) * $gap));
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
@@ -15,9 +15,9 @@
     justify-content: center;
     align-items: center;
     background-color: #eee;
-    border: 1px solid #000;
+    border: $cell-border;
     box-sizing: border-box;
-    padding: 10px;
+    padding: $cell-padding;
     font-family: Arial, sans-serif;
     font-size: 30px;
     font-weight: normal;
@@ -35,7 +35,6 @@
 @for $dayNumber from 1 through 31 {
   .calendar__day:nth-child(#{$dayNumber})::before {
     content: '#{$dayNumber}';
-    margin-left: 1px;
   }
 }
 
@@ -45,7 +44,7 @@
   }
 }
 
-@for $monthLength from 29 through 31 {
+@for $monthLength from 28 through 31 {
   .calendar--month-length-#{$monthLength}
     .calendar__day:nth-child(-n + #{$monthLength}) {
     display: flex;
