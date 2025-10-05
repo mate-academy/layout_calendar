@@ -96,6 +96,15 @@ body {
   }
 }
 
+// Month-length modifiers: esconde dias extras
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} {
+    .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
+
 // Números dos dias gerados via Sass @for
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
