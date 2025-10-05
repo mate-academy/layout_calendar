@@ -2,6 +2,13 @@
 // Calendar Variables
 // ====================
 
+// Global box-sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 // Tamanho dos dias
 $day-size: 100px;
 $day-border: 1px;
@@ -9,7 +16,7 @@ $day-gap: 1px;
 
 // Layout do calendário
 $columns: 7;
-$calendar-padding: 10px;
+$calendar-padding: 5px; // total horizontal = 10px
 
 // Aparência dos dias
 $day-bg: #eee;
@@ -42,12 +49,17 @@ body {
   padding: $calendar-padding;
   background-color: $calendar-bg;
 
-  // Largura calculada: 7 colunas + gap + padding
-  max-width: calc(
+  // Largura exata: 7 colunas + gap + padding
+  width: calc(
     ($day-size + $day-gap) * $columns - $day-gap + ($calendar-padding * 2)
   );
+}
 
-  counter-reset: day;
+.calendar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar__day {
@@ -61,27 +73,22 @@ body {
   font-family: $font-family;
   font-size: $font-size;
   position: relative;
-  counter-increment: day;
 
-  // Número do dia
-  &::before {
-    content: counter(day);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+  cursor: pointer;
 
-  // Hover
+  // Transição para hover-in e hover-out
+  transition:
+    background-color $transition-duration,
+    transform $transition-duration;
+
   &:hover {
-    cursor: pointer;
     background-color: $hover-bg;
     transform: translateY($hover-transform);
-    transition: all $transition-duration;
   }
 }
 
-@each $day, $col in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+// Start-day modifiers corrigidos: Monday = 0, Sunday = 6
+@each $day, $col in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       margin-left: calc(($day-size + $day-gap) * $col);
@@ -89,10 +96,13 @@ body {
   }
 }
 
-@for $i from 28 through 31 {
-  .calendar--month-length-#{$i} {
-    .calendar__day:nth-child(n + #{$i + 1}) {
-      display: none;
-    }
+// Números dos dias gerados via Sass @for
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }
