@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+}
+
+@for $i from 1 through 7 {
+  $day: 
+    [ 'mon',
+    'tue',
+    'wed',
+    'thu',
+    'fri',
+    'sat',
+    'sun'];
+  $offset: ($i - 1) * 101;
+
+  .calendar--start-day-#{nth($day, $i)} .calendar__day:first-child {
+    margin-left: #{$offset}px;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+.calendar__day {
+  background-color: #eee;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  transition-duration: 0.5s;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i}):before {
+      content: '#{$i}';
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transition-duration: 0.5s;
+    transform: translateY(-20px);
+  }
+}
