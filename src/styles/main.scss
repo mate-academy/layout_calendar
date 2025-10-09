@@ -14,10 +14,11 @@ body {
   padding: $calendar-padding;
 
   // prettier-ignore
-  width: ($columns * $day-total-size) + (($columns - 1) * $gap) + (2 * $calendar-padding);
+  width: ($columns * $day-total-size) + ($columns * $gap) + $calendar-padding;
   margin: auto;
 
   &__day {
+    box-sizing: border-box;
     flex-shrink: 0;
     position: relative;
     height: $day-size;
@@ -25,7 +26,7 @@ body {
     background: $color-day-bg;
     border: $border-size solid $color-border;
     cursor: pointer;
-    transition-duration: 0.5s;
+    transition: all 0.5s;
 
     &:hover {
       background-color: #ffbfcb;
