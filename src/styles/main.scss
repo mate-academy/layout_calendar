@@ -23,8 +23,9 @@ body {
 
 .calendar {
   font-family: Arial, sans-serif;
-  display: grid;
-  grid-template-columns: repeat($columns, #{$day-size});
+  display: flex;
+  flex-wrap: wrap;
+
   gap: $gap;
   padding: $padding;
   width: calc(
@@ -43,11 +44,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
 
     &:hover {
       background-color: $accent-color;
       transform: translateY(-20px);
+      cursor: pointer;
     }
 
     @for $number from 1 through 31 {
@@ -72,15 +73,18 @@ body {
   @each $day, $index-val in $day-start {
     &--start-day-#{$day} {
       .calendar__day:nth-child(1) {
-        grid-column-start: $index-val + 1;
+        margin-left: calc(
+          (#{$day-size}) * #{$index-val} + #{$gap} * #{$index-val}
+        );
       }
     }
   }
 
   @for $month-leng from 28 through 31 {
-    &--month-length-#{$month-leng}
+    &--month-length-#{$month-leng} {
       .calendar__day:nth-child(n + #{$month-leng + 1}) {
-      display: none;
+        display: none;
+      }
     }
   }
 }
