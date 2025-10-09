@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  box-sizing: border-box;
+  // box-sizing: border-box;
   display: flex;
   min-height: 100vh;
 }
@@ -23,7 +23,7 @@ body {
 
 @each $day, $offset in $days {
   .calendar--start-#{$day} .calendar__day:first-child {
-    margin-left: ($day-total-size + $gap) * $offset;
+    margin-left: ($day-size + $gap) * $offset;
   }
 }
 
@@ -31,10 +31,10 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  padding: $calendar-padding;
+  padding: $calendar-padding-total / 2;
 
   // prettier-ignore
-  width: (7 * $day-total-size) + (6 * $gap) + 2 * $calendar-padding;
+  width: (7 * $day-size) + (6 * $gap) + $calendar-padding-total;
   margin: auto;
 
   &__day {
