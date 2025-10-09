@@ -22,7 +22,7 @@ body {
 
 @each $day, $offset in $days {
   .calendar--start-#{$day} .calendar__day:first-child {
-    margin-left: ($day-size + $gap) * $offset;
+    margin-left: $column-width * $offset;
   }
 }
 
@@ -32,16 +32,15 @@ body {
   gap: $gap;
   padding: 0 $calendar-padding-x;
 
-  // prettier-ignore
-  width: (7 * $day-size) + (6 * $gap) + $calendar-padding-total;
+  width: (7 * $day-size-with-border) + (6 * $gap) + (2 * $calendar-padding-x);
   margin: auto;
 
   &__day {
     box-sizing: border-box;
     flex-shrink: 0;
     position: relative;
-    height: $day-size;
-    width: $day-size;
+    height: $day-size-with-border;
+    width: $day-size-with-border;
     background: $color-day-bg;
     border: $border-size solid $color-border;
     transition: background-color 0.5s, transform 0.5s;
@@ -50,7 +49,6 @@ body {
       background-color: #FFBFCB;
       transform: translateY(-20px);
       cursor: pointer;
-
     }
 
     &::before {
