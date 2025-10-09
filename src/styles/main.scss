@@ -8,6 +8,8 @@ $day-size: 100px;
 $columns: 7;
 $font-size: 30px;
 $font-family: Arial, sans-serif;
+$animation-duration: 0.5s;
+$hover-transform-distance: 20px;
 
 * {
   margin: 0;
@@ -39,15 +41,15 @@ body {
     border: $border-width solid black;
     background-color: $main-color;
     transition:
-      background-color 0.5s,
-      transform 0.5s;
+      background-color $animation-duration,
+      transform $animation-duration;
     display: flex;
     justify-content: center;
     align-items: center;
 
     &:hover {
       background-color: $accent-color;
-      transform: translateY(-20px);
+      transform: translateY(-#{$hover-transform-distance});
       cursor: pointer;
     }
 
