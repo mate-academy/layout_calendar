@@ -5,6 +5,7 @@ body {
   display: flex;
   min-height: 100vh;
 }
+
 @for $month-length from 28 through 31 {
   .calendar--month-length-#{$month-length} {
     .calendar__day:nth-child(n + #{$month-length + 1}) {
@@ -12,6 +13,7 @@ body {
     }
   }
 }
+
 .calendar__day::before {
   content: '';
   position: absolute;
@@ -21,16 +23,19 @@ body {
   font-size: $font-size;
   font-family: $font-family;
 }
+
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
   }
 }
+
 @each $day, $offset in $days {
   .calendar--start-day-#{$day} .calendar__day:first-child {
     margin-left: $column-width * $offset;
   }
 }
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
