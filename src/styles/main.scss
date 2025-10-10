@@ -1,131 +1,180 @@
-$main-color: #eee;
-$accent-color: #ffbfcb;
-$padding: 5px;
-$cell-padding: 10px;
-$border-width: 1px;
-$gap: 1px;
-$day-size: 100px;
-$columns: 7;
-$font-size: 30px;
-$font-family: Arial, sans-serif;
-$day-start: (
-  sun: 0,
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
-);
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@import '/src/utils/variables';
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
 }
 
 .calendar {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-wrap: wrap;
-
-  gap: $gap;
+  box-sizing: border-box;
   padding: $padding;
-  width: calc(
-    #{$day-size} * #{$columns} + #{$gap} * (#{$columns} - 1) + #{$padding} * 2
-  );
-
+  width: $total-width;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: $gap;
+  flex-wrap: wrap;
   &__day {
+    border: $day-border solid $border-color;
+    box-sizing: border-box;
     width: $day-size;
     height: $day-size;
-    padding: $cell-padding;
-    border: $border-width solid black;
-    background-color: $main-color;
+    background-color: $day-bg;
     transition:
-      background-color 0.5s,
-      transform 0.5s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &:hover {
-      background-color: $accent-color;
-      transform: translateY(-20px);
-      cursor: pointer;
-    }
-  }
-
-  @for $number from 1 through 31 {
-    .calendar__day:nth-child(#{$number})::before {
-      content: '#{$number}';
+      background-color $animation-duration ease,
+      transform $animation-duration ease;
+    position: relative;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       font-size: $font-size;
-      font-family: $font-family;
+      pointer-events: none;
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-$hover-lift);
+    }
+
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n}) {
+        &::before {
+          content: '#{$n}';
+        }
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day {
+        &:nth-child(n + #{$length + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @each $day in (mon, tue, wed, thu, fri, sat, sun) {
+    $offset: 0;
+
+    @if $day == mon {
+      $offset: 0;
+    }
+
+    @if $day == tue {
+      $offset: $day-size + $gap;
+    }
+
+    @if $day == wed {
+      $offset: ($day-size + $gap) * 2;
+    }
+
+    @if $day == thu {
+      $offset: ($day-size + $gap) * 3;
+    }
+
+    @if $day == fri {
+      $offset: ($day-size + $gap) * 4;
+    }
+
+    @if $day == sat {
+      $offset: ($day-size + $gap) * 5;
+    }
+
+    @if $day == sun {
+      $offset: ($day-size + $gap) * 6;
+    }
+
+    &--start-day-#{$day} {
+      .calendar__day {
+        &:first-child {
+          margin-left: $offset;
+        }
+      }
     }
   }
 }
 
-@each $day, $index-val in $day-start {
-  .calendar--start-#{$day} {
-    .calendar__day:nth-child(1) {
-      margin-left: calc(
-        (#{$day-size}) * #{$index-val} + #{$gap} * #{$index-val}
-      );
-    }
-  }
-}
-
-@for $month-leng from 28 through 31 {
-  .calendar--month-length-#{$month-leng} {
-    .calendar__day:nth-child(n + #{$month-leng + 1}) {
-      display: none;
-    }
-  }
-}
-
+// $font-family: Arial, sans-serif;
+// $border-size: 1px;
+// $gap: 1px;
+// $calendar-padding-x: 10px;
+// $color-border: #000;
+// $font-size: 30px;
+// $color-day-bg: #eee;
+// $day-size-with-border: 100px;
+// $day-size: $day-size-with-border - (2 * $border-size);
+// $column-width: $day-size-with-border + $gap;
+// $days: (
+//   sun: 0,
+//   mon: 1,
+//   tue: 2,
+//   wed: 3,
+//   thu: 4,
+//   fri: 5,
+//   sat: 6,
+// );
+// body {
+//   margin: 0;
+//   display: flex;
+//   min-height: 100vh;
+// }
+// @for $month-length from 28 through 31 {
+//   .calendar--month-length-#{$month-length} {
+//     .calendar__day:nth-child(n + #{$month-length + 1}) {
+//       display: none;
+//     }
+//   }
+// }
+// .calendar__day::before {
+//   content: '';
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   font-size: $font-size;
+//   font-family: $font-family;
+// }
+// @for $i from 1 through 31 {
+//   .calendar__day:nth-child(#{$i})::before {
+//     content: '#{$i}';
+//   }
+// }
+// @each $day, $offset in $days {
+//   .calendar--start-#{$day} .calendar__day:first-child {
+//     margin-left: $column-width * $offset;
+//   }
+// }
 // .calendar {
 //   display: flex;
 //   flex-wrap: wrap;
 //   gap: $gap;
 //   padding: 0 $calendar-padding-x;
-
 //   width: (7 * $day-size-with-border) + (6 * $gap) + (2 * $calendar-padding-x);
 //   margin: auto;
-
 //   &__day {
 //     box-sizing: border-box;
 //     flex-shrink: 0;
 //     position: relative;
-
 //     height: $day-size-with-border;
 //     width: $day-size-with-border;
-
 //     background: $color-day-bg;
 //     border: $border-size solid $color-border;
 //     transition:
 //       background-color 0.5s,
 //       transform 0.5s;
-
 //     &:hover {
 //       background-color: #ffbfcb;
 //       transform: translateY(-20px);
 //       cursor: pointer;
-//     }
-
-//     &::before {
-//       content: '';
-//       position: absolute;
-//       top: 50%;
-//       left: 50%;
-//       transform: translate(-50%, -50%);
-//       font-size: $font-size;
-//       font-family: $font-family;
 //     }
 //   }
 // }
