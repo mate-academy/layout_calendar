@@ -29,7 +29,7 @@ body {
   display: flex;
   gap: $cell-gap;
   flex-wrap: wrap;
-  width: calc(#{$columns-count} * #{$column-width} + 20px);
+  width: calc(#{$columns-count} * #{$column-width} + 2 * #{$container-padding});
 
   &__day {
     width: $cell-size;
@@ -37,7 +37,7 @@ body {
     border: $cell-border solid black;
     box-sizing: border-box;
     background-color: #eee;
-    cursor: pointer;
+
     transition:
       transform 0.5s,
       background-color 0.5s;
@@ -46,6 +46,7 @@ body {
       transform: translate(0, -20px);
       transition-duration: 0.5s;
       background-color: #ffbfcb;
+      cursor: pointer;
     }
 
     @for $day-number from 1 through 31 {
