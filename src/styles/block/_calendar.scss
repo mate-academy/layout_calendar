@@ -6,8 +6,8 @@
   width: $calendar-width;
 
   &__day {
-    width: $day-size;
-    height: $day-size;
+    width: $day-inner-size;
+    height: $day-inner-size;
     background-color: $day-color;
     border: $border-size solid black;
     display: flex;
@@ -21,7 +21,7 @@
     &:hover {
       cursor: pointer;
       background-color: $hover-color;
-      transform: translateY($hover-offset);
+      transform: translateY(-$hover-offset);
     }
 
     // Add day numbers using ::before
@@ -32,16 +32,10 @@
     }
   }
 
-  // Start-day modifiers - add empty cells before the first day
+  // Start-day modifiers - set margin-left for the first day
   @each $day, $index in $days-of-week {
-    &--start-day-#{$day}::before {
-      content: '';
-
-      @if $index > 0 {
-        width: $day-with-border * $index + $gap-size * ($index - 1);
-      }
-
-      height: 0;
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: ($index - 1) * $day-with-gap;
     }
   }
 
