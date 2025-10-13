@@ -1,0 +1,79 @@
+@use './variables' as *;
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-day;
+  font-size: $font-size-day;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(7 * $cell-size + 6 * $gap + 2 * $padding);
+  box-sizing: border-box;
+
+  // .calendar__day
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-bg;
+    border: $border-width solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      color: black;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg;
+      transform: translateY($hover-translate);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc($index * ($cell-size + $gap));
+  }
+}
+
+// --- Довжина місяця ---
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
