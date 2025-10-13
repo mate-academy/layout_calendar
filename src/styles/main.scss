@@ -1,15 +1,26 @@
 @import '/src/styles/variables';
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
 .calendar {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: $calendar-gap;
+  gap: $gap;
   max-width: $calendar-max-width;
-  padding: $calendar-padding;
+  padding-left: $calendar-padding;
+  padding-right: $calendar-padding;
   margin: auto;
-  overflow: hidden;
 
   &__day {
     width: $day-width;
@@ -35,15 +46,17 @@
     @for $day from 1 through 31 {
       &:nth-child(#{$day})::before {
         content: '#{$day}';
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Arial, sans-serif;
         font-size: $day-letter-size;
         position: absolute;
+
+        // text-align: center;
       }
     }
 
     @each $day, $i in $day-modifiers {
       .calendar--start-day-#{$day} &:first-child {
-        margin-left: $i * ($day-width + $calendar-gap);
+        margin-left: $i * ($day-width + $gap);
       }
     }
 
