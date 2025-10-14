@@ -8,10 +8,10 @@
 
 body {
   margin: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .calendar {
@@ -22,9 +22,7 @@ body {
 
   /* prettier-ignore */
 
-  width: calc(
-    ($day-size + (2 * $border)) * $days-in-week + $gap * ($days-in-week - 1) + 2 * $paddings
-  );
+  width: calc(($day-size + $gap) * $days-in-week - $gap + 2 * $paddings);
   justify-content: flex-start;
   align-items: flex-start;
 
@@ -43,10 +41,9 @@ body {
     cursor: pointer;
 
     &::before {
-      content: '';
+      content: counter(day);
       font-family: $font-family;
       font-size: $font-size;
-      position: absolute;
       color: black;
     }
 
@@ -72,10 +69,10 @@ body {
 
   $start-days: (sun 0, mon 1, tue 2, wed 3, thu 4, fri 5, sat 6);
 
-  @each $day, $index in $start-days {
+  @each $day, $num in $start-days {
     &--start-day-#{$day} {
       &__day:first-child {
-        margin-left: calc(($day-size + (2 * $border) + $gap) * $index);
+        margin-left: calc($num * ($day-size + $gap));
       }
     }
   }
