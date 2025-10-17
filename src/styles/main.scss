@@ -15,7 +15,7 @@ $font-family: Arial;
   padding: 0 $padding;
   width: calc(($day-size + $gap) * $columns - $gap + $padding * 2);
 
-  &_day {
+  &__day {
     background-color: #eee;
     height: $day-size;
     width: $day-size;
@@ -34,26 +34,26 @@ $font-family: Arial;
   }
 
   @for $day from 1 through 31 {
-    &_day:nth-child(#{$day})::before {
+    &__day:nth-child(#{$day})::before {
       content: '#{$day}';
     }
   }
 
-  $days: sun, mon, tue, wed, thu, fri, sat;
+  $days: mon, tue, wed, thu, fri, sat, sun;
 
   @each $day in $days {
-    &--start-#{$day} &_day:first-child {
+    &--start-#{$day} &__day:first-child {
       margin-left: calc(($day-size + $gap) * (list.index($days, $day) - 1));
     }
   }
 
-  @for $i from 28 through 30 {
-    &--month-length-#{$i} &_day:nth-child(n + #{$i + 1}) {
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
       display: none;
     }
   }
 
-  &_day:hover {
+  &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
     transform: translate(0, -20px);
