@@ -3,6 +3,14 @@
 $size-day: 100px;
 $calendar-gap: 1px;
 $day: mon, tue, wed, thu, fri, sat, sun;
+$columns: 7;
+$calendar-padding-horizontal: 5px;
+$calendar-paddings-horizontal: $calendar-padding-horizontal * 2;
+$border-size: 1px;
+$font-day-size: 30px;
+$hover-offset: 20px;
+$sum-gap: $calendar-gap * ($columns - 1);
+$calendar-width: $size-day * $columns + $sum-gap + $calendar-paddings-horizontal;
 
 body {
   margin: 0;
@@ -27,11 +35,13 @@ body {
   }
 
   &__month {
+    box-sizing: border-box;
     display: flex;
     margin: auto;
     flex-wrap: wrap;
     gap: $calendar-gap;
-    width: $size-day * 7 + 6px;
+    width: $calendar-width;
+    padding: 0 $calendar-padding-horizontal;
   }
 
   &__day {
@@ -39,9 +49,10 @@ body {
     width: $size-day;
     height: $size-day;
     background-color: #eee;
-    border: 1px solid #000;
-    transition: transform, 0.5s;
-    transition: background-color, 0.5s;
+    border: $border-size solid #000;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
 
     &::before {
       display: flex;
@@ -53,7 +64,7 @@ body {
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
-        font-size: 30px;
+        font-size: $font-day-size;
         font-family: Arial, sans-serif;
       }
     }
@@ -61,7 +72,7 @@ body {
     &:hover {
       background-color: #ffbfcb;
       cursor: pointer;
-      transform: translateY(-20px);
+      transform: translateY(-$hover-offset);
     }
   }
 }
