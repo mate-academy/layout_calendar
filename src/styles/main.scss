@@ -3,10 +3,13 @@ $day-gap: 1px;
 $day-border: 1px solid black;
 $day-bg: #eee;
 $calendar-padding: 10px;
-$days-of-week: sun, mon, tue, wed, thu, fri, sat;
+$days-of-week: mon, tue, wed, thu, fri, sat, sun;
 $month-lengths: 28, 29, 30, 31;
+$calendar-padding-horizontal: 10px;
+$calendar-padding-per-side: $calendar-padding-horizontal / 2;
 
-@each $length in $month-lengths {
+
+@for $length from 28 through 31 {
   .calendar--month-length-#{$length} {
     @for $i from ($length + 1) through 31 {
       .calendar__day:nth-child(#{$i}) {
@@ -37,10 +40,10 @@ body {
 
 .calendar {
   display: flex;
-  padding: $calendar-padding;
+  padding: $calendar-padding-per-side;
   gap: $day-gap;
   flex-wrap: wrap;
-  max-width: calc($day-size * 7 + $day-gap * 6);
+  max-width: calc($day-size * 7 + $day-gap * 6 + $calendar-padding-horizontal);
 
 }
 
