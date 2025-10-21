@@ -1,7 +1,9 @@
-$padding-size: 10px;
+$padding-side: 5px;
+$padding-total: 10px;
 $border-gap-size: 1px;
 $calendar-height: 100px;
 $calendar-width: 100px;
+$hover-lift: 20px;
 $days: (
   mon: 0,
   tue: 1,
@@ -27,10 +29,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $border-gap-size;
-  padding: $padding-size;
-  width: $calendar-width * 7 + $border-gap-size * 6 + $padding-size * 2;
+  padding: $padding-side;
+  width: $calendar-width * 7 + $border-gap-size * 6 + $padding-total;
   box-sizing: border-box;
-
 
   &__day {
     height: $calendar-height;
@@ -41,13 +42,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.5s, background-color 0.5s;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
   }
 
   &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
-    transform: translateY(-($padding-size * 2));
+    transform: translateY(-$hover-lift);
   }
 
   @for $i from 1 through 31 {
@@ -58,9 +61,10 @@ body {
 
   @each $day, $index in $days {
     &--start-day-#{$day} {
-
       & .calendar__day:first-child {
-        margin-left: calc((#{$calendar-width} + #{$border-gap-size}) * #{$index});
+        margin-left: calc(
+          (#{$calendar-width} + #{$border-gap-size}) * #{$index}
+        );
       }
     }
   }
@@ -73,4 +77,3 @@ body {
     }
   }
 }
-
