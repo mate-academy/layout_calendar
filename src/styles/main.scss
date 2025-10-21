@@ -8,6 +8,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -15,38 +16,39 @@ body {
 }
 
 .calendar {
+  margin-left: 10px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
+  width: $columns * $day-size + ($columns - 1) * $gap + $padding;
   gap: $gap;
-  padding: $padding;
 
   &__day {
     position: relative;
     height: $day-size;
     width: $day-size;
-    border: $border solid black;
+    border: $border solid $border-color;
     font-family: Arial, sans-serif;
-    background-color: #eee;
+    background-color: $day-bg;
     display: flex;
     justify-content: center;
     align-items: center;
     transition:
-      background-color 0.5s,
-      transform 0.5s;
+      background-color $transition-duration,
+      transform $transition-duration;
   }
 
   &__day:hover {
     background-color: $hover-color;
-    transform: translate(0, -20px);
+    transform: translate(0, -$hover-offset);
     cursor: pointer;
   }
 
   &__day::before {
     content: '';
     position: static;
-    font-size: 30px;
+    font-family: $number-font-family;
+    font-size: $number-font-size;
   }
 }
 
