@@ -1,4 +1,4 @@
-$pading-size: 10px;
+$padding-size: 10px;
 $border-gap-size: 1px;
 $calendar-height: 100px;
 $calendar-width: 100px;
@@ -27,8 +27,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $border-gap-size;
-  padding: $pading-size;
-  width: $calendar-height * 7 + $border-gap-size * 6 + $pading-size * 2;
+  padding: $padding-size;
+  width: $calendar-width * 7 + $border-gap-size * 6 + $padding-size * 2;
   box-sizing: border-box;
 
 
@@ -41,13 +41,13 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.5s, background-color 0.5s;
   }
 
   &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
-    transform: translateY(-($pading-size * 2));
-    transition-duration: 0.5s;
+    transform: translateY(-($padding-size * 2));
   }
 
   @for $i from 1 through 31 {
@@ -60,7 +60,7 @@ body {
     &--start-day-#{$day} {
 
       & .calendar__day:first-child {
-        margin-left: calc(101px * #{$index});
+        margin-left: calc((#{$calendar-width} + #{$border-gap-size}) * #{$index});
       }
     }
   }
