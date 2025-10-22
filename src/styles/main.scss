@@ -6,18 +6,18 @@
   gap: 1px;
   padding: 10px;
 
-  width: calc($day-size * 7 + 7);
+  width: calc($day-size * 7 + 6);
 
   @each $day in $start-day {
     $i: list.index($start-day, $day);
-    &__start-day--#{$day} .calendar__item:first-child {
+    &--start-day--#{$day} .calendar__item:first-child {
       margin-left: calc(($i - 1) * $day-size + $i - 1);
     }
   }
 
   @each $dayNum in $month-lenght {
     @for $i from 1 through $dayNum {
-      &__month-length--#{$dayNum}
+      &--month-length--#{$dayNum}
         .calendar__item:nth-child(#{$dayNum}n + #{$i})::before {
         content: '#{$i}';
         font-family: Arial, Helvetica, sans-serif;
@@ -33,11 +33,9 @@
       }
     }
 
-    @for $i from 31 to $dayNum {
-      &__month-length--#{$dayNum}
-        .calendar__item:nth-child(#{$dayNum}n + #{$i}) {
-        display: none;
-      }
+    &--month-length--#{$dayNum}
+      .calendar__item:nth-child(n + #{$dayNum + 1}) {
+      display: none;
     }
   }
 
