@@ -1,3 +1,5 @@
+@use 'sass:list';
+
 .calendar {
   display: flex;
   flex-wrap: wrap;
@@ -7,7 +9,7 @@
   width: calc($day-size * 7 + 7);
 
   @each $day in $start-day {
-    $i: index($start-day, $day);
+    $i: list.index($start-day, $day);
     &__start-day--#{$day} .calendar__item:first-child {
       margin-left: calc(($i - 1) * $day-size + $i - 1);
     }
