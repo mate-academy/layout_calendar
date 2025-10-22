@@ -1,3 +1,5 @@
+// src/styles/main.scss
+
 // Variables
 $day-size: 100px;
 $day-border: 1px solid #000;
@@ -23,7 +25,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
 }
 
 // Calendar block
@@ -35,9 +36,6 @@ body {
   /* prettier-ignore */
   width: calc(#{$columns-count} * #{$day-size} + (#{$columns-count} - 1) * #{$gap-size} + 2 * #{$padding-size});
   padding: $padding-size;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
   // Calendar day element
   &__day {
@@ -45,6 +43,9 @@ body {
     height: $day-size;
     background-color: $day-bg-color;
     border: $day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     transition: all $animation-duration ease;
 
@@ -52,16 +53,12 @@ body {
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         font-family: $font-family;
         font-size: $font-size;
       }
     }
 
-    // Hover effects
+    // Hover effects - використовуємо transform для ефекту підйому
     &:hover {
       background-color: $day-hover-color;
       cursor: pointer;
