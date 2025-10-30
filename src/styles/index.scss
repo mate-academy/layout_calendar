@@ -24,15 +24,15 @@ body {
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, $cell-size);
-  grid-auto-rows: $cell-size;
-  gap: $gap;
+  display: flex;
+  flex-wrap: wrap;
   width: calc(($cell-size + $gap) * 7 + $calendar-padding * 2);
   padding: $calendar-padding;
   box-sizing: border-box;
 
   &__day {
+    width: $cell-size;
+    height: $cell-size;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,13 +40,21 @@ body {
     border: 1px solid #000;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    transition: all 0.3s ease;
+    margin: 0 $gap $gap 0;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
   }
 
-  // Магія з’їзду: 1 потрапляє в правильну колонку
+  // Відступ першого дня місяця за допомогою margin-left
   @each $day, $dayNumber in $days {
     &--start-day-#{$day} .calendar__day:first-child {
-      grid-column-start: $dayNumber;
+      margin-left: ($cell-size + $gap) * ($dayNumber - 1);
     }
   }
 
@@ -62,11 +70,5 @@ body {
     &--month-length-#{$n} .calendar__day:nth-child(n + #{$n + 1}) {
       display: none;
     }
-  }
-
-  &__day:hover {
-    cursor: pointer;
-    background-color: #ffbfcb;
-    transform: translateY(-8px);
   }
 }
