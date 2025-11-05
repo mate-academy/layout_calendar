@@ -2,13 +2,13 @@
 
 .calendar {
   $days-map: (
-    sun: 0,
-    mon: 1,
-    tue: 2,
-    wed: 3,
-    thu: 4,
-    fri: 5,
-    sat: 6,
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
   );
 
   display: flex;
@@ -50,7 +50,7 @@
 
     background: vars.$color-day-bg;
 
-    transition: all 0.5s ease;
+    transition: all 0.5s;
 
     &::before {
       content: '';
@@ -61,8 +61,6 @@
 
       font-family: Arial, sans-serif;
       font-size: 30px;
-      font-weight: bold;
-      color: vars.$color-text;
     }
 
     &:hover {
@@ -72,13 +70,13 @@
   }
 
   @for $i from 1 through 31 {
-    &__day:nth-child(#{$i + 7})::before {
+    &__day:nth-child(#{$i})::before {
       content: '#{$i}';
     }
   }
 
   @each $day, $index in $days-map {
-    &--start-day_#{$day} {
+    &--start-day-#{$day} {
       & > .calendar__day:first-of-type {
         margin-left: $index * (vars.$day-size + vars.$gap);
       }
@@ -86,8 +84,8 @@
   }
 
   @for $len from 28 through 31 {
-    &--month-length_#{$len} {
-      & > .calendar__day:nth-child(n + #{$len + 8}) {
+    &--month-length-#{$len} {
+      & > .calendar__day:nth-child(n + #{$len + 1}) {
         display: none;
       }
     }
