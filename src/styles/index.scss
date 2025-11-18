@@ -67,18 +67,24 @@ body {
     cursor: pointer;
     background-color: $day-bg;
     border: 1px solid #000;
-  }
+    position: relative;
 
-  &:hover {
-    transform: translateY(-$hover-shift);
-    background-color: $day-hover;
-    transition: transform 500ms;
-  }
+    &:hover {
+      transform: translateY(-$hover-shift);
+      background-color: $day-hover;
+      transition: transform 500ms;
+    }
 
-  @for $i from 1 through 31 {
-    &:nth-child(#{$i})::before {
-      content: '#{$i}';
-      font-size: 30px;
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-size: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #333;
+      }
     }
   }
 }
