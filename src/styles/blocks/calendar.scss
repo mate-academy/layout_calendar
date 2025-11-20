@@ -1,0 +1,49 @@
+@use '../utils/variables.scss' as v;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: v.$padding;
+  gap: v.$gap;
+  width: (7 * v.$cell-size) + (6 * v.$gap);
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    height: v.$cell-size;
+    width: v.$cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $name, $column in v.$days {
+    &--start-day-#{$name} .calendar__day:first-child {
+      margin-left: ($column - 1) * (v.$cell-size + v.$gap);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    $startHide: $length + 1;
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$startHide}) {
+      display: none;
+    }
+  }
+}
