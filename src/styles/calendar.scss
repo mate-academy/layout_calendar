@@ -14,62 +14,63 @@
       left: 50%;
       transform: translate(-50%, -50%);
       display: inline-block;
-      transition: transform 500ms linear;
     }
   }
+}
 
-  @function cell-width-with-gap() {
-    $single-cell-width: (100% - (6 * $cellGap)) / 7;
+@function cell-width-with-gap() {
+  $single-cell-width: (100% - (6 * $cellGap)) / 7;
 
-    @return $single-cell-width + 1px;
-  }
+  @return $single-cell-width + 1px;
+}
 
-  @each $day-name, $position in $day-positions {
-    .calendar--start-day-#{$day-name} {
-      $cells-to-skip: $position - 1;
+@each $day-name, $position in $day-positions {
+  .calendar--start-day-#{$day-name} {
+    $cells-to-skip: $position - 1;
 
-      @if $cells-to-skip > 0 {
-        .calendar__cell-1 {
-          margin-left: calc(#{cell-width-with-gap()} * #{$cells-to-skip});
-        }
+    @if $cells-to-skip > 0 {
+      .calendar__cell:nth-child(-n + 1) {
+        margin-left: calc(#{cell-width-with-gap()} * #{$cells-to-skip});
       }
     }
   }
-  .calendar--start-day-sun .calendar__cell-1 {
-    margin-left: 0;
-  }
+}
 
-  @each $length in $month-lengths {
-    @if $length < $total-cells {
-      $start-hide: $length + 1;
+@each $length in $month-lengths {
+  @if $length < $totalDays {
+    $start-hide: $length + 1;
 
-      .calendar--month-length-#{$length} {
-        & > .calendar__cell:nth-child(n + #{$start-hide}) {
-          display: none;
-        }
+    .calendar--month-length-#{$length} {
+      & > .calendar__cell:nth-child(n + #{$start-hide}) {
+        display: none;
       }
     }
   }
-  .calendar {
+}
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: $cellGap;
+  &__cell {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: $cellGap;
-    &__cell {
-      display: flex;
-      box-sizing: border-box;
-      border: 1px solid #000;
-      color: #eee;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: #eee;
+    transition: transform 500ms linear;
 
-      width: calc((100% - (6 * $cellGap)) / 7);
-      height: 100px;
-      &:hover {
-        cursor: pointer;
-        background-color: #ffbfcb;
-        transform: translateY(-20px);
-      }
+    width: 100px;
+    height: 100px;
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
     }
+  }
+  &--start-day-sun &__cell:nth-child(-n + 1) {
+    margin-left: 0;
   }
 }
