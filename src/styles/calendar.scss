@@ -1,7 +1,7 @@
 @import 'vars';
 
 @for $day from 1 through $totalDays {
-  .calendar__cell-#{$day} {
+  .calendar__cell:nth-child(#{$day}) {
     position: relative;
     &::before {
       content: '#{$day}';
@@ -19,7 +19,7 @@
 }
 
 @function cell-width-with-gap() {
-  $single-cell-width: (100% - (6 * $cellGap)) / 7;
+  $single-cell-width: $cellWidth + $cellGap;
 
   @return $single-cell-width + 1px;
 }
@@ -55,15 +55,16 @@
   flex-wrap: wrap;
   padding: 10px;
   gap: $cellGap;
+  width: 706px;
   &__cell {
     display: flex;
     box-sizing: border-box;
     border: 1px solid #000;
     background-color: #eee;
-    transition: transform 500ms linear;
+    transition: all 500ms linear;
 
-    width: 100px;
-    height: 100px;
+    width: $cellWidth;
+    height: $cellHeigth;
     &:hover {
       cursor: pointer;
       background-color: #ffbfcb;
