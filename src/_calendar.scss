@@ -1,0 +1,65 @@
+/* Centralizar completamente */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* BLOCO */
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  width: calc(7 * $cell-size + 6 * $gap);
+
+  counter-reset: day; // reseta contador dos dias
+}
+
+/* ELEMENTO */
+.calendar__day {
+  width: $cell-size;
+  height: $cell-size;
+
+  background: $grey;
+  border: $border solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: $font;
+  font-size: $font-size;
+
+  cursor: pointer;
+
+  transition: 0.5s;
+
+  /* NUMERAÇÃO AUTOMÁTICA */
+  &::before {
+    counter-increment: day;
+    content: counter(day);
+  }
+
+  /* HOVER */
+  &:hover {
+    background: $pink;
+    transform: translateY(-20px);
+  }
+}
+
+/* Começar o mês na coluna correta */
+@each $day, $offset in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc($offset * ($cell-size + $gap));
+  }
+}
+
+/* Tamanho do mês: 28 | 29 | 30 | 31 */
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
