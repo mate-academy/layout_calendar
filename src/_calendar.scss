@@ -1,19 +1,10 @@
-/* Centralizar completamente */
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 /* BLOCO */
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-
   width: calc(7 * $cell-size + 6 * $gap);
+  padding: 0 10px;
 
   counter-reset: day; // reseta contador dos dias
 }
@@ -22,6 +13,7 @@ body {
 .calendar__day {
   width: $cell-size;
   height: $cell-size;
+  box-sizing: border-box;
 
   background: $grey;
   border: $border solid black;
@@ -34,7 +26,6 @@ body {
   font-size: $font-size;
 
   cursor: pointer;
-
   transition: 0.5s;
 
   /* NUMERAÇÃO AUTOMÁTICA */
