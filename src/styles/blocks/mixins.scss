@@ -1,0 +1,21 @@
+@each $name, $order in $days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: calc(#{$order - 1} * (#{$slot-size} + #{$gap}));
+  }
+}
+
+@each $name, $order in $days {
+  @for $i from 1 through 31 {
+    .calendar--start-day-#{$name} .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      color: black;
+    }
+  }
+}
+
+@for $amount from 28 through 31 {
+  .calendar--month-length-#{$amount}
+    .calendar__day:nth-child(n + #{$amount + 1}) {
+    display: none;
+  }
+}
