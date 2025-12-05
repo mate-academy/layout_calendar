@@ -1,0 +1,94 @@
+$calendar-cell-width: 100px;
+$calendar-cell-height: 100px;
+$calendar-cell-border-width: 1px;
+$calendar-cell-gap: 1px;
+$days:
+  mon 0,
+  tue 1,
+  wed 2,
+  thu 3,
+  fri 4,
+  sat 5,
+  sun 6;
+
+// nothing was said about removing margins on body.
+// a lot of instructions were really bad.
+.page {
+  &__body {
+    margin: 0;
+  }
+}
+
+.centering-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+
+  &__target {
+    margin: 0;
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-cell-gap;
+
+  width: ($calendar-cell-width + 2 * $calendar-cell-border-width) * 7 + $calendar-cell-gap * 6;
+  padding: 10px;
+
+  list-style: none;
+
+  &-- {
+    // "all the modifiers" section; good?
+    &month-length {
+      @for $length from 28 through 31 {
+        &-#{$length} {
+          & > :nth-child(n + #{$length + 1}) {
+            // is the application of maths good?
+            display: none;
+          }
+        }
+      }
+    }
+
+    &start-day {
+      @each $day, $number in $days {
+        &-#{$day} {
+          & > :first-child {
+            // is the choice of selectors good?
+            margin-left: $number * ($calendar-cell-width + ($calendar-cell-border-width * 2) + $calendar-cell-gap);
+          }
+        }
+      }
+    }
+  }
+
+  &__day {
+    width: $calendar-cell-width;
+    height: $calendar-cell-height;
+    border: $calendar-cell-border-width solid black;
+
+    line-height: $calendar-cell-height;
+    text-align: center;
+
+    background-color: #eee;
+
+    @for $cell-number from 1 through 31 {
+      &:nth-child(#{$cell-number}):before {
+        content: '#{$cell-number}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    transition-duration: 0.5s;
+    transition-property: background-color, transform;
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+  }
+}
