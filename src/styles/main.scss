@@ -1,0 +1,89 @@
+// =====================
+// Variables
+// =====================
+$day-size: 100px;
+$border-size: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$day-bg: #eee;
+$hover-bg: #FFBFCB;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+
+// =====================
+// Reset + Layout
+// =====================
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// =====================
+// Calendar Block
+// =====================
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: ($day-size + $border-size * 2) * $columns + $gap * ($columns - 1) + $padding * 2;
+
+  &__day {
+    position: relative;
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $border-size solid black;
+    transition: background-color 0.5s, transform 0.5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: $hover-bg;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      content: "";
+      font-family: $font-family;
+      font-size: $font-size;
+      color: black;
+      position: absolute;
+    }
+  }
+
+  // Numbering Days 1-31
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Month length modifier (hide extra days)
+  @for $len from 28 through 30 {
+    &--month-length-#{$len} &__day:nth-child(n+#{$len + 1}) {
+      display: none;
+    }
+  }
+
+  // Start-day modifier (margin-left on the 1st day)
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+    &--start-#{$day} &__day:nth-child(1) {
+      margin-left: ($day-size + $border-size * 2 + $gap) * $index;
+    }
+  }
+}
