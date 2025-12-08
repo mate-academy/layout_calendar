@@ -1,0 +1,17 @@
+@for $i from 1 through $month-length {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $name, $index in $days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: mal($index);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
