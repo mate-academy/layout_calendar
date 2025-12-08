@@ -1,0 +1,113 @@
+.calendar {
+  $calendar-width: ($day-size * $columns) + $gap-size * ($columns - 1);
+  width: $calendar-width;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    border: $border-size solid #000;
+    position: relative;
+    cursor: pointer;
+
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: $text-size;
+      }
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-$hover-lift);
+    }
+  }
+
+  $day-list: (
+    sun: 0,
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+  );
+  $days-map: (
+    sun: 0,
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+  );
+
+  @each $day, $index in $days-map {
+    &--start-day-#{$day} &__day:first-child {
+      $skip-width: ($day-size + $gap-size);
+
+      $offset: $index;
+
+      @if $day == sun {
+        $offset: 0;
+      }
+      @if $day == mon {
+        $offset: 1;
+      }
+      @if $day == tue {
+        $offset: 2;
+      }
+      @if $day == wed {
+        $offset: 3;
+      }
+      @if $day == thu {
+        $offset: 4;
+      }
+      @if $day == fri {
+        $offset: 5;
+      }
+      @if $day == sat {
+        $offset: 6;
+      }
+
+      $margin-multiplier: 0;
+      @if $day == mon {
+        $margin-multiplier: 0;
+      } @else if $day == tue {
+        $margin-multiplier: 1;
+      } @else if $day == wed {
+        $margin-multiplier: 2;
+      } @else if $day == thu {
+        $margin-multiplier: 3;
+      } @else if $day == fri {
+        $margin-multiplier: 4;
+      } @else if $day == sat {
+        $margin-multiplier: 5;
+      } @else if $day == sun {
+        $margin-multiplier: 6;
+      }
+
+      margin-left: $margin-multiplier * ($day-size + $gap-size);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
