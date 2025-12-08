@@ -6,7 +6,7 @@ $columns: 7;
 $main-background: #eee;
 $hover-background: #ffbfcb;
 $calc-width: calc($columns * $day-size + ($columns - 1) * $gap + 2 * $padding);
-$day-in-weak: (
+$day-in-week: (
   mon: 0,
   tue: 1,
   wed: 2,
@@ -31,7 +31,6 @@ body {
   gap: $gap;
 
   width: $calc-width;
-  margin-left: 20px;
   padding: $padding;
 
   &__day {
@@ -76,7 +75,7 @@ body {
   }
 }
 
-@each $day, $index in $day-in-weak {
+@each $day, $index in $day-in-week {
   .calendar--start-day-#{$day} .calendar__day:first-child {
     margin-left: calc(($day-size + $gap) * #{$index});
   }
