@@ -6,7 +6,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
 - Create a markup for the calendar block with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
-  - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
+  (https://sass-lang.com/documentation/at-rules/control/for)
 - Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
   - Don't use hardcoded `px` values if they are used several times
   - Use properly named variables to make all the calculations more clear.
@@ -20,6 +20,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - Set 31 days by default in your HTML
 
 On hovering over a cell:
+
 - cursor should become pointer
 - The hovered cell has to become pink (use `#FFBFCB`)
 - Move the hovered cell up by `20px` (use `transform`)
@@ -27,7 +28,7 @@ On hovering over a cell:
 
 > Here are the [Layout Tasks Instructions](https://mate-academy.github.io/layout_task-guideline)
 
-*Important note*: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
+_Important note_: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
 This is possible because [we use the Parcel library](https://en.parceljs.org/scss.html) to bundle your solution's source code.
 
 ![reference image](reference.png).
@@ -36,13 +37,13 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://Kanezoor.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Kanezoor.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
 - [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
-reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
+      reflects in changing calendar layout
+- [ ] Each day has no modifiers, only class (eg. calendar\_\_day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
