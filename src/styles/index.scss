@@ -1,3 +1,86 @@
+// 🔧 Variáveis
+$cell-size: 100px;
+$border-size: 1px;
+$cell-gap: 1px;
+$cell-total: $cell-size + (2 * $border-size);
+$columns: 7;
+$calendar-padding: 10px;
+$hover-color: #ffbfcb;
+$bg-color: #eee;
+$font-family: Arial, sans-serif;
+$font-size: 31px;
+
+// 🔄 Centralizar o calendário
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 📅 Calendário
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  width: calc(($cell-total * $columns) + $calendar-padding * 2);
+  padding: $calendar-padding;
+  box-sizing: border-box;
+  position: relative;
+}
+
+// 🔢 Células do calendário
+.calendar__day {
+  background-color: $bg-color;
+  border: $border-size solid black;
+  width: $cell-size;
+  height: $cell-size;
+  font-family: $font-family;
+  font-size: $font-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  cursor: default;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-color;
+    transform: translateY(-20px);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// 🔄 Gerar os dias via ::before
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// 🌐 Modificadores de dia inicial
+@each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(($cell-total + $cell-gap) * $index);
+  }
+}
+
+// 📅 Modificadores de quantidade de dias
+@for $length from 28 through 30 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
 }
