@@ -1,0 +1,28 @@
+@import 'variables';
+@import 'calendar';
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+$start-days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+@each $name, $shift in $start-days {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: ($cell-full + $gap) * ($shift);
+    }
+  }
+}
+
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} {
+    .calendar__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+}
