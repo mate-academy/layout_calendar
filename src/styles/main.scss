@@ -1,0 +1,79 @@
+@import 'variables';
+
+@for $i from 1 through 42 {
+  .calendar__day:nth-child(#{$i}) {
+    &::before {
+      content: '#{$i}';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
+$start-days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+@each $day, $index in $start-days {
+  .calendar--start-day-#{$day} {
+    // Застосовуємо grid-column-start до ПЕРШОГО елемента
+    .calendar__day:nth-child(1) {
+      grid-column-start: $index;
+    }
+  }
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat($days-in-week, $day-size);
+  gap: $gap-size;
+  padding: $padding;
+
+  &__day {
+    background-color: $gray;
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: 1px solid black;
+    position: relative;
+    transition: transform 0.5s ease-in-out;
+    transition:
+      background-color 0.5s,
+      transform 0.5s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $pink;
+      transform: translateY(-20px);
+
+      // pointer-events: none;
+    }
+  }
+}
