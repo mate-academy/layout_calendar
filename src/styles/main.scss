@@ -1,6 +1,9 @@
 @import './utils/variables';
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
 }
 
@@ -20,9 +23,9 @@ body {
     border: solid 1px #000;
     height: $cell-size;
     width: $cell-size;
-    font-style: Arial, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 30px;
-    transition: transform 500ms;
+    transition: transform all 0.5s;
 
     &:hover {
       cursor: pointer;
@@ -48,10 +51,8 @@ body {
 
 @for $n from 28 through 31 {
   .calendar--month-length-#{$n} {
-    @for $i from ($n + 1) through 31 {
-      .calendar__day:nth-child(n + #{$n + 1}) {
-        display: none;
-      }
+    .calendar__day:nth-child(n + #{$n + 1}) {
+      display: none;
     }
   }
 }
