@@ -1,0 +1,92 @@
+@use './variables' as vars;
+
+.calendar {
+  $days-map: (
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$gap;
+
+  width: vars.$calendar-width;
+  padding: vars.$padding;
+
+  background: vars.$color-bg;
+
+  margin: 0 auto;
+
+  &__weekday {
+    width: vars.$day-size;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+    text-align: center;
+    color: #444;
+  }
+
+  &__day {
+    cursor: pointer;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: vars.$day-size;
+    height: vars.$day-size;
+    border: vars.$border solid vars.$color-border;
+
+    background-color: vars.$color-day-bg;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      transition: all 0.5s;
+      background-color: vars.$color-hover;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $index in $days-map {
+    &--start-day-#{$day} {
+      & > .calendar__day:first-of-type {
+        margin-left: $index * (vars.$day-size + vars.$gap);
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      & > .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+}
