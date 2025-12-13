@@ -1,9 +1,10 @@
 $blocks-size: 100px;
 $blocks-padding: 10px;
-$line-height: $blocks-size - $blocks-padding * 2;
+$border: 1px;
+$line-height: $blocks-size - $blocks-padding * 2 - $border * 2;
 $gap-between-blocks: 1px;
 $cols: 7;
-$calendar-width: $blocks-size * $cols + $gap-between-blocks * $cols;
+$calendar-width: $blocks-size * $cols + $gap-between-blocks * ($cols - 1) + $blocks-padding * 2;
 $step: $blocks-size + $gap-between-blocks;
 $day-of-week: (
   mon: 0,
@@ -19,6 +20,7 @@ body {
   display: flex;
   place-content: center center;
   margin: 0;
+  min-height: 100vh;
 }
 
 .calendar {
@@ -33,7 +35,7 @@ body {
   width: $blocks-size;
   height: $blocks-size;
   padding: $blocks-padding;
-  border: 1px solid black;
+  border: $border solid black;
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
@@ -42,6 +44,8 @@ body {
   text-align: center;
 
   background-color: #eee;
+
+  transition: all 0.5s;
 }
 
 @for $i from 1 through 31 {
@@ -60,7 +64,7 @@ body {
 
 @for $month-length from 28 through 31 {
   .calendar--month-length-#{$month-length} {
-    .calendar__block:nth-child(n + #{$month-length}) {
+    .calendar__block:nth-child(n + (#{$month-length} + 1)) {
       display: none;
     }
   }
@@ -69,6 +73,5 @@ body {
 .calendar__block:hover {
   cursor: pointer;
   background-color: #ffbfcb;
-  transition: transform 0.5s;
   transform: translateY(-20px);
 }
