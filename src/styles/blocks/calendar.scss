@@ -1,5 +1,5 @@
 .calendar {
-  width: 706px;
+  width: $calendar-size;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
@@ -18,15 +18,18 @@
     position: relative;
     display: flex;
     box-sizing: border-box;
+    font-size: $font-size;
+    font-weight: 400;
 
     &::before {
       font-size: $font-size;
+      font-weight: 400;
       position: absolute;
     }
 
     &:hover {
       background-color: $color-cell-hover-background;
-      transform: translateY(-10px);
+      transform: translateY(-20px);
       transition: 0.5s;
       content: '';
     }
@@ -34,6 +37,7 @@
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
         content: '#{$i}';
+        font-size: 30px;
       }
     }
   }
