@@ -44,32 +44,31 @@ body {
   background-color: #eee;
 }
 
- @for $i from 1 through 31 {
+@for $i from 1 through 31 {
   .calendar__block:nth-child(#{$i})::before {
-    content: "#{$i}";
+    content: '#{$i}';
   }
- }
+}
 
- @each $name, $index in $day-of-week {
+@each $name, $index in $day-of-week {
   .calendar--start-day-#{$name} {
     .calendar__block:nth-child(1) {
-    margin-left: $index * $step;
+      margin-left: $index * $step;
     }
   }
- }
+}
 
- @for $month-length from 28 through 31 {
+@for $month-length from 28 through 31 {
   .calendar--month-length-#{$month-length} {
     .calendar__block:nth-child(n + #{$month-length}) {
       display: none;
     }
   }
- }
+}
 
- .calendar__block:hover {
+.calendar__block:hover {
   cursor: pointer;
-  background-color: #FFBFCB;
+  background-color: #ffbfcb;
   transition: transform 0.5s;
   transform: translateY(-20px);
- }
-
+}
