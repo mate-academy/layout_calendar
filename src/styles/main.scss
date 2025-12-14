@@ -1,0 +1,114 @@
+// Calendar styles (BEM) for layout task
+// Variables
+$day-size: 100px; // includes 1px border when using box-sizing
+$day-border: 1px;
+$day-bg: #eee;
+$day-hover-bg: #ffbfcb;
+$day-font: Arial, sans-serif;
+$day-font-size: 30px;
+$gap: 1px;
+$padding: 10px; // horizontal padding for calendar container
+$transition: 0.5s;
+
+// Calculated calendar width: 7 columns + 6 gaps + 2 paddings
+$calendar-width: 7 * $day-size + 6 * $gap + 2 * $padding;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $day-font;
+}
+
+.calendar-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Block: calendar
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendar-width;
+  background: transparent;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background: $day-bg;
+  border: $day-border solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition:
+    transform $transition,
+    background $transition;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.calendar__day::before {
+  content: '';
+  font-family: $day-font;
+  font-size: $day-font-size;
+  line-height: 1;
+  color: #000;
+}
+
+// Numbers: create content for each day using @for
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Hover state
+.calendar__day:hover {
+  background: $day-hover-bg;
+  transform: translateY(-20px);
+  z-index: 2;
+}
+
+// Start-day modifiers mapping columns: mon=1, tue=2, wed=3, thu=4, fri=5, sat=6, sun=7
+// This makes Monday the first column and Sunday the last column.
+$start-days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+@each $name, $index in $start-days {
+  .calendar--start-day-#{$name} {
+    // shift the first day to proper column by adding left margin
+    .calendar__day:nth-child(1) {
+      margin-left: ($day-size + $gap) * ($index - 1);
+    }
+  }
+}
+
+// Month-length modifiers: hide days after the last one
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} {
+    .calendar__day:nth-child(n + #{ $len + 1 }) {
+      display: none;
+    }
+  }
+}
