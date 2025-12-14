@@ -1,0 +1,96 @@
+/* #region variables */
+
+$gap-size: 1px;
+$cell-size: 100px;
+$hovered-cell-color: #ffbfcb;
+$hover-shift: 20px;
+$border-size: 1px;
+$day-font-size: 30px;
+$duration: 0.5s;
+$calendar-paddings: 5px;
+$calendar-width: ($cell-size * 7) + ($gap-size * 7) + ($calendar-paddings * 2);
+
+/*
+$calendar-height: (
+  ($cell-size * 6) + ($gap-size * 7) + ($calendar-paddings * 32.5)
+);
+
+*/
+
+/* #endregion */
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.place {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $calendar-width;
+
+  // height: $calendar-height;
+}
+
+.calendar {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: $gap-size $gap-size;
+  flex-wrap: wrap;
+  width: $cell-size * 7 + $gap-size * 7;
+
+  $start-days: (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6),
+    (sun, 7);
+
+  @each $start-day, $num-day in $start-days {
+    &--start-day-#{$start-day} {
+      .calendar__day:nth-child(1) {
+        margin-left: (
+          ($cell-size * ($num-day - 1)) + ($gap-size * ($num-day - 1))
+        );
+      }
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} {
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: $border-size solid #000;
+
+    @for $day-count from 1 through 31 {
+      &:nth-child(#{$day-count})::before {
+        content: '#{$day-count}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $day-font-size;
+        padding-left: $border-size;
+      }
+    }
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $hovered-cell-color;
+    transform: translateY(-$hover-shift);
+    transition:
+      background-color $duration,
+      transform $duration;
+  }
+}
