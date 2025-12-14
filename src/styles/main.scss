@@ -1,0 +1,126 @@
+@use 'sass:color';
+
+$day-total-size: 100px;
+$day-border-width: 1px;
+$spacing: 1px;
+$total-column-width: $day-total-size + $spacing; // 101px
+$day-count: 31;
+$color-bg-default: #eee;
+$color-border: #000;
+$color-bg-hover: #ffbfcb;
+$transition-duration: 0.5s;
+
+@mixin center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.calendar {
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  &__day-name {
+    width: $day-total-size;
+    text-align: center;
+  }
+
+  &__days {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: calc(7 * #{$day-total-size} + 6 * #{$spacing});
+  }
+
+  &__day {
+    width: $day-total-size - (2 * $day-border-width);
+    height: $day-total-size - (2 * $day-border-width);
+    border: $day-border-width solid $color-border;
+    background-color: $color-bg-default;
+    margin-right: $spacing;
+    margin-bottom: $spacing;
+    position: relative;
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration,
+      margin-bottom $transition-duration;
+
+    &:nth-child(7n) {
+      margin-right: 0;
+    }
+
+    @for $i from 1 through $day-count {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &::before {
+      @include center-absolute;
+
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      color: #333;
+      transition: color $transition-duration;
+    }
+
+    &:hover {
+      background-color: $color-bg-hover;
+
+      transform: translateY(-20px);
+      margin-bottom: $spacing + 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+      &::before {
+        color: color.adjust($color-border, $lightness: -10%);
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length--#{$len} &__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+
+  $start-days: (
+    sun: 0,
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+  );
+
+  @each $day, $offset in $start-days {
+    &--start-day--#{$day} &__day:first-child {
+      @if $offset > 0 {
+        margin-left: calc(#{$offset} * #{$total-column-width});
+      }
+    }
+  }
+}
