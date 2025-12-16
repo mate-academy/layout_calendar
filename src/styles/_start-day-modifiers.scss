@@ -1,0 +1,18 @@
+$days:
+  sun 1,
+  mon 2,
+  tue 3,
+  wed 4,
+  thu 5,
+  fri 6,
+  sat 7;
+
+@each $name, $col in $days {
+  .calendar--start-day-#{$name} {
+    .calendar__day:nth-child(1) {
+      margin-left: calc(
+        (#{$col - 1}) * (#{$day-size} + 2 * #{$day-border} + #{$gap})
+      );
+    }
+  }
+}
