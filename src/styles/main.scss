@@ -1,0 +1,77 @@
+@import 'variables';
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  font-family: $calendar-font-family;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: 0 $calendar-padding-x;
+  width: calc(
+    #{$calendar-columns} * #{$calendar-day-size} + (#{$calendar-columns} - 1) *
+      #{$calendar-gap} + #{$calendar-padding-x}
+  );
+
+  &__day {
+    position: relative;
+    width: $calendar-day-size;
+    height: $calendar-day-size;
+    background-color: $calendar-bg-color;
+    border: $calendar-border-width solid $calendar-border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: default;
+    transition:
+      background-color $calendar-animation-time,
+      transform $calendar-animation-time;
+
+    &::before {
+      content: '';
+      font-size: $calendar-font-size;
+      color: black;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: $calendar-hover-bg;
+      cursor: pointer;
+      transform: translateY(-$calendar-hover-lift);
+      z-index: 2;
+    }
+  }
+
+  // Сдвигаем первый день под нужный день недели по модификатору
+  @each $day, $index in $days {
+    &--start-day-#{$day} > &__day:first-child {
+      margin-left: calc(($calendar-day-size + $calendar-gap) * #{$index});
+    }
+  }
+}
+
+// Добавляем номера дней 1..31
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Скрываем дни, превышающие длину месяца
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} .calendar__day:nth-child(n + #{$len + 1}) {
+    display: none;
+  }
+}
