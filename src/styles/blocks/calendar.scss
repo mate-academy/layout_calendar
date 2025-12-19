@@ -6,7 +6,7 @@
   flex-flow: row wrap;
   gap: $dayGap;
   padding: $calPadding;
-  width: 7 * $daySize + 6 * $dayGap + 2 * $calPadding;
+  width: $daysInWeek * $daySize + ($daysInWeek - 1) * $dayGap + 2 * $calPadding;
 
   &__day {
     box-sizing: border-box;
@@ -39,7 +39,7 @@
   @each $day, $num in $weekDays {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: $daySize * ($num - 1) + $dayGap * ($num - 1);
+        margin-left: ($daySize + $dayGap) * ($num - 1);
       }
     }
   }
