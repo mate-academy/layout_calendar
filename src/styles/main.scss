@@ -1,0 +1,105 @@
+// --------------------
+// 🔹 Zmienne
+// --------------------
+$day-size: 100px; // Rozmiar komórki dnia
+$gap: 1px; // Odstęp między komórkami
+$padding: 10px; // Padding wokół kalendarza
+$columns: 7; // Liczba kolumn
+
+// Szerokość siatki = (7 * $day-size) + (($columns - 1) * $gap)
+$grid-width: ($columns * $day-size) + (($columns - 1) * $gap);
+$calendar-width: $grid-width + (2 * $padding);
+
+// --------------------
+// 🔹 Globalne style
+// --------------------
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+// --------------------
+// 🔹 Kalendarz
+// --------------------
+.calendar {
+  width: $calendar-width;
+  padding: $padding;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  // ------------------
+  // 🔹 Główna siatka dni (1–31)
+  // ------------------
+  &__grid {
+    width: $grid-width;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: $gap;
+  }
+
+  // ------------------
+  // 🔹 Pojedynczy dzień
+  // ------------------
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  // ------------------
+  // 🔹 Numeracja dni (1-31)
+  // ------------------
+  @for $i from 1 through 31 {
+    &__grid .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // ------------------
+  // 🔹 Długość miesiąca (modyfikator `month-length`)
+  // ------------------
+  // 📌 Mniej specyficzne selektory umieszczone wcześniej!
+  &--month-length-31 .calendar__grid .calendar__day {
+    display: flex; // Pokazuje wszystkie 31 dni
+  }
+  &--month-length-30 .calendar__grid .calendar__day:nth-child(n + 31) {
+    display: none; // Ukrywa dzień 31
+  }
+  &--month-length-29 .calendar__grid .calendar__day:nth-child(n + 30) {
+    display: none; // Ukrywa dni od 30 wzwyż
+  }
+  &--month-length-28 .calendar__grid .calendar__day:nth-child(n + 29) {
+    display: none; // Ukrywa dni od 29 wzwyż
+  }
+
+  // ------------------
+  // 🔹 Start miesiąca (modyfikator `start-day`)
+  // ------------------
+  &--start-day-sun .calendar__grid .calendar__day:first-child {
+    grid-column: 7; // Przesuwa dzień 1 na niedzielę
+  }
+}
