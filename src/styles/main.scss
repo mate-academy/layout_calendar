@@ -6,46 +6,41 @@ $font-family: Arial, sans-serif;
 $color-bg-day: #eee;
 $color-hover: #ffbfcb;
 
-html {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  margin: 0;
   background-color: #f5f5f5;
+  font-family: Roboto, sans-serif;
 }
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  padding: $padding;
-
   width: ($day-size * 7) + ($gap * 6) + ($padding * 2);
+  padding: $padding;
   box-sizing: border-box;
 
   &__day {
-    position: relative;
-    width: $day-size;
-    height: $day-size;
-    background-color: $color-bg-day;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: $font-family;
-    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
     border: $border-width solid #000;
+    box-sizing: border-box;
+    background-color: $color-bg-day;
+    font-family: $font-family;
     transition: all 0.5s;
 
     &:hover {
-      cursor: pointer;
+      z-index: 10;
       background-color: $color-hover;
       transform: translateY(-20px);
-      z-index: 10;
+      cursor: pointer;
     }
   }
 
