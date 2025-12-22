@@ -1,3 +1,64 @@
-body {
+@use 'variables';
+
+*,
+*::before {
+  box-sizing: border-box;
   margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: variables.$gap;
+  padding: variables.$padding;
+  max-width: variables.$calendar-width;
+
+  &__day {
+    box-sizing: border-box;
+    height: variables.$day-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: variables.$day-color;
+    width: variables.$day-size;
+    border: variables.$border-width solid variables.$border-color;
+
+    cursor: pointer;
+    transition: all variables.$animation-duration;
+
+    &:hover {
+      background-color: variables.$hover-color;
+      transform: translateY(variables.$hover-offset);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: variables.$font-size;
+    line-height: 1;
+  }
+}
+
+@each $day, $offset in variables.$weekdays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $offset * (variables.$day-size + variables.$gap);
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
 }
