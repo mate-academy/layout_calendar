@@ -1,0 +1,28 @@
+@use '../utils/variables' as *;
+
+.day {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $day-block-size;
+  width: $day-block-size;
+  font-size: $day-block-font-size;
+  background-color: $day-block-background-color;
+  border: $day-block-border-size solid #000;
+
+  transition-property: transform, background-color;
+  transition-duration: 0.5s;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: $day-block-background-color--hover;
+    cursor: pointer;
+  }
+}
