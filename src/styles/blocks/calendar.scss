@@ -1,9 +1,11 @@
 .calendar {
   display: flex;
   flex-flow: row wrap;
-  gap: 1px;
+  gap: $calendar-gap;
   padding: $calendar-padding;
-  width: calc(7 * #{$day-box-size} + (7 - 1) * 1px + 2 * #{$calendar-padding});
+  width: calc(
+    7 * #{$day-box-size} + 6 * $calendar-gap + 2 * #{$calendar-padding}
+  );
 
   &__day {
     display: flex;
@@ -21,7 +23,6 @@
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: none;
     }
 
     &::before {
