@@ -1,0 +1,66 @@
+@use './utils/variables' as v;
+
+*,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$gap;
+  padding: v.$padding;
+  width: calc(7 * #{v.$day-size} + 6 * #{v.$gap} + 2 * #{v.$padding});
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: v.$day-size;
+  height: v.$day-size;
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} .calendar__day {
+    &:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
+@each $day, $index in v.$days-of-week {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{$index} * (#{v.$day-size} + #{v.$gap}));
+  }
+}
