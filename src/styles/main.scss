@@ -1,0 +1,84 @@
+$cell-size: 100px; // размер клеточки календаря, одна ячейка
+$border: 1px; // бордер клеточки
+$gap: 1px; // промежуток между клеточками
+$cols: 7; // количество колонок, 7 дней недели = 7 колонок
+$padding: 10px; // паддинг 10
+$total-width: $cols * $cell-size + ($cols - 1) * $gap + 2 * $padding; // ширина всего календаря (7клет, 6 пром, 2пад)
+$days-width: $cols * $cell-size + ($cols - 1) * $gap; // ширина внутреннего контейнера (7клет, 6 пром, 2пад)
+$color-of-the-day: #eee;
+$starts: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+body {
+  // центрирование календаря
+  margin: 0; // убираем старнадртные отступы браузера
+  display: flex; // делаем body flex-контейнером
+  min-height: 100vh; // тело занимает всю высоту экрана
+  justify-content: center; // горизонтально центрируем календарь
+  align-items: center; // вертикально центрируем календарь
+}
+
+.calendar {
+  // контейнер календаря
+  padding: $padding; // отступ вокруг всех ячеек
+  width: $total-width;
+  box-sizing: border-box; // точная ширина блока календаря
+
+  &__days {
+    // контейнер дней
+    width: $days-width; // ширина только для внутренних ячеек, без padding
+    display: flex; // делаем контейнер flex-контейнером
+    flex-wrap: wrap; // переносим ячейки на следующую строку после 7 колонок
+    gap: $gap; // промежуток между ячейками
+  }
+
+  &__day {
+    // одиночная ячейка дня
+    box-sizing: border-box; // ширина и высота учитывают границу
+    width: $cell-size; // задаём квадрат размером cell size
+    height: $cell-size; // задаём квадрат размером cell size
+    border: $border solid #000; // чёрная рамка
+    background: $color-of-the-day; // серый фон ячейки
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.5s;
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      // цикл задает цифры в ячейках от 1 до 31
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  &--start-day {
+    @each $day, $position in $starts {
+      &-#{$day} {
+        .calendar__days > :first-child {
+          margin-left: ($cell-size + $gap) * $position;
+        }
+      }
+    }
+  }
+
+  &--month-length {
+    @for $num from 28 through 31 {
+      &-#{$num} {
+        .calendar__days > :nth-child(n + #{$num + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
