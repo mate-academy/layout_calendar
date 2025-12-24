@@ -1,3 +1,117 @@
+// =======================
+// Variables
+// =======================
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$calendar-columns: 7;
+$calendar-padding: 10px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$hover-color: #ffbfcb;
+$day-bg: #eee;
+$transition-time: 0.5s;
+$hover-move: -20px;
+
+// =======================
+// Calendar Width Calculation
+// =======================
+$calendar-width: (($day-size + $border-size * 2) * $calendar-columns) + ($gap-size * ($calendar-columns - 1)) + ($calendar-padding * 2);
+
+// =======================
+// Calendar Base
+// =======================
 body {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $calendar-padding;
+  width: $calendar-width;
+  box-sizing: border-box;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background: $day-bg;
+    border: $border-size solid black;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all $transition-time ease;
+
+    &:hover {
+      cursor: pointer;
+      background: $hover-color;
+      transform: translateY($hover-move);
+    }
+  }
+}
+
+// =======================
+// Numbers with ::before
+// =======================
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: $font-family;
+    font-size: $font-size;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// =======================
+// Start-day modifiers
+// =======================
+$days: sun, mon, tue, wed, thu, fri, sat;
+
+@each $day in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    @if $day == sun {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 6;
+    }
+
+    @if $day == mon {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 0;
+    }
+
+    @if $day == tue {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 1;
+    }
+
+    @if $day == wed {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 2;
+    }
+
+    @if $day == thu {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 3;
+    }
+
+    @if $day == fri {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 4;
+    }
+
+    @if $day == sat {
+      margin-left: ($day-size + $border-size * 2 + $gap-size) * 5;
+    }
+  }
+}
+
+// =======================
+// Month-length modifiers
+// =======================
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} .calendar__day:nth-child(n + #{$len + 1}) {
+    display: none;
+  }
 }
