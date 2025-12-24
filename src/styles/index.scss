@@ -1,3 +1,37 @@
+@import './utils/variabels';
+@import './utils/mixins';
+@import './utils/loops';
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  @include flex;
+
   margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  padding: 10px;
+  display: flex;
+  width: ($cell-size * 7) + ($gap * 6) + 20px;
+  flex-wrap: wrap;
+  gap: $gap;
+  &__day {
+    @include flex;
+
+    height: $cell-size;
+    width: $cell-size;
+    background-color: #eee;
+    border: 1px solid black;
+    transition-duration: 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
