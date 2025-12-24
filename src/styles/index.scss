@@ -1,3 +1,56 @@
+@import './variables';
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  gap: $gap;
+  padding: 10px;
+  width: calc(
+    ($calendar + $border) * $columns + $gap * ($columns - 8) + 2 * $padding
+  );
+}
+
+.calendar__day {
+  @include square($calendar, $color);
+
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+
+  position: relative;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  background-color: $hover-color;
+  transform: translate(0, -20px);
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+}
+
+.calendar__day::before {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
