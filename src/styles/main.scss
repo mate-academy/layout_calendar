@@ -1,0 +1,90 @@
+// Variáveis do calendário
+$day-gap: 1px;
+$day-size: 100px;
+$hover-color: #ffbfcb;
+$hover-shift: 20px;
+$border-size: 1px;
+$day-font-size: 30px;
+$duration: 0.5s;
+$calendar-padding: 10px;
+$dy-bg: #eee;
+$calendar-width: ($day-size * 7) + ($day-gap * 7) + ($calendar-padding * 2);
+
+body {
+  // layout base, centraliza tudo na tela
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  // container que segura e centraliza o calendário
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: $calendar-width;
+}
+
+.calendar {
+  // grid principal do calendário (7 colunas, várias linhas)
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: $day-gap $day-gap;
+  flex-wrap: wrap;
+  width: $day-size * 7 + $day-gap * 7;
+  padding: $calendar-padding;
+
+  $start-days: (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6),
+    (sun, 7);
+
+  @each $start-day, $num-day in $start-days {
+    &--start-day-#{$start-day} {
+      .calendar__day:nth-child(1) {
+        margin-left: (
+          ($day-size * ($num-day - 1)) + ($day-gap * ($num-day - 1))
+        );
+      }
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} {
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    // célula de cada dia (tamanho, estilo, hover)
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    background-color: $dy-bg;
+    border: $border-size solid #000;
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $day-font-size;
+        padding-left: $border-size;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-$hover-shift);
+      transition:
+        background-color $duration,
+        transform $duration;
+    }
+  }
+}
