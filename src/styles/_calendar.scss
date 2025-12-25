@@ -1,0 +1,100 @@
+@use './variables' as vars;
+
+.calendar {
+  // Modificadores de início do mês (domingo = padrão)
+  $days-map: (
+    sun: 0,
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6
+  );
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$gap;
+  
+  width: vars.$calendar-width;
+  padding: vars.$padding;
+  
+  background: vars.$color-bg;
+  
+  // Centralizar o calendário na tela
+  margin: 0 auto;
+  
+  &__weekday {
+    width: vars.$day-size;
+    height: 30px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-weight: bold;
+    text-align: center;
+    color: #444;
+  }
+
+  &__day {
+    cursor: pointer;
+    
+    position: relative;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    width: vars.$day-size;
+    height: vars.$day-size;
+    border: vars.$border solid vars.$color-border;
+    
+    background: vars.$color-day-bg;
+    
+    transition: all 0.5s ease;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      font-weight: bold;
+      color: vars.$color-text;
+    }
+    
+    &:hover {
+      transform: translateY(-20px);
+      background: vars.$color-hover;
+    }
+  }
+
+  // Numerar dias de 1 até 31 usando ::before
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i + 7})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Modificadores para o dia de início do mês
+  @each $day, $index in $days-map {
+    &--start-day_#{$day} {
+      & > .calendar__day:first-of-type {
+        margin-left: $index * (vars.$day-size + vars.$gap);
+      }
+    }
+  }
+
+  // Modificadores de comprimento do mês (28, 29, 30, 31)
+  @for $len from 28 through 31 {
+    &--month-length_#{$len} {
+      & > .calendar__day:nth-child(n + #{$len + 8}) {
+        display: none;
+      }
+    }
+  }
+}
