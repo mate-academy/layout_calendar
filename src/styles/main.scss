@@ -1,0 +1,77 @@
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$font-family: Arial, sans-serif;
+$font-size: 30px;
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Висота сторінки */
+  margin: 0;
+}
+
+.calendar {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: calc(#{$day-size} * 7 + #{$gap} * 7);
+  padding: 10px;
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  border: $border-width solid black;
+  background-color: #eee;
+
+  &::before {
+    content: '';
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: $font-family;
+    font-size: $font-size;
+    color: black;
+  }
+}
+
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@each $day, $i in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($day-size + $gap) * $i;
+  }
+}
+
+$month-lengths: 28, 29, 30, 31;
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
