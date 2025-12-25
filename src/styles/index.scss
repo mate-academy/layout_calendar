@@ -1,3 +1,71 @@
-body {
-  margin: 0;
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$font-size: 30px;
+$font-color: black;
+$hover-color: #FFBFCB;
+$default-bg-color: #eee;
+$border-color: black;
+$hover-move-up: -20px;
+$animation-duration: 0.5s;
+$calendar-padding: 10px;
+$columns: 7;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * #{$day-size} + 6 * #{$gap-size} + 2 * #{$calendar-padding});
+  padding: $calendar-padding;
+  margin: auto;
+  gap: $gap-size;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  counter-reset: day;
+
+  &__day {
+    position: relative;
+    width: $day-size;
+    height: $day-size;
+    background-color: $default-bg-color;
+    border: $border-size solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    cursor: pointer;
+    transition: transform $animation-duration, background-color $animation-duration;
+
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      color: $font-color;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY($hover-move-up);
+    }
+  }
+
+  @each $day-name, $shift in (sun: 0, mon: 6, tue: 5, wed: 4, thu: 3, fri: 2, sat: 1) {
+
+    &--start-#{$day-name} .calendar__day:nth-child(1) {
+      margin-left: calc(#{$shift} * (#{$day-size} + #{$gap-size}));
+    }
+
+    &--start-#{$day-name} .calendar__day:nth-child(31) {
+      margin-right: calc(#{$shift} * (#{$day-size} + #{$gap-size}));
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
 }
