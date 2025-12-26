@@ -1,0 +1,36 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    position: absolute;
+    font-size: $font-size;
+    top: 50%;
+    left: 50%;
+    color: black;
+    font-family: Arial, sans-serif;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@for $i from 28 through 30 {
+  $hide-from: $i + 1;
+
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$hide-from}) {
+    display: none;
+  }
+}
+
+$days: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+);
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc($index * ($day-size + $gap + 1.6px));
+  }
+}
