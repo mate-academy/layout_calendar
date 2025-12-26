@@ -1,3 +1,67 @@
+@import 'variables';
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: $calendar-padding;
+  width: calc((7 * $day-size) + (6 * $day-gap) + (2 * $calendar-padding));
+  gap: $day-gap;
+}
+
+.calendar__day {
+  position: relative;
+  width: $day-size;
+  height: $day-size;
+  box-sizing: border-box;
+  border: $day-border;
+  background-color: $day-color;
+
+  &::before {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $day-hover-color;
+    transform: translate(0, -20px);
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $index in $start-days {
+  .calendar--start-day-#{$day} {
+    // Зміщення для першого дня
+    .calendar__day:first-child {
+      margin-left: calc(#{$index} * ($day-size + $day-gap));
+    }
+  }
+}
+
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+    display: none;
+  }
 }
