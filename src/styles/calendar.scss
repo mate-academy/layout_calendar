@@ -1,0 +1,57 @@
+$width-cube: 100px;
+$height-cube: 100px;
+$colums-in-the-row: (7 * $width-cube);
+$max-days: 31;
+$days-of-week: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+@for $i from 1 through $max-days {
+  .calendar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    max-width: ($colums-in-the-row + 10px);
+
+    &__day {
+      display: flex;
+      box-sizing: border-box;
+      background-color: #eee;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #000;
+      width: $width-cube;
+      height: $height-cube;
+      font-size: 30px;
+      transition: all 0.5s ease;
+
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+
+      &:hover {
+        background-color: #ffbfcb;
+        transform: translate(0, -20px);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@each $day, $value in $days-of-week {
+  .calendar--start-day-#{$day} :first-of-type {
+    margin-left: ($width-cube + 1px) * ($value - 1);
+  }
+}
+
+@for $i from 28 through $max-days {
+  .calendar--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
