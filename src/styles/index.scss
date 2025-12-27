@@ -1,3 +1,109 @@
+@use 'sass:list';
+
+$cell-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$number-font-size: 30px;
+$calendar-padding: 10px;
+$cell-color: #eee;
+$border-color: black;
+$hover-color: #ffbfcb;
+$hover-move: 20px;
+$animation-duration: 0.5s;
+$font-family: Arial, sans-serif;
+$columns: 7;
+$pad-count: 2;
+$columns-width: $columns * $cell-size;
+$gaps-width: ($columns - 1) * $gap-size;
+$padding-width: $pad-count * $calendar-padding;
+
+/* Obliczona szerokość kolumny, włączając ramki i przerwę
+potrzebne do wyliczenia marginesu który wcina sie od lewej strony i uklada dni tygodnia
+*/
+
+$column-offset-unit: calc(#{$cell-size} + #{$gap-size});
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: calc(#{$columns-width} + #{$gaps-width} + #{$padding-width});
+  padding: $calendar-padding;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-size solid $border-color;
+    background-color: $cell-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all $animation-duration;
+
+    &::before {
+      font-size: $number-font-size;
+      font-family: $font-family;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: '#{$i}';
+        }
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-$hover-move);
+    }
+  }
+
+  /* Modyfikatory startowego dnia miesiąca za pomocą @each
+  :nth-child(1) wybiera pierwszy dzień miesiąca i tylko jego przesuwamy w prawo, żeby kalendarz zaczął się od właściwej kolumny tygodnia — reszta dni układa się już automatycznie.
+
+  $index mówi ile kolumn w prawo trzeba przesunąć pierwszy dzień miesiąca. index -1 pozwala liczyc od zera, wiec dla poniedzialku bedzie 0  i nic nie przesunie, dla niedzieli bedzie 7-1 =6 czyli niedziela bedzie 1 dniem miesiaca
+  */
+
+  $days: mon, tue, wed, thu, fri, sat, sun;
+
+  @each $day in $days {
+    $index: list.index($days, $day) - 1;
+    &--start-day-#{$day} {
+      .calendar__day:nth-child(1) {
+        margin-left: calc(#{$index} * #{$column-offset-unit});
+      }
+    }
+  }
+
+  /*
+modyfikator długości miesiąca, czyli jak kalendarz powinien ukrywać dni, które nie istnieją w danym miesiącu.
+$i przechodzi kolejno wartości 28, 29, 30, 31 (bo miesiące mają 28–31 dni).
+&--month-length tworzy klasę np calendar--month-length-30
+*/
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
 }
