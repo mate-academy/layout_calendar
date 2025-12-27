@@ -1,0 +1,23 @@
+@mixin number-day {
+  @for $cell from 1 through 31 {
+    & :nth-child(#{$cell})::before {
+      content: '#{$cell}';
+    }
+  }
+}
+
+@mixin weak-day-lentgh {
+  @each $week-day, $index in $start-day {
+    &--start-day-#{$week-day} :nth-child(1) {
+      margin-left: $cellSize * $index + $index;
+    }
+  }
+}
+
+@mixin month-length {
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length} :nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}

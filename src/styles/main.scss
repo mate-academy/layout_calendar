@@ -1,0 +1,43 @@
+@import './utils/mixin';
+@import './utils/variables';
+
+.page {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: ($cellSize * $weakSize) +6px;
+  padding-inline: $cellPading;
+
+  &__day {
+    width: $cellSize;
+    height: $cellSize;
+    background-color: $cellCollor;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: solid 1px black;
+
+    font-family: $cellFontFamily;
+    font-size: $cellFontHeight;
+
+    &:hover {
+      background-color: $hoverCollor;
+      cursor: pointer;
+      transform: translateY($translateY);
+      transition: transform $transformDuration;
+    }
+  }
+
+  @include number-day;
+  @include weak-day-lentgh;
+  @include month-length;
+}
