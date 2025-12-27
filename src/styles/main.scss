@@ -1,0 +1,87 @@
+@use 'sass:list';
+
+$columns: 7;
+$cell: 100px;
+$gap: 1px;
+$total-horizontal-padding: 10px;
+$pad-x-left: $total-horizontal-padding / 2;
+$pad-x-right: $total-horizontal-padding / 2;
+$pad-y: 10px;
+$calendar-width: (
+  $columns * $cell + ($columns - 1) * $gap + $total-horizontal-padding
+);
+$number-size: 30px;
+$transition-duration: all 0.5s;
+$font: Arial, sans-serif;
+$days: mon tue wed thu fri sat sun;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: $font;
+  font-size: $number-size;
+}
+
+.calendar {
+  width: $calendar-width;
+  padding: $pad-y $pad-x-right $pad-y $pad-x-left;
+  flex-wrap: wrap;
+  display: flex;
+  gap: $gap;
+
+  &__day {
+    position: relative;
+    width: $cell;
+    height: $cell;
+    display: grid;
+    place-items: center;
+    background: #eee;
+    border: 1px solid #000;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+
+    &::before {
+      font-size: $number-size;
+      font-weight: 400;
+      color: #000;
+    }
+  }
+
+  @each $day in $days {
+    $idx: list.index($days, $day) - 1;
+    &--start-day-#{$day} {
+      > .calendar__day:first-child {
+        margin-left: $idx * ($cell + $gap);
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      > .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @for $i from 1 through 31 {
+    > .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}' !important;
+    }
+  }
+}
