@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+}
+
+$cell-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$days: (mon, tue, wed, thu, fri, sat, sun);
+$container-width: #{$columns * $cell-size + ($columns - 1) * $gap + 2 * $padding};
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $container-width;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+.calendar__day {
+  position: relative;
+  font-family: Arial, sans-serif;
+  width: $cell-size;
+  height: $cell-size;
+  background-color: #eee;
+  border: 1px solid black;
+  box-sizing: border-box;
+  cursor: default;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+@each $day in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    @if $day == mon {
+      margin-left: 0;
+    } @else if $day == tue {
+      margin-left: ($cell-size + $gap) * 1;
+    } @else if $day == wed {
+      margin-left: ($cell-size + $gap) * 2;
+    } @else if $day == thu {
+      margin-left: ($cell-size + $gap) * 3;
+    } @else if $day == fri {
+      margin-left: ($cell-size + $gap) * 4;
+    } @else if $day == sat {
+      margin-left: ($cell-size + $gap) * 5;
+    } @else if $day == sun {
+      margin-left: ($cell-size + $gap) * 6;
+    }
+  }
+}
+
+$month-lengths: (28, 29, 30, 31);
+
+@each $length in $month-lengths {
+  .calendar--month-length-#{$length} {
+    @for $i from ($length + 1) through 32 {
+      .calendar__day:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+  }
+}
