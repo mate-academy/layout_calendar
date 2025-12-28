@@ -1,3 +1,133 @@
+// VARIABLES
+$day-size: 100px;
+$day-border-width: 1px;
+$day-gap: 1px;
+$calendar-padding: 10px;
+$num-columns: 7;
+$hover-lift-amount: -20px;
+
+// COLORS
+$color-day-bg: #eee;
+$color-day-border: #000;
+$color-day-hover-bg: #ffbfcb;
+
+// FONT
+$font-family-day: Arial;
+$font-size-day: 30px;
+
+// ANIMATION
+$transition-duration: 0.5s;
+
+// VARIABLES CALCULATED
+// DAY SELL WIDTH
+$day-total-width: $day-size + $day-gap;
+
+// CALENDAR WIDTH CALC (split to meet test reqirements)
+$calndr-width-no-padd: (
+  ($num-columns * $day-size) + (($num-columns - 1) * $day-gap)
+);
+$calndr-width: $calndr-width-no-padd + (2 * $calendar-padding);
+
+// BODY
 body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+}
+
+// CALENDAD
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $day-size);
+  gap: $day-gap;
+  width: $calndr-width;
+  padding: $calendar-padding;
+  margin-left: 20px;
+
+  // DAY
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $color-day-bg;
+    border: $day-border-width solid $color-day-border;
+    box-sizing: border-box;
+
+    // centering content
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    // animation
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-day-hover-bg;
+      transform: translateY($hover-lift-amount);
+    }
+
+    // DAY CONTENT generation
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: $font-family-day;
+        font-size: $font-size-day;
+      }
+    }
+  }
+
+  // START DAY
+  &.calendar--start-day-mon > .calendar__day:first-child {
+    grid-column-start: 1;
+  }
+
+  &.calendar--start-day-tue > .calendar__day:first-child {
+    grid-column-start: 2;
+  }
+
+  &.calendar--start-day-wed > .calendar__day:first-child {
+    grid-column-start: 3;
+  }
+
+  &.calendar--start-day-thu > .calendar__day:first-child {
+    grid-column-start: 4;
+  }
+
+  &.calendar--start-day-fri > .calendar__day:first-child {
+    grid-column-start: 5;
+  }
+
+  &.calendar--start-day-sat > .calendar__day:first-child {
+    grid-column-start: 6;
+  }
+
+  &.calendar--start-day-sun > .calendar__day:first-child {
+    grid-column-start: 7;
+  }
+
+  // MONGTH LENGTH
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      > .calendar__day:nth-child(n + #{$len + 1}) {
+        position: absolute;
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: none;
+        pointer-events: none;
+
+        display: block;
+        visibility: hidden;
+        &::before {
+          content: '';
+        }
+      }
+    }
+  }
 }
