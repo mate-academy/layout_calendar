@@ -1,3 +1,41 @@
-body {
-  margin: 0;
+@import '../utils/mixins';
+@import '../utils/variables';
+@import '../utils/loops';
+
+/* #region index */
+
+* {
+  box-sizing: border-box;
 }
+
+body {
+  @include flex;
+
+  margin: 0;
+  height: 100vh;
+}
+
+.calendar {
+  padding: 10px;
+  display: flex;
+  gap: $gap;
+  width: ($cell-size * 7) + ($gap * 6) + 20px;
+  flex-wrap: wrap;
+  &__day {
+    @include flex;
+
+    background-color: #eee;
+    height: $cell-size;
+    width: $cell-size;
+    border: 1px solid black;
+    transition-duration: 500ms;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $pink-color;
+    transform: translateY(-20px);
+  }
+}
+
+/* #endregion */
