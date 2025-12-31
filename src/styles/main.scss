@@ -1,0 +1,87 @@
+$day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$border-width: 1px;
+$border-color: black;
+$day-color: #eee;
+$hover-color: #ffbfcb;
+$font: Arial, sans-serif;
+$font-size: 30px;
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc(7 * #{$day-size} + 6 * #{$gap} + 2 * #{$padding});
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-color;
+  border: $border-width solid $border-color;
+  box-sizing: border-box;
+  position: relative;
+  cursor: pointer;
+  transition:
+    transform 0.5s ease,
+    background-color 0.5s ease;
+
+  &::before {
+    content: '';
+    font-family: $font;
+    font-size: $font-size;
+    color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px);
+    z-index: 1;
+  }
+}
+
+// Зсув першого дня через margin-left
+$days-map: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@each $day, $index in $days-map {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{$index} * (#{$day-size} + #{$gap}));
+  }
+}
+
+// Приховування зайвих днів
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} .calendar__day:nth-child(n + #{$len + 1}) {
+    display: none;
+  }
+}
