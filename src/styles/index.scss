@@ -1,3 +1,67 @@
+$day-size: 100px;
+$gap: 1px;
+$cols: 7;
+$padding: 10px;
+$number-property: 30px;
+$container-width: $cols * $day-size + ($cols - 1) * $gap;
+$start-days: 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun';
+
+@use 'sass:list';
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $container-width;
+  padding: 10px;
+  gap: 1px;
+}
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  border: 1px solid #000;
+  outline: none;
+  background-color: #eee;
+  transition: 0.5s;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+@for $num from 1 through 31 {
+  .calendar__day:nth-child(#{$num})::before {
+    content: '#{$num}';
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: $number-property;
+    color: #000;
+  }
+}
+
+@each $start-day in $start-days {
+  $offset: list.index($start-days, $start-day) - 1;
+  .calendar--start-day-#{$start-day} .calendar__day:nth-child(1) {
+    margin-left: ($offset * ($day-size + $gap));
+  }
+}
+
+@for $n from 28 through 31 {
+  .calendar--month-length-#{$n} .calendar__day:nth-child(n + #{$n + 1}) {
+    display: none;
+  }
 }
