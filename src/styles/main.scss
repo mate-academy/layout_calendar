@@ -1,0 +1,27 @@
+.page {
+  margin: 0;
+  height: 100vh;
+
+  @extend %df-center;
+}
+
+.calendar {
+  @extend %calendar-grid;
+
+  padding: $padd-side-5;
+
+  &__day {
+    @extend %cell-grid;
+    @extend %cell-content-style;
+    @extend %df-center;
+
+    transition: transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background: $cell-bg-hover;
+      transform: translateY($hover-ofset);
+    }
+  }
+}

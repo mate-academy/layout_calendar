@@ -1,0 +1,21 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $name, $value in $week {
+  .calendar--#{$s-d}-#{$name} {
+    .calendar__day:first-child {
+      margin-left: calc(($cell-size + $cell-gap) * $value);
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--#{$mon-len}-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
