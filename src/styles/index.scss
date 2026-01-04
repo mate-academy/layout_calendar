@@ -1,3 +1,96 @@
+$day-size: 100px;
+$day-border: 1px solid black;
+$day-gap: 1px;
+$calendar-padding: 10px;
+$hover-color: #ffbfcb;
+$hover-offset: -20px;
+$animation-duration: 0.5s;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+  width: calc(
+    (#{$day-size} * 7) + (#{$day-gap} * 6) + (#{$calendar-padding} * 2)
+  );
+
+  counter-reset: day;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: $day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY($hover-offset);
+      transition:
+        transform $animation-duration,
+        background-color $animation-duration,
+        border-color $animation-duration;
+    }
+  }
+
+  // Start-day modifiers for European week model (Monday as the first day)
+  &--start-day-mon .calendar__day:nth-child(1) {
+    margin-left: 0;
+  }
+  &--start-day-tue .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 1);
+  }
+  &--start-day-wed .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 2);
+  }
+  &--start-day-thu .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 3);
+  }
+  &--start-day-fri .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 4);
+  }
+  &--start-day-sat .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 5);
+  }
+  &--start-day-sun .calendar__day:nth-child(1) {
+    margin-left: calc((#{$day-size} + $day-gap) * 6);
+  }
+
+  // Month-length modifiers to hide extra days
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
