@@ -1,0 +1,71 @@
+@import '/src/styles/variables';
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: $calendar-max-width;
+  padding-left: $cal-pad-left;
+  padding-right: $cal-pad-right;
+  margin: auto;
+
+  &__day {
+    width: $day-width;
+    height: $day-height;
+    box-sizing: border-box;
+    border: $day-border solid $day-border-color;
+    background-color: $day-bgc;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transition:
+        transform 0.5s,
+        background-color 0.5s;
+      transform: translateY(-20px);
+    }
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+        font-family: Arial, sans-serif;
+        font-size: $day-letter-size;
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        top: 50%;
+      }
+    }
+
+    @each $day, $i in $day-modifiers {
+      .calendar--start-day-#{$day} &:first-child {
+        margin-left: $i * ($day-width + $gap);
+      }
+    }
+
+    @for $show-length from 28 through 31 {
+      .calendar--month-length-#{$show-length}
+        &:nth-child(n + #{$show-length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
