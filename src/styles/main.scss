@@ -1,0 +1,63 @@
+@use './vars.scss' as *;
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  width: $cal-width;
+  padding-left: $cal-hor-padding;
+  padding-right: $cal-hor-padding;
+  flex-flow: row wrap;
+  gap: $cal-gap;
+}
+
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: $cell-size;
+  height: $cell-size;
+
+  transition: all 500ms;
+
+  border: 1px solid #000;
+  background-color: #eee;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $index * ($cell-size + $cal-gap);
+  }
+}
+
+@for $num-of-the-day from 1 through 31 {
+  .calendar__day:nth-child(#{$num-of-the-day})::before {
+    content: '#{$num-of-the-day}';
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
