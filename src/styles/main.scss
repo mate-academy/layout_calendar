@@ -1,0 +1,100 @@
+// Variables
+$day-size: 100px;
+$day-border: 1px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$total-days: 31;
+$day-bg: #eee;
+$day-border-color: #000;
+$day-hover-bg: #ffbfcb;
+$day-hover-offset: 20px;
+$transition-duration: 0.5s;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$gaps-width: $gap * ($columns - 1);
+$columns-width: $day-size * $columns;
+$calendar-width: $columns-width + $gaps-width + ($padding * 2);
+
+// Days of week map for start-day modifier
+$days-of-week: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $day-border solid $day-border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-duration: $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-hover-bg;
+      transition-duration: $transition-duration;
+      transform: translateY(-$day-hover-offset);
+    }
+  }
+
+  // Generate day numbers using @for
+  &__day:first-child::before {
+    content: '1';
+  }
+
+  @for $i from 2 through $total-days {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // Generate start-day modifiers using @each
+  @each $day, $position in $days-of-week {
+    @if $position == 1 {
+      &--start-day-#{$day} &__day:first-child {
+        margin-left: 0;
+      }
+    } @else {
+      &--start-day-#{$day} &__day:first-child {
+        margin-left: ($day-size + $gap) * ($position - 1);
+      }
+    }
+  }
+
+  // Generate month-length modifiers using @for
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
