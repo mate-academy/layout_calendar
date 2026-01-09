@@ -7,7 +7,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
   - Add a number (`Arial 30px`) in the center of each day using `::before` and [@for](https://sass-lang.com/documentation/at-rules/control/for)
-- Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
+- Use flex with `1px` cell-gap and limit its width to exactly 7 columns + `10px` paddings
   - Don't use hardcoded `px` values if they are used several times
   - Use properly named variables to make all the calculations more clear.
 - Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
@@ -36,8 +36,8 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://Ziroch-Kapalay.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Ziroch-Kapalay.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
