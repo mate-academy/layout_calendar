@@ -18,6 +18,8 @@ body {
   margin: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -51,20 +53,20 @@ body {
         }
       }
     }
-
-    @for $length from 28 through 31 {
-      .calendar--month-length-#{$length} {
-        .calendar__day:nth-child(n + #{$length + 1}) {
-          display: none;
-        }
-      }
-    }
   }
 
   :hover {
     background-color: $active-cell-color;
     transform: translate(0, -20px);
     transition-duration: 500ms;
+  }
+
+  @for $length from 28 through 31 {
+    .calendar--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
   }
 
   @each $day-name, $shift-value in $start-days {
