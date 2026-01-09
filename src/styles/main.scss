@@ -28,7 +28,7 @@ body {
   gap: $cell-gap;
   justify-content: left;
   max-width: calc($colm * $column-width);
-  margin: 10px;
+  padding: 10px;
 
   &__day {
     display: flex;
@@ -41,6 +41,12 @@ body {
     height: $cell-size;
     width: $cell-size;
     cursor: pointer;
+
+    &:hover {
+      background-color: $active-cell-color;
+      transform: translate(0, -20px);
+      transition-duration: 500ms;
+    }
 
     @for $n from 1 through 31 {
       &:nth-child(#{$n}) {
@@ -55,15 +61,9 @@ body {
     }
   }
 
-  :hover {
-    background-color: $active-cell-color;
-    transform: translate(0, -20px);
-    transition-duration: 500ms;
-  }
-
   @for $length from 28 through 31 {
-    .calendar--month-length-#{$length} {
-      .calendar__day:nth-child(n + #{$length + 1}) {
+    &--month-length-#{$length} {
+      &__day:nth-child(n + #{$length + 1}) {
         display: none;
       }
     }
