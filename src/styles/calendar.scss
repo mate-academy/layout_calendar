@@ -1,0 +1,23 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  box-sizing: border-box;
+  width: calc(
+    #{$calendar-columns * $cell-size} + ((#{$calendar-columns} - 1) * $gap) + $padding
+  );
+
+  @each $day, $num in $start-day {
+    &.calendar--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(($cell-size + $gap) * ($num));
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &.calendar--month-length-#{$month-length}
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
