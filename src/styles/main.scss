@@ -1,0 +1,59 @@
+@use "sass:list";
+
+$day_width: 100px;
+$block_pading: 10px ;
+$elements_gap: 1px;
+$columns: 7;
+
+body {
+  margin: 0;
+}
+
+.calendar{
+  padding: 0 $block_pading;
+  width: (2 * $block_pading) + ($columns * $day_width) + (($columns - 1) * $elements_gap);
+  box-sizing: border-box;
+  display: flex;
+  gap: $elements_gap;
+  flex-wrap: wrap;
+
+}
+
+.calendar__day{
+  background-color: #eee;
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: $day_width;
+  width: $day_width;
+}
+
+
+@for $i from 1 through 31{
+  .calendar__day:nth-child(#{$i})::before{
+    content: "#{$i}";
+    font-size: 30px;
+  }
+}
+
+
+$days: (mon, tue, wed, thu, fri, sat, sun);
+
+
+@each $day in $days {
+  $i: list.index($days, $day);
+
+  .calendar--start-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($i - 1) * ($day_width + $elements_gap);
+    }
+  }
+}
+
+.calendar__day:hover{
+  cursor: pointer;
+  background-color: #FFBFCB;
+  transform:  translateY(-20px);
+  transition: transform 500ms;
+}
+
+
