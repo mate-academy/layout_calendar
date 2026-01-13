@@ -1,13 +1,14 @@
 $day-size: 100px;
 $gap: 1px;
-$border: 1px solid black;
+$border-width: 1px;
+$border: #000;
 $day-bg: #eee;
 $hover-bg: #ffbfcb;
-$hover-move: -20px;
+$hover-move: 20px;
 $transition: 0.5s;
 $columns: 7;
 $calendar-padding: 10px;
-$calendar-width: ($columns * ($day-size + $gap)) + ($calendar-padding * 2);
+$calendar-width: ($columns * $day-size) + (($columns - 1) * $gap) + ($calendar-padding * 2);
 
 .calendar {
   width: $calendar-width;
@@ -21,28 +22,34 @@ $calendar-width: ($columns * ($day-size + $gap)) + ($calendar-padding * 2);
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  box-sizing: content-box;
+  box-sizing: border-box;
 }
 
 .calendar__day {
   width: $day-size;
   height: $day-size;
   background: $day-bg;
-  border: $border;
+  border: $border-width solid $border;
+  box-sizing: border-box;
   position: relative;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  cursor: pointer;
+  cursor: default;
   transition:
     background $transition,
     transform $transition;
 
   &:hover {
+    cursor: pointer;
     background: $hover-bg;
-    transform: translateY($hover-move);
+    transform: translateY(-$hover-move);
+  }
+
+  &::before {
+    display: block;
   }
 }
 
