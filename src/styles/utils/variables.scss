@@ -1,0 +1,33 @@
+$cell-size: 100px;
+$border: 1px solid #000;
+$gap: 1px;
+$padding: 10px;
+$cell-color: #eee;
+$cell-color-hover: #ffbfcb;
+$columns: 7;
+$calendar-width: #{$columns * $cell-size + ($columns - 1) * $gap + 2 * $padding};
+$offsets: (
+  'sun': 0,
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+);
+
+@each $name, $off in $offsets {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: #{$off * ($cell-size + $gap)};
+    }
+  }
+}
+
+@for $lastday from 28 through 31 {
+  .calendar--month-length-#{$lastday} {
+    .calendar__day:nth-child(n + #{$lastday + 1}) {
+      display: none;
+    }
+  }
+}
