@@ -1,0 +1,74 @@
+$cell-size: 100px;
+$gap: 1px;
+$calendar-padding: 10px;
+$days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+html {
+  margin: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(($cell-size + $gap) * 7 + $calendar-padding * 2);
+  padding: $calendar-padding;
+  box-sizing: border-box;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 0 $gap $gap 0;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Відступ першого дня місяця за допомогою margin-left
+  @each $day, $dayNumber in $days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: ($cell-size + $gap) * ($dayNumber - 1);
+    }
+  }
+
+  // Генеруємо цифри 1–31
+  @for $n from 1 through 31 {
+    .calendar__day:nth-child(#{$n})::before {
+      content: '#{$n}';
+    }
+  }
+
+  // Приховуємо зайві дні
+  @for $n from 28 through 31 {
+    &--month-length-#{$n} .calendar__day:nth-child(n + #{$n + 1}) {
+      display: none;
+    }
+  }
+}
