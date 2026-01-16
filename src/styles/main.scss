@@ -1,0 +1,64 @@
+@use './variables.scss' as *;
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  width: $columns * $day-size + ($columns - 1) * $day-gap;
+  box-sizing: border-box;
+
+  @for $nr from 28 through 31 {
+    &--month-length-#{$nr} {
+      .calendar__day:nth-child(n + #{$nr + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day, $nr in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($day-gap + $day-size) * $nr;
+    }
+  }
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: black solid 1px;
+    background-color: $day-background-color;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-background-color-hover;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+}
