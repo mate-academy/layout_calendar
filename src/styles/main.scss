@@ -1,0 +1,64 @@
+// Variables
+$cell-size: 100px;
+$border-size: 1px;
+$font-size: 30px;
+$font-color: #000;
+$grey: #eee;
+$pink: #f5a9d6;
+$animation-duration: 0.5s;
+
+// Calendar styles
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(($cell-size + $border-size * 2) * 7 + 10px);
+  gap: $border-size;
+  padding: 10px;
+  counter-reset: day-counter; // Добавляем сброс счетчика на 1
+
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    border: $border-size solid #000;
+    background-color: $grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform $animation-duration, background-color $animation-duration;
+
+    // Day number
+    &::before {
+      content: counter(day-counter); // Используем counter для отображения числа
+      counter-increment: day-counter; // Увеличиваем счетчик на 1 для каждого дня
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+      color: $font-color;
+    }
+
+    // Hover effect
+    &:hover {
+      background-color: $pink;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// Start day modifiers
+@each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+  .calendar--start-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(619px - $border-size);
+    }
+  }
+}
+
+// Month length modifiers
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n+#{$length + 1}) {
+      display: none;
+    }
+  }
+}
