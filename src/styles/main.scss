@@ -1,0 +1,88 @@
+// Variables
+$calendar-border-color: #000;
+$calendar-day-bg: #eee;
+$calendar-day-hover-bg: #ffbfcb;
+$calendar-day-size: 100px;
+$calendar-font: 'Arial', sans-serif;
+$calendar-gap: 1px;
+$calendar-padding: 10px;
+$calendar-hover-move: 20px;
+$calendar-animation-time: 0.5s;
+
+// Calendar block
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: calc(
+    ($calendar-day-size * 7) + ($calendar-gap * 6) + ($calendar-padding * 2)
+  );
+  padding: $calendar-padding;
+  margin: auto;
+
+  // Default alignment
+  justify-content: flex-start; // Default flow starts from the left
+
+  &__day {
+    width: $calendar-day-size;
+    height: $calendar-day-size;
+    background-color: $calendar-day-bg;
+    border: 1px solid $calendar-border-color;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: $calendar-font;
+    font-size: 30px;
+    line-height: $calendar-day-size;
+
+    // Add numbers using ::before and @for
+    &::before {
+      content: counter(day);
+      counter-increment: day;
+      position: absolute;
+    }
+
+    // Hover styles
+    cursor: pointer;
+    transition:
+      background-color $calendar-animation-time,
+      transform $calendar-animation-time;
+
+    &:hover {
+      background-color: $calendar-day-hover-bg;
+      transform: translateY(-$calendar-hover-move);
+    }
+  }
+
+  // Start-day modifiers
+  @each $day,
+    $position
+      in (
+        sun: flex-end,
+        mon: flex-start,
+        tue: flex-start,
+        wed: flex-start,
+        thu: flex-start,
+        fri: flex-start,
+        sat: flex-start
+      )
+  {
+    &--start-day-#{$day} {
+      justify-content: $position;
+    }
+  }
+
+  // Month-length modifiers
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+// Counter reset for day numbering
+body {
+  counter-reset: day;
+}
