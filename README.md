@@ -2,7 +2,7 @@
 
 Display a calendar in the middle of the screen (both horizontally and vertically). Use SCSS and follow BEM. Don't use Javascript.
 
-- Write styles in `src/styles/main.scss` instead of `src/style.css`.
+- Write styles in `src/styles/main.scss` instead of `src/style.css`cd src/styles.
 - Create a markup for the calendar block with 31 days inside
   - DON'T add numbers in HTML (you will do it using CSS)
 - Each day is a grey (`#eee`) `100px` square (including 1px black border)
@@ -36,8 +36,8 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://<LizaN-I>.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://<LizaN-I>.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
@@ -46,3 +46,4 @@ reflects in changing calendar layout
 - [ ] Each day has no modifiers, only class (eg. calendar__day)
 - [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
 - [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
+
