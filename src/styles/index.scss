@@ -1,3 +1,57 @@
+@import './variables';
+@import './mixins';
+
 body {
+  @include flex(row, center, center);
+
   margin: 0;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: $main-font-size;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: (($box-size + $gap-size) * $week) - $gap-size;
+  gap: $gap-size;
+
+  &__day {
+    @include flex(row, center, center);
+
+    height: $box-size;
+    width: $box-size;
+    background-color: $grey-color;
+    border: 1px solid $black-color;
+    transition-duration: 0.5s;
+    box-sizing: border-box;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $pink-color;
+    transform: translateY(-20px);
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(n + #{$day})::before {
+      content: '#{$day}';
+    }
+  }
+
+  @each $day, $number in $start-day {
+    &--start-day-#{$day} {
+      .calendar__day:first-of-type {
+        margin-left: $number * ($box-size + $gap-size);
+      }
+    }
+  }
+
+  @for $numbers from 28 through 31 {
+    &--month-length-#{$numbers} {
+      .calendar__day:nth-child(n + #{$numbers + 1}) {
+        display: none;
+      }
+    }
+  }
 }
