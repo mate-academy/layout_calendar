@@ -1,0 +1,70 @@
+@import 'variables';
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(#{$block-column * $block} + #{$gap * ($block-column - 1)});
+  gap: $gap;
+  padding: $cal-padding;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  // &:nth-child(7n) {
+  //   margin-top: 0;
+  // }
+
+  @each $day, $index in $days {
+    &.start-day--#{$day} {
+      @for $i from 1 through $index {
+        .calendar::before {
+          content: '';
+          width: $block;
+          height: $block;
+          margin-right: $gap;
+          background-color: transparent;
+          border: none;
+        }
+      }
+    }
+  }
+
+}
+
+  .days {
+    width: $block;
+    height: $block;
+    background-color: #eee;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.5s ease-in-out;
+    cursor: pointer;
+
+    @for $index from 1 through 31 {
+      &:nth-child(#{$index})::before {
+        content: '#{$index}';
+        // font-weight: normal;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+  }
+
+  @for $index from 28 through 31 {
+    .calendar--month-length--#{$index} .days:nth-child(n + #{$index + 1}) {
+      display: none;
+    }
+  }
