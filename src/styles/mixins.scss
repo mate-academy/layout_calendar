@@ -1,0 +1,21 @@
+@import 'variables';
+
+@mixin day-number($last-day) {
+  @for $i from 1 through $last-day {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+@each $day, $index in $days {
+  .calendar--start-day--#{$day} > :first-child {
+    margin-left: #{(($block + $gap) * $index)};
+  }
+}
+
+@for $index from 28 through 31 {
+  .calendar--month-length--#{$index} :nth-child(n + #{$index + 1}) {
+    display: none;
+  }
+}

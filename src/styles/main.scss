@@ -1,0 +1,36 @@
+@import 'mixins';
+@import 'variables';
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  flex-flow: wrap;
+  width: 710px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+  .calendar__day {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    border: 1px solid;
+    padding: 10px;
+    text-align: center;
+    align-content: center;
+    background-color: $color-gray;
+
+    @include day-number(31);
+
+    &:hover {
+      transform: translateY(-20px);
+      transition: 0.5;
+      background-color: pink;
+    }
+  }
+}
