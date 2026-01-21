@@ -1,3 +1,83 @@
+@use 'sass:list';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+$day-size: 100px;
+$day-gap: 1px;
+$border-size: 1px;
+$cal-col: 7;
+$padding: 10px;
+$color-day: #eee;
+$color-hover: #ffbfcb;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+
+// Base styles
 body {
   margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: calc($cal-col * $day-size + ($cal-col - 1) * $day-gap + 2 * $padding);
+  padding: $padding;
+  position: relative;
+  counter-reset: day;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $color-day;
+  border: $border-size solid black;
+  position: relative;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+
+  &:hover {
+    background-color: $color-hover;
+    transform: translateY(-20px);
+    cursor: pointer;
+  }
+
+  &::before {
+    content: counter(day);
+    counter-increment: day;
+    position: absolute;
+    font-family: $font-family;
+    font-size: $font-size;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// Зсув першого числа місяця (початок з понеділка)
+$start-days: (mon, tue, wed, thu, fri, sat, sun);
+
+@each $day in $start-days {
+  $index: list.index($start-days, $day) - 1;
+
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(($day-size + $day-gap) * #{$index});
+  }
+}
+
+// Обмеження довжини місяця
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
