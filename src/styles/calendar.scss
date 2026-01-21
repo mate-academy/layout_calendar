@@ -1,0 +1,62 @@
+/*  #region calendar */
+
+.calendar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: $pad;
+  width: calc($days-size * #{$cols} + $gap * (#{$cols} - 1) + $pad * 2);
+  gap: $gap;
+  max-width: 100%;
+  overflow: hidden;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $days-size;
+    height: $days-size;
+    background-color: $days-color;
+    border: $border;
+    position: relative;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg;
+      transform: translateY(-20px);
+    }
+
+    @for $i-days from 1 through 31 {
+      &:nth-child(#{$i-days})::before {
+        content: '#{$i-days}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $font-size;
+        position: absolute;
+        pointer-events: none;
+        color: $numbers-color;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+
+  @each $day, $offset in $start-day {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(#{$offset} * ($days-size + $gap));
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} {
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+/*  #endregion */
