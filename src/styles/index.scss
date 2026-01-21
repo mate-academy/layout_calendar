@@ -1,3 +1,79 @@
 body {
-  margin: 0;
+  box-sizing: border-box;
+}
+
+$day-size: 100px;
+$gap-size: 1px;
+$border-size: 1px;
+$calendar-padding: 5px;
+$total-padding: $calendar-padding * 2;
+$total-gap: $gap-size * 6;
+$total-day-width: $day-size * 7;
+$calendar-width: $total-day-width + $total-gap + $total-padding;
+
+.calendar {
+  margin-top: 77px;
+  margin-left: 146px;
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $calendar-padding;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  counter-reset: day;
+}
+
+.calendar__day {
+  position: relative;
+  width: $day-size;
+  height: $day-size;
+  background-color: #eee;
+  border: $border-size solid black;
+  box-sizing: border-box;
+  transition:
+    transform 0.5s ease-in-out,
+    background-color 0.5s ease-in-out;
+  cursor: pointer;
+
+  &::before {
+    content: counter(day);
+    counter-increment: day;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:hover {
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@each $name, $index in $start-days {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$index} * #{$day-size} + #{$index} * #{$gap-size});
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
