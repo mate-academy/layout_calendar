@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  width: 706px;
+  flex-wrap: wrap;
+  padding: 10px;
+  counter-reset: day-counter;
+  gap: 1px;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  transition: all 0.5s ease;
+}
+
+.calendar__day::before {
+  content: counter(day-counter);
+  counter-increment: day-counter;
+  position: absolute;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+.calendar--month-length-28 .calendar__day:nth-child(n + 29),
+.calendar--month-length-29 .calendar__day:nth-child(n + 30),
+.calendar--month-length-30 .calendar__day:nth-child(n + 31),
+.calendar--month-length-31 .calendar__day:nth-child(n + 32) {
+  display: none;
+}
+
+.calendar--start-day-mon .calendar__day:first-child {
+  margin-left: 0;
+}
+
+.calendar--start-day-tue .calendar__day:first-child {
+  margin-left: 101px;
+}
+
+.calendar--start-day-wed .calendar__day:first-child {
+  margin-left: 202px;
+}
+
+.calendar--start-day-thu .calendar__day:first-child {
+  margin-left: 303px;
+}
+
+.calendar--start-day-fri .calendar__day:first-child {
+  margin-left: 404px;
+}
+
+.calendar--start-day-sat .calendar__day:first-child {
+  margin-left: 505px;
+}
+
+.calendar--start-day-sun .calendar__day:first-child {
+  margin-left: 606px;
+}
