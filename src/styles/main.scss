@@ -1,0 +1,67 @@
+$cell-width: 100px;
+$calendar-gap: 1px;
+$days-in-row: 7;
+$calendar-days-amount: 31;
+$padding-value: 10px;
+$calendar-width: (($days-in-row * ($cell-width + $calendar-gap) - 1));
+$days-of-week: (
+  mon ($cell-width + $calendar-gap) * 0,
+  tue ($cell-width + $calendar-gap) * 1,
+  wed ($cell-width + $calendar-gap) * 2,
+  thu ($cell-width + $calendar-gap) * 3,
+  fri ($cell-width + $calendar-gap) * 4,
+  sat ($cell-width + $calendar-gap) * 5,
+  sun ($cell-width + $calendar-gap) * 6
+);
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: $calendar-gap;
+  padding: $padding-value;
+  width: $calendar-width + 2 * $padding-value;
+
+  @each $day, $margin in $days-of-week {
+    &--start-day--#{$day} :first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length--#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    border: 1px solid black;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition-duration: 500ms;
+
+    @for $i from 1 through $calendar-days-amount {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ffbfcb;
+        transform: translateY(-20px);
+        transition-duration: 500ms;
+      }
+    }
+  }
+}
