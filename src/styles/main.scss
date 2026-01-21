@@ -1,0 +1,98 @@
+$month-length: 31;
+$main-color: #eee;
+$border-color: #000;
+$hover-color: #ffbfcb;
+$font-family: Arial, sans-serif;
+$gap: 1px;
+$day-size: 100px;
+$columns: 7;
+$padding: 10px;
+$calendar-starting-from-wednes-day: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap; // дае працювати нормально
+  align-items: center;
+  gap: $gap;
+  padding: $padding;
+
+  width: calc(
+    ($columns * #{$day-size}) + (6 * #{$gap})
+  ); // 7 колонок і gap між ними
+
+  &__day {
+    background-color: $main-color;
+    width: $day-size;
+    height: $day-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $border-color;
+    box-sizing: border-box; // border in box(day)
+    font-family: $font-family;
+    font-size: 16px;
+
+    @for $i from 1 through $month-length {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-size: 30px;
+        color: #000;
+      }
+    }
+
+    cursor: pointer;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  &--start-day-sun {
+    .calendar__day:nth-child(1) {
+      margin-left: calc(2 * #{$day-size} + #{$gap});
+    }
+  }
+
+  @each $day, $index in $calendar-starting-from-wednes-day {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc(
+          (#{$index} * #{$day-size}) + (#{$index} * #{$gap})
+        ); // Вираховує відступ
+      }
+    }
+  }
+
+  &.calendar--month-length-31 {
+    .day {
+      display: block; // Усі 31 днів видимі
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &.calendar--month-length-#{$days} {
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        display: none; // включчаемо невидимість після заднього дня в місяці
+      }
+    }
+  }
+}
