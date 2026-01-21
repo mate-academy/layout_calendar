@@ -35,9 +35,11 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 ## Checklist
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
+ 
+- [DEMO LINK](https://https://github.com/AlexanderBarkar/layout_calendar.github.io/layout_calendar/)
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [TEST REPORT LINK](https://https://github.com/AlexanderBarkar/layout_calendar.github.io/layout_calendar/report/html_report/)
+
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
