@@ -1,3 +1,70 @@
+@import './variables';
+
+// Застосування border-box для всіх елементів
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Загальні стилі для сторінки
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(7 * $day-size + 6 * $gap + 2 * $padding);
+  margin: 0 auto;
+  gap: $gap;
+  padding: $padding;
+}
+
+.calendar__day {
+  display: flex; /* Вирівнювання по центру */
+  justify-content: center; /* Вирівнювання по горизонталі */
+  align-items: center; /* Вирівнювання по вертикалі */
+  position: relative;
+  height: $day-size;
+  width: $day-size;
+  background-color: $background-color;
+  font-size: $font-size;
+  border: solid $border-size $border-color; /* Використання змінної кольору рамки */
+  transition:
+    background-color $animation-duration,
+    transform $animation-duration;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY($translate-y); /* Використання змінної translateY */
+    background-color: $hover-color;
+  }
+}
+
+// Генерація номерів днів
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+// Генерація відступів для перших днів тижня
+@each $day, $margin in $days {
+  $margin-left: $margin * ($day-size + $gap); // Обчислення лівого відступу
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $margin-left; // Використання змінної
+  }
+}
+
+// Приховування зайвих днів для місяців з меншим числом днів
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
 }
