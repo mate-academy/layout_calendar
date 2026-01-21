@@ -1,3 +1,80 @@
+$day-size: 100px;
+$gap-size: 1px;
+$border-color: #000;
+$bg-color: #eee;
+$hover-bg-color: #ffbfcb;
+$hover-move: -20px;
+$transition-duration: 0.5s;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: 726px;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    background-color: $bg-color;
+    border: 1px solid $border-color;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg-color;
+      transform: translateY($hover-move);
+    }
+  }
+
+  // Добавляем числа с 1 по 31
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // Модификатор для установки первого дня недели
+  $start-days: (
+    sun: 606px,
+    mon: 0,
+    tue: calc($day-size + $gap-size),
+    wed: calc(2 * ($day-size + $gap-size)),
+    thu: calc(3 * ($day-size + $gap-size)),
+    fri: calc(4 * ($day-size + $gap-size)),
+    sat: calc(5 * ($day-size + $gap-size)),
+  );
+
+  @each $day, $margin in $start-days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  // Модификатор для длины месяца
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
