@@ -1,0 +1,72 @@
+body {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+}
+
+.calendar {
+  padding: $day-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  max-width: calc(($day-size * $columns) + ($gap * ($columns - 1)));
+
+  &__day {
+    border: 1px solid black;
+
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@function get($map, $key) {
+  @each $k, $v in $map {
+    @if $k == $key {
+      @return $v;
+    }
+  }
+
+  @return null;
+}
+
+@each $day in $days-of-week {
+  $index: get($day-index, $day);
+
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{$index} * (#{$day-size} + #{$gap}));
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
