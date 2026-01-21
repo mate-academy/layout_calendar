@@ -12,7 +12,7 @@ const basic = {
     'h1',
   ],
   misMatchThreshold: 0.5,
-  referenceUrl: basicScenario.referenceUrl + '/calendar/',
+  referenceUrl: `${basicScenario.referenceUrl}/calendar/`,
 };
 
 const config = {
@@ -35,7 +35,7 @@ const config = {
     {
       ...basic,
       label: 'Calendar day with hover effect',
-      hoverSelector: '.calendar__day:nth-child(5)',
+      hoverSelector: '.calendar__day:nth-child(13)',
       postDOMChangeWait: 1000,
     },
     {

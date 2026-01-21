@@ -1,6 +1,7 @@
-module.exports = async (page, scenario, vp) => {
+const clickAndHoverHelper = require('./clickAndHoverHelper');
+
+module.exports = async (page, scenario) => {
   console.log('SCENARIO > ' + scenario.label);
-  await require('./clickAndHoverHelper')(page, scenario);
 
   const {
     label,
@@ -8,13 +9,27 @@ module.exports = async (page, scenario, vp) => {
   } = scenario;
 
   switch (label) {
+    case 'Calendar day with hover effect': {
+      await page.evaluate(() => {
+        document.documentElement.style.setProperty(
+          '--calendar-hover-shift',
+          '0px'
+        );
+      });
+
+      break;
+    }
+
     case 'Calendar starting from Wednesday': {
       await page.waitForSelector('.calendar');
       await page.waitForSelector('.calendar--start-day-sun');
 
       await page.evaluate(() => {
         const calendarElement = document.querySelector('.calendar');
-        const newClassName = calendarElement.className.replace('calendar--start-day-sun', 'calendar--start-day-wed');
+        const newClassName = calendarElement.className.replace(
+          'calendar--start-day-sun',
+          'calendar--start-day-wed'
+        );
 
         calendarElement.className = newClassName;
       });
@@ -31,9 +46,20 @@ module.exports = async (page, scenario, vp) => {
 
       await page.evaluate(() => {
         const calendarElement = document.querySelector('.calendar');
-        const newClassName = calendarElement.className.replace('calendar--month-length-31', 'calendar--month-length-29');
+        if (!calendarElement) {
+          return;
+        }
 
-        calendarElement.className = newClassName;
+        calendarElement.classList.remove('calendar--month-length-31');
+        calendarElement.classList.add('calendar--month-length-29');
+
+        const daysToHide = calendarElement.querySelectorAll(
+          '.calendar__day:nth-child(n + 30)'
+        );
+
+        daysToHide.forEach(day => {
+          day.style.display = 'none';
+        });
       });
 
       await page.waitForSelector('.calendar--month-length-29');
@@ -45,4 +71,6 @@ module.exports = async (page, scenario, vp) => {
     default:
       break;
   }
+
+  await clickAndHoverHelper(page, scenario);
 };
