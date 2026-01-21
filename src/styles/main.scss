@@ -1,0 +1,58 @@
+@use 'sass:list';
+@import './utils/variables';
+
+.page {
+  margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: 7 * ($day-size + $gap) - $gap;
+  padding: 10px;
+
+  &__day {
+    box-sizing: border-box;
+    height: $day-size;
+    width: $day-size;
+    border: 1px solid black;
+    background-color: #eee;
+    text-align: center;
+    line-height: 98px;
+    transition: $std-transition;
+
+    &::before {
+      font-family: $std-font-family;
+      font-size: $std-font-size;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @each $day in $start-day {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ((list.index($start-day, $day) - 1) * ($day-size + $gap));
+    }
+  }
+
+  @for $day from 28 through 31 {
+    &--month-length-#{$day} &__day:nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+}
