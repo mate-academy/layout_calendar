@@ -1,0 +1,86 @@
+@import './variables';
+@import './mixins';
+
+.calendar {
+  @include flex-center;
+
+  flex-wrap: wrap;
+
+  max-width: calc(
+    #{$day-size} * 7 + #{$day-gap} * 6 + 20px
+  ); /* Limita a largura a 7 colunas + espaçamento */
+
+  margin: auto;
+
+  padding: 10px;
+
+  &__day {
+    width: $day-size;
+
+    height: $day-size;
+
+    background-color: $grey;
+
+    border: 1px solid $border-color;
+
+    margin: $day-gap;
+
+    position: relative;
+
+    @include flex-center;
+
+    font-size: $font-size;
+
+    font-family: $font-family;
+
+    &::before {
+      content: counter(day);
+
+      counter-increment: day;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      background-color: $highlight-color;
+
+      transform: translateY(-20px);
+
+      @include transition(all, $transition-duration);
+    }
+  }
+
+  &--start-sun .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 0;
+  }
+
+  &--start-mon .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 1;
+  }
+
+  &--start-tue .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 2;
+  }
+
+  &--start-wed .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 3;
+  }
+
+  &--start-thu .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 4;
+  }
+
+  &--start-fri .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 5;
+  }
+
+  &--start-sat .calendar__day:nth-child(1) {
+    margin-left: calc(#{$day-size} + #{$day-gap}) * 6;
+  }
+
+  @for $i from 28 through 31 {
+    &--length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
