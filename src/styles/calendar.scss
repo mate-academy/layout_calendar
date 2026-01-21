@@ -1,0 +1,69 @@
+@use 'variables';
+
+.calendar {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  gap: variables.$cell-gap;
+  padding-left: variables.$padding;
+  padding-right: variables.$padding;
+
+  width: calc(
+    ((variables.$cell-size + 2 * variables.$cell-border) * 7) + (variables.$cell-gap * 6) + (2 * variables.$padding));
+
+  &__day {
+    width: variables.$cell-size;
+    height: variables.$cell-size;
+    border: variables.$cell-border solid black;
+    background-color: variables.$default-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: variables.$font-family;
+    transition:
+    background-color variables.$animation-duration,
+    transform variables.$animation-duration;
+  }
+
+  &__day::before {
+    font-size: variables.$font-size;
+    font-family: variables.$font-family;
+    position: absolute;
+    text-align: center;
+    content: attr(data-day);
+  }
+
+
+&__day--empty::before {
+  display: none;
+}
+
+&__day:hover {
+  cursor: pointer;
+  background-color: variables.$hover-color;
+  transform: translateY(variables.$hover-transform);
+}
+
+@each $name, $index in (mon, tue, wed, thu, fri, sat, sun) {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: calc(
+      (variables.$cell-size + 2 * variables.$cell-border + variables.$cell-gap) * #{$index});
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+&__day--ghost::before {
+  display: none;
+}
+
+&__day--ghost {
+  visibility: hidden;
+}
+}
