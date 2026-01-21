@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sections {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $my-var; // Ширина календаря
+  gap: $width-gap; // Проміжки між днями
+
+  &__day {
+    width: $width-boxs; // Ширина дня
+    height: $width-boxs; // Висота дня
+    border: 1px solid black; // Чорний бордюр
+    background-color: #eee; // Світло-сірий фон
+    transition: transform 0.5s ease; // Анімація при наведенні
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+
+    // При наведенні на день
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb; // Рожевий фон при наведенні
+      transform: translateY(-80px); // Підняття на 20px при наведенні
+    }
+
+    // Виводимо дні з 1 по 31 через цикл
+    @for $n from 1 through $calendar-days {
+      &:nth-child(#{$n})::after {
+        content: '#{$n}'; // Виводимо номер дня
+      }
+    }
+  }
+
+  // Обробка зсуву для перших днів тижня
+  @each $day, $n in $days-of-the-week {
+    &--days-#{$day} &__day:first-child {
+      margin-left: ($width-boxs + $width-gap) * $n; // Зсув першого дня
+    }
+  }
+
+  // Приховуємо дні для місяців з 28, 29, 30 днями
+  @for $length from 28 through $calendar-days {
+    &--months-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none; // Приховуємо дні, які більше за кількість днів у місяці
+    }
+  }
+}
