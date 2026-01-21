@@ -1,0 +1,81 @@
+// ---------------- Variables ----------------
+$day-size: 100px;
+$day-border: 1px;
+$day-font-size: 30px;
+$day-font: Arial, sans-serif;
+$day-bg: #eee;
+$day-hover-bg: #ffbfcb;
+$transition-time: 0.5s;
+
+$calendar-gap: 1px;
+$calendar-padding: 5px; // суммарно 10px горизонтально
+$columns: 7;
+
+// ---------------- Calendar ----------------
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $columns * $day-size + ($columns - 1) * $calendar-gap + $calendar-padding * 2;
+  padding: $calendar-padding;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    border: $day-border solid black;
+    background-color: $day-bg;
+    position: relative;
+    font-family: $day-font;
+    box-sizing: border-box;
+
+    // числа через ::before
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: "#{$i}";
+      }
+    }
+
+    &::before {
+      font-size: $day-font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    transition: background-color $transition-time, transform $transition-time;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $day-hover-bg;
+      transform: translateY(-20px);
+    }
+  }
+
+  // ---------------- Month length ----------------
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // ---------------- Start-day modifiers ----------------
+  @each $day, $index in (sun: 1, mon: 2, tue: 3, wed: 4, thu: 5, fri: 6, sat: 7) {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($index - 1) * ($day-size + $calendar-gap);
+      }
+    }
+  }
+}
+
+body {
+  margin: 0;
+}
