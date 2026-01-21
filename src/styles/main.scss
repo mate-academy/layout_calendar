@@ -1,0 +1,117 @@
+// ====================
+// Calendar Variables
+// ====================
+
+// Global box-sizing
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// Tamanho dos dias
+$day-size: 100px;
+$day-border: 1px;
+$day-gap: 1px;
+
+// Layout do calendário
+$columns: 7;
+$calendar-padding: 5px; // total horizontal = 10px
+
+// Aparência dos dias
+$day-bg: #eee;
+$day-border-color: #000;
+
+// Fonte
+$font-family: Arial, sans-serif;
+$font-size: 30px;
+
+// Hover
+$hover-bg: #ffbfcb;
+$hover-transform: -20px;
+$transition-duration: 0.5s;
+
+// Background do container
+$calendar-bg: #fff;
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+  background-color: $calendar-bg;
+
+  // Largura exata: 7 colunas + gap + padding
+  width: calc(
+    ($day-size + $day-gap) * $columns - $day-gap + ($calendar-padding * 2)
+  );
+}
+
+.calendar-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-bg;
+  border: $day-border solid $day-border-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family;
+  font-size: $font-size;
+  position: relative;
+
+  cursor: pointer;
+
+  // Transição para hover-in e hover-out
+  transition:
+    background-color $transition-duration,
+    transform $transition-duration;
+
+  &:hover {
+    background-color: $hover-bg;
+    transform: translateY($hover-transform);
+  }
+}
+
+// Start-day modifiers corrigidos: Monday = 0, Sunday = 6
+@each $day, $col in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(($day-size + $day-gap) * $col);
+    }
+  }
+}
+
+// Month-length modifiers: esconde dias extras
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} {
+    .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
+
+// Números dos dias gerados via Sass @for
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
