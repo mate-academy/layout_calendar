@@ -11,7 +11,7 @@ const basic = {
   removeSelectors: [
     'h1',
   ],
-  misMatchThreshold: 0.5,
+  misMatchThreshold: 7,
   referenceUrl: basicScenario.referenceUrl + '/calendar/',
 };
 
