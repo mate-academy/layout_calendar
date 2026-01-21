@@ -1,0 +1,47 @@
+.calendar {
+  width: $calendar_width;
+  height: $calendar_height;
+  display: $calendar_display;
+  flex-wrap: wrap;
+  margin: 0;
+  box-sizing: border-box;
+  gap: 0;
+
+  &__day {
+    width: $calendar_day_width;
+    height: $calendar_day_height;
+    background-color: $calendar_day_color;
+    border: $calendar_border;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transition-duration: 0.5s;
+
+    &::before {
+      content: '';
+      font-size: $font-size;
+      font-family: Arial, sans-serif;
+      color: black;
+    }
+  }
+
+  .calendar__day--spacer {
+    visibility: hidden;
+  }
+
+  @for $i from 1 through 35 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{ $i - 4 }';
+    }
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background: #ffbfcb;
+  transform: translateY(-20px);
+}
