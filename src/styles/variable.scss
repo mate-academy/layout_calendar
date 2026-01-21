@@ -1,0 +1,11 @@
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+
+@function find-index($list, $value) {
+  @for $i from 1 through length($list) {
+    @if nth($list, $i) == $value {
+      @return $i;
+    }
+  }
+
+  @return null;
+}
