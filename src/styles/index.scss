@@ -1,3 +1,64 @@
+@import './variables.scss';
+
 body {
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar__day-gap;
+  width: calc(7 * $calendar__day-dimension + $calendar__padding + $calendar__day-gap);
+  justify-content: center;
+  align-items: center;
+
+    &__day {
+      box-sizing: border-box;
+      border: 1px solid $calendar__border-color;
+      background-color: $calendar__background-color;
+      width: $calendar__day-dimension;
+      height: $calendar__day-dimension;
+      position: relative;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $calendar__day-hover-color;
+        transform: translateY(-20px);
+        transition-duration: $calendar__transition-duration;
+      }
+
+      @for $i from 1 through 31 {
+        &:nth-child(#{$i})::before {
+          content: "#{$i}";
+          font-size: $font-size-day-number;
+          font-family: $font-family-day-number;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+    }
+  }
+
+  @each $day, $margin in (
+    sun: 0px,
+    mon: $calendar__day-dimension + $calendar__day-gap,
+    tue: $calendar__day-dimension * 2 + $calendar__day-gap * 2,
+    wed: $calendar__day-dimension * 3 + $calendar__day-gap * 3,
+    thu: $calendar__day-dimension * 4 + $calendar__day-gap * 4,
+    fri: $calendar__day-dimension * 5 + $calendar__day-gap * 5,
+    sat: $calendar__day-dimension * 6 + $calendar__day-gap * 6
+  ) {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $margin;
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} {
+      .calendar__day:nth-child(n + #{$days + 1}) {
+        display: none;
+      }
+    }
+}
 }
