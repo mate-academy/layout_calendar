@@ -1,0 +1,25 @@
+@import 'variables';
+
+// Start-day modifier (sun to sat)
+$weekdays:
+  1 mon,
+  2 tue,
+  3 wed,
+  4 thu,
+  5 fri,
+  6 sat,
+  7 sun;
+
+@each $index, $day in $weekdays {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: (($index - 1) * ($day-size + $day-gap));
+  }
+}
+
+// Month-length modifier (28–30)
+@for $length from 28 through 30 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{($length + 1)}) {
+    display: none;
+  }
+}
