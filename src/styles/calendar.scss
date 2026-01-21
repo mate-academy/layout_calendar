@@ -1,0 +1,36 @@
+.calendar {
+  position: relative;
+  width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  margin: 0 auto;
+  padding-left: 47px;
+
+  &__day {
+    background-color: #eee;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+    cursor: pointer;
+
+    @for $i from 1 through 31 {
+      &[data-day='#{$i}']::before {
+        content: '#{$i}';
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    }
+  }
+
+  &__day:hover{
+    background-color: #FFBFCB;
+    transform: translateY(-20px);
+  }
+
+}

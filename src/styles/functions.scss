@@ -1,0 +1,23 @@
+
+$week-days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+@each $day, $day-position in $week-days {
+  .calendar--start-day-#{$day} > :first-child {
+    margin-left: ($cell-size + $gap) * $day-position;
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
