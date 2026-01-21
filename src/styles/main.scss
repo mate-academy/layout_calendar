@@ -1,0 +1,69 @@
+$cell-size: 100px;
+$padding-general: 10px;
+$field-width: (7 * $cell-size) + (2 * $padding-general) + 6;
+$days: 31;
+$day-of-week: ('mon' 1, 'tue' 2, 'wed' 3, 'thu' 4, 'fri' 5, 'sat' 6, 'sun' 7);
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  gap: 1px;
+  flex-wrap: wrap;
+  width: $field-width;
+  padding-inline: $padding-general;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $date from 1 through $days {
+      &:nth-child(#{$date})::before {
+        content: '#{$date}';
+      }
+    }
+  }
+
+  & :first-child {
+    margin-left: ($cell-size * 6) + 6;
+  }
+}
+
+@each $name, $startPosition in $day-of-week {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size * ($startPosition - 1)) + ($startPosition - 1);
+    }
+  }
+}
+
+@for $i from 28 through $days {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
