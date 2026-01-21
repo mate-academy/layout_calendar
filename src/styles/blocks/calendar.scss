@@ -1,0 +1,31 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-day;
+  box-sizing: border-box;
+
+  @include width-calendar;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid $border-day;
+    background-color: $bg-day;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    @include size-day;
+  }
+
+  &__day:hover {
+    background-color: $bg-hover-day;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
