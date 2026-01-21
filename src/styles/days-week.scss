@@ -1,0 +1,30 @@
+$week-day: (
+     1: "Mon",
+     2: "Tue",
+     3: "Wed",
+     4: "Thu",
+     5: "Fri",
+     6: "Sat",
+     7: "Sun"
+);
+
+  .days-week {  
+     display: flex;
+     flex-direction: row;
+     justify-content: space-around;
+
+     width: 600px;
+     height: 20px; 
+
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 16px;
+    
+          @each $index, $txt in $week-day {
+          p:nth-child(#{$index})::before {
+          content: "#{$txt}";
+
+        }
+       
+    }
+  
+  }
