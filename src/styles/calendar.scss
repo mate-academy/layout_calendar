@@ -1,0 +1,22 @@
+@import './variables.scss';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $gap-size;
+  width: calc($day-size * 7 + $gap-size * 6); // 7 колонок
+  margin: 0 auto;
+
+  &--start-day-sun {
+    .calendar__day:first-child {
+      margin-left: calc($day-size * 0);
+    }
+  }
+
+  &--month-length-31 {
+    .calendar__day:nth-child(n+32) {
+      display: none;
+    }
+  }
+}
