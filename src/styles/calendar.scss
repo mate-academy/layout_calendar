@@ -1,0 +1,51 @@
+@use 'variables' as *;
+@use 'sass:list';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: $day-gap;
+  width: $calendar-width;
+  height: 768px;
+  padding: 0 159px;
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    margin: 0;
+    padding: 0;
+    border: solid black $day-border;
+    position: relative;
+    background-color: #eee;
+    transition-duration: 0.5s;
+  }
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+  &__day::before {
+    height: 100%;
+    display: block;
+    align-content: center;
+    text-align: center;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $weekday in $weekdays {
+    &--start-day-#{$weekday} > &__day:nth-child(1) {
+      margin-left: calc($day-offset * (list.index($weekdays, $weekday) - 1));
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} > &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
