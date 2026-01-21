@@ -1,3 +1,80 @@
+$cell-size: 100px;
+$gap: 1px;
+$border-size: 1px;
+$total-columns: 7;
+$total-size: $cell-size + $border-size;
+$padding: 10px;
+$calendar-width: ($total-columns * $cell-size) + (6 * $gap);
+$margin-left: ($total-size + $gap) * 6;
+$star-day: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+$month-lengths: 28, 29, 30, 31;
+$day-background: #eee;
+$day-border: 1px solid black;
+$day-in-month: 31;
+$number-font-family: Arial, sans-serif;
+$number-font-size: 30px;
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  padding: $padding;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+
+  &__day {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    border: $day-border;
+    background-color: $day-background;
+
+    display: flex;
+    font-family: $number-font-family;
+    font-size: $number-font-size;
+
+    transition-duration: 0.5s;
+    transition-property: transform, background-color;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through $day-in-month {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  @each $day, $i in $star-day {
+    &--start-day-#{$day} :first-child {
+      margin-left: calc(#{$i} * $cell-size + (#{$i} * 1px));
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} :nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
 }
