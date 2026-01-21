@@ -1,3 +1,28 @@
+@import './utils/variables';
+@import './utils/typography';
+@import './blocks/calendar';
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: '#{$day}';
+  }
+}
+
+@each $day, $index in $day-names {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: (($index - 1) * $square-size) + (($index - 1) * $base-gap);
+  }
+}
+
+@for $day from $min-days through $max-days {
+  .calendar--month-length-#{$day}
+    .calendar__day:nth-last-child(-n + #{$max-days - $day}) {
+    display: none;
+  }
 }
