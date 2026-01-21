@@ -13,6 +13,7 @@ Display a calendar in the middle of the screen (both horizontally and vertically
 - Implement `start-day` modifier for the `calendar` with `mon`, `tue`, `wed`, `thu`, `fri`, `sat` and `sun` values
   - Use [@each](https://sass-lang.com/documentation/at-rules/control/each) to create all the modifiers
   - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
+
   - You can just add correct `margin-left` for the first day
   - Set calendar to start from Sunday by default in your HTML
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
@@ -30,14 +31,16 @@ On hovering over a cell:
 *Important note*: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
 This is possible because [we use the Parcel library](https://en.parceljs.org/scss.html) to bundle your solution's source code.
 
-![reference image](reference.png).
+
+
+![reference image](referenc3e.png).
 
 ## Checklist
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://Razsinxron.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Razsinxron.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
