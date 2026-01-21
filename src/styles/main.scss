@@ -1,0 +1,77 @@
+@use 'sass:list';
+
+body {
+  margin: 0;
+}
+
+@import 'variables';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: calc($cell-size * 7 + $gap * 6 + $padding * 2);
+
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &__day {
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: $cell-border solid black;
+    background: #eee;
+    position: relative;
+    transition: all $transition ease;
+
+    &:nth-child(1) {
+      margin-left: $calendar-margin;
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: $font-family;
+      font-size: $font-size;
+      content: '';
+    }
+
+    // hover эффекты
+    &:hover {
+      cursor: pointer;
+      background: $hover-color;
+      transform: translateY(-$hover-move);
+    }
+  }
+
+  // Добавляем числа в ячейки
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // Модификатор длины месяца
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  // Модификатор стартового дня недели
+
+  $days: sun, mon, tue, wed, thu, fri, sat;
+
+  @each $day in $days {
+    $i: list.index($days, $day) - 1; // индекс текущего дня, начиная с 0
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc(($cell-size + $gap) * #{$i});
+    }
+  }
+}
