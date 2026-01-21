@@ -1,3 +1,43 @@
+@use 'variables';
+
 body {
   margin: 0;
+}
+
+.calendar {
+  width: (variables.$box-day-size * 7) + 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  padding: 10px;
+
+  &-day {
+    width: variables.$box-day-size;
+    height: variables.$box-day-size;
+    background-color: #eee;
+    border: 1px solid black;
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition-duration: 0.5s;
+
+    &:first-child {
+      margin-left: (variables.$box-day-size * 6) + 6;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar-day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
 }
