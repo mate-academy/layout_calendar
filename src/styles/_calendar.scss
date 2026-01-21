@@ -1,0 +1,69 @@
+@use './variables' as vars;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(vars.$day-size * 7 + vars.$gap-size * 6 + vars.$padding-calendar * 2);
+  padding: vars.$padding-calendar;
+  gap: vars.$gap-size;
+  margin: auto;
+  position: relative;
+  font-family: vars.$font-family;
+  background-color: vars.$background-color;
+  color: vars.$text-color;
+
+  &__day {
+    position: relative;
+    width: vars.$day-size;
+    height: vars.$day-size;
+    background-color: vars.$day-bg;
+    border: vars.$day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+    transition:
+      background-color vars.$animation-duration,
+      transform vars.$animation-duration;
+
+    &::before {
+      font-family: vars.$font-family;
+      font-size: vars.$day-font-size;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: vars.$text-color;
+    }
+
+    &:hover {
+      background-color: vars.$hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Dias de 1 a 31
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: "#{$i}";
+    }
+  }
+
+  // Modificadores de dia inicial
+  @each $day, $index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+    &--start-day-#{$day} {
+      > .calendar__day:nth-child(1) {
+        margin-left: calc(#{$index} * (vars.$day-size + vars.$gap-size));
+      }
+    }
+  }
+
+  // Modificadores para tamanho do mês
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      > .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
