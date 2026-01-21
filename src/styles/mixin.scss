@@ -1,0 +1,8 @@
+@import './variables';
+
+@mixin start-day($start-day) {
+  $margin: map.get($days-of-week, $start-day);
+  .calendar--start-day-#{$start-day} .calendar__day:first-child {
+    margin-left: calc(#{$margin} * (#{$daywidth} + #{$border-width}));
+  }
+}
