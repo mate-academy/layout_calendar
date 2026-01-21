@@ -1,3 +1,60 @@
+@import 'variable';
+
 body {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   margin: 0;
+
+  .calendar {
+    width: $width-cell;
+    flex-wrap: wrap;
+    display: flex;
+    gap: $gap;
+    padding: 10px;
+
+    @each $start-day, $count in $start-days {
+      &--start-day-#{$start-day} {
+        .calendar__day:nth-child(1) {
+          margin-left: calc(#{$count * ($cell-size + $gap)});
+        }
+      }
+    }
+
+    @for $days from 28 through 31 {
+      &--month-length-#{$days} {
+        .calendar__day:nth-child(n + #{$days + 1}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .calendar__day {
+    border: #{$border} solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: $cell-size;
+    width: $cell-size;
+    box-sizing: border-box;
+    background-color: #eee;
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    @for $day from 1 through $day-count {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+    &:hover {
+      background: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
