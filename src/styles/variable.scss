@@ -1,0 +1,23 @@
+$day-size: 100px;
+$gap-size: 1px;
+$days-map: (
+  start-day-mon: 0,
+  start-day-tue: 1,
+  start-day-wed: 2,
+  start-day-thu: 3,
+  start-day-fri: 4,
+  start-day-sat: 5,
+  start-day-sun: 6,
+);
+
+@each $day, $pos in $days-map {
+  .calendar--#{$day} .calendar__day:first-child {
+    margin-left: calc(#{($pos) * ($day-size + $gap-size)});
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
