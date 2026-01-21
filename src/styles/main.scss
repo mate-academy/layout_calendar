@@ -1,0 +1,76 @@
+// Variables
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$padding-size: 5px;
+
+// The total width of the calendar, including gaps and padding
+// (7 days * day size) + (6 gaps * gap size) + (2 paddings * padding size)
+$calendar-width: (7 * $day-size) + (6 * $gap-size) + (2 * $padding-size);
+$days-in-month: 31; // Default month length
+
+.calendar {
+  margin: 0 auto;
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  list-style: none;
+  counter-reset: day-counter;
+  padding-left: $padding-size;
+  padding-right: $padding-size;
+
+  &__day {
+    border: $border-size solid black;
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    counter-increment: day-counter;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition:
+        background-color 0.5s,
+        transform 0.5s;
+      cursor: pointer;
+    }
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      content: counter(day-counter);
+      font-size: 30px;
+    }
+  }
+
+  $start-days: (
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+    sun: 0 // The last one is for the default margin,,,,,
+  );
+
+  @each $day, $offset in $start-days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      @if $offset > 0 {
+        margin-left: ($day-size + $gap-size) * $offset;
+      } @else {
+        margin-left: 0;
+      }
+    }
+  }
+
+  // Month-length modifier
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
