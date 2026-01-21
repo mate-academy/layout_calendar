@@ -1,0 +1,25 @@
+@mixin generate-days($lengths) {
+  @each $length in $lengths {
+    &--month-length-#{$length} {
+      @for $i from 1 through $length {
+        .calendar__day:nth-child(#{$i})::before {
+          content: '#{$i}';
+        }
+      }
+
+      @for $j from ($length + 1) through 32 {
+        .calendar__day:nth-child(#{$j}) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@mixin generate-start-day-margins($days-map) {
+  @each $day, $marginAmount in $days-map {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $marginAmount;
+    }
+  }
+}

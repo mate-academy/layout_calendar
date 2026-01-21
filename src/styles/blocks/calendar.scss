@@ -1,0 +1,27 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @include generate-days($month-lengths);
+  @include generate-start-day-margins($start-days-margin);
+}
