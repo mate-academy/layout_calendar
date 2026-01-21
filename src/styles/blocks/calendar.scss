@@ -1,0 +1,62 @@
+@use '../utilities/variables.scss' as *;
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $cell-gap;
+    padding: $grid-padding;
+    width: $container-width;
+    box-sizing: border-box;
+  }
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $color-primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid $border-color;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+    transform: translateY(0);
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $color-secondary;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day in $week-day {
+    $day-index: list.index($week-day, $day);
+    $margin-value: ($cell-size + $cell-gap) * ($day-index - 1);
+
+    .calendar-start-day--#{$day} &__day:nth-child(1) {
+      margin-left: $margin-value;
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    $to-hide: $month-length + 1;
+    &.calendar-month-length--#{$month-length} {
+      .calendar__grid > .calendar__day:nth-child(n + #{$to-hide}) {
+        display: none;
+      }
+    }
+  }
+}
