@@ -1,0 +1,25 @@
+@import '../utilities/variables';
+
+@each $day, $value in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
+  .calendar--start-day-#{$day} :nth-child(1) {
+    margin-left: calc(
+      #{$calendar-day-width} * #{$value} + #{$day-gap} * #{$value}
+    );
+  }
+}
+
+@for $cell from 1 through 31 {
+  .calendar__day:nth-child(#{$cell})::before {
+    content: '#{$cell}';
+
+    @include date-font;
+  }
+}
+
+@for $end-day from 28 through 31 {
+  .calendar--month-length-#{$end-day} {
+    .calendar__day:nth-child(n + #{$end-day + 1}) {
+      display: none;
+    }
+  }
+}
