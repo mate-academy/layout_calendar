@@ -1,0 +1,60 @@
+@import 'variables';
+@import 'mixins';
+
+body {
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  margin: 0;
+
+  @include center-items;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $block-gap;
+  width: $calendar-width;
+
+  @for $len from 28 to 30 {
+    &--month-length-#{$len} &__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    @include center-items;
+
+    background-color: #eee;
+    width: $block-width;
+    height: $block-height;
+    border: $block-gap solid #000;
+    box-sizing: border-box;
+    padding: 10px;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    @function get-start-day($day) {
+      @return index($start-day, $day) - 1;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    @each $day in $start-day {
+      .calendar--start-day-#{$day} &:first-child {
+        margin-left: calc(get-start-day($day) * ($block-width + $block-gap));
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
