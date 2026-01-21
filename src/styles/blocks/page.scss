@@ -1,0 +1,64 @@
+@use '../variables' as *;
+@use 'sass:list';
+
+body {
+  font-family: $textType;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-flow: row wrap;
+  gap: $gapCell;
+  width: calc($size * $dayOfTheWeek + $gapCell * ($dayOfTheWeek - 1));
+  padding: 0 ($paddingX / 2);
+
+  &__day {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: $size;
+    height: $size;
+    border: $borderCell;
+    background-color: $colorOfTheDay;
+    cursor: pointer;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+  }
+
+  &__day:hover {
+    transform: translateY(-20px);
+    background-color: $colorOfTheDayHover;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-family: $textType;
+      font-size: $textSize;
+    }
+  }
+
+  @each $day in $start-day {
+    $i: list.index(
+      $start-day,
+      $day
+    ); // тут використовуємо вбудовану фунцію saas, яка шукає позицію елемента $day у списку $start-day
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($i - 1) * $size + ($gapCell * ($i - 1));
+    }
+  }
+
+  @for $j from 28 through 31 {
+    &--month-length-#{$j} &__day:nth-child(n + #{ $j + 1 }) {
+      display: none;
+    }
+  }
+}
