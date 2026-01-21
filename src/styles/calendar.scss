@@ -1,0 +1,54 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $box-size * 7 + $gap * 6;
+  padding: 10px;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    box-sizing: border-box;
+    height: $box-size;
+    width: $box-size;
+    border: 1px solid #000;
+    background-color: #eee;
+
+    transition: all 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
+
+@for $data from 1 through 31 {
+  // прописываем числа в ячейках
+  .calendar__day:nth-child(#{$data})::before {
+    content: '#{$data}';
+  }
+}
+
+@each $day-name, $number in $weeks {
+  // цикл, чтоб присвоить числа дням недели
+  .calendar--start-day-#{$day-name} {
+    .calendar__day:first-child {
+      margin-left: calc((#{$number} * #{$box-size}) + (#{$number} * #{$gap}));
+    }
+  }
+}
+
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} {
+    .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+}
