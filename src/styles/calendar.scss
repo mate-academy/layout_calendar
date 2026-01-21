@@ -1,0 +1,50 @@
+$size: 100px;
+$month-length: 31;
+$sun: 606px;
+
+.calendar {
+  gap: 1px;
+  display: flex;
+  box-sizing: border-box;
+  width: 726px;
+  height: fit-content;
+  flex-wrap: wrap;
+
+  position: absolute;
+  inset: 0;
+  margin: auto;
+
+  padding: 10px;
+  background: #fff;
+  font-size: 30px;
+
+  &-day {
+    display: flex;
+    box-sizing: border-box;
+    width: $size;
+    height: $size;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    border: 1px solid #000;
+
+    @each $shift in $sun {
+      &:nth-child(1) {
+        margin-left: $shift;
+      }
+    }
+
+    @for $date from 1 through $month-length {
+      &:nth-child(#{$date})::before {
+        content: '#{$date}';
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      transform: translate(0, -20);
+      background-color: #ffbfcb;
+      animation-duration: 0.5s;
+    }
+  }
+}
