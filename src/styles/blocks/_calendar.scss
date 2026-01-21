@@ -1,0 +1,30 @@
+.calendar {
+  @include calendar-style;
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day}) {
+      @include day-block-theme;
+
+      &::before {
+        content: '#{$day}';
+      }
+
+      &:hover {
+        @include day-hover;
+      }
+    }
+  }
+
+  @each $day_name, $day_month_number in $start-days {
+    &--start-day-#{$day_name} &__day:first-child {
+      margin-left: calc(($day_month_number - 1) * ($day_block + 1px));
+    }
+  }
+
+  @for $month_length from 28 through 31 {
+    &--month-length-#{$month_length}
+      &__day:nth-child(n+#{$month_length + 1}) {
+      display: none;
+    }
+  }
+}
