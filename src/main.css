@@ -1,0 +1,90 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  counter-reset: day;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  width: calc((100px + 2px) * 7 + 10px);
+  padding: 10px;
+  position: relative;
+}
+
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  border: solid 1px black;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+}
+
+.calendar__day::before {
+  content: counter(day);
+  counter-increment: day;
+  font-size: 30px;
+  color: black;
+}
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+.calendar__day:nth-child(1) {
+  margin-left: calc((100 + (1 * 2)) * 0); /* sun */
+}
+
+.calendar__day:nth-child(2) {
+  margin-left: calc((100 + (1 * 2)) * 1); /* mon */
+}
+
+.calendar__day:nth-child(3) {
+  margin-left: calc((100 + (1 * 2)) * 2); /* tue */
+}
+
+.calendar__day:nth-child(4) {
+  margin-left: calc((100 + (1 * 2)) * 3); /* wed */
+}
+
+.calendar__day:nth-child(5) {
+  margin-left: calc((100 + (1 * 2)) * 4); /* thu */
+}
+
+.calendar__day:nth-child(6) {
+  margin-left: calc((100 + (1 * 2)) * 5); /* fri */
+}
+
+.calendar__day:nth-child(7) {
+  margin-left: calc((100 + (1 * 2)) * 6); /* sat */
+}
+
+.calendar__day:nth-child(n + 29) {
+  display: none;
+}
+
+.calendar__day:nth-child(n + 30) {
+  display: none;
+}
+
+.calendar__day:nth-child(n + 31) {
+  display: none;
+}
+
+.calendar__day:nth-child(n + 32) {
+  display: none;
+}
