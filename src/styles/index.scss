@@ -1,3 +1,77 @@
-body {
+// Variáveis
+$day-size: 100px;
+$day-border: 1px solid #000;
+$day-bg: #f0f0f0;
+$hover-color: #ffbfcb;
+
+// Reset
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
+}
+
+// Centralizar tudo na tela
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+// Calendário
+.calendar {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, $day-size);
+    gap: 1px;
+  }
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background: $day-bg;
+    border: $day-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    position: relative;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: $hover-color;
+      transform: translateY(-5px);
+      cursor: pointer;
+    }
+
+    // Números dos dias via ::before e @for
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  // Controle de início do mês usando @each
+  @each $day, $index in (sun: 7, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6)
+  {
+    &--start-day-#{$day} &__grid > .calendar__day:first-child {
+      grid-column: $index;
+    }
+  }
+
+  // Esconder os dias extras do mês
+  @each $length, $limit in (29: 30, 30: 31) {
+    &--month-length-#{$length}
+      &__grid
+      > .calendar__day:nth-child(n + #{$limit}) {
+      display: none;
+    }
+  }
 }
