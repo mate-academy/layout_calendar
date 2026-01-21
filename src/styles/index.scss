@@ -1,3 +1,76 @@
+@use 'sass:list';
+@import './variables';
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    content: '#{$i}';
+  }
+}
+
+@each $day in $days {
+  $i: list.index($days, $day) - 1;
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$i} * (#{$cell-total} + #{$gap}));
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+html,
 body {
   margin: 0;
+  padding: 0;
+}
+
+.page {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  &__grid {
+    margin: 0;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: $gap;
+    padding: $padding;
+    justify-content: flex-start;
+
+    list-style: none;
+    width: calc((7 * #{$cell-total}) + (6 * #{$gap}) + (2 * #{$padding}));
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #eee;
+    height: $cell-inner;
+    aspect-ratio: 1 / 1;
+    border: $border solid black;
+
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-$lift);
+    }
+  }
 }
