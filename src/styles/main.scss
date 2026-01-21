@@ -1,0 +1,76 @@
+$calendar__day-size: 100px;
+$calendar__gap: 1px;
+$calendar__columns: 7;
+$calendar__padding: 5px;
+$calendar__width: ($calendar__day-size * $calendar__columns) + ($calendar__gap * ($calendar__columns - 1)) + ($calendar__padding * 2);
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$month-length: (28, 29, 30, 31);
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar__gap;
+  width: $calendar__width;
+  padding: $calendar__padding;
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: $calendar__day-size;
+  height: $calendar__day-size;
+  background-color: #eee;
+  border: 1px solid black;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  transition: all 0.5s ease;
+  &:hover {
+    transform: translateY(-20px);
+    background-color: #ffbfcb;
+    cursor: pointer;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@each $day, $offset in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: calc(
+      (#{$calendar__day-size} + #{$calendar__gap}) * #{$offset}
+    );
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
