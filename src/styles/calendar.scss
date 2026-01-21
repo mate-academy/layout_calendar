@@ -1,0 +1,63 @@
+@use '/src/styles/variables.scss' as vars;
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: vars.$day-gap;
+  padding: 0 10px;
+  width: (vars.$col * vars.$cell-size + 6 * vars.$day-gap);
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: vars.$cell-size;
+    height: vars.$cell-size;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: #eee;
+    transition: 0.5s;
+
+    &:hover {
+      transform: translateY(-20px);
+      background: #ffbfcb;
+      cursor: pointer;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      display: flex;
+      justify-content: center;
+
+      content: '#{$i}';
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+}
+
+@each $name, $idx in vars.$map {
+  .calendar--start-day-#{$name} .calendar__day:nth-child(1) {
+    margin-left: $idx * (vars.$cell-size + vars.$day-gap);
+  }
+}
+
+@for $len from 28 through 31 {
+  @for $i from ($len + 1) through vars.$max-days {
+    .calendar--month-length-#{$len} .calendar__day:nth-child(#{$i}) {
+      display: none;
+    }
+  }
+}
