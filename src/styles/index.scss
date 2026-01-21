@@ -1,3 +1,82 @@
+// #region-variables
+
+$cell-size: 100px;
+$cell-gap: 1px;
+$text-size: 0.5 * $cell-size;
+$days-of-week: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+// #endregion
+
+// #region-functions
+
+@for $day-of-month from 1 through 31 {
+  .calendar__day:nth-child(#{$day-of-month})::before {
+    font-family: Arial, serif;
+    font-size: 30px;
+    content: '#{$day-of-month}';
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@each $name, $number in $days-of-week {
+  .calendar--start-day-#{$name} :first-child {
+    margin-left: ($cell-size + $cell-gap) * ($number - 1);
+  }
+}
+
+@for $days-in-month from 28 through 31 {
+  $days-removed: 1 + $days-in-month;
+  .calendar--month-length-#{$days-in-month} :nth-child(n + #{$days-removed}) {
+    display: none;
+  }
+}
+
+// #endregion
+
 body {
   margin: 0;
+  height: 100vh;
+  display: flex;
+}
+
+.calendar {
+  width: (7 * $cell-size) + ($cell-gap * 6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+
+  padding: 10px;
+  margin: auto;
+
+  &__day {
+    height: $cell-size;
+    width: $cell-size;
+
+    position: relative;
+
+    box-sizing: border-box;
+    border: 1px solid black;
+
+    background-color: #eee;
+
+    transition-duration: 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translate(0, -20px);
+    }
+  }
 }
