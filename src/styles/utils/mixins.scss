@@ -1,0 +1,44 @@
+@for $date from 1 through 31 {
+  .calendar__day:nth-child(#{$date})::before {
+    content: '#{$date}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    @if $length == 28 {
+      .calendar__day:nth-child(n + 29) {
+        display: none;
+      }
+    }
+
+    @if $length == 29 {
+      .calendar__day:nth-child(n + 30) {
+        display: none;
+      }
+    }
+
+    @if $length == 30 {
+      .calendar__day:nth-child(31) {
+        display: none;
+      }
+    }
+  }
+}
+
+@each $day, $i in $calendar-days {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: $cell-size * $i + $i * $gap-value;
+  }
+}
+
+@mixin cell-parameters($size) {
+  height: $size;
+  width: $size;
+}
+
+@mixin calendar-width {
+  width: 7 * $cell-size + 6 * $gap-value + 2 * $padding-value;
+}
