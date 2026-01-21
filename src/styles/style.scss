@@ -1,0 +1,23 @@
+/* prettier-ignore */
+$days: 'mon' 0,'tue' 1,'wed' 2,'thu' 3,'fri' 4,'sat' 5,'sun' 6;
+
+@each $day, $index in $days {
+  .calendar--start-day-#{$day} > :first-child {
+    margin-left: (100px + 1px) * $index;
+  }
+}
+
+@for $day from 1 through 32 {
+  .calendar__day:nth-child(#{$day}):before {
+    content: '#{$day}';
+  }
+}
+
+@for $day from 28 through 32 {
+  .calendar--month-length-#{$day} {
+    .calendar__day:nth-child(n + #{$day + 1}) {
+      display: none;
+      margin: auto;
+    }
+  }
+}
