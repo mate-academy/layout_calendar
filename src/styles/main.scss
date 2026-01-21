@@ -1,0 +1,86 @@
+$day-size: 100px;
+$padding-size: 10px;
+$gap-size: 1px;
+$total-columns: 7;
+$calendar-width: ($total-columns * $day-size) +
+  (($total-columns - 1) * $gap-size) + (2 * $padding-size);
+$hover-color: #ffbfcb;
+$animation-duration: 0.5s;
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@each $day, $offset in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      $margin-left: ($offset * $day-size) + ($offset * $gap-size);
+
+      margin-left: $margin-left;
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
+body {
+  margin: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  width: $calendar-width;
+  padding: $padding-size;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  gap: $gap-size;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  height: $day-size;
+  width: $day-size;
+  border: 1px solid black;
+  position: relative;
+
+  background-color: #eee;
+  transition: all $animation-duration ease;
+
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i}) {
+      &::before {
+        content: '#{$i}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: $hover-color;
+  transform: translateY(-20px);
+}
