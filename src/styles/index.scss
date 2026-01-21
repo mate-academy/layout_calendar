@@ -1,3 +1,240 @@
 body {
   margin: 0;
 }
+
+/* Caixa flexbox do calendário */
+
+.calendar {
+  width: max-content;
+  border: solid 2px #000;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 100px);
+  gap: 1px;
+  background-color: white;
+}
+
+/* END */
+
+/* posição dias da semana */
+$mon: 7;
+$tue: 1;
+$wed: 2;
+$thu: 3;
+$fri: 4;
+$sat: 5;
+$sun: 6;
+$weekone: 1;
+$weektwo: 2;
+$weekthree: 3;
+$weekfour: 4;
+$weekfive: 5;
+
+/* segundas */
+
+.calendar__day--1 {
+  grid-column: $mon;
+  grid-row: $weekone;
+}
+
+.calendar__day--8 {
+  grid-column: $mon;
+  grid-row: $weektwo;
+}
+
+.calendar__day--15 {
+  grid-column: $mon;
+  grid-row: $weekthree;
+}
+
+.calendar__day--22 {
+  grid-column: $mon;
+  grid-row: $weekfour;
+}
+
+.calendar__day--29 {
+  grid-column: $mon;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* tercas */
+
+.calendar__day--2 {
+  grid-column: $tue;
+  grid-row: $weektwo;
+}
+
+.calendar__day--9 {
+  grid-column: $tue;
+  grid-row: $weekthree;
+}
+
+.calendar__day--16 {
+  grid-column: $tue;
+  grid-row: $weekfour;
+}
+
+.calendar__day--23 {
+  grid-column: $tue;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* quartas */
+
+.calendar__day--3 {
+  grid-column: $wed;
+  grid-row: $weektwo;
+}
+
+.calendar__day--10 {
+  grid-column: $wed;
+  grid-row: $weekthree;
+}
+
+.calendar__day--17 {
+  grid-column: $wed;
+  grid-row: $weekfour;
+}
+
+.calendar__day--24 {
+  grid-column: $wed;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* quintas */
+
+.calendar__day--4 {
+  grid-column: $thu;
+  grid-row: $weektwo;
+}
+
+.calendar__day--11 {
+  grid-column: $thu;
+  grid-row: $weekthree;
+}
+
+.calendar__day--18 {
+  grid-column: $thu;
+  grid-row: $weekfour;
+}
+
+.calendar__day--25 {
+  grid-column: $thu;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* sextas */
+
+.calendar__day--5 {
+  grid-column: $fri;
+  grid-row: $weektwo;
+}
+
+.calendar__day--12 {
+  grid-column: $fri;
+  grid-row: $weekthree;
+}
+
+.calendar__day--19 {
+  grid-column: $fri;
+  grid-row: $weekfour;
+}
+
+.calendar__day--26 {
+  grid-column: $fri;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* sabado */
+
+.calendar__day--6 {
+  grid-column: $sat;
+  grid-row: $weektwo;
+}
+
+.calendar__day--13 {
+  grid-column: $sat;
+  grid-row: $weekthree;
+}
+
+.calendar__day--20 {
+  grid-column: $sat;
+  grid-row: $weekfour;
+}
+
+.calendar__day--27 {
+  grid-column: $sat;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* domingo */
+
+.calendar__day--7 {
+  grid-column: $sun;
+  grid-row: $weektwo;
+}
+
+.calendar__day--14 {
+  grid-column: $sun;
+  grid-row: $weekthree;
+}
+
+.calendar__day--21 {
+  grid-column: $sun;
+  grid-row: $weekfour;
+}
+
+.calendar__day--28 {
+  grid-column: $sun;
+  grid-row: $weekfive;
+}
+
+/* END */
+
+/* Estilização dias da semana */
+
+.calendar__day {
+  background-color: #f0ecec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  transition: all 0.5s;
+}
+
+@for $i from 1 through 29 {
+  .calendar__day--#{$i}::before {
+    content: '#{$i}';
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+  }
+}
+
+/* END */
+
+/* Animacao ao passar o mouse */
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+  cursor: pointer;
+}
+
+/* END */
