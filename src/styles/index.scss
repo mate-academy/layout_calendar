@@ -1,3 +1,80 @@
+@use 'sass:list';
+
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$days: mon, tue, wed, thur, fri, sat, sun;
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+  padding: 0;
+}
+
+/* stylelint-disable scss/operator-no-newline-after */
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: 0 $padding;
+  width: calc(
+    (#{$day-size} + 2 * #{$border-width}) * #{$columns} + #{$gap} *
+      (#{$columns} - 1) + 2 * $padding
+  );
+
+  /* stylelint-enable scss/operator-no-newline-after */
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    background-color: #eee;
+    transition:
+      background 0.5s,
+      transform 0.5s,
+      color 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+}
+
+/* stylelint-disable scss/operator-no-newline-after */
+@each $day in $days {
+  .calendar--start-day_#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(
+        (list.index($days, $day) - 1) *
+          (#{$day-size} + 2 * #{$border-width} + #{$gap})
+      );
+    }
+  }
+}
+
+/* stylelint-enable scss/operator-no-newline-after */
+@for $length from 28 through 31 {
+  .calendar--month-length_#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
 }
