@@ -1,3 +1,69 @@
-body {
-  margin: 0;
+$cell-size: 100px;
+$week-width: ($cell-size * 7) + 6px;
+$gap-size: 1px;
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap-size;
+  padding: 10px;
+  flex-wrap: wrap;
+  width: $week-width;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: 1px solid black;
+    flex-shrink: 0;
+    background-color: #eee;
+    position: relative;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $number from 1 through 31 {
+      &:nth-child(n + #{$number})::before {
+        position: absolute;
+        content: '#{$number}';
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        text-align: center;
+        line-height: $cell-size;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &--1 {
+      margin-left: $cell-size + $gap-size;
+    }
+  }
+
+  $days-names: mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6;
+
+  @each $name, $count-number in $days-names {
+    &--start-day--#{$name} .calendar__day:first-child {
+      margin-left: ($cell-size + $gap-size) * $count-number;
+    }
+  }
+
+  @for $last-day from 28 through 31 {
+    &--month-length--#{$last-day} {
+      .calendar__day:nth-child(n + #{$last-day + 1}) {
+        display: none;
+      }
+    }
+  }
 }
