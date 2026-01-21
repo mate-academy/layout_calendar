@@ -1,3 +1,78 @@
+$sellSize: 100px;
+$gap: 1px;
+$days-of-month: 31;
+$columns: 7;
+$week: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
 body {
+  --number-size: 30px;
+  --calendar-padding: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   margin: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+
+  .calendar {
+    display: flex;
+    max-width: calc((#{$columns} * $sellSize) + #{$gap} * (#{$columns} - 1));
+    min-width: calc((#{$columns} * $sellSize) + #{$gap});
+    flex-wrap: wrap;
+    gap: $gap;
+    padding: var(--calendar-padding);
+    list-style: none;
+
+    &__day {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      position: relative;
+      height: $sellSize;
+      width: $sellSize;
+      border: 1px solid black;
+      background-color: #eee;
+      transition-duration: 0.5s;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #ffbfcb;
+        transform: translateY(-20px);
+      }
+    }
+
+    @for $n from 1 through $days-of-month {
+      &__day:nth-child(#{$n}) {
+        &::before {
+          content: '#{$n}';
+          font-size: var(--number-size);
+        }
+      }
+    }
+
+    @each $name, $day in $week {
+      &--start-day-#{$name} {
+        .calendar__day:first-child {
+          margin-left: calc((#{$sellSize} + #{$gap}) * #{$day - 1});
+        }
+      }
+    }
+
+    @for $n from 28 through 31 {
+      &--month-length-#{$n} :nth-child(n + #{$n + 1}) {
+        display: none;
+      }
+    }
+  }
 }
