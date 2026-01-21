@@ -1,0 +1,85 @@
+@use 'sass:list';
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+$day-size: 100px;
+$border-width: 1px;
+$border-color: #000;
+$day-bg: #eee;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$gap: 1px;
+$calendar-padding: 10px;
+$columns: 7;
+$hover-bg: #ffbfcb;
+$hover-move-y: -20px;
+$transition-duration: 0.5s;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+
+  $calendar-content-width: ($columns * $day-size) + (($columns - 1) * $gap);
+
+  width: $calendar-content-width;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $border-width solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &::before {
+      font-family: $font-family;
+      font-size: $font-size;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg;
+      transform: translateY($hover-move-y);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  $days-of-week: mon, tue, wed, thu, fri, sat, sun;
+
+  @each $day in $days-of-week {
+    $index: list.index($days-of-week, $day) - 1;
+
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($index * $day-size) + ($index * $gap);
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+}
