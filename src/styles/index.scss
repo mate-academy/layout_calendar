@@ -1,3 +1,102 @@
+$cellsize: 100px;
+$paddingcalendar: 10px;
+$widthcalendar: 7 * $cellsize + 6px;
+$start-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  width: $widthcalendar;
+  padding: $paddingcalendar;
+
+  @each $day, $offset in $start-days {
+    &--start-day-#{$day} .calendar__day--1 {
+      margin-left: calc(#{$cellsize} * #{$offset} + #{$offset}px);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &.calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    background-color: #eee;
+    height: $cellsize;
+    width: $cellsize;
+    box-sizing: border-box;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s;
+
+    @for $cellnumber from 1 through 31 {
+      &--#{$cellnumber}::before {
+        content: '#{$cellnumber}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+        line-height: $cellsize;
+
+        // height: 100%;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// @for $i from 28 through 31 {
+//   .calendar.month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+//     display: none;
+//   }
+// }
+
+// .calendar__day {
+//   background-color: #eee;
+//   height: $cellsize;
+//   width: $cellsize;
+//   box-sizing: border-box;
+//   border: 1px solid black;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   transition: transform 0.5s;
+// }
+
+//   @for $cellnumber from 1 through 31 {
+//     .calendar__day--#{$cellnumber}::before {
+//       content: '#{$cellnumber}';
+//       font-family: Arial, Helvetica, sans-serif;
+//       font-size: 30px;
+//       line-height: 100px;
+//     }
+//   }
+
+// .calendar__day:hover {
+//   cursor: pointer;
+//   background-color: #FFBFCB;
+//   transform: translateY(-20px);
+// }
