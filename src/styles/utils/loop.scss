@@ -1,0 +1,36 @@
+/* start of function which calculate margin for the month start day */
+@function startday($dayOfMonth) {
+  @return ($dayOfMonth * 100) + $dayOfMonth;
+}
+
+/* end of function which calculate margin for the month start day */
+
+/* #start of loop for adding of text numbers to the calendar day */
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+/* #end of loop for adding of text numbers to the calendar day */
+
+/* #start of each loop for moving the first day in the first row of the calendar block */
+
+@each $day, $margin in $start-day {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: startday($margin);
+  }
+}
+
+/* #end of each loop for moving the first day in the first row of the calendar block */
+
+/* #start the loop for month day regulating */
+
+@for $hide-day from 28 through 31 {
+  .calendar--month-length-#{$hide-day}
+    .calendar__day:nth-last-child(-n + #{31 - $hide-day}) {
+    display: none;
+  }
+}
+
+/* #end of the loop for month day regulating */
