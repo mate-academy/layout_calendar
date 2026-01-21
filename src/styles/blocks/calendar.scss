@@ -1,0 +1,26 @@
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $gap;
+
+  &:last-child {
+    gap: 0;
+  }
+
+  @each $day, $index in $days-of-week {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(
+        #{$cell-size} * #{$index - 1} + #{$gap} * #{$index - 1}
+      );
+    }
+  }
+
+  @for $month-end from 28 through $max-days {
+    &--month-length-#{$month-end}
+      .calendar__day:nth-child(n + #{$month-end + 1}) {
+      display: none;
+    }
+  }
+}
