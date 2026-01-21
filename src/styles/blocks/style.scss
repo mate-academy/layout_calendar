@@ -1,0 +1,61 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar-month-length--#{$i} .calendar__day:nth-child(n) {
+    display: none;
+  }
+  .calendar-month-length--#{$i} .calendar__day:nth-child(-n + #{$i}) {
+    display: block;
+  }
+}
+
+@each $day, $murginsNumbers in $week-days {
+  .calendar-start-day--#{$day} .calendar__day:first-child {
+    margin-left: ($day-size + $gap) * $murginsNumbers;
+  }
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $calendar-padding;
+  max-width: calc(($day-size * 7) + ($gap * 6));
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+    position: relative;
+    background-color: $day-color;
+    box-sizing: border-box;
+    border: $border-width solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition-duration: 0.5s;
+
+    &:hover {
+      background-color: $pink-day-color;
+      transform: translateY(-20px);
+    }
+  }
+}
