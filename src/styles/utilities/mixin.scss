@@ -1,0 +1,26 @@
+@for $b from 28 through 30 {
+  .calendar--month-length-#{$b} .calendar__day:nth-child(n + #{$b + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day--#{$i}::before {
+    content: '#{$i}';
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@each $day-name,
+  $offset in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+{
+  .calendar--start-day-#{$day-name} .calendar__day--1 {
+    margin-left: calc(#{$offset} * $width_cell + #{$offset} * 1px);
+  }
+}
