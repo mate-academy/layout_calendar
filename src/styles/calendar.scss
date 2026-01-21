@@ -1,0 +1,49 @@
+@use './variables' as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $grid-gap;
+  width: ($cell-size + $grid-gap) * 7;
+  padding: 10px;
+  font-family: Arial, serif;
+
+  @each $day, $day-number in $days-of-week {
+    &--start-day-#{$day} {
+      .calendar__cell:nth-child(1) {
+        margin-left: ($cell-size + $grid-gap) * $day-number;
+      }
+    }
+  }
+
+  @each $lengths in $month-lengths {
+    &--month-length-#{$lengths} .calendar__cell:nth-child(n + #{$lengths + 1}) {
+      display: none;
+    }
+  }
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    background-color: #eee;
+    font-size: 30px;
+    cursor: pointer;
+    transition: .5s;
+
+    &:hover {
+      background: #FFBFCB;
+      transform: translateY(-20px);
+    }
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
+        content: "" + $day-number;
+      }
+    }
+  }
+}
