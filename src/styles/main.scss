@@ -1,0 +1,84 @@
+$black-color: #000;
+$light-color: #eee;
+$cell-size: 100px;
+$gap: 1px;
+$box-sizing: 2px;
+$calendar-width: ($cell-size * 7) + ($gap * 6) + ($box-sizing * 7);
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+
+h1 {
+  text-align: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: $calendar-width;
+  list-style: none;
+  gap: $gap;
+  padding: 0;
+  margin: auto;
+
+  &__cell {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $light-color;
+    border: 1px solid $black-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20%);
+      transition: 0.5s ease-in-out;
+    }
+
+    &::before {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @for $month-length from 1 through 31 {
+    &__cell:nth-child(#{$month-length})::before {
+      content: '#{$month-length}';
+    }
+  }
+
+  @each $start-day in $start-days {
+    $day-index: list.index($start-days, $start-day) - 1;
+
+    &--#{$start-day} {
+      .calendar__cell:first-child {
+        margin-left: if(
+          $day-index == 0,
+          0,
+          $day-index * $cell-size + $gap * $day-index + $box-sizing * $day-index
+        );
+      }
+    }
+  }
+}
+
+.calendar--month-length-28 {
+  .calendar__cell:nth-child(n + 29) {
+    display: none;
+  }
+}
+
+.calendar--month-length-29 {
+  .calendar__cell:nth-child(n + 30) {
+    display: none;
+  }
+}
+
+.calendar--month-length-30 {
+  .calendar__cell:nth-child(n + 31) {
+    display: none;
+  }
+}
