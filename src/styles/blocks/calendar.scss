@@ -1,0 +1,62 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+  width: calc($day-width * 7 + $calendar-gap * 6 + $calendar-padding * 2);
+
+  & :first-child {
+    margin-left: calc($day-width * 6 + $calendar-gap * 6);
+  }
+
+  $start-days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+  );
+
+  @each $start-day, $margin-left in $start-days {
+    &--start-day-#{$start-day} :first-child {
+      margin-left: calc(
+        $day-width * $margin-left + $calendar-gap * $margin-left
+      );
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    $days-to-delete: $month-length + 1;
+    &--month-length-#{$month-length} :nth-child(n + #{$days-to-delete}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $day-width;
+    width: $day-width;
+
+    background-color: $day-background;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+
+    @for $day-count from 1 through 31 {
+      &:nth-child(#{$day-count})::before {
+        content: '#{$day-count}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-background-hovered;
+      transform: translateY(-20px);
+    }
+  }
+}
