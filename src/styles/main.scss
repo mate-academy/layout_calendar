@@ -1,0 +1,81 @@
+$size: 100px;
+$border-width: 1px;
+$day-gap: 1px;
+$columns: 7;
+$padding: 10px;
+$month-length: 31;
+$days-of-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: #{$day-gap}; // Let Flexbox handle spacing between .calendar__day blocks
+  padding: #{$padding};
+  box-sizing: border-box;
+
+  // Width can omit the gap-based math if you let `gap` handle all the spacing:
+  width: calc(
+    ($size * $columns) + (2 * $padding) + (($columns - 1) * $day-gap)
+  );
+
+  @for $i from 1 through $month-length {
+    .calendar__day:nth-child(#{$i}) {
+      width: #{$size};
+      height: #{$size};
+      box-sizing: border-box;
+      background-color: #eee;
+      border: $border-width solid black;
+    }
+
+    .calendar__day:nth-child(#{$i})::before {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      content: '#{$i}';
+    }
+
+    .calendar__day:nth-child(#{$i}):hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+    }
+  }
+
+  @each $day, $offset in $days-of-week {
+    &.calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+      // Only multiply by the box size.
+      // Don’t include the gap or border in this calculation
+      margin-left: calc(#{$offset} * (#{$size} + #{$day-gap}));
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &.calendar--month-length-#{$length}
+      .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
