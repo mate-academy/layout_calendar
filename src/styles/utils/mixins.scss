@@ -1,0 +1,18 @@
+@mixin day-size {
+  width: $day-width;
+  height: $day-height;
+}
+
+@mixin calendar-width {
+  width: calc($day-width * 7 + $gap-size * 6 + $padding-size * 2);
+}
+
+@mixin hover($property1, $value1, $property2, $value2) {
+  transition:
+    $property1 0.5s ease,
+    $property2 0.5s ease;
+  &:hover {
+    #{$property1}: $value1;
+    #{$property2}: $value2;
+  }
+}
