@@ -1,3 +1,81 @@
-body {
+$day-size: 100px;
+$day-gap: 1px;
+$calendar-padding: 10px;
+$columns: 7;
+$border-width: 1px;
+$calendar-width: ($day-size * $columns) + ($day-gap * ($columns - 1));
+$total-width: $calendar-width + ($calendar-padding * 2);
+$start-days: (
+  'sun': 6,
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+);
+
+.body {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  padding: $calendar-padding;
+  width: $calendar-width;
+
+  @each $day, $index in $start-days {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc(($day-size + $day-gap) * #{$index});
+    }
+  }
+
+  @for $days from 28 through 31 {
+    &--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    background: #eee;
+    border: $border-width solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.5s;
+
+    // Números dos dias
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        color: black;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
