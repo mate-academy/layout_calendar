@@ -1,3 +1,75 @@
+@import './variables';
+
 body {
   margin: 0;
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: $day-font-family;
+    font-size: 30px;
+    width: auto;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 706px;
+  gap: $dya-gap;
+  padding: 10px;
+  &__day {
+    background-color: $day-color;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid $day-border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    transition: transform 500ms;
+
+    box-sizing: border-box;
+
+    &:hover {
+      background-color: $day-color-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 29 through 31 {
+    &--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day,
+  $margin
+    in (
+      mon: 0,
+      tue: $day-size + $dya-gap,
+      wed: 2 * $day-size + 2 * $dya-gap,
+      thu: 3 * $day-size + 3 * $dya-gap,
+      fri: 4 * $day-size + 4 * $dya-gap,
+      sat: 5 * $day-size + 5 * $dya-gap,
+      sun: 6 * $day-size + 6 * $dya-gap
+    )
+{
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $margin;
+  }
 }
