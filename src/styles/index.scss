@@ -1,3 +1,61 @@
+$daySize: 100px;
+$countDays: 31;
+$gapValue: 1px;
+$padding: 10px;
+$calendarWidth: $daySize * 7 + $gapValue * 6 + $padding * 2;
+$daysOfWeek: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
+$startDay: 'sun';
+
 body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
   margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: $padding;
+  gap: $gapValue;
+  width: $calendarWidth;
+
+  &__day {
+    display: none;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid black;
+    height: $daySize;
+    width: $daySize;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcd;
+      transition: all 0.5s;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar--month-length-#{$i} > .calendar__day:nth-child(-n + #{$i}) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $day, $offset in $daysOfWeek {
+  .calendar--start-day-#{$day} > .calendar__day:first-child {
+    margin-left: calc(($offset * 100px) + (1px * $offset));
+  }
 }
