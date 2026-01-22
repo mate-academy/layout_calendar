@@ -1,0 +1,79 @@
+$starts: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$cell-size: 100px;
+$every-day-color: #eee;
+$gap: 1px;
+$columns: 7;
+$paddings: 10px;
+$border: 1px solid #000;
+$container-width: $columns * $cell-size + ($columns - 1) * $gap + 2 * $paddings;
+
+body {
+  margin: 0;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $paddings;
+  width: $container-width;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background: $every-day-color;
+    border: $border;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition:
+      transform 0.5s,
+      background 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $name, $idx in $starts {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: $idx * ($gap + $cell-size);
+  }
+}
+
+@for $day from 28 through 31 {
+  .calendar--month-length-#{$day} .calendar__day:nth-child(n + #{$day + 1}) {
+    display: none;
+  }
+}
