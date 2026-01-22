@@ -1,0 +1,36 @@
+@use "sass:list";
+@import 'variables';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: 0 10px;
+
+  @each $day in $week {
+    $position: list.index($week, $day);
+    &--start-day-#{$day} {
+      .calendar__day:first-of-type {
+        margin-left: calc(($position - 1) * (#{$day-size} + #{$gap}));
+      }
+    }
+  }
+
+  @for $i from 1 through $days-in-month {
+    & .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+      position: absolute;
+    }
+  }
+
+  &__day:nth-child(n):hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+}
