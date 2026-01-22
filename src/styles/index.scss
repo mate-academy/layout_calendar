@@ -1,3 +1,75 @@
+$center: center;
+
 body {
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  height: 100vh;
+  display: flex;
+  align-items: $center;
+  justify-content: $center;
+}
+
+$days: (
+  'mon': '0px',
+  'tue': '101px',
+  'wed': '202px',
+  'thu': '303px',
+  'fri': '404px',
+  'sat': '505px',
+  'sun': '606px',
+);
+
+// Specifying left margin for initial calendar day, depending on which day of the week the month starts on.
+
+@each $day, $margin in $days {
+  .calendar--start-day-#{$day} > .calendar__day:first-child {
+    margin-left: #{$margin};
+  }
+}
+
+// Numbering the calendar days
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i}):before {
+    content: '#{$i}';
+  }
+}
+
+// Specifying which days should not be included in the calendar, depending on the length of the month
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar {
+  width: 706px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1px;
+  padding: 0 10px;
+}
+
+.calendar__day {
+  height: 100px;
+  width: 100px;
+  border: solid black 1px;
+  background-color: #eee;
+  line-height: 100px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+    transition-duration: 0.5s;
+    cursor: pointer;
+  }
 }
