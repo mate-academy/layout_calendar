@@ -1,0 +1,93 @@
+// Variables
+$day-size: 100px;
+$day-bg-color: #eee;
+$border-width: 1px;
+$border-color: black;
+$font-size: 30px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$hover-bg-color: #FFBFCB;
+$hover-transform: 20px;
+$transition-duration: 0.5s;
+
+// Calculate calendar width: (day-size * columns) + (gap * (columns - 1)) + (padding * 2)
+$calendar-width: ($day-size * $columns) + ($gap * ($columns - 1)) + ($padding * 2);
+
+// Center calendar on screen
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+// Calendar block
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+
+  // Calendar day elements
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg-color;
+    border: $border-width solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: background-color $transition-duration, transform $transition-duration;
+
+    &:hover {
+      background-color: $hover-bg-color;
+      transform: translateY(-$hover-transform);
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: $font-size;
+      color: black;
+    }
+  }
+}
+
+// Generate numbers 1-31 using @for loop
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+// Start-day modifiers using @each
+// Calculate margin for first day based on starting day of week
+// Sunday = 0, Monday = 1, Tuesday = 2, etc.
+$start-days: (
+  "sun": 0,
+  "mon": 1,
+  "tue": 2,
+  "wed": 3,
+  "thu": 4,
+  "fri": 5,
+  "sat": 6
+);
+
+@each $day, $position in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($day-size + $gap) * $position;
+  }
+}
+
+// Month-length modifiers using @for
+// Hide days beyond the specified month length
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} .calendar__day:nth-child(n+#{$length + 1}) {
+    display: none;
+  }
+}
