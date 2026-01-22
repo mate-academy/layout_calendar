@@ -1,0 +1,72 @@
+@use 'variables';
+
+html {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 4px;
+  width: variables.$tamanho;
+  min-height: 100vh;
+  gap: 1px;
+
+  &__day {
+    height: variables.$height-day;
+    width: variables.$width-day;
+    border: variables.$border-day;
+    transition: 0.5s;
+    font-family: variables.$font-family;
+    font-size: variables.$font-size;
+    background-color: variables.$color-day;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: row;
+      height: variables.$height-day;
+      width: variables.$width-day;
+      border: variables.$border-day;
+      content: '#{$i}';
+    }
+  }
+
+  @for $days from 28 through 31 {
+    .calendar--month-length-#{$days} {
+      @for $i from ($days + 1) through 31 {
+        .calendar__day:nth-child(#{$i}) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &__day:hover {
+    background-color: variables.$color-rosa;
+    cursor: pointer;
+    transform: translateY(-20px);
+  }
+}
+
+$days: (sun, 0), (mon, 1), (tue, 2), (wed, 3), (thu, 4), (fri, 5), (sat, 6);
+
+@each $day, $recuo in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: variables.$width-day * $recuo;
+    }
+  }
+}
