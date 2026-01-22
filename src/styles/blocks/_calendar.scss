@@ -1,0 +1,40 @@
+@use '../variables' as *;
+@use '../mixins' as mixins;
+@use '../functions' as funcs;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: funcs.calendar-width($cols, $cell-size, $gap, $pad-x-total);
+  padding-inline: $pad-x-total / 2;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    border: $border solid black;
+    background-color: $color-day;
+    cursor: pointer;
+    transition:
+      transform $transition,
+      background-color $transition;
+
+    &::before {
+      color: black;
+      font-family: $font-day;
+      font-size: $font-size-day;
+    }
+
+    &:hover {
+      background-color: $color-hover;
+      transform: translateY(-$move-up-hover);
+    }
+  }
+}
+
+@include mixins.start-day-mods;
+@include mixins.day-numbers;
+@include mixins.month-length-mods;

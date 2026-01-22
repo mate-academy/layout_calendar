@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+@mixin center-screen() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@mixin day-numbers() {
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
+
+@mixin start-day-mods() {
+  @each $name, $index in $start-days {
+    .calendar--start-day-#{$name} {
+      & > .calendar__day:first-child {
+        margin-left: $index * ($cell-size + $gap);
+      }
+    }
+  }
+}
+
+@mixin month-length-mods() {
+  @for $i from 28 through 31 {
+    .calendar--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+}
