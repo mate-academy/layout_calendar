@@ -1,3 +1,70 @@
+$cell-size: 100px;
+$gap: 1px;
+$column-count: 7;
+$cal-width: ($cell-size * $column-count) + ($gap * ($column-count));
+
 body {
   margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: auto;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $cal-width;
+
+  @each $day, $index in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
+  {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc(#{$index} * (#{$cell-size} + #{$gap}));
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  & > .calendar__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-size;
+    height: $cell-size;
+    background-color: #eee;
+    border: 1px solid #000;
+    box-sizing: border-box;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      padding-left: 1px; // this line is here because my numbers exactly 1px to the left so i can't pass the tests, i would like to know why ?
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      transition-duration: 0.5s;
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+      cursor: pointer;
+    }
+  }
 }
