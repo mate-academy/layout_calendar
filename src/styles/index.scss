@@ -1,3 +1,33 @@
-body {
-  margin: 0;
+@import '../utilis/variables';
+@import '../styles/bloks/body';
+
+.calendar {
+  width: calc($day-size * $colums) + ($colums - 1) * $day-gap;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+  }
+
+  &__day::before {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  &__day:hover {
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
 }
