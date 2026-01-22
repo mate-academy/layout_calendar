@@ -1,0 +1,67 @@
+$start-day: 'sun';
+$days: ('mon' 0, 'tue' 1, 'wed' 2, 'thu' 3, 'fri' 4, 'sat' 5, 'sun' 6);
+$calendar__day-gap: 1px;
+$calendar__day-size: 100px;
+$month-length: 31;
+
+.page {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 30px;
+  box-sizing: border-box;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar__day-gap;
+  justify-content: start;
+  max-width: calc((100px * 8) + 6px);
+  padding: 10px;
+  width: 726px;
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  width: 100px; /* Width of each block */
+  height: 100px; /* Height of each block */
+  background-color: #eee;
+  border: 1px solid black;
+
+  // position: relative; /* For absolute positioning of pseudo-element */
+  transition-duration: 0.5s;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+/* Pseudo-element to display day numbers */
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@for $j from 28 through 31 {
+  .calendar--month-length-#{$j} .calendar__day:nth-child(n + #{$j + 1}) {
+    display: none; /* Приховує дні після останнього */
+  }
+}
+
+/* Start-day modifiers */
+@each $day, $day-number in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $day-number * ($calendar__day-size + $calendar__day-gap);
+  }
+}
