@@ -1,0 +1,55 @@
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@each $day, $i in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc((#{$i}) * ($calendar__day-size + $gap-size));
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1 }) {
+    display: none;
+  }
+}
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $padding-size;
+  max-width: calc(7 * $calendar__day-size + 6 * $gap-size + 2 * $padding-size);
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $gap-size;
+  width: $calendar__day-size;
+  height: $calendar__day-size;
+  border: $calendar__day-border;
+  background-color: $calendar__day-background-color;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: $calendar__day-hover_background;
+  transform: translateY(-20px);
+  transition: 0.5s;
+}
