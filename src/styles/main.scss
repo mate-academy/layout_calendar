@@ -1,0 +1,110 @@
+// Cores
+$color-bg: #eee;
+$color-text: #333;
+$color-blue: #007bff;
+$color-black: #000;
+
+// Tamanhos para os dias
+$day-width: 100px;
+$day-height: 100px;
+
+// Espaçamento entre dias
+$day-gap: 1px;
+
+// Fonte para os dias
+$font-size-day: 30px;
+
+// Dias da semana
+$weekdays: sun, mon, tue, wed, thu, fri, sat;
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.calendar {
+  padding: 10px;
+  width: (7 * $day-width) + (6 * $day-gap);
+
+// Modificadores de start-day
+@each $day in $weekdays {
+  $offset: list.index($weekdays, $day) - 1;
+
+  &--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($offset * ($day-width + $day-gap));
+    }
+  }
+}
+
+
+@for $len from 28 through 31 {
+  &--month-length-#{$len} {
+    .calendar__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+}
+
+}
+
+.calendar__weekdays,
+.calendar__days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+
+}
+
+// Bloco dias da semana
+.calendar__weekday,
+.calendar__day {
+  width: $day-width;
+  height: $day-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+
+}
+
+.calendar__weekday {
+  font-weight: bold;
+  color: $color-text;
+}
+
+.calendar__day {
+  background-color: $color-bg;
+  border: 1px solid $color-black;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.5s, background-color 0.5s;
+
+// Pseudo-elemento  estilo do número
+  &::before {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $font-size-day;
+    color: $color-text;
+  }
+}
+
+
+
+// Loop para numeros dinâmicos de dias
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+// Efeito hover nos dias
+.calendar__day:hover {
+  background-color: #FFBFCB;
+  color: $color-text;
+  transform: translateY(-20px);
+}
+
