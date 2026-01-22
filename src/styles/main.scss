@@ -1,0 +1,77 @@
+@import './main/variables';
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  gap: $calendar-gap;
+  flex-wrap: wrap;
+  width: $calendar-day-width * 7 + $calendar-gap * 6;
+
+  &--start-day {
+    @each $day, $index in $days {
+      &-#{$day} {
+        .calendar__day:nth-child(1) {
+          margin-left: ($calendar-day-width + $calendar-gap) * $index;
+        }
+      }
+    }
+  }
+
+  &--month-length {
+    @each $length in $month-length {
+      &-#{$length} {
+        @for $i from ($length + 1) through 42 {
+          .calendar__day:nth-child(#{$i}) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__day {
+    height: $calendar-day-height;
+    width: $calendar-day-width;
+    background-color: #eee;
+    box-sizing: inherit;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    transition-duration: 0.5s;
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
