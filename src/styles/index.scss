@@ -1,3 +1,74 @@
-body {
+@import 'variables';
+
+* {
   margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  box-sizing: border-box;
+  width: calc(
+    #{$day-size} * #{$columns} + (#{$columns} - 1) * #{$gap} + 2 * #{$padding}
+  );
+
+  @each $day, $margin in $start-days {
+    &--start-day-#{$day} &__day:nth-child(1) {
+      margin-left: calc(#{$margin} * (#{$day-size} + #{$gap}));
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    border: 1px solid black;
+    background-color: #eee;
+    width: $day-size;
+    height: $day-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.5s;
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      transition: all 0.5s;
+    }
+  }
+
+  &__day::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
 }
