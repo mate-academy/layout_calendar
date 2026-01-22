@@ -1,0 +1,57 @@
+@import './inits/variables';
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(($daySize + $gapDay) * 7);
+  gap: 1px;
+  padding: 10px;
+
+  @for $i from 1 through $month-length {
+    &--day-length--31 :nth-child(#{$i}),
+    &--day-length--30 :nth-child(#{$i}),
+    &--day-length--29 :nth-child(#{$i}),
+    &--day-length--28 :nth-child(#{$i}) {
+      width: $daySize;
+      height: $daySize;
+      background-color: #eee;
+      border: 1px black solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    &--day-length--30 :nth-child(n + 31),
+    &--day-length--29 :nth-child(n + 30),
+    &--day-length--28 :nth-child(n + 29) {
+      visibility: hidden;
+    }
+  }
+
+  @for $day from 1 through $month-length {
+    &__day:nth-child(#{$day})::before {
+      content: '#{$day}';
+      position: absolute;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+    }
+  }
+
+  @each $name, $index in $days-of-the-week {
+    &--start-day--#{$name} :first-child {
+      margin-left: calc(($daySize + $gapDay) * #{$index});
+    }
+  }
+
+  &__day {
+    transition: transform 500ms;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
