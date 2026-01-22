@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+
+  display: flex;
+  justify-content: center; // горизонтально
+  align-items: center; // вертикально
+  min-height: 100vh; // Встановлює мінімальну висоту тіла на весь екран — важливо для вертикального центрування
+
+  background-color: $day-color;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 7 * $day-size + 6 * $gap + 2 * $calendar-padding;
+  padding-inline: $calendar-padding; // Внутрішні горизонтальні падінги календаря
+  gap: $gap;
+}
+
+.calendar__day {
+  position: relative; // Дозволяє позиціонувати псевдоелементи всередині відносно цієї клітинки
+
+  width: $day-size;
+  height: $day-size;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: $font-family;
+  font-size: $font-size;
+  color: $text-color;
+
+  background-color: $day-color;
+  border: 1px solid $border-color;
+
+  cursor: pointer;
+  transition:
+    transform 0.5s ease,
+    background-color 0.5s ease; // Анімація плавного переміщення і зміни кольору при hover
+
+  // псевдоелемент ::before — невидимий блок перед вмістом .calendar__day
+  // Ми використовуємо його, бо в HTML сам по собі блок .calendar__day порожній
+  // Завдяки ::before ми можемо додати текст (число) через CSS, а не HTML
+  @for $i from 1 through 31 {
+    &:nth-child(#{$i})::before {
+      // застосовуємо до кожного class="calendar__day"
+      content: '#{$i}'; // вставляємо в кожний class="calendar__day"
+    }
+  }
+
+  &:hover {
+    background-color: $hover-color;
+    transform: translateY(-20px) rotateY(360deg);
+  }
+}
