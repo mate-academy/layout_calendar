@@ -1,0 +1,50 @@
+@use 'variables' as var;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: var.$calendarWidth;
+  gap: 1px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  &__day {
+    border: 1px solid black;
+    height: var.$blockSize;
+    width: var.$blockSize;
+    background-color: #eee;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $number from 1 through 31 {
+    &__day:nth-child(#{$number})::before {
+      content: '#{$number}';
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 30px;
+      color: black;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  @each $day, $dayNumber in var.$days-of-week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: (var.$visualSize + var.$gap) * ($dayNumber - 1);
+    }
+  }
+}
