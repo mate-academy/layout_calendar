@@ -1,7 +1,7 @@
 $cell-size: 100px;
 $col-count: 7;
 $gap: 1px;
-$margin: 10px;
+$padding: 10px;
 $calendar-width: ($cell-size * $col-count) + ($gap * ($col-count - 1));
 $min-days: 28;
 $max-days: 31;
@@ -14,18 +14,15 @@ body {
   height: 100vh;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  margin: $margin;
+  padding: $padding;
   gap: $gap;
-  width: $calendar-width;
+  width: $calendar-width + ($padding * 2);
+  box-sizing: border-box;
+  list-style: none;
+  margin: 0;
 }
 
 .calendar__day {
