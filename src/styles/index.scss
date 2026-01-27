@@ -1,5 +1,8 @@
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -23,20 +26,16 @@ $padding-size: 10px;
 
   width: calc(7 * $square-size + 6 * $gap + 2 * $padding-size);
 
-
-  @for $day from 1 through 31 {
-    &__day#{$day} {
+   &__day {
       box-sizing: border-box;
       background-color: #eee;
       width: $square-size;
       height: $square-size;
       border: 1px solid black;
 
-      transition: transform 0.5s;
-    }
+      transition: all 0.5s;
 
-
-    &__day#{$day}::before {
+      &::before {
       display: block;
       text-align: center;
       line-height: $square-size;
@@ -45,10 +44,18 @@ $padding-size: 10px;
       font-family: Arial;
       font-size: 30px;
 
-      content: "#{$day}";
+      content: "";
+    }
+   }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day})::before {
+        content: "#{$day}";
+      }
     }
 
-    &__day#{$day}:hover {
+
+    &__day:hover {
       cursor: pointer;
       background-color: #FFBFCB;
 
@@ -56,28 +63,26 @@ $padding-size: 10px;
     }
 
   @for $ml from 28 through 31 {
-    &--month-length-#{$ml} {
-      @if $ml < 31 {
-        @for $hide from ($ml + 1) through 31 {
-          .calendar__day#{$hide} {
-            display: none;
-            }
-          }
+      &--month-length-#{$ml} {
+        @if $ml < 31 {
+          .calendar__day:nth-child(n + #{$ml + 1}) {
+          display: none;
         }
-      @else {
-        &__day31 {
+        }
+        @else {
+          .calendar__day:nth-child(n + #{$ml}) {
           display: block;
         }
+        }
       }
-      }
+    }
+
+    $days-week: ('mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6);
+
+  @each $day, $number in $days-week {
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc($number * ($square-size + $gap));
+    }
     }
   }
 
-  $days-week: ('mon': 0, 'tue': 1, 'wed': 2, 'thu': 3, 'fri': 4, 'sat': 5, 'sun': 6);
-
-  @each $day, $number in $days-week {
-  &--start-day-#{$day} .calendar__day1 {
-    margin-left: calc($number * ($square-size + $gap));
-  }
-  }
-}
