@@ -45,16 +45,17 @@
     }
   }
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: '#{$i}';
+  // Generate numbering (1-31) for calendar day cells
+  @for $N from 1 through 31 {
+    &__day:nth-child(#{$N})::before {
+      content: '#{$N}';
     }
   }
 
-  @each $day, $index in $start-days {
+  @each $day, $value in $start-days {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($index * $day-width) + ($index * $calendar-content-gap);
+        margin-left: ($value * $day-width) + ($value * $calendar-content-gap);
       }
     }
   }
