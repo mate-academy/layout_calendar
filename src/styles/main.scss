@@ -22,8 +22,9 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: calc($daySize * 7 + 10px);
+  width: calc($daySize * 7 + 6px);
   gap: 1px;
+  padding: 0 2px;
 
   @for $i from $minMonthLength through $maxMonthLength {
     &--month-length-#{$i} {
@@ -43,10 +44,8 @@ body {
   }
 
   @each $startDay, $index in $startDays {
-    &--day-start-#{$startDay} {
-      .calendar__day--start {
-        margin-left: $daySize * $index + calc($index * 1px);
-      }
+    &--day-start-#{$startDay} :first-child {
+      margin-left: $daySize * $index + calc($index * 1px);
     }
   }
 }
@@ -63,7 +62,7 @@ body {
 }
 
 .calendar__day:hover {
-  background-color: #FF9C9C;
+  background-color: #FFBFCB;
   transform: translate(0, -20px);
   transition: 0.5s;
 }
