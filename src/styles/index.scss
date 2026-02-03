@@ -1,3 +1,77 @@
+$day-size: 100px;
+$day-font-size: 30px;
+$calendar-gap: 1px;
+$columns: 7;
+$bg-hov: #ffbfcb;
+$padding: 10px;
+$calendar-width: ($day-size * $columns) + ($calendar-gap * ($columns - 1)) + ($padding * 2);
+
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
+}
+
+$index: 0;
+
+@each $day-name in (mon, tue, wed, thu, fri, sat, sun) {
+  $index: $index + 1;
+
+  .calendar--start-day-#{$day-name} .calendar__day:first-child {
+    margin-left: calc(($index - 1) * ($day-size + $calendar-gap));
+  }
+}
+
+// ==================== Month-Length модифікатори ====================
+@each $len in (28, 29, 30, 31) {
+  .calendar--month-length-#{$len} {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i > $len {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+// ==================== Нумерація днів через ::before ====================
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  padding: $padding;
+
+ width: $calendar-width;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid #000;
+    background-color: #eee;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $day-font-size;
+
+    &:hover {
+      background-color: $bg-hov;
+      transform: translateY(-20px);
+      transition-duration: 0.5s;
+    }
+  }
 }
