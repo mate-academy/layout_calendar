@@ -1,0 +1,35 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  width: calc(
+    #{$columns} * #{$day-size} + (#{$columns - 1}) * #{$gap} + 2 * #{$calendar-padding}
+  );
+  padding: $calendar-padding;
+  gap: $gap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border-size solid $day-border-color;
+
+    background-color: $day-bg;
+
+    cursor: pointer;
+    transition: all 500ms;
+
+    &::before {
+      font-family: $font-family;
+      font-size: $font-size-before;
+    }
+
+    &:hover {
+      background-color: $day-hover-color;
+      transform: translateY(-20px);
+    }
+  }
+}
