@@ -1,0 +1,64 @@
+@use '../base/variables' as v;
+
+$days-total-width: v.$day-size * v.$columns-count;
+$gaps-total-width: v.$calendar-gap * (v.$columns-count - 1);
+$paddings-total-width: v.$calendar-padding * 2;
+$calendar-width: $days-total-width + $gaps-total-width + $paddings-total-width;
+
+.calendar {
+  width: $calendar-width;
+  padding: v.$calendar-padding;
+  gap: v.$calendar-gap;
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+
+  @each $day, $multiplier in v.$start-days {
+    &--start-#{$day} {
+      .calendar__day:first-child {
+        $offset: (v.$day-size * $multiplier) + (v.$calendar-gap * $multiplier);
+
+        margin-left: $offset;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    flex: 0 0 v.$day-size;
+    height: v.$day-size;
+    border: v.$day-border;
+    background-color: v.$day-bg;
+    box-sizing: border-box;
+    transition: 0.5s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #ffbfcb;
+      cursor: pointer;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      font-family: v.$font-main;
+      font-size: 30px;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+}
