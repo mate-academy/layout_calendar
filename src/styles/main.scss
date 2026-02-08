@@ -1,0 +1,92 @@
+@import 'variables';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  width: $calendar-width;
+  padding: $padding;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+
+    background: $cell-bg;
+    border: $border-size solid $cell-border;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    transition:
+      transform $anim-duration,
+      background-color $anim-duration;
+    will-change: transform;
+
+    &::before {
+      font-family: $number-font;
+      font-size: $number-size;
+      line-height: 1;
+      color: $cell-border;
+      content: '';
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover;
+      transform: translateY(-$hover-shift);
+    }
+  }
+
+  // ===== Numbers 1..31 via ::before and @for =====
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // ===== Month length modifiers (hide days after N) =====
+  // Default in HTML: calendar--month-length-31
+  @for $n from 28 through 31 {
+    &--month-length-#{$n} {
+      .calendar__day:nth-child(n + #{$n + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // ===== Start day modifiers (margin-left for the first cell) =====
+  // Column mapping (Mon=1 ... Sun=7) => offset columns for first day:
+  // offset = col - 1
+  $start-days: (
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+    sun: 7,
+  );
+
+  @each $name, $col in $start-days {
+    &--start-#{$name} {
+      .calendar__day:first-child {
+        margin-left: ($col - 1) * ($cell-size + $gap);
+      }
+    }
+  }
+}
