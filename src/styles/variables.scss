@@ -1,0 +1,34 @@
+$gap: 1px;
+$border-width: 1px;
+$cols: 7;
+$padding: 10px;
+$day-size: 100px;
+$width: $cols * $day-size + ($cols - 1) * $gap + 2 * $padding;
+$cell: $day-size + $gap;
+$days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+@each $name, $day in $days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: $cell * ($day - 1);
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
