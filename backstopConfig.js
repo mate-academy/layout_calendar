@@ -6,13 +6,11 @@ const { basicScenario } = backstop;
 
 const basic = {
   ...basicScenario,
-  label: 'Elementary test',
+  url: 'https://johannpdaniel.github.io/layout_calendar/',
+  referenceUrl: 'https://johannpdaniel.github.io/layout_calendar/',
+  testUrl: 'https://johannpdaniel.github.io/layout_calendar/',
   selectors: ['body'],
-  removeSelectors: [
-    'h1',
-  ],
   misMatchThreshold: 0.5,
-  referenceUrl: basicScenario.referenceUrl + '/calendar/',
 };
 
 const config = {

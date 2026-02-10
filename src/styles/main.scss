@@ -1,0 +1,89 @@
+@use 'variables' as *;
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  box-sizing: border-box;
+
+  /* prettier-ignore */
+  width: calc(#{$days-in-week * $cell-full-size} + #{($days-in-week - 1) * $gap} + #{2 * $padding});
+  padding: $padding;
+}
+
+.calendar__day {
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+  width: $day-size;
+  height: $day-size;
+  border: $border solid black;
+
+  background: #eee;
+
+  transition:
+    background-color 0.5s,
+    transform 0.5s;
+
+  &::before {
+    content: '';
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+  }
+
+  &:hover {
+    transform: translateY(-20px);
+    background-color: #ffbfcb;
+  }
+}
+
+$start-days: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+);
+
+@each $day, $offset in $start-days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: calc(#{$offset} * (#{$cell-full-size} + #{$gap}));
+    }
+  }
+}
+
+@for $days from 28 through 31 {
+  $limit: $days + 1;
+
+  .calendar--month-length-#{$days} {
+    .calendar__day:nth-child(n + #{$limit}) {
+      display: none;
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
