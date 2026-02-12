@@ -1,10 +1,12 @@
 @import 'variables';
 
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
 
+body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,6 +36,9 @@ body {
     font-family: Arial, sans-serif;
     font-size: 30px;
 
+    transition: transform 0.5s;
+    transition: background-color 0.5s;
+
     @for $i from 1 through 31 {
       &:nth-child(#{$i}) {
         &::before {
@@ -45,8 +50,7 @@ body {
     &:hover {
       cursor: pointer;
       background-color: #ffbfcb;
-      transform: translate(0, -20px);
-      transition: all 0.5s;
+      transform: translateY(-20px);
     }
   }
 
@@ -58,7 +62,7 @@ body {
 
   @each $day, $index in $week {
     &--start-day-#{$day} &__day:first-child {
-      margin-left: calc($cell_width * $index);
+      margin-left: calc($cell_width * ($index - 1) + $gap * ($index - 1));
     }
   }
 }
