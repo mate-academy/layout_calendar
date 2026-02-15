@@ -1,0 +1,74 @@
+@use 'sass:list';
+
+$cell-size: 100px;
+$cell-color: #eee;
+$cell-hover-color: #ffbfcb;
+$cell-font: Arial;
+$cell-font-size: 30px;
+$main-gap: 1px;
+$main-paddings: 10px;
+$max-days: 31;
+$days-list: mon, tue, wed, thu, fri, sat, sun;
+
+.page {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $main-gap;
+  padding: $main-paddings;
+  width: 7 * $cell-size + 2 * $main-paddings + 6 * $main-gap;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $cell-size;
+    width: $cell-size;
+    box-sizing: border-box;
+    border: 1px solid black;
+    background-color: $cell-color;
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through $max-days {
+    &__day:nth-child(#{$i}) {
+      &::before {
+        content: '#{$i}';
+        font-family: $cell-font;
+        font-size: $cell-font-size;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day in $days-list {
+    $index: list.index($days-list, $day);
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc((#{$index} - 1) * (#{$cell-size} + #{$main-gap}));
+      }
+    }
+  }
+}
