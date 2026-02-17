@@ -57,10 +57,18 @@
     box-sizing: border-box;
   }
 
+  &--start-day-sun {
+    .calendar__day:first-child {
+      margin-left: $cell-step * 6;
+    }
+  }
+
   @each $day, $index in $start-days {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: $cell-step * $index;
+    @if $day != 'sun' {
+      &--start-day-#{$day} {
+        .calendar__day:first-child {
+          margin-left: $cell-step * $index;
+        }
       }
     }
   }
