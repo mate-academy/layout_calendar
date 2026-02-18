@@ -1,0 +1,85 @@
+// Variables
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+
+// Step between the start of one day and the next (size + gap)
+$day-step: $day-size + $gap;
+
+// Total calendar width: 7 columns + 6 gaps + 2 side paddings
+$calendar-width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendar-width;
+  box-sizing: border-box;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    background-color: #eee;
+    border: $border-width solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    // Generate day numbers via ::before using @for
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// start-day modifiers — @each over day name → column offset map
+// Monday-first week: Mon = col 1 (offset 0), … Sun = col 7 (offset 6)
+$start-days: (
+  'mon': 0,
+  'tue': 1,
+  'wed': 2,
+  'thu': 3,
+  'fri': 4,
+  'sat': 5,
+  'sun': 6,
+);
+
+@each $day, $offset in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    @if $offset > 0 {
+      margin-left: $offset * $day-step;
+    }
+  }
+}
+
+// month-length modifiers — @for to hide days beyond the chosen length
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
