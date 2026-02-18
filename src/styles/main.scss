@@ -1,0 +1,90 @@
+$day-size: 100px;
+$border-size: 1px;
+$gap: 1px;
+$columns: 7;
+$container-padding: 10px;
+$day-bg: #eee;
+$hover-bg: #ffbfcb;
+$border-color: #000;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$animation-duration: 0.5s;
+
+/* prettier-ignore */
+$calendar-width: ($day-size * $columns) + ($gap * ($columns - 1)) + ($container-padding * 2);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $container-padding;
+  width: $calendar-width;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $border-size solid $border-color;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    transition: all $animation-duration ease;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: $hover-bg;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-family: $font-family;
+      font-size: $font-size;
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // Навіщо щось тут міняти я чесно не розумію , коли роблю як кажеться в пул реквесті тести не проходять , коли залишаю все як є результат ідентичний до того і тести проходять , навіщо нам лівий рядок верхній як там правий верхній
+  $days: (
+    mon: 1,
+    tue: 2,
+    wed: 3,
+    thu: 4,
+    fri: 5,
+    sat: 6,
+    sun: 7,
+  );
+
+  @each $name, $position in $days {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: ($position - 1) * ($day-size + $gap);
+      }
+    }
+  }
+}
