@@ -1,0 +1,26 @@
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: $font-size;
+  }
+}
+
+@each $day, $col in $start-days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      // margin-left = (col - 1) * (day-size + gap)
+      margin-left: ($col - 1) * ($day-size + $gap);
+    }
+  }
+}
+
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} {
+    @for $i from ($len + 1) through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        display: none;
+      }
+    }
+  }
+}
