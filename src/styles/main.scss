@@ -1,0 +1,94 @@
+$day-size: 100px;
+$border-size: 1px;
+$border-color: #000;
+$gap: 1px;
+$pad: 10px;
+$columns: 7;
+$cell-bg: #eee;
+$hover-bg: #ffbfcb;
+$day-font: Arial, sans-serif;
+$day-font-size: 30px;
+$anim-time: 0.5s;
+$grid-width: $day-size * $columns + $gap * ($columns - 1) + $pad * 2;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  &__grid {
+    width: $grid-width;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $gap;
+    padding: $pad;
+  }
+
+  &__day {
+    position: relative;
+    width: $day-size;
+    height: $day-size;
+    background: $cell-bg;
+    border: $border-size solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $day-font;
+    font-size: $day-font-size;
+    cursor: pointer;
+    transition:
+      transform $anim-time,
+      background $anim-time;
+
+    &::before {
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    &:hover {
+      background: $hover-bg;
+      transform: translateY(-20px);
+      transition:
+        background $anim-time,
+        transform $anim-time;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  $start-days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  @each $name, $idx in $start-days {
+    &--start-day-#{$name} &__day:first-child {
+      margin-left: ($day-size + $gap) * $idx;
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} &__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+}
