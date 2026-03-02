@@ -1,13 +1,28 @@
-$width-content: $day-size * $columns;
-$width-gaps: $gap * ($columns - 1);
-$width-paddings: $calendar-padding * 2;
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   padding: $calendar-padding;
-  width: $width-content + $width-gaps + $width-paddings;
+
+  $w-days: $day-size * $columns;
+  $w-gaps: $gap * ($columns - 1);
+  $w-pad: $calendar-padding * 2;
+
+  width: $w-days + $w-gaps + $w-pad;
   box-sizing: border-box;
 }
 
@@ -33,14 +48,6 @@ $width-paddings: $calendar-padding * 2;
   }
 }
 
-// Modificadores de quantidade de dias
-.calendar--month-length-28 .calendar__day:nth-child(n + 29),
-.calendar--month-length-29 .calendar__day:nth-child(n + 30),
-.calendar--month-length-30 .calendar__day:nth-child(n + 31) {
-  display: none;
-}
-
-// Modificadores de dia de início
 $days: (
   mon: 0,
   tue: 1,
@@ -54,7 +61,9 @@ $days: (
 @each $name, $index in $days {
   .calendar--start-day-#{$name} {
     .calendar__day:first-child {
-      margin-left: ($day-size + $gap) * $index;
+      $m-left: ($day-size + $gap) * $index;
+
+      margin-left: $m-left;
     }
   }
 }
