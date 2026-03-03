@@ -1,0 +1,75 @@
+@use 'sass:list';
+
+$days-in-month: 31;
+$cell-size: 100px;
+$gap-size: 1px;
+$calendar-padding: 10px;
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+
+@for $day from 1 through $days-in-month {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
+
+@each $start-day in $start-days {
+  .calendar--start-day-#{$start-day} {
+    .calendar__day:first-child {
+      $start-day-index: list.index($start-days, $start-day) - 1;
+
+      margin-left: $start-day-index * ($cell-size + $gap-size);
+    }
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $calendar-padding;
+  width: calc(7 * #{$cell-size} + 6 * #{$gap-size} + 2 * #{$calendar-padding});
+  box-sizing: border-box;
+}
+
+.calendar__day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: $cell-size;
+  height: $cell-size;
+  border: 1px solid black;
+  background-color: #eee;
+  box-sizing: border-box;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+}
+
+.calendar__day::before {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  cursor: pointer;
+  transform: translateY(-20px);
+}
