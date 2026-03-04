@@ -1,3 +1,42 @@
 body {
-  margin: 0;
+  width: 800px;
+  margin: 150px auto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: 700px;
+  gap: 1px;
+}
+
+.calendar_day {
+  flex-basis: calc(100% / 7 - (1px * 6 / 7));
+  display: flex;
+  transition: 500ms;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+  border: 1px solid #000;
+  background-color: #eee;
+  height: 99px;
+  width: 99px;
+}
+
+.calendar_day:first-child {
+  margin-left: calc(100% / 7 * 6);
+}
+
+@for $i from 1 through 31 {
+  .calendar_day:nth-child(#{$i})::before {
+  content: '#{$i}';
+  }
+}
+
+.calendar_day:hover {
+  background-color: #FFBFCB;
+  transform: translateY(-20px)
 }
