@@ -3,10 +3,15 @@ $gap: 1px;
 $day-size: 99px;
 $bg-main: #eee;
 $bg-hover: #FFBFCB;
+$calendar-width: 700px;
 
 body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 800px;
-  margin: 150px auto;
+  margin: auto;
   font-family: Arial, sans-serif;
   font-size: 30px;
 }
@@ -14,7 +19,7 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  width: 700px;
+  width: $calendar-width;
   gap: $gap;
 
   @for $i from 1 through 7 {
@@ -27,7 +32,7 @@ body {
 
   $lengths: 28, 29, 30, 31;
 
-  @each $len in $lengths {
+  @for $len from 28 through 31 {
     &--len-#{$len} {
       .calendar__day:nth-child(n + #{$len + 1}) {
         display: none;
@@ -50,6 +55,7 @@ body {
   &:hover {
     background-color: $bg-hover;
     transform: translateY(-20px);
+    cursor: pointer;
   }
 }
 
