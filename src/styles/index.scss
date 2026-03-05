@@ -1,3 +1,99 @@
+$cell-size: 100px;
+$border-size: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$cell-bg: #eee;
+$border-color: #000;
+$hover-bg: #ffbfcb;
+$font-family: Arial, sans-serif;
+$font-size: 30px;
+$calendar-width: $columns * $cell-size + ($columns - 1) * $gap + 2 * $padding;
+$days-in-week: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  filter: brightness(1);
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendar-width;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.calendar__day {
+  width: $cell-size;
+  height: $cell-size;
+  background-color: $cell-bg;
+  border: $border-size solid $border-color;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: 1;
+  transition-duration: 0.5s;
+}
+
+.calendar__day::before {
+  content: '';
+}
+
+.calendar__day:hover {
+  background-color: $hover-bg;
+  transform: translateY(-20px);
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} {
+    .calendar__day:nth-child(n + #{$len + 1}) {
+      display: none;
+    }
+  }
+}
+
+@each $day, $index in $days-in-week {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($cell-size + $gap) * $index;
+    }
+  }
 }
