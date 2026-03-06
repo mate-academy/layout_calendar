@@ -1,0 +1,72 @@
+@use 'sass:list';
+
+$cell-size: 100px;
+$border: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap $gap;
+  padding: $padding;
+  box-sizing: border-box;
+
+  width: ($columns * $cell-size) + (($columns - 1) * $gap) + ($padding * 2);
+}
+
+.calendar__day {
+  width: $cell-size;
+  height: $cell-size;
+  background: #eee;
+  border: $border solid black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+  transition: 0.5s;
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+$days: mon, tue, wed, thu, fri, sat, sun;
+
+@each $day in $days {
+  $index: list.index($days, $day);
+
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($index - 1) * ($cell-size + $gap);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
