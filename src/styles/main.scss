@@ -9,7 +9,7 @@ $day-offset-up: -20px;
 $day-tr-duration: 0.5s;
 $padding-total: $calendar-padding * 2;
 $calendar-first: $day-size * $calendar-columns;
-$calendar-second: $calendar-columns - $calendar-gap;
+$calendar-second: $calendar-gap * ($calendar-columns - 1);
 $calendar-width: ($calendar-first) + ($calendar-second) + $padding-total;
 $month-length: (28, 29, 30, 31);
 $start-days: (
@@ -67,7 +67,7 @@ body {
   @each $day, $offset in $start-days {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($day-size + $calendar-gap) * $offset;
+        margin-left: calc((#{$day-size} + #{$calendar-gap}) * #{$offset});
       }
     }
   }
