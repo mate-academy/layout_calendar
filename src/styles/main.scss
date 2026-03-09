@@ -8,7 +8,9 @@ $day-border-width: 1px;
 $day-offset-up: -20px;
 $day-tr-duration: 0.5s;
 $padding-total: $calendar-padding * 2;
-$calendar-width: ($day-size * 7) + (1 * (7 - 1)) + 20;
+$calendar-first: $day-size * $calendar-columns;
+$calendar-second: $calendar-columns - $calendar-gap;
+$calendar-width: ($calendar-first) + ($calendar-second) + $padding-total;
 $month-length: (28, 29, 30, 31);
 $start-days: (
   'mon': 0,
@@ -33,7 +35,6 @@ body {
   display: flex;
   flex-wrap: wrap;
   width: $calendar-width;
-  columns: $calendar-columns;
   padding: $calendar-padding;
   gap: $calendar-gap;
 
