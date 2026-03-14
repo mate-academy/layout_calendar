@@ -1,0 +1,102 @@
+// Variables
+$day-size: 100px;
+$day-border: 1px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$hover-lift: 20px;
+$transition-duration: 0.5s;
+$day-bg: #eee;
+$day-border-color: #000;
+$hover-bg: #ffbfcb;
+$font-size-day: 30px;
+
+// With box-sizing: border-box, border is included in $day-size.
+// Total calendar width: 7 days + 6 gaps + 2 paddings
+$calendar-width: $day-size * $columns + $gap * ($columns - 1) + $padding * 2;
+
+// Each column slot = day size + gap after it
+$column-slot: $day-size + $gap;
+
+// Start-day column offsets (Monday-first week: Mon=1, ..., Sun=7)
+// README: "Monday is the 1st, Friday is the 5th"
+$start-days: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  width: $calendar-width;
+
+  // start-day modifiers
+  @each $day, $col in $start-days {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        // shift first day to its correct column (1-indexed)
+        margin-left: $column-slot * ($col - 1);
+      }
+    }
+  }
+
+  // month-length modifiers — hide days beyond the month length
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-bg;
+    border: $day-border solid $day-border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+    flex-shrink: 0;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: $font-size-day;
+    }
+
+    // Generate day numbers 1–31 using @for
+    @for $n from 1 through 31 {
+      &:nth-child(#{$n})::before {
+        content: '#{$n}';
+      }
+    }
+
+    &:hover {
+      background-color: $hover-bg;
+      transform: translateY(-$hover-lift);
+    }
+  }
+}
