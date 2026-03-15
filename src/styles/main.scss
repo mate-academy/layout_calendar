@@ -1,0 +1,46 @@
+@import 'variables';
+
+.calendar {
+  display: flex;
+  gap: $calendar_gap;
+  padding: 10px;
+  width: 726px;
+  flex-wrap: wrap;
+
+  &__day {
+    background: $calendar_day_color;
+    width: $calendar_day_size;
+    height: $calendar_day_size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    font-family: $calendar_day_font;
+    font-size: $calendar_day_font-size;
+    transition-duration: 0.5s;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: $calendar_day_hover_color;
+    transform: translateY(-20px);
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $offset in $days_of_week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $offset * ($calendar_day_size + $calendar_gap);
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
