@@ -19,11 +19,10 @@ body {
   flex-wrap: wrap;
   gap: $gap;
   padding: $padding;
-  width: ($day-size * $columns) + ($gap * ($columns - 1));
+  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$padding});
 }
 
 .calendar__day {
-  box-sizing: border-box;
   width: $day-size;
   height: $day-size;
   transition: all 0.5s;
@@ -63,8 +62,8 @@ $days: (
 );
 
 @each $day, $index in $days {
-  .calendar--start-#{$day} .calendar__day:first-child {
-    margin-left: $index * ($day-size + $gap);
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: calc(#{$index} * (#{$day-size} + #{$gap}));
   }
 }
 
