@@ -1,0 +1,79 @@
+@use 'sass:list';
+@use './variables.scss' as *;
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 $padding-main;
+  gap: $gap-main;
+  max-width: $total-width;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  position: relative;
+  height: $cell-size;
+  width: $cell-size;
+  background-color: $color-row;
+  border: 1px solid black;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    display: flex;
+    font-family: $font-main;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:hover {
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: $color-hover;
+    transform: translate(0, -20px);
+  }
+}
+
+@for $i from 1 through $days-in-month {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+@for $n from 29 through $days-in-month {
+  .calendar--month-length-#{$n} .calendar__day:nth-child(n + #{$n + 1}) {
+    display: none;
+  }
+}
+
+@each $name, $index in $days {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: ($index * ($cell-size + $gap-main));
+    }
+  }
+}
