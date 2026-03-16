@@ -15,14 +15,16 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
   padding: $padding;
-  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$padding});
+  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap} + 2 * #{$padding});
 }
 
 .calendar__day {
+  box-sizing: border-box;
   width: $day-size;
   height: $day-size;
   transition: all 0.5s;
@@ -48,7 +50,7 @@ body {
 .calendar__day:hover {
   cursor: pointer;
   background: $hover-color;
-  transform: translateY(-20px);
+  transform: translateY(20px);
 }
 
 $days: (
