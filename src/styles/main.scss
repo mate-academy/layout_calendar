@@ -1,0 +1,87 @@
+@use 'variables' as *;
+
+body,
+html {
+  height: 100%;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding;
+  box-sizing: border-box;
+  
+}
+
+.calendar {
+  width: $calendar-width;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding: $padding;
+  box-sizing: content-box; // se mantiveres assim, $calendar-width deve incluir 2 * $padding
+
+  
+}
+
+.calendar__day {
+  width: $day-size;
+  height: $day-size;
+  background: #eee;
+  border: $day-border solid #000;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    transform 0.5s,
+    background-color 0.5s;
+
+  &::before {
+    content: '';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    color: #000;
+
+    /*  position: static porque usamos flex para centrar  */
+  }
+}
+
+.calendar__day:hover {
+  background-color: #ffbfcb;
+  transform: translateY(-20px);
+}
+
+/*  gera números  */
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@each $name, $col in $start-days {
+  .calendar--#{$name} {
+    // desloca apenas o primeiro dia do mês para a coluna correta
+    .calendar__day:nth-child(1) {
+      
+     /*  background-color: yellow;  */
+
+      
+      margin-left: ($col - 1) * ($day-size + $gap);
+    }
+  }
+}
+
+@for $n from 28 through 31 {
+  .calendar--month-length-#{$n} {
+    /* esconde dias a partir de N+1 (ou seja: n + (N+1)) */
+
+    .calendar__day:nth-child(n + #{ $n + 1 }) {
+      display: none;
+    }
+  }
+}
