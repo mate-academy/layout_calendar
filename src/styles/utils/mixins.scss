@@ -1,0 +1,24 @@
+@mixin format-text($font-size, $line-height, $font-weight, $color) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  color: $color;
+}
+
+@each $day, $index in $week-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($width-day + $gap-size) * ($index - 1);
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}

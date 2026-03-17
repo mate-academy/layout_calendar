@@ -1,0 +1,29 @@
+.calendar {
+  width: calc((7 * $width-day) + ($gap-size * 6));
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $gap-size;
+  padding: $padding-square;
+
+  &__day {
+    width: $width-day;
+    height: $height-day;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: $border-size solid $border-color;
+    background-color: $backround-color-day;
+    transition: all 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hovered-square;
+      transform: translateY($hovered-square-transform);
+    }
+  }
+}
