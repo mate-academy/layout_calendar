@@ -3,14 +3,15 @@ $columns: 7;
 $gap: 1px;
 $main-color: #eee;
 $secondary-color: #ffbfcb;
+$calendar-padding: 10px;
 $days: (
-  'mon': 0,
-  'tue': 1,
-  'wed': 2,
-  'thu': 3,
-  'fri': 4,
-  'sat': 5,
-  'sun': 6,
+  "mon": 0,
+  "tue": 1,
+  "wed": 2,
+  "thu": 3,
+  "fri": 4,
+  "sat": 5,
+  "sun": 6
 );
 
 body {
@@ -28,8 +29,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap});
-
+  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap} + #{$calendar-padding});
+  padding-inline: $calendar-padding / 2;
   &__day {
     box-sizing: border-box;
     width: $day-size;
@@ -40,13 +41,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     transition:
       background-color 0.5s,
       transform 0.5s;
 
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
-        content: ' #{$i}';
+        content: " #{$i}";
         font-family: Arial, sans-serif;
         font-size: $day-size * 0.3;
       }
