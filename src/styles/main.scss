@@ -16,7 +16,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   padding: 0 10px;
-  width: calc($columns * $block-width) + 6 * $gap;
+  width: $columns * $block-width + ($columns - 1) * $gap;
   gap: $gap;
 
   &__day {
@@ -24,7 +24,7 @@ body {
     box-sizing: border-box;
     height: $block-height;
     width: $block-width;
-    background-color: #eee;
+    background-color: $block-bg;
     border: 1px solid black;
     align-items: center;
     justify-content: center;
@@ -45,8 +45,7 @@ body {
     }
   }
 
-  @each $day, $margin in (mon: 0, tu: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
-  {
+  @each $day, $margin in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6) {
     &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: ($block-width * $margin) + ($gap * $margin);
