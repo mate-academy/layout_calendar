@@ -3,7 +3,6 @@ $columns: 7;
 $gap: 1px;
 $main-color: #eee;
 $secondary-color: #ffbfcb;
-$calendar-padding: 10px;
 $days: (
   "mon": 0,
   "tue": 1,
@@ -29,8 +28,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
-  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap} + #{$calendar-padding});
-  padding-inline: $calendar-padding / 2;
+  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap});
+  padding-inline: 5px;
   &__day {
     box-sizing: border-box;
     width: $day-size;
@@ -68,7 +67,7 @@ body {
 
   @for $i from 28 through 31 {
     &--month-length-#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
+      &__day:nth-child(n + #{$i + 1}) {
         display: none;
       }
     }
