@@ -1,0 +1,21 @@
+// -----content for each day----
+@for $dayN from 1 through 31 {
+  .calendar__day:nth-child(#{$dayN})::before {
+    content: '#{$dayN}';
+  }
+}
+
+// -------move the first day to the desired column------
+@each $day, $shift in $start-days {
+  .calendar.calendar--#{$day} .calendar__day:first-child {
+    margin-left: ($day-width * $shift);
+  }
+}
+
+// -------hide days after month length------
+@for $i from 28 through 31 {
+  .calendar.calendar--month-length-#{$i}
+    .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
