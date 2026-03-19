@@ -1,0 +1,68 @@
+.calendar {
+  $color-cell-bg: #eee;
+  $color-cell-bg-hover: #ffbfcb;
+  $color-cell-border: #000;
+  $calendar-padding: 10px;
+  $calendar-gap: 1px;
+  $cell-width: 100px;
+  $days-per-week: 7;
+  $min-days-per-month: 28;
+  $max-days-per-month: 31;
+  $week-days: (
+    'mon': 1,
+    'tue': 2,
+    'wed': 3,
+    'thu': 4,
+    'fri': 5,
+    'sat': 6,
+    'sun': 7,
+  );
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $cell-width * $days-per-week
+         + $calendar-gap * ($days-per-week - 1)
+         + ($calendar-padding * 2);
+
+  margin-inline: auto;
+  padding: $calendar-padding;
+
+  @each $name, $day in $week-days {
+    &--start-day-#{$name} > :first-child {
+      margin-inline-start: ($cell-width + $calendar-gap) * ($day - 1);
+    }
+  }
+
+  @for $day from $min-days-per-month through $max-days-per-month {
+    &--month-length-#{$day} > :nth-child(n + #{$day + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $cell-width;
+    aspect-ratio: 1;
+    border: solid 1px $color-cell-border;
+    background-color: $color-cell-bg;
+    transition:
+      background-color 0.5s ease,
+      transform 0.5s ease;
+
+    &:hover {
+      background-color: $color-cell-bg-hover;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+
+    @for $day from 1 through $max-days-per-month {
+      &:nth-child(#{$day}):before {
+        content: '#{$day}';
+        font-size: 30px;
+      }
+    }
+  }
+}
