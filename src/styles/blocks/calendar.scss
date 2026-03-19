@@ -29,13 +29,13 @@
   padding: $calendar-padding;
 
   @each $name, $day in $week-days {
-    &--start-day-#{$name} :first-child {
+    &--start-day-#{$name} > :first-child {
       margin-inline-start: ($cell-width + $calendar-gap) * ($day - 1);
     }
   }
 
   @for $day from $min-days-per-month through $max-days-per-month {
-    &--month-length-#{$day} :nth-child(n + #{$day + 1}) {
+    &--month-length-#{$day} > :nth-child(n + #{$day + 1}) {
       display: none;
     }
   }
@@ -58,7 +58,7 @@
       cursor: pointer;
     }
 
-    @for $day from 0 through $max-days-per-month {
+    @for $day from 1 through $max-days-per-month {
       &:nth-child(#{$day}):before {
         content: '#{$day}';
         font-size: 30px;
