@@ -22,7 +22,7 @@ $anim-speed: 0.5s;
   padding: $padding;
   gap: $gap;
 
-  &__days {
+  &__day {
     box-sizing: border-box;
     width: $day-size;
     height: $day-size;
@@ -31,10 +31,12 @@ $anim-speed: 0.5s;
     text-align: center;
     border: $border;
     cursor: pointer;
-    transition: background-color $anim-speed ease, transform $anim-speed ease;
+    transition:
+      background-color $anim-speed ease,
+      transform $anim-speed ease;
     font-family: Arial, sans-serif;
     font-size: 30px;
-    
+
     &:hover {
       background-color: $bg-pink;
       transform: translateY(-20px);
@@ -42,7 +44,7 @@ $anim-speed: 0.5s;
   }
 
   @for $i from 1 through 31 {
-    &__days:nth-child(#{$i}) {
+    &__day:nth-child(#{$i}) {
       &::before {
         content: '#{$i}';
       }
@@ -83,7 +85,7 @@ $anim-speed: 0.5s;
     }
 
     &--start-day-#{$day} {
-      .calendar__days:first-child {
+      .calendar__day:first-child {
         margin-left: $num * ($day-size + $gap);
       }
     }
@@ -91,7 +93,7 @@ $anim-speed: 0.5s;
 
   @for $length from 28 through 31 {
     &--month-length-#{$length} {
-      .calendar__days:nth-child(n + #{$length + 1}) {
+      .calendar__day:nth-child(n + #{$length + 1}) {
         display: none;
       }
     }
