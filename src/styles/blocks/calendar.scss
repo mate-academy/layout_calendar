@@ -1,0 +1,72 @@
+@use '../utils/vars.scss';
+
+.calendar {
+  $month-length: 31;
+  $day-width: 100px;
+  $day-height: 100px;
+  $calendar-gap: 1px;
+  $calendar-padding: 10px;
+  $days: (
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
+
+  display: flex;
+  place-content: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  gap: $calendar-gap;
+  padding: $calendar-padding;
+
+  max-width: ($day-width * 7) + ($calendar-gap * 6) + ($calendar-padding * 2);
+
+  @each $day, $numberOfDay in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($day-width + $calendar-gap) * $numberOfDay;
+    }
+  }
+
+  @for $i from 28 through $month-length {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $day-width;
+    height: $day-height;
+    border: 1px solid vars.$day-border-color;
+    background-color: vars.$day-background-color;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.2;
+
+    transition:
+      transform 0.5s ease-in,
+      background-color 0.5s ease-in;
+
+    @for $i from 1 through $month-length {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: vars.$day-background-color--hover;
+      transform: translateY(-20px);
+    }
+  }
+}
