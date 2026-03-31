@@ -1,0 +1,52 @@
+@use './utils/variables.scss' as var;
+
+.calendar {
+  display: flex;
+  gap: var.$cell-gap;
+  padding: var.$cell-padding;
+  flex-wrap: wrap;
+
+  /* prettier-ignore */
+  width:
+    var.$columns * var.$cell-size + var.$cell-padding * 2 + var.$cell-gap * (var.$columns - 1);
+  box-sizing: border-box;
+
+  &__day {
+    width: var.$cell-size;
+    height: var.$cell-size;
+    background-color: var.$cell-background;
+    border: var.$cell-border solid var.$border-color;
+    text-align: center;
+    box-sizing: border-box;
+    transition: all 0.5s;
+    
+    &:hover {
+      cursor: pointer;
+      background-color: var.$hover-color;
+      transform: translateY(-20px);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}):before {
+        content: '#{$i}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+        line-height: 98px;
+      }
+    }
+  }
+}
+
+@each $day, $shift in var.$start-day {
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: $shift * (var.$cell-size + var.$cell-gap);
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .calendar__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
