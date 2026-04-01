@@ -27,6 +27,8 @@ body {
 }
 
 .calendar {
+  --start-offset: 0;
+
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
@@ -80,6 +82,10 @@ body {
       .calendar__day:first-child {
         margin-left: ($index - 1) * ($cell-size + $gap);
       }
+    }
+
+    &__day:first-child {
+      margin-left: var(--start-offset);
     }
   }
 }
