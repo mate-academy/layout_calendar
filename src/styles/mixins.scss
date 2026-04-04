@@ -1,0 +1,20 @@
+@mixin start-day-margin($modifier, $index) {
+  .calendar--start-day-#{$modifier} .calendar__day:nth-child(1) {
+    margin-left: calc((#{$daySize} + #{$gap}) * #{$index});
+  }
+}
+
+@each $modifier, $index in $calendar-modifier {
+  @include start-day-margin($modifier, $index);
+}
+
+@mixin calendar-length($length) {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 28 through 31 {
+  @include calendar-length($i);
+}
