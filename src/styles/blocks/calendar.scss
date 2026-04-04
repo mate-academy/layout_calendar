@@ -1,0 +1,59 @@
+@use '../utils/variables' as *;
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  width: $calendar-width;
+  flex-wrap: wrap;
+  gap: $gap;
+  padding-inline: $padding-inline;
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: $item-size;
+    height: $item-size;
+    background-color: $main-color;
+    border: 1px solid #000;
+
+    transition-duration: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transition-duration: 0.5s;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through $max-day-of-month {
+    &__day:nth-child(#{$i}):before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $step in $days-of-week {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: $step * ($item-size + $gap);
+    }
+  }
+
+  @for $i from $min-day-of-month through $max-day-of-month {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
