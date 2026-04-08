@@ -1,86 +1,42 @@
-// VARIABLES
-$cell-size: 100px;
-$gap: 1px;
-$columns: 7;
-$padding: 10px;
-$border: 1px;
-$day-bg: #eee;
-$hover-bg: #ffbfcb;
-
-// RESET + CENTERING
-body {
+/* Global reset */
+* {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  box-sizing: border-box; // safety for all elements
+}
 
+body {
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #f0f0f0;
+  font-family: sans-serif;
 }
 
-// BLOCK
+/* Calendar block */
 .calendar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $gap;
-  padding: $padding;
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 100px);
+    grid-gap: 2px; // optional spacing
+  }
 
-  width: ($cell-size * $columns) + ($gap * ($columns - 1)) + (2 * $padding);
-
-  // ELEMENT
   &__day {
-    width: $cell-size;
-    height: $cell-size;
-    background-color: $day-bg;
-    border: $border solid black;
-
+    width: 100px;
+    height: 100px;
+    border: 1px solid #333;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box; // critical fix for layout
+    font-size: 1.2rem;
+    background-color: #fff;
 
-    position: relative;
-    transition: all 0.5s;
-
-    // GENERATE NUMBERS
+    /* Add day numbers via CSS */
     @for $i from 1 through 31 {
       &:nth-child(#{$i})::before {
-        content: '#{$i}';
-        font-family: Arial, sans-serif;
-        font-size: 30px;
-      }
-    }
-
-    // HOVER EFFECT
-    &:hover {
-      cursor: pointer;
-      background-color: $hover-bg;
-      transform: translateY(-20px);
-    }
-  }
-
-  // START DAY MODIFIERS
-  $days: (
-    sun: 0,
-    mon: 1,
-    tue: 2,
-    wed: 3,
-    thu: 4,
-    fri: 5,
-    sat: 6,
-  );
-
-  @each $name, $index in $days {
-    &--start-day-#{$name} {
-      .calendar__day:first-child {
-        margin-left: ($cell-size + $gap) * $index;
-      }
-    }
-  }
-
-  // MONTH LENGTH MODIFIERS
-  @for $i from 28 through 31 {
-    &--month-length-#{$i} {
-      .calendar__day:nth-child(n + #{$i + 1}) {
-        display: none;
+        content: "#{$i}";
       }
     }
   }
