@@ -1,0 +1,64 @@
+@use 'sass:list';
+@use '../utils/variables' as v;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$gap-size v.$gap-size;
+  margin: auto;
+  padding: 10px;
+  width: v.$gap-size * (v.$days-count - 1) + v.$day-size * v.$days-count;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: v.$day-size;
+    height: v.$day-size;
+    background-color: v.$day-color;
+    border: 1px solid black;
+    transition-duration: 0.25s;
+
+    &::before {
+      font:
+        30px Arial,
+        sans-serif;
+      text-align: center;
+      display: block;
+      box-sizing: border-box;
+    }
+
+    @for $i from 1 through v.$full-month-length {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: v.$day-color-hover;
+      transform: translateY(-20px);
+      transition-duration: 0.25s;
+    }
+  }
+
+  @for $i from v.$shortest-month-length through v.$full-month-length {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $day in v.$days-of-week {
+    &--start-day-#{$day} {
+      $day-index: list.index(v.$days-of-week, $day);
+      $skip-days: $day-index - 1;
+
+      .calendar__day:first-child {
+        margin-left: $skip-days * (v.$day-size + v.$gap-size);
+      }
+    }
+  }
+}
