@@ -1,0 +1,27 @@
+@use 'sass:list';
+
+@for $n from 28 through 31 {
+  .calendar--month-length-#{$n} .calendar__day:nth-child(n + #{$n + 1}) {
+    display: none;
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@each $day in $start-days {
+  $i: list.index($start-days, $day);
+  .calendar--start-day-#{$day} .calendar__day:nth-child(1) {
+    margin-left: ($day-size + $gap) * ($i - 1);
+  }
+}
