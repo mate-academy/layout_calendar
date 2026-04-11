@@ -2,6 +2,9 @@
 
 $size: 100px;
 $start-day: mon, tue, wed, thu, fri, sat, sun;
+$gap: 1px;
+$container-padding: 10px;
+$calendar-width: calc(7 * $size + 6 * $gap + 2 * $container-padding);
 
 * {
   box-sizing: border-box;
@@ -16,16 +19,17 @@ $start-day: mon, tue, wed, thu, fri, sat, sun;
 }
 
 .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, $size);
-  max-width: 710px;
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  gap: $gap;
+  padding: $container-padding;
   margin: 0 auto;
-  gap: 1px;
 
   @each $day in $start-day {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        grid-column-start: list.index($start-day, $day);
+        margin-left: calc((list.index($start-day, $day) - 1) * ($size + $gap));
       }
     }
   }
@@ -44,8 +48,9 @@ $start-day: mon, tue, wed, thu, fri, sat, sun;
     justify-content: center;
     background-color: #eee;
     height: $size;
+    width: $size;
     border: 1px solid black;
-    transition-duration: 500ms;
+    transition: all, 0.5s;
 
     &::before {
       font-family: Arial, sans-serif;
