@@ -1,3 +1,67 @@
-body {
+@use 'sass:list';
+
+$size: 100px;
+$start-day: mon, tue, wed, thu, fri, sat, sun;
+
+* {
+  box-sizing: border-box;
+}
+
+.body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, $size);
+  max-width: 710px;
+  margin: 0 auto;
+  gap: 1px;
+
+  @each $day in $start-day {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        grid-column-start: list.index($start-day, $day);
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+    height: $size;
+    border: 1px solid black;
+    transition-duration: 500ms;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
 }
