@@ -1,7 +1,13 @@
-@use 'sass:list';
-
 $size: 100px;
-$start-day: mon, tue, wed, thu, fri, sat, sun;
+$start-day: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
 $gap: 1px;
 $container-padding: 10px;
 $calendar-width: calc(7 * $size + 6 * $gap + 2 * $container-padding);
@@ -26,10 +32,10 @@ $calendar-width: calc(7 * $size + 6 * $gap + 2 * $container-padding);
   padding: $container-padding;
   margin: 0 auto;
 
-  @each $day in $start-day {
+  @each $day, $index in $start-day {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: calc((list.index($start-day, $day) - 1) * ($size + $gap));
+        margin-left: #{$index * ($size + $gap)};
       }
     }
   }
@@ -50,7 +56,7 @@ $calendar-width: calc(7 * $size + 6 * $gap + 2 * $container-padding);
     height: $size;
     width: $size;
     border: 1px solid black;
-    transition: all, 0.5s;
+    transition: all 0.5s;
 
     &::before {
       font-family: Arial, sans-serif;
