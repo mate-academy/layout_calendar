@@ -1,3 +1,73 @@
+@import './variables';
+
+$days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $sg;
+  padding: $sp;
+  width: calc(7 * #{$size} + 6 * #{$sg} + 2 * #{$sp});
+  box-sizing: border-box;
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $size;
+    height: $size;
+    background-color: $main-color;
+    color: #000;
+    font-family: $font-family;
+    font-size: 30px;
+    border: 1px solid $aditional-color-2;
+    cursor: pointer;
+    transition: all $ani-time;
+
+    &:hover {
+      background-color: $aditional-color;
+      transform: translateY(-20px);
+      z-index: 10;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  @each $name, $order in $days {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: calc((#{$size} + #{$sg}) * (#{$order} - 1));
+      }
+    }
+  }
 }
