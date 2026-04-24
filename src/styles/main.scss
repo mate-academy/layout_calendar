@@ -1,0 +1,59 @@
+@use 'utils/variables' as vars;
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  gap: vars.$dayGap;
+  width: vars.$calendarWidth;
+  padding-inline: vars.$calendarPadding;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+
+  &__day {
+    box-sizing: border-box;
+    width: vars.$calendarDayWidth;
+    height: vars.$calendarDayHeight;
+    background-color: vars.$mainColor;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: vars.$hoverColor;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $day, $count in vars.$days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: (vars.$calendarDayWidth + vars.$dayGap) * $count;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
