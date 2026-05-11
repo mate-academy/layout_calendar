@@ -1,0 +1,22 @@
+@use '../utils/variables.scss' as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $calendar-padding;
+  gap: $gap;
+  width: $calendar-width;
+}
+
+@each $day-name, $day-index in $start-days {
+  .calendar--start-day-#{$day-name} .calendar__day:first-child {
+    margin-left: ($day-index - 1) * ($day-size + $gap);
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}

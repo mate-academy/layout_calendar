@@ -1,0 +1,31 @@
+@use '../utils/variables.scss' as *;
+
+.calendar__day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: $day-size;
+  height: $day-size;
+  background-color: $day-bg-color;
+  border: 1px solid $border-color;
+  transition-duration: 0.5s;
+
+  &::before {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: $day-hover-color;
+    transform: translateY(-20px);
+    transition-duration: 0.5s;
+  }
+}
+
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
