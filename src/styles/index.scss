@@ -1,3 +1,62 @@
+@import 'variables';
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  list-style: none;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: $item-gap;
+  max-width: $item-size * 7 + $item-gap * 6;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $item-size;
+    height: $item-size;
+    border: 1px solid black;
+    counter-increment: card-number;
+    transition-duration: 0.5s;
+    justify-content: center;
+
+    &::before {
+      @for $day from 1 to 29 {
+        content: counter(card-number);
+        align-self: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+      cursor: pointer;
+    }
+  }
+}
+
+@each $day, $count in $start-day {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($item-size + $item-gap) * $count;
+    }
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
 }
