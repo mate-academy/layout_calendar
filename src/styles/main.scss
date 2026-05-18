@@ -10,12 +10,14 @@ body {
 
 .calendar {
   list-style: none;
-  padding: 10px;
+  padding: $item-padding;
   display: flex;
   flex-wrap: wrap;
 
+  counter-reset: card-number;
+
   gap: $item-gap;
-  max-width: $item-size * 7 + $item-gap * 6;
+  max-width: $item-size * 7 + $item-gap * 6 + $item-padding * 2;
 
   &__day {
     display: flex;
@@ -29,7 +31,7 @@ body {
     justify-content: center;
 
     &::before {
-      @for $day from 1 to 29 {
+      @for $day from 1 through 31 {
         content: counter(card-number);
         align-self: center;
         font-family: Arial, Helvetica, sans-serif;
