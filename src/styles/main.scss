@@ -31,53 +31,54 @@ $start-day: (
 
 body {
   display: flex;
+  box-sizing: border-box;
   margin: 0;
   height: 100vh;
   justify-content: center;
   align-items: center;
-}
 
-.calendar {
-  display: flex;
-  gap: 1px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 726px;
-  padding: $ten-pixels;
-  counter-reset: day-counter;
-
-  &__day {
+  .calendar {
+    display: flex;
+    gap: 1px;
     box-sizing: border-box;
-    flex-basis: $hundred-pixels;
-    position: relative;
-    height: $hundred-pixels;
-    width: $hundred-pixels;
-    background-color: #eee;
-    border: 1px solid $color-black;
-    counter-increment: day-counter;
-    transition-duration: 0.5s ease;
-  }
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 726px;
+    padding: $ten-pixels;
+    counter-reset: day-counter;
 
-  &__day::before {
-    content: counter(day-counter);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    &__day {
+      box-sizing: border-box;
+      flex-basis: $hundred-pixels;
+      position: relative;
+      height: $hundred-pixels;
+      width: $hundred-pixels;
+      background-color: #eee;
+      border: 1px solid $color-black;
+      counter-increment: day-counter;
+      transition: all 0.5s ease;
+    }
 
-    font-family: Arial, sans-serif;
-    font-size: $thirty-pixels;
+    &__day::before {
+      content: counter(day-counter);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
 
-    pointer-events: none;
-    color: $color-black;
-  }
+      font-family: Arial, sans-serif;
+      font-size: $thirty-pixels;
 
-  &__day:hover {
-    cursor: pointer;
-    background-color: #ffbfcb;
-    transform: translateY(-20px);
-    transition-duration: 0.5s ease;
+      pointer-events: none;
+      color: $color-black;
+    }
+
+    &__day:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
   }
 }
+
