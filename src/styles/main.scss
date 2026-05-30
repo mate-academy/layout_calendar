@@ -13,16 +13,18 @@ $week-days: (
   sat: 5,
   sun: 6,
 );
-$cell-full-size: $cell-size + $border-size * 2;
-$cells-width: $cell-full-size * $columns-count;
+$cells-width: $cell-size * $columns-count;
 $gaps-width: $gap-size * ($columns-count - 1);
 $total-width: $cells-width + $gaps-width + $padding-size * 2;
 
 // ===== BASE STYLES =====
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  height: 100vh;
-
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,28 +33,25 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-
   gap: $gap-size;
   padding: $padding-size;
-  width: $total-width;
+  max-width: $total-width;
 
   &__day {
     position: relative;
-
     width: $cell-size;
     height: $cell-size;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     border: $border-size solid black;
     background-color: #eee;
-
-    transition: 0.5s;
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
 
     &:hover {
-      cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
     }
@@ -74,7 +73,7 @@ body {
 // ===== START DAY =====
 @each $name, $position in $week-days {
   .calendar--start-day-#{$name} .calendar__day:first-child {
-    margin-left: $cell-full-size * $position + $gap-size * $position;
+    margin-left: ($cell-size + $gap-size) * $position;
   }
 }
 
