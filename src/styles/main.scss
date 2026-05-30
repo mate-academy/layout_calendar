@@ -1,0 +1,85 @@
+// ===== VARIABLES =====
+$cell-size: 100px;
+$gap-size: 1px;
+$border-size: 1px;
+$columns-count: 7;
+$padding-size: 10px;
+$week-days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+$cells-width: $cell-size * $columns-count;
+$gaps-width: $gap-size * ($columns-count - 1);
+$total-width: $cells-width + $gaps-width + $padding-size * 2;
+
+// ===== BASE STYLES =====
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $padding-size;
+  max-width: $total-width;
+
+  &__day {
+    position: relative;
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: $border-size solid black;
+    background-color: #eee;
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+    }
+  }
+}
+
+// ===== NUMBERS =====
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+// ===== START DAY =====
+@each $name, $position in $week-days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: ($cell-size + $gap-size) * $position;
+  }
+}
+
+// ===== MONTH LENGTH =====
+@for $days from 28 through 31 {
+  .calendar--month-length-#{$days} .calendar__day:nth-child(n + #{$days + 1}) {
+    display: none;
+  }
+}
