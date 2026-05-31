@@ -1,3 +1,89 @@
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// Variables de configuración
+$cell-size: 100px;
+$cell-border: 1px solid black;
+$cell-gap: 1px;
+$padding-calendar: 10px;
+$bg-color: #eee;
+$hover-color: #ffbfcb;
+
+// Aquí irán tus estilos...
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: $cell-gap;
+  box-sizing: border-box;
+  width: calc(7 * $cell-size + 6 * $cell-gap + 2 * $padding-calendar);
+
+  &__day {
+    // Definimos el tamaño del cuadrado
+    width: $cell-size;
+    height: $cell-size;
+    border: $cell-border;
+    background-color: $bg-color;
+    box-sizing: border-box;
+    transition: all 0.5s ease;
+
+    // Hacemos que el día sea un contenedor flex para centrar el ::before
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer; // Cambia la flecha por la manita
+      background-color: $hover-color; // Usamos la variable rosa que definimos al inicio
+      transform: translateY(-20px); // Lo movemos 20px hacia arriba en el eje Y
+    }
+
+    // Ahora inyectamos los números con el bucle *INVVESTIGAR Y REPASAR ESTO PARA ENTENDERLO BIEN*
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+
+  // Definimos un mapa con los días y su posición (0 es Lunes, 1 Martes...)
+  $days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  // Bucle @each para crear los modificadores *INVVESTIGAR Y REPASAR ESTO PARA ENTENDERLO BIEN*
+  @each $day, $index in $days {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        // Calculamos el margen según el índice
+        margin-left: $index * ($cell-size + $cell-gap);
+      }
+    }
+  }
+
+  // Bucle del 28 al 31 para la longitud del mes
+  @for $length from 28 through 31 {
+    // Creamos el modificador dinámico, ej: &--month-length-28
+    &--month-length-#{$length} {
+      // Ocultamos los días que superen esa longitud
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
 }
