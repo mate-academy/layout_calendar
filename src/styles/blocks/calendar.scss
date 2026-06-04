@@ -41,45 +41,13 @@
     }
   }
 
-  &--start-day-sun {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 6 + $gap * 6;
-    }
-  }
-
-  &--start-day-mon {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 0 + $gap * 0;
-    }
-  }
-
-  &--start-day-tue {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 1 + $gap * 1;
-    }
-  }
-
-  &--start-day-wed {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 2 + $gap * 2;
-    }
-  }
-
-  &--start-day-thu {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 3 + $gap * 3;
-    }
-  }
-
-  &--start-day-fri {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 4 + $gap * 4;
-    }
-  }
-
-  &--start-day-sat {
-    .calendar__day:first-child {
-      margin-left: $cell-size * 5 + $gap * 5;
+  @each $start-day, $start-day-gap in 'sun' 6, 'mon' 0, 'tue' 1, 'wed' 2,
+    'thu' 3, 'fri' 4, 'sat' 5
+  {
+    &--start-day-#{$start-day} {
+      .calendar__day:first-child {
+        margin-left: $cell-size * $start-day-gap + $gap * $start-day-gap;
+      }
     }
   }
 }
