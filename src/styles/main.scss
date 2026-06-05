@@ -1,0 +1,99 @@
+// Variáveis
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$font-size: 30px;
+$font-family: Arial, sans-serif;
+$highlight-color: #ffbfcb;
+$default-color: #eee;
+$columns: 7;
+$padding: 10px;
+$transition-time: 0.5s;
+
+// Centralização total
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+
+  font-family: $font-family;
+
+  background: #f9f9f9;
+}
+
+// Bloco principal
+.calendar {
+  $column-width: $day-size + $border-size * -2 + $gap-size;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  width: ($columns * $column-width - $gap-size + $padding * 2);
+  margin-top: -16px;
+  margin-left: 6px;
+  padding: $padding;
+  border-radius: 6px;
+
+  background: white;
+  &__day {
+    position: relative;
+
+    gap: $gap-size;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: $border-size solid black;
+
+    background: $default-color;
+
+    transition: all $transition-time ease;
+
+    // Números automáticos
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        font-family: $font-family;
+        font-size: $font-size;
+      }
+    }
+
+    // Hover refinado
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background: $highlight-color;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // Modificadores de início do mês
+  @each $day, $index in (sun: 6, mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5)
+  {
+    &--start-day-#{$day} {
+      & > .calendar__day:first-child {
+        margin-left: $index * ($day-size + $border-size * 0 + $gap-size);
+      }
+    }
+  }
+
+  // Modificadores de comprimento do mês
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      & > .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+}
