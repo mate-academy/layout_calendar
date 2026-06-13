@@ -1,0 +1,94 @@
+$day-size: 100px;
+$day-border: 1px;
+$grid-gap: 1px;
+$grid-columns: 7;
+$grid-padding: 10px;
+$days-width: $grid-columns * $day-size;
+$gaps-width: ($grid-columns - 1) * $grid-gap;
+$borders-and-padding: 2 * $grid-padding;
+$calendar-width: $days-width + $gaps-width + $borders-and-padding;
+$day-color: #eee;
+$day-border-color: #000;
+$day-hover-color: #ffbfcb;
+$day-font-family: Arial, sans-serif;
+$day-font-size: 30px;
+$hover-lift: 20px;
+$transition-dur: 0.5s;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: $day-font-family;
+  font-size: $day-font-size;
+  background: #f5f5f5;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $grid-gap;
+  padding: $grid-padding;
+  width: $calendar-width;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    border: $day-border solid $day-border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background-color $transition-dur,
+      transform $transition-dur;
+
+    &:hover {
+      background-color: $day-hover-color;
+      transform: translateY(-$hover-lift);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i})::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  $start-days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  @each $day, $col in $start-days {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: $col * ($day-size + $grid-gap); // 0, 101, 202...606
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+}
