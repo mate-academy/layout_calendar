@@ -1,0 +1,54 @@
+@use './variables' as *;
+@use 'sass:list';
+
+$start-days: mon, tue, wed, thu, fri, sat, sun;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+
+  box-sizing: border-box;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border solid #000;
+
+    background-color: #eee;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+  }
+}
+
+@for $day from 1 through $days-in-max-month {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+@each $start-day in $start-days {
+  $offset: list.index($start-days, $start-day) - 1;
+
+  .calendar--start-day-#{$start-day} .calendar__day:first-child {
+    margin-left: $offset * ($day-size + $day-gap);
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
