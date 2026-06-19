@@ -1,3 +1,5 @@
+@import './utils/mixins';
+
 $day-size: 100px;
 $gap: 1px;
 $columns: 7;
@@ -5,6 +7,10 @@ $padding: 10px;
 $border: 1px solid black;
 $bg-color: #eee;
 $font-family: Arial;
+$font-size: 30px;
+$transition-duration: 0.5s;
+$hover-color: #ffbfcb;
+$hover-translate-y: -20px;
 $days: (
   mon: 0,
   tue: 1,
@@ -20,9 +26,7 @@ body {
   height: 100vh;
   margin: 0;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
 }
 
 .calendar {
@@ -35,29 +39,28 @@ body {
 }
 
 .calendar__day {
-  display: flex;
+  @include flex-center;
+
   box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
   height: $day-size;
   width: $day-size;
   border: $border;
   background-color: $bg-color;
 
   transition:
-    transform 0.5s,
-    background-color 0.5s;
+    transform $transition-duration,
+    background-color $transition-duration;
 
   &::before {
     font-family: $font-family;
-    font-size: 30px;
+    font-size: $font-size;
   }
 }
 
 .calendar__day:hover {
   cursor: pointer;
-  background-color: pink;
-  transform: translateY(-20px);
+  background-color: $hover-color;
+  transform: translateY($hover-translate-y);
 }
 
 @for $i from 1 through 31 {
