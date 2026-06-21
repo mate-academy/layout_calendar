@@ -25,7 +25,7 @@ On hovering over a cell:
 - Move the hovered cell up by `20px` (use `transform`)
 - All changes should be animated with the duration of 0.5s
 
-> Here are the [Layout Tasks Instructions](https://mate-academy.github.io/layout_task-guideline)
+> Here are the [Layout Tasks Instructions](npx)
 
 *Important note*: In this task, you are allowed to link `*.scss` files directly in HTML `<link>` tags using `href` attribute.
 This is possible because [we use the Parcel library](https://en.parceljs.org/scss.html) to bundle your solution's source code.
@@ -36,13 +36,13 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://dannydan0311-glitch.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://dannydan0311-glitch.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
-- [ ] Changing 'month-lengh' and 'start-day' modifier in the code element
+- [x] Changing 'month-lengh' and 'start-day' modifier in the code element
 reflects in changing calendar layout
-- [ ] Each day has no modifiers, only class (eg. calendar__day)
-- [ ] All `Typical Mistakes` from `BEM` lesson theory are checked.
-- [ ] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
+- [x] Each day has no modifiers, only class (eg. calendar__day)
+- [x] All `Typical Mistakes` from `BEM` lesson theory are checked.
+- [x] Code follows all the [Code Style Rules ❗️](https://mate-academy.github.io/layout_task-guideline/html-css-code-style-rules)
