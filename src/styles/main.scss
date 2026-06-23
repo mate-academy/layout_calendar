@@ -1,4 +1,4 @@
-@use 'sass:list';
+@use "sass:list";
 
 $day-size: 100px;
 $gap-size: 1px;
@@ -50,16 +50,17 @@ body {
 
     transition: all 0.5s ease;
 
-    @for $i from 1 through 31 {
-      &:nth-child(#{$i})::before {
-        content: '#{$i}';
-      }
-    }
-
     &:hover {
       cursor: pointer;
+
       transform: translateY(-20px);
       background-color: $day-hover-bg;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
     }
   }
 
