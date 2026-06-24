@@ -1,10 +1,11 @@
-$day-squere-width: 100px;
+$day-square-width: 100px;
 $day-border-width: 1px;
 $calendar-gap-width: 1px;
-$calendar-width: calc($day-squere-width * 7 + 6px);
+$calendar-column-number: 7;
+$calendar-width: $day-square-width * $calendar-column-number + ($calendar-column-number - 1) * $calendar-gap-width;
 
 @function get-correction($n) {
-  @return ($n - 1) * $day-squere-width + $n - 1;
+  @return ($n - 1) * ($day-square-width + $calendar-gap-width);
 }
 
 $days-margin: (
@@ -25,9 +26,9 @@ $days-margin: (
   padding: 10px;
 
   &__day {
-    width: $day-squere-width;
-    min-width: $day-squere-width;
-    height: $day-squere-width;
+    width: $day-square-width;
+    min-width: $day-square-width;
+    height: $day-square-width;
     border: $day-border-width solid black;
     background-color: #eee;
     font-size: 30px;
