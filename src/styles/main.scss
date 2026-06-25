@@ -1,11 +1,14 @@
-$day-square-width: 100px;
+$day-size: 100px;
 $day-border-width: 1px;
 $calendar-gap-width: 1px;
 $calendar-column-number: 7;
-$calendar-width: $day-square-width * $calendar-column-number + ($calendar-column-number - 1) * $calendar-gap-width;
+$calendar-padding: 10px;
+$calendar-grid-width: $day-size * $calendar-column-number;
+$calendar-gaps: ($calendar-column-number - 1) * $calendar-gap-width;
+$calendar-width: $calendar-grid-width + $calendar-gaps + 2 * $calendar-padding;
 
 @function get-correction($n) {
-  @return ($n - 1) * ($day-square-width + $calendar-gap-width);
+  @return ($n - 1) * ($day-size + $calendar-gap-width);
 }
 
 $days-margin: (
@@ -23,12 +26,13 @@ $days-margin: (
   display: flex;
   flex-wrap: wrap;
   gap: $calendar-gap-width;
-  padding: 10px;
+  padding: $calendar-padding;
+  box-sizing: border-box;
 
   &__day {
-    width: $day-square-width;
-    min-width: $day-square-width;
-    height: $day-square-width;
+    width: $day-size;
+    min-width: $day-size;
+    height: $day-size;
     border: $day-border-width solid black;
     background-color: #eee;
     font-size: 30px;
@@ -70,8 +74,3 @@ $days-margin: (
     }
   }
 }
-
-
-/* Luke, ogarnij się padding liczony jako zmienna we kalkulacji gridu nie ma sensu, zadanie nie wymaga tego i to juz jest czepianie
-w zadaniu jest: - Use flex with `1px` gap and limit its width to exactly 7 columns + `10px` paddings
-zdecydowanie nadinterpretowałeś, reszte poprawiłem */
