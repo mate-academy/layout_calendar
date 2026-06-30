@@ -1,3 +1,93 @@
 body {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin: 0;
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  display: flex;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+div {
+  unicode-bidi: isolate;
+}
+
+.calendar {
+  flex-wrap: wrap;
+  display: flex;
+  gap: 1px;
+  padding: 10px;
+  width: 726px;
+  background-color: image-set(
+    'https://images.unsplash.com/photo-1682685790910-1f3c5e7d8b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
+  );
+}
+
+.calendar__day {
+  background-color: #eee;
+  border: 1px solid #000;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  transition-duration: 0.5s;
+  display: flex;
+
+  &::before {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+.start__day {
+  background-color: #eee;
+}
+
+
+.calendar__day:first-child::before {
+  content: "1";
+}
+
+
+.month__day {
+  background-color: #0f0;
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+$day-width: 100px;
+$gap: 1px;
+
+@each $day-name,
+  $day-number in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7)
+{
+  .calendar--start-day-#{$day-name} {
+    .calendar__day:first-child {
+      margin-left: ($day-number - 1) * ($day-width + $gap);
+    }
+  }
+}
+
+@for $month from 28 through 31 {
+  .calendar--month-#{$month} {
+    .calendar__day:nth-child(n + #{$month + 1}) {
+      display: none;
+    }
+  }
+}
+
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: #ffbfcb;
+  transition-duration: 0.5s;
+  transform: translateY(-20px);
 }
