@@ -5,6 +5,7 @@ $columns: 7;
 $hover-color: #ffbfcb;
 $day-color: #eee;
 $border-color: #000;
+$hover-shift: 20px;
 $days-width: $day-size * $columns;
 $gaps-width: $gap * ($columns - 1);
 $padding-width: $calendar-padding * 2;
@@ -19,6 +20,7 @@ body {
 }
 
 .calendar {
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: $gap;
@@ -39,7 +41,7 @@ body {
   &:hover {
     cursor: pointer;
     background-color: $hover-color;
-    transform: translateY(-20px);
+    transform: translateY(-$hover-shift);
   }
 }
 
