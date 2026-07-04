@@ -8,6 +8,10 @@ $hover-shift: 20px;
 $day-bg-color: #eee;
 $day-hover-color: #ffbfcb;
 $border-color: black;
+$days-width: $week-days * $day-size;
+$gaps-width: ($week-days - 1) * $gap-size;
+$paddings-width: 2 * $calendar-padding;
+$calendar-width: $days-width + $gaps-width + $paddings-width;
 
 body {
   margin: 0;
@@ -22,8 +26,8 @@ body {
   flex-wrap: wrap;
   gap: $gap-size;
   padding: $calendar-padding;
-  width: $week-days * $day-size + ($week-days - 1) * $gap-size;
-  box-sizing: content-box;
+  width: $calendar-width;
+  box-sizing: border-box;
 
   &__day {
     width: $day-size;
