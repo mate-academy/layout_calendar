@@ -1,0 +1,64 @@
+@use 'sass:list';
+
+$modifikator: mon, tue, wed, thu, fri, sat, sun;
+$day-width: 100px;
+$day-height: 100px;
+$calendar-gap: 1px;
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.calendar {
+  width: $day-width * 7 + $calendar-gap * 6;
+  display: flex;
+  gap: $calendar-gap;
+  flex-wrap: wrap;
+  margin: auto;
+
+  &__day {
+    text-align: center;
+    align-content: center;
+    background-color: #eee;
+    box-sizing: border-box;
+    margin: 0;
+
+    width: $day-width;
+    height: $day-height;
+    border: 1px solid black;
+    transition-duration: 500ms;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+@each $day in $modifikator {
+  $offset: (list.index($modifikator, $day) - 1) * ($day-width + $calendar-gap);
+
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $offset;
+  }
+}
