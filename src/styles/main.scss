@@ -78,9 +78,10 @@ $calendar-width: ($day-size * $columns) + ($grid-gap * ($columns - 1)) + ($paddi
 
   // --- Month Length Modifiers ---
   // Hides any day element greater than the targeted month length
-  @for $length from 28 through 31 {
+ @for $length from 28 through 31 {
     &--month-length-#{$length} {
-      &__day:nth-child(n + #{$length + 1}) {
+      // Notice the space here via nesting to target the child days properly
+      .calendar__day:nth-child(n + #{$length + 1}) {
         display: none;
       }
     }
