@@ -34,11 +34,7 @@ body {
   gap: $gap;
   padding: $padding;
 
-  width: calc(
-    #{$columns} * #{$cell-size}
-    + (#{$columns - 1}) * #{$gap}
-    + (#{$padding} * 2)
-  );
+  width: $columns * $cell-size + ($columns - 1) * $gap + $padding * 2;
 
   &__day {
     display: flex;
@@ -75,7 +71,7 @@ body {
   @each $day, $index in $days {
     &--#{$day} {
       .calendar__day:first-child {
-        margin-left: calc((#{$cell-size} + #{$gap}) * #{$index});
+        margin-left: ($cell-size + $gap) * $index;
       }
     }
   }
