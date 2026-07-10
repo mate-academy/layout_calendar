@@ -3,25 +3,29 @@
 body {
   margin: 0;
   flex-wrap: wrap;
-  width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
-  padding: $padding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .calendar {
   $days: (
-    sun: 0,
-    mon: 1,
-    tue: 2,
-    wed: 3,
-    thu: 4,
-    fri: 5,
-    sat: 6,
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
   );
 
   display: flex;
   flex-wrap: wrap;
-  max-width: calc(7 * $day-size + 6 * $border-width + 2 * $padding);
   align-items: center;
+  gap: $gap;
+  padding: $padding;
+  max-width: calc($columns * $day-size + ($columns - 1) * $gap + 2 * $padding);
 
   &__day {
     display: flex;
@@ -53,14 +57,15 @@ body {
 
   @for $i from 28 through 31 {
     $hidden-day: $i + 1;
-    .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$hidden-day}) {
+    &.calendar--month-length-#{$i}
+      .calendar__day:nth-child(n + #{$hidden-day}) {
       display: none;
     }
   }
 
   @each $day, $i in $days {
-    .calendar--start-day-#{$day} .calendar__day:first-child {
-      margin-left: calc($i * ($day-size + $border-width));
+    &.calendar--start-day-#{$day} .calendar__day:first-child {
+      margin-left: calc($i * ($day-size + $gap));
     }
   }
 }
