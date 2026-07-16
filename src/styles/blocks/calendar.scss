@@ -1,8 +1,11 @@
 .calendar {
+  box-sizing: border-box;
   display: flex;
-  width: $calendar_block_size * 7 + $calendar_padding;
+  width: $calendar_block_size * 7 + 6 * $calendar_gap_size + 2 *
+    $calendar_padding;
   flex-wrap: wrap;
-  gap: 1px;
+  gap: $calendar_gap_size;
+  padding: 10px;
 
   @each $start_day, $i in $start_days {
     &--start-day-#{$start_day} .calendar__day:nth-child(1) {
