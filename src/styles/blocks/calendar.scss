@@ -1,12 +1,12 @@
 .calendar {
   display: flex;
-  width: $calendar_block_size * 7 + 10px;
+  width: $calendar_block_size * 7 + $calendar_padding;
   flex-wrap: wrap;
   gap: 1px;
 
   @each $start_day, $i in $start_days {
     &--start-day-#{$start_day} .calendar__day:nth-child(1) {
-      margin-left: $i * $calendar_block_size + $i;
+      margin-left: $i * ($calendar_block_size + $calendar_gap_size);
     }
   }
 
