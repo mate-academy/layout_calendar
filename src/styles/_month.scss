@@ -1,0 +1,8 @@
+@use './variables' as v;
+
+@for $length from v.$min-month-length through v.$max-month-length {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}

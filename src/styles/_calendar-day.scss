@@ -1,0 +1,30 @@
+@use './variables' as v;
+
+.calendar__day {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: v.$day-size;
+  height: v.$day-size;
+  border: v.$border-width solid v.$border-color;
+  background-color: v.$day-background;
+  font:
+    30px Arial,
+    sans-serif;
+  cursor: pointer;
+  transition:
+    background-color v.$transition-duration,
+    transform v.$transition-duration;
+
+  &:hover {
+    background-color: v.$day-hover-background;
+    transform: translateY(-1 * v.$hover-lift);
+  }
+
+  @for $i from 1 through v.$max-month-length {
+    &:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+}
