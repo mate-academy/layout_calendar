@@ -38,16 +38,17 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: transform $transform-duration;
+    transition:
+      transform $transform-duration,
+      background-color $transform-duration;
 
     &::before {
       font-family: $font;
       font-size: $font-size;
-      content: counter(day);
-      counter-increment: day;
     }
 
     &:hover {
+      background-color: $hover-color;
       cursor: pointer;
       transform: translateY(-20px);
     }
@@ -71,5 +72,9 @@ body {
     }
   }
 
-  counter-reset: day;
+  @for $i from 1 through 31 {
+    .calendar__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
 }
