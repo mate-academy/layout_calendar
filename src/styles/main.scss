@@ -4,22 +4,27 @@ $calendar-padding: 10px;
 $days-in-week: 7;
 $border-size: 1px;
 $transition-duration: 0.5s;
+$days: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
 
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $day-gap;
-
   width: $day-size * $days-in-week + $day-gap * ($days-in-week - 1);
-
   padding: $calendar-padding;
 
   &__day {
     width: $day-size;
     height: $day-size;
-
     box-sizing: border-box;
-
     background-color: #eee;
     border: $border-size solid #000;
 
@@ -49,12 +54,10 @@ $transition-duration: 0.5s;
     }
   }
 
-  @each $day,
-    $position in (mon: 0, tue: 1, wed: 2, thu: 3, fri: 4, sat: 5, sun: 6)
-  {
+  @each $day, $position in $days {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: $position * ($day-size + $day-gap);
+        margin-left: ($day-size + $day-gap) * $position;
       }
     }
   }
