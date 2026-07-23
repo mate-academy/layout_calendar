@@ -1,13 +1,20 @@
+@import './variables';
+
 .calendar {
+  box-sizing: border-box;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: start;
-  gap: 1px;
-  width: 706px;
+  justify-content: left;
+  align-items: center;
+  gap: $day-gaps;
+  width: 726px;
   flex-wrap: wrap;
   list-style: none;
-  padding-inline: 10px;
-  margin-top: 82px;
-  margin-left: 149px;
+  padding-inline: $inline-p;
+  text-align: left;
 
   $week: (
     mon: 0,
@@ -22,7 +29,7 @@
   @each $day, $num in $week {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: calc($num * (100px + 1px));
+        margin-left: calc($num * ($day-width + $day-gaps));
       }
     }
   }
@@ -41,7 +48,7 @@
         }
       }
 
-      @for $g from $j + 1 through 31 {
+      @for $g from $j + 1 through 32 {
         .calendar__day:nth-child(#{$g}) {
           display: none;
         }
@@ -52,8 +59,8 @@
   .calendar__day {
     cursor: pointer;
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
+    width: $day-width;
+    height: $day-width;
     background-color: #eee;
     position: relative;
     border: black 1px solid;
