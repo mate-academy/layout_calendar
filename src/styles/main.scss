@@ -1,3 +1,4 @@
+
 @use 'sass:list';
 @import './variables';
 
@@ -42,11 +43,15 @@
 $week-days: mon, tue, wed, thu, fri, sat, sun;
 
 @each $day in $week-days {
-  $index: list.index($week-days, $day);
+  $day-index: list.index($week-days, $day) - 1;
+
+  @if $day == sun {
+    $day-index: 0;
+  }
 
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: ($index - 1) * ($day-size + $gap-size);
+      margin-left: $day-index * ($day-size + $gap-size);
     }
   }
 }
