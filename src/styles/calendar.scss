@@ -6,24 +6,25 @@
   padding: 10px;
 
   $start-days: (
-    'mon': 0,
-    'tue': 1,
-    'wed': 2,
-    'thu': 3,
-    'fri': 4,
-    'sat': 5,
-    'sun': 6,
+    'mon': 1,
+    'tue': 2,
+    'wed': 3,
+    'thu': 4,
+    'fri': 5,
+    'sat': 6,
+    'sun': 0,
   );
 
   @each $day, $i in $start-days {
+    $offset: ($i + 6) % 7;
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: #{$i * ($cell-size + $gap)};
+      margin-left: $offset * ($cell-size + $gap);
     }
   }
 
   $month-lengths: (28, 29, 30, 31);
 
-  @each $length in $month-lengths {
+  @for $length from 28 through 31 {
     &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
       display: none;
     }
