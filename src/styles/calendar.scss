@@ -7,17 +7,17 @@
 
   $start-days: (
     'mon': 0,
-    'tue': 101,
-    'wed': 202,
-    'thu': 303,
-    'fri': 404,
-    'sat': 505,
-    'sun': 606,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
   );
 
-  @each $day, $offset in $start-days {
+  @each $day, $i in $start-days {
     &--start-day-#{$day} .calendar__day:first-child {
-      margin-left: #{$offset}px;
+      margin-left: #{$i * ($cell-size + $gap)};
     }
   }
 
