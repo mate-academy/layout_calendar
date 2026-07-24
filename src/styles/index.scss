@@ -1,3 +1,82 @@
+@use 'sass:list';
+
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$day-bg: #eee;
+$day-hover-bg: #ffbfcb;
+$day-font-size: 30px;
+$transition-duration: 0.5s;
+$hover-lift: 20px;
+$calendar-width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
+$week-days: mon, tue, wed, thu, fri, sat, sun;
+
 body {
   margin: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+  box-sizing: border-box;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    box-sizing: border-box;
+    background-color: $day-bg;
+    border: $border-width solid #000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, sans-serif;
+    font-size: $day-font-size;
+
+    cursor: pointer;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      background-color: $day-hover-bg;
+      transform: translateY(-#{$hover-lift});
+    }
+  }
+
+  @each $day in $week-days {
+    $index: list.index($week-days, $day) - 1;
+
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: calc((#{$day-size} + #{$gap}) * #{$index});
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
 }
