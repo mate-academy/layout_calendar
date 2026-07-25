@@ -43,7 +43,7 @@ $week-days: (mon, tue, wed, thu, fri, sat, sun);
   @each $day in $week-days {
     $index: list.index($week-days, $day);
     &--start-day-#{$day} &__day:first-child {
-      margin-left: ($index - 1) * (vars.$cell-size + vars.$gap-size);
+      margin-left: (($index - 1) % 7) * (vars.$cell-size + vars.$gap-size);
     }
   }
 
