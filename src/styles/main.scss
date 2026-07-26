@@ -20,7 +20,7 @@ body {
   align-items: center;
   gap: $gap-calendar;
   padding: $padding;
-  width: calc((7 * #{$day-size}) + (6 * #{$gap-calendar}));
+  width: calc(($columns * #{$day-size}) + (6 * #{$gap-calendar}));
 
   &__day {
     position: relative;
@@ -29,6 +29,7 @@ body {
     box-sizing: border-box;
     border: 1px solid black;
     width: $day-size;
+    transition: all 0.5s;
 
     &::before {
       position: absolute;
@@ -42,7 +43,7 @@ body {
       cursor: pointer;
       background-color: #ffbfcb;
       transform: translateY(-20px);
-      transition: all 0.5s;
+
     }
   }
 }
