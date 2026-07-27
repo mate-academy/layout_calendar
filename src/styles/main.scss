@@ -1,91 +1,69 @@
-$calendar-padding: 10px;
-$calendar-columns: 7;
-$calendar-gap: 1px;
-$day-border-width: 1px;
-$day-border-color: #000;
-$day-size: 100px;
-$day-inner-size: $day-size - 2 * $day-border-width;
-$calendar-width: $calendar-columns * $day-size + 2 * $calendar-padding + ($calendar-columns - 1) * $calendar-gap;
-$day-bg: #eee;
-$day-hover-bg: #ffbfcb;
-$hover-duration: 0.5s;
-$hover-shift: -20px;
-$start-days: ( sun: 0,
-  mon: 1,
-  tue: 2,
-  wed: 3,
-  thu: 4,
-  fri: 5,
-  sat: 6,
-);
-
-html,
-body {
-  height: 100%;
-  margin: 0;
+* {
+  box-sizing: border-box;
 }
 
+$day-size: 100px;
+$gap: 1px;
+$columns: 7;
+$padding: 10px;
+$days: ('mon', 0), ('tue', 1), ('wed', 2), ('thu', 3), ('fri', 4), ('sat', 5),
+  ('sun', 6);
+
 body {
+  margin: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .calendar {
+  align-content: flex-start;
   display: flex;
   flex-wrap: wrap;
-  width: $calendar-width;
-  padding: $calendar-padding;
-  gap: $calendar-gap;
-  box-sizing: border-box;
-
+  gap: $gap;
+  padding: $padding;
+  width: ($day-size + $gap) * $columns - $gap + $padding * 2;
   &__day {
-    width: $day-inner-size;
-    height: $day-inner-size;
-    border: $day-border-width solid $day-border-color;
-    background-color: $day-bg;
-    box-sizing: border-box;
-    position: relative;
     transition:
-      background-color $hover-duration,
-      transform $hover-duration;
+      background-color 0.5s,
+      transform 0.5s;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid #000;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &:hover {
       cursor: pointer;
-      background-color: $day-hover-bg;
-      transform: translateY($hover-shift);
-    }
-
-    &::before {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      font-family: Arial, sans-serif;
-      font-size: 30px;
-      line-height: 1;
-      transform: translate(-50%, -50%);
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
     }
   }
+}
 
-  @for $i from 1 through 31 {
-    &__day:nth-child(#{$i})::before {
-      content: '#{$i}';
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+  }
+}
+
+@each $name, $offset in $days {
+  .calendar--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: ($day-size + $gap) * $offset;
     }
   }
+}
 
-  @each $day, $offset in $start-days {
-    &--start-day-#{$day} {
-      .calendar__day:first-child {
-        margin-left: $offset * ($day-size + $calendar-gap);
-      }
-    }
-  }
-
-  @for $month-length from 28 through 31 {
-    &--month-length-#{$month-length} {
-      .calendar__day:nth-child(n + #{$month-length + 1}) {
-        display: none;
-      }
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
     }
   }
 }
