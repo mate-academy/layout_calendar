@@ -3,11 +3,10 @@
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  align-self: center;
 
-  gap: $rowgap $columngap;
+  gap: $gap;
   padding: $padding;
-  width: 7 * $width + 6 * $rowgap + 2 * $padding;
+  width: 7 * $width + 6 * $gap + 2 * $padding;
 
   &__day {
     background-color: #eee;
@@ -40,7 +39,7 @@
   @each $day, $number in $days {
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($number - 1) * ($width + $rowgap);
+        margin-left: ($number - 1) * ($width + $gap);
       }
     }
   }
