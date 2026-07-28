@@ -13,6 +13,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .calendar {
@@ -22,6 +23,7 @@ body {
   padding: $padding;
   width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
   counter-reset: day;
+  box-sizing: border-box;
 }
 
 .calendar__day {
@@ -33,9 +35,9 @@ body {
   display: flex;
   cursor: pointer;
   transition: transform 0.5s;
+  background: #eee;
 
   &:hover {
-    background: #ffbfcb;
     transform: translateY(-20px);
   }
 
@@ -50,8 +52,6 @@ body {
     font-size: 30px;
   }
 }
-
-$days: mon tue wed thu fri sat sun;
 
 @each $day in $days {
   $day-index: list.index($days, $day);
