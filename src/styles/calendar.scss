@@ -1,0 +1,49 @@
+@use 'sass:list';
+@use 'variables' as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  box-sizing: border-box;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    width: $day-size;
+    height: $day-size;
+    border: $border-width solid $border-color;
+    font-family: $font-family;
+    font-size: $font-size;
+    background-color: $day-color;
+    transition-duration: $transition-duration;
+
+    &:hover {
+      transform: translateY(-$hover-shift);
+      cursor: pointer;
+      background-color: $day-hover-color;
+    }
+
+    @for $day from 1 through $days-in-month {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+      }
+    }
+  }
+
+  @each $week-day in $week-days {
+    &--start-day-#{$week-day} .calendar__day:first-child {
+      margin-left: (list.index($week-days, $week-day) - 1) * $day-step;
+    }
+  }
+
+  @for $length from $min-month-length through $max-month-length {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
