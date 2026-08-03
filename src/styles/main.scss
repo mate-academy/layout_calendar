@@ -1,0 +1,70 @@
+.calendar {
+  display: flex;
+  margin: auto;
+}
+
+.calendar__container {
+  display: flex;
+  gap: $distance-box;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  &:last-child {
+    justify-content: flex-start;
+  }
+}
+
+.calendar__day {
+  display: flex;
+  box-sizing: border-box;
+
+  justify-content: center;
+  align-items: center;
+
+  width: $value-default;
+  height: $value-default;
+
+  background-color: $color-box;
+
+  border: 1px solid black;
+
+  cursor: pointer;
+  transition: 0.5s linear;
+
+  &:hover {
+    transform: translateY($moveY-hover);
+    background-color: $color-box-hover;
+  }
+}
+
+// #region ADD DAYS
+@for $numbers from 1 through 31 {
+  .calendar__day:nth-child(#{$numbers})::before {
+    content: '#{$numbers}';
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: $font-size-default;
+  }
+}
+
+// #endregion
+
+// #region Start Day
+$daysWeek: (
+  sun: 0,
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+);
+
+@each $dayWeek, $weekValue in $daysWeek {
+  .calendar--#{$dayWeek} {
+    .calendar__day:first-child {
+      margin-left: ($value-default + $distance-box) * ($weekValue * 6);
+    }
+  }
+}
+
+// #endregion
