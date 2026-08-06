@@ -1,4 +1,5 @@
 .calendar {
+  box-sizing: border-box;
   padding: $padding;
 
   display: flex;
@@ -7,12 +8,10 @@
   gap: $gap;
   flex-wrap: wrap;
 
-  width: calc-of-max-width($day-width, $gap);
+  width: calc-of-max-width($day-width, $gap, $padding);
 
   @each $name-of-the-day, $value-of-the-name in $names-of-the-day {
     &--start-day-#{$name-of-the-day} {
-      content: '';
-
       .calendar__day:nth-child(1) {
         margin-left: calc-position-of-the-day(
           $value-of-the-name,
@@ -47,7 +46,9 @@
 
     background-color: #eee;
 
-    transition: color, transform, 0.5s;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
 
     // Добавляет псевдоэлементы к элементам с числовыми значениями от 1 до 31
     @for $i from 1 through 31 {
