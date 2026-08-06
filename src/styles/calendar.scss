@@ -8,7 +8,6 @@
   flex-wrap: wrap;
 
   width: calc-of-max-width($day-width, $gap);
-  height: fit-content;
 
   @each $name-of-the-day, $value-of-the-name in $names-of-the-day {
     &--start-day-#{$name-of-the-day} {
@@ -29,9 +28,7 @@
   @for $i from 28 through 31 {
     &--month-length-#{$i} {
       .calendar__day:nth-child(n + #{$i + 1}) {
-        visibility: 0;
-        opacity: 0;
-        pointer-events: none;
+        display: none;
       }
     }
   }
@@ -41,8 +38,10 @@
     position: relative;
     width: $day-width;
     height: $day-height;
-    text-align: center;
-    line-height: $day-height;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     border: 1px solid black;
 
