@@ -15,15 +15,16 @@ Display a calendar in the middle of the screen (both horizontally and vertically
   - The month should start at the correct column (Monday is the 1st, Friday is the 5th)
   - You can just add correct `margin-left` for the first day
   - Set calendar to start from Sunday by default in your HTML
+
 - Add a modifier `month-length` for the `calendar` with values 28, 29, 30 and 31 (use `@for`)
   - It sets the last day to show (use [nth-child](https://css-tricks.com/how-nth-child-works/))
   - Set 31 days by default in your HTML
 
-On hovering over a cell:
-- cursor should become pointer
-- The hovered cell has to become pink (use `#FFBFCB`)
-- Move the hovered cell up by `20px` (use `transform`)
-- All changes should be animated with the duration of 0.5s
+- On hovering over a cell:
+  - cursor should become pointer
+  - The hovered cell has to become pink (use `#FFBFCB`)
+  - Move the hovered cell up by `20px` (use `transform`)
+  - All changes should be animated with the duration of 0.5s
 
 > Here are the [Layout Tasks Instructions](https://mate-academy.github.io/layout_task-guideline)
 
@@ -36,8 +37,8 @@ This is possible because [we use the Parcel library](https://en.parceljs.org/scs
 
 ❗️ Replace `<your_account>` with your Github username and copy the links to `Pull Request` description:
 
-- [DEMO LINK](https://<your_account>.github.io/layout_calendar/)
-- [TEST REPORT LINK](https://<your_account>.github.io/layout_calendar/report/html_report/)
+- [DEMO LINK](https://Delviiiii.github.io/layout_calendar/)
+- [TEST REPORT LINK](https://Delviiiii.github.io/layout_calendar/report/html_report/)
 
 ❗️ Copy this `Checklist` to the `Pull Request` description after links, and put `- [x]` before each point after you checked it.
 
