@@ -1,0 +1,56 @@
+@use 'sass:map';
+
+.calendar {
+  max-width: $calendarMaxWidth;
+  display: flex;
+  flex-flow: row wrap;
+  gap: $calendarGap;
+  padding: $calendarPaddings;
+
+  @each $day in $dayList {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: map.get($dayOffsetMap, $day) * $slotTotalWidth;
+      }
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} {
+      .calendar__day:nth-child(n + #{$i + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    width: $dayBoxWidth;
+    height: $dayBoxHeight;
+    background-color: $dayBackgroundColor;
+    border: 1px solid $dayBorderColor;
+    position: relative;
+    transition:
+      transform 0.5s,
+      background-color 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $dayBackgroundColorActive;
+      transform: translate(0, $movingCellValue);
+    }
+
+    @for $i from 1 through 31 {
+      &:nth-child(#{$i}) {
+        &::before {
+          content: '#{$i}';
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
