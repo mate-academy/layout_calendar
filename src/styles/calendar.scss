@@ -1,0 +1,62 @@
+@use 'variables' as *;
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: $calendar-width;
+  padding: $padding;
+  box-sizing: border-box;
+
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $day-bg;
+    border: $border-width solid #000;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-bg;
+      transform: translateY(-$hover-lift);
+    }
+  }
+}
+
+@for $i from 1 through $days-total {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
+
+$start-days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+@each $day, $column in $start-days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: ($column - 1) * $column-step;
+  }
+}
+
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length}
+    .calendar__day:nth-child(n + #{$length + 1}) {
+    display: none;
+  }
+}
