@@ -38,7 +38,9 @@ body {
     border: $day-border-width solid $day-border-color;
     background-color: $day-background-color;
     cursor: pointer;
-    transition: background-color $transition-duration ease;
+    transition:
+      background-color $transition-duration ease,
+      transform $transition-duration ease;
     position: relative;
 
     &::before {
@@ -50,7 +52,9 @@ body {
     }
 
     &:hover {
-      background-color: #ffbfcb;
+      background-color: $day-hover-background-color;
+      transform: translateY($hover-translate);
+      z-index: 1;
     }
   }
 
