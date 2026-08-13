@@ -1,0 +1,92 @@
+$day-size: 100px;
+$day-gap: 1px;
+$padding-calendar: 10px;
+$border-width: 1px;
+$font-size: 30px;
+$hover-offset: -20px;
+$transition-duration: 0.5s;
+$color-bg-day: #eee;
+$color-border-day: #000;
+$color-hover-day: #ffbfcb;
+$calendar-width: (7 * $day-size) + (6 * $day-gap) + (2 * $padding-calendar);
+$days-map: (
+  mon: 0,
+  tue: 1,
+  wed: 2,
+  thu: 3,
+  fri: 4,
+  sat: 5,
+  sun: 6,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: $calendar-width;
+  padding: $padding-calendar;
+
+  // Célula individual de cada dia
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    background-color: $color-bg-day;
+    border: $border-width solid $color-border-day;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-hover-day;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Gera a numeração de 1 a 31 via pseudo-elemento ::before
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+      font-size: $font-size;
+    }
+  }
+
+  // Modificador start-day: calcula a margem do primeiro dia
+  @each $day, $index in $days-map {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc(#{$index} * (#{$day-size} + #{$day-gap}));
+    }
+  }
+
+  // Modificador month-length: esconde os dias excedentes
+  @for $length from 28 through 30 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
