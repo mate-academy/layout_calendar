@@ -4,19 +4,18 @@
   $cell-step: $cell-size + $gap-size;
   $calendar-padding: 10px;
   $columns: 7;
-  $total-width: 2 * $calendar-padding + $columns * $cell-size + ($columns - 1) *
-    $gap-size;
+  $total-width: 2 * $calendar-padding + $columns * $cell-size + ($columns - 1) * $gap-size;
 
-  display: flex;
   width: #{$total-width};
   flex-wrap: wrap;
   gap: $gap-size;
   padding: $calendar-padding;
+  display: flex;
 
   $days: (mon, tue, wed, thu, fri, sat, sun);
 
   @each $day in $days {
-    $idx: index($days, $day);
+    $idx: list.index($days, $day);
     $margin: ($idx - 1) * $cell-step;
 
     &--start-day-#{$day} {
