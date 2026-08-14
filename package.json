@@ -2,14 +2,15 @@
   "name": "calendar",
   "version": "1.0.0",
   "description": "Frontend practice with calendar",
+  "homepage": "./",
   "scripts": {
     "init": "mate-scripts init",
-    "start": "mate-scripts start",
+    "start": "parcel src/index.html --open",
     "format": "prettier --ignore-path .prettierignore --write './src/**/*.{html,css,scss}'",
     "lint": "npm run format && mate-scripts lint",
     "test:only": "mate-scripts test",
-    "build": "mate-scripts build",
-    "deploy": "mate-scripts deploy",
+    "build": "parcel build src/index.html --dist-dir dist --public-url ./ && node scripts/fix-gh-pages-paths.js",
+    "deploy": "npm run build",
     "update": "mate-scripts update",
     "postinstall": "npm run update",
     "test": "npm run lint && npm run test:only"
