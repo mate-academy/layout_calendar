@@ -1,0 +1,92 @@
+$cell-size: 100px;
+$gap-size: 1px;
+$padding-size: 10px;
+$columns-count: 7;
+$cell-bg: #eee;
+$cell-border-color: #000;
+$cell-hover-bg: #ffbfcb;
+$font-main: Arial, sans-serif;
+$font-size: 30px;
+$cells-total: $columns-count * $cell-size;
+$gaps-total: ($columns-count - 1) * $gap-size;
+$paddings-total: $padding-size * 2;
+$calendar-width: $cells-total + $gaps-total + $paddings-total;
+$days-map: (
+  'mon': 1,
+  'tue': 2,
+  'wed': 3,
+  'thu': 4,
+  'fri': 5,
+  'sat': 6,
+  'sun': 7,
+);
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  width: $calendar-width;
+  padding: $padding-size;
+
+  // Day Element
+  &__day {
+    width: $cell-size;
+    height: $cell-size;
+    background-color: $cell-bg;
+    border: 1px solid $cell-border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:
+      background-color 0.5s ease,
+      transform 0.5s ease;
+
+    &::before {
+      font-family: $font-main;
+      font-size: $font-size;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $cell-hover-bg;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  @each $day, $index in $days-map {
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        margin-left: ($index - 1) * ($cell-size + $gap-size);
+      }
+    }
+  }
+
+  @for $len from 28 through 31 {
+    &--month-length-#{$len} {
+      .calendar__day:nth-child(n + #{$len + 1}) {
+        display: none;
+      }
+    }
+  }
+}
