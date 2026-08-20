@@ -49,9 +49,16 @@ body {
     justify-content: center;
     align-items: center;
 
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
     transition:
       background-color $animation-duration,
       transform $animation-duration;
+
+    &::before {
+      content: '';
+    }
 
     &:hover {
       cursor: pointer;
@@ -64,9 +71,6 @@ body {
 @for $day from 1 through 31 {
   .calendar__day:nth-child(#{$day})::before {
     content: '#{$day}';
-
-    font-family: Arial, sans-serif;
-    font-size: 30px;
   }
 }
 
