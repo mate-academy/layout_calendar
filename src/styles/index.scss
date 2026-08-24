@@ -59,11 +59,12 @@ max-width: 726px;
     transform: translateY(-20px);
   }
 
-@each $day-name, $day-index in (mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6, sun: 7) {
-  &--start-day-#{$day-name} &__day:first-child {
-    margin-left: ($day-index - 1) * ($day-size + $gap);
+  @each $day-name, $day-index in (sun: 0, mon: 1, tue: 2, wed: 3, thu: 4, fri: 5, sat: 6) {
+    &--start-day-#{$day-name} &__day:first-child {
+      margin-left: $day-index * ($day-size + $gap);
+    }
   }
-}
+
 
 
 }
