@@ -8,19 +8,21 @@ $width: $columns * $day_size + ($columns - 1) * $gap + 2 * $padding_calendar;
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .calendar {
   display: flex;
   width: $width;
   flex-wrap: wrap;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   gap: $gap;
   padding: $padding_calendar;
 
@@ -54,7 +56,9 @@ body {
   }
 
   &__day {
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: relative;
     background-color: #eee;
     border: 1px solid black;
@@ -65,10 +69,6 @@ body {
     @for $day_num from 1 through 31 {
       &:nth-child(#{$day_num})::before {
         content: '#{$day_num}';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
         font-family: Arial, sans-serif;
         font-size: 30px;
       }
