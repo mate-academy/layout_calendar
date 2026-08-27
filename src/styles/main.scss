@@ -14,7 +14,8 @@ $animation-duration: 0.5s;
 
 // Derived
 $day-step: $day-size + $day-gap;
-$calendar-width: $day-size * $days-in-week + $day-gap * ($days-in-week - 1);
+$columns-width: $day-size * $days-in-week + $day-gap * ($days-in-week - 1);
+$calendar-width: $columns-width + $calendar-padding * 2;
 
 // Week days
 $week-days: mon, tue, wed, thu, fri, sat, sun;
@@ -40,7 +41,7 @@ body {
   flex-wrap: wrap;
   gap: $day-gap;
 
-  box-sizing: content-box;
+  box-sizing: border-box;
   width: $calendar-width;
   padding: $calendar-padding;
 
