@@ -16,7 +16,11 @@ body {
 }
 
 .calendar {
-  width: calc(#{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap});
+  box-sizing: border-box;
+
+  width: calc(
+    #{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap} + 2 * #{$padding}
+  );
 
   display: flex;
   flex-wrap: wrap;
@@ -65,7 +69,7 @@ $week-days: (
 @each $day, $index in $week-days {
   .calendar--start-day-#{$day} {
     .calendar__day:first-child {
-      margin-left: ($index - 1) * ($day-size + $gap);
+      margin-left: ($index - 1) * $day-size + ($index - 1) * $gap;
     }
   }
 }
