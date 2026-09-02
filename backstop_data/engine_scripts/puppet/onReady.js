@@ -14,13 +14,29 @@ module.exports = async (page, scenario, vp) => {
 
       await page.evaluate(() => {
         const calendarElement = document.querySelector('.calendar');
-        const newClassName = calendarElement.className.replace('calendar--start-day-sun', 'calendar--start-day-wed');
+        const newClassName = calendarElement.className.replace(
+          'calendar--start-day-sun',
+          'calendar--start-day-wed',
+        );
 
         calendarElement.className = newClassName;
       });
 
+      const debug = await page.$eval('.calendar', (calendar) => {
+        const firstDay = calendar.querySelector('.calendar__day');
+
+        return {
+          className: calendar.className,
+          marginLeft: getComputedStyle(firstDay).marginLeft,
+        };
+      });
+
+      console.log('WEDNESDAY DEBUG:', debug);
+
       await page.waitForSelector('.calendar--start-day-wed');
-      await new Promise(resolve => setTimeout(resolve, postDOMChangeWait));
+      await new Promise((resolve) =>
+        setTimeout(resolve, postDOMChangeWait),
+      );
 
       break;
     }
@@ -31,13 +47,18 @@ module.exports = async (page, scenario, vp) => {
 
       await page.evaluate(() => {
         const calendarElement = document.querySelector('.calendar');
-        const newClassName = calendarElement.className.replace('calendar--month-length-31', 'calendar--month-length-29');
+        const newClassName = calendarElement.className.replace(
+          'calendar--month-length-31',
+          'calendar--month-length-29',
+        );
 
         calendarElement.className = newClassName;
       });
 
       await page.waitForSelector('.calendar--month-length-29');
-      await new Promise(resolve => setTimeout(resolve, postDOMChangeWait));
+      await new Promise((resolve) =>
+        setTimeout(resolve, postDOMChangeWait),
+      );
 
       break;
     }
