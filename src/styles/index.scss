@@ -1,3 +1,108 @@
+$day-size: 100px;
+$border-size: 1px;
+$gap-size: 1px;
+$calendar-padding: 10px;
+$columns: 7;
+$transition-duration: 0.5s;
+$hover-color: #ffbfcb;
+$day-color: #eee;
+
+html,
 body {
   margin: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+
+  width: calc(
+    #{$columns} * #{$day-size} + (#{$columns} - 1) * #{$gap-size} + 2 * #{$calendar-padding}
+  );
+
+  padding: $calendar-padding;
+
+  &__day {
+    box-sizing: border-box;
+
+    width: $day-size;
+    height: $day-size;
+
+    border: $border-size solid #000;
+    background-color: $day-color;
+
+    position: relative;
+
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    @for $day from 1 through 31 {
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
+
+        font-family: Arial, sans-serif;
+        font-size: 30px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $hover-color;
+      transform: translateY(-20px);
+    }
+  }
+
+  // Кількість днів у місяці
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // Кількість днів у місяці (від 28 до 31)
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+
+  // День, з якого починається місяць (імена класів з урахуванням --start-day-*)
+  $start-days: (
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
+
+  @each $name, $offset in $start-days {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: calc(#{$offset} * (#{$day-size} + #{$gap-size}));
+      }
+    }
+  }
 }
