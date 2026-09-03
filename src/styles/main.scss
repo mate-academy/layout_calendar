@@ -1,0 +1,87 @@
+$cell-size: 100px;
+$cell-border: 1px;
+$grid-gap: 1px;
+$columns-count: 7;
+$calendar-padding: 10px;
+$day-hover-color: #ffbfcb;
+$day-hover-lift: -20px;
+$transition-duration: 0.5s;
+$cells-width: $cell-size * $columns-count;
+$gaps-width: $grid-gap * ($columns-count - 1);
+$calendar-width: $cells-width + $gaps-width + $calendar-padding * 2;
+$start-day-columns: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $grid-gap;
+
+  box-sizing: border-box;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: $cell-size;
+    height: $cell-size;
+    border: $cell-border solid #000;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    background-color: #eee;
+
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY($day-hover-lift);
+      background-color: $day-hover-color;
+    }
+
+    @for $day-number from 1 through 31 {
+      &:nth-child(#{$day-number})::before {
+        content: '#{$day-number}';
+      }
+    }
+  }
+
+  @each $day-name, $start-column in $start-day-columns {
+    &--start-day-#{$day-name} &__day:first-child {
+      margin-left: ($cell-size + $grid-gap) * ($start-column - 1);
+    }
+  }
+
+  @for $month-length from 28 through 31 {
+    &--month-length-#{$month-length}
+      &__day:nth-child(n + #{$month-length + 1}) {
+      display: none;
+    }
+  }
+}
