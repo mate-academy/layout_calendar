@@ -3,9 +3,7 @@
   flex-wrap: wrap;
   box-sizing: border-box;
   padding: $padding-of-cal;
-  width: calc(
-    $padding-of-cal * 2 + $width-of-day * $days-of-cal + $gap-size * 6
-  );
+  width: $padding-of-cal * 2 + $day-size * $days-of-cal + $gap-size * 6;
   gap: $gap-size;
 
   $start-day: (
@@ -21,7 +19,7 @@
   @each $name, $i in $start-day {
     &--start-day-#{$name} {
       .calendar__day:first-child {
-        margin-left: calc($i * ($width-of-day + $gap-size));
+        margin-left: calc($i * ($day-size + $gap-size));
       }
     }
   }
