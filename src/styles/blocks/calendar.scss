@@ -1,0 +1,34 @@
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: $padding-of-cal;
+  width: $padding-of-cal * 2 + $day-size * $days-of-cal + $gap-size * 6;
+  gap: $gap-size;
+
+  $start-day: (
+    mon: 0,
+    tue: 1,
+    wed: 2,
+    thu: 3,
+    fri: 4,
+    sat: 5,
+    sun: 6,
+  );
+
+  @each $name, $i in $start-day {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: calc($i * ($day-size + $gap-size));
+      }
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
