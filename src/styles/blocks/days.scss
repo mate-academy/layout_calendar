@@ -1,0 +1,28 @@
+.calendar__day {
+  position: relative;
+  width: $width-of-day;
+  height: 100px;
+  box-sizing: border-box;
+  background-color: #eee;
+  border: 1px solid black;
+
+  transition-duration: 0.5s;
+
+  @for $day from 1 through 31 {
+    &:nth-child(#{$day})::before {
+      content: '#{$day}';
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translate(0, -20px);
+  }
+}
