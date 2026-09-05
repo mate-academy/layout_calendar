@@ -1,3 +1,80 @@
+@import 'variables';
+
+$days-width: $day-size * $cal-columns;
+$gaps-width: $cal-gap * ($cal-columns - 1);
+$padding-width: $cal-padding * 2;
+
 body {
   margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cal-gap;
+  padding: $cal-padding;
+  box-sizing: border-box;
+
+  width: $days-width + $gaps-width + $padding-width;
+
+  &__day {
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    background-color: $color-bg-day;
+    border: $day-border solid $color-border;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-bg-hover;
+      transform: translateY(-20px);
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i}) {
+      &::before {
+        content: '#{$i}';
+      }
+    }
+  }
+
+  $start-days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  @each $day, $offset in $start-days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc(#{$offset} * (#{$day-size} + #{$cal-gap}));
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      @if $length < 31 {
+        @for $i from $length + 1 through 31 {
+          & > .calendar__day:nth-child(#{$i}) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
 }
