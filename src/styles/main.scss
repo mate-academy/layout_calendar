@@ -1,0 +1,74 @@
+// Variáveis
+$cell-size: 100px;
+$cell-gap: 1px;
+$container-padding: 10px;
+$bg-color: #eee;
+$bg-hover: #ffbfcb;
+$border-color: #000;
+$font-size: 30px;
+$transition-time: 0.5s;
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $cell-gap;
+  padding: $container-padding;
+  box-sizing: content-box;
+  width: calc((7 * #{$cell-size}) + (6 * #{$cell-gap}));
+}
+
+// Modificadores de início da semana
+$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
+
+@each $name, $offset in $days {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
+    margin-left: calc(#{$offset} * (#{$cell-size} + #{$cell-gap}));
+  }
+}
+
+// Modificadores do tamanho do mês (corrigido para 31)
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+    display: none;
+  }
+}
+
+// Estilo básico do quadrado de cada dia
+.calendar__day {
+  width: $cell-size;
+  height: $cell-size;
+  background-color: $bg-color;
+  border: 1px solid $border-color;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform $transition-time,
+    background-color $transition-time;
+}
+
+// Numeração dos dias (1 a 31) gerada via @for e pseudo-elemento ::before
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+    font-size: $font-size;
+    color: #000;
+  }
+}
+
+// Animação e estilo ao passar o cursor sobre a célula
+.calendar__day:hover {
+  cursor: pointer;
+  background-color: $bg-hover;
+  transform: translateY(-20px);
+}
