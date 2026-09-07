@@ -1,9 +1,4 @@
-/* box-sizing global para cálculos previsíveis */
-* {
-  box-sizing: border-box;
-}
-
-/* Variáveis com nomes claros e sem valores fixos repetidos */
+// Variáveis
 $cell-size: 100px;
 $cell-gap: 1px;
 $container-padding: 10px;
@@ -13,7 +8,6 @@ $border-color: #000;
 $font-size: 30px;
 $transition-time: 0.5s;
 
-/* Reset de body / centralização */
 body {
   margin: 0;
   min-height: 100vh;
@@ -23,71 +17,58 @@ body {
   font-family: Arial, sans-serif;
 }
 
-/* Container do calendário */
 .calendar {
   display: flex;
   flex-wrap: wrap;
   gap: $cell-gap;
   padding: $container-padding;
-  width: calc(
-    (7 * #{$cell-size}) + (6 * #{$cell-gap}) + (2 * #{$container-padding})
-  );
+  box-sizing: content-box;
+  width: calc((7 * #{$cell-size}) + (6 * #{$cell-gap}));
 }
 
-/* Modificadores de início da semana (deslocamento da 1ª célula) */
-$days: (sun 0, mon 1, tue 2, wed 3, thu 4, fri 5, sat 6);
+// Modificadores de início da semana (sem o hífen duplo antes do valor)
+$days: (mon 0, tue 1, wed 2, thu 3, fri 4, sat 5, sun 6);
 
 @each $name, $offset in $days {
-  .calendar--start-day--#{$name} .calendar__day:first-child {
+  .calendar--start-day-#{$name} .calendar__day:first-child {
     margin-left: calc(#{$offset} * (#{$cell-size} + #{$cell-gap}));
   }
 }
 
-/* Modificadores do tamanho do mês (oculta dias sobressalentes) */
-@for $i from 28 through 31 {
-  .calendar--month-length--#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
+// Modificadores do tamanho do mês (sem o hífen duplo antes do valor)
+@for $i from 28 through 30 {
+  .calendar--month-length-#{$i} .calendar__day:nth-child(n + #{$i + 1}) {
     display: none;
   }
 }
 
-/* Estilo básico do quadrado de cada dia */
+// Estilo básico do quadrado de cada dia
 .calendar__day {
   width: $cell-size;
   height: $cell-size;
   background-color: $bg-color;
   border: 1px solid $border-color;
+  box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   transition:
     transform $transition-time,
     background-color $transition-time;
-  position: relative;
 }
 
-/* Pseudo-elemento ::before com centralização e estilos comuns */
-.calendar__day::before {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: Arial, sans-serif;
-  font-size: $font-size;
-  color: #000;
-  user-select: none;
-}
-
-/* Numeração dos dias (1 a 31) gerada via @for e pseudo-elemento ::before */
+// Numeração dos dias (1 a 31) gerada via @for e pseudo-elemento ::before
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
     content: '#{$i}';
+    font-size: $font-size;
+    color: #000;
   }
 }
 
-/* Animação e estilo ao passar o cursor sobre a célula */
+// Animação e estilo ao passar o cursor sobre a célula
 .calendar__day:hover {
   cursor: pointer;
   background-color: $bg-hover;
   transform: translateY(-20px);
-  z-index: 2;
 }
