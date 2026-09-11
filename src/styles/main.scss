@@ -1,0 +1,98 @@
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$columns: 7;
+$day-size: 100px;
+$day-gap: 1px;
+$day-border-width: 1px;
+$day-background-color: #eee;
+$day-hover-background-color: #ffbfcb;
+$calendar-padding: 10px;
+$hover-lift-distance: 20px;
+$transition-duration: 0.5s;
+$calendar-days-width: $columns * $day-size + ($columns - 1) * $day-gap;
+$calendar-width: $calendar-days-width + 2 * $calendar-padding;
+$week-days: (
+  mon: 1,
+  tue: 2,
+  wed: 3,
+  thu: 4,
+  fri: 5,
+  sat: 6,
+  sun: 7,
+);
+
+// ==========================================================================
+// Base
+// ==========================================================================
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+// ==========================================================================
+// Block: calendar
+// ==========================================================================
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $day-gap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+  box-sizing: border-box;
+  list-style: none;
+
+  // Element: calendar__day
+  &__day {
+    position: relative;
+    box-sizing: border-box;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border-width solid #000;
+    background-color: $day-background-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $day-hover-background-color;
+      transform: translateY(-$hover-lift-distance);
+    }
+  }
+
+  // Modifier: calendar--start-day-*
+  @each $day, $index in $week-days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: ($index - 1) * ($day-size + $day-gap);
+    }
+  }
+
+  // Modifier: calendar--month-length-*
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day {
+      &:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Day numbers, generated via CSS counters instead of hardcoded HTML content
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+    font:
+      30px Arial,
+      sans-serif;
+  }
+}
