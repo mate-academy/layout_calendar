@@ -1,0 +1,87 @@
+$day-size: 100px;
+$gap-size: 1px;
+$padding-size: 10px;
+$border-color: #000;
+$day-bg: #eee;
+$hover-bg: #ffbfcb;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-size;
+  padding: $padding-size;
+  width: calc((#{$day-size} * 7) + (#{$gap-size} * 6) + (#{$padding-size} * 2));
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid $border-color;
+    background-color: $day-bg;
+    cursor: pointer;
+    transition:
+      transform 0.5s ease,
+      background-color 0.5s ease;
+
+    &:hover {
+      background-color: $hover-bg;
+      transform: translateY(-20px);
+    }
+
+    &::before {
+      font-size: 30px;
+      font-family: Arial, sans-serif;
+    }
+  }
+
+  @for $i from 1 through 31 {
+    &__day:nth-child(#{$i})::before {
+      content: '#{$i}';
+    }
+  }
+
+  // Mapeamento que coloca 'sun' no indice 6 para alinhar a referencia visual
+  $days: (
+    'mon': 0,
+    'tue': 1,
+    'wed': 2,
+    'thu': 3,
+    'fri': 4,
+    'sat': 5,
+    'sun': 6,
+  );
+
+  @each $day, $index in $days {
+    &--start-day-#{$day} &__day:first-child {
+      margin-left: calc((#{$day-size} + #{$gap-size}) * #{$index});
+    }
+  }
+
+  @for $i from 28 through 31 {
+    &--month-length-#{$i} &__day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
