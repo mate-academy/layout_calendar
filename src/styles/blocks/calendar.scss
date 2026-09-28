@@ -10,8 +10,8 @@
     box-sizing: border-box;
     border: 1px solid black;
 
-    width: 100px;
-    height: 100px;
+    width: $day-size;
+    height: $day-size;
 
     background-color: #eee;
 
@@ -21,14 +21,20 @@
       transform: translate(0, -20px);
       transition-duration: 0.5s;
     }
+
+    &::before {
+      content: '';
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
   }
 
   @for $i from 1 through 31 {
     .calendar__day:nth-child(#{$i})::before {
       content: '#{$i}';
-      display: block;
-      text-align: center;
-      line-height: 100px;
     }
   }
 
@@ -46,7 +52,7 @@
     &--month-length-#{$i} {
       .calendar__day {
         &:nth-child(n + #{$i + 1}) {
-          opacity: 0;
+          display: none;
         }
       }
     }
