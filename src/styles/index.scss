@@ -1,3 +1,119 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+}
+
+.calendar {
+  display: flex;
+  gap: 1px;
+  width: 726px;
+  padding: 10px;
+  flex-wrap: wrap;
+
+  &__day {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transition-duration: 0.5s;
+    transform: translateY(-20px);
+  }
+
+  &--month-length-28 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 29 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-29 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 30 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-30 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 31 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-31 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+      }
+    }
+  }
+}
+
+.calendar--start-day-mon .calendar__day:first-child {
+  margin-left: 0;
+}
+
+.calendar--start-day-tue .calendar__day:first-child {
+  margin-left: 101px;
+}
+
+.calendar--start-day-wed .calendar__day:first-child {
+  margin-left: 202px;
+}
+
+.calendar--start-day-thu .calendar__day:first-child {
+  margin-left: 303px;
+}
+
+.calendar--start-day-fri .calendar__day:first-child {
+  margin-left: 404px;
+}
+
+.calendar--start-day-sat .calendar__day:first-child {
+  margin-left: 505px;
+}
+
+.calendar--start-day-sun .calendar__day:first-child {
+  margin-left: 606px;
 }
