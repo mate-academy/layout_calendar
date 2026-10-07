@@ -1,0 +1,70 @@
+@use 'sass:list';
+
+$day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100vh;
+  margin: 0;
+}
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+
+  width: 7 * $day-size + 6 * $gap + 2 * $padding;
+  padding: $padding;
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $day-size;
+    height: $day-size;
+    border: 1px solid #000;
+
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+
+    background-color: #eee;
+
+    transition: 0.5s;
+
+    &:hover {
+      cursor: pointer;
+      transform: translateY(-20px);
+      background-color: #ffbfcb;
+    }
+  }
+
+  @for $day from 1 through 31 {
+    &__day:nth-child(#{$day})::before {
+      content: '#{$day}';
+    }
+  }
+
+  @each $day in mon, tue, wed, thu, fri, sat, sun {
+    $index: list.index((mon, tue, wed, thu, fri, sat, sun), $day) - 1;
+
+    &--start-day-#{$day} .calendar__day:first-child {
+      margin-left: $index * ($day-size + $gap);
+    }
+  }
+
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} &__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
