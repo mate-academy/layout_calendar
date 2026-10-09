@@ -1,0 +1,63 @@
+@import '../utils/variables';
+
+.calendar {
+  box-sizing: border-box;
+  width: $calendar-width;
+  padding: $calendar-padding;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+
+  &__day {
+    box-sizing: border-box;
+    background-color: #eee;
+    width: $day-width;
+    aspect-ratio: 1 / 1;
+    border: 1px solid black;
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      transform 0.5s;
+
+    &::before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      font-size: 30px;
+      color: black;
+    }
+
+    &:hover {
+      background-color: #ffbfcb;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// Add numbers to each calendar day
+@for $day from 1 through 31 {
+  .calendar__day:nth-child(#{$day})::before {
+    content: '#{$day}';
+  }
+}
+
+// Position the first day according to the starting weekday
+@each $day, $offset in $start-days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: $offset * ($day-width + $calendar-gap);
+    }
+  }
+}
+
+// Hide days that exceed the selected month length
+@for $length from 28 through 31 {
+  .calendar--month-length-#{$length} {
+    .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+}
