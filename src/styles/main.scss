@@ -1,6 +1,5 @@
-body {
-  margin: 0;
-}
+@use 'sass:list';
+
 // ==========================================================================
 // Variables
 // ==========================================================================
@@ -13,14 +12,12 @@ $columns: 7;
 $number-font-size: 30px;
 $transition-duration: 0.5s;
 $hover-lift: 20px;
-
 $day-color: #eee;
 $hover-color: #ffbfcb;
 $border-color: #000;
-
-$days-of-week: sun, mon, tue, wed, thu, fri, sat;
-
-$calendar-width: ($day-size * $columns) + ($gap * ($columns - 1)) + ($padding * 2);
+$days-of-week: mon, tue, wed, thu, fri, sat, sun;
+$row-width: ($day-size * $columns) + ($gap * ($columns - 1));
+$calendar-width: $row-width + ($padding * 2);
 
 // ==========================================================================
 // Base
@@ -45,7 +42,6 @@ body {
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
   width: $calendar-width;
   padding: $padding;
   gap: $gap;
@@ -60,7 +56,9 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all $transition-duration;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
 
     &::before {
       font-family: Arial, sans-serif;
@@ -69,17 +67,18 @@ body {
 
     &:hover {
       background-color: $hover-color;
-      transform: translateY(-#{$hover-lift});
+      transform: translateY(-$hover-lift);
     }
   }
 
   // Modifier: calendar--start-day-{day}
   @each $day in $days-of-week {
-    $day-index: index($days-of-week, $day) - 1;
+    $day-index: list.index($days-of-week, $day) - 1;
 
     &--start-day-#{$day} {
       .calendar__day:first-child {
-        margin-left: ($day-size + $gap) * $day-index;
+        // Правильний розрахунок відступу для flex-контейнера
+        margin-left: $day-index * ($day-size + $gap);
       }
     }
   }
@@ -97,6 +96,6 @@ body {
 // Generate the day numbers via ::before, without adding numbers in HTML
 @for $i from 1 through 31 {
   .calendar__day:nth-child(#{$i})::before {
-    content: "#{$i}";
+    content: '#{$i}';
   }
 }
