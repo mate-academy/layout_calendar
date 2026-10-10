@@ -1,0 +1,101 @@
+@use 'sass:list';
+
+// ==========================================================================
+// Variables
+// ==========================================================================
+
+$day-size: 100px;
+$border-width: 1px;
+$gap: 1px;
+$padding: 10px;
+$columns: 7;
+$number-font-size: 30px;
+$transition-duration: 0.5s;
+$hover-lift: 20px;
+$day-color: #eee;
+$hover-color: #ffbfcb;
+$border-color: #000;
+$days-of-week: mon, tue, wed, thu, fri, sat, sun;
+$row-width: ($day-size * $columns) + ($gap * ($columns - 1));
+$calendar-width: $row-width + ($padding * 2);
+
+// ==========================================================================
+// Base
+// ==========================================================================
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+// ==========================================================================
+// Block: calendar
+// ==========================================================================
+
+.calendar {
+  display: flex;
+  flex-wrap: wrap;
+  width: $calendar-width;
+  padding: $padding;
+  gap: $gap;
+
+  // Element: calendar__day
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    background-color: $day-color;
+    border: $border-width solid $border-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      transform $transition-duration,
+      background-color $transition-duration;
+
+    &::before {
+      font-family: Arial, sans-serif;
+      font-size: $number-font-size;
+    }
+
+    &:hover {
+      background-color: $hover-color;
+      transform: translateY(-$hover-lift);
+    }
+  }
+
+  // Modifier: calendar--start-day-{day}
+  @each $day in $days-of-week {
+    $day-index: list.index($days-of-week, $day) - 1;
+
+    &--start-day-#{$day} {
+      .calendar__day:first-child {
+        // Правильний розрахунок відступу для flex-контейнера
+        margin-left: $day-index * ($day-size + $gap);
+      }
+    }
+  }
+
+  // Modifier: calendar--month-length-{28,29,30,31}
+  @for $length from 28 through 31 {
+    &--month-length-#{$length} {
+      .calendar__day:nth-child(n + #{$length + 1}) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Generate the day numbers via ::before, without adding numbers in HTML
+@for $i from 1 through 31 {
+  .calendar__day:nth-child(#{$i})::before {
+    content: '#{$i}';
+  }
+}
