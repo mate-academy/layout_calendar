@@ -9,7 +9,7 @@ body {
 $day-size: 100px;
 $gap: 1px;
 $calendar-padding: 10px;
-$days-in-weak: 7;
+$days-in-week: 7;
 
 .calendar {
   box-sizing: border-box;
@@ -17,7 +17,7 @@ $days-in-weak: 7;
   flex-wrap: wrap;
   gap: $gap;
 
-  width: $days-in-weak * ($day-size + $gap) - $gap + 2 * $calendar-padding;
+  width: $days-in-week * ($day-size + $gap) - $gap + 2 * $calendar-padding;
   padding: $calendar-padding;
 
   &__day {
@@ -53,7 +53,7 @@ $start-days: (
 );
 
 @each $day, $position in $start-days {
-  .calendar--start-day--#{$day} {
+  .calendar--start-day-#{$day} {
     .calendar__day:first-child {
       margin-left: $position * ($day-size + $gap);
     }
@@ -67,7 +67,7 @@ $start-days: (
 }
 
 @for $month-length from 28 through 31 {
-  .calendar--month-length--#{$month-length} {
+  .calendar--month-length-#{$month-length} {
     .calendar__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
