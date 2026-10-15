@@ -67,7 +67,7 @@ body {
   }
 
   $start-days: (
-    mon: 6,
+    mon: 0,
     tue: 1,
     wed: 2,
     thu: 3,
@@ -76,13 +76,15 @@ body {
     sun: 6
   );
 
-  @each $name, $offset in $start-days {
-    &--start-day-#{$name} {
-      .calendar__day:first-child {
-        margin-left: $offset * ($day-size + 2 * $day-border + $calendar-gap);
-      }
+@each $name, $offset in $start-days {
+  &--start-day-#{$name} {
+    .calendar__day:first-child {
+      margin-left: calc(
+        #{$offset} * (#{$day-size} + 2 * #{$day-border} + #{$calendar-gap})
+      );
     }
   }
+}
 
   @for $length from 28 through 31 {
     &--month-length-#{$length} {
