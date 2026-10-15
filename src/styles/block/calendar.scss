@@ -56,15 +56,13 @@
     sun: 6,
   );
 
-@each $name, $offset in $start-days {
-  &--start-day-#{$name} {
-    .calendar__day:first-child {
-      margin-left: calc(
-        #{$offset} * (#{$day-size} + #{$calendar-gap})
-      );
+  @each $name, $offset in $start-days {
+    &--start-day-#{$name} {
+      .calendar__day:first-child {
+        margin-left: calc(#{$offset} * (#{$day-size} + #{$calendar-gap}));
+      }
     }
   }
-}
 
   @for $length from 28 through 31 {
     &--month-length-#{$length} {
