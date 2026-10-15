@@ -61,13 +61,9 @@ body {
     }
   }
 
-  // &__day--first {
-  //   margin-left: 606px;
-  // }
-
   @for $day from 1 through 31 {
     &__day:nth-child(#{$day})::before {
-      content: '#{$day}';
+      content: "#{$day}";
     }
   }
 
@@ -78,21 +74,12 @@ body {
     thu: 3,
     fri: 4,
     sat: 5,
-    sun: 6,
+    sun: 6
   );
 
-  // @each $name, $offset in $start-days {
-  //   &--start-day-#{$name} {
-  //     .calendar__day:first-child {
-  //       margin-left: calc(
-  //         #{$offset} * (#{$day-size} + 2 * #{$day-border} + #{$calendar-gap})
-  //       );
-  //     }
-  //   }
-  // }
   @each $name, $offset in $start-days {
     &--start-day-#{$name} {
-      .calendar__day {
+      .calendar__day:first-child {
         margin-left: $offset * ($day-size + $calendar-gap);
       }
     }
