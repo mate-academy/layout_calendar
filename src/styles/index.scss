@@ -26,7 +26,9 @@ body {
   background: #eee;
   border: 1px solid black;
   position: relative;
-  transition: transform 0.5s;
+  transition:
+    transform 0.5s,
+    0.5s;
 }
 
 .calendar__day::before {
@@ -49,5 +51,17 @@ body {
 @for $number from 1 through 31 {
   .calendar__day:nth-child(#{$number})::before {
     content: '#{$number}';
+  }
+}
+
+@each $day, $col in $days {
+  .calendar--start-day-#{$day} .calendar__day:first-child {
+    margin-left: $col * ($cell-size + $gap);
+  }
+}
+
+@for $len from 28 through 31 {
+  .calendar--month-length-#{$len} .calendar__day:nth-child(n + #{$len + 1}) {
+    display: none;
   }
 }
