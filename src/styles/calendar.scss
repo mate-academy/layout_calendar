@@ -1,0 +1,58 @@
+$days: mon, tue, wed, thu, fri, sat, sun;
+$columns: 1, 2, 3, 4, 5, 6, 7;
+
+.calendar {
+  display: flex;
+  box-sizing: border-box;
+  justify-self: center;
+  padding: 10px;
+
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 100px);
+    gap: 1px;
+    counter-reset: day;
+  }
+}
+
+@each $day, $column in zip($days, $columns) {
+  .calendar--start-day-#{$day} {
+    .day:first-child {
+      grid-column-start: $column;
+    }
+  }
+}
+
+@for $i from 28 through 31 {
+  .calendar--month-length-#{$i} {
+    .day:nth-child(n + #{$i + 1}) {
+      display: none;
+    }
+  }
+}
+
+.day {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #eee;
+  border: black 1px solid;
+  counter-increment: day;
+  transition: 500ms;
+
+  &::before {
+    content: counter(day);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+}
