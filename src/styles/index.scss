@@ -8,9 +8,10 @@ $hover-offset: 20px;
 $day-background: #eee;
 $day-hover-background: #ffbfcb;
 $day-border-color: #000;
-$calendar-width: ($days-per-week * (
-  $day-size + 2 * $day-border)) + ((
-    $days-per-week - 1) * $calendar-gap) + (2 * $calendar-padding);
+$day-with-border: $day-size + 2 * $day-border;
+$total-days-width: $days-per-week * $day-with-border;
+$gaps-width: ($days-per-week - 1) * $calendar-gap;
+$calendar-width: $total-days-width + $gaps-width + 2 * $calendar-padding;
 
 body {
   margin: 0;
