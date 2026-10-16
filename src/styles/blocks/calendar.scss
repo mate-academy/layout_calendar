@@ -1,0 +1,50 @@
+@use '../utils/variables.scss' as *;
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $calendar-gap;
+  width: $calendar-width;
+  padding: $calendar-padding;
+
+  @each $name, $offset in $week-days {
+    &--start-day-#{$name} .calendar__day:first-child {
+      margin-left: $offset * ($day-size + $calendar-gap);
+    }
+  }
+
+  @for $length from 28 through $max-month-length {
+    &--month-length-#{$length} .calendar__day:nth-child(n + #{$length + 1}) {
+      display: none;
+    }
+  }
+
+  &__day {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $day-size;
+    height: $day-size;
+    border: $day-border-width solid $color-border;
+    background-color: $color-day;
+    font-family: Arial, sans-serif;
+    font-size: $day-font-size;
+    transition:
+      background-color $transition-duration,
+      transform $transition-duration;
+
+    @for $n from 1 through $max-month-length {
+      &:nth-child(#{$n})::before {
+        content: '#{$n}';
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $color-day-hover;
+      transform: translateY(-$day-hover-lift);
+    }
+  }
+}
