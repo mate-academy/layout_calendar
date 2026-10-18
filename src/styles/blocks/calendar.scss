@@ -36,10 +36,10 @@
     }
   }
 
-  @each $name, $offset in $start-days {
-    &--start-day-#{$name} &__day:first-child {
-      margin-left: $offset * ($day-size + $gap);
-    }
+  @each $name, $day-number in $start-days {
+  &--start-day-#{$name} &__day:first-child {
+    margin-left: ($day-number + $columns - 1) % $columns * ($day-size + $gap);
+  }
   }
 
   @for $length from 28 through 31 {
