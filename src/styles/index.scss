@@ -1,3 +1,5 @@
+@use 'sass:list';
+
 * {
   box-sizing: border-box;
 }
@@ -24,6 +26,7 @@ body {
     width: 100px;
     height: 100px;
     display: flex;
+    transition-duration: 0.5s;
     justify-content: center;
     align-items: center;
     background-color: #eee;
@@ -33,7 +36,6 @@ body {
   &__day:hover {
     cursor: pointer;
     background-color: #ffbfcb;
-    transition-duration: 0.5s;
     transform: translateY(-20px);
   }
 
@@ -90,30 +92,13 @@ body {
   }
 }
 
-.calendar--start-day-mon .calendar__day:first-child {
-  margin-left: 0;
-}
+$day-size: 101px;
+$days: mon, tue, wed, thu, fri, sat, sun;
 
-.calendar--start-day-tue .calendar__day:first-child {
-  margin-left: 101px;
-}
-
-.calendar--start-day-wed .calendar__day:first-child {
-  margin-left: 202px;
-}
-
-.calendar--start-day-thu .calendar__day:first-child {
-  margin-left: 303px;
-}
-
-.calendar--start-day-fri .calendar__day:first-child {
-  margin-left: 404px;
-}
-
-.calendar--start-day-sat .calendar__day:first-child {
-  margin-left: 505px;
-}
-
-.calendar--start-day-sun .calendar__day:first-child {
-  margin-left: 606px;
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: $day-size * (list.index($days, $day) - 1);
+    }
+  }
 }
