@@ -1,0 +1,108 @@
+@use 'sass:list';
+
+$day-size: 100px;
+$gap: 1px;
+$padding: 10px;
+$font-size: 30px;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: $font-size;
+}
+
+.calendar {
+  display: flex;
+  gap: $gap;
+  width: 726px;
+  padding: $padding;
+  flex-wrap: wrap;
+
+  &__day {
+    width: $day-size;
+    height: $day-size;
+    display: flex;
+    transition-duration: 0.5s;
+    justify-content: center;
+    align-items: center;
+    background-color: #eee;
+    border: 1px solid #000;
+  }
+
+  &__day:hover {
+    cursor: pointer;
+    background-color: #ffbfcb;
+    transform: translateY(-20px);
+  }
+
+  &--month-length-28 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 29 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-29 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 30 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-30 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i}) {
+        @if $i >= 31 {
+          display: none;
+        } @else {
+          &::before {
+            content: '#{$i}';
+          }
+        }
+      }
+    }
+  }
+
+  &--month-length-31 {
+    @for $i from 1 through 31 {
+      .calendar__day:nth-child(#{$i})::before {
+        content: '#{$i}';
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: $font-size;
+      }
+    }
+  }
+}
+
+$days: mon, tue, wed, thu, fri, sat, sun;
+
+@each $day in $days {
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($day-size + $gap) * (list.index($days, $day) - 1);
+    }
+  }
+}
