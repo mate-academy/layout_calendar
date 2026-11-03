@@ -12,14 +12,12 @@
     }
   }
 
-  @each $day in $week-days {
+  @each $day, $offset in $week-days {
     &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: $offset * ($day-size + $gap);
       }
     }
-
-    $offset: $offset + 1;
   }
 
   width: $columns * $day-size + ($columns - 1) * $gap + 2 * $padding;
