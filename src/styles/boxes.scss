@@ -1,0 +1,49 @@
+@use 'variables' as *;
+
+.dayBox{
+ box-sizing: border-box;
+ border: 1px solid #000;
+ width: $day-size;
+ height: $day-size;
+ display: flex;
+ background-color: #eee;
+ transition: transform 0.5s;
+ justify-content: center;
+
+
+
+ &:hover {
+   background-color: #FFBFCB;
+   transform:translateY(-20px);
+   cursor: pointer;
+ }
+ &::before {
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 100px;
+
+  }
+
+    @each $name, $value in $weekdays {
+    &--start-day--#{$name} {
+      margin-left: $value;
+    }
+  }
+  
+  @for $i2 from $monthLen + 1 through 32 {
+  &:nth-child(#{$i2}){
+    visibility: hidden;
+    content: "";
+  }
+}
+
+}
+
+@for $i from 1 through 31 {
+  .dayBox:nth-child(#{$i})::before {
+    content: "#{$i}";
+  }
+}
+
+
