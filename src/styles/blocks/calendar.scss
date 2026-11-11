@@ -15,7 +15,7 @@
     sat: 5,
     sun: 6,
   );
-  
+
   @each $day, $cells-before in $days {
     &--start-day-#{$day} &__day:first-child {
       margin-left: ($cell-size + $cell-gap) * $cells-before;
@@ -24,7 +24,7 @@
 
   @for $month-length from 28 through 31 {
     &--month-length-#{$month-length}
-      &__day:nth-child(n + #{$month-length + 1}) {
+      .calendar__day:nth-child(n + #{$month-length + 1}) {
       display: none;
     }
   }
@@ -42,6 +42,9 @@
 
     background-color: #eee;
     border: 1px solid #000;
+
+    transition-property: background-color, transform;
+    transition-duration: 0.5s;
   }
 
   @for $day from 1 through 31 {
@@ -52,8 +55,6 @@
 
   &__day:hover {
     cursor: pointer;
-    transition-property: background-color, transform;
-    transition-duration: 0.5s;
     background-color: #ffbfcb;
     transform: translateY(-20px);
   }
