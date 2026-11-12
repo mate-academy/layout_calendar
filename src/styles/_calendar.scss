@@ -1,0 +1,36 @@
+@use './variables' as vars;
+
+.calendar {
+  box-sizing: border-box;
+  display: flex;
+  gap: vars.$gap-size;
+  flex-wrap: wrap;
+  width: calc(
+    7 * vars.$cell-size + 6 * vars.$gap-size + 2 * vars.$calendar-padding
+  );
+  padding: vars.$calendar-padding;
+}
+
+.calendar__day {
+  box-sizing: border-box;
+  width: vars.$cell-size;
+  height: vars.$cell-size;
+  background-color: vars.$day-background-color;
+  border: 1px solid vars.$day-border-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-family: Arial, sans-serif;
+
+  transition:
+    background-color vars.$animation-duration,
+    transform vars.$animation-duration;
+}
+
+.calendar__day:hover {
+  background-color: vars.$day-hover-color;
+  transform: translateY(-20px);
+  cursor: pointer;
+}
