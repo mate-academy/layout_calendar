@@ -1,0 +1,28 @@
+@use 'sass:list';
+@use './_variables' as vars;
+
+@for $number from 1 through 31 {
+  .calendar__day:nth-child(#{$number})::before {
+    content: '#{$number}';
+  }
+}
+
+@for $month-length from 28 through 31 {
+  $first-hidden-day: $month-length + 1;
+  .calendar--month-length-#{$month-length} {
+    .calendar__day:nth-child(n + #{$first-hidden-day}) {
+      display: none;
+    }
+  }
+}
+
+$days: mon, tue, wed, thu, fri, sat, sun;
+
+@each $day in $days {
+  $day-index: list.index($days, $day);
+  .calendar--start-day-#{$day} {
+    .calendar__day:first-child {
+      margin-left: ($day-index - 1) * (vars.$cell-size + vars.$gap-size);
+    }
+  }
+}
